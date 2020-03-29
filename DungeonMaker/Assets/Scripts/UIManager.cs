@@ -143,9 +143,11 @@ public class UIManager : MonoBehaviour
 		//Add MouseOverEvent
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerClick;
-		entry.callback.AddListener( (eventData) => {gameManager.selectedPrefab = (GameManager.Selectable) j;
+		entry.callback.AddListener( (eventData) => {gameManager.selectedPrefab = gameManager.instantiatedPlacePrefabs[j-1].GetComponent<PreviewData>().thisElement;
 		gameManager.cursorData = gameManager.instantiatedPlacePrefabs[j-1].GetComponent<PreviewData>();
-		 gameManager.updateCursor();} );
+		 gameManager.updateCursor();} 
+		 //Change color of Selectionbox
+		 );
 		element.GetComponent<EventTrigger>().triggers.Add(entry);
 
 		}

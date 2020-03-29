@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
 	LevelEditor editor;
 	public Cursor cursor;
 	public PreviewData cursorData;
-	public enum Selectable { cursor = 0, wall = 1, floor = 2 }
+	public enum Selectable { cursor = 0, wall = 3, enemy = 1 , floor = 2}
 
 	public Selectable selectedPrefab = Selectable.cursor;
 	Object[] examplePrefabs;
@@ -138,8 +138,8 @@ public class GameManager : MonoBehaviour {
 			rt.Create ();
 			renderTextures[i] = rt;
 			cam.targetTexture = renderTextures[i];
-			renderTexturesSet = true;
 		}
+		renderTexturesSet = true;
 	}
 
 	void Update () {

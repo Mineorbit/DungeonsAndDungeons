@@ -8,6 +8,7 @@ public class PreviewData : MonoBehaviour {
     public Vector3 previewRescale;
     public Quaternion previewRotation;
     public Quaternion previewReRotation;
+    public GameManager.Selectable thisElement;
     public void apply () {
         transform.rotation = previewReRotation;
         transform.localScale = Vector3.Scale (previewScale, previewRescale);
