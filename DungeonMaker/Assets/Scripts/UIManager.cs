@@ -131,7 +131,7 @@ public class UIManager : MonoBehaviour
 	}
 	void setupLevelItemList()
 	{
-		GameObject content = BuilderUI.transform.Find("Content").gameObject;
+		GameObject content = BuilderUI.transform.Find("BottomBar").Find("Content").gameObject;
 		Object prefabElement = Resources.Load("UI/PrefabElement");
 		for(int i = 0;i<prefabTextures.Length;i++)
 		{
