@@ -58,13 +58,13 @@ public class UIManager : MonoBehaviour
 	setupMainMenu();	
 	}
 	
-	if(gameManager.currentState==GameManager.State.play||gameManager.currentState==GameManager.State.edit)
+	if(gameManager.currentState!=GameManager.State.mainmenu)
 	{	
 	Menu = this.transform.Find("Menu").gameObject;
-
-        MainMenuSlider = Menu.GetComponent<CanvasGroup>();
+	MainMenuSlider = Menu.GetComponent<CanvasGroup>();
 	setupMenu();
 	}
+
 	if(gameManager.currentState==GameManager.State.edit)
 	{
 	BuilderUI =  this.transform.Find("BuilderUI").gameObject;
@@ -84,6 +84,8 @@ public class UIManager : MonoBehaviour
 	
 	void setupBuilderUI()
 	{
+		Button test =  BuilderUI.transform.Find("BottomBar").Find("SubMenu").Find("Test").GetComponent<Button>();
+		test.onClick.AddListener(gameManager.startTestMode);
 	}
 	void setupBuilderMenu()
 	{
@@ -111,7 +113,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
 	       
-	if(gameManager.currentState==GameManager.State.play||gameManager.currentState==GameManager.State.edit)
+	if(gameManager.currentState!=GameManager.State.mainmenu)
 	MenuLogic();
 
 	if(gameManager.currentState==GameManager.State.edit)

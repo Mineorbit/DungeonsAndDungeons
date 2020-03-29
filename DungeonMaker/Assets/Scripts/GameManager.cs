@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	//GameLogic
-	public enum SceneIndex { Starting = 0, MainMenu = 1, Edit = 2, Play = 3, Option = 4 }
+	public enum SceneIndex { Starting = 0, MainMenu = 1, Edit = 2, Play = 3, Option = 4}
 	SceneIndex currentScene = SceneIndex.Starting;
-	public enum State { start, mainmenu, loadplay, loadedit, play, edit, option }
-	public enum PlayState { test, play }
+	public enum State { start, mainmenu, loadplay, loadedit, play, edit, option,test }
+
 	public State currentState = State.start;
 
 	public bool loading = true;
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] instantiatedPlacePrefabs;
 	Mesh[] cursorMeshes;
 	public bool clearLevel = true;
+	public bool backToEdit = false;
 
 	public int previewTextureResolution = 512;
 	public RenderTexture[] renderTextures;
@@ -34,7 +35,9 @@ public class GameManager : MonoBehaviour {
 	Vector3 prefabOffset = new Vector3 (0, -20, 0);
 
 	//PlaySate/Networkdata
-	PlayState currentPlayState;
+	int hp;
+	int mp;
+
 	// Start is called before the first frame update
 	void Start () {
 		editor = this.GetComponent<LevelEditor> ();
@@ -68,6 +71,9 @@ public class GameManager : MonoBehaviour {
 		if (currentState == State.play) {
 			stopPlayMode ();
 		}
+		if (currentState == State.test) {
+			stopTestMode ();
+		}
 		if (currentScene != SceneIndex.Starting) {
 			SceneManager.UnloadSceneAsync ((int) currentScene);
 		}
@@ -87,11 +93,25 @@ public class GameManager : MonoBehaviour {
 		GenerateExamplePrefabs ();
 		setupMeshes ();
 	}
+	public void startTestMode() {
+		clearLevel = false;
+		clear();
+		currentState = State.test;
+		StartCoroutine (load(SceneIndex.Play));
+
+
+	}
 
 	void stopEditMode () {
 		foreach (Transform prefab in transform) {
 			Destroy (prefab.gameObject);
 		}
+		if (clearLevel) {
+			editor.clear ();
+		}
+	}
+	void stopTestMode () {
+		clearLevel = !backToEdit;
 		if (clearLevel) {
 			editor.clear ();
 		}
