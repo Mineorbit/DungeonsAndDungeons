@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
 
 	public bool loading = true;
 
+
+	Vector3 lastPosition;
 	//EditState
 
 	LevelEditor editor;
@@ -41,12 +43,16 @@ public class GameManager : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start () {
+		clearLevel = true;
 		editor = this.GetComponent<LevelEditor> ();
 		startMainMenuMode ();
 	}
 
 	public void startMainMenuMode () {
+		clearLevel = true;
+		backToEdit = false;
 		clear ();
+		Debug.Log("Test");
 		currentState = State.mainmenu;
 		StartCoroutine (load (SceneIndex.MainMenu));
 	}
@@ -60,7 +66,7 @@ public class GameManager : MonoBehaviour {
 		while (!op.isDone) {
 			yield return null;
 		}
-		postSceneLoadAction ();
+		postSceneLoadAction();
 
 		loading = false;
 	}
@@ -96,6 +102,7 @@ public class GameManager : MonoBehaviour {
 	}
 	public void startTestMode() {
 		clearLevel = false;
+		backToEdit = true;
 		clear();
 		currentState = State.test;
 		StartCoroutine (load(SceneIndex.Play));
@@ -104,11 +111,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void stopEditMode () {
+		lastPosition = GameObject.Find("Builder").transform.position;
 		foreach (Transform prefab in transform) {
 			Destroy (prefab.gameObject);
 		}
 		if (clearLevel) {
-			editor.clear ();
+			editor.clear();
 		}
 	}
 	void stopTestMode () {
@@ -119,7 +127,11 @@ public class GameManager : MonoBehaviour {
 	}
 	void stopPlayMode () {
 		if (clearLevel) {
-			editor.clear ();
+			Transform level = GameObject.Find("Level").transform;
+			foreach(Transform o in level)
+			{
+				Destroy(o.gameObject);
+			}
 		}
 
 	}
@@ -131,7 +143,18 @@ public class GameManager : MonoBehaviour {
 			editor.startEdit ();
 			//Load  LevelData if existing level is edited
 		}
+		if(currentState == State.play){
+			startGame();
+		}
+		if(currentState == State.test){
+			GameObject player = GameObject.Find("Player");
+			player.transform.position = lastPosition + new Vector3(0,5,0);
+		}
 	}
+	void startGame(){
+
+	}
+	
 
 	void setupMeshes () {
 		cursorMeshes = new Mesh[examplePrefabs.Length];
