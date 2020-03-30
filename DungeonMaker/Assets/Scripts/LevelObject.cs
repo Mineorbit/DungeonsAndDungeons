@@ -11,5 +11,6 @@ public class LevelObject
     	public Vector3 location;
 	//Wichtig prefab name ist Zahl des types
 	public GameManager.Selectable type;
+	public GameObject instance;
 
 }

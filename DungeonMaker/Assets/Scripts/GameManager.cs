@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	LevelEditor editor;
 	public Cursor cursor;
 	public PreviewData cursorData;
+	public Vector3 cursorLocation;
 	public enum Selectable { cursor = 0, wall = 3, enemy = 1 , floor = 2}
 
 	public Selectable selectedPrefab = Selectable.cursor;
@@ -171,7 +172,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void updateCursor () {
-		bool valid = editor.checkPositionValid ();
+		bool valid = editor.checkPositionValid (cursorLocation);
 
 		if ((int) selectedPrefab >= 1) cursor.setCursor (valid, cursorMeshes[((int) selectedPrefab) - 1], cursorData);
 	}

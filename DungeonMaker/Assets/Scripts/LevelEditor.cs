@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class LevelEditor : MonoBehaviour
 {
-	GameManager gameManager;
-	public Object[] mapPrefabs;
+	GameManager 		gameManager;
+	public Object[] 	mapPrefabs;
 	//LevelData 
-	public GameObject levelHook;
-	public Level	currentLevel;
+	public GameObject 	levelHook;
+	public Level		currentLevel;
 	
     void Start()
     {
-        GameObject gManager = GameObject.Find("GameManager");
+    GameObject gManager = GameObject.Find("GameManager");
 	gameManager = gManager.GetComponent<GameManager>();
     }
     public void startEdit()
 	{
 	prepareMapPrefabs();
 	levelHook = GameObject.Find("Level");
-	currentLevel = levelHook.GetComponent<Level>();
+	create();
 	}
+
     public void prepareMapPrefabs()	
 	{
 	mapPrefabs = Resources.LoadAll("Map",typeof(GameObject));
-		
 	}
 	
     // Update is called once per frame
@@ -38,15 +38,11 @@ public class LevelEditor : MonoBehaviour
 	return mapPrefabs[(int)gameManager.selectedPrefab];
 	}
 
-	public bool checkPositionValid()
+	public bool checkPositionValid(Vector3 loc)
 	{
-	
-	return true;
-	}
-
-    	public void open()
-	{
-
+		if(currentLevel==null) return false;
+	//Additional Rules
+	return !currentLevel.contains(loc);
 	}
 
     public void load()
@@ -63,26 +59,28 @@ public class LevelEditor : MonoBehaviour
 	LevelObject newObject =	new LevelObject();
 	newObject.type = gameManager.selectedPrefab;
 	newObject.prefab = getCurrent();
-	 add(newObject);
+	add(newObject);
 	}
 
 	public void add(LevelObject e)
 	{
-		if(checkPositionValid())
+		Vector3 target = gameManager.cursor.transform.position;
+		if(checkPositionValid(target))
 		{
-		e.orientation = LevelObject.Orientation.North;
-		e.location = gameManager.cursor.transform.position;
-		Object prefab = e.prefab;
-		if(e.type==null)
-		{
-		e.type = gameManager.selectedPrefab;
-		}
-		GameObject newObject = Instantiate(prefab,levelHook.transform) as GameObject;
-		newObject.transform.position = e.location;
-		//Auch in  Level noch eintragen
+		currentLevel.addObject(target,e);
 		}
 	}
-	
+
+    public void open()
+	{
+		currentLevel = levelHook.AddComponent(typeof(Level)) as Level;
+	}
+
+	public void create()
+	{
+		currentLevel = levelHook.AddComponent(typeof(Level)) as Level;
+	}
+
 	public void remove(LevelObject e)
 	{
 
@@ -95,7 +93,6 @@ public class LevelEditor : MonoBehaviour
 	}
 	public void clear()
 	{
-		Debug.Log("Hallo!");
 		foreach(Transform t in levelHook.transform)
 		{
 		Destroy(t.gameObject);

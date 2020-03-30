@@ -25,11 +25,16 @@ public class Cursor : MonoBehaviour {
 
 	public void setCursor (bool ValidPosition, Mesh CursorMesh, PreviewData p) {
 		model.mesh = CursorMesh;
+		model.transform.localPosition = p.modelDisplacement;
 		model.transform.localScale = p.previewScale;
 		model.transform.rotation = p.previewRotation;
 		modelRenderer.material = ValidPosition?valid : invalid;
 		baseRenderer.material = ValidPosition?valid : invalid;
 
 	}
+		public void setCursor(bool ValidPosition) {
+		modelRenderer.material = ValidPosition?valid : invalid;
+		baseRenderer.material = ValidPosition?valid : invalid;
+		}
 
 }

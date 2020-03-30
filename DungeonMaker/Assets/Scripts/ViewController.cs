@@ -6,10 +6,13 @@ public class ViewController : MonoBehaviour {
 	public Camera camera;
 	public Vector3 target;
 	public float gridGranularity = 5;
+	GameManager gameManager;
 	// Start is called before the first frame update
 	void Start () {
 		camera = GetComponentInChildren<Camera> ();
 		target = new Vector3 (0, 0, 0);
+		gameManager =  GameObject.Find("GameManager").transform.GetComponent<GameManager>();
+		
 	}
 
 	Vector3 getClose (Vector3 point) {
@@ -28,13 +31,14 @@ public class ViewController : MonoBehaviour {
 
 		if (Input.GetMouseButton (2)) rotate ();
 	}
-	void findTarget () {
+	void findTarget() {
 		RaycastHit hit;
 		Ray ray = camera.ScreenPointToRay (Input.mousePosition);
 		if (Physics.Raycast (ray, out hit)) {
 			Vector3 hitPoint = hit.point;
-
 			target = getClose (hitPoint) + new Vector3 (0, gridGranularity, 0);
+			gameManager.cursorLocation = target;
+			gameManager.updateCursor();
 		}
 	}
 	void rotate () {

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276655544978683402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   previewMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
   previewScale: {x: 0.5, y: 0.5, z: 0.5}
   previewRescale: {x: 1, y: 1, z: 1}
+  modelDisplacement: {x: 0, y: -5, z: 0}
   previewRotation: {x: 0, y: 0, z: 0, w: 1}
   previewReRotation: {x: 0, y: 0, z: 0.21643962, w: 0.976296}
   thisElement: 2

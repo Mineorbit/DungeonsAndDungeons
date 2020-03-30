@@ -174,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2721896653223680037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 3401147816256348600}
@@ -198,6 +198,7 @@ MonoBehaviour:
     type: 3}
   previewScale: {x: 50, y: 50, z: 50}
   previewRescale: {x: 0.05, y: 0.05, z: 0.05}
+  modelDisplacement: {x: 0, y: -3, z: 0}
   previewRotation: {x: -0.70710677, y: 0.00000003090862, z: 0.70710677, w: -0.00000003090862}
   previewReRotation: {x: 0, y: 0, z: 0, w: 0}
   thisElement: 1
