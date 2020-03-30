@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour {
 
 	public void updateCursor () {
 		bool valid = editor.checkPositionValid (cursorLocation);
-
+		cursor.setCursor(valid);
 		if ((int) selectedPrefab >= 1) cursor.setCursor (valid, cursorMeshes[((int) selectedPrefab) - 1], cursorData);
 	}
 }

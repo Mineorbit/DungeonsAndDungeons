@@ -14,6 +14,7 @@ public class BuilderController : MonoBehaviour {
 		viewController = GetComponent<ViewController> ();
 		GameObject gManager = GameObject.Find ("GameManager");
 		levelEditor = gManager.GetComponent<LevelEditor> ();
+		gManager.GetComponent<GameManager>().cursor = cursor.GetComponent<Cursor>();
 	}
 
 	// Update is called once per frame

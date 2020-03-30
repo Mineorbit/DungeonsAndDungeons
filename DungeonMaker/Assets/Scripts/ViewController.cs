@@ -38,8 +38,8 @@ public class ViewController : MonoBehaviour {
 			Vector3 hitPoint = hit.point;
 			target = getClose (hitPoint) + new Vector3 (0, gridGranularity, 0);
 			gameManager.cursorLocation = target;
-			gameManager.updateCursor();
 		}
+		gameManager.updateCursor();
 	}
 	void rotate () {
 		transform.Rotate (0f, Input.GetAxis ("Mouse X"), 0f);

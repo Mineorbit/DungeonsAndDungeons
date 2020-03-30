@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour {
 		speedY = onGround ? 0 : speedY + Gravity;
 
 		if (Input.GetKeyDown (KeyCode.Space) && !jumping) {
-			Debug.Log ("Jump");
 			jump ();
 		}
 

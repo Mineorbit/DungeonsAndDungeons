@@ -70,6 +70,12 @@ public class UIManager : MonoBehaviour
 	BuilderUI =  this.transform.Find("BuilderUI").gameObject;
 	setupBuilderUI();
 	}
+	if(gameManager.currentState==GameManager.State.test)
+	{
+	setupTestEndMenu();
+
+	}
+
 
 	}
 	
@@ -85,7 +91,12 @@ public class UIManager : MonoBehaviour
 	void setupBuilderUI()
 	{
 		Button test =  BuilderUI.transform.Find("BottomBar").Find("SubMenu").Find("Test").GetComponent<Button>();
-		test.onClick.AddListener(gameManager.startTestMode);
+		test.onClick.AddListener(backToEdit);
+	}
+	void backToEdit()
+	{
+	gameManager.backToEdit = true;
+	gameManager.startTestMode();
 	}
 	void setupBuilderMenu()
 	{
@@ -96,7 +107,19 @@ public class UIManager : MonoBehaviour
 	void setupPlayerMenu()
 	{
 	}
+	void setupTestEndMenu()
+	{
+	Object prefabElement = Resources.Load("UI/EndTest");
+	GameObject button	= (GameObject) Instantiate(prefabElement,new Vector3(0,0,0),Quaternion.identity,this.transform) as GameObject;
+	RectTransform rectTransform = button.GetComponent<RectTransform>();
+	rectTransform.offsetMin = new Vector2(0, 0);
+    rectTransform.offsetMax = new Vector2(0, 0);
 
+	Button testButton = button.GetComponent<Button>();
+	testButton.onClick.AddListener(gameManager.startEditMode);
+
+
+	}
 	void setupMenu()
 	{
 	Transform rMenu = Menu.transform.Find("Panel");
