@@ -6,17 +6,22 @@ using System;
 public class Level : MonoBehaviour{
     public Dictionary<string,LevelObject> levelItems;
     public GameObject levelHook;
+    public Spawn spawn;
+    public Goal  goal;
+    
     GameManager gameManager;
     public void Start() {
         levelHook = this.gameObject;
         gameManager = GameObject.Find("GameManager").transform.GetComponent<GameManager>();
         levelItems = new Dictionary<string,LevelObject>();
+        spawn = null;
     }
     public void addObject(Vector3 location, LevelObject obj) {
     LevelObject entry = instantiateObject(location,obj);
     int x  = (int) location.x;
     int y  = (int) location.y;
     int z  = (int) location.z;
+    entry.place(this);
     levelItems.Add(x+"|"+y+"|"+z,entry);
     }
 

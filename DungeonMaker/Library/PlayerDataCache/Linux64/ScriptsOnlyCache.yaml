@@ -6,11 +6,14 @@ ScriptsOnlyBuild:
     - Cursor
     - GameManager
     - LevelEditor
+    - LevelObjectHook
     - ModelController
     - PlacementData
     - PlayerController
     - PreviewData
     - Rotator
+    - Shield
+    - Sword
     - UIManager
     - ViewController
     NavMeshComponents.dll:
@@ -46,7 +49,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Volume
     - UnityEngine.Rendering.VolumeProfile
     Unity.RenderPipelines.Universal.Runtime.dll:
-    - UnityEngine.Experimental.Rendering.Universal.RenderObjects
     - UnityEngine.Rendering.Universal.Bloom
     - UnityEngine.Rendering.Universal.ColorCurves
     - UnityEngine.Rendering.Universal.DepthOfField
@@ -59,6 +61,7 @@ ScriptsOnlyBuild:
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.ShaderGraph.Editor.dll:
+    - UnityEditor.Graphing.GraphObject
     - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
@@ -361,8 +364,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12540}
-    - Class: 114
       Script: {instanceID: 12542}
     - Class: 114
       Script: {instanceID: 12592}
@@ -463,7 +464,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15788}
     - Class: 114
-      Script: {instanceID: 16294}
+      Script: {instanceID: 16298}
+    - Class: 114
+      Script: {instanceID: 26432}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -517,11 +520,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
@@ -567,6 +574,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 15546}
     - Class: 114
       Script: {instanceID: 15616}
+    - Class: 114
+      Script: {instanceID: 46832}
+    - Class: 114
+      Script: {instanceID: 54142}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -924,7 +935,7 @@ ScriptsOnlyBuild:
     className: UIFoldout
   - hash:
       serializedVersion: 2
-      Hash: edb999ad362934c306a7a19fba79604e
+      Hash: 4c6ad55ebdd1bd940248990b44fedba1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1062,7 +1073,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 682b01aebfd69e53c4326458a3a4c4f7
+      Hash: 2f1adf534bb7095d9b103cf7f144494a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Level
@@ -1564,10 +1575,40 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Goal
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelObjectHook
+  - hash:
+      serializedVersion: 2
+      Hash: a20c0816016c1026273e867db6c84f1f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Item
+  - hash:
+      serializedVersion: 2
+      Hash: a20c0816016c1026273e867db6c84f1f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Sword
+  - hash:
+      serializedVersion: 2
+      Hash: a20c0816016c1026273e867db6c84f1f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Shield
   platform: 24
   scenePathNames:
   - Assets/Scenes/MainScene.unity
   - Assets/Scenes/MainMenuScene.unity
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/PlayScene.unity
-  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/30_33_20/DungeonsAndDungeons.x86_64
+  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/1_4_17/DungeonsAndDungeons.x86_64

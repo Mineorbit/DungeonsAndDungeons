@@ -38,11 +38,11 @@ public class LevelEditor : MonoBehaviour
 	return mapPrefabs[(int)gameManager.selectedPrefab];
 	}
 
-	public bool checkPositionValid(Vector3 loc)
+	public bool checkPositionValid(Vector3 loc,LevelObject o, Level l)
 	{
-		if(currentLevel==null) return false;
-	//Additional Rules
-	return !currentLevel.contains(loc);
+	if(currentLevel==null) return false;
+	//Additional Rules for each object type specifically
+	return o.checkPosition(loc,l);
 	}
 
     public void load()
@@ -56,16 +56,27 @@ public class LevelEditor : MonoBehaviour
 	
 	public void add()
 	{
-	LevelObject newObject =	new LevelObject();
+	LevelObject newObject;
+	newObject = setClass();
+
+
 	newObject.type = gameManager.selectedPrefab;
 	newObject.prefab = getCurrent();
 	add(newObject);
+	}
+	public LevelObject setClass()
+	{
+		if(gameManager.selectedPrefab==GameManager.Selectable.spawn)
+		{
+			return new Spawn();
+		}
+		return new  LevelObject();
 	}
 
 	public void add(LevelObject e)
 	{
 		Vector3 target = gameManager.cursor.transform.position;
-		if(checkPositionValid(target))
+		if(checkPositionValid(target,e,currentLevel))
 		{
 		currentLevel.addObject(target,e);
 		}

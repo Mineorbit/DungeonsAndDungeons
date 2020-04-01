@@ -16,12 +16,12 @@ public class GameManager : MonoBehaviour {
 
 	Vector3 lastPosition;
 	//EditState
-
+	public LevelObject dummy;
 	LevelEditor editor;
 	public Cursor cursor;
 	public PreviewData cursorData;
 	public Vector3 cursorLocation;
-	public enum Selectable { cursor = 0, wall = 3, enemy = 1 , floor = 2}
+	public enum Selectable { cursor = 0,  enemy = 1 , floor = 2, spawn = 3, wall = 4};
 
 	public Selectable selectedPrefab = Selectable.cursor;
 	Object[] examplePrefabs;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	public bool backToEdit = false;
 
 	public int previewTextureResolution = 512;
-	public RenderTexture[] renderTextures;
+	public Dictionary<PreviewData,Texture> renderTextures;
 	public bool renderTexturesSet = false;
 	Vector3 prefabPlace = new Vector3 (0, -40, 0);
 
@@ -47,12 +47,14 @@ public class GameManager : MonoBehaviour {
 		editor = this.GetComponent<LevelEditor> ();
 		startMainMenuMode ();
 	}
-
+	public LevelEditor getEditor()
+	{
+		return editor;
+	}
 	public void startMainMenuMode () {
 		clearLevel = true;
 		backToEdit = false;
 		clear ();
-		Debug.Log("Test");
 		currentState = State.mainmenu;
 		StartCoroutine (load (SceneIndex.MainMenu));
 	}
@@ -168,20 +170,21 @@ public class GameManager : MonoBehaviour {
 		renderTexturesSet = false;
 		examplePrefabs = Resources.LoadAll ("CursorMesh", typeof (GameObject));
 		Object rotCamera = Resources.Load ("Main/RotatingCamera");
-		renderTextures = new RenderTexture[examplePrefabs.Length];
+		renderTextures = new Dictionary<PreviewData,Texture>();
 		Vector3 location = new Vector3 (0, 0, 0);
 		instantiatedPlacePrefabs = new GameObject[examplePrefabs.Length];
 		for (int i = 0; i < examplePrefabs.Length; i++) {
 			location = prefabPlace + (i * prefabOffset);
 			instantiatedPlacePrefabs[i] = (GameObject) Instantiate (examplePrefabs[i], location, Quaternion.identity, this.transform);
-			instantiatedPlacePrefabs[i].GetComponent<PreviewData> ().apply ();
+			PreviewData pd = instantiatedPlacePrefabs[i].GetComponent<PreviewData> ();
+			pd.apply();
 			GameObject cameraRig = (GameObject) Instantiate (rotCamera, location, Quaternion.identity, this.transform);
 
 			Camera cam = cameraRig.transform.Find ("Camera").gameObject.GetComponent<Camera> ();
 			RenderTexture rt = new RenderTexture (previewTextureResolution, previewTextureResolution, 16, RenderTextureFormat.ARGB32);
 			rt.Create ();
-			renderTextures[i] = rt;
-			cam.targetTexture = renderTextures[i];
+		    renderTextures.Add(pd , rt);
+			cam.targetTexture = rt;
 		}
 		renderTexturesSet = true;
 	}
@@ -195,7 +198,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void updateCursor () {
-		bool valid = editor.checkPositionValid (cursorLocation);
+		
+		dummy.type = selectedPrefab;
+		bool valid = editor.checkPositionValid (cursorLocation,dummy,editor.currentLevel);
 		cursor.setCursor(valid);
 		if ((int) selectedPrefab >= 1) cursor.setCursor (valid, cursorMeshes[((int) selectedPrefab) - 1], cursorData);
 	}

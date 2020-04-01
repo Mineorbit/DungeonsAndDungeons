@@ -23,8 +23,8 @@ public class UIManager : MonoBehaviour
 	//MainMenuMode
 	
 	//EditMode
+	Dictionary<PreviewData,Texture> prefabTextures;
 
-	RenderTexture[] prefabTextures;
 
 
 	bool renderTexturesIn = false;
@@ -146,7 +146,9 @@ public class UIManager : MonoBehaviour
 		updateItemList();
 		}
 	}
+
     }
+
 	void updateItemList()
 	{
 	
@@ -158,18 +160,18 @@ public class UIManager : MonoBehaviour
 	{
 		GameObject content = BuilderUI.transform.Find("BottomBar").Find("Content").gameObject;
 		Object prefabElement = Resources.Load("UI/PrefabElement");
-		for(int i = 0;i<prefabTextures.Length;i++)
+		foreach(KeyValuePair<PreviewData,Texture> d in prefabTextures)
 		{
-		int j = i+1;
-		GameObject element = (GameObject)Instantiate(prefabElement,new 		Vector3(0,0,0),Quaternion.identity,content.transform);
+		GameObject element = (GameObject)Instantiate(prefabElement,new 	Vector3(0,0,0),Quaternion.identity,content.transform);
 		//Set Texture
-		element.GetComponent<RawImage>().texture = prefabTextures[i];
+		element.GetComponent<RawImage>().texture = d.Value;
 
 		//Add MouseOverEvent
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerClick;
-		entry.callback.AddListener( (eventData) => {gameManager.selectedPrefab = gameManager.instantiatedPlacePrefabs[j-1].GetComponent<PreviewData>().thisElement;
-		gameManager.cursorData = gameManager.instantiatedPlacePrefabs[j-1].GetComponent<PreviewData>();
+		entry.callback.AddListener( (eventData) => {gameManager.selectedPrefab = d.Key.thisElement;
+		gameManager.cursorData = d.Key;
+		 gameManager.dummy =  gameManager.getEditor().setClass();
 		 gameManager.updateCursor();} 
 		 //Change color of Selectionbox
 		 );
