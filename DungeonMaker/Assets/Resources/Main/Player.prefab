@@ -45,22 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c034966bab1c881c69c726752b18ba4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factor: 0
-  Speed: 8
-  TargetSpeed: 0
+  Factor: 0
   BaseSpeed: 0.2
   Increase: 0.1
-  TargetGravity: 0.01
-  speedY: 0
-  onGround: 0
-  height: 0.6
-  currentVelocity: {x: 0, y: 0, z: 0}
-  Host: 1
+  Accelaration: 1
+  Speed: 8
+  Gravity: 1
+  TargetDirection: {x: 0, y: 0, z: 0}
+  Mask: 0
+  Height: 0.6
+  jumpForce: 0
   inControl: 1
-  Hit: 0
-  jumpForce: 0.3
-  jumping: 0
-  mask: 0
+  isGrounded: 0
 --- !u!143 &3484302783761241516
 CharacterController:
   m_ObjectHideFlags: 0
@@ -106,11 +102,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8042316807397619865}
+  - {fileID: 8371552281113056622}
   m_Father: {fileID: 3484302784205523563}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3091360814646367107
+--- !u!1001 &3555326646477356660
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -135,17 +131,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 12502f449126c0ba6b70b15166d86705,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12502f449126c0ba6b70b15166d86705,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12502f449126c0ba6b70b15166d86705,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 12502f449126c0ba6b70b15166d86705,
         type: 3}
@@ -175,13 +171,13 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 12502f449126c0ba6b70b15166d86705,
         type: 3}
       propertyPath: m_Name
-      value: model
+      value: char
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12502f449126c0ba6b70b15166d86705, type: 3}
---- !u!4 &8042316807397619865 stripped
+--- !u!4 &8371552281113056622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 12502f449126c0ba6b70b15166d86705,
     type: 3}
-  m_PrefabInstance: {fileID: 3091360814646367107}
+  m_PrefabInstance: {fileID: 3555326646477356660}
   m_PrefabAsset: {fileID: 0}

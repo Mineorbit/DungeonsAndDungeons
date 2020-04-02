@@ -3,109 +3,153 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	public float factor;
-	public float Speed;
-	public float TargetSpeed;
-	public float BaseSpeed = 2;
-	public float Increase = 2;
-	float Gravity = 0.1f;
 
-	public float TargetGravity = 0.1f;
-	public float speedY = 0;
-	Vector3 direction;
-	public bool onGround = false;
-	public float height = 0.5f;
-	public Vector3 currentVelocity;
-	CharacterController controller;
-	public bool Host = true;
-	public bool inControl = true;
-	public bool Hit = false;
-	float HitForce = 0;
-	public float jumpForce = 10;
-	public bool jumping;
-	Vector3 HitDirection = new Vector3 (0, 0, 0);
+	public float Factor;
+	float TargetSpeed = 0;
+	public float BaseSpeed 	= 2;
+	public float Increase	= 2;
+	public float Accelaration = 1;
+	public float Speed = 0;
+	public float Gravity = 1;
+	public Vector3 TargetDirection;
+	Vector3 Direction;
+	CharacterController Controller;
+	public int Mask;
+	public float Height = 0.75f;
+	float runTime = 0;
+	float errorThreshold = 0.01f;
+	float SpeedY;
+	public ModelController modelController;
 
-	public int mask;
+	public float jumpForce;
+	public bool inControl = false;
+	public bool isGrounded = false;
+	public bool Jumping = false;
+	public bool Strike =  false;
+	public float useTime = 0.5f;
 	void Start () {
-		mask = LayerMask.GetMask ("Floor");
-		controller = GetComponent<CharacterController> ();
+		Mask = LayerMask.GetMask ("Floor");
+		Controller = GetComponent<CharacterController> ();
+		TargetDirection = new Vector3(0,0,0);
 	}
 
-	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.LeftShift)) {
-			TargetSpeed = BaseSpeed + Increase;
-		} else TargetSpeed = BaseSpeed;
-		onGround = FloorCheck ();
-
-		Vector3 targetDirection = new Vector3 (0, 0, 0);
-
-		if (Hit) {
-			targetDirection = pushBack ((-1 * controller.velocity + HitDirection) / 2, HitForce);
-			Hit = false;
-			HitForce = 0;
-			HitDirection = new Vector3 (0, 0, 0);
+		Strike = false;
+		isGrounded = FloorCheck();
+		//walken
+		if(inControl)
+		{
+		if(Input.GetKey(KeyCode.LeftShift)&&isGrounded) TargetSpeed = BaseSpeed+Increase; else TargetSpeed = BaseSpeed;
+		TargetDirection.x = Input.GetAxis("Vertical");
+		TargetDirection.z = -Input.GetAxis("Horizontal");
+		if(TargetDirection.x == 0 && TargetDirection.z == 0) TargetSpeed =  0;
+		computeSpeed();
+		}else
+		{
+			Speed = 0;
 		}
-
-		if (onGround && jumping) jumping = false;
-
-		Debug.DrawRay (transform.position, transform.up * -1, Color.red, height, true);
-
-		if (inControl) {
-			targetDirection = Input.GetAxis ("Horizontal") * -1 * transform.forward + Input.GetAxis ("Vertical") * transform.right;
-			targetDirection = Vector3.Normalize (targetDirection);
+		Direction = Speed *Vector3.Normalize(TargetDirection);
+		
+		Factor = Speed/(BaseSpeed+Increase);
+		
+		//fallen
+		if(!isGrounded)
+		{
+			SpeedY+=-Gravity*Time.deltaTime;
+		}else
+		{
+			if(Input.GetKeyDown(KeyCode.Space))
+			{
+				Jumping = true;
+				SpeedY = jumpForce;
+			}else
+			{
+				Jumping = false;
+				SpeedY = 0;
+			}
 		}
-
-		Speed = Mathf.Lerp (Speed, TargetSpeed, 0.5f);
-
-		Gravity = Mathf.Lerp (Gravity, TargetGravity, 0.5f);
-
-		targetDirection *= Speed;
-
-		Vector3 vel = controller.velocity;
-		vel.y = 0;
-		factor = (vel.magnitude) / BaseSpeed;
-		if (factor == 0 && !inControl) {
-			inControl = true;
+		Direction.y = SpeedY;
+		Controller.Move (Direction);
+		//Combat
+		//Right Action
+		if(Input.GetMouseButtonDown(0)&&!Jumping)
+		{
+			RightUse();
 		}
-
-		direction = Vector3.Lerp (direction, targetDirection, 0.5f);
-
-		speedY = onGround ? 0 : speedY + Gravity;
-
-		if (Input.GetKeyDown (KeyCode.Space) && !jumping) {
-			jump ();
+		if(Input.GetMouseButtonDown(1)&&!Jumping)
+		{
+			LeftUse();
 		}
+	}
 
-		direction.y = -speedY;
+	void computeSpeed()
+	{
+		if(TargetDirection.x == 0 && TargetDirection.z == 0)
+		{
+			if(Mathf.Abs(Speed)<errorThreshold)
+			{
+				Speed = 0;
+			}else
+			{
+			Speed += 0.5f*Mathf.Sign(-Speed)*Accelaration*Time.deltaTime;
+			}
+		}else
+		if(Input.GetKey(KeyCode.LeftShift))
+		{
+			if(Mathf.Abs((BaseSpeed+Increase)-Speed)<errorThreshold)
+			{
+				Speed = BaseSpeed+Increase;
+			}else
+			{
+			Speed += 0.5f*Mathf.Sign(TargetSpeed-Speed)*Accelaration*Time.deltaTime;
+			}
+		}else{
+			if(Mathf.Abs((BaseSpeed)-Speed)<errorThreshold)
+			{
+				Speed = BaseSpeed;
+			}else
+			{
+			Speed += 0.5f*Mathf.Sign(TargetSpeed-Speed)*Accelaration*Time.deltaTime;
+			}
 
-		if (Input.GetKeyDown (KeyCode.F)) takeDamage (10, -1 * controller.velocity);
-		move ();
-
+		}
 	}
 
 	Vector3 pushBack (Vector3 direction, float force) {
 		inControl = false;
 		return force * Vector3.Normalize (direction);
 	}
-
-	public void takeDamage (float hitForce, Vector3 directionFromForce) {
-		Hit = true;
-		HitForce = hitForce;
-		HitDirection = directionFromForce;
+	void LeftUse()
+	{
+		setupUse();
+		modelController.strikeL();
 	}
-
-	void move () {
-		controller.Move (direction);
-		currentVelocity = controller.velocity;
+	void RightUse()
+	{
+		setupUse();
+		modelController.strikeR();
 	}
-	void jump () {
-		jumping = true;
-		speedY -= jumpForce;
+	void setupUse()
+	{
+		Strike =  true;
+		inControl = false;
+		StartCoroutine("useItem");
 	}
-
 	bool FloorCheck () {
 		Vector3 down = transform.up * -1;
-		return Physics.Raycast (transform.position, down, height, mask);
+		return Physics.Raycast (transform.position, down, Height, Mask);
 	}
+
+	void postUse()
+	{
+		Strike = false;
+		inControl = true;
+		modelController.postStrike();
+	}
+	IEnumerator useItem()
+    {
+        yield return new WaitForSeconds(useTime);
+		postUse();
+    }
+
 }

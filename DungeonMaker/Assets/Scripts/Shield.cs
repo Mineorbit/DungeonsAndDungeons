@@ -6,8 +6,7 @@ public class Shield : Item
 {
   public void Start()
   {
-      rotationHand = Quaternion.Euler(0f,-90f,0f);
-      offsetHand    = new Vector3(0,0,-1);
+    rotationHand = Quaternion.Euler(180,270,0);
       base.Start();
   }
   public void Update()

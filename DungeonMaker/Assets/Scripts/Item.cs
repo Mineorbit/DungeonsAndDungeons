@@ -7,8 +7,8 @@ public class Item : MonoBehaviour
     bool onPlayer = true;
     public Transform target;
 
-    public Quaternion rotationHand = Quaternion.Euler(0f,90f,90f);
-    public Vector3 offsetHand = new Vector3(0.1f,0f,0f);
+    public Quaternion rotationHand;
+    public Vector3 offsetHand;
 
     public void Start()
     {
