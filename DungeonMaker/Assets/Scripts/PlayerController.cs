@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour {
 	public bool Jumping = false;
 	public bool Strike =  false;
 	public float useTime = 0.5f;
+	public Item left;
+	public Item right;
 	void Start () {
 		Mask = LayerMask.GetMask ("Floor");
 		Controller = GetComponent<CharacterController> ();
@@ -142,9 +144,10 @@ public class PlayerController : MonoBehaviour {
 
 	void postUse()
 	{
+		left.animateDefault();
+		right.animateDefault();
 		Strike = false;
 		inControl = true;
-		modelController.postStrike();
 	}
 	IEnumerator useItem()
     {

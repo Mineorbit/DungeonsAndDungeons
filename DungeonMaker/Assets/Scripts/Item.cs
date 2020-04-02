@@ -12,12 +12,14 @@ public class Item : MonoBehaviour
 
     public void Start()
     {
+
+        animateDefault();
         attachItem();
     }
 
     public void Update()
     {
-       
+       attachItem();
     }
     public void tryAttachItem()
     {
@@ -31,5 +33,13 @@ public class Item : MonoBehaviour
         this.transform.parent = target;
         transform.localPosition = offsetHand;
         transform.localRotation = rotationHand;
+    }
+
+    public virtual void animateDefault()
+    {
+    }
+    public virtual void animateAction()
+    {
+
     }
 }

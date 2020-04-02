@@ -21,6 +21,10 @@ public class ModelController : MonoBehaviour
     {
 		setAnimationValues();
         rotate();
+		if(controller.isGrounded)
+		{
+			postResetPosition();
+		}
     }
 	void setAnimationValues()
 	{
@@ -30,13 +34,15 @@ public class ModelController : MonoBehaviour
 	}
 	public void strikeR()
 	{
+		controller.right.animateAction();
 		animator.SetTrigger("Slash");
 	}
 	public void strikeL()
 	{
+		controller.left.animateAction();
 		animator.SetTrigger("Block");
 	}
-	public void postStrike()
+	public void postResetPosition()
 	{
 		model.transform.localPosition = new Vector3(0,0,0);
 	}
