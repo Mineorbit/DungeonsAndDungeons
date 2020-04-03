@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shield : Item
 {
-
+  bool overrideIt = false;
   public void Start()
   {
       animateDefault();
@@ -13,15 +13,26 @@ public class Shield : Item
   public void Update()
   {
       base.Update();
+      if(overrideIt)
+      overrideAnimate();
   }
   public override void animateDefault()
   {
-    offsetHand   = new Vector3(0,0,-0.26f);
-    rotationHand = Quaternion.Euler(180,270,0);
+    overrideIt = false;
+    offsetHand   = new Vector3(0.2f,0.22f,-0.165f);
+    rotationHand = Quaternion.Euler(120,-12,160);
+    base.animateDefault();
   }
   public override void animateAction()
   {
-    offsetHand   = new Vector3(0,0.385f,-0.12f);
-    rotationHand = Quaternion.Euler(10,180,250);
+    Debug.Log("Test");
+    overrideIt = true;
+    offsetHand   = new Vector3(0.1f,0.385f,-0.12f);
+    rotationHand = transform.parent.rotation*Quaternion.Euler(120,-12,160);
+  }
+  void overrideAnimate()
+  {
+    transform.localPosition = offsetHand;
+    transform.rotation = rotationHand;
   }
 }

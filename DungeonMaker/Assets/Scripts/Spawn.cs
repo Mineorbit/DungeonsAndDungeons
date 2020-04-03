@@ -14,5 +14,12 @@ public class Spawn : LevelObject
     {
         data.spawn = this;
     }
-
+    public void doAction(GameObject[] players)
+    {
+        Debug.Log("Testers");
+        for(int i = 0;i<players.Length;i++)
+		{
+			players[i].transform.position = location;
+		}
+    }
 }

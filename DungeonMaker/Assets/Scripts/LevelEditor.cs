@@ -19,7 +19,14 @@ public class LevelEditor : MonoBehaviour
 	{
 	prepareMapPrefabs();
 	levelHook = GameObject.Find("Level");
+	setupCurrentLevel();
+	}
+	void setupCurrentLevel()
+	{
+	if(levelHook.GetComponent<Level>()==null)
+	{
 	create();
+	}else open();
 	}
 
     public void prepareMapPrefabs()	
@@ -84,7 +91,7 @@ public class LevelEditor : MonoBehaviour
 
     public void open()
 	{
-		currentLevel = levelHook.AddComponent(typeof(Level)) as Level;
+		currentLevel = levelHook.GetComponent<Level>();
 	}
 
 	public void create()
@@ -108,6 +115,7 @@ public class LevelEditor : MonoBehaviour
 		{
 		Destroy(t.gameObject);
 		}
+		Destroy(currentLevel);
 	}
 	
 }

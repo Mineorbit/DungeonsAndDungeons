@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour {
 	//PlaySate/Networkdata
 	int hp;
 	int mp;
+	public bool roundStarted = false;
+	public Level currentLevel;
+	GameObject[] players;
 
 	// Start is called before the first frame update
 	void Start () {
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void clear () {
+		openLoadingScreen();
 		if (currentState == State.edit) {
 			stopEditMode ();
 		}
@@ -91,6 +95,8 @@ public class GameManager : MonoBehaviour {
 	public void startPlayMode () {
 		clear ();
 		currentState = State.play;
+		//lade level
+		//currentLevel =  level von menü her geladen
 		StartCoroutine (load (SceneIndex.Play));
 
 	}
@@ -107,6 +113,7 @@ public class GameManager : MonoBehaviour {
 		backToEdit = true;
 		clear();
 		currentState = State.test;
+		currentLevel = editor.currentLevel;
 		StartCoroutine (load(SceneIndex.Play));
 
 
@@ -139,24 +146,77 @@ public class GameManager : MonoBehaviour {
 	}
 	void postSceneLoadAction () {
 		if (currentState == State.edit) {
-			GameObject cur = GameObject.Find ("Cursor");
-			cursor = cur.GetComponent<Cursor> ();
-
-			editor.startEdit ();
-			//Load  LevelData if existing level is edited
+			
+			startEdit();
 		}
 		if(currentState == State.play){
 			startGame();
 		}
 		if(currentState == State.test){
-			GameObject player = GameObject.Find("Player");
-			player.transform.position = lastPosition + new Vector3(0,5,0);
+			startTest();
 		}
+
+	closeLoadingScreen();
 	}
-	void startGame(){
+
+	void openLoadingScreen()
+	{
 
 	}
-	
+	void closeLoadingScreen()
+	{
+
+	}
+
+	void startEdit()
+	{
+			GameObject cur = GameObject.Find ("Cursor");
+			cursor = cur.GetComponent<Cursor> ();
+			editor.startEdit ();
+
+			//Load  LevelData if existing level is edited
+	}
+	void startTest()
+	{
+		Debug.Log("Test");
+		//Setup TestPlayer
+		players = new GameObject[1];
+		InstantiateTestPlayer();
+		players[0] = GameObject.Find("Player");
+		
+			if(currentLevel.spawn==null)
+			{
+				Debug.Log("Testerfuck");
+			players[0].transform.position = lastPosition + new Vector3(0,5,0);
+			}else
+			{
+			spawnPlayers(players);	
+			}
+	}
+	void startGame(){
+		players = new GameObject[1];
+		InstantiatePlayers();
+		players[0] = GameObject.Find("Player");
+		spawnPlayers(players);
+		roundStarted = true;
+	}
+	void InstantiatePlayers()
+	{
+
+	}
+	void InstantiateTestPlayer()
+	{
+
+	}
+	void updateGame()
+	{
+
+	}
+
+	void spawnPlayers(GameObject[] players)
+	{
+		currentLevel.spawn.doAction(players);
+	}
 
 	void setupMeshes () {
 		cursorMeshes = new Mesh[examplePrefabs.Length];
@@ -191,6 +251,10 @@ public class GameManager : MonoBehaviour {
 
 	void Update () {
 		updateEditMode ();
+		if(roundStarted)
+		{
+			updateGame();
+		}
 	}
 
 	void updateEditMode () {

@@ -21,5 +21,8 @@ public class LevelObject
 	{
 
 	}
-
+	public virtual void doAction()
+	{
+		
+	}
 }
