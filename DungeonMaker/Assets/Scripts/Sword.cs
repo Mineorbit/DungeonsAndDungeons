@@ -7,14 +7,25 @@ public class Sword : Item
 
     void Start()
     {
-
-        offsetHand   = new Vector3(0,0.23f,-0.1f);
-        rotationHand = Quaternion.Euler(0,180,90);
+        useTime = 0.2f;
         base.Start();
     }
     void Update()
     {
+
         base.Update();
     }
-    
+
+    public override void animateDefault()
+    {
+        offsetHand   = new Vector3(-0.25f,0.35f,0.0475f);
+        rotationHand = Quaternion.Euler(0,270,90);
+        base.animateDefault();
+    }
+    public override void animateAction()
+    {
+        offsetHand   = new Vector3(-0.25f,0.35f,0.0475f);
+        rotationHand = Quaternion.Euler(0,270,90);
+        base.animateAction();
+    }
 }

@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
 
     public Quaternion rotationHand;
     public Vector3 offsetHand;
-
+    public float useTime = 0.5f;
     public void Start()
     {
 
@@ -19,7 +19,6 @@ public class Item : MonoBehaviour
 
     public void Update()
     {
-       attachItem();
     }
     public void tryAttachItem()
     {
@@ -37,9 +36,10 @@ public class Item : MonoBehaviour
 
     public virtual void animateDefault()
     {
+       attachItem();
     }
     public virtual void animateAction()
     {
-
+       attachItem();
     }
 }

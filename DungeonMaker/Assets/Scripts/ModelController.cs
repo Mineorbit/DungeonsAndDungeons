@@ -48,7 +48,6 @@ public class ModelController : MonoBehaviour
 	}
     void rotate()
 	{
-
 	Vector3 targetDirection = controller.TargetDirection;
 	float swapz = targetDirection.z;
 	targetDirection.z = -targetDirection.x;
@@ -62,6 +61,5 @@ public class ModelController : MonoBehaviour
 	}
 	if(controller.inControl)
 	transform.rotation = Quaternion.Lerp(transform.rotation,targetRotation,0.25f);
-	
-}
+	}
 }

@@ -123,11 +123,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	void LeftUse()
 	{
+		useTime = left.useTime;
 		setupUse();
 		modelController.strikeL();
 	}
 	void RightUse()
 	{
+		useTime = right.useTime;
 		setupUse();
 		modelController.strikeR();
 	}
