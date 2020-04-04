@@ -13,9 +13,11 @@ public class GameManager : MonoBehaviour {
 
 	public bool loading = true;
 
+	public string levelToLoad =  "";
+
+	//EditState
 
 	Vector3 lastPosition;
-	//EditState
 	public LevelObject dummy;
 	LevelEditor editor;
 	public Cursor cursor;
@@ -95,10 +97,17 @@ public class GameManager : MonoBehaviour {
 	public void startPlayMode () {
 		clear ();
 		currentState = State.play;
-		//lade level
-		//currentLevel =  level von menü her geladen
+		loadLevel();
 		StartCoroutine (load (SceneIndex.Play));
 
+	}
+	void loadLevel(){
+		GameObject levelHook = GameObject.Find("Level");
+		Level level = (levelHook.GetComponent<Level>()==null)?levelHook.AddComponent<Level>():levelHook.GetComponent<Level>();
+		LevelLoader loader = new LevelLoader();
+		LevelData lD = loader.load(levelToLoad);
+		level = lD.toLevel(level);
+		currentLevel = level;
 	}
 
 	public void startEditMode () {
@@ -155,7 +164,6 @@ public class GameManager : MonoBehaviour {
 		if(currentState == State.test){
 			startTest();
 		}
-
 	closeLoadingScreen();
 	}
 
@@ -170,11 +178,15 @@ public class GameManager : MonoBehaviour {
 
 	void startEdit()
 	{
+			if(!newLevel)
+			{
+			loadLevel();
+			editor.currentLevel = currentLevel;
+			}
 			GameObject cur = GameObject.Find ("Cursor");
 			cursor = cur.GetComponent<Cursor> ();
 			editor.startEdit ();
 
-			//Load  LevelData if existing level is edited
 	}
 	void startTest()
 	{
