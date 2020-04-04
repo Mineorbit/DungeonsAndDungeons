@@ -16,14 +16,15 @@ public class GameManager : MonoBehaviour {
 	public string levelToLoad =  "";
 
 	//EditState
-
+	//Describes wether to create new Level in edit mode
+	public bool newLevel =  true;
 	Vector3 lastPosition;
 	public LevelObject dummy;
 	LevelEditor editor;
 	public Cursor cursor;
 	public PreviewData cursorData;
 	public Vector3 cursorLocation;
-	public enum Selectable { cursor = 0,  enemy = 1 , floor = 2, spawn = 3, wall = 4};
+	public enum Selectable { cursor = 0,  enemy = 1 , floor = 2, spawn = 3, wall = 4, goal = 5};
 
 	public Selectable selectedPrefab = Selectable.cursor;
 	Object[] examplePrefabs;

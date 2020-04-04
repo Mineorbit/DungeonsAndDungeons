@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelLoader
 {
-	void load()
+	public LevlData load(string  path)
 	{
 	}
 }
