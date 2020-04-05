@@ -9,6 +9,7 @@ public class LevelEditor : MonoBehaviour
 	//LevelData 
 	public GameObject 	levelHook;
 	public Level		currentLevel;
+	public string		currentLevelPath;
 	
     void Start()
     {
@@ -19,14 +20,35 @@ public class LevelEditor : MonoBehaviour
 	{
 	prepareMapPrefabs();
 	levelHook = GameObject.Find("Level");
+	currentLevelPath = "map/test";
 	setupCurrentLevel();
 	}
+
+	public void startEdit(string path)
+	{
+	prepareMapPrefabs();
+	levelHook = GameObject.Find("Level");
+	currentLevelPath = path;
+	setupCurrentLevel();
+	}
+
+
 	void setupCurrentLevel()
 	{
 	if(levelHook.GetComponent<Level>()==null)
 	{
 	create();
 	}else open();
+	}
+
+	public void open()
+	{
+		currentLevel = levelHook.GetComponent<Level>();
+	}
+
+	public void create()
+	{
+		currentLevel = levelHook.AddComponent(typeof(Level)) as Level;
 	}
 
     public void prepareMapPrefabs()	
@@ -52,17 +74,17 @@ public class LevelEditor : MonoBehaviour
 	return o.checkPosition(loc,l);
 	}
 
-    public void load()
-	{
-
-	}
 	public void save()
 	{
-		
+		LevelSaver ls = new LevelSaver();
+		LevelData data = new LevelData();
+		data.fromLevel(currentLevel);
+		ls.save(currentLevelPath,data);
 	}
 	
 	public void add()
 	{
+
 	LevelObject newObject;
 	newObject = setClass();
 
@@ -89,15 +111,6 @@ public class LevelEditor : MonoBehaviour
 		}
 	}
 
-    public void open()
-	{
-		currentLevel = levelHook.GetComponent<Level>();
-	}
-
-	public void create()
-	{
-		currentLevel = levelHook.AddComponent(typeof(Level)) as Level;
-	}
 
 	public void remove(LevelObject e)
 	{

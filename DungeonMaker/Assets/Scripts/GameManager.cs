@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
 	Vector3 prefabOffset = new Vector3 (0, -20, 0);
 
 	//PlaySate/Networkdata
+	public bool Host = false;
 	int hp;
 	int mp;
 	public bool roundStarted = false;
@@ -187,11 +188,9 @@ public class GameManager : MonoBehaviour {
 			GameObject cur = GameObject.Find ("Cursor");
 			cursor = cur.GetComponent<Cursor> ();
 			editor.startEdit ();
-
 	}
 	void startTest()
 	{
-		Debug.Log("Test");
 		//Setup TestPlayer
 		players = new GameObject[1];
 		InstantiateTestPlayer();

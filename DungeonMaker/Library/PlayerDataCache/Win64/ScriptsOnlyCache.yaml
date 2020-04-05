@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Bar
     - BuilderController
     - CameraController
     - Cursor
@@ -48,27 +49,14 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.VolumeProfile
     Unity.RenderPipelines.Universal.Runtime.dll:
     - UnityEngine.Rendering.Universal.Bloom
-    - UnityEngine.Rendering.Universal.ChannelMixer
-    - UnityEngine.Rendering.Universal.ChromaticAberration
-    - UnityEngine.Rendering.Universal.ColorAdjustments
     - UnityEngine.Rendering.Universal.ColorCurves
-    - UnityEngine.Rendering.Universal.ColorLookup
     - UnityEngine.Rendering.Universal.DepthOfField
-    - UnityEngine.Rendering.Universal.FilmGrain
     - UnityEngine.Rendering.Universal.ForwardRendererData
-    - UnityEngine.Rendering.Universal.LensDistortion
     - UnityEngine.Rendering.Universal.LiftGammaGain
-    - UnityEngine.Rendering.Universal.MotionBlur
-    - UnityEngine.Rendering.Universal.PaniniProjection
     - UnityEngine.Rendering.Universal.PostProcessData
-    - UnityEngine.Rendering.Universal.ShadowsMidtonesHighlights
-    - UnityEngine.Rendering.Universal.SplitToning
-    - UnityEngine.Rendering.Universal.Tonemapping
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
-    - UnityEngine.Rendering.Universal.Vignette
-    - UnityEngine.Rendering.Universal.WhiteBalance
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.ShaderGraph.Editor.dll:
@@ -106,6 +94,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.RawImage
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
@@ -174,11 +163,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14742}
     - Class: 114
-      Script: {instanceID: 15230}
+      Script: {instanceID: 15232}
     - Class: 114
-      Script: {instanceID: 15556}
+      Script: {instanceID: 15560}
     - Class: 114
-      Script: {instanceID: 15628}
+      Script: {instanceID: 15632}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -243,6 +232,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11808}
     - Class: 114
+      Script: {instanceID: 11872}
+    - Class: 114
       Script: {instanceID: 11876}
     - Class: 114
       Script: {instanceID: 11964}
@@ -271,13 +262,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14742}
     - Class: 114
-      Script: {instanceID: 15006}
+      Script: {instanceID: 15008}
     - Class: 114
-      Script: {instanceID: 15230}
+      Script: {instanceID: 15232}
     - Class: 114
-      Script: {instanceID: 15556}
+      Script: {instanceID: 15560}
     - Class: 114
-      Script: {instanceID: 15628}
+      Script: {instanceID: 15632}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -448,35 +439,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14804}
     - Class: 114
-      Script: {instanceID: 15096}
+      Script: {instanceID: 15098}
     - Class: 114
-      Script: {instanceID: 15146}
+      Script: {instanceID: 15148}
     - Class: 114
-      Script: {instanceID: 15230}
+      Script: {instanceID: 15232}
     - Class: 114
-      Script: {instanceID: 15308}
+      Script: {instanceID: 15310}
     - Class: 114
-      Script: {instanceID: 15364}
+      Script: {instanceID: 15368}
     - Class: 114
-      Script: {instanceID: 15536}
+      Script: {instanceID: 15540}
     - Class: 114
-      Script: {instanceID: 15556}
-    - Class: 114
-      Script: {instanceID: 15592}
+      Script: {instanceID: 15560}
     - Class: 114
       Script: {instanceID: 15596}
     - Class: 114
-      Script: {instanceID: 15628}
+      Script: {instanceID: 15600}
     - Class: 114
-      Script: {instanceID: 15656}
+      Script: {instanceID: 15632}
     - Class: 114
       Script: {instanceID: 15660}
     - Class: 114
-      Script: {instanceID: 15794}
+      Script: {instanceID: 15664}
     - Class: 114
-      Script: {instanceID: 15802}
+      Script: {instanceID: 15798}
     - Class: 114
-      Script: {instanceID: 16314}
+      Script: {instanceID: 15806}
+    - Class: 114
+      Script: {instanceID: 16318}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -581,13 +572,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14742}
     - Class: 114
-      Script: {instanceID: 15230}
+      Script: {instanceID: 14928}
     - Class: 114
-      Script: {instanceID: 15556}
+      Script: {instanceID: 15232}
     - Class: 114
-      Script: {instanceID: 15600}
+      Script: {instanceID: 15560}
     - Class: 114
-      Script: {instanceID: 15628}
+      Script: {instanceID: 15604}
+    - Class: 114
+      Script: {instanceID: 15632}
+    - Class: 114
+      Script: {instanceID: 15700}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -599,8 +594,6 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
-      Script: {instanceID: 0}
-    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -725,7 +718,7 @@ ScriptsOnlyBuild:
     className: Bloom
   - hash:
       serializedVersion: 2
-      Hash: beac32409adc5cfafb8194e5e3467219
+      Hash: 9be721ebff1c4d328cf59b71faea9857
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelEditor
@@ -935,7 +928,7 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: a20c0816016c1026273e867db6c84f1f
+      Hash: 6b1021ece4d073a65ff6e8334f0f7f3d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Sword
@@ -953,7 +946,7 @@ ScriptsOnlyBuild:
     className: UIFoldout
   - hash:
       serializedVersion: 2
-      Hash: 4c6ad55ebdd1bd940248990b44fedba1
+      Hash: 95f9f6e7a75794ee38640f91990ae923
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1097,7 +1090,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 2f1adf534bb7095d9b103cf7f144494a
+      Hash: 682b01aebfd69e53c4326458a3a4c4f7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Level
@@ -1367,7 +1360,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerValue
   - hash:
       serializedVersion: 2
-      Hash: a20c0816016c1026273e867db6c84f1f
+      Hash: 6b1021ece4d073a65ff6e8334f0f7f3d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Item
@@ -1377,6 +1370,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
     namespaceName: UnityEngine.Experimental.Rendering.Universal
     className: CinemachineUniversalPixelPerfect
+  - hash:
+      serializedVersion: 2
+      Hash: 099d7b7ea64da4b0588c150baf87b40b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Bar
   - hash:
       serializedVersion: 2
       Hash: 36112b0a16753cab0931521e4de67ef6
@@ -1523,7 +1522,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerIntField
   - hash:
       serializedVersion: 2
-      Hash: a20c0816016c1026273e867db6c84f1f
+      Hash: 6b1021ece4d073a65ff6e8334f0f7f3d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Shield
@@ -1569,12 +1568,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
     namespaceName: UnityEngine.Experimental.Rendering.Universal
     className: Light2D
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Goal
   - hash:
       serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
@@ -1623,4 +1616,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainMenuScene.unity
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/PlayScene.unity
-  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Windows/3_4_0/DungeonsAndDungeons/DungeonMaker.exe
+  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/5_4_17/DungeonsAndDungeons/DungeonMaker.exe
