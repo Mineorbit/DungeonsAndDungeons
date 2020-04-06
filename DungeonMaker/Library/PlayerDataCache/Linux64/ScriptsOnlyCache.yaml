@@ -19,6 +19,8 @@ ScriptsOnlyBuild:
     - ViewController
     NavMeshComponents.dll:
     - UnityEngine.AI.NavMeshSurface
+    NavMeshComponentsEditor.dll:
+    - UnityEditor.AI.NavMeshAssetManager
     Unity.RenderPipelines.Core.Runtime.dll:
     - UnityEngine.Rendering.UI.DebugUIHandlerBitField
     - UnityEngine.Rendering.UI.DebugUIHandlerButton
@@ -67,14 +69,17 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Universal.Tonemapping
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
+    - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
     - UnityEngine.Rendering.Universal.Vignette
     - UnityEngine.Rendering.Universal.WhiteBalance
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.ShaderGraph.Editor.dll:
+    - UnityEditor.Graphing.GraphObject
     - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -84,8 +89,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -104,6 +111,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
     - UnityEngine.UI.RawImage
+    - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
@@ -250,9 +258,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11964}
     - Class: 114
+      Script: {instanceID: 12008}
+    - Class: 114
       Script: {instanceID: 12162}
     - Class: 114
       Script: {instanceID: 12198}
+    - Class: 114
+      Script: {instanceID: 12390}
     - Class: 114
       Script: {instanceID: 12544}
     - Class: 114
@@ -479,7 +491,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15806}
     - Class: 114
-      Script: {instanceID: 16318}
+      Script: {instanceID: 18436}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -730,7 +742,7 @@ ScriptsOnlyBuild:
     className: Bloom
   - hash:
       serializedVersion: 2
-      Hash: 9be721ebff1c4d328cf59b71faea9857
+      Hash: 625cc71e7c0c0a91d07d93c3757375b5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelEditor
@@ -958,7 +970,7 @@ ScriptsOnlyBuild:
     className: UIFoldout
   - hash:
       serializedVersion: 2
-      Hash: 95f9f6e7a75794ee38640f91990ae923
+      Hash: 8558c32f9f7b56e2a0b3f0a1e56100a3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1102,7 +1114,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 682b01aebfd69e53c4326458a3a4c4f7
+      Hash: f4d42997fd69cdd9857194e39b8c035f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Level
@@ -1628,4 +1640,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainMenuScene.unity
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/PlayScene.unity
-  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/5_4_17/DungeonsAndDungeons.x86_64
+  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/6_4_19/DungeonsAndDungeons.x86_64
