@@ -364,7 +364,7 @@ public class UIManager : MonoBehaviour {
 			entry.callback.AddListener ((eventData) => {
 					gameManager.selectedPrefab = d.Key.thisElement;
 					gameManager.cursorData = d.Key;
-					gameManager.dummy = gameManager.getEditor ().setClass ();
+					gameManager.dummy = LevelObject.setClass (gameManager.selectedPrefab);
 					gameManager.updateCursor ();
 				}
 				//Change color of Selectionbox

@@ -32,26 +32,26 @@ public class Level : MonoBehaviour{
     }
     public bool Valid()
     {
-        Debug.Log(levelItems.Count);
-        Debug.Log(spawn);
-        Debug.Log(goal);
         return (levelItems.Count>0)&&(spawn!=null)&&(goal!=null);
     }
     //Type and location must be  set
     public void addObject(Vector3 location, LevelObject obj) {
      if(!setup) {setupLevel(); setup = true;}
     
-    
+    GameManager.Selectable type =  obj.type;
+    //Klasse Konfigurieren
+    obj = LevelObject.setClass(type);
+    obj.type = type;
     //Dringend optimieren
     obj = setPrefab(obj);
+
+
     if(obj.type==GameManager.Selectable.spawn)
     {
-        Debug.Log("Tada");
-    spawn = (Spawn) obj;
+    spawn =  (Spawn) obj;
     }
     if(obj.type==GameManager.Selectable.goal)
     {
-        Debug.Log("Tudu");
     goal = (Goal) obj;
     }
 

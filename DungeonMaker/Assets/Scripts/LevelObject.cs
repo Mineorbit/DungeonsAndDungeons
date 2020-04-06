@@ -26,7 +26,7 @@ public class LevelObject
 	}
 	public static LevelObject fromLevelObjectData(LevelObjectData d)
 	{
-		LevelObject l = new LevelObject();
+		LevelObject l = LevelObject.setClass(d.type);
 		l.orientation = d.orientation;
 		Vector3 locationT  = new Vector3(d.location[0],d.location[1],d.location[2]);
 		l.location = locationT;
@@ -41,5 +41,17 @@ public class LevelObject
 		d.orientation =  orientation;
 		d.type = type;
 		return d;
+	}
+	public static LevelObject setClass(GameManager.Selectable type)
+	{
+		if(type==GameManager.Selectable.spawn)
+		{
+			return new Spawn();
+		}
+		if(type==GameManager.Selectable.goal)
+		{
+			return new Goal();
+		}
+		return new  LevelObject();
 	}
 }

@@ -192,6 +192,8 @@ public class GameManager : MonoBehaviour {
 	{
 			GameObject cur = GameObject.Find ("Cursor");
 			cursor = cur.GetComponent<Cursor> ();
+			if(!backToEdit)
+			{
 			if(!newLevel)
 			{
 			levelToLoad = "/map/"+TargetLevelName+".lev";
@@ -200,18 +202,17 @@ public class GameManager : MonoBehaviour {
 			
 			currentLevel.name = TargetLevelName;
 			editor.LevelName = TargetLevelName;
-			editor.startEdit ();
 			}else
 			{
 			Level l = editor.levelHook.AddComponent<Level>();
 			l.name = newLevelName;
-			Debug.Log("name"+newLevelName);
 			currentLevel = l;
 			currentLevel.name = newLevelName;
 			editor.LevelName = newLevelName;
 			editor.currentLevel = currentLevel;
-			editor.startEdit();
 			}
+			}
+			editor.startEdit();
 	}
 	void startTest()
 	{

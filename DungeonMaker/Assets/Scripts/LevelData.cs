@@ -6,8 +6,6 @@ using UnityEngine;
 public class LevelData {
 	public LevelObjectData[] levelObjects;
 	public string name;
-	public int spawnIndex;
-	public int goalIndex;
 	public void fromLevel(Level l)
 	{
 		name = l.name;
@@ -17,8 +15,6 @@ public class LevelData {
 		{
 			LevelObjectData d = levelObject.Value.toLevelObjectData();
 			levelObjects[i] =  d;
-			if(d.type == GameManager.Selectable.spawn) spawnIndex = i;
-			if(d.type == GameManager.Selectable.goal) goalIndex = i;
 			
 			i++;
 		}
@@ -38,9 +34,6 @@ public class LevelData {
 			Debug.Log(currentLevel.name);
 			i++;
 		}
-			currentLevel.spawn = (Spawn) store[spawnIndex];
-
-			currentLevel.goal = (Goal) store[goalIndex];
 		
 		return currentLevel;
 	}

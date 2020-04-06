@@ -87,25 +87,16 @@ public class LevelEditor : MonoBehaviour
 	{
 
 	LevelObject newObject;
-	newObject = setClass();
 
 
+	newObject = LevelObject.setClass(gameManager.selectedPrefab);
 	newObject.type = gameManager.selectedPrefab;
 	newObject.prefab = getCurrent();
+
 	add(newObject);
 	}
-	public LevelObject setClass()
-	{
-		if(gameManager.selectedPrefab==GameManager.Selectable.spawn)
-		{
-			return new Spawn();
-		}
-		if(gameManager.selectedPrefab==GameManager.Selectable.goal)
-		{
-			return new Goal();
-		}
-		return new  LevelObject();
-	}
+	
+
 
 	public void add(LevelObject e)
 	{
