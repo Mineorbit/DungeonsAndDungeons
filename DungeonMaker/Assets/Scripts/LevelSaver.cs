@@ -17,6 +17,5 @@ public class LevelSaver
 		FileStream stream = new FileStream(targetpath,FileMode.Create);
 		formatter.Serialize(stream,data);
 		stream.Close();
-		Debug.Log("Saved to: "+targetpath);
 	}
 }

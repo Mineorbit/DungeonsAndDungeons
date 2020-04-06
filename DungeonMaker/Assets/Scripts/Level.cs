@@ -6,23 +6,67 @@ using System;
 public class Level : MonoBehaviour{
     public Dictionary<string,LevelObject> levelItems;
     public GameObject levelHook;
-    public Spawn spawn;
-    public Goal  goal;
+    public string name;
+    public Spawn spawn = null;
+    public Goal  goal = null;
     
     GameManager gameManager;
-    public void Start() {
+    bool setup = false;
+    Dictionary<GameManager.Selectable,UnityEngine.Object> prefabs;
+
+
+    public void Awake() {
+     setupLevel();
+    }
+
+    void setupLevel()
+    {
         levelHook = this.gameObject;
         gameManager = GameObject.Find("GameManager").transform.GetComponent<GameManager>();
         levelItems = new Dictionary<string,LevelObject>();
         spawn = null;
     }
+    void setupPrefabDictionary()
+    {
+
+    }
+    public bool Valid()
+    {
+        Debug.Log(levelItems.Count);
+        Debug.Log(spawn);
+        Debug.Log(goal);
+        return (levelItems.Count>0)&&(spawn!=null)&&(goal!=null);
+    }
+    //Type and location must be  set
     public void addObject(Vector3 location, LevelObject obj) {
+     if(!setup) {setupLevel(); setup = true;}
+    
+    
+    //Dringend optimieren
+    obj = setPrefab(obj);
+    if(obj.type==GameManager.Selectable.spawn)
+    {
+        Debug.Log("Tada");
+    spawn = (Spawn) obj;
+    }
+    if(obj.type==GameManager.Selectable.goal)
+    {
+        Debug.Log("Tudu");
+    goal = (Goal) obj;
+    }
+
     LevelObject entry = instantiateObject(location,obj);
     int x  = (int) location.x;
     int y  = (int) location.y;
     int z  = (int) location.z;
     entry.place(this);
     levelItems.Add(x+"|"+y+"|"+z,entry);
+    }
+    
+    LevelObject setPrefab(LevelObject o)
+    {
+        o.prefab = Resources.Load("Map/"+(int)o.type);
+        return o;
     }
 
     public LevelObject instantiateObject(Vector3 target, LevelObject e)

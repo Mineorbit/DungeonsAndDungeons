@@ -9,26 +9,18 @@ public class LevelEditor : MonoBehaviour
 	//LevelData 
 	public GameObject 	levelHook;
 	public Level		currentLevel;
-	public string		currentLevelPath;
-	
+	public string LevelName;
     void Start()
     {
     GameObject gManager = GameObject.Find("GameManager");
 	gameManager = gManager.GetComponent<GameManager>();
+	levelHook = GameObject.Find("Level");
     }
-    public void startEdit()
-	{
-	prepareMapPrefabs();
-	levelHook = GameObject.Find("Level");
-	currentLevelPath = "map/test";
-	setupCurrentLevel();
-	}
+   
 
-	public void startEdit(string path)
+	public void startEdit()
 	{
 	prepareMapPrefabs();
-	levelHook = GameObject.Find("Level");
-	currentLevelPath = path;
 	setupCurrentLevel();
 	}
 
@@ -39,6 +31,12 @@ public class LevelEditor : MonoBehaviour
 	{
 	create();
 	}else open();
+
+		foreach(KeyValuePair<string,LevelObject> p in currentLevel.levelItems)
+			{
+				Debug.Log("P:"+p.Key);
+			}
+
 	}
 
 	public void open()
@@ -59,7 +57,10 @@ public class LevelEditor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.F))
+		{
+			
+		}
     }
 
 	public Object getCurrent()
@@ -79,7 +80,7 @@ public class LevelEditor : MonoBehaviour
 		LevelSaver ls = new LevelSaver();
 		LevelData data = new LevelData();
 		data.fromLevel(currentLevel);
-		ls.save(currentLevelPath,data);
+		ls.save("map/"+LevelName,data);
 	}
 	
 	public void add()
@@ -98,6 +99,10 @@ public class LevelEditor : MonoBehaviour
 		if(gameManager.selectedPrefab==GameManager.Selectable.spawn)
 		{
 			return new Spawn();
+		}
+		if(gameManager.selectedPrefab==GameManager.Selectable.goal)
+		{
+			return new Goal();
 		}
 		return new  LevelObject();
 	}
@@ -128,7 +133,13 @@ public class LevelEditor : MonoBehaviour
 		{
 		Destroy(t.gameObject);
 		}
-		Destroy(currentLevel);
+		Destroy(levelHook.GetComponent<Level>());
+		currentLevel = null;
+		gameManager.currentLevel = null;
+		LevelName = null;
+		gameManager.newLevelName = null;
+		gameManager.TargetLevelName = null;
+		Debug.Log("Cleared everything");
 	}
 	
 }

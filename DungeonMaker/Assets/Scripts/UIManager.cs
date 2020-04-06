@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using System.IO;
+using TMPro;
 public class UIManager : MonoBehaviour {
 	GameManager gameManager;
 
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour {
 	Dictionary<PreviewData, Texture> prefabTextures;
 
 	bool renderTexturesIn = false;
+	string[] dataLevelName;
 	// Start is called before the first frame update
 	void Start () {
 		setup ();
@@ -97,10 +99,17 @@ public class UIManager : MonoBehaviour {
 		Button test = BuilderUI.transform.Find ("BottomBar").Find ("SubMenu").Find ("Test").GetComponent<Button> ();
 		test.onClick.AddListener (backToEdit);
 		Button save = BuilderUI.transform.Find ("BottomBar").Find ("SubMenu").Find ("Save").GetComponent<Button> ();
-		save.onClick.AddListener (storeTestAction);
+		save.onClick.AddListener (storeAction);
 	}
-	void storeTestAction () {
+	void storeAction () {
+		Debug.Log("Test");
+		if(gameManager.currentLevel.Valid())
+		{
 		gameManager.getEditor ().save ();
+		}else
+		{
+			Debug.Log("level hat Mängel");
+		}
 	}
 	void backToEdit () {
 		gameManager.backToEdit = true;
@@ -114,8 +123,58 @@ public class UIManager : MonoBehaviour {
 	}
 	void setupBuilderMenu () {
 		setupHotbar(BuilderMenu.transform.Find("Hotbar"));
+		getLocalLevels();
+		changeEditItemList();
+		setupBuilderMenuButton();
+	 }
+	void setupBuilderMenuButton()
+	{
+		Button newLevel = BuilderMenu.transform.Find("NewLevel").GetComponent<Button>();
+		newLevel.onClick.AddListener(createNewLevel);
+	}
+	
+
+	 void changeEditItemList()
+	 {
+		Transform contentHandle =   BuilderMenu.transform.Find("LevelList").Find("Viewport").Find("Content");
+		clearChildren(contentHandle);
+		LevelData[] data = gameManager.localLevels;
+
+		Object levelItemprefab = Resources.Load("UI/LevelItem");
+		dataLevelName = new string[data.Length];
+		int i = 0;
+		foreach(LevelData d in data)
+		{
+			int j = i;
+			GameObject item = Instantiate(levelItemprefab,contentHandle) as GameObject;
+			item.transform.Find("Name").GetComponent<TMP_Text>().text = d.name;
+			dataLevelName[i] = d.name;
+			item.transform.Find("Select").GetComponent<Button>().onClick.AddListener(()=>{loadExistingLevel(j);});
+			i++;
+		}
 	 }
 
+	 void loadExistingLevel(int i)
+	 {
+		 gameManager.newLevel = false;
+		 gameManager.TargetLevelName = dataLevelName[i];
+		gameManager.startEditMode();
+	 }
+
+	void createNewLevel()
+	{
+		Debug.Log("New Level");
+		gameManager.newLevel  = true;
+		gameManager.newLevelName = BuilderMenu.transform.Find("NewLevelName").Find("Text Area").Find("Text").GetComponent<TMP_Text>().text;
+		gameManager.startEditMode();
+	}
+	void clearChildren(Transform t)
+	{
+		foreach(Transform data in t)
+		{
+			Destroy(data);
+		}
+	}
 	void closeCurrentMenu () {
 		if (currentMenu == MenuState.Play) {
 			closePlayerMenu ();
@@ -125,6 +184,23 @@ public class UIManager : MonoBehaviour {
 		} else
 		if (currentMenu == MenuState.Main) {
 			closeMainMenu ();
+		}
+	}
+
+	void getLocalLevels(){
+		DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath+"/map");
+		LevelLoader loader = new LevelLoader();
+		
+		FileInfo[] files = dir.GetFiles("*.lev");
+		
+		gameManager.localLevels = new LevelData[files.Length];
+		int i = 0;
+		foreach (FileInfo file in files)
+ 		{
+			Debug.Log(file);
+			LevelData data = loader.load("/map/"+file.Name);
+			gameManager.localLevels[i] = data;
+			i++;
 		}
 	}
 

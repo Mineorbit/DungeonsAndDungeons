@@ -16,8 +16,12 @@ public class GameManager : MonoBehaviour {
 	public string levelToLoad =  "";
 
 	//EditState
-	//Describes wether to create new Level in edit mode
+
+	public LevelData[] localLevels;
 	public bool newLevel =  true;
+	public string newLevelName = "test";
+	public string TargetLevelName = "";
+	//Describes wether to create new Level in edit mode
 	Vector3 lastPosition;
 	public LevelObject dummy;
 	LevelEditor editor;
@@ -50,6 +54,7 @@ public class GameManager : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start () {
+		dummy = new LevelObject();
 		clearLevel = true;
 		editor = this.GetComponent<LevelEditor> ();
 		startMainMenuMode ();
@@ -105,10 +110,15 @@ public class GameManager : MonoBehaviour {
 	}
 	void loadLevel(){
 		GameObject levelHook = GameObject.Find("Level");
+		editor.levelHook = levelHook;
 		Level level = (levelHook.GetComponent<Level>()==null)?levelHook.AddComponent<Level>():levelHook.GetComponent<Level>();
+		level.levelHook = levelHook;
 		LevelLoader loader = new LevelLoader();
 		LevelData lD = loader.load(levelToLoad);
 		level = lD.toLevel(level);
+		Debug.Log("Geladen");
+
+	
 		currentLevel = level;
 	}
 
@@ -178,16 +188,30 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	void startEdit()
+	public void startEdit()
 	{
-			if(!newLevel)
-			{
-			loadLevel();
-			editor.currentLevel = currentLevel;
-			}
 			GameObject cur = GameObject.Find ("Cursor");
 			cursor = cur.GetComponent<Cursor> ();
+			if(!newLevel)
+			{
+			levelToLoad = "/map/"+TargetLevelName+".lev";
+			loadLevel();
+			editor.currentLevel = currentLevel;
+			
+			currentLevel.name = TargetLevelName;
+			editor.LevelName = TargetLevelName;
 			editor.startEdit ();
+			}else
+			{
+			Level l = editor.levelHook.AddComponent<Level>();
+			l.name = newLevelName;
+			Debug.Log("name"+newLevelName);
+			currentLevel = l;
+			currentLevel.name = newLevelName;
+			editor.LevelName = newLevelName;
+			editor.currentLevel = currentLevel;
+			editor.startEdit();
+			}
 	}
 	void startTest()
 	{
@@ -198,7 +222,6 @@ public class GameManager : MonoBehaviour {
 		
 			if(currentLevel.spawn==null)
 			{
-				Debug.Log("Testerfuck");
 			players[0].transform.position = lastPosition + new Vector3(0,5,0);
 			}else
 			{
@@ -274,10 +297,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void updateCursor () {
-		
 		dummy.type = selectedPrefab;
 		bool valid = editor.checkPositionValid (cursorLocation,dummy,editor.currentLevel);
 		cursor.setCursor(valid);
-		if ((int) selectedPrefab >= 1) cursor.setCursor (valid, cursorMeshes[((int) selectedPrefab) - 1], cursorData);
+		if ((int) selectedPrefab >= 1) cursor.setCursor (valid, cursorData.previewMesh, cursorData);
 	}
 }
