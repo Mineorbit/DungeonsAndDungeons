@@ -50,7 +50,7 @@ public class Level : MonoBehaviour {
         Vector3 loc = new Vector3(objData.location[0],objData.location[1],objData.location[2]);
         newObject.transform.position = loc;
         LevelObject lvlObj = addLevelObject (newObject, objData);
-       
+        lvlObj.type = objData.type;
         lvlObj.prefab = prefab;
         lvlObj.location = loc;
 
@@ -77,7 +77,15 @@ public class Level : MonoBehaviour {
         int y = (int) location.y;
         int z = (int) location.z;
         string c = x + "|" + y + "|" + z;
-        return false;
+        LevelObject temp;
+        if(levelItems.TryGetValue(c, out temp))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void remove (Vector3 location) {
