@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		Mask = LayerMask.GetMask ("Floor");
 		Controller = GetComponent<CharacterController> ();
+		modelController = GetComponentInChildren<ModelController>();
+		modelController.left = left;
+		modelController.right = right;
 		TargetDirection = new Vector3(0,0,0);
 	}
 
@@ -82,6 +85,15 @@ public class PlayerController : MonoBehaviour {
 		{
 			LeftUse();
 		}
+		updateAnimator();
+	}
+	void updateAnimator()
+	{
+		modelController.isGrounded = isGrounded;
+		modelController.Jumping = Jumping;
+		modelController.Factor = Factor;
+		modelController.TargetDirection = TargetDirection;
+		modelController.inControl = inControl;
 	}
 
 	void computeSpeed()
@@ -125,13 +137,13 @@ public class PlayerController : MonoBehaviour {
 	{
 		useTime = left.useTime;
 		setupUse();
-		modelController.strikeL();
+		modelController.useL();
 	}
 	void RightUse()
 	{
 		useTime = right.useTime;
 		setupUse();
-		modelController.strikeR();
+		modelController.useR();
 	}
 	void setupUse()
 	{

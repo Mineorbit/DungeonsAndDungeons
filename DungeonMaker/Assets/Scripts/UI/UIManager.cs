@@ -7,6 +7,7 @@ using System.IO;
 using TMPro;
 public class UIManager : MonoBehaviour {
 	GameManager gameManager;
+	public static UIManager current;
 
 	//MainMenuMode
 
@@ -18,14 +19,17 @@ public class UIManager : MonoBehaviour {
 
 	public GameObject PlayerUI;
 	public GameObject PlayerMenu;
+	public GameObject WinMenu;
 
 	CanvasGroup MenuSlider;
 
 	CanvasGroup MainMenuSlider;
 
 	CanvasGroup PlaySlider;
+	CanvasGroup WinSlider;
 
 	CanvasGroup EditSlider;
+
 
 	public float FadeTime;
 	public bool menuActive = false;
@@ -39,7 +43,15 @@ public class UIManager : MonoBehaviour {
 	string[] dataLevelName;
 	// Start is called before the first frame update
 	void Start () {
+		Debug.Log("Test");
 		setup ();
+
+		current = this;
+	}
+
+	public void openWin()
+	{
+		StartCoroutine("openWinMenu");
 	}
 
 	void MenuLogic () {
@@ -53,8 +65,16 @@ public class UIManager : MonoBehaviour {
 
 	void setup () {
 		GameObject gManager = GameObject.Find ("GameManager");
+
 		if (gManager != null)
 			gameManager = gManager.GetComponent<GameManager> ();
+
+
+		if(GameManager.current.currentState == GameManager.State.play||GameManager.current.currentState==GameManager.State.test)
+		{
+			WinMenu = this.transform.Find("Win").gameObject;
+			WinSlider = WinMenu.GetComponent<CanvasGroup>();
+		}
 
 		if (gameManager.currentState == GameManager.State.mainmenu) {
 			
@@ -233,6 +253,28 @@ public class UIManager : MonoBehaviour {
 	}
 	void closeMainMenu () {
 		StartCoroutine("closetheMainMenu");
+	}
+
+	IEnumerator closeWinMenu () {
+		for (float ft = 1f; ft >= 0; ft -= 0.1f) {
+			WinSlider.alpha = ft;
+			yield return null;
+		}
+		WinSlider.alpha = 0;
+		WinMenu.SetActive(false);
+		yield return null;
+	}
+
+	IEnumerator openWinMenu () {
+
+		WinMenu.SetActive(true);
+		for (float ft = 0f; ft <= 1; ft += 0.1f) {
+			WinSlider.alpha = ft;
+			yield return null;
+		}
+		WinSlider.alpha = 1;
+
+		yield return null;
 	}
 
 

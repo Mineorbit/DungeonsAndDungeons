@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour {
 	//PlaySate/Networkdata
 	public bool Host = false;
 	public Level currentLevel;
-	public GameObject[] players;
 
 	void Awake()
 	{
@@ -159,6 +158,7 @@ public class GameManager : MonoBehaviour {
 		if (clearLevel) {
 			editor.clear ();
 		}
+		GameLogic.current.stopRound();
 	}
 	void stopPlayMode () {
 		if (clearLevel) {
@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour {
 				Destroy(o.gameObject);
 			}
 		}
-
+		GameLogic.current.stopRound();
 	}
 	void postSceneLoadAction () {
 		if (currentState == State.edit) {
@@ -222,38 +222,17 @@ public class GameManager : MonoBehaviour {
 
 	void startTest()
 	{
-		//Setup TestPlayer
-		players = new GameObject[1];
-		InstantiateTestPlayer();
-		players[0] = GameObject.Find("Player");
-		if(currentLevel.spawn==null)
-		{
-			GameLogic.current.spawnPlayer(0,lastPosition);	
-		}else
-		{
-			GameLogic.current.spawnPlayers(players);	
-		}
-		GameLogic.current.startRound();
+		GameLogic.current.startTestRound();
 	}
 
 
 	void startGame(){
-		players = new GameObject[1];
-		InstantiatePlayers();
-		players[0] = GameObject.Find("Player");
 		GameLogic.current.startRound();
 	}
 
 
 
-	void InstantiatePlayers()
-	{
-
-	}
-	void InstantiateTestPlayer()
-	{
-
-	}
+	
 
 	
 

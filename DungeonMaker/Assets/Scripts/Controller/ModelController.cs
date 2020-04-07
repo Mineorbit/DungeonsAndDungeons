@@ -6,13 +6,19 @@ public class ModelController : MonoBehaviour
 {
 	public Animator animator;
 	public GameObject model;
- 	public PlayerController controller;
 	Quaternion targetRotation = Quaternion.identity;
- 
+	public Item left;
+	public Item right;
+	public bool isGrounded;
+	public bool inControl;
+	public bool Jumping;
+	public float Factor;
+	public Vector3 TargetDirection;
+
    // Start is called before the first frame update
     void Start()
     {
-        controller.modelController = this;
+		animator = GetComponentInChildren<Animator>();
 		model = animator.gameObject;
     }
 
@@ -21,25 +27,25 @@ public class ModelController : MonoBehaviour
     {
 		setAnimationValues();
         rotate();
-		if(controller.isGrounded)
+		if(isGrounded)
 		{
 			postResetPosition();
 		}
     }
 	void setAnimationValues()
 	{
-	animator.SetFloat("Speed",controller.Factor);
-	animator.SetBool("OnGround",controller.isGrounded);
-	animator.SetBool("Jump",controller.Jumping);
+	animator.SetFloat("Speed",Factor);
+	animator.SetBool("OnGround",isGrounded);
+	animator.SetBool("Jump",Jumping);
 	}
-	public void strikeR()
+	public void useR()
 	{
-		controller.right.animateAction();
+		right.animateAction();
 		animator.SetTrigger("Slash");
 	}
-	public void strikeL()
+	public void useL()
 	{
-		controller.left.animateAction();
+		left.animateAction();
 		animator.SetTrigger("Block");
 	}
 	public void postResetPosition()
@@ -48,7 +54,7 @@ public class ModelController : MonoBehaviour
 	}
     void rotate()
 	{
-	Vector3 targetDirection = controller.TargetDirection;
+	Vector3 targetDirection = TargetDirection;
 	float swapz = targetDirection.z;
 	targetDirection.z = -targetDirection.x;
 	targetDirection.x = swapz;	
@@ -59,7 +65,7 @@ public class ModelController : MonoBehaviour
 	{	
 	targetRotation.SetLookRotation(targetDirection,transform.up);
 	}
-	if(controller.inControl)
+	if(inControl)
 	transform.rotation = Quaternion.Lerp(transform.rotation,targetRotation,0.25f);
 	}
 }
