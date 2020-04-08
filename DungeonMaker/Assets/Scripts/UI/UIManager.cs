@@ -42,11 +42,9 @@ public class UIManager : MonoBehaviour {
 	bool renderTexturesIn = false;
 	string[] dataLevelName;
 	// Start is called before the first frame update
-	void Start () {
-		Debug.Log("Test");
-		setup ();
-
+	public void Start () {
 		current = this;
+		setup ();
 	}
 
 	public void openWin()

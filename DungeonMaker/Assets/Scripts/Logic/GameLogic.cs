@@ -31,7 +31,16 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z)) Win();
+        if(GameManager.current.currentState==GameManager.State.play||GameManager.current.currentState==GameManager.State.test) updateGame();
+    }
+    public void updateGame()
+    {
+       if(Input.GetKeyDown(KeyCode.Z)) 
+        {
+            Debug.Log("Tada");
+            Win();
+        }
+        updateHUD(); 
     }
     public void startRound()
     {
@@ -40,6 +49,12 @@ public class GameLogic : MonoBehaviour
         spawnLocation = SpawnPointLocation();
         spawnPlayer();
         setupCamera();
+    }
+    
+    public void updateHUD()
+    {
+        float hpfactor = hp/maxhp;
+        float mpfactor = mp/maxmp;
     }
     Vector3 SpawnPointLocation()
     {
@@ -61,6 +76,10 @@ public class GameLogic : MonoBehaviour
     {
         GameObject p =  Instantiate(player) as GameObject;
         mainPlayer =  p.AddComponent<Player>();
+        mainPlayer.id = localId;
+    }
+    public void createExternalPlayer()
+    {
 
     }
     public void setupCamera()
