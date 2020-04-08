@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void clear () {
+		if(GameLogic.current!=null) GameLogic.current.startUnpause();
 		openLoadingScreen();
 		if (currentState == State.edit) {
 			stopEditMode ();

@@ -10,9 +10,15 @@ public class GameLogic : MonoBehaviour
     public static GameObject[] players;
 	public int hp;
 	public int mp;
-    public int maxhp;
-	public int maxmp;
+    public int maxhp  = 100;
+	public int maxmp = 100;
     public int localId = 0;
+
+    public int playerCount = 1;
+
+    public bool Paused = false;
+
+    public bool Pausable = true;
 
     UnityEngine.Object player;
     UnityEngine.Object playerExt;
@@ -21,11 +27,17 @@ public class GameLogic : MonoBehaviour
     Vector3 spawnLocation;
     void Start()
     {
+        Pausable  = true;
         current   =  this;
         player    =  Resources.Load("Main/Player/Player");
         playerExt =  Resources.Load("Main/Player/ExternalPlayer");
         playerCamera =  Resources.Load("Main/Player/PlayerCamera");
         
+    }
+    public void startUnpause()
+    {
+        Paused = false;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -35,11 +47,6 @@ public class GameLogic : MonoBehaviour
     }
     public void updateGame()
     {
-       if(Input.GetKeyDown(KeyCode.Z)) 
-        {
-            Debug.Log("Tada");
-            Win();
-        }
         updateHUD(); 
     }
     public void startRound()
@@ -97,10 +104,31 @@ public class GameLogic : MonoBehaviour
     public void Win()
     {
         UIManager.current.openWin();
+        pauseGame();
+        Pausable = false;
     }
     public void stopRound()
     {
         Destroy(mainPlayer.gameObject);
         Destroy(camera);
+    }
+
+    public void pauseGame()
+    {
+        if(Pausable)
+        {
+    Paused = true;
+    Time.timeScale = 0;
+    mainPlayer.gameObject.GetComponent<PlayerController>().enabled = false;
+        }
+    }
+    public void unpauseGame()
+    {
+        if(Pausable)
+        {
+        Paused = false;
+        Time.timeScale = 1;
+        mainPlayer.gameObject.GetComponent<PlayerController>().enabled = true;
+        }
     }
 }

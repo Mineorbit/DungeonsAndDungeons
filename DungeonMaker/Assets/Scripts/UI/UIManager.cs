@@ -72,6 +72,7 @@ public class UIManager : MonoBehaviour {
 		{
 			WinMenu = this.transform.Find("Win").gameObject;
 			WinSlider = WinMenu.GetComponent<CanvasGroup>();
+			setupWinMenu();
 		}
 
 		if (gameManager.currentState == GameManager.State.mainmenu) {
@@ -370,6 +371,11 @@ public class UIManager : MonoBehaviour {
 		desktop.onClick.AddListener (Application.Quit);
 		Menu.SetActive (false);
 	}
+	void setupWinMenu() {
+		Button mainMenu = WinMenu.transform.Find("MainMenu").GetComponent<Button>();
+		Button lobby = WinMenu.transform.Find("Lobby").GetComponent<Button>();
+		mainMenu.onClick.AddListener(GameManager.current.startMainMenuMode);
+	}
 	// Update is called once per frame
 	void Update () {
 
@@ -437,12 +443,18 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void CloseMenu () {
+		if(GameLogic.current.Pausable)
+		{
 		menuActive = false;
 		StartCoroutine ("closeMenu");
+		}
 	}
 	public void OpenMenu () {
+		if(GameLogic.current.Pausable)
+		{
 		menuActive = true;
 		StartCoroutine ("openMenu");
+		}
 	}
 	public void StopGame () {
 		Application.Quit ();
