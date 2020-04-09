@@ -47,9 +47,9 @@ public void process() throws IOException
 }
 public Package receive() throws IOException
 {
-	byte[] data = new byte[100];
-	inStream.read(data,0,100);
-	Package p = Package.Get(data);
+	byte[] data = new byte[32];
+	inStream.read(data,0,32);
+	Package p = Package.From(data);
 	return null;
 }
 

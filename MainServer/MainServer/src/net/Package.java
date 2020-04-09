@@ -6,4 +6,12 @@ public class Package {
 	public static Package Get(byte[] d) {
 		return null;
 	}
+	public static Package From(byte[] d) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public static byte[] From(Package p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
