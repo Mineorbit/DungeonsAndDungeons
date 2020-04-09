@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public float tickRate = 64;
     void Start()
     {
+        QualitySettings.vsyncCount = 0;
+        Application.targetFrameRate = (int)tickRate;
         Time.fixedDeltaTime = 1/tickRate;
     }
 
