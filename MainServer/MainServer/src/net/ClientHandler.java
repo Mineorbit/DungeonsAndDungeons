@@ -50,12 +50,12 @@ public Package receive() throws IOException
 	byte[] data = new byte[32];
 	inStream.read(data,0,32);
 	Package p = Package.From(data);
-	return null;
+	return p;
 }
 
 public void send(Package p) throws IOException
 {	
-	outStream.write(p.data);
+	outStream.write(Package.To(p));
 	outStream.flush();
 }
 }
