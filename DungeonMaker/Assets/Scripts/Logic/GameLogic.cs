@@ -8,8 +8,8 @@ public class GameLogic : MonoBehaviour
     public Player mainPlayer;
     public GameObject camera;
     public static GameObject[] players;
-	public int hp;
-	public int mp;
+	public int hp = 50;
+	public int mp =  50;
     public int maxhp  = 100;
 	public int maxmp = 100;
     public int localId = 0;
@@ -60,8 +60,10 @@ public class GameLogic : MonoBehaviour
     
     public void updateHUD()
     {
-        float hpfactor = hp/maxhp;
-        float mpfactor = mp/maxmp;
+        float hpfactor = (float)hp/(float)maxhp;
+        float mpfactor = (float)mp/(float)maxmp;
+        UIManager.current.hpBar.setBar(hpfactor);
+        UIManager.current.mpBar.setBar(mpfactor);
     }
     Vector3 SpawnPointLocation()
     {

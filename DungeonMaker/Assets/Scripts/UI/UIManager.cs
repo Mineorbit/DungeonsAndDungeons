@@ -30,6 +30,9 @@ public class UIManager : MonoBehaviour {
 
 	CanvasGroup EditSlider;
 
+	public Bar hpBar;
+	public Bar mpBar;
+
 
 	public float FadeTime;
 	public bool menuActive = false;
@@ -98,6 +101,10 @@ public class UIManager : MonoBehaviour {
 			BuilderUI = this.transform.Find ("BuilderUI").gameObject;
 			setupBuilderUI ();
 		}
+		if (gameManager.currentState == GameManager.State.play||gameManager.currentState == GameManager.State.test) {
+			PlayerUI = this.transform.Find ("PlayerUI").gameObject;
+			setupPlayerUI ();
+		}
 		if (gameManager.currentState == GameManager.State.test) {
 			setupTestEndMenu ();
 		}
@@ -112,7 +119,11 @@ public class UIManager : MonoBehaviour {
 		edit.onClick.AddListener (startBuilderMenu);
 	}
 
-	void setupPlayerUI () { }
+	void setupPlayerUI () { 
+		hpBar = PlayerUI.transform.Find("HP").GetComponent<Bar>();
+		mpBar = PlayerUI.transform.Find("MP").GetComponent<Bar>();
+
+	}
 
 	void setupBuilderUI () {
 		Button test = BuilderUI.transform.Find ("BottomBar").Find ("SubMenu").Find ("Test").GetComponent<Button> ();
@@ -121,7 +132,6 @@ public class UIManager : MonoBehaviour {
 		save.onClick.AddListener (storeAction);
 	}
 	void storeAction () {
-		Debug.Log("Test");
 		if(gameManager.currentLevel.Valid())
 		{
 		gameManager.getEditor ().save ();
