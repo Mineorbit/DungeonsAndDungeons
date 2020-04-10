@@ -7,11 +7,11 @@ import java.net.Socket;
 public class ClientListener implements Runnable {
 
 	ServerSocket serverSocket;
-	
-	public ClientListener(ServerSocket sS)
-	{
+
+	public ClientListener(ServerSocket sS) {
 		serverSocket = sS;
 	}
+
 	@Override
 	public void run() {
 		try {
@@ -22,13 +22,12 @@ public class ClientListener implements Runnable {
 		}
 	}
 
-	public void accept() throws IOException
-	{
-		 Socket s = serverSocket.accept();
-		 ClientHandler c = new ClientHandler(s);
-		 Thread t = new Thread(c);
-		 t.start();
-		 accept();
+	public void accept() throws IOException {
+		Socket s = serverSocket.accept();
+		ClientHandler c = new ClientHandler(s);
+		Thread t = new Thread(c);
+		t.start();
+		accept();
 	}
 
 }

@@ -15,66 +15,60 @@ import util.Util;
 import java.util.*;
 
 public class ClientHandler implements Runnable {
-Socket socket;
-InputStream inStream;
-OutputStream outStream;
-public ClientHandler(Socket s)
-{
-	socket = s;
-}
-@Override
-public void run() {
-System.out.println("Neue Verbindung: "+socket);
-try {
-	inStream = new BufferedInputStream(socket.getInputStream());
-} catch (IOException e1) {
-	// TODO Auto-generated catch block
-	e1.printStackTrace();
-}
-try {
-	outStream = new BufferedOutputStream(socket.getOutputStream());
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
+	Socket socket;
+	InputStream inStream;
+	OutputStream outStream;
 
-
-Connector info = new Connector();
-info.socket = socket;
-info.inStream = inStream;
-info.outStream = outStream;
-
-String playerName = "";
-//Handshake
-byte[] welcomeData = info.Receive(32);
-if(welcomeData[0]!=42)
-{
-	System.out.println("Invalider Nutzer");
-	return;
-}
-
-playerName = new String(Util.subArray(welcomeData, 1, 31));
-//PlayerSetup
-Random r = new Random();
-if(playerName.equals(""))
-{
-	playerName = "Testplayer"+r.nextInt();
-}
-Player p;
-	synchronized(this)
-	{
-	p = new Player(playerName,info);
-	p.globalid = Server.freeId;
-	Server.freeId++;
-	Server.playerCount++;
-	p.playerHandle = new PlayerHandle(p);
-	Server.current.players.add(p);
+	public ClientHandler(Socket s) {
+		socket = s;
 	}
-System.out.println("Neuer Spieler: "+playerName);
-System.out.println(" Globale Id:"+p.globalid);
+
+	@Override
+	public void run() {
+		System.out.println("Neue Verbindung: " + socket);
+		try {
+			inStream = new BufferedInputStream(socket.getInputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			outStream = new BufferedOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Connector info = new Connector();
+		info.socket = socket;
+		info.inStream = inStream;
+		info.outStream = outStream;
+
+		String playerName = "";
+//Handshake
+		byte[] welcomeData = info.Receive(32);
+		if (welcomeData[0] != 42) {
+			System.out.println("Invalider Nutzer");
+			return;
+		}
+
+		playerName = new String(Util.subArray(welcomeData, 1, 31));
+//PlayerSetup
+		Random r = new Random();
+		if (playerName.equals("")) {
+			playerName = "Testplayer" + r.nextInt();
+		}
+		Player p;
+		synchronized (this) {
+			p = new Player(playerName, info);
+			p.globalid = Server.freeId;
+			Server.freeId++;
+			Server.playerCount++;
+			p.playerHandle = new PlayerHandle(p);
+			Server.current.players.add(p);
+		}
+		System.out.println("Neuer Spieler: " + playerName);
+		System.out.println(" Globale Id:" + p.globalid);
+	}
+
 }
-
-
-
-}
-

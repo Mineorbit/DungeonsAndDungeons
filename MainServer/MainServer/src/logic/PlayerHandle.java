@@ -8,11 +8,12 @@ import java.util.Queue;
 import main.Server;
 import net.pack.Packet;
 
-public class PlayerHandle implements Runnable{
+public class PlayerHandle implements Runnable {
 	Player p;
 	InputHandle iH;
 	OutputHandle oH;
 	boolean Running;
+
 	@Override
 	public void run() {
 		iH = new InputHandle(p);
@@ -21,24 +22,21 @@ public class PlayerHandle implements Runnable{
 		Thread oT = new Thread(oH);
 		iT.start();
 		oT.start();
-		while(Running)
-		{
-			
+		while (Running) {
+
 		}
 	}
-	public void Update(Packet p)
-	{
-	oH.toSend.add(p);	
+
+	public void Update(Packet p) {
+		oH.toSend.add(p);
 	}
-	
-	public PlayerHandle(Player player)
-	{
+
+	public PlayerHandle(Player player) {
 		Running = true;
 		p = player;
 	}
-	
-	public void Disconnect()
-	{
+
+	public void Disconnect() {
 		Server.current.playerCount--;
 		Server.current.players.remove(p);
 		try {
@@ -48,32 +46,33 @@ public class PlayerHandle implements Runnable{
 			e.printStackTrace();
 		}
 		Running = false;
-		
+
 	}
-	class InputHandle implements Runnable
-	{
+
+	class InputHandle implements Runnable {
 		Player player;
 		Queue<Packet> receivedPackets;
+
 		public InputHandle(Player p) {
 			receivedPackets = new LinkedList<Packet>();
-			player  = p;
+			player = p;
 		}
 
 		@Override
 		public void run() {
-			while(p.playerHandle.Running)
-			{
+			while (p.playerHandle.Running) {
 				byte[] data = player.connector.Receive(32);
 				Packet result = Packet.FromData(data);
 				receivedPackets.add(result);
 			}
 		}
-		
+
 	}
-	class OutputHandle implements Runnable
-	{
+
+	class OutputHandle implements Runnable {
 		Player player;
 		public Queue<Packet> toSend;
+
 		public OutputHandle(Player p) {
 			toSend = new LinkedList<Packet>();
 			player = p;
@@ -81,19 +80,16 @@ public class PlayerHandle implements Runnable{
 
 		@Override
 		public void run() {
-			while(p.playerHandle.Running)
-			{
-				if(!toSend.isEmpty())
-				{
-				Packet send = toSend.poll();
-				if(send!=null)
-				{
-				player.connector.Send(send.ToData());
-				}
+			while (p.playerHandle.Running) {
+				if (!toSend.isEmpty()) {
+					Packet send = toSend.poll();
+					if (send != null) {
+						player.connector.Send(send.ToData());
+					}
 				}
 			}
 		}
-		
+
 	}
-	
+
 }
