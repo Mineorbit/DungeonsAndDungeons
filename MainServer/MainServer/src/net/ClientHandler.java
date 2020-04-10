@@ -28,15 +28,10 @@ public class ClientHandler implements Runnable {
 		System.out.println("Neue Verbindung: " + socket);
 		try {
 			inStream = new BufferedInputStream(socket.getInputStream());
+			outStream = new BufferedOutputStream(socket.getOutputStream());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		try {
-			outStream = new BufferedOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		Connector info = new Connector();

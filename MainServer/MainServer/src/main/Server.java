@@ -46,7 +46,6 @@ public class Server {
 			for (Player p : players) {
 				if (!p.setup) {
 					p.setup = true;
-					;
 					Thread t = new Thread(p.playerHandle);
 					t.start();
 				}
