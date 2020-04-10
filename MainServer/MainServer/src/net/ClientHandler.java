@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import net.pack.Package;
+
 public class ClientHandler implements Runnable {
 Socket socket;
 InputStream inStream;

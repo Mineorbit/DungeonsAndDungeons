@@ -6,19 +6,27 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.Lobby;
+import logic.Player;
 import net.ClientHandler;
+import util.ThreadManager;
 
 public class Server {
 	public static int  port;
 	public static int  maxPlayers;
 	public static  int playerCount;
 	ServerSocket serverSocket;
-	public List<Thread> threads;
+	public List<Lobby> lobbies;
+	public List<Player> players;
  public Server(int p,int mP)
  {
-	 threads = new ArrayList<Thread>();
+	 ThreadManager.instance = new ThreadManager();
+	 lobbies = new ArrayList<Lobby>();
+	 players = new ArrayList<Player>();
 	 port = p;
 	 maxPlayers  = mP;
+	 
+	 
  }
  public void start() throws IOException {
 	 System.out.println("MainServer gestartet");
@@ -31,7 +39,6 @@ public class Server {
 	 Socket s = serverSocket.accept();
 	 ClientHandler c = new ClientHandler(s);
 	 Thread t = new Thread(c);
-	 threads.add(t);
 	 t.start();
 	 accept();
  }
