@@ -384,6 +384,7 @@ public class UIManager : MonoBehaviour {
 	void setupWinMenu() {
 		Button mainMenu = WinMenu.transform.Find("MainMenu").GetComponent<Button>();
 		Button lobby = WinMenu.transform.Find("Lobby").GetComponent<Button>();
+		lobby.onClick.AddListener(null);
 		mainMenu.onClick.AddListener(GameManager.current.startMainMenuMode);
 	}
 	// Update is called once per frame

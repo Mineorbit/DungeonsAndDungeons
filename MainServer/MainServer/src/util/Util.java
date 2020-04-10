@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Arrays;
+
 public class Util {
 	public static byte[] toBytes(int x)
 	{
@@ -10,5 +12,9 @@ public class Util {
 	}
 	return r;
 	}
+	public static<T> byte[] subArray(byte[] data, int beg, int end) {
+		return Arrays.copyOfRange(data, beg, end + 1);
+	}
+
 	
 }

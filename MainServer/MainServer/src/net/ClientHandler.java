@@ -7,13 +7,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import net.pack.Package;
+import logic.Player;
+import logic.PlayerHandle;
+import main.Server;
+import util.Util;
+
+import java.util.*;
 
 public class ClientHandler implements Runnable {
 Socket socket;
 InputStream inStream;
 OutputStream outStream;
-enum State {Join,Add,Lobby,Remove,Start};
 public ClientHandler(Socket s)
 {
 	socket = s;
@@ -34,30 +38,43 @@ try {
 	e.printStackTrace();
 }
 
-try {
-	process();
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
+
+Connector info = new Connector();
+info.socket = socket;
+info.inStream = inStream;
+info.outStream = outStream;
+
+String playerName = "";
+//Handshake
+byte[] welcomeData = info.Receive(32);
+if(welcomeData[0]!=42)
+{
+	System.out.println("Invalider Nutzer");
+	return;
 }
 
-}
-public void process() throws IOException
+playerName = new String(Util.subArray(welcomeData, 1, 31));
+//PlayerSetup
+Random r = new Random();
+if(playerName.equals(""))
 {
-	Package p = receive();
-	send(p);
+	playerName = "Testplayer"+r.nextInt();
 }
-public Package receive() throws IOException
-{
-	byte[] data = new byte[32];
-	inStream.read(data,0,32);
-	Package p = Package.From(data);
-	return p;
+Player p;
+	synchronized(this)
+	{
+	p = new Player(playerName,info);
+	p.globalid = Server.freeId;
+	Server.freeId++;
+	Server.playerCount++;
+	p.playerHandle = new PlayerHandle(p);
+	Server.current.players.add(p);
+	}
+System.out.println("Neuer Spieler: "+playerName);
+System.out.println(" Globale Id:"+p.globalid);
 }
 
-public void send(Package p) throws IOException
-{	
-	outStream.write(Package.To(p));
-	outStream.flush();
+
+
 }
-}
+
