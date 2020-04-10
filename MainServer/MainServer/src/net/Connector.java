@@ -13,17 +13,11 @@ public class Connector {
 	public void Send(byte[] data) {
 		try {
 			outStream.write(data);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
 			outStream.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public byte[] Receive(int amount) {
