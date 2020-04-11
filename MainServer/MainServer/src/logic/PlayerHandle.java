@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import main.Server;
 import net.pack.Packet;
+import net.pack.client.ClientPacket;
 
 public class PlayerHandle implements Runnable {
 	Player p;
@@ -50,19 +51,17 @@ public class PlayerHandle implements Runnable {
 
 	class InputHandle implements Runnable {
 		Player player;
-		Queue<Packet> receivedPackets;
+		Queue<ClientPacket> receivedPackets;
 
 		public InputHandle(Player p) {
-			receivedPackets = new LinkedList<Packet>();
+			receivedPackets = new LinkedList<ClientPacket>();
 			player = p;
 		}
 
 		@Override
 		public void run() {
 			while (p.playerHandle.Running) {
-				byte[] data = player.connector.Receive(32);
-				Packet result = Packet.FromData(data);
-				receivedPackets.add(result);
+				receivedPackets.add(ClientPacket.fromInputStream(player.connector.inStream));
 			}
 		}
 	}

@@ -6,7 +6,6 @@ import net.pack.NotificationPacket;
 import net.pack.Packet;
 
 public class Player {
-
 	public String name;
 	// ServerWide ID (Permanent)
 	public int globalID;

@@ -14,7 +14,7 @@ public class LengthPacket implements Packet {
 		byte[] inner = innerPacket.toBytes();
 		byte[] result = Arrays.copyOf(inner, inner.length + 2);
 		
-		result[inner.length] = (byte) (inner.length >> 1);
+		result[inner.length] = (byte) (inner.length >> 8);
 		result[inner.length + 1] = (byte) inner.length;
 		
 		return result;
