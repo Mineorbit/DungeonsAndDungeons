@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class LengthClientPacket extends ClientPacket {
-	ClientPacket innerPacket;
+	private ClientPacket innerPacket;
 	
 	public LengthClientPacket(ClientPacket innerPacket) {
 		this.innerPacket = innerPacket;
+	}
+	
+	public ClientPacket getInnerPacket() {
+		return innerPacket;
 	}
 	
 	public static ClientPacket fromInputStream(InputStream in) throws IOException {
