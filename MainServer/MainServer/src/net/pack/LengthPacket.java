@@ -12,10 +12,14 @@ public class LengthPacket implements Packet {
 	@Override
 	public byte[] toBytes() {
 		byte[] inner = innerPacket.toBytes();
-		byte[] result = Arrays.copyOf(inner, inner.length + 2);
+		byte[] result = new byte[inner.length + 2];
 		
-		result[inner.length] = (byte) (inner.length >> 8);
-		result[inner.length + 1] = (byte) inner.length;
+		result[0] = (byte) (inner.length >> 8);
+		result[1] = (byte) inner.length;
+		
+		for (int i = 0; i < inner.length; i++) {
+			result[i + 2] = inner[i];
+		}
 		
 		return result;
 	}
