@@ -17,7 +17,6 @@ public class Server {
 	public static Server current;
 	public static int port;
 	public static int maxPlayers;
-	public static int playerCount;
 	public static int freeId = 0;
 	ServerSocket serverSocket;
 	public static List<Lobby> lobbies;
@@ -42,25 +41,19 @@ public class Server {
 	}
 
 	public static Player GetPlayer(int globalID) {
-		Integer i = new Integer(globalID);
-		return playersbyGlobalID.get(i);
-
+		return playersbyGlobalID.get(globalID);
 	}
 
 	class ServerControl implements Runnable {
-
 		@Override
 		public void run() {
-			for (Player p : players) {
+			for (Player p : playersbyGlobalID.values()) {
 				if (!p.setup) {
 					p.setup = true;
 					Thread t = new Thread(p.playerHandle);
 					t.start();
 				}
 			}
-
 		}
-
 	}
-
 }

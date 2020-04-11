@@ -58,7 +58,6 @@ public class ClientHandler implements Runnable {
 			p = new Player(playerName, info);
 			p.globalid = Server.freeId;
 			Server.freeId++;
-			Server.playerCount++;
 			p.playerHandle = new PlayerHandle(p);
 			Server.current.playersbyGlobalID.put(p.globalid, p);
 		}
