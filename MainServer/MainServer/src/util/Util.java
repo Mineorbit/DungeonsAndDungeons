@@ -6,7 +6,8 @@ public class Util {
 	public static byte[] toBytes(int x) {
 		byte[] r = new byte[4];
 		for (int i = 0; i < 4; i++) {
-			r[i] = (byte) (x << (i * 8));
+			r[3-i] = (byte) (x << (i * 8));
+			System.out.println(r[3-i]);
 		}
 		return r;
 	}
