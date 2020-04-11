@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System;
+using UnityEngine.UI;
 
 //Courtesy of Tom Weiland, still a lot required tho
 public class Client : MonoBehaviour
@@ -24,11 +25,13 @@ public class Client : MonoBehaviour
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
+
     //SpielInfo
 
+    private static GameObject overlay;
     public int globalId = 0;
     public int localId = 0;
-    public string name = 0;
+    public string name = "Test";
 
 
     private void Awake()
@@ -45,6 +48,7 @@ public class Client : MonoBehaviour
 
     private void Start()
     {
+        overlay = GameObject.Find("Overlay");
         tcp = new TCP();
     }
 
@@ -60,20 +64,34 @@ public class Client : MonoBehaviour
         {
             isConnected = false;
             tcp.socket.Close();
-            udp.socket.Close();
 
-            Debug.Log("Disconnected from server.");
+            Client.updateNetworkMessage("Disconnected from server.");
         }
     }
 
+    public static void updateNetworkMessage(string info)
+    {
+        Text t = overlay.transform.Find("NetworkInfo").GetComponent<Text>();
+        t.text = info;
+    }
     public void ConnectToServer()
     {
+        Client.updateNetworkMessage($"Connecting to {ip}:{port}");
+
         InitializeClientData();
 
         isConnected = true;
         tcp.Connect(); 
     }
 
+    private void InitializeClientData()
+    {
+        packetHandlers = new Dictionary<int, PacketHandler>()
+        {
+            { (int)ServerPackets.ConnectInfo, ClientHandle.ConnectInfo },
+            { (int)ServerPackets.Information, ClientHandle.Information }
+        };
+    }
     public class TCP
     {
         public TcpClient socket;

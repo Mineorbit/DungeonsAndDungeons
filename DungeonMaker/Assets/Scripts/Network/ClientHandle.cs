@@ -13,8 +13,17 @@ public class ClientHandle : MonoBehaviour
 
         Debug.Log($"Verbunden mit Server");
         Client.instance.globalId = _myId;
-        Client.instance.updateGame();
+        Client.updateNetworkMessage("Vebunden zum Server");
         ClientSend.PlayerConnect("TestUser123");
-        
+
+    }
+    public static void Information(Packet _packet)
+    {
+
+        string info = _packet.ReadString();
+
+        Debug.Log($"Message: {info}");
+        Client.updateNetworkMessage(info);
+
     }
 }
