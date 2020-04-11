@@ -74,7 +74,7 @@ public class Client : MonoBehaviour
         Text t = overlay.transform.Find("NetworkInfo").GetComponent<Text>();
         t.text = info;
     }
-    public void ConnectToServer()
+    public void ConnectToMainServer()
     {
         Client.updateNetworkMessage($"Connecting to {ip}:{port}");
 
@@ -82,6 +82,10 @@ public class Client : MonoBehaviour
 
         isConnected = true;
         tcp.Connect(); 
+    }
+    public void ConnectToGameServer()
+    {
+        
     }
 
     private void InitializeClientData()

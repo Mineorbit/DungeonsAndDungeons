@@ -16,7 +16,7 @@ public class ConnectBar : MonoBehaviour
     void Connect()
     {
         Client.instance.name = nameField.text;
-        Client.instance.ConnectToServer();
+        Client.instance.ConnectToMainServer();
     }
     // Update is called once per frame
     void Update()
