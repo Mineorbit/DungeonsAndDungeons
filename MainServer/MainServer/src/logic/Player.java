@@ -28,19 +28,26 @@ public class Player {
 		
 	}
 	
-	public void JoinLobby(Lobby l)
+	public void JoinLobby(Player joinee, Lobby l)
+	{
+	//Should only be possible if invite packet has been sent to player before	
+	}
+	public void JoinLobby(Player joinee, int lobbyId)
 	{
 		
 	}
-	public void JoinLobby(int lobbyId)
-	{
-		
-	}
+	
 	public void disconnect() {
+
+		//Removal from all Lobbys and Server data
+		
+		//Disconnect
 		playerHandle.Disconnect();
 	}
 
-	public void Update(Packet p) {
+	//Any Information (Will be displayed in Overlay/NetworkInfo)
+	public void sendNotification(String message) {
+		NotificationPacket p = new NotificationPacket();
 		playerHandle.Update(p);
 	}
 

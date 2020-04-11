@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,16 +9,16 @@ import main.Server;
 
 public class Lobby {
 	public Map<Integer,Player> playersByLocalId;
-	public int id;
+	public int globalLobbyId;
 	//LocalId of MasterPlayer
 	public int masterId = 0;
 
 	public Lobby() {
-		players = new ArrayList<Player>();
+		playersByLocalId = new HashMap<Integer,Player>();
 	}
 	public void InvitePlayer(int playerId)
 	{
-		
+		//Send Invite Packet to player (includes lobbyId)
 	}
 	public void InvitePlayer(String username)
 	{

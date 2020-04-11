@@ -1,14 +1,18 @@
 package net.pack;
 
+import java.util.List;
+
+import logic.Player;
+
 public class Packet {
-	enum Target {
-		Lobby, Friends, All
-	};
+	List <Player> t;
 
-	public Target target;
-
+	public Packet(List <Player> targets)
+	{
+		t = targets;
+	}
 	public static Packet FromData(byte[] data) {
-		return new Packet();
+		return new Packet(null);
 	}
 
 	public byte[] ToData() {
