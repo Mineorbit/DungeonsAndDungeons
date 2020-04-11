@@ -21,12 +21,12 @@ public class Server {
 	public static int freeId = 0;
 	ServerSocket serverSocket;
 	public static List<Lobby> lobbies;
-	public static Map<Integer,Player> playersbyGlobalID;
+	public static Map<Integer, Player> playersbyGlobalID;
 
 	public Server(int p, int mP) {
 		current = this;
 		lobbies = new ArrayList<Lobby>();
-		playersbyGlobalID = new HashMap<Integer,Player>();
+		playersbyGlobalID = new HashMap<Integer, Player>();
 		port = p;
 		maxPlayers = mP;
 	}
@@ -41,12 +41,12 @@ public class Server {
 
 	}
 
-	public static Player GetPlayer(int globalID)
-	{
+	public static Player GetPlayer(int globalID) {
 		Integer i = new Integer(globalID);
 		return playersbyGlobalID.get(i);
-		
+
 	}
+
 	class ServerControl implements Runnable {
 
 		@Override

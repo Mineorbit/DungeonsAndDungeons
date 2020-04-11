@@ -5,12 +5,12 @@ import java.util.List;
 import logic.Player;
 
 public class Packet {
-	List <Player> t;
+	List<Player> t;
 
-	public Packet(List <Player> targets)
-	{
+	public Packet(List<Player> targets) {
 		t = targets;
 	}
+
 	public static Packet FromData(byte[] data) {
 		return new Packet(null);
 	}
