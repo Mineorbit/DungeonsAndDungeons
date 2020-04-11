@@ -65,7 +65,6 @@ public class PlayerHandle implements Runnable {
 				receivedPackets.add(result);
 			}
 		}
-
 	}
 
 	class OutputHandle implements Runnable {
@@ -83,12 +82,11 @@ public class PlayerHandle implements Runnable {
 				if (!toSend.isEmpty()) {
 					Packet send = toSend.poll();
 					if (send != null) {
-						player.connector.Send(send.ToData());
+						player.connector.Send(send.toBytes());
 					}
 				}
 			}
 		}
-
 	}
 
 }

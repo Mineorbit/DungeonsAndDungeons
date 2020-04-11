@@ -1,6 +1,8 @@
 package logic;
 
 import net.Connector;
+import net.pack.LengthPacket;
+import net.pack.NotificationPacket;
 import net.pack.Packet;
 
 public class Player {
@@ -49,7 +51,8 @@ public class Player {
 
 	// Any Information (Will be displayed in Overlay/NetworkInfo)
 	public void sendNotification(String message) {
-		NotificationPacket p = new NotificationPacket();
+		NotificationPacket noti = new NotificationPacket(message);
+		LengthPacket p = new LengthPacket(noti);
 		playerHandle.Update(p);
 	}
 
