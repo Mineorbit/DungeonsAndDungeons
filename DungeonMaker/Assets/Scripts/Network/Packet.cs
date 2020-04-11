@@ -218,7 +218,7 @@ public enum ClientPackets
             if (buffer.Count > readPos)
             {
                 // If there are unread bytes
-                short _value = BitConverter.ToInt16(readableBuffer, readPos); // Convert the bytes to a short
+                short _value = (short)(((int)readableBuffer[readPos])*256+((int)readableBuffer[readPos+1])); // Convert the bytes to a short
                 if (_moveReadPos)
                 {
                     // If _moveReadPos is true and there are unread bytes
@@ -231,7 +231,7 @@ public enum ClientPackets
                 throw new Exception("Could not read value of type 'short'!");
             }
         }
-
+        
         /// <summary>Reads an int from the packet.</summary>
         /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
         public int ReadInt(bool _moveReadPos = true)
@@ -239,7 +239,7 @@ public enum ClientPackets
             if (buffer.Count > readPos)
             {
                 // If there are unread bytes
-                int _value = BitConverter.ToInt32(readableBuffer, readPos); // Convert the bytes to an int
+                int _value = ((int) readableBuffer[readPos])*16777216 + ((int) readableBuffer[readPos+1])*65536+((int) readableBuffer[readPos+2])*256+((int) readableBuffer[readPos+3]);// Convert the bytes to an int
                 if (_moveReadPos)
                 {
                     // If _moveReadPos is true

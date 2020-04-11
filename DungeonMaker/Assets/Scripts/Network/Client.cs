@@ -160,7 +160,7 @@ public class Client : MonoBehaviour
 
                 byte[] _data = new byte[_byteLength];
                 Array.Copy(receiveBuffer, _data, _byteLength);
-
+                Debug.Log("Paket empfangen: "+_data.Length+" Byte");
                 receivedData.Reset(HandleData(_data));
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
             }
@@ -176,15 +176,15 @@ public class Client : MonoBehaviour
 
             receivedData.SetBytes(_data);
 
-            if (receivedData.UnreadLength() >= 4)
+            if (receivedData.UnreadLength() >= 2)
             {
-                _packetLength = receivedData.ReadInt();
+                _packetLength = (int) receivedData.ReadShort();
                 if (_packetLength <= 0)
                 {
                     return true; 
                 }
             }
-
+            Debug.Log("Test: "+_packetLength);
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
             {
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
@@ -193,6 +193,7 @@ public class Client : MonoBehaviour
                     using (Packet _packet = new Packet(_packetBytes))
                     {
                         int _packetId = _packet.ReadInt();
+                        Debug.Log("PacketID:"+_packetId);
                         packetHandlers[_packetId](_packet); 
                     }
                 });

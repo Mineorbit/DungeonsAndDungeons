@@ -20,7 +20,7 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.PlayerConnect))
         {
-            _packet.Write(Client.instance.globalId);
+            Debug.Log($"Schicke Login Paket mit Namen: {username}");
             _packet.Write(username);
             SendTCPData(_packet);
         }
