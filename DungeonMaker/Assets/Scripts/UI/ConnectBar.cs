@@ -9,7 +9,7 @@ public class ConnectBar : MonoBehaviour
     public InputField name;
     void Start()
     {
-        connectButton = transform.GetComponentInChildren<Button>();
+        connectButton = transform.Find("GO").GetComponentInChildren<Button>();
         name = transform.GetComponentInChildren<InputField>();
         connectButton.onClick.AddListener(Connect);
     }
