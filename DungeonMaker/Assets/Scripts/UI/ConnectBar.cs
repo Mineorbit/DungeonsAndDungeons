@@ -6,15 +6,17 @@ using UnityEngine.UI;
 public class ConnectBar : MonoBehaviour
 {
     public Button connectButton;
-    public InputField name;
+    public InputField nameField;
     void Start()
     {
         connectButton = transform.Find("GO").GetComponentInChildren<Button>();
-        name = transform.GetComponentInChildren<InputField>();
+        nameField = transform.GetComponentInChildren<InputField>();
         connectButton.onClick.AddListener(Connect);
     }
     void Connect()
     {
+        Client.instance.name = nameField.text;
+        Client.instance.ConnectToServer();
     }
     // Update is called once per frame
     void Update()

@@ -14,7 +14,7 @@ public class ClientHandle : MonoBehaviour
         Debug.Log($"Verbunden mit Server");
         Client.instance.globalId = _myId;
         Client.updateNetworkMessage("Vebunden zum Server");
-        ClientSend.PlayerConnect("TestUser123");
+        ClientSend.PlayerConnect(Client.instance.name);
 
     }
     public static void Information(Packet _packet)
