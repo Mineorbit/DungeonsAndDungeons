@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import logic.Lobby;
 import logic.Player;
@@ -19,12 +21,12 @@ public class Server {
 	public static int freeId = 0;
 	ServerSocket serverSocket;
 	public static List<Lobby> lobbies;
-	public static List<Player> players;
+	public static Map<Integer,Player> playersbyGlobalID;
 
 	public Server(int p, int mP) {
 		current = this;
 		lobbies = new ArrayList<Lobby>();
-		players = new ArrayList<Player>();
+		playersbyGlobalID = new HashMap<Integer,Player>();
 		port = p;
 		maxPlayers = mP;
 	}
@@ -39,6 +41,12 @@ public class Server {
 
 	}
 
+	public static Player GetPlayer(int globalID)
+	{
+		Integer i = new Integer(globalID);
+		return playersbyGlobalID.get(i);
+		
+	}
 	class ServerControl implements Runnable {
 
 		@Override
