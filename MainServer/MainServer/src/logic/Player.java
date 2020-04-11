@@ -7,7 +7,7 @@ public class Player {
 
 	public String name;
 	// ServerWide ID (Permanent)
-	public int globalid;
+	public int globalID;
 	public Connector connector;
 	public PlayerHandle playerHandle;
 

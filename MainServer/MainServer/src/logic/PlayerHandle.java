@@ -37,7 +37,7 @@ public class PlayerHandle implements Runnable {
 	}
 
 	public void Disconnect() {
-//		Server.current.playersbyGlobalID.
+		Server.getInstance();
 		try {
 			p.connector.socket.close();
 		} catch (IOException e) {

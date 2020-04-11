@@ -56,13 +56,13 @@ public class ClientHandler implements Runnable {
 		Player p;
 		synchronized (this) {
 			p = new Player(playerName, info);
-			p.globalid = Server.freeId;
-			Server.freeId++;
+			p.globalID = Server.getInstance().getFreeId();
+			Server.getInstance().setFreeId(p.globalID + 1);;
 			p.playerHandle = new PlayerHandle(p);
-			Server.current.playersbyGlobalID.put(p.globalid, p);
+			Server.getInstance().getPlayersbyGlobalID().put(p.globalID, p);
 		}
 		System.out.println("Neuer Spieler: " + playerName);
-		System.out.println(" Globale Id:" + p.globalid);
+		System.out.println(" Globale Id:" + p.globalID);
 	}
 
 }

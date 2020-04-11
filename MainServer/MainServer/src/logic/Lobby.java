@@ -39,7 +39,7 @@ public class Lobby {
 	}
 
 	public void ban(int globalId) {
-		Player playerToBan = Server.GetPlayer(globalId);
+		Player playerToBan = Server.getInstance().getPlayersbyGlobalID().get(globalId);
 
 		kick(playerToBan.localId);
 	}
