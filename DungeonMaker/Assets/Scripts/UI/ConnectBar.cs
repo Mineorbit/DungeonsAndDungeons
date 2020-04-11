@@ -15,7 +15,6 @@ public class ConnectBar : MonoBehaviour
     }
     void Connect()
     {
-        NetworkManager.current.ConnectToMain(name.text);
     }
     // Update is called once per frame
     void Update()
