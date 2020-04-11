@@ -30,7 +30,7 @@ public class Server {
 	}
 
 	public static void initInstance(int p, int mP) {
-		if (instance != null) {
+		if (instance == null) {
 			instance = new Server(p, mP);
 		}
 	}

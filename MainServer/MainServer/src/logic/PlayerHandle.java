@@ -61,7 +61,12 @@ public class PlayerHandle implements Runnable {
 		@Override
 		public void run() {
 			while (p.playerHandle.Running) {
-				receivedPackets.add(ClientPacket.fromInputStream(player.connector.inStream));
+				try {
+					receivedPackets.add(ClientPacket.fromInputStream(player.connector.inStream));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
