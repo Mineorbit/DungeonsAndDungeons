@@ -190,7 +190,7 @@ public class Client : MonoBehaviour
                 {
                     using (Packet _packet = new Packet(_packetBytes))
                     {
-                        int _packetId = _packet.ReadInt();
+                        int _packetId = (int)_packet.ReadByte();
                         Debug.Log("PacketID:"+_packetId);
                         packetHandlers[_packetId](_packet); 
                     }

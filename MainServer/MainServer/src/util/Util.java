@@ -7,7 +7,6 @@ public class Util {
 		byte[] r = new byte[4];
 		for (int i = 0; i < 4; i++) {
 			r[3-i] = (byte) (x << (i * 8));
-			System.out.println(r[3-i]);
 		}
 		return r;
 	}
