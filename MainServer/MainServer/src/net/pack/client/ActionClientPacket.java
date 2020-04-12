@@ -2,8 +2,8 @@ package net.pack.client;
 
 import java.util.Arrays;
 
-public class ActionClientPacket extends ClientPacket {
-	public static ClientPacket fromBytes(byte[] bytes) {
+public abstract class ActionClientPacket extends ClientPacket {
+	public static ActionClientPacket fromBytes(byte[] bytes) {
 		final byte id = bytes[0];
 		final byte[] content = Arrays.copyOfRange(bytes, 1, bytes.length);
 		
@@ -25,4 +25,6 @@ public class ActionClientPacket extends ClientPacket {
 			return null;
 		}
 	}
+	
+	public abstract <T, R> R handle(ClientPacketHandler<T, R> handler, T arg);
 }

@@ -6,7 +6,7 @@ import net.pack.NotificationPacket;
 import net.pack.Packet;
 
 public class Player {
-	public String name;
+	private String name;
 	// ServerWide ID (Permanent)
 	public int globalID;
 	public Connector connector;
@@ -24,19 +24,19 @@ public class Player {
 	Color playerColor;
 
 	public Player(String n, Connector info) {
-		name = n;
+		setName(n);
 		connector = info;
 	}
 
-	public void LeaveLobby() {
+	public void leaveLobby() {
 
 	}
 
-	public void JoinLobby(Player joinee, Lobby l) {
+	public void joinLobby(Player joinee, Lobby l) {
 		// Should only be possible if invite packet has been sent to player before
 	}
 
-	public void JoinLobby(Player joinee, int lobbyId) {
+	public void joinLobby(Player joinee, int lobbyId) {
 
 	}
 
@@ -45,14 +45,22 @@ public class Player {
 		// Removal from all Lobbys and Server data
 
 		// Disconnect
-		playerHandle.Disconnect();
+		playerHandle.disconnect();
 	}
 
 	// Any Information (Will be displayed in Overlay/NetworkInfo)
 	public void sendNotification(String message) {
 		NotificationPacket noti = new NotificationPacket(message);
 		LengthPacket p = new LengthPacket(noti);
-		playerHandle.Update(p);
+		playerHandle.send(p);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

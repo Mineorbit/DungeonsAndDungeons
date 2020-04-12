@@ -7,7 +7,10 @@ import java.util.Queue;
 
 import main.Server;
 import net.pack.Packet;
+import net.pack.client.ActionClientPacket;
 import net.pack.client.ClientPacket;
+import net.pack.client.LengthClientPacket;
+import net.pack.client.PlayerConnectPacket;
 
 public class PlayerHandle implements Runnable {
 	Player p;
@@ -24,12 +27,27 @@ public class PlayerHandle implements Runnable {
 		iT.start();
 		oT.start();
 		while (Running) {
+			synchronized (iH) {
+				if (!iH.receivedPackets.isEmpty()) {
+					ClientPacket recv = iH.receivedPackets.poll();
+					
+					if (recv instanceof LengthClientPacket) {
+						LengthClientPacket lengthPacket = (LengthClientPacket) recv;
+						ActionClientPacket inner = lengthPacket.getInnerPacket();
 
+						inner.handle(PlayerPacketHandler.getInstance(), p);
+					} else {
+						System.err.println("Recieved a non-length packet");
+					}
+				}
+			}
 		}
 	}
 
-	public void Update(Packet p) {
-		oH.toSend.add(p);
+	public void send(Packet p) {
+		synchronized (oH) {
+			oH.toSend.add(p);
+		}
 	}
 
 	public PlayerHandle(Player player) {
@@ -37,16 +55,14 @@ public class PlayerHandle implements Runnable {
 		p = player;
 	}
 
-	public void Disconnect() {
-		Server.getInstance();
+	public void disconnect() {
+		Running = false;
 		try {
 			p.connector.socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Running = false;
-
 	}
 
 	class InputHandle implements Runnable {

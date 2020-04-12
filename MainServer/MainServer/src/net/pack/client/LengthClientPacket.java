@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class LengthClientPacket extends ClientPacket {
-	private ClientPacket innerPacket;
+	private ActionClientPacket innerPacket;
 	
-	public LengthClientPacket(ClientPacket innerPacket) {
+	public LengthClientPacket(ActionClientPacket innerPacket) {
 		this.innerPacket = innerPacket;
 	}
 	
-	public ClientPacket getInnerPacket() {
+	public ActionClientPacket getInnerPacket() {
 		return innerPacket;
 	}
 	
-	public static ClientPacket fromInputStream(InputStream in) throws IOException {
+	public static LengthClientPacket fromInputStream(InputStream in) throws IOException {
 		byte[] rawLen = in.readNBytes(2);
 		int length = 0;
 		
