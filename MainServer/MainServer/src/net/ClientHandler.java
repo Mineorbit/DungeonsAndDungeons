@@ -58,11 +58,13 @@ public class ClientHandler implements Runnable {
 		Packet toSend = new LengthPacket(new ConnectionInfoPacket(playerId));
 		connector.Send(toSend.toBytes());
 
+		System.out.println("WillkommensPacket gesendet");
 		// Handshake Client -> Server
 		String playerName = "";
 		ClientPacket recv;
 		try {
 			recv = ClientPacket.fromInputStream(connector.inStream);
+			System.out.println("Antwortpaket erhalten");
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;

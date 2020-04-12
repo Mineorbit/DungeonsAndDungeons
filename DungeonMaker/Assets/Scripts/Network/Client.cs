@@ -138,8 +138,15 @@ public class Client : MonoBehaviour
             {
                 if (socket != null)
                 {
+                    byte[] a = _packet.ToArray();
+                    foreach(byte b in a)
+                    {
+                        Debug.Log(b);
+                    }
+
                     stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
                 }
+                Debug.Log("Data Sent");
             }
             catch (Exception _ex)
             {
@@ -191,7 +198,6 @@ public class Client : MonoBehaviour
                     using (Packet _packet = new Packet(_packetBytes))
                     {
                         int _packetId = (int)_packet.ReadByte();
-                        Debug.Log("PacketID:"+_packetId);
                         packetHandlers[_packetId](_packet); 
                     }
                 });

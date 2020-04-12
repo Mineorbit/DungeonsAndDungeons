@@ -18,7 +18,7 @@ public class ClientSend : MonoBehaviour
 
     public static void PlayerConnect(string username)
     {
-        using (Packet _packet = new Packet((int)ClientPackets.PlayerConnect))
+        using (Packet _packet = new Packet((byte)ClientPackets.PlayerConnect))
         {
             Debug.Log($"Schicke Login Paket mit Namen: {username}");
             _packet.Write(username);
