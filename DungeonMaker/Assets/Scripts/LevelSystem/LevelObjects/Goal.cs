@@ -9,6 +9,11 @@ bool won = false;
 
 public void Start()
 {
+}
+
+public override void onRoundStart()
+{
+won = false;
 playersInGoal = new List<Player>();
 }
 public void Update()

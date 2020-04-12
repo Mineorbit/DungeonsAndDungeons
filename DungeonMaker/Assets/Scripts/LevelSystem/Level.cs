@@ -26,6 +26,14 @@ public class Level : MonoBehaviour {
         spawn = null;
         setupPrefabDictionary ();
     }
+    public void setupRound()
+    {
+        foreach (KeyValuePair<string,LevelObject> p in levelItems)
+        {
+            p.Value.onRoundStart();
+        }
+    }
+
     void setupPrefabDictionary () {
         prefabs = new Dictionary<int, UnityEngine.Object> ();
         int length = Enum.GetNames (typeof (GameManager.Selectable)).Length;

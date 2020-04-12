@@ -53,12 +53,28 @@ public class GameLogic : MonoBehaviour
     public void startRound()
     {
         if(!Online) Pausable  = true;
+        Paused = false;
         createPlayer();
         spawnLocation = SpawnPointLocation();
         spawnPlayer();
         setupCamera();
+        setupLevelRoundStart();
     }
-    
+    public void  startTestRound()
+    {
+        Pausable  = true;
+        Paused = false;
+        createPlayer();
+        spawnLocation = SpawnPointLocation();
+        spawnPlayer();
+        setupCamera();
+        setupLevelRoundStart();
+    }
+    void setupLevelRoundStart()
+    {
+        GameManager.current.currentLevel.setupRound();
+    }
+
     public void updateHUD()
     {
         float hpfactor = (float)hp/(float)maxhp;
@@ -74,14 +90,7 @@ public class GameLogic : MonoBehaviour
         Vector3 loc = GameManager.current.currentLevel.spawn.transform.position+offset;
         return loc;
     }
-    public void  startTestRound()
-    {
-        Pausable  = true;
-        createPlayer();
-        spawnLocation = SpawnPointLocation();
-        spawnPlayer();
-        setupCamera();
-    }
+    
 
     public void createPlayer()
     {
@@ -107,6 +116,7 @@ public class GameLogic : MonoBehaviour
 	}
     public void Win()
     {
+        Debug.Log("Test");
         UIManager.current.openWin();
         pauseGame();
         Pausable = false;

@@ -31,6 +31,10 @@ public class LevelObject:MonoBehaviour
 	{
 		
 	}
+	public virtual void onRoundStart()
+	{
+
+	}
 	public LevelObjectData toLevelObjectData()
 	{
 		LevelObjectData d = new LevelObjectData();
