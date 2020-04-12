@@ -11,6 +11,10 @@ public class Util {
 		}
 		return r;
 	}
+	
+	public static int readTwoBytes(byte a, byte b) {
+		return (int) a << 8 | (int) b;
+	}
 
 	public static byte[] subArray(byte[] data, int beg, int end) {
 		return Arrays.copyOfRange(data, beg, end + 1);
