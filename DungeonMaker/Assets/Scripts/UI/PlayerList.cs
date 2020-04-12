@@ -21,8 +21,23 @@ public class PlayerList : MonoBehaviour
 
     void startSoloMode()
     {
-
+        PlayerData pD = new PlayerData();
+        pD.name ="Du";
+        playerDataInLobby[0] = pD;
+        updateList();
     }
+    void updateList()
+    {
+        for(int i = 0;i<4;i++)
+        {
+            if(playerDataInLobby[i]!=null)
+            {
+                playerPreview[i].set(playerDataInLobby[i]);
+                playerPreview[i].open();
+            }
+        }
+    }
+
     void startMultiPlayerMode()
     {
 

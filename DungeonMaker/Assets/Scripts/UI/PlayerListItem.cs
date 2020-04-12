@@ -23,7 +23,7 @@ public class PlayerListItem : MonoBehaviour
     }
     public void open()
     {
-        this.gameObject.SetActive(true;
+        this.gameObject.SetActive(true);
     }
     public void set(PlayerData p)
     {
