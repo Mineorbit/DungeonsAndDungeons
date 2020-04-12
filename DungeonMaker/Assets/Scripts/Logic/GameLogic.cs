@@ -24,10 +24,11 @@ public class GameLogic : MonoBehaviour
     UnityEngine.Object playerExt;
     UnityEngine.Object playerCamera;
 
+    public bool Online = false;
+
     Vector3 spawnLocation;
     void Start()
     {
-        Pausable  = true;
         current   =  this;
         player    =  Resources.Load("Main/Player/Player");
         playerExt =  Resources.Load("Main/Player/ExternalPlayer");
@@ -51,7 +52,7 @@ public class GameLogic : MonoBehaviour
     }
     public void startRound()
     {
-        //Load Level
+        if(!Online) Pausable  = true;
         createPlayer();
         spawnLocation = SpawnPointLocation();
         spawnPlayer();
@@ -75,6 +76,7 @@ public class GameLogic : MonoBehaviour
     }
     public void  startTestRound()
     {
+        Pausable  = true;
         createPlayer();
         spawnLocation = SpawnPointLocation();
         spawnPlayer();
