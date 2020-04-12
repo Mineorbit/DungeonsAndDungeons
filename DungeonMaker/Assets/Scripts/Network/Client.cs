@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 //Courtesy of Tom Weiland, still a lot required tho
 public class Client : MonoBehaviour
@@ -28,7 +29,7 @@ public class Client : MonoBehaviour
 
     //SpielInfo
 
-    private static GameObject overlay;
+    public static TMP_Text info;
     public int globalId = 0;
     public int localId = 0;
     public string name = "Test";
@@ -48,7 +49,6 @@ public class Client : MonoBehaviour
 
     private void Start()
     {
-        overlay = GameObject.Find("Overlay");
         tcp = new TCP();
     }
 
@@ -69,10 +69,14 @@ public class Client : MonoBehaviour
         }
     }
 
-    public static void updateNetworkMessage(string info)
+    public static void updateNetworkMessage(string infoT)
     {
-        Text t = overlay.transform.Find("NetworkInfo").GetComponent<Text>();
-        t.text = info;
+        if(info==null)
+        {
+        GameObject i = GameObject.Find("Canvas").transform.Find("Info").gameObject;
+        info = i.transform.GetComponent<TMP_Text>();
+        }
+        info.text = infoT;
     }
     public void ConnectToMainServer()
     {
