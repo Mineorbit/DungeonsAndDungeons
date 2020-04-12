@@ -1,7 +1,5 @@
 package net.pack;
 
-import java.util.Arrays;
-
 public class LengthPacket implements Packet {
 	private Packet innerPacket;
 	
