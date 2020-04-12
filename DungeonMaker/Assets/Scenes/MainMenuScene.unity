@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: a54f530039674a440bcfab364daf7f69,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -671,6 +671,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &132952322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3276360111264259290, guid: 5d12e594328f2e41ca731f624d841fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 976668505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &132952323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132952322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a70556b1fc9432cb2ee14c6aa4d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &175396598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,10 +1146,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 250533118}
-  - component: {fileID: 250533119}
   - component: {fileID: 250533120}
+  - component: {fileID: 250533119}
   m_Layer: 5
-  m_Name: PlayBar
+  m_Name: ConnectBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,6 +1203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectButton: {fileID: 0}
   nameField: {fileID: 0}
+  slider: {fileID: 0}
+  opened: 1
 --- !u!1 &254397588
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,6 +2304,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669191314}
   m_CullTransparentMesh: 0
+--- !u!1 &720381882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3276360111264259290, guid: 5d12e594328f2e41ca731f624d841fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1164233971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &720381883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720381882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a70556b1fc9432cb2ee14c6aa4d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &771194958
 GameObject:
   m_ObjectHideFlags: 0
@@ -13429,7 +13467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2069303406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13461,8 +13499,8 @@ CanvasGroup:
   m_GameObject: {fileID: 2069303405}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &2069303408
 MonoBehaviour:
@@ -13476,6 +13514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05760cfe25f60c1e2aa7c7b5ce2fe3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  opened: 0
 --- !u!1 &2112490570
 GameObject:
   m_ObjectHideFlags: 0
@@ -13759,6 +13799,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2144425703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3276360111264259290, guid: 5d12e594328f2e41ca731f624d841fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 893965363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2144425704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144425703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a70556b1fc9432cb2ee14c6aa4d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2144722976
 GameObject:
   m_ObjectHideFlags: 0
@@ -14344,3 +14402,21 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8489971580521400219}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8489971580521400221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3276360111264259290, guid: 5d12e594328f2e41ca731f624d841fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8489971580521400219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8489971580521400222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8489971580521400221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a70556b1fc9432cb2ee14c6aa4d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
