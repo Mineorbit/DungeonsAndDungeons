@@ -1,6 +1,6 @@
 package net.pack.client;
 
-import java.nio.charset.StandardCharsets;
+import util.Util;
 
 public class ChangeNamePacket extends ClientPacket {
 	String newName;
@@ -10,6 +10,6 @@ public class ChangeNamePacket extends ClientPacket {
 	}
 	
 	public static PlayerConnectPacket fromBytes(byte[] bytes) {
-		return new PlayerConnectPacket(new String(bytes, StandardCharsets.UTF_8));
+		return new PlayerConnectPacket(Util.bytesToString(bytes));
 	}
 }

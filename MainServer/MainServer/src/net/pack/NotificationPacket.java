@@ -2,6 +2,8 @@ package net.pack;
 
 import java.nio.charset.StandardCharsets;
 
+import util.Util;
+
 public class NotificationPacket implements Packet {
 	private static byte id = PacketType.NOTIFICATION.id;
 	private String message;
@@ -12,7 +14,7 @@ public class NotificationPacket implements Packet {
 	
 	@Override
 	public byte[] toBytes() {
-		final byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
+		final byte[] bytes = Util.stringToBytes(message);
 		byte[] result = new byte[bytes.length + 1];
 		
 		result[0] = id;
