@@ -3,7 +3,6 @@ package logic;
 import net.Connector;
 import net.pack.LengthPacket;
 import net.pack.NotificationPacket;
-import net.pack.Packet;
 
 public class Player {
 	private String name;
@@ -41,7 +40,6 @@ public class Player {
 	}
 
 	public void disconnect() {
-
 		// Removal from all Lobbys and Server data
 
 		// Disconnect

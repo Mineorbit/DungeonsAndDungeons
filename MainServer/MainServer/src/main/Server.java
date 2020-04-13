@@ -2,15 +2,11 @@ package main;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import logic.Lobby;
 import logic.Player;
-import net.ClientHandler;
 import net.ClientListener;
 
 public class Server {
@@ -19,11 +15,11 @@ public class Server {
 	private int maxPlayers;
 	private int freeId = 0;
 	private ServerSocket serverSocket;
-	private List<Lobby> lobbies;
+	private Map<Integer, Lobby> lobbies;
 	private Map<Integer, Player> playersbyGlobalID;
 
 	private Server(int p, int mP) {
-		lobbies = new ArrayList<Lobby>();
+		lobbies = new HashMap<Integer, Lobby>();
 		playersbyGlobalID = new HashMap<Integer, Player>();
 		port = p;
 		maxPlayers = mP;
@@ -55,7 +51,7 @@ public class Server {
 		this.freeId = freeId;
 	}
 
-	public List<Lobby> getLobbies() {
+	public Map<Integer, Lobby> getLobbies() {
 		return lobbies;
 	}
 
