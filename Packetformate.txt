@@ -1,0 +1,14 @@
+Bei allen: 2 Byte Length , 1 Byte Id
+
+Server To Client
+
+name           Id Content    
+ConnectionInfo 1  Id
+Notification   2  String
+
+
+
+Client To Server
+
+name            Id Content    
+PlayerConnected 1
