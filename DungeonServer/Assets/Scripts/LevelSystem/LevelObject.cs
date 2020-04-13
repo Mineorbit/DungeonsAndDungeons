@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LevelObjectType { cursor = 0,  enemy = 1 , floor = 2, spawn = 3, wall = 4, goal = 5};
 public class LevelObject:MonoBehaviour
 {
 	public Object prefab;
@@ -9,7 +10,7 @@ public class LevelObject:MonoBehaviour
 	public Orientation orientation;
     	public Vector3 location;
 	//Wichtig prefab name ist Zahl des types
-	public GameManager.LevelObjectType type;
+	public LevelObjectType type;
 	public GameObject instance;
 
 	public void Start()

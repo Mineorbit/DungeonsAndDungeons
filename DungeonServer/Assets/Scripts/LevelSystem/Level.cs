@@ -10,7 +10,6 @@ public class Level : MonoBehaviour {
     public Spawn spawn = null;
     public Goal goal = null;
 
-    GameManager gameManager;
     bool setup = false;
     Dictionary<int, UnityEngine.Object> prefabs;
 
@@ -21,14 +20,13 @@ public class Level : MonoBehaviour {
 
     void setupLevel () {
         levelHook = this.gameObject;
-        gameManager = GameObject.Find ("GameManager").transform.GetComponent<GameManager> ();
         levelItems = new Dictionary<string, LevelObject> ();
         spawn = null;
         setupPrefabDictionary ();
     }
     void setupPrefabDictionary () {
         prefabs = new Dictionary<int, UnityEngine.Object> ();
-        int length = Enum.GetNames (typeof (GameManager.LevelObjectType)).Length;
+        int length = Enum.GetNames (typeof (LevelObjectType)).Length;
         for (int i = 0; i < length; i++) {
             UnityEngine.Object p = Resources.Load ("Map/" + i);
             prefabs.Add (i, p);
@@ -58,12 +56,12 @@ public class Level : MonoBehaviour {
         levelItems.Add (s, lvlObj);
     }
     public LevelObject addLevelObject (GameObject g, LevelObjectData d) {
-        if (d.type == GameManager.LevelObjectType.spawn) {
+        if (d.type == LevelObjectType.spawn) {
             Spawn lspawn = g.AddComponent<Spawn> ();
             spawn = lspawn;
             return lspawn;
         }
-        if (d.type == GameManager.LevelObjectType.goal) {
+        if (d.type == LevelObjectType.goal) {
             Goal lgoal = g.AddComponent<Goal> ();
             goal = lgoal;
             return lgoal;
