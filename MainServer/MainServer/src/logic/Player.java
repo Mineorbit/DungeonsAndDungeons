@@ -1,5 +1,6 @@
 package logic;
 
+import main.Server;
 import net.Connector;
 import net.pack.LengthPacket;
 import net.pack.NotificationPacket;
@@ -16,11 +17,7 @@ public class Player {
 	int localId;
 	public boolean setup;
 
-	enum Color {
-		Red, Blue, Green, Yellow
-	};
-
-	Color playerColor;
+	private PlayerColor playerColor;
 
 	public Player(String n, Connector info) {
 		setName(n);
@@ -41,6 +38,10 @@ public class Player {
 
 	public void disconnect() {
 		// Removal from all Lobbys and Server data
+		Server server = Server.getInstance();
+		synchronized (server) {
+			
+		}
 
 		// Disconnect
 		playerHandle.disconnect();
@@ -59,6 +60,14 @@ public class Player {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public PlayerColor getPlayerColor() {
+		return playerColor;
+	}
+
+	public void setPlayerColor(PlayerColor playerColor) {
+		this.playerColor = playerColor;
 	}
 
 }

@@ -82,7 +82,7 @@ public class ClientHandler implements Runnable {
 			return;
 		}
 
-		// PlayerSetup
+		// Player setup
 		Player p = new Player(playerName, connector);
 		p.globalID = playerId;
 		p.playerHandle = new PlayerHandle(p);

@@ -59,7 +59,7 @@ public class PlayerPacketHandler implements ClientPacketHandler<Player, Void> {
 
 	@Override
 	public Void handleChangeColor(ChangeColorPacket p, Player arg) {
-		// TODO Auto-generated method stub
+		arg.setPlayerColor(p.getNewColor());
 		return null;
 	}
 

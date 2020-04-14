@@ -6,13 +6,16 @@ import java.util.Map;
 import main.Server;
 
 public class Lobby {
-	public Map<Integer, Player> playersByLocalId;
-	public int lobbyId;
+	private Map<Integer, Player> playersByLocalId;
+	private int lobbyId;
 	// LocalId of MasterPlayer
-	public int masterId;
+	private int masterId;
 
-	public Lobby() {
-		playersByLocalId = new HashMap<Integer, Player>();
+	public Lobby(int lobbyId, Player master) {
+		this.lobbyId = lobbyId;
+		this.playersByLocalId = new HashMap<Integer, Player>();
+		this.masterId = 0;
+		this.playersByLocalId.put(this.masterId, master);
 	}
 
 	public void invitePlayer(int playerId) {
@@ -23,8 +26,24 @@ public class Lobby {
 
 	}
 
-	public void kick(int localId) {
+	public void removePlayer(int localId) {
+		playersByLocalId.remove(localId);
+		
+		// If there are no more players in the lobby,
+		// remove this lobby
+		if (playersByLocalId.isEmpty()) {
+			Server server = Server.getInstance();
+			synchronized (server) {
+				server.getLobbies().remove(lobbyId);
+			}
+		}
+	}
 
+	public void removePlayerByGlobalId(int globalId) {
+		Player playerToBan = Server.getInstance()
+				.getPlayersbyGlobalID().get(globalId);
+
+		removePlayer(playerToBan.localId);
 	}
 
 	public void changeMaster(Player requester, int localId) {
@@ -36,13 +55,6 @@ public class Lobby {
 			// Send Message to requester that operation was illegal
 			requester.sendNotification("You aren't allowed to do that");
 		}
-	}
-
-	public void ban(int globalId) {
-		Player playerToBan = Server.getInstance()
-				.getPlayersbyGlobalID().get(globalId);
-
-		kick(playerToBan.localId);
 	}
 
 	public void startGame(String ip, int port) {
