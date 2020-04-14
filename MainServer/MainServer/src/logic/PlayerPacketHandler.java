@@ -12,7 +12,7 @@ import net.pack.client.PlayerDisconnectPacket;
 public class PlayerPacketHandler implements ClientPacketHandler<Player, Void> {
 	private static PlayerPacketHandler instance = null;
 	
-	public PlayerPacketHandler() {}
+	private PlayerPacketHandler() {}
 	
 	public static PlayerPacketHandler getInstance() {
 		if (instance == null) {

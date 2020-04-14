@@ -13,7 +13,8 @@ public class Server {
 	private static Server instance = null;
 	private int port;
 	private int maxPlayers;
-	private int freeId = 0;
+	private int freePlayerId = 0;
+	private int freeLobbyId = 0;
 	private ServerSocket serverSocket;
 	private Map<Integer, Lobby> lobbies;
 	private Map<Integer, Player> playersbyGlobalID;
@@ -43,12 +44,12 @@ public class Server {
 		this.maxPlayers = maxPlayers;
 	}
 
-	public int getFreeId() {
-		return freeId;
+	public int getFreePlayerId() {
+		return freePlayerId;
 	}
 
-	public void setFreeId(int freeId) {
-		this.freeId = freeId;
+	public void setFreePlayerId(int freeId) {
+		this.freePlayerId = freeId;
 	}
 
 	public Map<Integer, Lobby> getLobbies() {
@@ -67,6 +68,14 @@ public class Server {
 		listenThread.start();
 		System.out.println("Socket geöffnet auf " + port + ", Server wird betriebsbereit geführt");
 
+	}
+
+	public int getFreeLobbyId() {
+		return freeLobbyId;
+	}
+
+	public void setFreeLobbyId(int freeLobbyId) {
+		this.freeLobbyId = freeLobbyId;
 	}
 
 	class ServerControl implements Runnable {

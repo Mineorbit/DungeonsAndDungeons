@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import logic.Lobby;
 import logic.Player;
 import logic.PlayerHandle;
 import main.Server;
@@ -52,8 +53,8 @@ public class ClientHandler implements Runnable {
 
 		// Handshake Server -> Client
 		synchronized (server) {
-			playerId = server.getFreeId();
-			server.setFreeId(playerId + 1);
+			playerId = server.getFreePlayerId();
+			server.setFreePlayerId(playerId + 1);
 		}
 		Packet toSend = new LengthPacket(new ConnectionInfoPacket(playerId));
 		connector.Send(toSend.toBytes());
@@ -89,6 +90,18 @@ public class ClientHandler implements Runnable {
 
 		synchronized (server) {
 			server.getPlayersbyGlobalID().put(p.globalID, p);
+		}
+		
+		// Lobby setup
+		int lobbyId = -1;
+		synchronized (server) {
+			lobbyId = server.getFreeLobbyId();
+			server.setFreeLobbyId(lobbyId + 1);
+		}
+		
+		Lobby l = new Lobby(lobbyId, p);
+		synchronized (server) {
+			server.getLobbies().put(lobbyId, l);
 		}
 
 		System.out.println("Neuer Spieler: " + playerName);
