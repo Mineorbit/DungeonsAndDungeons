@@ -55,10 +55,15 @@ public class Server
         AsyncCallback asyncCallback = null;
         asyncCallback = ar =>
         {
-            Debug.Log("test");
+            Debug.Log("Prüfe neue Verbindung");
                 //Check globalId
         int[] data = ReadPlayerConnectPacket(receivedData);
-        if(!checkIncomingPlayerValid(data)) return;
+        if(!checkIncomingPlayerValid(data))
+        {
+        Debug.Log("Verbindung abgelehnt: Verbindungsdaten waren nicht korrekt");
+        Reject(_client);
+        return;
+        } 
 
         _globalId = data[2];
         _localId = data[3];
@@ -75,17 +80,7 @@ public class Server
         Debug.Log($"Spieler {_localId} verbunden");
         return;
         };
-
-
         stream.BeginRead(receivedData, 0, 8, asyncCallback, null);
-
-        foreach(byte b in receivedData)
-        {
-            Debug.Log(b);
-        }
-        
-         
-
      }
         private void ConnectPacketReceiveCallback(IAsyncResult _result)
         {
@@ -125,7 +120,11 @@ public class Server
         };
         Debug.Log("Initialized packets.");
     }
-
+    public static void Reject(TcpClient tcpClient)
+    {
+        tcpClient.GetStream().Close();
+        tcpClient.Close();
+    }
     public static void Stop()
     {
         tcpListener.Stop();
