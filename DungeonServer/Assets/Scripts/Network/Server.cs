@@ -82,12 +82,7 @@ public class Server
         };
         stream.BeginRead(receivedData, 0, 8, asyncCallback, null);
      }
-        private void ConnectPacketReceiveCallback(IAsyncResult _result)
-        {
-
-        
-            
-        }
+    
 
 
     private static int[] ReadPlayerConnectPacket(byte[] d)
