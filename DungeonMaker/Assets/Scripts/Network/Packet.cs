@@ -9,7 +9,8 @@ using UnityEngine;
 public enum ServerPackets
 {
     ConnectInfo = 1,
-    Information
+    Information,
+    PlayerGameDisconnect
 }
 //Client to Server
 public enum ClientPackets
@@ -20,8 +21,10 @@ public enum ClientPackets
     JoinLobby,
     ChangeName,
     ChangeItem,
-    ChangeColor
+    ChangeColor,
+    PlayerGameConnect
 }
+
 
 
 public class Packet : IDisposable
