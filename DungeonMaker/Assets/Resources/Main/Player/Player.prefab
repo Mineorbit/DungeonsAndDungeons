@@ -1348,16 +1348,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Factor: 0
-  BaseSpeed: 0.15
-  Increase: 0.05
-  Accelaration: 1
+  BaseSpeed: 7.5
+  Increase: 2.5
+  Accelaration: 50
   Speed: 0
-  Gravity: 1
+  Gravity: 0.5
   TargetDirection: {x: 0, y: 0, z: 0}
   Mask: 0
   Height: 0.6
   modelController: {fileID: 0}
-  jumpForce: 0.4
+  jumpForce: 1
   inControl: 1
   isGrounded: 0
   Jumping: 0

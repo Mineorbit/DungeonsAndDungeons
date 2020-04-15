@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour {
 
 	public float Factor;
 	float TargetSpeed = 0;
-	public float BaseSpeed 	= 2;
-	public float Increase	= 2;
-	public float Accelaration = 1;
+	public float BaseSpeed;
+	public float Increase;
+	public float Accelaration;
 	public float Speed = 0;
 	public float Gravity = 1;
 	public Vector3 TargetDirection;

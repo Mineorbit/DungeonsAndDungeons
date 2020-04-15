@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
 		currentState = State.play;
 		loadLevel();
 		StartCoroutine (load (SceneIndex.Play));
-
+		this.gameObject.AddComponent<PlayLogic>();
 	}
 	void loadLevel(){
 		GameObject levelHook = GameObject.Find("Level");
@@ -122,8 +122,6 @@ public class GameManager : MonoBehaviour {
 		LevelData lD = loader.load(levelToLoad);
 		level = lD.toLevel(level);
 		Debug.Log("Geladen");
-
-	
 		currentLevel = level;
 	}
 
@@ -141,8 +139,7 @@ public class GameManager : MonoBehaviour {
 		currentState = State.test;
 		currentLevel = editor.currentLevel;
 		StartCoroutine (load(SceneIndex.Play));
-
-
+		this.gameObject.AddComponent<TestLogic>();
 	}
 
 	void stopEditMode () {
