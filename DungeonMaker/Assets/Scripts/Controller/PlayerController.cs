@@ -53,14 +53,14 @@ public class PlayerController : MonoBehaviour {
 		{
 			Speed = 0;
 		}
-		Direction = Speed *Vector3.Normalize(TargetDirection);
+		Direction = Speed *Vector3.Normalize(TargetDirection)*Time.deltaTime;
 		
 		Factor = Speed/(BaseSpeed+Increase);
 		
 		//fallen
 		if(!isGrounded)
 		{
-			SpeedY+=-Gravity*Time.deltaTime;
+			SpeedY+=-Gravity+Time.deltaTime;
 		}else
 		{
 			if(Input.GetKeyDown(KeyCode.Space))

@@ -28,7 +28,7 @@ public void Update()
 public override void doAction()
 {
     Debug.Log("Hurra!");
-    GameLogic.current.Win();
+    TestLogic.current.Win();
 }
 void OnTriggerEnter(Collider other)
 {

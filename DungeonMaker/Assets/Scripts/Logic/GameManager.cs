@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void clear () {
-		if(GameLogic.current!=null) GameLogic.current.startUnpause();
+		if(TestLogic.current!=null) TestLogic.current.startUnpause();
 		openLoadingScreen();
 		if (currentState == State.edit) {
 			stopEditMode ();
@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour {
 		if (clearLevel) {
 			editor.clear ();
 		}
-		GameLogic.current.stopRound();
+		TestLogic.current.stopRound();
 	}
 	void stopPlayMode () {
 		if (clearLevel) {
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour {
 				Destroy(o.gameObject);
 			}
 		}
-		GameLogic.current.stopRound();
+		TestLogic.current.stopRound();
 	}
 	void postSceneLoadAction () {
 		if (currentState == State.edit) {
@@ -223,12 +223,12 @@ public class GameManager : MonoBehaviour {
 
 	void startTest()
 	{
-		GameLogic.current.startTestRound();
+		GameLogic.current.startRound();
 	}
 
 
 	void startGame(){
-		GameLogic.current.startRound();
+		//GameLogic.current.startRound();
 	}
 
 
