@@ -110,35 +110,36 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (currentScene != SceneIndex.Starting) {
-
-			Debug.Log((int)currentScene+" tut");
-			//Stuck here
-			
-			SceneManager.UnloadSceneAsync ((int) currentScene);
-
+			SceneManager.UnloadSceneAsync((int)currentScene);
 		}
-		Debug.Log("Moin");
 	}
-
+	
 // Important Mode starters
+
+
 	public void startPlayMode () {
-		Debug.Log("Los gehts");
+
+		Debug.Log("Tadadad");
 		clear ();
-		Debug.Log("Los gehts");
 		currentState = State.play;
 		levelToLoad = "/map/Test​.lev";
 		loadLevel();
+
+		Debug.Log("Los gehts");
 		clearForGame();
 		StartCoroutine (load (SceneIndex.Play));
 		this.gameObject.AddComponent<PlayLogic>();
 		ClientSend.PlayerReady(Client.instance.localId);
 	}
+
 	//Replace all LevelObjects with NetworkLevelObjects
 	void clearForGame()
 	{
 
 	}
 	void loadLevel(){
+
+		Debug.Log("Tadadad");
 		GameObject levelHook = GameObject.Find("Level");
 		editor.levelHook = levelHook;
 		Level level = (levelHook.GetComponent<Level>()==null)?levelHook.AddComponent<Level>():levelHook.GetComponent<Level>();
@@ -209,6 +210,7 @@ public class GameManager : MonoBehaviour {
 			startTest();
 		}
 	closeLoadingScreen();
+	Debug.Log("Fertig Geladen");
 	}
 
 	void openLoadingScreen()

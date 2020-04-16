@@ -116,6 +116,7 @@ public class UIManager : MonoBehaviour {
 		Button play = MainMenu.transform.Find ("Play").GetComponent<Button> ();
 		Button edit = MainMenu.transform.Find ("Edit").GetComponent<Button> ();
 		play.onClick.AddListener (startPlayerMenu);
+		//play.onClick.AddListener(gameManager.startPlayMode);
 		edit.onClick.AddListener (startBuilderMenu);
 	}
 
@@ -185,8 +186,8 @@ public class UIManager : MonoBehaviour {
 
 	 void loadExistingLevel(int i)
 	 {
-		 gameManager.newLevel = false;
-		 gameManager.TargetLevelName = dataLevelName[i];
+		gameManager.newLevel = false;
+		gameManager.TargetLevelName = dataLevelName[i];
 		gameManager.startEditMode();
 	 }
 

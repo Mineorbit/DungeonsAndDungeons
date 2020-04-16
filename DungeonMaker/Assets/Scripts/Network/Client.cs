@@ -160,8 +160,14 @@ public class Client : MonoBehaviour
 
                 //Starte in PlayMode
                 Debug.Log("Test");
-                GameManager.current.startPlayMode();
                 ClientSend.PlayerGameConnect(Client.instance.globalId,Client.instance.localId);
+                
+                ThreadManager.ExecuteOnMainThread(() =>
+                {
+                GameManager.current.startPlayMode();
+                });
+                
+                
 
                 Client.instance.isConnectedGame = true;
             }
