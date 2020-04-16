@@ -29,4 +29,8 @@ public class ClientHandle : MonoBehaviour
         Client.updateNetworkMessage(info);
 
     }
+    public static void GameReady(Packet _packet)
+    {
+        GameManager.current.startPlayMode();
+    }
 }

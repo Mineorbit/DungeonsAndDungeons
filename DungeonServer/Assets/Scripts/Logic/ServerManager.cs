@@ -5,7 +5,7 @@ using UnityEngine;
 public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
-    public bool Local;
+    public bool Local = true;
     public enum State{Setup,Idle,Preparing,Ready,Playing,Won};
     public static State s;
     public Player[] players;
@@ -31,9 +31,6 @@ public class ServerManager : MonoBehaviour
     {
         Server.Stop();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    
 }

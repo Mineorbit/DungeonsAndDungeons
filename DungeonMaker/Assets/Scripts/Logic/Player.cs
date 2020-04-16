@@ -5,14 +5,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int id;
-    void Start()
+    public bool Host;
+    void  Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    void FixedUpdate()
     {
-        
+        if(Host)
+        {
+            //Send Data
+        }
     }
 }

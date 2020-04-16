@@ -79,15 +79,17 @@ public class TestLogic : GameLogic
 	}
     public override void Win()
     {
-        Debug.Log("Test");
         UIManager.current.openWin();
         pauseGame();
         Pausable = false;
     }
-    public void stopRound()
+    public override void stopRound()
     {
         Destroy(mainPlayer.gameObject);
         Destroy(camera);
+        Pausable = true;
+        unpauseGame();
+        Debug.Log("Tadafix");
     }
 
     public void pauseGame()

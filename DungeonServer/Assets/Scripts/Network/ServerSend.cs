@@ -27,11 +27,30 @@ public class ServerSend
     {
 
     }
+    public static void GameReady()
+    {
+        Packet readyPack =  new Packet((int)ServerPackets.GameReady);
+        SendTCPDataToAll(-1,readyPack);
+    }
     //Tell Everyone except player disconnected
     public static void PlayerDisconnected(int localId)
     {
         Packet discPack = new Packet((int)ServerPackets.PlayerGameDisconnect);
         discPack.Write(Server.globalIds[localId]);
         SendTCPDataToAll(localId,discPack);
+    }
+    public static void PlayerLocomotionData(int localId, Vector3 position, Quaternion rotation)
+    {
+        Packet locoData =  new  Packet((int)ServerPackets.PlayerLocomotionData);
+        locoData.Write(localId);
+        locoData.Write(position.x);
+        locoData.Write(position.y);
+        locoData.Write(position.z);
+        locoData.Write(rotation.x);
+        locoData.Write(rotation.y);
+        locoData.Write(rotation.z);
+        locoData.Write(rotation.w);
+        SendTCPDataToAll(localId,locoData);
+        
     }
 }

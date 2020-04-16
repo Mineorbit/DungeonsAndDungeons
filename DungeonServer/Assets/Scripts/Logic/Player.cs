@@ -9,10 +9,13 @@ public class Player : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
+    public void updateData(Vector3 pos,Quaternion rot)
+    {
+        transform.position = pos;
+        transform.rotation = rot;
+    }
     void FixedUpdate()
     {
-        
+        ServerSend.PlayerLocomotionData(id,transform.position,transform.rotation);
     }
 }

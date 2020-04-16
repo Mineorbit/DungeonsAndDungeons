@@ -30,7 +30,7 @@ public class GameLogic : MonoBehaviour
     {
         
     }
-    public void createPlayer()
+    public virtual void createPlayer()
     {
         GameObject p =  Instantiate(player) as GameObject;
         mainPlayer =  p.AddComponent<Player>();

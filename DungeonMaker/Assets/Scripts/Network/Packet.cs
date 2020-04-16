@@ -10,7 +10,10 @@ public enum ServerPackets
 {
     ConnectInfo = 1,
     Information,
-    PlayerGameDisconnect
+    PlayerGameDisconnect,
+    GameReady,
+    PlayerLocomotionData,
+    PlayerReSpawn
 }
 //Client to Server
 public enum ClientPackets
@@ -22,7 +25,9 @@ public enum ClientPackets
     ChangeName,
     ChangeItem,
     ChangeColor,
-    PlayerGameConnect
+    PlayerGameConnect,
+    PlayerGameReady,
+    PlayerLocomotionData
 }
 
 

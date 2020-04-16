@@ -25,5 +25,16 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+    public static void PlayerGameConnect(int globalId,int localId)
+    {
+        using (Packet _packet = new Packet((byte)ClientPackets.PlayerGameConnect))
+        {
+            Debug.Log("Verbinde zu Spiel");
+            _packet.Write(globalId);
+            _packet.Write((byte)localId);
+            SendTCPData(_packet);
+        }
+    }
+
     
 }

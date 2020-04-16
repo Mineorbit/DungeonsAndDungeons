@@ -104,14 +104,18 @@ public class GameManager : MonoBehaviour {
 		if (currentScene != SceneIndex.Starting) {
 			SceneManager.UnloadSceneAsync ((int) currentScene);
 		}
+		Destroy(GameLogic.current);
 	}
 
+// Important Mode starters
 	public void startPlayMode () {
 		clear ();
 		currentState = State.play;
+		levelToLoad = "Test";
 		loadLevel();
 		StartCoroutine (load (SceneIndex.Play));
 		this.gameObject.AddComponent<PlayLogic>();
+		ClientSend.PlayerReady(Client.instance.localId);
 	}
 	void loadLevel(){
 		GameObject levelHook = GameObject.Find("Level");
@@ -121,7 +125,6 @@ public class GameManager : MonoBehaviour {
 		LevelLoader loader = new LevelLoader();
 		LevelData lD = loader.load(levelToLoad);
 		level = lD.toLevel(level);
-		Debug.Log("Geladen");
 		currentLevel = level;
 	}
 
@@ -156,7 +159,8 @@ public class GameManager : MonoBehaviour {
 		if (clearLevel) {
 			editor.clear ();
 		}
-		TestLogic.current.stopRound();
+		Debug.Log("Test");
+		GameLogic.current.stopRound();
 	}
 	void stopPlayMode () {
 		if (clearLevel) {
@@ -166,7 +170,7 @@ public class GameManager : MonoBehaviour {
 				Destroy(o.gameObject);
 			}
 		}
-		TestLogic.current.stopRound();
+		GameLogic.current.stopRound();
 	}
 	void postSceneLoadAction () {
 		if (currentState == State.edit) {
@@ -225,7 +229,7 @@ public class GameManager : MonoBehaviour {
 
 
 	void startGame(){
-		//GameLogic.current.startRound();
+		GameLogic.current.startRound();
 	}
 
 

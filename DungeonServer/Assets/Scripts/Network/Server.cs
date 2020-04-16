@@ -98,6 +98,7 @@ public class Server
 
      private static bool checkIncomingPlayerValid(int[] data)
      {
+         if(ServerManager.instance.Local) return true;
          if(data[0]!=6) return false;
          if(data[1]!=(int)ClientPackets.PlayerGameConnect) return false; 
          return true;
@@ -111,7 +112,8 @@ public class Server
 
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
-           // { (int)ClientPackets.playerShoot, ServerHandle.PlayerShoot }
+           { (int)ClientPackets.PlayerGameReady, ServerHandle.PlayerGameReady },
+           { (int)ClientPackets.PlayerLocomotionData, ServerHandle.PlayerLocomotionData }
         };
         Debug.Log("Initialized packets.");
     }

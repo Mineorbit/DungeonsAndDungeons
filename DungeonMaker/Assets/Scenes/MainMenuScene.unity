@@ -1204,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectButton: {fileID: 0}
   nameField: {fileID: 0}
+  localButton: {fileID: 0}
   slider: {fileID: 0}
   opened: 1
 --- !u!1 &254397588
@@ -2264,8 +2265,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 267060964}
   m_HandleRect: {fileID: 267060963}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
