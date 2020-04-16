@@ -31,7 +31,7 @@ public class ClientHandle : MonoBehaviour
     }
     public static void GameReady(Packet _packet)
     {
-        //Spawne Spieler und gib kontrolle ab
+        //PlayLogic muss spieler spawnen
     }
     public static void PlayerLocomotionData(Packet _packet)
     {

@@ -6,6 +6,7 @@ public class ServerHandle : MonoBehaviour
 {
     public static void PlayerGameReady(int from, Packet _packet)
     {
+        Debug.Log("Player "+from+" ready");
         int localid = from;
         GameLogic.current.setupPlayer(localid);
         GameLogic.current.checkAllPlayersReady();

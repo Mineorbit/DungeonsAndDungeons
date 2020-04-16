@@ -59,6 +59,11 @@ public class Client
             {
                 if (socket != null)
                 {
+                    Debug.Log("PaketDaten:");
+                    foreach(byte b in _packet.ToArray()){
+                        Debug.Log(b);
+                    }
+
                     stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null); // Send data to appropriate client
                 }
             }
@@ -96,14 +101,15 @@ public class Client
         /// <param name="_data">The recieved data.</param>
         private bool HandleData(byte[] _data)
         {
+            Debug.Log("Dealing with new packet");
             int _packetLength = 0;
 
             receivedData.SetBytes(_data);
 
-            if (receivedData.UnreadLength() >= 4)
+            if (receivedData.UnreadLength() >= 2)
             {
                 // If client's received data contains a packet
-                _packetLength = receivedData.ReadInt();
+                _packetLength = (short) receivedData.ReadShort();
                 if (_packetLength <= 0)
                 {
                     // If packet contains no data

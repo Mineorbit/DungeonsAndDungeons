@@ -119,17 +119,14 @@ public class GameManager : MonoBehaviour {
 
 	public void startPlayMode () {
 
-		Debug.Log("Tadadad");
 		clear ();
 		currentState = State.play;
 		levelToLoad = "/map/Test​.lev";
 		loadLevel();
 
-		Debug.Log("Los gehts");
 		clearForGame();
 		StartCoroutine (load (SceneIndex.Play));
 		this.gameObject.AddComponent<PlayLogic>();
-		ClientSend.PlayerReady(Client.instance.localId);
 	}
 
 	//Replace all LevelObjects with NetworkLevelObjects
@@ -139,7 +136,6 @@ public class GameManager : MonoBehaviour {
 	}
 	void loadLevel(){
 
-		Debug.Log("Tadadad");
 		GameObject levelHook = GameObject.Find("Level");
 		editor.levelHook = levelHook;
 		Level level = (levelHook.GetComponent<Level>()==null)?levelHook.AddComponent<Level>():levelHook.GetComponent<Level>();
@@ -181,7 +177,6 @@ public class GameManager : MonoBehaviour {
 		if (clearLevel) {
 			editor.clear ();
 		}
-		Debug.Log("Test");
 		GameLogic.current.stopRound();
 	}
 	void stopPlayMode () {
@@ -210,7 +205,11 @@ public class GameManager : MonoBehaviour {
 			startTest();
 		}
 	closeLoadingScreen();
-	Debug.Log("Fertig Geladen");
+
+	}
+	public void startGame()
+	{
+		ClientSend.PlayerReady(Client.instance.localId);
 	}
 
 	void openLoadingScreen()
@@ -254,10 +253,6 @@ public class GameManager : MonoBehaviour {
 		GameLogic.current.startRound();
 	}
 
-
-	void startGame(){
-		GameLogic.current.startRound();
-	}
 
 
 

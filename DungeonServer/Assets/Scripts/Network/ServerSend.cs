@@ -15,10 +15,11 @@ public class ServerSend
     private static void SendTCPDataToAll(int _exceptClient, Packet _packet)
     {
         _packet.WriteLength();
-        for (int i = 1; i <= 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (i != _exceptClient)
             {
+                if(Server.clients[i]!=null)
                 Server.clients[i].tcp.SendData(_packet);
             }
         }
@@ -29,19 +30,19 @@ public class ServerSend
     }
     public static void GameReady()
     {
-        Packet readyPack =  new Packet((int)ServerPackets.GameReady);
+        Packet readyPack =  new Packet((byte)ServerPackets.GameReady);
         SendTCPDataToAll(-1,readyPack);
     }
     //Tell Everyone except player disconnected
     public static void PlayerDisconnected(int localId)
     {
-        Packet discPack = new Packet((int)ServerPackets.PlayerGameDisconnect);
+        Packet discPack = new Packet((byte)ServerPackets.PlayerGameDisconnect);
         discPack.Write(Server.globalIds[localId]);
         SendTCPDataToAll(localId,discPack);
     }
     public static void PlayerLocomotionData(int localId, Vector3 position, Quaternion rotation)
     {
-        Packet locoData =  new  Packet((int)ServerPackets.PlayerLocomotionData);
+        Packet locoData =  new  Packet((byte)ServerPackets.PlayerLocomotionData);
         locoData.Write(localId);
         locoData.Write(position.x);
         locoData.Write(position.y);

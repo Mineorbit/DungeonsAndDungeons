@@ -38,7 +38,7 @@ public class ClientSend : MonoBehaviour
     public static void PlayerReady(int id)
     {
         Packet _p = new Packet((byte)ClientPackets.PlayerGameReady);
-        
+        Debug.Log("Verschicke ReadyPaket");   
         SendTCPData(_p);
     }
     public static void PlayerLocomotionData(int localId,Vector3 pos, Quaternion rot)

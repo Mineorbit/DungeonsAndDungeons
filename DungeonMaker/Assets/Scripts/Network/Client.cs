@@ -158,8 +158,6 @@ public class Client : MonoBehaviour
             {
                 Client.instance.gameConnect = false;
 
-                //Starte in PlayMode
-                Debug.Log("Test");
                 ClientSend.PlayerGameConnect(Client.instance.globalId,Client.instance.localId);
                 
                 ThreadManager.ExecuteOnMainThread(() =>

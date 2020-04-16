@@ -66,7 +66,6 @@ public class Packet : IDisposable
     {
         buffer = new List<byte>(); // Intitialize buffer
         readPos = 0; // Set readPos to 0
-        Debug.Log("Byte Create");
         Write(_id); // Write packet id to the buffer
     }
 
