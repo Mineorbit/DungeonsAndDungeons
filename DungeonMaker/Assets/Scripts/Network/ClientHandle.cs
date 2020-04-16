@@ -31,6 +31,18 @@ public class ClientHandle : MonoBehaviour
     }
     public static void GameReady(Packet _packet)
     {
-        GameManager.current.startPlayMode();
+        //Spawne Spieler und gib kontrolle ab
+    }
+    public static void PlayerLocomotionData(Packet _packet)
+    {
+        int locId =_packet.ReadByte();
+        float x = _packet.ReadFloat();
+        float y = _packet.ReadFloat();
+        float z = _packet.ReadFloat();
+        float qx = _packet.ReadFloat();
+        float qy = _packet.ReadFloat();
+        float qz = _packet.ReadFloat();
+        float qw = _packet.ReadFloat();
+        
     }
 }

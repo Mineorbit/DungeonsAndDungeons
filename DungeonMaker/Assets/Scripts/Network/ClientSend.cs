@@ -35,6 +35,28 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+    public static void PlayerReady(int id)
+    {
+        Packet _p = new Packet((byte)ClientPackets.PlayerGameReady);
+        
+        SendTCPData(_p);
+    }
+    public static void PlayerLocomotionData(int localId,Vector3 pos, Quaternion rot)
+    {
+
+        using (Packet _packet = new Packet((byte)ClientPackets.PlayerLocomotionData))
+        {
+            _packet.Write(pos.x);
+            _packet.Write(pos.y);
+            _packet.Write(pos.z);
+
+            _packet.Write(rot.x);
+            _packet.Write(rot.y);
+            _packet.Write(rot.z);
+            _packet.Write(rot.w);
+            SendTCPData(_packet);
+        }
+    }
 
     
 }

@@ -118,7 +118,8 @@ public class Client : MonoBehaviour
         {
             { (int)ServerPackets.ConnectInfo, ClientHandle.ConnectInfo },
             { (int)ServerPackets.GameReady, ClientHandle.GameReady },
-            { (int)ServerPackets.Information, ClientHandle.Information }
+            { (int)ServerPackets.Information, ClientHandle.Information },
+            { (int)ServerPackets.PlayerLocomotionData, ClientHandle.PlayerLocomotionData}
         };
     }
     public class TCP
@@ -156,6 +157,10 @@ public class Client : MonoBehaviour
             if(Client.instance.gameConnect)
             {
                 Client.instance.gameConnect = false;
+
+                //Starte in PlayMode
+                Debug.Log("Test");
+                GameManager.current.startPlayMode();
                 ClientSend.PlayerGameConnect(Client.instance.globalId,Client.instance.localId);
 
                 Client.instance.isConnectedGame = true;

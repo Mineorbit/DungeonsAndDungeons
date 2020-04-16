@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerHandle
+public class ServerHandle : MonoBehaviour
 {
-    public static void PlayerGameReady(Packet _packet)
+    public static void PlayerGameReady(int from, Packet _packet)
     {
-        int localid = _packet.ReadByte();
+        int localid = from;
         GameLogic.current.setupPlayer(localid);
         GameLogic.current.checkAllPlayersReady();
 
     }
-    public static void PlayerLocomotionData(Packet _packet)
+    public static void PlayerLocomotionData(int from, Packet _packet)
     {
-        int localid = _packet.ReadByte();
+        int localid = from;
         float x = 0;
         float y = 0;
         float z = 0;
@@ -30,8 +30,8 @@ public class ServerHandle
         qz = _packet.ReadFloat();
         qw = _packet.ReadFloat();
         Vector3 loc = new Vector3(x,y,z);
-        Quaternion q = new Quaternion(qx,qy,qz,qw);
-        GameLogic.current.players[localid].
+        Quaternion rot = new Quaternion(qx,qy,qz,qw);
+        GameLogic.current.players[localid].updateLocomotionData(loc,rot);
         
     }
 

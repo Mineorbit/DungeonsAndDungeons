@@ -9,13 +9,14 @@ public class Player : MonoBehaviour
     {
         
     }
-    public void updateData(Vector3 pos,Quaternion rot)
-    {
-        transform.position = pos;
-        transform.rotation = rot;
-    }
+   
     void FixedUpdate()
     {
         ServerSend.PlayerLocomotionData(id,transform.position,transform.rotation);
+    }
+    public void updateLocomotionData(Vector3 loc,Quaternion rot)
+    {
+        transform.position = loc;
+        transform.rotation = rot;
     }
 }

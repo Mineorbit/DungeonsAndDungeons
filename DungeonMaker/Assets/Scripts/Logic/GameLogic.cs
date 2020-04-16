@@ -28,7 +28,7 @@ public class GameLogic : MonoBehaviour
 
     void Start()
     {
-        
+        players = new GameObject[4];
     }
     public virtual void createPlayer()
     {

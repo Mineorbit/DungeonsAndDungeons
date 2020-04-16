@@ -15,6 +15,12 @@ public class Player : MonoBehaviour
         if(Host)
         {
             //Send Data
+            ClientSend.PlayerLocomotionData(id,transform.position,transform.rotation);
         }
+    }
+    public void updateLocomotionData(Vector3 loc,Quaternion rot)
+    {
+        transform.position = loc;
+        transform.rotation = rot;
     }
 }

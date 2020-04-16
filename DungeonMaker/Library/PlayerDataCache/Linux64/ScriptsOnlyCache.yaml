@@ -25,6 +25,8 @@ ScriptsOnlyBuild:
     - WinMenu
     NavMeshComponents.dll:
     - UnityEngine.AI.NavMeshSurface
+    NavMeshComponentsEditor.dll:
+    - UnityEditor.AI.NavMeshAssetManager
     Unity.RenderPipelines.Core.Runtime.dll:
     - UnityEngine.Rendering.UI.DebugUIHandlerBitField
     - UnityEngine.Rendering.UI.DebugUIHandlerButton
@@ -525,7 +527,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 16410}
     - Class: 114
-      Script: {instanceID: 20800}
+      Script: {instanceID: 24598}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -688,7 +690,7 @@ ScriptsOnlyBuild:
     className: NavMeshModifier
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 3ad4841a9475c0191fbc7d403ff4000c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayLogic
@@ -958,7 +960,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 40618f26b90c2576dd07b7d0cbd3656f
+      Hash: 22ef5a6acc542e2046f753c8de16793b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ConnectBar
@@ -1156,7 +1158,7 @@ ScriptsOnlyBuild:
     className: Rotator
   - hash:
       serializedVersion: 2
-      Hash: 2ecdbe75f54c8965e9d317f6c9a2e0e3
+      Hash: d027e78fbf6dc3c645887e841c18ef02
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -1408,7 +1410,7 @@ ScriptsOnlyBuild:
     className: UniversalRenderPipelineEditorResources
   - hash:
       serializedVersion: 2
-      Hash: aa469afd5485b197224a1ed69e4fb021
+      Hash: 998c6fd052d8eb1046c780aa97f2e2b5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1702,7 +1704,7 @@ ScriptsOnlyBuild:
     className: SignalEmitter
   - hash:
       serializedVersion: 2
-      Hash: 34e169c2dd046d0146f2145d5b504dac
+      Hash: c064e28e144d4d99d459aa43fd83ff75
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Client
@@ -1766,4 +1768,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainMenuScene.unity
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/PlayScene.unity
-  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/16_4_1/DungeonsAndDungeons.x86_64
+  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/16_4_19/DungeonsAndDungeons.x86_64
