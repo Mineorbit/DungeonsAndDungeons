@@ -1357,7 +1357,7 @@ MonoBehaviour:
   Mask: 0
   Height: 0.6
   modelController: {fileID: 0}
-  jumpForce: 1
+  jumpForce: 10
   inControl: 1
   isGrounded: 0
   Jumping: 0
@@ -1365,6 +1365,7 @@ MonoBehaviour:
   useTime: 0.5
   left: {fileID: 0}
   right: {fileID: 0}
+  actualDirection: {x: 0, y: 0, z: 0}
 --- !u!143 &3612875797267075982
 CharacterController:
   m_ObjectHideFlags: 0
