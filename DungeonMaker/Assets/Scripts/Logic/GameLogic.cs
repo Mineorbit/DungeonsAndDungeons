@@ -28,13 +28,11 @@ public class GameLogic : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Testing GameLogic setup");
         players = new GameObject[4];
     }
     public virtual void createPlayer()
     {
-        GameObject p =  Instantiate(player) as GameObject;
-        mainPlayer =  p.AddComponent<Player>();
-        mainPlayer.id = localId;
     }
     public virtual void startRound()
     {

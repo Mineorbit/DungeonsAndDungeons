@@ -33,7 +33,7 @@ public class GameLogic : MonoBehaviour
         p.name = "Player"+localId;
         pp.id=localId;
         Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/2)*localId),0,-Mathf.Cos((Mathf.PI/2)*localId));
-
+        offset *=2;
         p.transform.position = spawnPoint+offset;
         players[localId] = pp;
     }

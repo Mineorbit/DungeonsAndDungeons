@@ -31,6 +31,19 @@ public class ServerSend
     public static void GameReady()
     {
         Packet readyPack =  new Packet((byte)ServerPackets.GameReady);
+        for(int i = 0;i<4;i++)
+        {
+            if(GameLogic.current.players[i]!=null)
+            {
+                readyPack.Write((byte)1);
+                readyPack.Write((byte)1);
+            }else
+            {
+                readyPack.Write((byte)0);
+                readyPack.Write((byte)0);
+            }
+        }
+
         SendTCPDataToAll(-1,readyPack);
     }
     //Tell Everyone except player disconnected
@@ -51,6 +64,7 @@ public class ServerSend
         locoData.Write(rotation.y);
         locoData.Write(rotation.z);
         locoData.Write(rotation.w);
+        Debug.Log("Sending to all except "+localId);
         SendTCPDataToAll(localId,locoData);
         
     }

@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class PlayLogic : GameLogic
 {
-    public void createPlayer()
+   
+   
+    public void Start()
     {
+        players = new GameObject[4];
+        current = this;
+        player = Resources.Load("Main/Player/Player");
+        playerExt = Resources.Load("Main/Player/ExternalPlayer");
+        playerCamera = Resources.Load("Main/Player/PlayerCamera");
     }
     public override void startRound()
     {
+        Debug.Log("Round start");
         Pausable =  false;
-        createPlayer();
-        spawnPlayer();    
+
+        setupPlayers();
 
         setupCamera();
         setupLevelRoundStart();
@@ -29,13 +37,43 @@ public class PlayLogic : GameLogic
     {
         return new Vector3(0,0,0);  
     }
-    public override void spawnPlayer()
+    public void setupPlayers()
     {
+        for(int i = 0;i<4;i++)
+        {
+            Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/2)*localId),0,-Mathf.Cos((Mathf.PI/2)*localId));
+            offset *=2;
+            if(GameManager.current.playerData[i]!=null)
+            {
+                GameObject p;
+                Player pp;
+                if(i==Client.instance.localId)
+                {
+                    p = (GameObject) Instantiate(player) as GameObject;
+                    pp = p.GetComponent<Player>();
+                    pp.Host = true;
+                    pp.id = i;
 
+                }else
+                {
+                    //Spawn ExtPlayer
+                    p = (GameObject) Instantiate(playerExt) as GameObject;
+                    pp = p.GetComponent<Player>();
+                    pp.Host = false;
+                    pp.id = i;
+                }
+                players[i] = p;
+                p.transform.position = SpawnPointLocation()+offset;
+
+            }
+        }
     }
+
+
     public override void setupCamera()
     {
-
+        Debug.Log("Test");
+        Instantiate(playerCamera);
     }
     public override void setupLevelRoundStart()
     {

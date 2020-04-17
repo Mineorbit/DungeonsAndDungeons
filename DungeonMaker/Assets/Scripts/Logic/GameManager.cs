@@ -52,9 +52,14 @@ public class GameManager : MonoBehaviour {
 	public bool Host = false;
 	public Level currentLevel;
 
+
+    public PlayerData[] playerData;
+
 	void Awake()
 	{
 		current = this;
+
+        playerData = new PlayerData[4];
 	}
 	// Start is called before the first frame update
 	void Start () {
@@ -126,7 +131,7 @@ public class GameManager : MonoBehaviour {
 
 		clearForGame();
 		StartCoroutine (load (SceneIndex.Play));
-		this.gameObject.AddComponent<PlayLogic>();
+		
 	}
 
 	//Replace all LevelObjects with NetworkLevelObjects
@@ -209,6 +214,7 @@ public class GameManager : MonoBehaviour {
 	}
 	public void startGame()
 	{
+		this.gameObject.AddComponent<PlayLogic>();
 		ClientSend.PlayerReady(Client.instance.localId);
 	}
 
