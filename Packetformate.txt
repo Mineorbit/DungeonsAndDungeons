@@ -2,13 +2,19 @@ Bei allen: 2 Byte Length , 1 Byte Id
 
 Server To Client
 
-name           Id Content    
-ConnectionInfo 1  Id
-Notification   2  String
+Name			Id	Content    
+ConnectionInfo		1	Id
+Notification		2	String
 
 
 
 Client To Server
 
-name            Id Content    
-PlayerConnected 1
+Name			Id	Content    
+PlayerConnected		1	String
+PlayerDisconnect	2	-
+LeaveLobby		3	-
+JoinLobby		4	Id
+ChangeName		5	String
+ChangeItem		6	byte
+ChangeColor		7	byte
