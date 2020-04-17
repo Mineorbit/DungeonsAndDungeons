@@ -5,14 +5,25 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int id;
+    Vector3 targetPosition;
+    Quaternion targetRotation;
     void Start()
     {
         
     }
+    void Update()
+    {
+        transform.position = Vector3.Lerp(targetPosition,transform.position,0.5f);
+        transform.rotation = Quaternion.Lerp(targetRotation,transform.rotation,0.5f);
+    }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        
+        ServerSend.PlayerLocomotionData(id,transform.position,transform.rotation);
+    }
+    public void updateLocomotionData(Vector3 loc,Quaternion rot)
+    {
+        targetPosition = loc;
+        targetRotation = rot;
     }
 }

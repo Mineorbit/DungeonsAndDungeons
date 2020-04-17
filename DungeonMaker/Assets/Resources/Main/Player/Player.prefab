@@ -1313,6 +1313,7 @@ GameObject:
   - component: {fileID: 3154317079298869689}
   - component: {fileID: 3154317078588159892}
   - component: {fileID: 3612875797267075982}
+  - component: {fileID: -3702519712339724559}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -1348,16 +1349,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Factor: 0
-  BaseSpeed: 0.15
-  Increase: 0.05
-  Accelaration: 1
+  BaseSpeed: 7.5
+  Increase: 2.5
+  Accelaration: 50
   Speed: 0
-  Gravity: 1
+  Gravity: 0.5
   TargetDirection: {x: 0, y: 0, z: 0}
   Mask: 0
   Height: 0.6
   modelController: {fileID: 0}
-  jumpForce: 0.4
+  jumpForce: 10
   inControl: 1
   isGrounded: 0
   Jumping: 0
@@ -1365,6 +1366,7 @@ MonoBehaviour:
   useTime: 0.5
   left: {fileID: 0}
   right: {fileID: 0}
+  actualDirection: {x: 0, y: 0, z: 0}
 --- !u!143 &3612875797267075982
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1383,3 +1385,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &-3702519712339724559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830747479161335912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9af6b7d0f09851a8988bcfae319dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  Host: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ClientHandle : MonoBehaviour
 {
+    
     //Für jede PaketArt einen Handler
     public static void ConnectInfo(Packet _packet)
     {
@@ -28,5 +29,42 @@ public class ClientHandle : MonoBehaviour
         Debug.Log($"Message: {info}");
         Client.updateNetworkMessage(info);
 
+    }
+    public static void GameReady(Packet _packet)
+    {
+        PlayerData[] pData = new PlayerData[4];
+        Debug.Log("Moin Client Packet empfangen");
+        for(int i = 0;i<4;i++)
+        {
+            byte d = _packet.ReadByte();
+            byte e = _packet.ReadByte();
+            if(d==0)
+            {
+                pData[i] = null;
+            }else
+            {
+                byte leftHand = d;
+                byte rightHand = e;
+                PlayerData data = new  PlayerData();
+                data.localId = i;
+                data.leftHand = (PlayerData.Item) ((int) leftHand);
+                data.rightHand = (PlayerData.Item) ((int) rightHand);
+                pData[i] =  data;
+            }
+        }
+        GameManager.current.playerData = pData;
+        PlayLogic.current.startRound();
+    }
+    public static void PlayerLocomotionData(Packet _packet)
+    {
+        int locId =_packet.ReadByte();
+        float x = _packet.ReadFloat();
+        float y = _packet.ReadFloat();
+        float z = _packet.ReadFloat();
+        float qx = _packet.ReadFloat();
+        float qy = _packet.ReadFloat();
+        float qz = _packet.ReadFloat();
+        float qw = _packet.ReadFloat();
+        //Hier muss noch an den jeweiligen Player gegeben werden
     }
 }

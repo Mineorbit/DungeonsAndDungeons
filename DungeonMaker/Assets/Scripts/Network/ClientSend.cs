@@ -25,5 +25,38 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+    public static void PlayerGameConnect(int globalId,int localId)
+    {
+        using (Packet _packet = new Packet((byte)ClientPackets.PlayerGameConnect))
+        {
+            Debug.Log("Verbinde zu Spiel");
+            _packet.Write(globalId);
+            _packet.Write((byte)localId);
+            SendTCPData(_packet);
+        }
+    }
+    public static void PlayerReady(int id)
+    {
+        Packet _p = new Packet((byte)ClientPackets.PlayerGameReady);
+        Debug.Log("Verschicke ReadyPaket");   
+        SendTCPData(_p);
+    }
+    public static void PlayerLocomotionData(int localId,Vector3 pos, Quaternion rot)
+    {
+
+        using (Packet _packet = new Packet((byte)ClientPackets.PlayerLocomotionData))
+        {
+            _packet.Write(pos.x);
+            _packet.Write(pos.y);
+            _packet.Write(pos.z);
+
+            _packet.Write(rot.x);
+            _packet.Write(rot.y);
+            _packet.Write(rot.z);
+            _packet.Write(rot.w);
+            SendTCPData(_packet);
+        }
+    }
+
     
 }

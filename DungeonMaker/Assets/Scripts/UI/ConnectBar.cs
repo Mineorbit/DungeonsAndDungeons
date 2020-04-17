@@ -7,6 +7,7 @@ public class ConnectBar : MonoBehaviour
 {
     public Button connectButton;
     public InputField nameField;
+    public Button localButton;
     public static ConnectBar current;
     public CanvasGroup slider;
     GameObject bar;
@@ -15,9 +16,11 @@ public class ConnectBar : MonoBehaviour
      {
         current = this;
         bar = this.gameObject;
-        connectButton = transform.Find("GO").GetComponentInChildren<Button>();
+        connectButton = transform.Find("GO").GetComponent<Button>();
         nameField = transform.GetComponentInChildren<InputField>();
+        localButton = transform.Find("PlaySolo").GetComponent<Button>();
         connectButton.onClick.AddListener(Connect);
+        localButton.onClick.AddListener(ConnectLocal);
         slider = GetComponent<CanvasGroup>();
 
     }
@@ -25,6 +28,11 @@ public class ConnectBar : MonoBehaviour
     {
         Client.instance.name = nameField.text;
         Client.instance.ConnectToMainServer();
+    }
+    void ConnectLocal()
+    {
+        Client.instance.name = nameField.text;
+        Client.instance.ConnectToGameServer("127.0.0.1");
     }
     // Update is called once per frame
     void Update()

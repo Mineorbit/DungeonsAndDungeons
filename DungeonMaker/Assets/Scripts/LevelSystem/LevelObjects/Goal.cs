@@ -18,17 +18,19 @@ playersInGoal = new List<Player>();
 }
 public void Update()
 {
+    /* Remodel for test mode only/offline mode only
     if(playersInGoal.Count == GameLogic.current.playerCount&&!won)
     {
         won =  true;
         doAction();
     }
+    */
 }
 
 public override void doAction()
 {
     Debug.Log("Hurra!");
-    GameLogic.current.Win();
+    TestLogic.current.Win();
 }
 void OnTriggerEnter(Collider other)
 {

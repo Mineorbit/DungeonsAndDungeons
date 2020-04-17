@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour {
 
 	public float Factor;
 	float TargetSpeed = 0;
-	public float BaseSpeed 	= 2;
-	public float Increase	= 2;
-	public float Accelaration = 1;
+	public float BaseSpeed;
+	public float Increase;
+	public float Accelaration;
 	public float Speed = 0;
 	public float Gravity = 1;
 	public Vector3 TargetDirection;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 	public int Mask;
 	public float Height = 0.75f;
 	float runTime = 0;
-	float errorThreshold = 0.01f;
+	float errorThreshold = 0.05f;
 	float SpeedY;
 	public ModelController modelController;
 
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 	public float useTime = 0.5f;
 	public Item left;
 	public Item right;
+	public Vector3 actualDirection;
 	void Start () {
 		Mask = LayerMask.GetMask ("Floor");
 		Controller = GetComponent<CharacterController> ();
@@ -38,7 +39,8 @@ public class PlayerController : MonoBehaviour {
 		TargetDirection = new Vector3(0,0,0);
 	}
 
-	void Update () {
+	void FixedUpdate()
+	{
 		Strike = false;
 		isGrounded = FloorCheck();
 		//walken
@@ -54,13 +56,13 @@ public class PlayerController : MonoBehaviour {
 			Speed = 0;
 		}
 		Direction = Speed *Vector3.Normalize(TargetDirection);
-		
+		actualDirection = Vector3.Normalize(Controller.velocity);
 		Factor = Speed/(BaseSpeed+Increase);
 		
 		//fallen
 		if(!isGrounded)
 		{
-			SpeedY+=-Gravity*Time.deltaTime;
+			SpeedY+=-Gravity;
 		}else
 		{
 			if(Input.GetKeyDown(KeyCode.Space))
@@ -73,8 +75,13 @@ public class PlayerController : MonoBehaviour {
 				SpeedY = 0;
 			}
 		}
+
+	}
+	void Update () {
+		
+
 		Direction.y = SpeedY;
-		Controller.Move (Direction);
+		Controller.Move (Direction*Time.deltaTime);
 		//Combat
 		//Right Action
 		if(Input.GetMouseButtonDown(0)&&!Jumping)
@@ -92,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 		modelController.isGrounded = isGrounded;
 		modelController.Jumping = Jumping;
 		modelController.Factor = Factor;
-		modelController.TargetDirection = TargetDirection;
+		modelController.TargetDirection = actualDirection;
 		modelController.inControl = inControl;
 	}
 

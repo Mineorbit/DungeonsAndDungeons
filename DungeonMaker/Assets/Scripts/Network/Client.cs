@@ -22,7 +22,9 @@ public class Client : MonoBehaviour
     public int port = 13565;
     public TCP tcp;
 
+    public bool isConnectedGame =  false;
     private bool isConnected = false;
+    public bool gameConnect = false;
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
@@ -35,6 +37,7 @@ public class Client : MonoBehaviour
     public string name = "Test";
 
 
+
     private void Awake()
     {
         if (instance == null)
@@ -45,6 +48,8 @@ public class Client : MonoBehaviour
         {
             Destroy(this);
         }
+
+        InitializeClientData();
     }
 
     private void Start()
@@ -80,16 +85,31 @@ public class Client : MonoBehaviour
     }
     public void ConnectToMainServer()
     {
+        if(isConnected)
+        {
+            Disconnect();
+        }
         Client.updateNetworkMessage($"Connecting to {ip}:{port}");
 
-        InitializeClientData();
-
+        port = 13565;
         isConnected = true;
+        gameConnect = false;
         tcp.Connect(); 
     }
-    public void ConnectToGameServer()
+    public void ConnectToGameServer(string tip)
     {
-        
+        if(isConnectedGame) return;
+        if(isConnected)
+        {
+            Disconnect();
+        }
+         Client.updateNetworkMessage($"Connecting to {ip}:{port}");
+
+        ip = tip;
+        port =  45565;
+        isConnected = true;
+        tcp.Connect();
+        gameConnect = true;
     }
 
     private void InitializeClientData()
@@ -97,7 +117,9 @@ public class Client : MonoBehaviour
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
             { (int)ServerPackets.ConnectInfo, ClientHandle.ConnectInfo },
-            { (int)ServerPackets.Information, ClientHandle.Information }
+            { (int)ServerPackets.GameReady, ClientHandle.GameReady },
+            { (int)ServerPackets.Information, ClientHandle.Information },
+            { (int)ServerPackets.PlayerLocomotionData, ClientHandle.PlayerLocomotionData}
         };
     }
     public class TCP
@@ -132,7 +154,21 @@ public class Client : MonoBehaviour
             stream = socket.GetStream();
 
             receivedData = new Packet();
+            if(Client.instance.gameConnect)
+            {
+                Client.instance.gameConnect = false;
 
+                ClientSend.PlayerGameConnect(Client.instance.globalId,Client.instance.localId);
+                
+                ThreadManager.ExecuteOnMainThread(() =>
+                {
+                GameManager.current.startPlayMode();
+                });
+                
+                
+
+                Client.instance.isConnectedGame = true;
+            }
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
 

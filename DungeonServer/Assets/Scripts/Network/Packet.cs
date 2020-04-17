@@ -9,7 +9,11 @@ using UnityEngine;
 public enum ServerPackets
 {
     ConnectInfo = 1,
-    Information
+    Information,
+    PlayerGameDisconnect,
+    GameReady,
+    PlayerLocomotionData,
+    PlayerReSpawn
 }
 //Client to Server
 public enum ClientPackets
@@ -20,9 +24,11 @@ public enum ClientPackets
     JoinLobby,
     ChangeName,
     ChangeItem,
-    ChangeColor
+    ChangeColor,
+    PlayerGameConnect,
+    PlayerGameReady,
+    PlayerLocomotionData
 }
-
 
 public class Packet : IDisposable
 {
@@ -60,7 +66,6 @@ public class Packet : IDisposable
     {
         buffer = new List<byte>(); // Intitialize buffer
         readPos = 0; // Set readPos to 0
-        Debug.Log("Byte Create");
         Write(_id); // Write packet id to the buffer
     }
 

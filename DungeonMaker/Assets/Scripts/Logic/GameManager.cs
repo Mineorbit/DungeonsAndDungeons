@@ -52,9 +52,14 @@ public class GameManager : MonoBehaviour {
 	public bool Host = false;
 	public Level currentLevel;
 
+
+    public PlayerData[] playerData;
+
 	void Awake()
 	{
 		current = this;
+
+        playerData = new PlayerData[4];
 	}
 	// Start is called before the first frame update
 	void Start () {
@@ -90,8 +95,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void clear () {
-		if(GameLogic.current!=null) GameLogic.current.startUnpause();
+		//if(TestLogic.current!=null) TestLogic.current.startUnpause();
 		openLoadingScreen();
+
+
+		if(GameLogic.current!=null) Destroy(GameLogic.current);
 		if (currentState == State.edit) {
 			stopEditMode ();
 		}
@@ -101,19 +109,38 @@ public class GameManager : MonoBehaviour {
 		if (currentState == State.test) {
 			stopTestMode ();
 		}
+		if(currentState == State.mainmenu)
+		{
+			stopMainMenuMode();
+		}
+
 		if (currentScene != SceneIndex.Starting) {
-			SceneManager.UnloadSceneAsync ((int) currentScene);
+			SceneManager.UnloadSceneAsync((int)currentScene);
 		}
 	}
+	
+// Important Mode starters
+
 
 	public void startPlayMode () {
+
 		clear ();
 		currentState = State.play;
+		levelToLoad = "/map/Test​.lev";
 		loadLevel();
+
+		clearForGame();
 		StartCoroutine (load (SceneIndex.Play));
+		
+	}
+
+	//Replace all LevelObjects with NetworkLevelObjects
+	void clearForGame()
+	{
 
 	}
 	void loadLevel(){
+
 		GameObject levelHook = GameObject.Find("Level");
 		editor.levelHook = levelHook;
 		Level level = (levelHook.GetComponent<Level>()==null)?levelHook.AddComponent<Level>():levelHook.GetComponent<Level>();
@@ -121,9 +148,6 @@ public class GameManager : MonoBehaviour {
 		LevelLoader loader = new LevelLoader();
 		LevelData lD = loader.load(levelToLoad);
 		level = lD.toLevel(level);
-		Debug.Log("Geladen");
-
-	
 		currentLevel = level;
 	}
 
@@ -141,8 +165,7 @@ public class GameManager : MonoBehaviour {
 		currentState = State.test;
 		currentLevel = editor.currentLevel;
 		StartCoroutine (load(SceneIndex.Play));
-
-
+		this.gameObject.AddComponent<TestLogic>();
 	}
 
 	void stopEditMode () {
@@ -171,6 +194,10 @@ public class GameManager : MonoBehaviour {
 		}
 		GameLogic.current.stopRound();
 	}
+	void stopMainMenuMode() {
+		clearLevel = true;
+
+	}
 	void postSceneLoadAction () {
 		if (currentState == State.edit) {
 			
@@ -183,6 +210,12 @@ public class GameManager : MonoBehaviour {
 			startTest();
 		}
 	closeLoadingScreen();
+
+	}
+	public void startGame()
+	{
+		this.gameObject.AddComponent<PlayLogic>();
+		ClientSend.PlayerReady(Client.instance.localId);
 	}
 
 	void openLoadingScreen()
@@ -223,13 +256,9 @@ public class GameManager : MonoBehaviour {
 
 	void startTest()
 	{
-		GameLogic.current.startTestRound();
-	}
-
-
-	void startGame(){
 		GameLogic.current.startRound();
 	}
+
 
 
 

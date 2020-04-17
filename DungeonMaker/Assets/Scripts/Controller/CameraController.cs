@@ -19,6 +19,6 @@ public class CameraController : MonoBehaviour
         targetP = target.position;
         if (!followY) targetP.y = -10;
 
-        transform.position = Vector3.Lerp(transform.position,targetP,0.25f);
+        transform.position = Vector3.Lerp(transform.position,targetP,0.5f);
     }
 }
