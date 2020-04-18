@@ -10,7 +10,7 @@ public class ConnectionInfoPacket implements Packet {
 
 	@Override
 	public byte[] toBytes() {
-		final byte[] bytes = util.Util.toBytes(globalId);
+		final byte[] bytes = util.Util.intToBytes(globalId);
 		byte[] result = new byte[bytes.length + 1];
 		
 		result[0] = id;

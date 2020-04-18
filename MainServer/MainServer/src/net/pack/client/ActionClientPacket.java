@@ -12,15 +12,15 @@ public abstract class ActionClientPacket extends ClientPacket {
 		} else if (id == ClientPacketType.PLAYER_DISCONNECT.id) {
 			return PlayerDisconnectPacket.fromBytes(content);
 		} else if (id == ClientPacketType.LEAVE_LOBBY.id) {
-			return null;
+			return LeaveLobbyPacket.fromBytes(bytes);
 		} else if (id == ClientPacketType.JOIN_LOBBY.id) {
-			return null;
+			return JoinLobbyPacket.fromBytes(bytes);
 		} else if (id == ClientPacketType.CHANGE_NAME.id) {
 			return ChangeNamePacket.fromBytes(bytes);
 		} else if (id == ClientPacketType.CHANGE_ITEM.id) {
-			return null;
+			return ChangeItemPacket.fromBytes(bytes);
 		} else if (id == ClientPacketType.CHANGE_COLOR.id) {
-			return null;
+			return ChangeColorPacket.fromBytes(bytes);
 		} else {
 			return null;
 		}
