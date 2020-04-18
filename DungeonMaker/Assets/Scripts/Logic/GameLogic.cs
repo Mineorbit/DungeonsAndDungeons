@@ -12,7 +12,8 @@ public class GameLogic : MonoBehaviour
 
     public Player mainPlayer;
     public GameObject camera;
-    public static GameObject[] players;
+    public GameObject[] players;
+    public  Player[] playerComps;
 	public int hp = 50;
 	public int mp =  50;
     public int maxhp  = 100;

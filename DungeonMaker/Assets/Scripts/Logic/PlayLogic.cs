@@ -6,13 +6,10 @@ public class PlayLogic : GameLogic
 {
    
    
-    public GameObject[] players;
-    public Player[] playerComps;
-    public static PlayLogic current;
-
     public void Start()
     {
         current = this;
+        localId = Client.instance.localId;
         players = new GameObject[4];
         playerComps = new Player[4];
         player = Resources.Load("Main/Player/Player");
@@ -54,8 +51,10 @@ public class PlayLogic : GameLogic
     {
         for(int i = 0;i<4;i++)
         {
-            Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/2)*localId),0,-Mathf.Cos((Mathf.PI/2)*localId));
-            offset *=2;
+            Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/4)*(float)i),0,-Mathf.Cos((Mathf.PI/4)*(float)i));
+            
+            offset *=3;
+            Debug.Log(i+" "+offset);
             if(GameManager.current.playerData[i]!=null)
             {
                 GameObject p;

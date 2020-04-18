@@ -35,7 +35,6 @@ public class ServerHandle : MonoBehaviour
         qw = _packet.ReadFloat();
         Vector3 loc = new Vector3(x,y,z);
         Quaternion rot = new Quaternion(qx,qy,qz,qw);
-        Debug.Log("Rotation: "+rot);
         GameLogic.current.players[localid].updateLocomotionData(loc,rot);
         
     }

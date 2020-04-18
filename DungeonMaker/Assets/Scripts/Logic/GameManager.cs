@@ -226,6 +226,10 @@ public class GameManager : MonoBehaviour {
 		if(currentState == State.test){
 			startTest();
 		}
+		if(currentState == State.mainmenu)
+		{
+			startMain();
+		}
 
 	}
 	public void startGame()
@@ -242,7 +246,10 @@ public class GameManager : MonoBehaviour {
 	{
 		Destroy(loadingScreen);
 	}
-
+	public void startMain()
+	{
+	closeLoadingScreen();
+	}
 	public void startEdit()
 	{
 			GameObject cur = GameObject.Find ("Cursor");

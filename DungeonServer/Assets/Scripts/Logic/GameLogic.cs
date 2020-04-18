@@ -46,8 +46,8 @@ public class GameLogic : MonoBehaviour
         Player pp = p.GetComponent<Player>();
         p.name = "Player"+localId;
         pp.id=localId;
-        Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/2)*localId),0,-Mathf.Cos((Mathf.PI/2)*localId));
-        offset *=2;
+        Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/4)*(float)localId),0,-Mathf.Cos((Mathf.PI/4)*(float)localId));
+        offset *=3;
 
         spawnPoint = getSpawnPoint();
        
