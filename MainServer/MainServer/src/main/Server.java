@@ -3,8 +3,10 @@ package main;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import logic.GameServer;
 import logic.Lobby;
 import logic.Player;
 import net.ClientListener;
@@ -18,6 +20,7 @@ public class Server {
 	private ServerSocket serverSocket;
 	private Map<Integer, Lobby> lobbies;
 	private Map<Integer, Player> playersbyGlobalID;
+	private List<GameServer> gameServers;
 
 	private Server(int p, int mP) {
 		lobbies = new HashMap<Integer, Lobby>();

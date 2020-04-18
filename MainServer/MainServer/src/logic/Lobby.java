@@ -10,7 +10,9 @@ public class Lobby {
 	private int lobbyId;
 	// LocalId of MasterPlayer
 	private int masterId;
-
+	
+	private long currentLevelId;
+	
 	public Lobby(int lobbyId, Player master) {
 		this.lobbyId = lobbyId;
 		this.playersByLocalId = new HashMap<Integer, Player>();
