@@ -24,7 +24,7 @@ public class ServerManager : MonoBehaviour
         s = State.Setup;
 
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 64;
 
         Debug.Log("Server wird gestartet");
         Server.Start(45565);

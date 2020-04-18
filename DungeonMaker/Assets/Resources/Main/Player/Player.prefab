@@ -1358,7 +1358,7 @@ MonoBehaviour:
   Mask: 0
   Height: 0.6
   modelController: {fileID: 0}
-  jumpForce: 10
+  jumpForce: 20
   inControl: 1
   isGrounded: 0
   Jumping: 0
@@ -1398,6 +1398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  Online: 1
   Host: 0
   targetPosition: {x: 0, y: 0, z: 0}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}

@@ -19,7 +19,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        ServerSend.PlayerLocomotionData(id,transform.position,transform.rotation);
+        if(targetPosition!=transform.position)
+        {
+        ServerSend.PlayerLocomotionData(id,targetPosition,targetRotation);
+        }
     }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)
     {

@@ -51,7 +51,7 @@ public class PlayLogic : GameLogic
     {
         for(int i = 0;i<4;i++)
         {
-            Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/4)*(float)i),0,-Mathf.Cos((Mathf.PI/4)*(float)i));
+            Vector3 offset = new Vector3(Mathf.Sin((Mathf.PI/2)*(float)i),0,-Mathf.Cos((Mathf.PI/2)*(float)i));
             
             offset *=3;
             Debug.Log(i+" "+offset);
