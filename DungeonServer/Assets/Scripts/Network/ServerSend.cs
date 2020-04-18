@@ -24,10 +24,7 @@ public class ServerSend
             }
         }
     }
-    public static void PlayerPosition(Player p)
-    {
-
-    }
+    
     public static void GameReady()
     {
         Packet readyPack =  new Packet((byte)ServerPackets.GameReady);
@@ -50,7 +47,7 @@ public class ServerSend
     public static void PlayerDisconnected(int localId)
     {
         Packet discPack = new Packet((byte)ServerPackets.PlayerGameDisconnect);
-        discPack.Write(Server.globalIds[localId]);
+        discPack.Write((byte)localId);
         SendTCPDataToAll(localId,discPack);
     }
     public static void PlayerLocomotionData(int localId, Vector3 position, Quaternion rotation)

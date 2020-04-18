@@ -13,7 +13,9 @@ public class ServerHandle : MonoBehaviour
     }
     public static void PlayerDisconnect(int from, Packet _packet)
     {
-
+        GameLogic.current.players[from] = null;
+        Server.clients[from].Disconnect();
+        ServerSend.PlayerDisconnected(from);
     }
     public static void PlayerLocomotionData(int from, Packet _packet)
     {

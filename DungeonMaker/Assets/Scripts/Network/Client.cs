@@ -67,6 +67,10 @@ public class Client : MonoBehaviour
     {
         if (isConnected)
         {
+            if(gameConnect)
+            {
+            ClientSend.PlayerGameDisconnect();
+            }
             isConnected = false;
             tcp.socket.Close();
 
@@ -119,7 +123,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.ConnectInfo, ClientHandle.ConnectInfo },
             { (int)ServerPackets.GameReady, ClientHandle.GameReady },
             { (int)ServerPackets.Information, ClientHandle.Information },
-            { (int)ServerPackets.PlayerLocomotionData, ClientHandle.PlayerLocomotionData}
+            { (int)ServerPackets.PlayerLocomotionData, ClientHandle.PlayerLocomotionData},
+            { (int)ServerPackets.PlayerGameDisconnect, ClientHandle.PlayerGameDisconnect}
         };
     }
     public class TCP

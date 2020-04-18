@@ -26,6 +26,7 @@ public enum ClientPackets
     ChangeItem,
     ChangeColor,
     PlayerGameConnect,
+    PlayerGameDisconnect,
     PlayerGameReady,
     PlayerLocomotionData
 }

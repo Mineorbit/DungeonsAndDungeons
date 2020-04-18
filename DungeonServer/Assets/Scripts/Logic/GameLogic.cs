@@ -52,6 +52,7 @@ public class GameLogic : MonoBehaviour
         spawnPoint = getSpawnPoint();
        
         p.transform.position = spawnPoint+offset;
+        Server.clients[localId].player = pp;
         players[localId] = pp;
     }
     public void  checkAllPlayersReady()

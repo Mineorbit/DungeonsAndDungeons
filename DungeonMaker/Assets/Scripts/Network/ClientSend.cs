@@ -16,12 +16,21 @@ public class ClientSend : MonoBehaviour
 
    //Hier HookUp zum Client
 
+    
+
     public static void PlayerConnect(string username)
     {
         using (Packet _packet = new Packet((byte)ClientPackets.PlayerConnect))
         {
             Debug.Log($"Schicke Login Paket mit Namen: {username}");
             _packet.Write(username);
+            SendTCPData(_packet);
+        }
+    }
+    public static void PlayerGameDisconnect()
+    {
+        using (Packet _packet = new Packet((byte)ClientPackets.PlayerGameDisconnect))
+        {
             SendTCPData(_packet);
         }
     }

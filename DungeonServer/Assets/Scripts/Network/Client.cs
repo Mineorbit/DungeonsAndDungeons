@@ -96,7 +96,6 @@ public class Client
         /// <param name="_data">The recieved data.</param>
         private bool HandleData(byte[] _data)
         {
-            Debug.Log("Dealing with new packet");
             int _packetLength = 0;
 
             receivedData.SetBytes(_data);
@@ -159,7 +158,7 @@ public class Client
     
 
     /// <summary>Disconnects the client and stops all network traffic.</summary>
-    private void Disconnect()
+    public void Disconnect()
     {
 
         ThreadManager.ExecuteOnMainThread(() =>

@@ -69,4 +69,9 @@ public class ClientHandle : MonoBehaviour
         Quaternion rot = new  Quaternion(qx,qy,qz,qw);
         PlayLogic.current.playerComps[locId].set(loc,rot);
     }
+    public static void PlayerGameDisconnect(Packet _packet)
+    {
+        int localId = (int) _packet.ReadByte();
+        Destroy(GameLogic.current.players[localId].gameObject);
+    }
 }
