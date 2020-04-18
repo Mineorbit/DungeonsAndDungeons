@@ -21,7 +21,12 @@ public class TestLogic : GameLogic
         Paused = false;
         Time.timeScale = 1;
     }
-
+    public void createPlayer()
+    {
+    GameObject p = (GameObject) Instantiate(player) as GameObject;
+    mainPlayer = p.GetComponent<Player>();
+    mainPlayer.Online  = false;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +49,7 @@ public class TestLogic : GameLogic
     }
     void setupLevelRoundStart()
     {
+        //Setup enemies and such
         GameManager.current.currentLevel.setupRound();
     }
 

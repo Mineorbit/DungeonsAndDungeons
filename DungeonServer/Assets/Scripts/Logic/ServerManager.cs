@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ServerManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class ServerManager : MonoBehaviour
         {
             Destroy(this);
         }
+        SetupServer();
         s = State.Setup;
 
         QualitySettings.vSyncCount = 0;
@@ -30,6 +32,10 @@ public class ServerManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Server.Stop();
+    }
+    void SetupServer()
+    {
+        Directory.CreateDirectory(Application.persistentDataPath+"/map");
     }
 
     

@@ -6,10 +6,15 @@ public class PlayLogic : GameLogic
 {
    
    
+    public GameObject[] players;
+    public Player[] playerComps;
+    public static PlayLogic current;
+
     public void Start()
     {
-        players = new GameObject[4];
         current = this;
+        players = new GameObject[4];
+        playerComps = new Player[4];
         player = Resources.Load("Main/Player/Player");
         playerExt = Resources.Load("Main/Player/ExternalPlayer");
         playerCamera = Resources.Load("Main/Player/PlayerCamera");
@@ -17,12 +22,13 @@ public class PlayLogic : GameLogic
     public override void startRound()
     {
         Debug.Log("Round start");
-        Pausable =  false;
+        Pausable = true;
 
         setupPlayers();
 
         setupCamera();
         setupLevelRoundStart();
+		GameManager.current.closeLoadingScreen();
     }
 
     public override void startUnpause()
@@ -33,9 +39,16 @@ public class PlayLogic : GameLogic
     {
 
     }
+    
     public override Vector3 SpawnPointLocation()
     {
-        return new Vector3(0,0,0);  
+        if(GameManager.current.currentLevel==null)
+        {
+            return new Vector3(20,20,20);
+        }else
+        {
+            return GameManager.current.currentLevel.spawn.transform.position+new Vector3(0,5,0);
+        }  
     }
     public void setupPlayers()
     {
@@ -53,6 +66,7 @@ public class PlayLogic : GameLogic
                     pp = p.GetComponent<Player>();
                     pp.Host = true;
                     pp.id = i;
+                    mainPlayer = pp;
 
                 }else
                 {
@@ -63,6 +77,7 @@ public class PlayLogic : GameLogic
                     pp.id = i;
                 }
                 players[i] = p;
+                playerComps[i] = pp;
                 p.transform.position = SpawnPointLocation()+offset;
 
             }
@@ -73,7 +88,9 @@ public class PlayLogic : GameLogic
     public override void setupCamera()
     {
         Debug.Log("Test");
-        Instantiate(playerCamera);
+        GameObject camera = (GameObject) Instantiate(playerCamera) as GameObject;
+        camera.transform.position = SpawnPointLocation();
+        camera.GetComponent<CameraController>().target = players[Client.instance.localId].transform;
     }
     public override void setupLevelRoundStart()
     {

@@ -6,10 +6,13 @@ public class ServerHandle : MonoBehaviour
 {
     public static void PlayerGameReady(int from, Packet _packet)
     {
-        Debug.Log("Player "+from+" ready");
         int localid = from;
         GameLogic.current.setupPlayer(localid);
         GameLogic.current.checkAllPlayersReady();
+
+    }
+    public static void PlayerDisconnect(int from, Packet _packet)
+    {
 
     }
     public static void PlayerLocomotionData(int from, Packet _packet)
@@ -32,6 +35,7 @@ public class ServerHandle : MonoBehaviour
         qw = _packet.ReadFloat();
         Vector3 loc = new Vector3(x,y,z);
         Quaternion rot = new Quaternion(qx,qy,qz,qw);
+        Debug.Log("Rotation: "+rot);
         GameLogic.current.players[localid].updateLocomotionData(loc,rot);
         
     }

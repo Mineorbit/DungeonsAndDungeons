@@ -56,7 +56,7 @@ public class ServerSend
     public static void PlayerLocomotionData(int localId, Vector3 position, Quaternion rotation)
     {
         Packet locoData =  new  Packet((byte)ServerPackets.PlayerLocomotionData);
-        locoData.Write(localId);
+        locoData.Write((byte)localId);
         locoData.Write(position.x);
         locoData.Write(position.y);
         locoData.Write(position.z);
@@ -64,7 +64,6 @@ public class ServerSend
         locoData.Write(rotation.y);
         locoData.Write(rotation.z);
         locoData.Write(rotation.w);
-        Debug.Log("Sending to all except "+localId);
         SendTCPDataToAll(localId,locoData);
         
     }

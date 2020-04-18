@@ -59,11 +59,6 @@ public class Client
             {
                 if (socket != null)
                 {
-                    Debug.Log("PaketDaten:");
-                    foreach(byte b in _packet.ToArray()){
-                        Debug.Log(b);
-                    }
-
                     stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null); // Send data to appropriate client
                 }
             }

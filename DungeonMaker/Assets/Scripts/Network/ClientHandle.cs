@@ -65,6 +65,8 @@ public class ClientHandle : MonoBehaviour
         float qy = _packet.ReadFloat();
         float qz = _packet.ReadFloat();
         float qw = _packet.ReadFloat();
-        //Hier muss noch an den jeweiligen Player gegeben werden
+        Vector3 loc = new Vector3(x,y,z);
+        Quaternion rot = new  Quaternion(qx,qy,qz,qw);
+        PlayLogic.current.playerComps[locId].set(loc,rot);
     }
 }

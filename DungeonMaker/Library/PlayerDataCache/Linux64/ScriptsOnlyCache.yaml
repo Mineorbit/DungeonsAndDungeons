@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - LobbyBar
     - ModelController
     - PlacementData
+    - Player
     - PlayerController
     - PlayerList
     - PlayerListItem
@@ -57,27 +58,14 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.VolumeProfile
     Unity.RenderPipelines.Universal.Runtime.dll:
     - UnityEngine.Rendering.Universal.Bloom
-    - UnityEngine.Rendering.Universal.ChannelMixer
-    - UnityEngine.Rendering.Universal.ChromaticAberration
-    - UnityEngine.Rendering.Universal.ColorAdjustments
     - UnityEngine.Rendering.Universal.ColorCurves
-    - UnityEngine.Rendering.Universal.ColorLookup
     - UnityEngine.Rendering.Universal.DepthOfField
-    - UnityEngine.Rendering.Universal.FilmGrain
     - UnityEngine.Rendering.Universal.ForwardRendererData
-    - UnityEngine.Rendering.Universal.LensDistortion
     - UnityEngine.Rendering.Universal.LiftGammaGain
-    - UnityEngine.Rendering.Universal.MotionBlur
-    - UnityEngine.Rendering.Universal.PaniniProjection
     - UnityEngine.Rendering.Universal.PostProcessData
-    - UnityEngine.Rendering.Universal.ShadowsMidtonesHighlights
-    - UnityEngine.Rendering.Universal.SplitToning
-    - UnityEngine.Rendering.Universal.Tonemapping
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
-    - UnityEngine.Rendering.Universal.Vignette
-    - UnityEngine.Rendering.Universal.WhiteBalance
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.ShaderGraph.Editor.dll:
@@ -449,6 +437,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13494}
     - Class: 114
+      Script: {instanceID: 13504}
+    - Class: 114
       Script: {instanceID: 13700}
     - Class: 114
       Script: {instanceID: 13728}
@@ -527,7 +517,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 16410}
     - Class: 114
-      Script: {instanceID: 24598}
+      Script: {instanceID: 20800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -690,7 +680,7 @@ ScriptsOnlyBuild:
     className: NavMeshModifier
   - hash:
       serializedVersion: 2
-      Hash: 3ad4841a9475c0191fbc7d403ff4000c
+      Hash: 30737cc79caf878ad96f7fc8de47213b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayLogic
@@ -1158,7 +1148,7 @@ ScriptsOnlyBuild:
     className: Rotator
   - hash:
       serializedVersion: 2
-      Hash: d027e78fbf6dc3c645887e841c18ef02
+      Hash: 93a248c6ae870f3a2af41f569391f031
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -1768,4 +1758,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainMenuScene.unity
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/PlayScene.unity
-  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/16_4_19/DungeonsAndDungeons.x86_64
+  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/18_4_15/DungeonsAndDungeons.x86_64

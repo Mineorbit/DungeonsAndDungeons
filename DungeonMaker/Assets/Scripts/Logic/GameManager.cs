@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -8,15 +9,17 @@ public class GameManager : MonoBehaviour {
 	public static GameManager current;
 	//GameState
 	public enum SceneIndex { Starting = 0, MainMenu = 1, Edit = 2, Play = 3, Option = 4}
-	SceneIndex currentScene = SceneIndex.Starting;
 	public enum State { start, mainmenu, loadplay, loadedit, play, edit, option,test }
 
+	SceneIndex currentScene = SceneIndex.Starting;
 	public State currentState = State.start;
 
 	public bool loading = true;
 
 	public string levelToLoad =  "";
 
+	GameObject loadingScreen;
+	UnityEngine.Object loadingScreenPrefab;
 	//EditState
 
 	int playerId;
@@ -57,10 +60,20 @@ public class GameManager : MonoBehaviour {
 
 	void Awake()
 	{
+		setupGame();
 		current = this;
 
         playerData = new PlayerData[4];
 	}
+
+
+	void setupGame()
+	{
+        Directory.CreateDirectory(Application.persistentDataPath+"/map");
+		loadingScreenPrefab = Resources.Load("UI/LoadingScreen");
+	}
+
+
 	// Start is called before the first frame update
 	void Start () {
 		dummy = new LevelObject();
@@ -112,6 +125,10 @@ public class GameManager : MonoBehaviour {
 		if(currentState == State.mainmenu)
 		{
 			stopMainMenuMode();
+		}
+		if(currentState == State.start)
+		{
+			closeLoadingScreen();
 		}
 
 		if (currentScene != SceneIndex.Starting) {
@@ -209,7 +226,6 @@ public class GameManager : MonoBehaviour {
 		if(currentState == State.test){
 			startTest();
 		}
-	closeLoadingScreen();
 
 	}
 	public void startGame()
@@ -218,13 +234,13 @@ public class GameManager : MonoBehaviour {
 		ClientSend.PlayerReady(Client.instance.localId);
 	}
 
-	void openLoadingScreen()
+	public void openLoadingScreen()
 	{
-
+		loadingScreen = (GameObject) Instantiate(loadingScreenPrefab) as GameObject;
 	}
-	void closeLoadingScreen()
+	public void closeLoadingScreen()
 	{
-
+		Destroy(loadingScreen);
 	}
 
 	public void startEdit()
@@ -252,11 +268,13 @@ public class GameManager : MonoBehaviour {
 			}
 			}
 			editor.startEdit();
+		closeLoadingScreen();
 	}
 
 	void startTest()
 	{
 		GameLogic.current.startRound();
+		closeLoadingScreen();
 	}
 
 

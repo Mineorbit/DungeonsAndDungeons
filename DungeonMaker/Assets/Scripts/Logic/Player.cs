@@ -5,19 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int id;
+    public bool Online = true;
     public bool Host;
     public Vector3 targetPosition;
     public  Quaternion targetRotation;
+    Transform model;
     void  Start()
     {
-
+        model = transform.Find("char");
     }
     void FixedUpdate()
     {
         if(Host)
         {
             //Send Data
-            ClientSend.PlayerLocomotionData(id,transform.position,transform.rotation);
+            ClientSend.PlayerLocomotionData(id,transform.position,model.rotation);
         }
     }
     public void set(Vector3 loc,Quaternion rot)
@@ -34,16 +36,23 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if(!Host)
+        if(Online) processOnline(); else processOffline();
+    }
+    void processOnline()
+    {
+    if(!Host)
         {
             UpdatePosition();
         }
     }
+    void  processOffline()
+    {
 
+    }
     void UpdatePosition()
     {
         transform.position = Vector3.Lerp(targetPosition,transform.position,0.5f);
-        transform.rotation = Quaternion.Lerp(targetRotation,transform.rotation,0.5f);
+        transform.localRotation = Quaternion.Lerp(targetRotation,model.rotation,0.5f);
     }
 
 }
