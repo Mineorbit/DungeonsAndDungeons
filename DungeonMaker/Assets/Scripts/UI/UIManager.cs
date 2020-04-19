@@ -115,11 +115,16 @@ public class UIManager : MonoBehaviour {
 	void setupMainMenu () {
 		Button play = MainMenu.transform.Find ("Play").GetComponent<Button> ();
 		Button edit = MainMenu.transform.Find ("Edit").GetComponent<Button> ();
+		Button option = MainMenu.transform.Find("Option").GetComponent<Button>();
 		play.onClick.AddListener (startPlayerMenu);
 		//play.onClick.AddListener(gameManager.startPlayMode);
 		edit.onClick.AddListener (startBuilderMenu);
+		option.onClick.AddListener(startOption);
 	}
-
+	void startOption()
+	{
+		GameManager.current.startOptionMode();
+	}
 	void setupPlayerUI () { 
 		hpBar = PlayerUI.transform.Find("HP").GetComponent<Bar>();
 		mpBar = PlayerUI.transform.Find("MP").GetComponent<Bar>();
