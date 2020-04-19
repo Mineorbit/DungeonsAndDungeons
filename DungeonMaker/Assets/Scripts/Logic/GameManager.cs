@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
 
 	Vector3 prefabOffset = new Vector3 (0, -20, 0);
 
+	public bool CanOpenMenu = true;
 	//PlaySate/Networkdata
 	public Level currentLevel;
 

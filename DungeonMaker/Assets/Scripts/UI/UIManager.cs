@@ -502,14 +502,12 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void CloseMenu () {
-		if(GameLogic.current.Pausable)
-		{
+		
 		menuActive = false;
 		StartCoroutine ("closeMenu");
-		}
 	}
 	public void OpenMenu () {
-		if(GameLogic.current.Pausable)
+		if(GameManager.current.CanOpenMenu)
 		{
 		menuActive = true;
 		StartCoroutine ("openMenu");
