@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Options : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Button backButton;
+    public void Setup()
     {
-        
+        backButton=transform.Find("Close").GetComponent<Button>();
+        backButton.onClick.AddListener(close);
     }
-
-    // Update is called once per frame
-    void Update()
+    void  close()
     {
-        
+        UIManager.current.closeOption();
     }
+    
 }

@@ -21,6 +21,9 @@ public class UIManager : MonoBehaviour {
 	public GameObject PlayerMenu;
 	public GameObject WinMenu;
 
+
+	public GameObject OptionsUI;
+
 	CanvasGroup MenuSlider;
 
 	CanvasGroup MainMenuSlider;
@@ -87,6 +90,8 @@ public class UIManager : MonoBehaviour {
 			PlaySlider = PlayerMenu.GetComponent<CanvasGroup>();
 			BuilderMenu = this.transform.Find ("BuilderMenu").gameObject;
 			EditSlider = BuilderMenu.GetComponent<CanvasGroup>();
+			OptionsUI = this.transform.Find("Options").gameObject;
+			setupOptions();
 			setupPlayerMenu();
 			setupBuilderMenu();
 		}
@@ -112,6 +117,11 @@ public class UIManager : MonoBehaviour {
 		startMainMenu();
 	}
 
+	void setupOptions()
+	{
+		OptionsUI.GetComponent<Options>().Setup();
+	}
+
 	void setupMainMenu () {
 		Button play = MainMenu.transform.Find ("Play").GetComponent<Button> ();
 		Button edit = MainMenu.transform.Find ("Edit").GetComponent<Button> ();
@@ -121,9 +131,15 @@ public class UIManager : MonoBehaviour {
 		edit.onClick.AddListener (startBuilderMenu);
 		option.onClick.AddListener(startOption);
 	}
+
 	//Open Menu
-	void startOption()
+	public void startOption()
 	{
+		StartCoroutine("openOptions");
+	}
+	public void closeOption()
+	{
+		StartCoroutine("closeOptions");
 	}
 
 
@@ -271,6 +287,30 @@ public class UIManager : MonoBehaviour {
 	void closeMainMenu () {
 		StartCoroutine("closetheMainMenu");
 	}
+
+	IEnumerator closeOptions () {
+
+		for (float ft = 0.85f; ft >= 0; ft -= 0.1f) {
+			OptionsUI.transform.localScale = new Vector3(ft,ft,1);
+			yield return null;
+		}
+		OptionsUI.transform.localScale = new Vector3(0,0,1);
+		OptionsUI.SetActive(false);
+		yield return null;
+	}
+
+	IEnumerator openOptions () {
+
+		OptionsUI.SetActive(true);
+		for (float ft = 0f; ft <= 0.85f; ft += 0.1f) {
+			OptionsUI.transform.localScale = new Vector3(ft,ft,1);
+			yield return null;
+		}
+		OptionsUI.transform.localScale = new Vector3(0.85f,0.85f,1);
+
+		yield return null;
+	}
+
 
 	IEnumerator closeWinMenu () {
 		for (float ft = 1f; ft >= 0; ft -= 0.1f) {

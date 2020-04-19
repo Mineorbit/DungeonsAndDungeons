@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour {
 	Vector3 prefabOffset = new Vector3 (0, -20, 0);
 
 	//PlaySate/Networkdata
-	public bool Host = false;
 	public Level currentLevel;
 
 
