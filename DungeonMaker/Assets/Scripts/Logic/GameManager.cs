@@ -92,13 +92,7 @@ public class GameManager : MonoBehaviour {
 		currentState = State.mainmenu;
 		StartCoroutine (load (SceneIndex.MainMenu));
 	}
-	public void startOptionMode () {
-		clearLevel = true;
-		backToEdit = false;
-		clear ();
-		currentState =  State.option;
-		StartCoroutine (load (SceneIndex.Option));
-	}
+	
 
 	IEnumerator load (SceneIndex i) {
 		loading = true;
@@ -237,17 +231,10 @@ public class GameManager : MonoBehaviour {
 		{
 			startMain();
 		}
-		if(currentState == State.option)
-		{
-			startOption();
-		}
+	
 
 	}
-	public void startOption()
-	{
-		Debug.Log("Test");
-		closeLoadingScreen();
-	}
+	
 	public void startGame()
 	{
 		this.gameObject.AddComponent<PlayLogic>();

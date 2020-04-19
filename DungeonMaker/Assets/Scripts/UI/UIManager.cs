@@ -121,10 +121,12 @@ public class UIManager : MonoBehaviour {
 		edit.onClick.AddListener (startBuilderMenu);
 		option.onClick.AddListener(startOption);
 	}
+	//Open Menu
 	void startOption()
 	{
-		GameManager.current.startOptionMode();
 	}
+
+
 	void setupPlayerUI () { 
 		hpBar = PlayerUI.transform.Find("HP").GetComponent<Bar>();
 		mpBar = PlayerUI.transform.Find("MP").GetComponent<Bar>();
