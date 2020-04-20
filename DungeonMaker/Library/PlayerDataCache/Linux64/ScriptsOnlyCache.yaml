@@ -27,8 +27,6 @@ ScriptsOnlyBuild:
     - WinMenu
     NavMeshComponents.dll:
     - UnityEngine.AI.NavMeshSurface
-    NavMeshComponentsEditor.dll:
-    - UnityEditor.AI.NavMeshAssetManager
     Unity.RenderPipelines.Core.Runtime.dll:
     - UnityEngine.Rendering.UI.DebugUIHandlerBitField
     - UnityEngine.Rendering.UI.DebugUIHandlerButton
@@ -70,6 +68,7 @@ ScriptsOnlyBuild:
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.ShaderGraph.Editor.dll:
+    - UnityEditor.Graphing.GraphObject
     - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     Unity.TextMeshPro.dll:
     - TMPro.TMP_Dropdown
@@ -539,7 +538,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 16418}
     - Class: 114
-      Script: {instanceID: 20858}
+      Script: {instanceID: 53348}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128

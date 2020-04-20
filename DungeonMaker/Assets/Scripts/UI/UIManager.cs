@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour {
 
 	public float FadeTime;
 	public bool menuActive = false;
+	bool		optionOpen = false;
 	enum MenuState { Main, Play, Edit, Option, Credit, Pause, None }
 	MenuState currentMenu = MenuState.None;
 
@@ -135,11 +136,16 @@ public class UIManager : MonoBehaviour {
 	//Open Menu
 	public void startOption()
 	{
+		if(!optionOpen)
+		{
+		optionOpen = true;
 		StartCoroutine("openOptions");
+		}
 	}
 	public void closeOption()
 	{
 		StartCoroutine("closeOptions");
+		optionOpen = false;
 	}
 
 

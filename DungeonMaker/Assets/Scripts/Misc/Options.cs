@@ -9,7 +9,7 @@ public class Options : MonoBehaviour
 {
     Button backButton;
     TMP_Dropdown resolutionList;
-    Slider masterAudio;
+    Slider[] masterAudio;
 
 
     int currentN;
@@ -24,7 +24,9 @@ public class Options : MonoBehaviour
     {
         Volume = new float[numberOfMixers];
         backButton=transform.Find("Close").GetComponent<Button>();
-        masterAudio = transform.Find("Volume").GetComponent<Slider>();
+        masterAudio = new Slider[numberOfMixers];
+        masterAudio[0] = transform.Find("VolumeMusic").GetComponent<Slider>();
+        masterAudio[0] = transform.Find("VolumeSFX").GetComponent<Slider>();
         resolutionList = transform.Find("Resolutions").GetComponent<TMP_Dropdown>();
         backButton.onClick.AddListener(close);
         setupResolutionSetter();
@@ -41,16 +43,23 @@ public class Options : MonoBehaviour
         for(int i = 0;i<numberOfMixers;i++)
         {    
         Volume[i] = PlayerPrefs.GetFloat("Volume"+i);
-        masterAudio.value = Volume[i];
+        Debug.Log("Volume:"+Volume[i]);
+        if(masterAudio[i]!=null)masterAudio[i].value = Volume[i];
         if(mixers[i]!=null)
         mixers[i].SetFloat("Volume",correctForMain(Volume[i]));
         }
     }
-    public void setMainValue(float v)
+    public void setMusicValue(float v)
     {
         Volume[0] = v;
         PlayerPrefs.SetFloat("Volume"+0,v);
         mixers[0].SetFloat("Volume",correctForMain(v));
+    }
+    public void setSFXValue(float v)
+    {
+        Volume[1] = v;
+        PlayerPrefs.SetFloat("Volume"+1,v);
+        mixers[1].SetFloat("Volume",correctForMain(v));
     }
     public void setupResolutionSetter()
     {
