@@ -2,14 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Options : MonoBehaviour
 {
     Button backButton;
+    TMP_Dropdown resolutionList;
+    int currentN;
     public void Setup()
     {
         backButton=transform.Find("Close").GetComponent<Button>();
+        resolutionList = transform.Find("Resolutions").GetComponent<TMP_Dropdown>();
         backButton.onClick.AddListener(close);
+        resolutionList.ClearOptions();
+        List<string> options = new List<string>();
+        int index = 0;
+        int v = 0;
+        foreach(Resolution res in Screen.resolutions)
+        {
+            Resolution r = res;
+            options.Add(r.ToString());
+            if(r.Equals(Screen.currentResolution)) v = index;
+            index++;
+        }
+        resolutionList.AddOptions(options);
+        resolutionList.value = v;
+    }
+    public void handleResolutionData(int n)
+    {
+        Resolution r = Screen.resolutions[n];
+        currentN = n;
+        Screen.SetResolution(r.width,r.height,true,r.refreshRate);
     }
     void  close()
     {
