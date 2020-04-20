@@ -27,6 +27,8 @@ ScriptsOnlyBuild:
     - WinMenu
     NavMeshComponents.dll:
     - UnityEngine.AI.NavMeshSurface
+    NavMeshComponentsEditor.dll:
+    - UnityEditor.AI.NavMeshAssetManager
     Unity.RenderPipelines.Core.Runtime.dll:
     - UnityEngine.Rendering.UI.DebugUIHandlerBitField
     - UnityEngine.Rendering.UI.DebugUIHandlerButton
@@ -328,6 +330,12 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 225
+      Script: {instanceID: 0}
+    - Class: 241
+      Script: {instanceID: 0}
+    - Class: 243
+      Script: {instanceID: 0}
+    - Class: 245
       Script: {instanceID: 0}
     - Class: 258
       Script: {instanceID: 0}
@@ -1601,7 +1609,7 @@ ScriptsOnlyBuild:
     className: GeneralSubject
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 54d2be8cbb8231dac35e38670991b169
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Options
@@ -1816,4 +1824,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/PlayScene.unity
   - Assets/Scenes/OptionScene.unity
-  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/20_4_1/DungeonsAndDungeons.x86_64
+  playerPath: /home/max/Schreibtisch/Dungeons/DungeonsAndDungeons/Builds/Linux/20_4_15/DungeonsAndDungeons.x86_64
