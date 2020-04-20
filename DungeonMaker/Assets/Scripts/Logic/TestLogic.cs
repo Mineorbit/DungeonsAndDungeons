@@ -85,6 +85,7 @@ public class TestLogic : GameLogic
 	}
     public override void Win()
     {
+        Debug.Log("Tut");
         UIManager.current.openWin();
         pauseGame();
         Pausable = false;
