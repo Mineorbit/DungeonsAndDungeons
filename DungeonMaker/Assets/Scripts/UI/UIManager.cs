@@ -33,9 +33,12 @@ public class UIManager : MonoBehaviour {
 
 	CanvasGroup EditSlider;
 
+	CanvasGroup	bottomBuildSlider;
+
 	public Bar hpBar;
 	public Bar mpBar;
 
+	Button delete;
 
 	public float FadeTime;
 	public bool menuActive = false;
@@ -160,7 +163,60 @@ public class UIManager : MonoBehaviour {
 		test.onClick.AddListener (backToEdit);
 		Button save = BuilderUI.transform.Find ("BottomBar").Find ("SubMenu").Find ("Save").GetComponent<Button> ();
 		save.onClick.AddListener (storeAction);
+		bottomBuildSlider = BuilderUI.transform.Find("BottomBar").GetComponent<CanvasGroup>();
+		delete = BuilderUI.transform.Find("Delete").GetComponent<Button>();
+		delete.onClick.AddListener(enterDeleteMode);
 	}
+	void enterDeleteMode()
+	{
+		delete.onClick.RemoveAllListeners();
+		delete.GetComponentInChildren<TMP_Text>().text = "Exit Remove";
+		delete.onClick.AddListener(exitDeleteMode);
+
+		fadeOutBottomBar();
+		BuilderController.instance.startRemove();
+	}
+	void exitDeleteMode()
+	{
+
+		delete.onClick.RemoveAllListeners();
+		delete.GetComponentInChildren<TMP_Text>().text = "Remove Objects";
+		delete.onClick.AddListener(enterDeleteMode);
+		fadeInBottomBar();
+		BuilderController.instance.startAdd();
+
+	}
+	void fadeOutBottomBar()
+	{
+		StartCoroutine("closeBottomBar");
+	}
+	void fadeInBottomBar()
+	{
+		StartCoroutine("openBottomBar");
+	}
+
+	IEnumerator closeBottomBar () {
+		for (float ft = 1f; ft >= 0; ft -= 0.1f) {
+			bottomBuildSlider.alpha = ft;
+			yield return null;
+		}
+		bottomBuildSlider.alpha = 0;
+		bottomBuildSlider.gameObject.SetActive(false);
+		yield return null;
+	}
+
+	IEnumerator openBottomBar () {
+
+		bottomBuildSlider.gameObject.SetActive(true);
+		for (float ft = 0f; ft <= 1; ft += 0.1f) {
+			bottomBuildSlider.alpha = ft;
+			yield return null;
+		}
+		bottomBuildSlider.alpha = 1;
+
+		yield return null;
+	}
+
 	void storeAction () {
 		if(gameManager.currentLevel.Valid())
 		{

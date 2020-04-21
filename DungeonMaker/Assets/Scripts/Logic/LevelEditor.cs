@@ -69,18 +69,21 @@ public class LevelEditor : MonoBehaviour {
 		d.location = new float[] {loc.x,loc.y,loc.z};
 		add(d);
 	}
+	public void remove()
+	{
+		Vector3 loc = gameManager.cursorLocation-new Vector3(0,5,0);
+		remove(loc);
+	}
+	public void remove(Vector3 location)
+	{
+		currentLevel.removeObject(location);
+	}
 	public void add(LevelObjectData d)
 	{
 		Vector3 loc = new Vector3(d.location[0],d.location[1],d.location[2]);
 		currentLevel.addObject(loc,d);
 	}
-	public void remove (LevelObject e) {
-
-	}
-
-	public void remove (Vector3 location) {
-
-	}
+	
 	public void clear () {
 		foreach (Transform t in levelHook.transform) {
 			Destroy (t.gameObject);

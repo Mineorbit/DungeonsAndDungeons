@@ -46,6 +46,23 @@ public class Level : MonoBehaviour {
         return (levelItems.Count > 0) && (spawn != null) && (goal != null);
     }
 
+    public void removeObject(Vector3 location)
+    {
+        if(contains(location))
+        {
+            LevelObject l = get(location);
+            int x = (int) location.x;
+            int y = (int) location.y;
+            int z = (int) location.z;
+            string c = x + "|" + y + "|" + z;
+            levelItems.Remove(c);
+            Destroy(l.gameObject);
+        }
+        //Fetch LevelObject at location and call removeLevelObject
+
+        //Destroy GameObject as well
+    }
+    
     /*
         Type and location must be  set
         Instantiates GameObject newObject under Level and signs it in.
@@ -65,6 +82,7 @@ public class Level : MonoBehaviour {
         string s = loc.x + "|" + loc.y + "|" + loc.z;
         levelItems.Add (s, lvlObj);
     }
+    
     public LevelObject addLevelObject (GameObject g, LevelObjectData d) {
         if (d.type == GameManager.Selectable.spawn) {
             Spawn lspawn = g.AddComponent<Spawn> ();
@@ -95,9 +113,19 @@ public class Level : MonoBehaviour {
             return false;
         }
     }
-
-    public void remove (Vector3 location) {
-
+    public LevelObject get (Vector3 location) {
+        int x = (int) location.x;
+        int y = (int) location.y;
+        int z = (int) location.z;
+        string c = x + "|" + y + "|" + z;
+        LevelObject temp;
+        if(levelItems.TryGetValue(c, out temp))
+        {
+            return temp;
+        }
+        else
+        {
+            return null;
+        }
     }
-
 }
