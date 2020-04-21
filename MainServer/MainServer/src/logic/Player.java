@@ -10,25 +10,47 @@ public class Player {
 	// ServerWide ID (Permanent)
 	private int globalID;
 	private Connector connector;
-	public PlayerHandle playerHandle;
+	private PlayerHandle playerHandle;
 
 	private Lobby currentLobby;
 
 	// ID in lobby(temporary) also important for gameplay range: 0-3
 	private int localId;
-	private PlayerColor playerColor;
+	private PlayerColor color;
+	private byte item;
 
-	public Player(int globalId, String n, Connector info) {
+	public Player(int globalId, String n, Connector connector) {
 		this.globalID = globalId;
 		this.name = n;
 		this.currentLobby = null;
-		connector = info;
+		this.connector = connector;
+		this.item = 0;
+		
+		this.playerHandle = new PlayerHandle(this);
+		Thread handleThread = new Thread(this.playerHandle);
+		handleThread.start();
 	}
 
 	public void leaveLobby() {
+		// Remove from current lobby
 		synchronized (currentLobby) {
 			currentLobby.removePlayer(localId);
 		}
+		
+		// Create a new lobby for this player alone
+		Server server = Server.getInstance();
+		
+		int lobbyId = -1;
+		synchronized (server) {
+			lobbyId = server.getFreeLobbyId();
+		}
+		
+		Lobby l = new Lobby(lobbyId, this);
+		synchronized (server) {
+			server.getLobbies().put(lobbyId, l);
+		}
+		
+		currentLobby = l;
 	}
 	
 	public void disconnect() {
@@ -62,11 +84,11 @@ public class Player {
 	}
 
 	public PlayerColor getPlayerColor() {
-		return playerColor;
+		return color;
 	}
 
 	public void setPlayerColor(PlayerColor playerColor) {
-		this.playerColor = playerColor;
+		this.color = playerColor;
 	}
 
 	public int getGlobalID() {
@@ -83,6 +105,14 @@ public class Player {
 	
 	public void setCurrentLobby(Lobby currentLobby) {
 		this.currentLobby = currentLobby;
+	}
+
+	public byte getItem() {
+		return item;
+	}
+
+	public void setItem(byte item) {
+		this.item = item;
 	}
 
 }

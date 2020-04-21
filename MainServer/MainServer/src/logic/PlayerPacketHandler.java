@@ -23,7 +23,7 @@ public class PlayerPacketHandler implements ClientPacketHandler<Player, Void> {
 	
 	@Override
 	public Void handlePlayerConnect(PlayerConnectPacket p, Player arg) {
-		// TODO Auto-generated method stub
+		// Should not happen once a handshake is already complete
 		return null;
 	}
 
@@ -53,7 +53,7 @@ public class PlayerPacketHandler implements ClientPacketHandler<Player, Void> {
 
 	@Override
 	public Void handleChangeItem(ChangeItemPacket p, Player arg) {
-		// TODO Auto-generated method stub
+		arg.setItem(p.getItem());
 		return null;
 	}
 

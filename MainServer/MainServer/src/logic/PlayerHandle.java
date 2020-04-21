@@ -16,17 +16,17 @@ public class PlayerHandle implements Runnable {
 	Player p;
 	InputHandle iH;
 	OutputHandle oH;
-	boolean Running;
+	boolean running;
 
 	@Override
 	public void run() {
-		iH = new InputHandle(p);
-		oH = new OutputHandle(p);
+		iH = new InputHandle(this);
+		oH = new OutputHandle(this);
 		Thread iT = new Thread(iH);
 		Thread oT = new Thread(oH);
 		iT.start();
 		oT.start();
-		while (Running) {
+		while (running) {
 			synchronized (iH) {
 				if (!iH.receivedPackets.isEmpty()) {
 					ClientPacket recv = iH.receivedPackets.poll();
@@ -51,12 +51,12 @@ public class PlayerHandle implements Runnable {
 	}
 
 	public PlayerHandle(Player player) {
-		Running = true;
+		running = true;
 		p = player;
 	}
 
 	public void disconnect() {
-		Running = false;
+		running = false;
 		try {
 			p.getConnector().socket.close();
 		} catch (IOException e) {
@@ -66,19 +66,19 @@ public class PlayerHandle implements Runnable {
 	}
 
 	class InputHandle implements Runnable {
-		Player player;
+		PlayerHandle handle;
 		Queue<ClientPacket> receivedPackets;
 
-		public InputHandle(Player p) {
+		public InputHandle(PlayerHandle handle) {
 			receivedPackets = new LinkedList<ClientPacket>();
-			player = p;
+			this.handle = handle;
 		}
 
 		@Override
 		public void run() {
-			while (p.playerHandle.Running) {
+			while (handle.running) {
 				try {
-					receivedPackets.add(ClientPacket.fromInputStream(player.getConnector().inStream));
+					receivedPackets.add(ClientPacket.fromInputStream(handle.p.getConnector().inStream));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -88,21 +88,21 @@ public class PlayerHandle implements Runnable {
 	}
 
 	class OutputHandle implements Runnable {
-		Player player;
+		PlayerHandle handle;
 		public Queue<Packet> toSend;
 
-		public OutputHandle(Player p) {
+		public OutputHandle(PlayerHandle handle) {
 			toSend = new LinkedList<Packet>();
-			player = p;
+			this.handle = handle;
 		}
 
 		@Override
 		public void run() {
-			while (p.playerHandle.Running) {
+			while (handle.running) {
 				if (!toSend.isEmpty()) {
 					Packet send = toSend.poll();
 					if (send != null) {
-						player.getConnector().Send(send.toBytes());
+						handle.p.getConnector().Send(send.toBytes());
 					}
 				}
 			}

@@ -84,7 +84,6 @@ public class ClientHandler implements Runnable {
 
 		// Player setup
 		Player p = new Player(playerId, playerName, connector);
-		p.playerHandle = new PlayerHandle(p);
 
 		synchronized (server) {
 			server.getPlayersbyGlobalID().put(playerId, p);
@@ -94,7 +93,6 @@ public class ClientHandler implements Runnable {
 		int lobbyId = -1;
 		synchronized (server) {
 			lobbyId = server.getFreeLobbyId();
-			server.setFreeLobbyId(lobbyId + 1);
 		}
 		
 		Lobby l = new Lobby(lobbyId, p);

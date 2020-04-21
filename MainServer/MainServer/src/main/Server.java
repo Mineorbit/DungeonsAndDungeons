@@ -74,7 +74,7 @@ public class Server {
 	}
 
 	public int getFreeLobbyId() {
-		return freeLobbyId;
+		return freeLobbyId++;
 	}
 
 	public void setFreeLobbyId(int freeLobbyId) {
