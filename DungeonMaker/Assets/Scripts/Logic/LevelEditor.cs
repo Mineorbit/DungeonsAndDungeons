@@ -12,12 +12,15 @@ public class LevelEditor : MonoBehaviour {
 	public string LevelName;
 	void Start () {
 		current = this;
+
 		gameManager = GameManager.current;
 		levelHook = GameObject.Find ("Level");
 
 	}
 
 	public void startEdit () {
+
+		gameManager.dummy = gameManager.cursor.gameObject.AddComponent<LevelObject>();
 		prepareMapPrefabs ();
 		setupCurrentLevel ();
 	}
@@ -52,7 +55,7 @@ public class LevelEditor : MonoBehaviour {
 
 	public bool checkPositionValid (Vector3 loc, LevelObject o, Level l) {
 		if (currentLevel == null) return false;
-		return o.checkPosition (loc, l);
+		return l.Placeable (o,loc);
 	}
 
 	public void save () {
@@ -85,6 +88,7 @@ public class LevelEditor : MonoBehaviour {
 	}
 	
 	public void clear () {
+		Destroy(gameManager.dummy);
 		foreach (Transform t in levelHook.transform) {
 			Destroy (t.gameObject);
 		}
@@ -94,7 +98,6 @@ public class LevelEditor : MonoBehaviour {
 		LevelName = null;
 		gameManager.newLevelName = null;
 		gameManager.TargetLevelName = null;
-		Debug.Log ("Cleared everything");
 	}
 
 }

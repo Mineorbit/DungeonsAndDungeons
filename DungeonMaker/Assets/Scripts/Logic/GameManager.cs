@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start () {
-		dummy = new LevelObject();
 		clearLevel = true;
 		editor = this.GetComponent<LevelEditor> ();
 		startMainMenuMode ();
@@ -335,7 +334,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void updateCursor () {
-		dummy.type = selectedPrefab;
 		bool valid = editor.checkPositionValid (cursorLocation,dummy,editor.currentLevel);
 		cursor.setCursor(valid);
 		if ((int) selectedPrefab >= 1) cursor.setCursor (valid, cursorData.previewMesh, cursorData);

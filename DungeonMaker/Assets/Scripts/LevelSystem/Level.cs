@@ -48,7 +48,7 @@ public class Level : MonoBehaviour {
 
     public void removeObject(Vector3 location)
     {
-        if(contains(location))
+        if(get(location)!=null)
         {
             LevelObject l = get(location);
             int x = (int) location.x;
@@ -70,6 +70,10 @@ public class Level : MonoBehaviour {
     */
     public void addObject (Vector3 location, LevelObjectData objData) {
         if (!setup) { setupLevel (); setup = true; }
+
+        //Check if position ist valid, then hand off
+
+
         UnityEngine.Object prefab = prefabs[(int) objData.type];
         GameObject newObject = (GameObject) Instantiate (prefab, levelHook.transform) as GameObject;
         Vector3 loc = new Vector3(objData.location[0],objData.location[1],objData.location[2]);
@@ -98,28 +102,37 @@ public class Level : MonoBehaviour {
         return o;
     }
 
-    public bool contains (Vector3 location) {
-        int x = (int) location.x;
-        int y = (int) location.y;
-        int z = (int) location.z;
-        string c = x + "|" + y + "|" + z;
-        LevelObject temp;
-        if(levelItems.TryGetValue(c, out temp))
+
+    public bool Placeable(LevelObject l, Vector3 location)
+    {
+        if(get(location)!=null) return false;
+        if(l.inPoints!=null)
         {
-            return true;
-        }
-        else
+        foreach(Vector3 offsetPoint in l.inPoints)
         {
-            return false;
+            if(get(location+offsetPoint)!=null)
+            {
+                return false;
+            }
         }
+        }
+
+        return true;
     }
+   
     public LevelObject get (Vector3 location) {
-        int x = (int) location.x;
-        int y = (int) location.y;
-        int z = (int) location.z;
-        string c = x + "|" + y + "|" + z;
+        
+        foreach(KeyValuePair<string,LevelObject> pair in levelItems)
+        {
+            if(pair.Value.checkPosition(location)) return pair.Value;
+        }
+
+        return null;
+    }
+    public LevelObject get (string location) {
+       
         LevelObject temp;
-        if(levelItems.TryGetValue(c, out temp))
+        if(levelItems.TryGetValue(location, out temp))
         {
             return temp;
         }

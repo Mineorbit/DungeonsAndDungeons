@@ -9,6 +9,8 @@ bool won = false;
 
 public void Start()
 {
+    instance = this.gameObject;
+    setInpoints();
 }
 
 public override void onRoundStart()
@@ -16,15 +18,16 @@ public override void onRoundStart()
 won = false;
 playersInGoal = new List<Player>();
 }
-public void Update()
+ 
+public override void updateTest()
 {
+        
     if(playersInGoal.Count == GameLogic.current.playerCount&&!won)
     {
         won =  true;
         doAction();
     }
 }
-
 public override void doAction()
 {
     Debug.Log("Hurra!");
