@@ -8,11 +8,13 @@ public class Invitation {
 	private Player recipient;
 	private Lobby lobby;
 	private Date expiration;
+	private boolean used;
 	
 	public Invitation(int id, Player recipient, Lobby lobby) {
 		this.id = id;
 		this.recipient = recipient;
 		this.lobby = lobby;
+		this.used = false;
 		
 		// Add expiration date
 		Calendar cal = Calendar.getInstance();
@@ -31,10 +33,14 @@ public class Invitation {
 
 	public boolean isValid() {
 		Date now = new Date();
-		return now.before(expiration);
+		return !used && now.before(expiration);
 	}
 
 	public int getId() {
 		return id;
+	}
+	
+	public void use() {
+		used = true;
 	}
 }

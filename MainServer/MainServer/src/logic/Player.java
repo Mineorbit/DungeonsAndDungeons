@@ -16,6 +16,7 @@ public class Player {
 
 	// ID in lobby(temporary) also important for gameplay range: 0-3
 	private int localId;
+
 	private PlayerColor color;
 	private byte item;
 
@@ -31,6 +32,16 @@ public class Player {
 		handleThread.start();
 	}
 
+	public void joinLobby(int lobbyId, int invitationId) {
+		Lobby l;
+		Server server = Server.getInstance();
+		synchronized (server) {
+			l = server.getLobbies().get(lobbyId);
+		}
+		
+		l.join(this, invitationId);
+	}
+	
 	public void leaveLobby() {
 		// Remove from current lobby
 		synchronized (currentLobby) {
@@ -97,6 +108,10 @@ public class Player {
 
 	public int getLocalId() {
 		return localId;
+	}
+	
+	public void setLocalId(int localId) {
+		this.localId = localId;
 	}
 	
 	public Connector getConnector() {

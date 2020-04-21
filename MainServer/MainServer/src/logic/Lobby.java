@@ -1,6 +1,5 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,14 +17,15 @@ public class Lobby {
 	private long currentLevelId;
 	
 	public Lobby(int lobbyId, Player master) {
-		master.setCurrentLobby(this);
-		
 		this.lobbyId = lobbyId;
 		this.playersByLocalId = new HashMap<Integer, Player>();
 		this.invitations = new HashMap<Integer, Invitation>();
 		this.freeInvitationId = 0;
+		
+		// Add the master
 		this.masterId = 0;
 		this.playersByLocalId.put(this.masterId, master);
+		master.setCurrentLobby(this);
 	}
 	
 	public void invitePlayer(Player p) {
@@ -33,13 +33,41 @@ public class Lobby {
 		Invitation inv = new Invitation(freeInvitationId, p, this);
 		invitations.put(freeInvitationId++, inv);
 		
-		// Send Invite Packet to player (includes lobbyId)
+		// Send Invitation Packet to player (includes lobbyId)
 	}
 
 	public void invitePlayer(String username) {
 
 	}
 
+	private int getFreeLocalId() {
+		for (int i = 0; i < 4; i++) {
+			if (!playersByLocalId.containsKey(i)) return i;
+		}
+		return -1;
+	}
+	
+	public void join(Player p, int invitationId) {
+		// Check if this Player has a valid invitation
+		if (invitations.containsKey(invitationId)) {
+			Invitation inv = invitations.get(invitationId);
+			if (inv.isValid()) {
+				inv.use();
+				
+				// Add this player
+				int localId = getFreeLocalId();
+				playersByLocalId.put(localId, p);
+				
+				p.setLocalId(localId);
+				p.setCurrentLobby(this);
+			} else {
+				p.sendNotification("This invitation is not valid");
+			}
+		} else {
+			p.sendNotification("You were not invited to this lobby");
+		}
+	}
+	
 	public void removePlayer(int localId) {
 		playersByLocalId.remove(localId);
 		

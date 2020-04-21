@@ -41,7 +41,7 @@ public class PlayerPacketHandler implements ClientPacketHandler<Player, Void> {
 
 	@Override
 	public Void handleJoinLobby(JoinLobbyPacket p, Player arg) {
-		// TODO Auto-generated method stub
+		arg.joinLobby(p.getLobbyId(), p.getInvitationId());
 		return null;
 	}
 
