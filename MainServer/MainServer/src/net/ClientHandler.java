@@ -54,7 +54,6 @@ public class ClientHandler implements Runnable {
 		// Handshake Server -> Client
 		synchronized (server) {
 			playerId = server.getFreePlayerId();
-			server.setFreePlayerId(playerId + 1);
 		}
 		Packet toSend = new LengthPacket(new ConnectionInfoPacket(playerId));
 		connector.Send(toSend.toBytes());
@@ -84,12 +83,11 @@ public class ClientHandler implements Runnable {
 		}
 
 		// Player setup
-		Player p = new Player(playerName, connector);
-		p.globalID = playerId;
+		Player p = new Player(playerId, playerName, connector);
 		p.playerHandle = new PlayerHandle(p);
 
 		synchronized (server) {
-			server.getPlayersbyGlobalID().put(p.globalID, p);
+			server.getPlayersbyGlobalID().put(playerId, p);
 		}
 		
 		// Lobby setup
@@ -105,7 +103,7 @@ public class ClientHandler implements Runnable {
 		}
 
 		System.out.println("Neuer Spieler: " + playerName);
-		System.out.println(" Globale Id:" + p.globalID);
+		System.out.println(" Globale Id:" + playerId);
 	}
 
 }

@@ -8,36 +8,35 @@ import net.pack.NotificationPacket;
 public class Player {
 	private String name;
 	// ServerWide ID (Permanent)
-	public int globalID;
-	public Connector connector;
+	private int globalID;
+	private Connector connector;
 	public PlayerHandle playerHandle;
 
-	Lobby currentLobby = null;
-	// ID in lobby(temporary) also important for gameplay range: 0-3
-	int localId;
-	public boolean setup;
+	private Lobby currentLobby;
 
+	// ID in lobby(temporary) also important for gameplay range: 0-3
+	private int localId;
 	private PlayerColor playerColor;
 
-	public Player(String n, Connector info) {
-		setName(n);
+	public Player(int globalId, String n, Connector info) {
+		this.globalID = globalId;
+		this.name = n;
+		this.currentLobby = null;
 		connector = info;
 	}
 
 	public void leaveLobby() {
-
+		synchronized (currentLobby) {
+			currentLobby.removePlayer(localId);
+		}
 	}
-
-	public void joinLobby(Player joinee, Lobby l) {
-		// Should only be possible if invite packet has been sent to player before
-	}
-
-	public void joinLobby(Player joinee, int lobbyId) {
-
-	}
-
+	
 	public void disconnect() {
 		// Removal from all Lobbys and Server data
+		synchronized (currentLobby) {
+			currentLobby.removePlayer(localId);
+		}
+		
 		Server server = Server.getInstance();
 		synchronized (server) {
 			
@@ -68,6 +67,22 @@ public class Player {
 
 	public void setPlayerColor(PlayerColor playerColor) {
 		this.playerColor = playerColor;
+	}
+
+	public int getGlobalID() {
+		return globalID;
+	}
+
+	public int getLocalId() {
+		return localId;
+	}
+	
+	public Connector getConnector() {
+		return connector;
+	}
+	
+	public void setCurrentLobby(Lobby currentLobby) {
+		this.currentLobby = currentLobby;
 	}
 
 }

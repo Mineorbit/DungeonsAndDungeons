@@ -48,7 +48,7 @@ public class Server {
 	}
 
 	public int getFreePlayerId() {
-		return freePlayerId;
+		return freePlayerId++;
 	}
 
 	public void setFreePlayerId(int freeId) {
@@ -79,18 +79,5 @@ public class Server {
 
 	public void setFreeLobbyId(int freeLobbyId) {
 		this.freeLobbyId = freeLobbyId;
-	}
-
-	class ServerControl implements Runnable {
-		@Override
-		public void run() {
-			for (Player p : playersbyGlobalID.values()) {
-				if (!p.setup) {
-					p.setup = true;
-					Thread t = new Thread(p.playerHandle);
-					t.start();
-				}
-			}
-		}
 	}
 }

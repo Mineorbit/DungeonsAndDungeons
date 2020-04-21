@@ -58,7 +58,7 @@ public class PlayerHandle implements Runnable {
 	public void disconnect() {
 		Running = false;
 		try {
-			p.connector.socket.close();
+			p.getConnector().socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class PlayerHandle implements Runnable {
 		public void run() {
 			while (p.playerHandle.Running) {
 				try {
-					receivedPackets.add(ClientPacket.fromInputStream(player.connector.inStream));
+					receivedPackets.add(ClientPacket.fromInputStream(player.getConnector().inStream));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -102,7 +102,7 @@ public class PlayerHandle implements Runnable {
 				if (!toSend.isEmpty()) {
 					Packet send = toSend.poll();
 					if (send != null) {
-						player.connector.Send(send.toBytes());
+						player.getConnector().Send(send.toBytes());
 					}
 				}
 			}
