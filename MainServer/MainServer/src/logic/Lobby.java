@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.Server;
+import net.pack.InvitationPacket;
+import net.pack.LengthPacket;
 
 public class Lobby {
 	private Map<Integer, Player> playersByLocalId;
@@ -34,6 +36,9 @@ public class Lobby {
 		invitations.put(freeInvitationId++, inv);
 		
 		// Send Invitation Packet to player (includes lobbyId)
+		InvitationPacket invPacket = new InvitationPacket(lobbyId, inv.getId());
+		LengthPacket packet = new LengthPacket(invPacket);
+		p.sendPacket(packet);
 	}
 
 	public void invitePlayer(String username) {

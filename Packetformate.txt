@@ -5,10 +5,11 @@ Server To Client
 Name			Id	Content    
 ConnectionInfo		1	Id
 Notification		2	String
-PlayerGameDisconnect	3
-GameReady		4	2*4 byte
-PlayerLocomotionData	5	localId 7 float
-PlayerReSpawn		6	localId 3 float
+Invitation		3	int lobbyId int invitationId
+PlayerGameDisconnect	4
+GameReady		6	2*4 byte
+PlayerLocomotionData	7	localId 7 float
+PlayerReSpawn		8	localId 3 float
 
 
 
