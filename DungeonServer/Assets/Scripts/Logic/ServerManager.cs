@@ -10,6 +10,7 @@ public class ServerManager : MonoBehaviour
     public enum State{Setup,Idle,Prepare,Play,GameOver};
     public static State s;
     public Player[] players;
+    public static Level currentLevel;
 
     long levelId = 0;
     void Start()
@@ -58,6 +59,7 @@ public class ServerManager : MonoBehaviour
         Application.targetFrameRate = 64;
         //Download and load map
         
+        prepareLevel();
 
         Debug.Log("Server wird gestartet");
         Server.Start(45565);
@@ -68,6 +70,30 @@ public class ServerManager : MonoBehaviour
        Array.Reverse(bytes);
        string hex = BitConverter.ToString(bytes).Replace("-", string.Empty);
        return hex;
+    }
+
+    public void prepareLevel()
+    {
+        if(!checkLevelAvailable(levelId)) { downloadLevel(levelId); return;}
+        loadLevel();
+    }
+
+    public void loadLevel()
+    {
+        GameObject levelHook = GameObject.Find("Level");
+		editor.levelHook = levelHook;
+		Level level = (levelHook.GetComponent<Level>()==null)?levelHook.AddComponent<Level>():levelHook.GetComponent<Level>();
+		level.levelHook = levelHook;
+		LevelLoader loader = new LevelLoader();
+		LevelData lD = loader.load(levelToLoad);
+		level = lD.toLevel(level);
+		currentLevel = level;
+        currentLevel.setupServerSide();
+    }
+
+    public bool checkLevelAvailable(long levelId)
+    {
+        return true;
     }
 
     private void OnApplicationQuit()
