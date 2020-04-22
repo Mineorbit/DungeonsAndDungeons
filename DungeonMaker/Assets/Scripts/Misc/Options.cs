@@ -9,6 +9,7 @@ public class Options : MonoBehaviour
 {
     Button backButton;
     TMP_Dropdown resolutionList;
+    TMP_Dropdown screenModeList;
     Slider[] masterAudio;
 
 
@@ -18,7 +19,7 @@ public class Options : MonoBehaviour
     public int numberOfMixers = 2;
     public float[] Volume;
     public AudioMixer[] mixers= new AudioMixer[2];
-    
+    FullScreenMode[] screenModes =  new FullScreenMode[]{FullScreenMode.ExclusiveFullScreen,FullScreenMode.FullScreenWindow,FullScreenMode.Windowed};
 
     public void Setup()
     {
@@ -35,6 +36,12 @@ public class Options : MonoBehaviour
 
         
     }
+
+    public void handleScreenModeData(int n)
+    {
+        Screen.fullScreenMode = screenModes[n];
+    }
+
     public float correctForMain(float v){
         return 100*v-80;
     }
