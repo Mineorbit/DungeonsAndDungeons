@@ -74,7 +74,7 @@ public class TestLogic : GameLogic
     public void setupCamera()
     {
     camera = Instantiate(playerCamera) as GameObject;
-    camera.GetComponent<CameraController>().target = mainPlayer.transform;
+    camera.GetComponent<ThirdPersonCameraController>().target = mainPlayer.transform;
     }
 
     public void spawnPlayer()
@@ -85,7 +85,6 @@ public class TestLogic : GameLogic
 	}
     public override void Win()
     {
-        Debug.Log("Tut");
         UIManager.current.openWin();
         pauseGame();
         Pausable = false;
@@ -96,7 +95,6 @@ public class TestLogic : GameLogic
         Destroy(camera);
         Pausable = true;
         unpauseGame();
-        Debug.Log("Tadafix");
     }
 
     public void pauseGame()

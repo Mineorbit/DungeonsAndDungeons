@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour {
 	Vector3 prefabOffset = new Vector3 (0, -20, 0);
 
 	public bool CanOpenMenu = true;
+
+	public bool openLoadingscreen = true;
 	//PlaySate/Networkdata
 	public Level currentLevel;
 
@@ -109,6 +111,7 @@ public class GameManager : MonoBehaviour {
 
 	void clear () {
 		//if(TestLogic.current!=null) TestLogic.current.startUnpause();
+		if(openLoadingscreen)
 		openLoadingScreen();
 
 
@@ -176,6 +179,7 @@ public class GameManager : MonoBehaviour {
 		setupMeshes ();
 	}
 	public void startTestMode() {
+		openLoadingscreen = false;
 		clearLevel = false;
 		backToEdit = true;
 		clear();
@@ -246,6 +250,8 @@ public class GameManager : MonoBehaviour {
 	}
 	public void closeLoadingScreen()
 	{
+		openLoadingscreen = true;
+		if(loadingScreen!=null)
 		Destroy(loadingScreen);
 	}
 	public void startMain()

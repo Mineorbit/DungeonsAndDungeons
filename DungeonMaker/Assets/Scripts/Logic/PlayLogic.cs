@@ -89,7 +89,7 @@ public class PlayLogic : GameLogic
         Debug.Log("Test");
         GameObject camera = (GameObject) Instantiate(playerCamera) as GameObject;
         camera.transform.position = SpawnPointLocation();
-        camera.GetComponent<CameraController>().target = players[Client.instance.localId].transform;
+        camera.GetComponent<ThirdPersonCameraController>().target = players[Client.instance.localId].transform;
     }
     public override void setupLevelRoundStart()
     {
