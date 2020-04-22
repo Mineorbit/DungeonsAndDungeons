@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
+using System;
 public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
@@ -11,6 +11,7 @@ public class ServerManager : MonoBehaviour
     public static State s;
     public Player[] players;
 
+    long levelId = 0;
     void Start()
     {
         if(instance==null)
@@ -21,7 +22,7 @@ public class ServerManager : MonoBehaviour
             Destroy(this);
         }
 
-
+        Debug.Log(GetLongBinaryString(levelId));
         Setup();
 
        
@@ -56,10 +57,18 @@ public class ServerManager : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 64;
         //Download and load map
+        
+
         Debug.Log("Server wird gestartet");
         Server.Start(45565);
     }
-
+    static string GetLongBinaryString(long n)
+    {
+       byte[] bytes =BitConverter.GetBytes(n); 
+       Array.Reverse(bytes);
+       string hex = BitConverter.ToString(bytes).Replace("-", string.Empty);
+       return hex;
+    }
 
     private void OnApplicationQuit()
     {
