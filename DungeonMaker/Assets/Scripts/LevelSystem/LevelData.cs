@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelData {
 	public LevelObjectData[] levelObjects;
 	public string name;
+	public long ulid = 0;
 
 	public void fromLevel(Level l)
 	{

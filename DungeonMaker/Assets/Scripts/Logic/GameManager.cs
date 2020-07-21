@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 	public LevelData[] localLevels;
 	public bool newLevel =  true;
 	public string newLevelName = "test";
-	public string TargetLevelName = "";
+	public LevelData TargetLevel = null;
 	//Describes wether to create new Level in edit mode
 	Vector3 lastPosition;
 	public LevelObject dummy;
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-// Important Mode starters
+ // Important Mode starters
 
 
 	public void startPlayMode () {
@@ -258,6 +258,17 @@ public class GameManager : MonoBehaviour {
 	{
 	closeLoadingScreen();
 	}
+	public string generateUlidString(long ulid)
+	{
+		string s = ""+ulid;
+		while(s.Length<16)
+		{
+			s = "0"+s;
+		}
+		return s;
+	}
+
+	
 	public void startEdit()
 	{
 			GameObject cur = GameObject.Find ("Cursor");
@@ -266,12 +277,14 @@ public class GameManager : MonoBehaviour {
 			{
 			if(!newLevel)
 			{
-			levelToLoad = "/map/"+TargetLevelName+".lev";
+			string ulidString =	generateUlidString(TargetLevel.ulid);
+
+			levelToLoad = "/map/"+ulidString+".lev";
 			loadLevel();
 			editor.currentLevel = currentLevel;
 			
-			currentLevel.name = TargetLevelName;
-			editor.LevelName = TargetLevelName;
+			currentLevel.name = TargetLevel.name;
+			editor.LevelName = TargetLevel.name;
 			}else
 			{
 			Level l = editor.levelHook.AddComponent<Level>();

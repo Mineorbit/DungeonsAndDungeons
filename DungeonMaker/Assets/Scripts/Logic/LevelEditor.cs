@@ -97,7 +97,7 @@ public class LevelEditor : MonoBehaviour {
 		gameManager.currentLevel = null;
 		LevelName = null;
 		gameManager.newLevelName = null;
-		gameManager.TargetLevelName = null;
+		gameManager.TargetLevel = null;
 	}
 
 }

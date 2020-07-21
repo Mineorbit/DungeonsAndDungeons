@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour {
 	Dictionary<PreviewData, Texture> prefabTextures;
 
 	bool renderTexturesIn = false;
-	string[] dataLevelName;
+	LevelData[] localLevelData;
 	// Start is called before the first frame update
 	public void Start () {
 		current = this;
@@ -256,14 +256,14 @@ public class UIManager : MonoBehaviour {
 		LevelData[] data = gameManager.localLevels;
 
 		Object levelItemprefab = Resources.Load("UI/LevelItem");
-		dataLevelName = new string[data.Length];
+		localLevelData = new LevelData[data.Length];
 		int i = 0;
 		foreach(LevelData d in data)
 		{
 			int j = i;
 			GameObject item = Instantiate(levelItemprefab,contentHandle) as GameObject;
 			item.transform.Find("Name").GetComponent<TMP_Text>().text = d.name;
-			dataLevelName[i] = d.name;
+			localLevelData[i] = d;
 			item.transform.Find("Select").GetComponent<Button>().onClick.AddListener(()=>{loadExistingLevel(j);});
 			i++;
 		}
@@ -272,7 +272,7 @@ public class UIManager : MonoBehaviour {
 	 void loadExistingLevel(int i)
 	 {
 		gameManager.newLevel = false;
-		gameManager.TargetLevelName = dataLevelName[i];
+		gameManager.TargetLevel = localLevelData[i];
 		gameManager.startEditMode();
 	 }
 
