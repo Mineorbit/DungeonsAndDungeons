@@ -24,6 +24,7 @@ public class Client : MonoBehaviour
 
     public bool isConnectedGame =  false;
     private bool isConnected = false;
+    public bool lobbyConnect = false;
     public bool gameConnect = false;
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
@@ -65,27 +66,40 @@ public class Client : MonoBehaviour
     //Disconnected
     private void Disconnect()
     {
+        Debug.Log("Hallo");
         if (isConnected)
         {
+
+            Client.updateNetworkMessage("Verbindung zum Server getrennt");
+            if(lobbyConnect)
+            {
+                clearLobbyContext();
+            }
             if(gameConnect)
             {
-            ClientSend.PlayerGameDisconnect();
+                clearGameContext();
             }
             isConnected = false;
             tcp.socket.Close();
-
-            Client.updateNetworkMessage("Disconnected from server.");
         }
     }
+    public void clearLobbyContext()
+    {
 
+    }
+    public void clearGameContext()
+    {
+            ClientSend.PlayerGameDisconnect();
+    }
     public static void updateNetworkMessage(string infoT)
     {
+        Debug.Log("JaMoin");
         if(info==null)
         {
-        GameObject i = GameObject.Find("Canvas").transform.Find("Info").gameObject;
+        GameObject i = GameObject.Find("Canvas").transform.Find("Debug").transform.Find("Info").gameObject;
         info = i.transform.GetComponent<TMP_Text>();
         }
-        info.text = infoT;
+    info.SetText(infoT);
     }
     public void ConnectToMainServer()
     {
@@ -265,7 +279,7 @@ public class Client : MonoBehaviour
         private void Disconnect()
         {
             instance.Disconnect();
-
+            Debug.Log("Disconnecting TCP");
             stream = null;
             receivedData = null;
             receiveBuffer = null;
