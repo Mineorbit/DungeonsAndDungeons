@@ -17,7 +17,7 @@ public class ClientHandle : MonoBehaviour
         Client.updateNetworkMessage("Vebunden zum Server");
         Client.instance.lobbyConnect = true;
         ClientSend.PlayerConnect(Client.instance.name);
-        LobbyManager.instance.Start();
+        LobbyManager.instance.start();
 
     }
     public static void Information(Packet _packet)

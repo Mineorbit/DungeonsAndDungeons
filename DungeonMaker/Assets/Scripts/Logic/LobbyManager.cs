@@ -6,17 +6,18 @@ public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager instance;
     Stack<LobbyData> invites;
+    enum PlayerLobbyState {JoinCreate,PickLevelItem,ModeSet};
     public LobbyManager()
     {
         if(instance == null)
         {instance = this;
         }else Destroy(this);
     }
-    public void Start()
+    public void start()
     {
         openUI();
     }
-    public void Stop()
+    public void stop()
     {
         closeUI();
     }

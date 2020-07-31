@@ -30,7 +30,6 @@ public class LobbyBar : MonoBehaviour
     }
     public void close()
     {
-        Debug.Log("Test");
         if(opened)
         {
         StartCoroutine("FadeOut");

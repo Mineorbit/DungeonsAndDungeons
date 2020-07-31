@@ -71,7 +71,7 @@ public class Client : MonoBehaviour
             Debug.Log("Test");
             if(lobbyConnect)
             {
-                LobbyManager.instance.Stop();
+                LobbyManager.instance.stop();
     lobbyConnect = false;
             }
             if(gameConnect)
