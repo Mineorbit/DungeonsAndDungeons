@@ -20,6 +20,8 @@ public class LobbyBar : MonoBehaviour
    
     public void open()
     {
+
+		bar.SetActive(true);
         if(!opened)
         {
         StartCoroutine("FadeIn");
@@ -28,6 +30,7 @@ public class LobbyBar : MonoBehaviour
     }
     public void close()
     {
+        Debug.Log("Test");
         if(opened)
         {
         StartCoroutine("FadeOut");
@@ -35,6 +38,7 @@ public class LobbyBar : MonoBehaviour
         }
     }
     IEnumerator FadeOut () {
+
 		for (float ft = 1f; ft >= 0; ft -= 0.1f) {
 			slider.alpha = ft;
 			yield return null;
@@ -48,7 +52,6 @@ public class LobbyBar : MonoBehaviour
 
 	IEnumerator FadeIn () {
 
-		bar.SetActive(true);
 		for (float ft = 0f; ft <= 1; ft += 0.1f) {
 			slider.alpha = ft;
 			yield return null;

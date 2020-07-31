@@ -15,9 +15,10 @@ public class ClientHandle : MonoBehaviour
 
         Client.instance.globalId = _myId;
         Client.updateNetworkMessage("Vebunden zum Server");
+        Client.instance.lobbyConnect = true;
         ClientSend.PlayerConnect(Client.instance.name);
         ConnectBar.current.close();
-        LobbyBar.current.Start();
+        //LobbyBar.current.Start();
         LobbyBar.current.open();
 
     }
@@ -68,6 +69,10 @@ public class ClientHandle : MonoBehaviour
         Vector3 loc = new Vector3(x,y,z);
         Quaternion rot = new  Quaternion(qx,qy,qz,qw);
         PlayLogic.current.playerComps[locId].set(loc,rot);
+    }
+    public static void PlayerLobbyDisconnect(Packet _packet)
+    {
+
     }
     public static void PlayerGameDisconnect(Packet _packet)
     {

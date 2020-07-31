@@ -41,6 +41,7 @@ public class ConnectBar : MonoBehaviour
     }
     public void open()
     {
+		bar.SetActive(true);
         if(!opened)
         {
         StartCoroutine("FadeIn");
@@ -68,8 +69,6 @@ public class ConnectBar : MonoBehaviour
 	}
 
 	IEnumerator FadeIn () {
-
-		bar.SetActive(true);
 		for (float ft = 0f; ft <= 1; ft += 0.1f) {
 			slider.alpha = ft;
 			yield return null;

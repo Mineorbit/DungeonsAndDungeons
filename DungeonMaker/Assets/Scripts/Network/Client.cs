@@ -66,11 +66,9 @@ public class Client : MonoBehaviour
     //Disconnected
     private void Disconnect()
     {
-        Debug.Log("Hallo");
-        if (isConnected)
-        {
-
-            Client.updateNetworkMessage("Verbindung zum Server getrennt");
+        //if (isConnected)
+        //{
+            Debug.Log("Test");
             if(lobbyConnect)
             {
                 clearLobbyContext();
@@ -81,11 +79,17 @@ public class Client : MonoBehaviour
             }
             isConnected = false;
             tcp.socket.Close();
-        }
+
+        //}
     }
     public void clearLobbyContext()
     {
+    Debug.Log("Test"+LobbyBar.current);
+    LobbyBar.current.close();
 
+    //LobbyBar.current.Start();
+    ConnectBar.current.open();
+    lobbyConnect = false;
     }
     public void clearGameContext()
     {
@@ -93,7 +97,6 @@ public class Client : MonoBehaviour
     }
     public static void updateNetworkMessage(string infoT)
     {
-        Debug.Log("JaMoin");
         if(info==null)
         {
         GameObject i = GameObject.Find("Canvas").transform.Find("Debug").transform.Find("Info").gameObject;
