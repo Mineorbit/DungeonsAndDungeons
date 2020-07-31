@@ -1,6 +1,12 @@
 var express = require('express');
 var Long = require("long");
+
+const fileUpload = require('express-fileupload');
 var app = express(); // here I use the express() method, instead of the createServer()
+
+
+app.use(fileUpload());
+
 app.get('/', function(req, res){
   res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
   res.write("<h1>Willkommen auf dem Dungeons & Dungeons Level Finder</h1>");
@@ -21,10 +27,13 @@ res.end();
 });
 app.post('/upl', function(req, res){
   //Hier upload processen
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
  let levelFile = req.files.level;
  var luid = new Long(0xFFFFFFFF, 0x7FFFFFFF);
 
-  levelFile.mv('lev/'+liud.toString()+'.lev',function(err) {
+  levelFile.mv(__dirname+'/levels/'+luid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err);
   res.send('Level hochgeladen'); });
 });
