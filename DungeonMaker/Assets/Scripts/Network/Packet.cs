@@ -22,6 +22,7 @@ public enum ClientPackets
     PlayerDisconnect,
     LeaveLobby,
     JoinLobby,
+    SendInvite,
     ChangeName,
     ChangeItem,
     ChangeColor,

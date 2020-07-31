@@ -16,7 +16,24 @@ public class ClientSend : MonoBehaviour
 
    //Hier HookUp zum Client
 
-    
+    public static void sendInvite(string username)
+    {
+        using (Packet _packet = new Packet((byte)ClientPackets.SendInvite))
+        {
+            Debug.Log($"Schicke Invite für: {username}");
+            _packet.Write(username);
+            SendTCPData(_packet);
+        }
+    }
+    public static void JoinLobby(int lobbyId)
+    {
+        using (Packet _packet = new Packet((byte)ClientPackets.JoinLobby))
+        {
+            Debug.Log($"Schicke Join für: {lobbyId}");
+            _packet.Write(lobbyId);
+            SendTCPData(_packet);
+        }
+    }
 
     public static void PlayerConnect(string username)
     {
