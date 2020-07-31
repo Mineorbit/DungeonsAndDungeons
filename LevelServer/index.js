@@ -1,4 +1,5 @@
 var express = require('express');
+var Long = require("long");
 var app = express(); // here I use the express() method, instead of the createServer()
 app.get('/', function(req, res){
   res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
@@ -6,16 +7,30 @@ app.get('/', function(req, res){
   res.write("<a href='/list'>Das große Archiv</a>");
   res.end();
 });
-app.get('/upload', function(req, res){
+app.get('/upload', function(req,res){
+ res.write('<html>');
+ res.write(' <body>');
+   res.write(' <form ref="uploadForm"'); 
+      res.write('id="uploadForm"');
+      res.write('action="/upl"'); 
+      res.write('method="post"'); 
+      res.write('encType="multipart/form-data"><input type="file" name="level" />');
+      res.write('<input type="submit" value="Upload!" /></form></body>');
+res.write('</html>');
+res.end();
+});
+app.post('/upl', function(req, res){
   //Hier upload processen
-  res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
-  res.write("<h1>Level hochgeladen!</h1>");
-  res.write("ulid: 0");
-  res.end();
+ let levelFile = req.files.level;
+ var luid = new Long(0xFFFFFFFF, 0x7FFFFFFF);
+
+  levelFile.mv('lev/'+liud.toString()+'.lev',function(err) {
+  if(err) return res.status(500).send(err);
+  res.send('Level hochgeladen'); });
 });
 
 app.get('/pull', function(req, res){
-  //Hier upload processen
+  //Hier download processen
   console.log('Test');
   const file = `${__dirname}/levels/0000000000000000.lev`;
   res.download(file);
