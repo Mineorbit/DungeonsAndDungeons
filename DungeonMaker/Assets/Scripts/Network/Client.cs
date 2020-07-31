@@ -71,7 +71,8 @@ public class Client : MonoBehaviour
             Debug.Log("Test");
             if(lobbyConnect)
             {
-                clearLobbyContext();
+                LobbyManager.instance.Stop();
+    lobbyConnect = false;
             }
             if(gameConnect)
             {
@@ -82,15 +83,7 @@ public class Client : MonoBehaviour
             updateNetworkMessage("Connection closed");
         //}
     }
-    public void clearLobbyContext()
-    {
-    Debug.Log("Test"+LobbyBar.current);
-    LobbyBar.current.close();
-
-    //LobbyBar.current.Start();
-    ConnectBar.current.open();
-    lobbyConnect = false;
-    }
+  
     public void clearGameContext()
     {
             ClientSend.PlayerGameDisconnect();
