@@ -79,7 +79,7 @@ public class Client : MonoBehaviour
             }
             isConnected = false;
             tcp.socket.Close();
-
+            updateNetworkMessage("Connection closed");
         //}
     }
     public void clearLobbyContext()

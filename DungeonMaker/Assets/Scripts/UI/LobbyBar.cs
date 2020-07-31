@@ -37,6 +37,14 @@ public class LobbyBar : MonoBehaviour
         opened = false;
         }
     }
+    public void SendInvite()
+    {
+
+    }
+    public void JoinInvite()
+    {
+        
+    }
     IEnumerator FadeOut () {
 
 		for (float ft = 1f; ft >= 0; ft -= 0.1f) {
