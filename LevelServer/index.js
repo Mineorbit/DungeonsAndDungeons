@@ -13,14 +13,6 @@ const client = new Client({
 })
 client.connect()
 
-app.get('/psq', function(req,res){
-
-(async () => {
-  const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-  console.log(res.rows[0].message) // Hello world!
-})()
-
-});
 
 app.use(fileUpload());
 
@@ -67,15 +59,16 @@ res.write('<h1>Das große Archiv</h1>');
 res.write("<a href='/'>Start</a>");
 res.write('<table style="width:100%">');
 var i;
+
 res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
 
-for(i=0; i <16;i++)
+client.query('SELECT * FROM level', (err, resp) => {  
+for(i = 0;i<resp.rowCount;i++)
 {
-res.write('<tr><td>'+i+'</td><td>Ein Level</td><td>Dungeon</td></tr>');
+res.write('<tr><td>'+i+'</td><td>Test</td> <td>'+resp.rows[0].name+'</td></tr>');
 }
-
 res.write('</table>');
-res.end();
+})
 });
 var server = app.listen(13337, function() {
   console.log('Listening on port %d', server.address().port);
