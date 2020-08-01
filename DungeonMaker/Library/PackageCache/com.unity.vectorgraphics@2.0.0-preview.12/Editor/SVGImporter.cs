@@ -13,7 +13,7 @@ using UnityEditor.U2D;
 using UnityEditor.Experimental.U2D;
 #endif
 using UnityEngine.Experimental.U2D;
-using UnityEditor.Experimental.AssetImporters;
+
 using UnityEngine.Experimental.Rendering;
 using UnityEditor.U2D.Sprites;
 
@@ -41,8 +41,8 @@ namespace Unity.VectorGraphics.Editor
 
     /// <summary>The SVG importer class.</summary>
     [Serializable]
-    [ScriptedImporter(5, "svg")]
-    public class SVGImporter : ScriptedImporter, ISpriteEditorDataProvider
+    [UnityEditor.AssetImporters.ScriptedImporter(5, "svg")]
+    public class SVGImporter : UnityEditor.AssetImporters.ScriptedImporter, ISpriteEditorDataProvider
     {
         internal static readonly string k_PackagePath = "Packages/com.unity.vectorgraphics";
 
@@ -272,7 +272,7 @@ namespace Unity.VectorGraphics.Editor
 
         /// <summary>Imports an SVG asset</summary>
         /// <param name="ctx">The asset import context of the scripted importer</param>
-        public override void OnImportAsset(AssetImportContext ctx)
+        public override void OnImportAsset(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
             UpdateProperties();
 
@@ -375,7 +375,7 @@ namespace Unity.VectorGraphics.Editor
             sprite.hideFlags = HideFlags.None;
         }
 
-        private void GenerateSpriteAsset(AssetImportContext ctx, Sprite sprite, string name)
+        private void GenerateSpriteAsset(UnityEditor.AssetImporters.AssetImportContext ctx, Sprite sprite, string name)
         {
             PrepareSpriteAsset(sprite, name);
 
@@ -397,7 +397,7 @@ namespace Unity.VectorGraphics.Editor
             ctx.SetMainObject(gameObject);
         }
 
-        private void GenerateUGUISpriteAsset(AssetImportContext ctx, Sprite sprite, string name)
+        private void GenerateUGUISpriteAsset(UnityEditor.AssetImporters.AssetImportContext ctx, Sprite sprite, string name)
         {
             PrepareSpriteAsset(sprite, name);
 
@@ -423,7 +423,7 @@ namespace Unity.VectorGraphics.Editor
             ctx.SetMainObject(gameObject);
         }
 
-        private void GenerateTexturedSpriteAsset(AssetImportContext ctx, Sprite sprite, string name)
+        private void GenerateTexturedSpriteAsset(UnityEditor.AssetImporters.AssetImportContext ctx, Sprite sprite, string name)
         {
             if (sprite.texture != null)
                 sprite.texture.name = name + "Atlas";
@@ -470,7 +470,7 @@ namespace Unity.VectorGraphics.Editor
             GameObject.DestroyImmediate(sprite);
         }
 
-        private void GenerateTexture2DAsset(AssetImportContext ctx, Sprite sprite, string name)
+        private void GenerateTexture2DAsset(UnityEditor.AssetImporters.AssetImportContext ctx, Sprite sprite, string name)
         {
             var tex = BuildTexture(sprite, name);
 
@@ -485,7 +485,7 @@ namespace Unity.VectorGraphics.Editor
         }
 
 #if UNITY_2019_3_OR_NEWER
-        private void GenerateUIElementAsset(AssetImportContext ctx, List<VectorUtils.Geometry> geometry, string name)
+        private void GenerateUIElementAsset(UnityEditor.AssetImporters.AssetImportContext ctx, List<VectorUtils.Geometry> geometry, string name)
         {
             UnityEngine.Object asset;
             Texture2D texAtlas;

@@ -7,17 +7,17 @@ using System.Reflection;
 using Unity.Collections;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
+
 using UnityEngine.U2D;
 using UnityEngine.Experimental.U2D;
-using UnityEngine.Experimental.Rendering;
+
 using UnityEngine.Rendering;
 
 namespace Unity.VectorGraphics.Editor
 {
     [CustomEditor(typeof(SVGImporter))]
     [CanEditMultipleObjects]
-    internal class SVGImporterEditor : ScriptedImporterEditor
+    internal class SVGImporterEditor : UnityEditor.AssetImporters.ScriptedImporterEditor
     {
         private enum SettingsType
         {
