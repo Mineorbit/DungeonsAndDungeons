@@ -10,17 +10,14 @@ const client = new Client({
   host: '127.0.0.1',
   database: 'levelserver',
   password: 'Stinker123',
-  port: 3211,
 })
 client.connect()
 
 app.get('/psq', function(req,res){
 
 (async () => {
-  await client.connect()
   const res = await client.query('SELECT $1::text as message', ['Hello world!'])
   console.log(res.rows[0].message) // Hello world!
-  await client.end()
 })()
 
 });
@@ -80,6 +77,6 @@ res.write('<tr><td>'+i+'</td><td>Ein Level</td><td>Dungeon</td></tr>');
 res.write('</table>');
 res.end();
 });
-var server = app.listen(3000, function() {
+var server = app.listen(13337, function() {
   console.log('Listening on port %d', server.address().port);
 });
