@@ -4,6 +4,26 @@ var Long = require("long");
 const fileUpload = require('express-fileupload');
 var app = express(); // here I use the express() method, instead of the createServer()
 
+const { Client } = require('pg')
+const client = new Client({  
+  user: 'max',
+  host: '127.0.0.1',
+  database: 'levelserver',
+  password: 'Stinker123',
+  port: 3211,
+})
+client.connect()
+
+app.get('/psq', function(req,res){
+
+(async () => {
+  await client.connect()
+  const res = await client.query('SELECT $1::text as message', ['Hello world!'])
+  console.log(res.rows[0].message) // Hello world!
+  await client.end()
+})()
+
+});
 
 app.use(fileUpload());
 
