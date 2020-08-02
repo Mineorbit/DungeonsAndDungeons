@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviour {
 	{
 	closeLoadingScreen();
 	}
+	//Move to utils
 	public string generateUlidString(long ulid)
 	{
 		string s = ""+ulid;
