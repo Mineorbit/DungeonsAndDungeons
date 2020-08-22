@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-
+using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 
 namespace UnityEditor.Rendering.HighDefinition
 {
-    [UnityEditor.AssetImporters.ScriptedImporter(0, "cube")]
-    class CubeLutImporter : UnityEditor.AssetImporters.ScriptedImporter
+    [ScriptedImporter(0, "cube")]
+    class CubeLutImporter : ScriptedImporter
     {
         // In case PPv2 is still in the project for some reason, exclude these files
         static readonly List<string> s_Excluded = new List<string>()
@@ -22,7 +22,7 @@ namespace UnityEditor.Rendering.HighDefinition
             "Unity Log to sRGB r1"
         };
 
-        public override void OnImportAsset(UnityEditor.AssetImporters.AssetImportContext ctx)
+        public override void OnImportAsset(AssetImportContext ctx)
         {
             // Skip PPv2 files explicitly just in case
             string filename = Path.GetFileNameWithoutExtension(ctx.assetPath);
@@ -64,7 +64,7 @@ namespace UnityEditor.Rendering.HighDefinition
             return filtered.ToString();
         }
 
-        bool ParseCubeData(UnityEditor.AssetImporters.AssetImportContext ctx, out int lutSize, out Color[] pixels)
+        bool ParseCubeData(AssetImportContext ctx, out int lutSize, out Color[] pixels)
         {
             // Quick & dirty error utility
             bool Error(string msg)

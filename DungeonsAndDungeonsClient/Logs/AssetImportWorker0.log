@@ -15,11 +15,11 @@ C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50032
+51684
 Successfully changed project path to: C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient
 C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 146.08 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 113.25 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.2.0a19 (8037ac78137e)
 [Subsystems] Discovering subsystems at path D:/UnityEditors/2020.2.0a19/Editor/Data/Resources/UnitySubsystems
@@ -27,316 +27,65 @@ Initialize engine version: 2020.2.0a19 (8037ac78137e)
 GfxDevice: creating device client; threaded=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: Intel(R) UHD Graphics 620 (ID=0x5917)
+    Renderer: NVIDIA GeForce GTX 980 Ti (ID=0x17c8)
     Vendor:   
-    VRAM:     8112 MB
-    Driver:   24.20.100.6344
+    VRAM:     6097 MB
+    Driver:   26.21.14.4575
 Initialize mono
 Mono path[0] = 'D:/UnityEditors/2020.2.0a19/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditors/2020.2.0a19/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/UnityEditors/2020.2.0a19/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56508
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56256
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
 Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.003029 seconds.
+Registered in 0.003501 seconds.
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 154.38 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 109.40 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  4.739 seconds
+- Completed reload, in  1.563 seconds
 Registering precompiled user dll's ...
-Registered in 0.824643 seconds.
+Registered in 0.187221 seconds.
 Platform modules already initialized, skipping
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 234.44 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 306.11 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.408 seconds
+- Completed reload, in  2.358 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 2.41 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.12 seconds
+Refreshing native plugins compatible for Editor in 1.71 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2828 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 118.6 MB.
-System memory in use after: 112.7 MB.
+Unloading 2842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 121.5 MB.
+System memory in use after: 117.5 MB.
 
-Unloading 91 unused Assets to reduce memory usage. Loaded Objects now: 3174.
-Total: 27.758200 ms (FindLiveObjects: 1.808800 ms CreateObjectMapping: 0.635500 ms MarkObjects: 12.743200 ms  DeleteObjects: 12.569200 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/HDRPDefaultResources
-  artifactKey: Guid(abc661c586a9116428571bb17ea1a331) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HDRPDefaultResources using Guid(abc661c586a9116428571bb17ea1a331) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '226eedf90d8ffc7a76fe822999e19bfa') in 0.059677 seconds
-  Import took 0.079023 seconds .
+Unloading 64 unused Assets to reduce memory usage. Loaded Objects now: 3222.
+Total: 14.979200 ms (FindLiveObjects: 1.281600 ms CreateObjectMapping: 0.551400 ms MarkObjects: 4.446400 ms  DeleteObjects: 8.697600 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.004060 seconds.
-  path: Assets/Scenes
-  artifactKey: Guid(5723232641ea6bb4b992336b0fbbb461) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes using Guid(5723232641ea6bb4b992336b0fbbb461) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a53602eb45856fe0c64ff8ca6392a783') in 0.040151 seconds
-  Import took 0.057189 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.010933 seconds.
-  path: Assets/Settings
-  artifactKey: Guid(006b6043041431d4d909ad5f958582cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings using Guid(006b6043041431d4d909ad5f958582cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3e5009e444b1da77fe8f24f5b6afc32') in 0.062057 seconds
-  Import took 0.230849 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.141420 seconds.
-  path: Assets/TutorialInfo
-  artifactKey: Guid(49110bb8dcada46328ad741970bce702) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TutorialInfo using Guid(49110bb8dcada46328ad741970bce702) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6276f7242179145ff6974292ed2df96') in 0.045940 seconds
-  Import took 0.067777 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.117988 seconds.
-  path: Assets/Presets
-  artifactKey: Guid(2754f8cebe196654cbc72d1885ebcf0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets using Guid(2754f8cebe196654cbc72d1885ebcf0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f34542e6085071f5d3cb7bc2097c0e0') in 0.021195 seconds
-  Import took 0.041010 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.024685 seconds.
-  path: Assets/ExampleAssets
-  artifactKey: Guid(46bb990f49fc0f64db3320186a780872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExampleAssets using Guid(46bb990f49fc0f64db3320186a780872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e77a401b262002fc1f6f40b43740a20d') in 0.019200 seconds
-  Import took 0.036029 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.005016 seconds.
-  path: Assets/VFXDefaultResources.asset
-  artifactKey: Guid(e4d61d0c025b6104a84e8f905e1a34f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VFXDefaultResources.asset using Guid(e4d61d0c025b6104a84e8f905e1a34f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b9d8dffca0d9ae3be6a49ecebca4646') in 0.315748 seconds
-  Import took 0.333545 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.015716 seconds.
-  path: Assets/Scripts
-  artifactKey: Guid(22a92dda8b126ff4796f9e84ae1c8871) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts using Guid(22a92dda8b126ff4796f9e84ae1c8871) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf4b0ff1a49b19c4dd18fefff7bc1442') in 0.029589 seconds
-  Import took 0.044452 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.017811 seconds.
-  path: Assets/Readme.asset
-  artifactKey: Guid(83c2ed844a8c74b779a4c823d16594b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Readme.asset using Guid(83c2ed844a8c74b779a4c823d16594b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6793d3ad77c4dd99c79aea89302aea54') in 0.047396 seconds
-  Import took 0.063643 seconds .
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 3.13 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 89 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 64.8 MB.
-System memory in use after: 58.9 MB.
-
-Unloading 89 unused Assets to reduce memory usage. Loaded Objects now: 3175.
-Total: 10.769900 ms (FindLiveObjects: 0.669200 ms CreateObjectMapping: 0.390600 ms MarkObjects: 3.834500 ms  DeleteObjects: 5.874200 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 90.944291 seconds.
-  path: Assets/Scenes/samplescene
-  artifactKey: Guid(13b933ed50aa0ff4e8bf942522390a9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/samplescene using Guid(13b933ed50aa0ff4e8bf942522390a9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4511b6de3135cc57bc0c016b6fdc6029') in 0.010044 seconds
-  Import took 0.018613 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000352 seconds.
-  path: Assets/Scenes/main.unity
-  artifactKey: Guid(6b92104698e0b8a4dae6c84614bad955) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/main.unity using Guid(6b92104698e0b8a4dae6c84614bad955) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c8e51b57fd58e85b873c58026bb12e9') in 0.008822 seconds
-  Import took 0.016980 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000440 seconds.
-  path: Assets/Scenes/samplescene.unity
-  artifactKey: Guid(cbfe36cfddfde964d9dfce63a355d5dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/samplescene.unity using Guid(cbfe36cfddfde964d9dfce63a355d5dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5123dd41e4c5c44016de20b8afef9cc') in 0.011010 seconds
-  Import took 0.020360 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.907784 seconds.
-  path: Assets/Presets/Defaults
-  artifactKey: Guid(62d01720aebe09744845cc69fc236e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/Defaults using Guid(62d01720aebe09744845cc69fc236e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8dd1d4fcab8d01ce698000152820a3f') in 0.010961 seconds
-  Import took 0.017561 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000293 seconds.
-  path: Assets/Presets/HDRTexture.preset
-  artifactKey: Guid(78830bb1431cab940b74be615e2a739f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/HDRTexture.preset using Guid(78830bb1431cab940b74be615e2a739f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc3ba2173f5b5bde32caf9a61ab93fb2') in 0.017888 seconds
-  Import took 0.026102 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000477 seconds.
-  path: Assets/Presets/AudioCompressedInMemory.preset
-  artifactKey: Guid(e18fd6ecd9cdb524ca99844f39b9d9ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/AudioCompressedInMemory.preset using Guid(e18fd6ecd9cdb524ca99844f39b9d9ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db0168627c53c57eaf5a33a27d6cf415') in 0.010449 seconds
-  Import took 0.019095 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000411 seconds.
-  path: Assets/Presets/AudioStreaming.preset
-  artifactKey: Guid(460e573eb8466884baaa0b8475505f83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/AudioStreaming.preset using Guid(460e573eb8466884baaa0b8475505f83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b76b2cc0c52d8e6c643b9f9009638daf') in 0.012523 seconds
-  Import took 0.020840 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000368 seconds.
-  path: Assets/Presets/NormalTexture.preset
-  artifactKey: Guid(1d826a4c23450f946b19c20560595a1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/NormalTexture.preset using Guid(1d826a4c23450f946b19c20560595a1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d0b59991fb5f74f59fd63d71cc17042') in 0.013171 seconds
-  Import took 0.022276 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000570 seconds.
-  path: Assets/Presets/UtilityTexture.preset
-  artifactKey: Guid(9303d565bd8aa6948ba775e843320e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/UtilityTexture.preset using Guid(9303d565bd8aa6948ba775e843320e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '491651f2a5bda6d871fd355a6978cacd') in 0.013473 seconds
-  Import took 0.022275 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.989171 seconds.
-  path: Assets/Presets/Defaults/AlbedoTexture_Default.preset
-  artifactKey: Guid(7a99f8aa944efe94cb9bd74562b7d5f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/Defaults/AlbedoTexture_Default.preset using Guid(7a99f8aa944efe94cb9bd74562b7d5f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a87294ee4ebf5baccb8f8dd9e071936') in 0.008465 seconds
-  Import took 0.015420 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000361 seconds.
-  path: Assets/Presets/Defaults/SSSSettings_Default.preset
-  artifactKey: Guid(8fa3055e2a1363246838debd20206d37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/Defaults/SSSSettings_Default.preset using Guid(8fa3055e2a1363246838debd20206d37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e41d6639f775ed8097ec1b4169c6aab3') in 0.012973 seconds
-  Import took 0.019685 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000374 seconds.
-  path: Assets/Presets/Defaults/DirectionalLight_Default.preset
-  artifactKey: Guid(c1cf8506f04ef2c4a88b64b6c4202eea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/Defaults/DirectionalLight_Default.preset using Guid(c1cf8506f04ef2c4a88b64b6c4202eea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ca68743c6476bdc23efd4c9e2eac945') in 0.013892 seconds
-  Import took 0.022278 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000318 seconds.
-  path: Assets/Presets/Defaults/AudioDecompressOnLoad_Default.preset
-  artifactKey: Guid(0cd792cc87e492d43b4e95b205fc5cc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/Defaults/AudioDecompressOnLoad_Default.preset using Guid(0cd792cc87e492d43b4e95b205fc5cc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b46490b259c19bf0673c3c22254aacc5') in 0.022984 seconds
-  Import took 0.029578 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.031758 seconds.
-  path: Assets/ExampleAssets/Materials
-  artifactKey: Guid(08926ba083f53d746952ad51d0e9d30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExampleAssets/Materials using Guid(08926ba083f53d746952ad51d0e9d30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c66b2878db063c5aba496ce1b6466cfd') in 0.007393 seconds
-  Import took 0.014259 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000316 seconds.
-  path: Assets/ExampleAssets/Prefabs
-  artifactKey: Guid(9c26179f5b673014fa7ab89695ba837c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExampleAssets/Prefabs using Guid(9c26179f5b673014fa7ab89695ba837c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb9057ca5b9f79ca03980d6bdecc59ce') in 0.007900 seconds
-  Import took 0.013535 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000381 seconds.
-  path: Assets/ExampleAssets/Models
-  artifactKey: Guid(757f6be72dedcb9468cddd9431ff8b37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExampleAssets/Models using Guid(757f6be72dedcb9468cddd9431ff8b37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47e75d1d7e269ff19d1097b27cc6206a') in 0.009390 seconds
-  Import took 0.017450 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000532 seconds.
-  path: Assets/ExampleAssets/Textures
-  artifactKey: Guid(8d3eee3a5f583b74f9190e842344bc20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExampleAssets/Textures using Guid(8d3eee3a5f583b74f9190e842344bc20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db06d63ddb9c5cf259679627d4c1b45a') in 0.010048 seconds
-  Import took 0.019454 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.940843 seconds.
-  path: Assets
-  artifactKey: Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets using Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5148814b4d6070b6eab59bb6bdd8508b') in 0.010797 seconds
-  Import took 0.020402 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.617886 seconds.
-  path: Assets/Assets
-  artifactKey: Guid(e86b2868bd382474b80622aa4af6c637) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets using Guid(e86b2868bd382474b80622aa4af6c637) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '692fd8ebd3a67187cb01ca5798335ea4') in 0.004333 seconds
-  Import took 0.013314 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000817 seconds.
-  path: Assets/Assets
-  artifactKey: Guid(e86b2868bd382474b80622aa4af6c637) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets using Guid(e86b2868bd382474b80622aa4af6c637) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '692fd8ebd3a67187cb01ca5798335ea4') in 0.004419 seconds
-  Import took 0.011687 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.960739 seconds.
-  path: Assets/Resources
-  artifactKey: Guid(c1d030abcb64e2843b28c258e1843cd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources using Guid(c1d030abcb64e2843b28c258e1843cd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c340656d6b3528f2f7257d95bbdc23dd') in 0.012179 seconds
-  Import took 0.021046 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000843 seconds.
-  path: Assets/Resources
-  artifactKey: Guid(c1d030abcb64e2843b28c258e1843cd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources using Guid(c1d030abcb64e2843b28c258e1843cd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c340656d6b3528f2f7257d95bbdc23dd') in 0.003655 seconds
-  Import took 0.011993 seconds .
+  path: Assets/Scripts/Edit/BuilderController.cs
+  artifactKey: Guid(8e778d68f814af245835eb764f042235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Edit/BuilderController.cs using Guid(8e778d68f814af245835eb764f042235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcee3c8270ab5b3cfb4fa17cea3a7c90') in 0.168314 seconds
+  Import took 0.183659 seconds .
 
 ========================================================================
 Received Prepare
@@ -346,371 +95,98 @@ Registering precompiled unity dll's ...
 Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
 Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.003188 seconds.
+Registered in 0.003171 seconds.
 Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-Native extension for LinuxStandalone target not found
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 86.31 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.435 seconds
-Registering precompiled user dll's ...
-Registered in 0.096925 seconds.
-Platform modules already initialized, skipping
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-Native extension for LinuxStandalone target not found
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 0.71 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.948 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.66 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 245 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 94.1 MB.
-System memory in use after: 90.6 MB.
+d3d11: failed to create staging 2D texture w=128 h=1024 d3dfmt=28 [8007000e]
+d3d11: failed to create 2D texture id=203 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-Unloading 44 unused Assets to reduce memory usage. Loaded Objects now: 3389.
-Total: 6.143800 ms (FindLiveObjects: 0.567000 ms CreateObjectMapping: 0.319100 ms MarkObjects: 1.964500 ms  DeleteObjects: 3.292700 ms)
+d3d11: failed to create 2D texture shader resource view id=203 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 10.243048 seconds.
-  path: Assets/Settings/Skin.asset
-  artifactKey: Guid(26bdddf49760c61438938733f07fa2a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/Skin.asset using Guid(26bdddf49760c61438938733f07fa2a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fd308463038f5eb7f559a6dd0fd8435') in 0.013191 seconds
-  Import took 0.019266 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000333 seconds.
-  path: Assets/Settings/HDRenderPipelineAsset.asset
-  artifactKey: Guid(3e2e6bfc59709614ab90c0cd7d755e48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/HDRenderPipelineAsset.asset using Guid(3e2e6bfc59709614ab90c0cd7d755e48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13c3e5f8983b704ee229d928b88f2543') in 0.008798 seconds
-  Import took 0.014055 seconds .
+d3d11: failed to create 2D texture id=205 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000354 seconds.
-  path: Assets/Settings/SampleSceneSkyandFogSettings.asset
-  artifactKey: Guid(a123fc0ac58cb774e8592c925f167e7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/SampleSceneSkyandFogSettings.asset using Guid(a123fc0ac58cb774e8592c925f167e7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18b5d3259c21bcadb58f57928f9f8d8d') in 0.011733 seconds
-  Import took 0.018659 seconds .
+d3d11: failed to create 2D texture shader resource view id=205 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000355 seconds.
-  path: Assets/Settings/Foliage.asset
-  artifactKey: Guid(78322c7f82657514ebe48203160e3f39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/Foliage.asset using Guid(78322c7f82657514ebe48203160e3f39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dc653e60e8bb17d518e59d9beeedc8b') in 0.020402 seconds
-  Import took 0.029118 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000439 seconds.
-  path: Assets/Settings/SampleScenePostProcessingSettings.asset
-  artifactKey: Guid(183cbd347d25080429f42b520742bbd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/SampleScenePostProcessingSettings.asset using Guid(183cbd347d25080429f42b520742bbd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7feb16ce82df5407dde29a36ccd1c859') in 0.016509 seconds
-  Import took 0.026149 seconds .
+d3d11: failed to create 2D texture id=207 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 17.606976 seconds.
-  path: Assets/Scripts/SimpleCameraController.cs
-  artifactKey: Guid(e8a636f62116c0a40bbfefdf876d4608) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/SimpleCameraController.cs using Guid(e8a636f62116c0a40bbfefdf876d4608) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a915641ef7c5f85d0bf477dcf299e4c9') in 0.012566 seconds
-  Import took 0.019784 seconds .
+d3d11: failed to create 2D texture shader resource view id=207 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.003655 seconds.
-  path: Assets/Scripts/SimpleCameraController.cs
-  artifactKey: Guid(e8a636f62116c0a40bbfefdf876d4608) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/SimpleCameraController.cs using Guid(e8a636f62116c0a40bbfefdf876d4608) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a915641ef7c5f85d0bf477dcf299e4c9') in 0.003251 seconds
-  Import took 0.011695 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Prepare
-Reloading mono domain
-Begin MonoManager ReloadAssembly
-Registering precompiled unity dll's ...
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.001438 seconds.
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-Native extension for LinuxStandalone target not found
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 101.13 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.436 seconds
-Registering precompiled user dll's ...
-Registered in 0.088602 seconds.
-Platform modules already initialized, skipping
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-Native extension for LinuxStandalone target not found
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 0.57 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.037 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.77 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 85.9 MB.
-System memory in use after: 82.4 MB.
+d3d11: failed to create 2D texture id=209 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-Unloading 47 unused Assets to reduce memory usage. Loaded Objects now: 3393.
-Total: 7.220300 ms (FindLiveObjects: 0.739900 ms CreateObjectMapping: 0.173100 ms MarkObjects: 2.901400 ms  DeleteObjects: 3.405200 ms)
+d3d11: failed to create 2D texture shader resource view id=209 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 28.878366 seconds.
-  path: Assets/Scripts/Network
-  artifactKey: Guid(65c4d5396ef8b9e4d9443f23e4f8922b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network using Guid(65c4d5396ef8b9e4d9443f23e4f8922b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2d7b20661cb30bc1fa5970e4e6ab8d4') in 0.013150 seconds
-  Import took 0.023509 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 3.318083 seconds.
-  path: Assets/Scripts/Network/Client.cs
-  artifactKey: Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/Client.cs using Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6deedfe2b18e74f3f735d55acd811a0b') in 0.007332 seconds
-  Import took 0.014643 seconds .
+d3d11: failed to create 2D texture id=211 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000327 seconds.
-  path: Assets/Scripts/Network/ClientSend.cs
-  artifactKey: Guid(62b1775973a4f98fb948bd29c99549aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ClientSend.cs using Guid(62b1775973a4f98fb948bd29c99549aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2f47c34e37f14524a851789f35846c6') in 0.006410 seconds
-  Import took 0.011751 seconds .
+d3d11: failed to create 2D texture shader resource view id=211 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000401 seconds.
-  path: Assets/Scripts/Network/ClientHandle.cs
-  artifactKey: Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ClientHandle.cs using Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e79ab46ed635d98548d8d78c1723dd58') in 0.006245 seconds
-  Import took 0.010989 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000317 seconds.
-  path: Assets/Scripts/Network/Packet.cs
-  artifactKey: Guid(9a747ca89d29db74c92bdb169cb5f4c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/Packet.cs using Guid(9a747ca89d29db74c92bdb169cb5f4c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a888c990cd20bc62582d460e28a930eb') in 0.006508 seconds
-  Import took 0.011550 seconds .
+d3d11: failed to create 2D texture id=213 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000317 seconds.
-  path: Assets/Scripts/Network/ThreadManager.cs
-  artifactKey: Guid(97fd5e16035ad00eb83e88cf265131f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ThreadManager.cs using Guid(97fd5e16035ad00eb83e88cf265131f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7dd817f09f72a216492ab720bf6acc9') in 0.006150 seconds
-  Import took 0.011093 seconds .
+d3d11: failed to create 2D texture shader resource view id=213 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 87.519550 seconds.
-  path: Assets/Scripts/Network/ClientHandle.cs
-  artifactKey: Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ClientHandle.cs using Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4415e6a209ccd5ca2ab5a58aa3a657d6') in 0.006530 seconds
-  Import took 0.016177 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.003721 seconds.
-  path: Assets/Scripts/Network/ClientHandle.cs
-  artifactKey: Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ClientHandle.cs using Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4415e6a209ccd5ca2ab5a58aa3a657d6') in 0.004692 seconds
-  Import took 0.012822 seconds .
+d3d11: failed to create 2D texture id=215 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 7.788029 seconds.
-  path: Assets/Scripts/Logic
-  artifactKey: Guid(18f8602aa7ae7324889c3b8fa4cc4475) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Logic using Guid(18f8602aa7ae7324889c3b8fa4cc4475) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cbc892297bdc33f48f6d9ac26554be85') in 0.012585 seconds
-  Import took 0.021339 seconds .
+d3d11: failed to create 2D texture shader resource view id=215 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 6.516090 seconds.
-  path: Assets/Scripts/Control
-  artifactKey: Guid(a44cc384626e9e448a0ed0e90397dd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Control using Guid(a44cc384626e9e448a0ed0e90397dd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44eaf7980655a608193107f6e5cce755') in 0.013297 seconds
-  Import took 0.021489 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 9.692121 seconds.
-  path: Assets/Scripts/Edit
-  artifactKey: Guid(aa0382c76a756444d94c68741c4e3304) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Edit using Guid(aa0382c76a756444d94c68741c4e3304) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57bc5051567c60e082a618bae063e0b8') in 0.012578 seconds
-  Import took 0.022052 seconds .
+d3d11: failed to create 2D texture id=217 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000678 seconds.
-  path: Assets/Scripts/Edit
-  artifactKey: Guid(aa0382c76a756444d94c68741c4e3304) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Edit using Guid(aa0382c76a756444d94c68741c4e3304) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57bc5051567c60e082a618bae063e0b8') in 0.004144 seconds
-  Import took 0.012531 seconds .
+d3d11: failed to create 2D texture shader resource view id=217 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 21.700556 seconds.
-  path: Assets/Scripts/Network/ClientHandle.cs
-  artifactKey: Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ClientHandle.cs using Guid(efbc1a11aecc73e56b02c819035ac2ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '640aa112f32fe6c1b9c22659634e894a') in 0.003070 seconds
-  Import took 0.010756 seconds .
+d3d11: Failed to create 2D texture in GfxDeviceD3D11
 
-========================================================================
-Received Import Request.
-  Time since last request: 69.470539 seconds.
-  path: Assets/Scripts/Network/Client.cs
-  artifactKey: Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/Client.cs using Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9890bf68a178efe797d6b69c04b4d76') in 0.009861 seconds
-  Import took 0.024533 seconds .
+d3d11: failed to create Cube texture id=225 width=128 height=128 mips=8 dxgifmt=95 [D3D error was 8007000e]
 
-========================================================================
-Received Import Request.
-  Time since last request: 258.213476 seconds.
-  path: Assets/Scripts/Network/Client.cs
-  artifactKey: Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/Client.cs using Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '731562f0f1191b94f61bd7055d9fd111') in 0.008929 seconds
-  Import took 0.021387 seconds .
+d3d11: failed to create Cube texture shader resource view id=225 [D3D error was 80070057]
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.003408 seconds.
-  path: Assets/Scripts/Network/Client.cs
-  artifactKey: Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/Client.cs using Guid(885c148fa38b3d4099d401a45a28246b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '731562f0f1191b94f61bd7055d9fd111') in 0.006669 seconds
-  Import took 0.016153 seconds .
+failed to create cubemap
 
-========================================================================
-Received Prepare
-Reloading mono domain
-Begin MonoManager ReloadAssembly
-Registering precompiled unity dll's ...
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.001473 seconds.
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-Native extension for LinuxStandalone target not found
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 87.16 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.371 seconds
-Registering precompiled user dll's ...
-Registered in 0.092646 seconds.
-Platform modules already initialized, skipping
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-Native extension for LinuxStandalone target not found
-Native extension for WindowsStandalone target not found
-Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 0.79 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.092 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.71 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 50 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 86.0 MB.
-System memory in use after: 82.5 MB.
+Received signal SIGSEGV
+Stack trace:
+0x00007ff7791a3b67 (Unity) 
+0x00007ff779199234 (Unity) 
+0x00007ff7791809e5 (Unity) 
+0x00007ff779195dbc (Unity) 
+0x00007ff779a85cdd (Unity) 
+0x00007ff77a17cc43 (Unity) 
+0x00007ff77a17d602 (Unity) 
+0x00007ff77a17d77a (Unity) 
+0x00007ff77a10c96e (Unity) 
+0x00007ff77a10d117 (Unity) 
+0x00007ff77a1106a3 (Unity) 
+0x00007ff77878a426 (Unity) 
+0x00007ff77a01ed04 (Unity) 
+0x00007ff77a0a1390 (Unity) 
+0x00007ff77a0c3592 (Unity) 
+0x00007ff778919a36 (Unity) 
+0x00007ff779b79f1e (Unity) 
+0x00007ff779b7872f (Unity) 
+0x00007ff779b748a8 (Unity) 
+0x00007ff779b7479f (Unity) 
+0x00007ff77a0e8a2c (Unity) 
+0x00007ff77a02d2e0 (Unity) 
+0x00007ff77a034279 (Unity) 
+0x00007ff77b3c5e69 (Unity) 
+0x00007ff77b7dd8cf (Unity) 
+0x00007ff77b8a1f02 (Unity) 
+0x00007ff77b8a4060 (Unity) 
+0x00007ff77b8a77ee (Unity) 
+0x00007ff77b82318b (Unity) 
+0x00007ff77b8231e0 (Unity) 
+0x00007ff77ad5f1de (Unity) 
+0x00007ff77b6b8f72 (Unity) 
+0x00007ff77d47ced6 (Unity) 
+0x00007ffa24647bd4 (KERNEL32) 
+0x00007ffa258ace51 (ntdll) RtlUserThreadStart
 
-Unloading 44 unused Assets to reduce memory usage. Loaded Objects now: 3402.
-Total: 7.328800 ms (FindLiveObjects: 0.688000 ms CreateObjectMapping: 0.496300 ms MarkObjects: 3.021000 ms  DeleteObjects: 3.122800 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 54.893441 seconds.
-  path: Assets/Scripts/Network/ClientSend.cs
-  artifactKey: Guid(62b1775973a4f98fb948bd29c99549aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Network/ClientSend.cs using Guid(62b1775973a4f98fb948bd29c99549aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70e835b2468bcdb144797e415da70c10') in 0.004459 seconds
-  Import took 0.010777 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.371572 seconds.
-  path: Assets/Scripts/Play
-  artifactKey: Guid(00f9aaaba2802ef428076555a95f5ab9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Play using Guid(00f9aaaba2802ef428076555a95f5ab9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdcf04c75f16ab7a87ca4a5058fc540d') in 0.012128 seconds
-  Import took 0.020247 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.709463 seconds.
-  path: Assets/Scripts/UI
-  artifactKey: Guid(43b0cdc0ba862e24b8562044ab769c3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/UI using Guid(43b0cdc0ba862e24b8562044ab769c3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61790c6def26f83cec35c0eccd5e0aeb') in 0.012638 seconds
-  Import took 0.021261 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 41.543949 seconds.
-  path: Assets/Scripts/Level
-  artifactKey: Guid(73e7c4d6e3e879046bbc1d5fcbf0eada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Level using Guid(73e7c4d6e3e879046bbc1d5fcbf0eada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68bdd0f8eaa0f691cff0af5a64b8c9cf') in 0.011392 seconds
-  Import took 0.020507 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000606 seconds.
-  path: Assets/Scripts/Level
-  artifactKey: Guid(73e7c4d6e3e879046bbc1d5fcbf0eada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Level using Guid(73e7c4d6e3e879046bbc1d5fcbf0eada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68bdd0f8eaa0f691cff0af5a64b8c9cf') in 0.004551 seconds
-  Import took 0.012309 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.402368 seconds.
-  path: Assets/Scripts/Misc
-  artifactKey: Guid(d450e35b7b0c0c948a98d444c7b9133d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Misc using Guid(d450e35b7b0c0c948a98d444c7b9133d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1781790e411a932fa18d9c4d4a83243') in 0.011555 seconds
-  Import took 0.020413 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000643 seconds.
-  path: Assets/Scripts/Misc
-  artifactKey: Guid(d450e35b7b0c0c948a98d444c7b9133d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Misc using Guid(d450e35b7b0c0c948a98d444c7b9133d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1781790e411a932fa18d9c4d4a83243') in 0.003904 seconds
-  Import took 0.012568 seconds .
-
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file
