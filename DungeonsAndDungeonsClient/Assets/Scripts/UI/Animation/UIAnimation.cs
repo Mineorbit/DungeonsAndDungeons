@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class UIAnimation
 {
     public Transform target;
     public RectTransform targetTransform;
     public CanvasGroup canvasGroup;
-
+    public UnityEvent animationEndedEvent;
     public bool animationPlaying = false;
     public virtual bool Play()
     {
@@ -18,5 +18,5 @@ public class UIAnimation
         animationPlaying = true;
         return true;
     }
-
+   
 }

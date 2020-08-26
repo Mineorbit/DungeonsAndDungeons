@@ -6,7 +6,7 @@ using UnityEngine;
 public class CoroutineManager : MonoBehaviour
 {
     public static CoroutineManager instance;
-    void Start()
+    void Awake()
     {
         if (instance != null)
         {

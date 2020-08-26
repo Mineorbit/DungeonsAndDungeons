@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,12 +24,25 @@ public class GameManager : MonoBehaviour
     }
     public void SetupGameStateFSM()
     {
+        UnityEvent closeLoadingScreen = new UnityEvent();
+        closeLoadingScreen.AddListener(LoadingScreen.instance.closeLoadScreen);
         int[] afterInit = {1,1,1};
         int[][] gameStateTranslationTable =  {afterInit,afterInit,afterInit,afterInit};
-        Action<int>[] stateTable =      { x => { UnityEngine.Debug.Log("Reinitliasing Game"); }
-                                        , x => { UnityEngine.Debug.Log("Loading MainMenu");currentGameState = State.MainMenu; SceneManager.load(1); }
+        Action<int>[] stateTable =      { x => 
+                                        {
+                                            PauseMenu.pauseMenuAvailable = true;
+                                            UnityEngine.Debug.Log("Reinitliasing Game"); 
+                                        }
+                                        , x => 
+                                        {
+                                            PauseMenu.pauseMenuAvailable = false;
+                                            LoadingScreen.instance.openLoadScreen();
+                                            UnityEngine.Debug.Log("Loading MainMenu");
+                                            currentGameState = State.MainMenu;
+                                            SceneLoadManager.instance.load(1,closeLoadingScreen);
+                                        }
                                         , x => { }
-                                        , x => { UnityEngine.Debug.Log("Loading Test"); currentGameState = State.Test; SceneManager.load(2); } };
+                                        , x => { LoadingScreen.instance.openLoadScreen(); UnityEngine.Debug.Log("Loading Test"); currentGameState = State.Test; SceneLoadManager.instance.load(2); } };
         gameStateFSM = new FSM("GameState",gameStateTranslationTable,stateTable);
     }
     

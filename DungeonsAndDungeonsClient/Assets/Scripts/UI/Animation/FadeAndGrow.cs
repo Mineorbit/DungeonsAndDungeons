@@ -34,6 +34,7 @@ public class FadeAndGrow : UIAnimation
             yield return null;
         }
         animationPlaying = false;
+        if(animationEndedEvent!=null)animationEndedEvent.Invoke();
     }
 
     public IEnumerator FadeOut()
@@ -45,5 +46,6 @@ public class FadeAndGrow : UIAnimation
             yield return null;
         }
         animationPlaying = false;
+        if (animationEndedEvent != null) animationEndedEvent.Invoke();
     }
 }

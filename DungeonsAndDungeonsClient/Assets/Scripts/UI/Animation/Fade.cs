@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class Fade : UIAnimation
@@ -31,6 +32,7 @@ public class Fade : UIAnimation
             yield return null;
         }
         animationPlaying = false;
+        if (animationEndedEvent != null) animationEndedEvent.Invoke();
     }
 
     public IEnumerator FadeOut()
@@ -41,5 +43,6 @@ public class Fade : UIAnimation
             yield return null;
         }
         animationPlaying = false;
+        if (animationEndedEvent != null) animationEndedEvent.Invoke();
     }
 }
