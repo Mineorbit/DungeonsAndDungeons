@@ -63,9 +63,10 @@ public class LoadingScreen : MonoBehaviour
     }
     public void closeScreen()
     {
+        UnityEngine.Debug.Log("Tset");
         if (eventCount == 0)
             return;
-
+        UnityEngine.Debug.Log("Test");
             eventCount--;
         animationScreen.Play();
     }

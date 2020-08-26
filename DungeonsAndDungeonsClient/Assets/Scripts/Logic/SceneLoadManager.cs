@@ -16,12 +16,14 @@ public class SceneLoadManager : MonoBehaviour
         }
         instance = this;
     }
+    /*
     public void load(int loadScene)
     {
         if (loadScene >= numberOfScenes)
         { UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Additive); }else
         UnityEngine.SceneManagement.SceneManager.LoadScene(loadScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
+    */
     public void load(int loadScene,UnityEvent finishEvent)
     {
         if (loadScene >= numberOfScenes)
@@ -43,10 +45,11 @@ public class SceneLoadManager : MonoBehaviour
         {
             yield return null;
         }
+        currentScene = targetScene;
         finEvent.Invoke();
     }
-    public static void unload()
+    public void unloadCurrentScene()
     {
-
+        UnityEngine.SceneManagement.SceneManager.UnloadScene(currentScene);
     }
 }
