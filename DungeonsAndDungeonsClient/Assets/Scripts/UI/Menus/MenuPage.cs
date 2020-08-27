@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MenuPage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    UIAnimation transferAnimation;
+    public virtual void Start()
     {
-        
+        setupUI();
+    }
+    void setupUI()
+    {
+        transferAnimation = new Fade();
+        transferAnimation.target = this.transform;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

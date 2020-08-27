@@ -63,7 +63,6 @@ public class LoadingScreen : MonoBehaviour
     public void closeLoadingScreen()
     {
         rc.enabled = false;
-        UnityEngine.Debug.Log("Hallo: "+animationInfoText.open);
         animationInfoText.Play();
     }
     public void setLoadingScreenOpen()

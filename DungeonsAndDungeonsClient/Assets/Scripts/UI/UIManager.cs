@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public static UIManager instance;
+    MenuPage[] pages;
+    FSM mainMenuFSM;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this);
+        }
+        instance = this;
+    }
     void Start()
     {
-        
     }
-
-    // Update is called once per frame
-    void Update()
+    public void setupMainMenu()
     {
-        
+        UnityEngine.Debug.Log("MainMenu Controls Setup");
     }
+    
 }

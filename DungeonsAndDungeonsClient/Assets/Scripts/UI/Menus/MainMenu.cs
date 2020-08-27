@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class MainMenu : MenuPage
 {
     Button testModeButton;
-    void Start()
+    public override void Start()
     {
+        base.Start();
         setupButtons(); 
     }
     void setupButtons()

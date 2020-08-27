@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    UnityEvent closeLoadingScreen;
+    UnityEvent afterMenuLoad;
+    UnityEvent afterTestLoad;
     FSM gameStateFSM;
     public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
     public State currentGameState;
@@ -23,13 +24,16 @@ public class GameManager : MonoBehaviour
         } else instance = this;
 
         SetupGameStateFSM();
-        setupLoadingScreen();
+        setupAfterLoadEvents();
         performAction(GameAction.LoadGameFromBoot);
     }
-    public void setupLoadingScreen()
+    public void setupAfterLoadEvents()
     {
-        closeLoadingScreen = new UnityEvent();
-        closeLoadingScreen.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterMenuLoad = new UnityEvent();
+        afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterMenuLoad.AddListener(UIManager.instance.setupMainMenu);
+        afterTestLoad = new UnityEvent();
+        afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
     }
     public void SetupGameStateFSM()
     {
@@ -44,6 +48,7 @@ public class GameManager : MonoBehaviour
                                             UnityEvent initEvent = new UnityEvent();
                                             initEvent.AddListener(asyncInit);
                                             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+                                            
                                         }
                                         , x =>
                                         {
@@ -93,20 +98,20 @@ public class GameManager : MonoBehaviour
         SceneLoadManager.instance.unloadCurrentScene();
         PauseMenu.pauseMenuAvailable = false;
         currentGameState = State.MainMenu;
-        SceneLoadManager.instance.load(1, closeLoadingScreen);
+        SceneLoadManager.instance.load(1, afterMenuLoad);
     }
     void asyncTestLoad()
     {
     SceneLoadManager.instance.unloadCurrentScene();
     PauseMenu.pauseMenuAvailable = true;
     currentGameState = State.Test;
-    SceneLoadManager.instance.load(2, closeLoadingScreen);
+    SceneLoadManager.instance.load(2, afterTestLoad);
     }
     public void performAction(GameAction action)
     {
         gameStateFSM.Move((int) action);
     }
-
+    
 
     void Update()
     {
