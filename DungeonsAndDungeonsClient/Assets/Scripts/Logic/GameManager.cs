@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    UnityEvent closeLoadingScreen;
     FSM gameStateFSM;
     public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
     public State currentGameState;
-    public enum GameAction { LoadGameFromBoot = 0,EnterTestFromMainMenu };
+    public enum GameAction { LoadGameFromBoot = 0,EnterMainMenu ,EnterTestFromMainMenu };
 
     void Start()
     {
@@ -20,51 +21,93 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         } else instance = this;
+
         SetupGameStateFSM();
+        setupLoadingScreen();
         performAction(GameAction.LoadGameFromBoot);
+    }
+    public void setupLoadingScreen()
+    {
+        closeLoadingScreen = new UnityEvent();
+        closeLoadingScreen.AddListener(LoadingScreen.instance.closeLoadingScreen);
     }
     public void SetupGameStateFSM()
     {
-        UnityEvent closeLoadingScreen = new UnityEvent();
-        closeLoadingScreen.AddListener(LoadingScreen.instance.closeLoadScreen);
-        int[] afterInit = {1,1,1};
-        int[] afterMenu = {1,3,1};
+        int[] afterInit = {0,1,1};
+        int[] afterMenu = {1,1,3};
         int[][] gameStateTranslationTable =  {afterInit,afterMenu,afterInit,afterInit};
         //x ist GameAction int
         //Wichtige lücke: aktuell können unloading und neues szenen laden passieren obwohl loading screen noch nicht voll da
-        Action<int>[] stateTable =      { x => 
+        Action<int>[] stateTable =      { x =>
                                         {
-                                            PauseMenu.pauseMenuAvailable = true;
-                                            currentGameState = State.Init;
-                                            UnityEngine.Debug.Log("Reinitliasing Game"); 
+                                            UnityEngine.Debug.Log("Initliasing Game");
+                                            UnityEvent initEvent = new UnityEvent();
+                                            initEvent.AddListener(asyncInit);
+                                            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
                                         }
-                                        , x => 
+                                        , x =>
                                         {
-                                            LoadingScreen.instance.openLoadScreen();
-                                            SceneLoadManager.instance.unloadCurrentScene();
-                                            PauseMenu.pauseMenuAvailable = false;
                                             UnityEngine.Debug.Log("Loading MainMenu");
-                                            currentGameState = State.MainMenu;
-                                            SceneLoadManager.instance.load(1,closeLoadingScreen);
+
+                                            UnityEvent menuLoad = new UnityEvent();
+                                            menuLoad.AddListener(asyncMenuLoad);
+
+                                            if(!LoadingScreen.instance.isOpen())
+                                            {
+                                                UnityEngine.Debug.Log("Nochmal öffnen");
+                                                LoadingScreen.instance.openLoadingScreen(menuLoad);
+                                            }else
+                                            {
+                                                asyncMenuLoad();
+                                            }
+
+
+
                                         }
                                         , x => { }
-                                        , x => 
+                                        , x =>
                                         {
-                                            LoadingScreen.instance.openLoadScreen();
-                                            SceneLoadManager.instance.unloadCurrentScene();
-                                            PauseMenu.pauseMenuAvailable = true;
                                             UnityEngine.Debug.Log("Loading Test");
-                                            currentGameState = State.Test;
-
-                                            SceneLoadManager.instance.load(2,closeLoadingScreen);
+                                            UnityEvent testLoad = new UnityEvent();
+                                            testLoad.AddListener(asyncTestLoad);
+                                             
+                                            if(!LoadingScreen.instance.isOpen())
+                                            {
+                                                LoadingScreen.instance.openLoadingScreen(testLoad);
+                                            }else
+                                            {
+                                                asyncTestLoad();
+                                            }
                                         }
         };
         gameStateFSM = new FSM("GameState",gameStateTranslationTable,stateTable);
+    }
+    void asyncInit()
+    {
+        PauseMenu.pauseMenuAvailable = false;
+        currentGameState = State.Init;
+        performAction(GameAction.EnterMainMenu);
+    }
+    void asyncMenuLoad()
+    {
+        SceneLoadManager.instance.unloadCurrentScene();
+        PauseMenu.pauseMenuAvailable = false;
+        currentGameState = State.MainMenu;
+        SceneLoadManager.instance.load(1, closeLoadingScreen);
+    }
+    void asyncTestLoad()
+    {
+    SceneLoadManager.instance.unloadCurrentScene();
+    PauseMenu.pauseMenuAvailable = true;
+    currentGameState = State.Test;
+    SceneLoadManager.instance.load(2, closeLoadingScreen);
     }
     public void performAction(GameAction action)
     {
         gameStateFSM.Move((int) action);
     }
+
+
     void Update()
     {
         

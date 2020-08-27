@@ -1,12 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
 public class Fade : UIAnimation
 {
-    bool open = false;
+    public override void Open()
+    {
+        if (!base.open)
+        { base.Open(); }
+        else return;
+        animationPlaying = false;
+
+        canvasGroup.alpha = 1;
+    }
 
     public override bool Play()
     {
@@ -27,7 +36,7 @@ public class Fade : UIAnimation
     }
     public IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1.05; i += 0.5f*Time.deltaTime)
+        for (float i = 0; i <= 1.05; i += Time.deltaTime)
         {
             canvasGroup.alpha = i;
             yield return null;
@@ -35,18 +44,18 @@ public class Fade : UIAnimation
 
         canvasGroup.alpha = 1;
         animationPlaying = false;
-        if (animationEndedEvent != null) animationEndedEvent.Invoke();
-    }
+        InEnded();
+     }
 
     public IEnumerator FadeOut()
     {
-        for (float i = 1; i >= -0.05; i -= 0.5f * Time.deltaTime)
+        for (float i = 1; i >= -0.05; i -= Time.deltaTime)
         {
             canvasGroup.alpha = i;
             yield return null;
         }
         canvasGroup.alpha = 0;
         animationPlaying = false;
-        if (animationEndedEvent != null) animationEndedEvent.Invoke();
+        OutEnded();
     }
 }

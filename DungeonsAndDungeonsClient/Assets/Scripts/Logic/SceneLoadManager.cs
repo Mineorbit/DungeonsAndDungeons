@@ -50,6 +50,7 @@ public class SceneLoadManager : MonoBehaviour
     }
     public void unloadCurrentScene()
     {
+        if(currentScene!=0)
         UnityEngine.SceneManagement.SceneManager.UnloadScene(currentScene);
     }
 }
