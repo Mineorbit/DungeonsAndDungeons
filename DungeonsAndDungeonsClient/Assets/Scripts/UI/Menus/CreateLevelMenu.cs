@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateLevelMenu : MonoBehaviour
+public class CreateLevelMenu : MenuPage
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        index = 4;
     }
 }

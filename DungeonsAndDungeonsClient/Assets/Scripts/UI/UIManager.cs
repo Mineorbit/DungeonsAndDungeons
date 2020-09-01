@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     public void setupMainMenu()
     {
         UnityEngine.Debug.Log("MainMenu Controls Setup");
+        pages = GameObject.FindObjectsOfType<MenuPage>();
+
     }
     
 }

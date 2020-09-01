@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuPage : MonoBehaviour
 {
+    public int index;
     UIAnimation transferAnimation;
     public virtual void Start()
     {
