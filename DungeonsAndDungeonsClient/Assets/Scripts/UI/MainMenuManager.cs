@@ -43,6 +43,8 @@ public class MainMenuManager : MonoBehaviour
         UnityEngine.Debug.Log("MainMenu Controls Setup");
         pages = GameObject.FindObjectsOfType<MenuPage>();
         sortPages();
+        int[][] menuTransition = { {1,2 },{2,1 } };
+        mainMenuFSM = new FSM("MainMenuFSM",);
     }
 
 }
