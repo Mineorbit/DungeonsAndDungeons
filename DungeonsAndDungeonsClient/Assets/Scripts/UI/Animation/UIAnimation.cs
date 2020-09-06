@@ -13,19 +13,28 @@ public class UIAnimation
     public UnityEvent OutEndedEvent;
     public bool animationPlaying = false;
     public bool open = false;
-    public virtual bool Play()
+    public bool setup = false;
+    public void Setup()
     {
+        if (setup) return;
+        if(CoroutineManager.instance==null)
+        {
+            UnityEngine.Debug.Log("Kein CoroutineManager verfügbar, UIAnimation nicht möglich");
+        }
         if (targetTransform == null) targetTransform = target.GetComponent<RectTransform>();
         if (canvasGroup == null) canvasGroup = target.GetComponent<CanvasGroup>();
+        setup = true;
+    }
+    public virtual bool Play()
+    {
+        Setup();
         if (animationPlaying) return false;
         animationPlaying = true;
         return true;
     }
     public virtual void Open()
     {
-        if (targetTransform == null) targetTransform = target.GetComponent<RectTransform>();
-        if (canvasGroup == null) canvasGroup = target.GetComponent<CanvasGroup>();
-        
+        Setup();
         open = true;
         InEnded();
     }

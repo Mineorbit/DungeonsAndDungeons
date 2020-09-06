@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class MainMenu : MenuPage
 {
     Button testModeButton;
-    public void Awake()
+    public override void Awake()
     {
+        base.Awake();
         index = 0;
     }
     public override void Start()

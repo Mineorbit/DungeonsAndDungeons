@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         setupMainMenu();
+        mainMenuFSM.Move(0);
     }
     void sortPages()
     {
@@ -38,13 +39,26 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     }
+    //States: 0 Init, 1 MainMenu
     public void setupMainMenu()
     {
         UnityEngine.Debug.Log("MainMenu Controls Setup");
         pages = GameObject.FindObjectsOfType<MenuPage>();
         sortPages();
-        int[][] menuTransition = { {1,2 },{2,1 } };
-        mainMenuFSM = new FSM("MainMenuFSM",);
+
+        int[] initTable = { 0, 1 };
+        int[] mainTable = { 2, 3 };
+
+        int[][] menuTransition = {initTable,mainTable};
+        System.Action<int>[] stateTable =
+        {
+            x => {
+            //Open MainMenu
+            pages[0].Open();
+            },
+            x => { }
+        };
+        mainMenuFSM = new FSM("MainMenuFSM",menuTransition,stateTable);
     }
 
 }
