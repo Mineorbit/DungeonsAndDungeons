@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
         targetDirection = 
             Vector3.Normalize(Vector3.ProjectOnPlane( cam.right,transform.up) * Input.GetAxisRaw("Horizontal")+ Vector3.ProjectOnPlane(cam.forward, transform.up) * Input.GetAxisRaw("Vertical"));
 
-        if(targetDirection.sqrMagnitude >= 0.1f)
+        if(targetDirection.sqrMagnitude >= 0.01f)
         {
             controller.Move(targetDirection*Speed*Time.deltaTime);    
         }
