@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414668, b: 0.12107808, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731658, g: 0.13414633, b: 0.12107791, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 5d897a408158a954c80aac97a100b599,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +119,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -163,6 +166,7 @@ GameObject:
   - component: {fileID: 2136707979}
   - component: {fileID: 2136707980}
   - component: {fileID: 2136707981}
+  - component: {fileID: 2136707982}
   m_Layer: 0
   m_Name: ServerManager
   m_TagString: Untagged
@@ -222,5 +226,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87d9830d51d3dce38304e5dfa196294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 1
-  players: []
+--- !u!114 &2136707982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136707977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e567806165e2fd94fb0675fb9d183bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -57,11 +57,14 @@ public class ServerManager : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 64;
         //Download and load map
-        
         prepareLevel();
 
         Debug.Log("Server wird gestartet");
         Server.Start(45565);
+    }
+    void prepareLevel()
+    {
+
     }
     static string GetLongBinaryString(long n)
     {
@@ -94,7 +97,7 @@ public class ServerManager : MonoBehaviour
 
         if(Local) 
         {
-        GameLogic.current.playerCount = 1;
+        PlayerManager.playerCount = 1;
         }
         Prepare();
     }

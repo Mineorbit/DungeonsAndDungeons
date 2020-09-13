@@ -30,7 +30,7 @@ public class ServerSend
         Packet readyPack =  new Packet((byte)ServerPackets.GameReady);
         for(int i = 0;i<4;i++)
         {
-            if(GameLogic.current.players[i]!=null)
+            if(PlayerManager.players[i]!=null)
             {
                 readyPack.Write((byte)1);
                 readyPack.Write((byte)1);
