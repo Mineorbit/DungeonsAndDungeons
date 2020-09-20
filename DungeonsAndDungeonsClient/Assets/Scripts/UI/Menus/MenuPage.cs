@@ -20,6 +20,11 @@ public class MenuPage : MonoBehaviour
     }
     public void Open()
     {
+        Debug.Log(transferAnimation);
+        transferAnimation.Play();
+    }
+    public void Close()
+    {
         transferAnimation.Play();
     }
 

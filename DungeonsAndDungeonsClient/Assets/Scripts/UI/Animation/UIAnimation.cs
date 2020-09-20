@@ -40,6 +40,7 @@ public class UIAnimation
     }
     public void InEnded()
     {
+        canvasGroup.interactable = true;
         if (InEndedEvent != null)
         {
             InEndedEvent.Invoke();
@@ -47,6 +48,7 @@ public class UIAnimation
     }
     public void OutEnded()
     {
+        canvasGroup.interactable = false;
         if (OutEndedEvent != null)
         {
             OutEndedEvent.Invoke();

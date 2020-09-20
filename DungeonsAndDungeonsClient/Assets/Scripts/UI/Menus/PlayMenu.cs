@@ -6,6 +6,7 @@ public class PlayMenu : MenuPage
 {
     public void Awake()
     {
+        base.Awake();
         index = 1;
     }
 }

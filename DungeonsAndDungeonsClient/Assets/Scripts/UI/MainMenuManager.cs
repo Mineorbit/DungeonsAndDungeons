@@ -9,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager instance;
     public MenuPage[] pages;
     FSM mainMenuFSM;
+    int currentPage = 0;
     void Awake()
     {
         if (instance != null)
@@ -20,7 +21,7 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         setupMainMenu();
-        mainMenuFSM.Move(0);
+        OpenPage(0);
     }
     void sortPages()
     {
@@ -39,6 +40,10 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     }
+    public void OpenPage(int n)
+    {
+        mainMenuFSM.Move(n);
+    }
     //States: 0 Init, 1 MainMenu
     public void setupMainMenu()
     {
@@ -53,10 +58,19 @@ public class MainMenuManager : MonoBehaviour
         System.Action<int>[] stateTable =
         {
             x => {
+            pages[currentPage].Close();
             //Open MainMenu
-            pages[0].Open();
+            pages[x].Open();
+            currentPage = x;
             },
-            x => { }
+            x => {
+            pages[currentPage].Close();
+            //Open MainMenu
+            Debug.Log(x);
+            pages[x].Open();
+            currentPage = x;
+            }
+
         };
         mainMenuFSM = new FSM("MainMenuFSM",menuTransition,stateTable);
     }
