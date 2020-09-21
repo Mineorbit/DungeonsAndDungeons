@@ -75,7 +75,8 @@ public class GameManager : MonoBehaviour
                                             UnityEngine.Debug.Log("Loading Test");
                                             UnityEvent testLoad = new UnityEvent();
                                             testLoad.AddListener(asyncTestLoad);
-                                             
+                                            
+
                                             if(!LoadingScreen.instance.isOpen())
                                             {
                                                 LoadingScreen.instance.openLoadingScreen(testLoad);
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
     SceneLoadManager.instance.unloadCurrentScene();
     PauseMenu.pauseMenuAvailable = true;
     currentGameState = State.Test;
+    Client.instance.ConnectToGameServer("127.0.0.1");
     SceneLoadManager.instance.load(2, afterTestLoad);
     }
     public void performAction(GameAction action)
