@@ -120,6 +120,10 @@ public class Server
     }
     public static void Reject(TcpClient tcpClient)
     {
+        Debug.Log("Rejection geschickt");
+        byte[] rejectMessage = { (byte)ServerPackets.ConnectionBlock };
+        tcpClient.GetStream().Write(rejectMessage,0,2);
+        tcpClient.GetStream().Flush();
         tcpClient.GetStream().Close();
         tcpClient.Close();
     }

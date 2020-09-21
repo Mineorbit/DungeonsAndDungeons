@@ -9,6 +9,7 @@ using UnityEngine;
 public enum ServerPackets
 {
     ConnectInfo = 1,
+    ConnectionBlock,
     Information,
     PlayerGameDisconnect,
     GameReady,
