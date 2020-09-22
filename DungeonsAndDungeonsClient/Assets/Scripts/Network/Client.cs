@@ -26,6 +26,15 @@ public class Client : MonoBehaviour
             Destroy(this);
         instance = this;
     }
+    public void Start()
+    {
+        Setup();
+    }
+
+    public void Setup()
+    {
+
+    }
     public void ConnectToLobbyServer()
     {
 

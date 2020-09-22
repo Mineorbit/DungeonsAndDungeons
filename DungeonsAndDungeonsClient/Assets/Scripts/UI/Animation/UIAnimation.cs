@@ -35,6 +35,7 @@ public class UIAnimation
     public virtual void Open()
     {
         Setup();
+        canvasGroup.interactable = true;
         open = true;
         InEnded();
     }
