@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     {
         if(targetPosition!=transform.position)
         {
-        ServerSend.PlayerLocomotionData(id,targetPosition,targetRotation);
+        //ServerSend.PlayerLocomotionData(id,targetPosition,targetRotation);
         }
     }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)

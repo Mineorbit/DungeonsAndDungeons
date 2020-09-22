@@ -7,13 +7,12 @@ public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
     public bool Local = true;
-    public enum State{Setup,Idle,Prepare,Play,GameOver};
-    public static State s;
-    public Player[] players;
+    public enum State{Setup,Idle,Prepare,Connect,Play,GameOver};
+    public static State state;
 
-    long levelId = 0;
     void Start()
     {
+
         if(instance==null)
         {
             instance = this;
@@ -22,85 +21,23 @@ public class ServerManager : MonoBehaviour
             Destroy(this);
         }
 
-        Debug.Log(GetLongBinaryString(levelId));
-        Setup();
+        SetupGameServer();
 
        
     }
 
-   
-
-    void Idle()
+    void OpenGameServer()
     {
-        s = State.Idle;
-        //Do house keeping tasks like preloading favorite levels, manage memory etc
-
-
+        if(GameLogic.current!=null && state == State.Prepare)
+        ServerManager.state = State.Connect;
     }
-    void Play()
+
+    void SetupGameServer()
     {
-        s = State.Play;
-        //Block entries communicate to  lobby everything necessary
+        state = State.Idle;
+        GameLogic.StartRound(this.transform);
+        Server.CreateServer(this.transform);
     }
 
 
-    void  GameOver()
-    {
-        s = State.GameOver;
-        //Redirect Players and go back to  start
-
-    }
-
-    void Prepare()
-    {
-        s = State.Prepare;
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 64;
-        //Download and load map
-        prepareLevel();
-
-        Debug.Log("Server wird gestartet");
-        Server.Start(45565);
-    }
-    void prepareLevel()
-    {
-
-    }
-    static string GetLongBinaryString(long n)
-    {
-       byte[] bytes =BitConverter.GetBytes(n); 
-       Array.Reverse(bytes);
-       string hex = BitConverter.ToString(bytes).Replace("-", string.Empty);
-       return hex;
-    }
-
-   
-
-    
-
-    public bool checkLevelAvailable(long levelId)
-    {
-        return true;
-    }
-
-    private void OnApplicationQuit()
-    {
-        Server.Stop();
-        //Deallocate everything / delete garbage / create logs
-    }
-    void Setup()
-    {
-
-        s = State.Setup;
-
-        Directory.CreateDirectory(Application.persistentDataPath+"/map");
-
-        if(Local) 
-        {
-        PlayerManager.playerCount = 1;
-        }
-        Prepare();
-    }
-
-    
 }
