@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Fade : UIAnimation
 {
+    float fadeSpeed = 2;
     public override void Open()
     {
         if (!base.open)
@@ -36,7 +37,7 @@ public class Fade : UIAnimation
     }
     public IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1.05; i += Time.deltaTime)
+        for (float i = 0; i <= 1.05; i += fadeSpeed*Time.deltaTime)
         {
             canvasGroup.alpha = i;
             yield return null;
@@ -49,7 +50,7 @@ public class Fade : UIAnimation
 
     public IEnumerator FadeOut()
     {
-        for (float i = 1; i >= -0.05; i -= Time.deltaTime)
+        for (float i = 1; i >= -0.05; i -= fadeSpeed * Time.deltaTime)
         {
             canvasGroup.alpha = i;
             yield return null;

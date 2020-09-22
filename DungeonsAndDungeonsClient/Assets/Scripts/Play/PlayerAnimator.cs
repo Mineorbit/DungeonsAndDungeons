@@ -16,10 +16,16 @@ public class PlayerAnimator : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetDirection = new Vector3(controller.velocity.x,0, controller.velocity.z).normalized;
+        Vector3 targetDirection = PlayerController.movingDirection;
+        targetDirection.y = 0;
         Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         characterAnimator.SetFloat("Speed",Mathf.Min(inputVelocity.magnitude,1));
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.125f);
+        bool movementKeyPressed = Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.D); 
         
+        if(movementKeyPressed)
+        { 
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.05f);
+        }
+
     }
 }

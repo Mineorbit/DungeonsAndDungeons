@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class FadeAndGrow : UIAnimation
 {
+    float Speed = 2;
     public override void Open()
     {
         if (!base.open)
@@ -35,7 +36,7 @@ public class FadeAndGrow : UIAnimation
     }
     public IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1.05; i += Time.deltaTime)
+        for (float i = 0; i <= 1.05; i += Speed*Time.deltaTime)
         {
             canvasGroup.alpha = i;
             target.localScale = new Vector3(i,i,i);
@@ -49,7 +50,7 @@ public class FadeAndGrow : UIAnimation
 
     public IEnumerator FadeOut()
     {
-        for (float i = 1; i >= -0.05; i -= Time.deltaTime)
+        for (float i = 1; i >= -0.05; i -= Speed*Time.deltaTime)
         {
             canvasGroup.alpha = i;
             target.localScale = new Vector3(i, i, i);

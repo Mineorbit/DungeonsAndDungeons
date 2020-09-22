@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
+
     public static GameManager instance;
 
     UnityEvent afterMenuLoad;
