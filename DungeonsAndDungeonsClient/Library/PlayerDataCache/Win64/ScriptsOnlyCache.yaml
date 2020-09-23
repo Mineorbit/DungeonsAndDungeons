@@ -278,8 +278,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 225
       Script: {instanceID: 0}
-    - Class: 258
-      Script: {instanceID: 0}
     Assets/Scenes/menu.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -426,6 +424,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14530}
     - Class: 114
       Script: {instanceID: 14786}
+    - Class: 114
+      Script: {instanceID: 15148}
     - Class: 114
       Script: {instanceID: 15816}
     - Class: 114
@@ -1277,7 +1277,7 @@ ScriptsOnlyBuild:
     className: VolumeProfile
   - hash:
       serializedVersion: 2
-      Hash: fd2735ddfb29eaa75e3424dcd14feca0
+      Hash: 38b06677a0ba236a47c8531025ea34bc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenuManager
@@ -2033,7 +2033,7 @@ ScriptsOnlyBuild:
     className: MicroShadowing
   - hash:
       serializedVersion: 2
-      Hash: 3a8a3ac2aa52397c19198d76f34d2af4
+      Hash: f2fbd9cc09f05f47fd2c1156c8b7a639
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PauseMenu
@@ -2090,5 +2090,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/main.unity
   - Assets/Scenes/menu.unity
   - Assets/Scenes/test.unity
-  playerPath: C:/Users/mineo/Desktop/ddbuilds/Builds/220920/Dungeons and Dungeons
+  playerPath: C:/Users/mineo/Desktop/ddbuilds/Builds/230920/Dungeons and Dungeons
     Client.exe
