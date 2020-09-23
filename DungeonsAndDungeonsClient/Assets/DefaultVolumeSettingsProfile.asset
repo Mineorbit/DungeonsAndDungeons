@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf384b154398e341b6b29969c078198, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   quality:
-    m_OverrideState: 0
-    m_Value: 1
-  intensity:
     m_OverrideState: 1
     m_Value: 2
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
     min: 0
   maximumVelocity:
     m_OverrideState: 0
@@ -249,17 +249,17 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2.2
     min: 0
     max: 4
   directLightingStrength:
     m_OverrideState: 1
-    m_Value: 0.635
+    m_Value: 0.524
     min: 0
     max: 1
   radius:
     m_OverrideState: 1
-    m_Value: 2.62
+    m_Value: 1.55
     min: 0.25
     max: 5
   temporalAccumulation:

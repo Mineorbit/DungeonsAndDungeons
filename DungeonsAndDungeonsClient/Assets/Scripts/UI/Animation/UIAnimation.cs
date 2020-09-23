@@ -36,12 +36,14 @@ public class UIAnimation
     {
         Setup();
         canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
         open = true;
         InEnded();
     }
     public void InEnded()
     {
         canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
         if (InEndedEvent != null)
         {
             InEndedEvent.Invoke();
@@ -50,6 +52,7 @@ public class UIAnimation
     public void OutEnded()
     {
         canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
         if (OutEndedEvent != null)
         {
             OutEndedEvent.Invoke();

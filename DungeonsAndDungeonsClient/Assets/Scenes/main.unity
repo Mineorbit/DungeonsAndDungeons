@@ -823,12 +823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ip: 127.0.0.1
   port: 13565
-  isConnectedGame: 0
-  lobbyConnected: 0
-  gameConnected: 0
-  globalId: 1
-  localId: 1
-  name: Test
 --- !u!1001 &5955086545594616271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -836,6 +830,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5955086544136709255, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955086544136709255, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5955086544136709257, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -928,6 +930,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5955086545003530172, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5955086545003530173, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
       propertyPath: pauseMenuAvailable
       value: 1
@@ -935,6 +941,26 @@ PrefabInstance:
     - target: {fileID: 5955086545003530173, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
       propertyPath: freezeGame
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955086545224681921, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_Name
+      value: Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955086545846594685, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_text
+      value: Back to Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955086545846594685, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955086545846594685, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955086545846594685, guid: 06055e5e72897c341b43b479362ad24b, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06055e5e72897c341b43b479362ad24b, type: 3}

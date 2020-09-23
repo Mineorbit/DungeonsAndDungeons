@@ -21,7 +21,7 @@ public class Client
     public Player player;
     public TcpClient tcpClient;
 
-    public enum PacketType { Message = 1};
+    public enum PacketType { Message = 1 };
 
     public Client(int _clientId)
     {
@@ -56,22 +56,36 @@ public class Client
     public void sendMessage(string message)
     {
         int messageLength = System.Text.ASCIIEncoding.Unicode.GetByteCount(message);
-        byte[] data = new byte[2+message.Length+messageLength];
-        byte[] idData = ShortToByte((short) PacketType.Message);
+        byte[] data = new byte[2 + message.Length + messageLength];
+        byte[] idData = ShortToByte((short)PacketType.Message);
         data[0] = idData[0];
         data[1] = idData[1];
         byte[] mData = StringToByte(message);
-        for(int i = 0; i < messageLength; i++)
+        for (int i = 0; i < messageLength; i++)
         {
             data[2 + i] = mData[i];
-        } 
-        
-        
+        }
+
+
+    }
+    public void processRead(IAsyncResult result)
+    {
+
+    }
+    public void StartRead()
+    {
+        tcpClient.GetStream().BeginRead(buffer, 0, buffer.Length,
+                                                 new AsyncCallback(processRead),
+                                                 tcpClient.GetStream());
     }
 
+  
     public void SendPacket(byte[] data)
     {
         tcpClient.GetStream().Write(data,0,data.Length);
+        Debug.Log(buffer[0]);
+
+        
     }
 
     public void Disconnect(string message)

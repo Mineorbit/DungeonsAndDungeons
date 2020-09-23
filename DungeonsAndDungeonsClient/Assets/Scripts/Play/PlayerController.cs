@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 targetDirection;
     public static Vector3 movingDirection;
     float speedY = 0;
-    float gravity = 1f;
+    float gravity = 1.5f;
     void Start()
     {
         controller = transform.GetComponent<CharacterController>();
@@ -24,24 +24,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-       if(acceptInput)
-        {
+       
             Move();
-        }
+        
     }
     void Move()
     {
+        if (acceptInput)
+        {
         targetDirection =
                     Vector3.Normalize(Vector3.ProjectOnPlane(cam.right, transform.up) * Input.GetAxisRaw("Horizontal") + Vector3.ProjectOnPlane(cam.forward, transform.up) * Input.GetAxisRaw("Vertical"));
-
+        }
 
         if (!controller.isGrounded)
         {
             speedY -= gravity * Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (controller.isGrounded && acceptInput && Input.GetKeyDown(KeyCode.Space))
         {
-            speedY = 1;
+                speedY = 1;
         }
         targetDirection.y = speedY;
         if (targetDirection.sqrMagnitude >= 0.01f)

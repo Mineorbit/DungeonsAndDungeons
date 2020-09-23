@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     {
         afterMenuLoad = new UnityEvent();
         afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
-        afterMenuLoad.AddListener(UIManager.instance.setupMainMenu);
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
     }

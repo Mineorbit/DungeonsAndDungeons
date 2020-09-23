@@ -11,7 +11,7 @@ public class Server : MonoBehaviour
 {
     public static Server server;
     Client[] clients;
-    int connected;
+    public int connected;
     int maxConnected = 4;
     TcpListener tcpListener;
 

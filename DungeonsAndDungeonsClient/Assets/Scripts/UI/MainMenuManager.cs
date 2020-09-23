@@ -9,7 +9,7 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager instance;
     public MenuPage[] pages;
     FSM mainMenuFSM;
-    int currentPage = 0;
+    public int currentPage = 0;
     void Awake()
     {
         if (instance != null)
@@ -52,7 +52,7 @@ public class MainMenuManager : MonoBehaviour
         sortPages();
 
         int[] initTable = { 0, 1 };
-        int[] mainTable = { 2, 3 };
+        int[] mainTable = { 0, 3 };
 
         int[][] menuTransition = {initTable,mainTable};
         System.Action<int>[] stateTable =

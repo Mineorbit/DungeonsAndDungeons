@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     public static bool pauseMenuAvailable;
@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public UIAnimation animation;
     public bool open;
     public bool freezePlayer = true;
+
+    public Button backToMainMenuButton;
     void Start()
     {
         Setup();
@@ -19,7 +21,16 @@ public class PauseMenu : MonoBehaviour
     {
         animation = new FadeAndGrow();
         animation.target = this.transform;
+        backToMainMenuButton = transform.Find("Main").GetComponent<Button>();
+        backToMainMenuButton.onClick.AddListener(GotoMainMenu);
     }
+
+    void GotoMainMenu()
+    {
+        Close();
+        GameManager.instance.performAction(GameManager.GameAction.EnterMainMenu);
+    }
+
     void Open()
     {
         open = true;

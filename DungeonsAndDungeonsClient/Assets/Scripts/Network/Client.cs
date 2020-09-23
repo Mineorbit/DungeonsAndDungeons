@@ -35,9 +35,13 @@ public class Client : MonoBehaviour
     {
 
     }
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) ConnectToLobbyServer();
+    }
     public void ConnectToLobbyServer()
     {
-
+        tcp = new TcpClient(ip,port);
     }
     public void ConnectToGameServer(string serverIp)
     {
