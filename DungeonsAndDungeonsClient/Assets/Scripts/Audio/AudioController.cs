@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int audioSources;
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/AudioProfile", order = 1)]
+    class AudioProfile : ScriptableObject
+    {
+        public Vector3 relativePosition;
+        public float minVolume = 0.5f;
+        public float maxVolume = 1;
+        public AudioClip audioClip;
+    }
+
+    AudioProfile[] audioProfiles;
+    void Awake()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetupAudioProfiles()
     {
-        
+
     }
+    
 }
