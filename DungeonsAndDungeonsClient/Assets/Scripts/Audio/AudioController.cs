@@ -84,6 +84,8 @@ public class AudioController : MonoBehaviour
     }
     public void StopAll(int index)
     {
+        foreach (AudioSource source in audioSources[index])
+            source.Stop(); 
     }
     public void StopAll()
     {
