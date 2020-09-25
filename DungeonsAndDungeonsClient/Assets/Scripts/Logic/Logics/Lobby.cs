@@ -19,6 +19,8 @@ public class Lobby : MonoBehaviour
         player.name = name;
         Lobby.lobby.players[0] = player;
         //Open Pop Up with connect
+
+        NetworkManager.instance.LobbyConnect();
     }
 
 }

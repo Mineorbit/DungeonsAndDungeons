@@ -5,10 +5,11 @@ using UnityEngine;
 public class BlurScreen : MonoBehaviour
 {
     public static BlurScreen blurScreen;
-    float maxDist = 1000;
+    float maxDist = 50;
     float minDist = 1;
     public float t;
     bool open = false;
+    bool finished = true;
     void Start()
     {
         if (blurScreen != null) Destroy(this);
@@ -20,9 +21,10 @@ public class BlurScreen : MonoBehaviour
     void Update()
     {
     if(Camera.main != null)
-    transform.LookAt(Camera.main.transform.position);
-
+        { 
+        transform.LookAt(Camera.main.transform.position);
         transform.position = LerpPos(t);
+        }
     }
 
     Vector3 LerpPos(float t)
@@ -32,13 +34,37 @@ public class BlurScreen : MonoBehaviour
         return (1 - t) * (camPos + camFor * minDist) + t * (camPos + camFor * maxDist);
     }
 
-    IEnumerator Open()
+    public void Open()
     {
-        return null;
+        if (open&&!finished) return;
+        open = true;
+        finished = false;
+        StartCoroutine("OpenAnim");
     }
-    IEnumerator Close()
+    public void Close()
     {
+        if (!open && !finished) return;
+        open = false;
+        finished = false;
+        StartCoroutine("CloseAnim");
+    }
 
-        return null;
+    IEnumerator OpenAnim()
+    {
+        for (float ft = 1f; ft >= 0; ft -= 2* Time.deltaTime)
+        {
+            t = ft;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        finished = true;
+    }
+    IEnumerator CloseAnim()
+    {
+        for (float ft = 0f; ft <= 1; ft += 2 * Time.deltaTime)
+        {
+            t = ft;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        finished = true;
     }
 }
