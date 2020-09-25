@@ -18,12 +18,12 @@ public class MenuPage : MonoBehaviour
         transferAnimation = new Fade();
         transferAnimation.target = this.transform;
     }
-    public void Open()
+    public virtual void Open()
     {
         Debug.Log(transferAnimation);
         transferAnimation.Play();
     }
-    public void Close()
+    public virtual void Close()
     {
         transferAnimation.Play();
     }

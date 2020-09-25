@@ -20,9 +20,18 @@ public class PlayMenu : MenuPage
     {
         Button backButton = transform.Find("Back").GetComponent<Button>();
         backButton.onClick.AddListener(goBack);
+        Button lobbyButton = transform.Find("Online").Find("Go").GetComponent<Button>();
+        lobbyButton.onClick.AddListener(goLobby);
     }
     void goBack()
     {
         MainMenuManager.instance.OpenPage(0);
+    }
+    void goLobby()
+    {
+        string name = transform.gameObject.GetComponentInChildren<InputField>().text;
+        
+        MainMenuManager.instance.OpenPage(2);
+        Lobby.lobby.Open(name);
     }
 }

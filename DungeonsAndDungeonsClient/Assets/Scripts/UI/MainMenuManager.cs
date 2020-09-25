@@ -51,10 +51,11 @@ public class MainMenuManager : MonoBehaviour
         pages = GameObject.FindObjectsOfType<MenuPage>();
         sortPages();
 
-        int[] initTable = { 0, 1 };
-        int[] mainTable = { 0, 3 };
+        int[] mainTable = { 0, 1 ,0};
+        int[] playTable = { 0, 2, 2 };
+        int[] lobbyTable = { 0, 2, 2 };
 
-        int[][] menuTransition = {initTable,mainTable};
+        int[][] menuTransition = {mainTable,playTable,lobbyTable};
         System.Action<int>[] stateTable =
         {
             x => {
@@ -65,8 +66,17 @@ public class MainMenuManager : MonoBehaviour
             },
             x => {
             pages[currentPage].Close();
-            //Open MainMenu
-            Debug.Log(x);
+            //Open 
+
+            Debug.Log("Test");
+            pages[x].Open();
+            currentPage = x;
+            },
+            x => {
+            pages[currentPage].Close();
+            //Open 
+
+            Debug.Log("Testen");
             pages[x].Open();
             currentPage = x;
             }

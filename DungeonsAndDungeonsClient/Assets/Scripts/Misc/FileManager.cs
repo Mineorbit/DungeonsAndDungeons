@@ -6,9 +6,15 @@ using System.Diagnostics;
 
 public class FileManager : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
-        UnityEngine.Debug.Log(Application.persistentDataPath);
+        Setup();
+    }
+
+    void Setup()
+    {
+        createFolder("/level");
+        createFolder("/settings");
     }
     void createFolder(string path)
     {

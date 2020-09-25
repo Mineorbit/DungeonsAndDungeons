@@ -21,23 +21,10 @@ public class Client
     public TcpClient tcp;
     
 
-    public void Start()
-    {
-        Setup();
-    }
-
-    public void Setup()
-    {
-
-    }
     
-    public void ConnectToLobbyServer()
+    public void Connect()
     {
         tcp = new TcpClient(ip,port);
-    }
-    public void ConnectToGameServer(string serverIp)
-    {
-
     }
 
 }

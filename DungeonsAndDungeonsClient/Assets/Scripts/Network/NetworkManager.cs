@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static NetworkManager instance;
+    Client lobbyClient;
+    Client gameClient;
+    void Awake()
     {
-        
+        if (instance != null) Destroy(this);
+        instance = this;
+        lobbyClient = new Client();
+        gameClient = new Client();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LobbyConnect()
     {
-        
+        lobbyClient.Connect();
+
+        //Sende Message with name
     }
+
 }
