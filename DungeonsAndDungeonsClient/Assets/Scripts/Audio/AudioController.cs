@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/AudioProfile", order = 1)]
-    class AudioProfile : ScriptableObject
-    {
-        public bool         overloading;
-        public Vector3      relativePosition;
-        public float        minVolume = 0.5f;
-        public float        maxVolume = 1;
-        public float        spatialFactor;
-        public bool         loop;
-        public AudioClip[]    audioClip;
-    }
-    
+   
 
-    AudioProfile[] audioProfiles;
+
+    public AudioProfile[] audioProfiles;
     AudioSource[][] audioSources;
     int[] currentPlay;
     void Awake()
     {
-        audioSources = new AudioSource[audioProfiles.Length];
+        audioSources = new AudioSource[audioProfiles.Length][];
         SetupAudioProfiles();
     }
 
@@ -32,41 +22,50 @@ public class AudioController : MonoBehaviour
         currentPlay = new int[audioProfiles.Length];
         foreach(AudioProfile ap in audioProfiles)
         {
-            AudioSource[] source = new AudioSource[ap.audioClip.Length];
+            audioSources[j] = new AudioSource[ap.audioClip.Length];
             int i = 0;
             foreach (AudioClip c in ap.audioClip)
             {
-                source[i] = transform.gameObject.AddComponent<AudioSource>();
-                source[i].loop = ap.loop;
-                source[i].clip = ap.audioClip;
+                audioSources[j][i] = transform.gameObject.AddComponent<AudioSource>();
+                audioSources[j][i].loop = ap.loop;
+                audioSources[j][i].mute = true;
+                audioSources[j][i].playOnAwake = ap.onAwake;
+                audioSources[j][i].clip = ap.audioClip[i];
                 i++;
             }
-            audioSources[j] = source;
             j++;
         }
     }
     public void Blend(int index, float t)
     {
-        audioSources[index].volume = (1 - t) * audioProfiles[index].minVolume + t * audioProfiles[index].maxVolume;
+        audioSources[index][currentPlay[index]].volume = (1 - t) * audioProfiles[index].minVolume + t * audioProfiles[index].maxVolume;
+    }
+    void prePlay(int index)
+    {
+        //Prüfen ob schon läuft
+        audioSources[index][currentPlay[index]].mute = false;
     }
     public void Play(int index)
     {
-        if(!audioSources[index].isPlaying)
+        prePlay(index);
+        if (!audioSources[index][currentPlay[index]].isPlaying)
         {
-            audioSources[index].Play();
+            audioSources[index][currentPlay[index]].Play();
         }
     }
     public void PlayNext(int index)
     {
+        prePlay(index);
         int nextPlay = (currentPlay[index] + 1) % (audioSources[index].Length);
-        if (!audioSources[index][currentPlay[index]].isPlaying)
+        bool clipFinished = audioSources[index][currentPlay[index]].time >= audioSources[index][currentPlay[index]].clip.length;
+        if (!audioSources[index][currentPlay[index]].isPlaying && (clipFinished) )
         {
 
             audioSources[index][currentPlay[index]].Stop();
             audioSources[index][nextPlay].Play();
         }
 
-        if (audioSources[index][currentPlay].isPlaying)
+        if (audioSources[index][currentPlay[index]].isPlaying && (clipFinished) )
         {
 
             if (audioProfiles[index].overloading)
@@ -80,7 +79,14 @@ public class AudioController : MonoBehaviour
 
     public void Stop(int index)
     {
-        audioSources[index][currentPlay[index]].Stop();
+        if(audioProfiles[index].loop)
+        {
+            audioProfiles[index].loop = false;
+        }
+        else
+        {
+            audioSources[index][currentPlay[index]].Stop();
+        }
     }
     public void StopAll(int index)
     {

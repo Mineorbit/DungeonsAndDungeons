@@ -107,7 +107,9 @@ public class GameManager : MonoBehaviour
     SceneLoadManager.instance.unloadCurrentScene();
     PauseMenu.pauseMenuAvailable = true;
     currentGameState = State.Test;
-    Client.instance.ConnectToGameServer("127.0.0.1");
+
+        //Connect to Game Server
+
     SceneLoadManager.instance.load(2, afterTestLoad);
     }
     public void performAction(GameAction action)
