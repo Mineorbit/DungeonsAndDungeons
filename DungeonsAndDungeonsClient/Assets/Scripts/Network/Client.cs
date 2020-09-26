@@ -15,8 +15,8 @@ using System.Text;
 public class Client
 {
 
-    public static int dataBufferSize = 4096;
-
+    int dataBufferSize = 4096;
+    byte[] receiveBuffer;
     public string ip = "127.0.0.1";
     public int port = 13565;
     public TcpClient tcp;
@@ -40,6 +40,7 @@ public class Client
 
         ns = tcp.GetStream();
         Debug.Log("Verbunden");
+        receiveBuffer = new byte[dataBufferSize];
         ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
 
 
@@ -47,6 +48,10 @@ public class Client
     private void ReceiveCallback(IAsyncResult _result)
     {
         int length = ns.EndRead(_result);
+        byte id = receiveBuffer[0];
+        byte[] data = new byte[5];
+        Packet p = Packet.Parse(data);
+        p.OnReceive();
     }
     public void Disconnect()
     {
