@@ -29,6 +29,7 @@ public class NetworkManager : MonoBehaviour
 
      
     }
+
     void sendUsernameData()
     {
         //Sende Message with name

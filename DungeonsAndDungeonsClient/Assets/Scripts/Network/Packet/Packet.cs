@@ -6,7 +6,7 @@ using System;
 using System.Text;
 public class Packet
 {
-    byte packetId;
+    public byte packetId;
     Type[] types;
     object[] content;
     
@@ -19,13 +19,41 @@ public class Packet
         }
         return true;
     }
-    static Packet setPacketType()
+
+    static Packet setPacketType(byte id)
     {
+        Type[] subtypes = PacketTypeHandler.SubTypes;
+        foreach (Type t in subtypes)
+        {
+            Packet instance = (Packet) Activator.CreateInstance(t);
+            Debug.Log(instance.packetId);
+            if(instance.packetId == id)
+            {
+                return instance;
+            }
+
+        }
         return null;
+    }
+    Packet parseContent(byte[] content)
+    {
+        return this;
     }
     public static Packet Parse(byte[] data)
     {
-        return null;
+        Debug.Log("Parse packet");
+        short length = (short) ( (256 * (int) data[0]) + (int) data[1]);
+        byte[] shortened = new byte[data.Length-2];
+        Array.Copy(data,2,shortened,0,length);
+        byte id = shortened[0];
+        byte[] content = new byte[shortened.Length-1];
+        Array.Copy(shortened,1,content,0,shortened.Length-1);
+        Packet newPacket = Packet.setPacketType(id);
+        //nicht parsbarkeit besser handlen
+        if (newPacket == null)
+            return null;
+        Packet packedPacket = newPacket.parseContent(content);
+        return packedPacket;
     }
 
     public byte[] Compose()

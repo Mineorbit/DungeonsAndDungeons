@@ -63,11 +63,16 @@ public class Client
     private void ReceiveCallback(IAsyncResult _result)
     {
         int length = ns.EndRead(_result);
-        byte[] data = new byte[length];
-        receiveBuffer.CopyTo(data,length);
-        Packet p = Packet.Parse(data);
-        p.OnReceive();
+        ThreadManager.ExecuteOnMainThread(()=> {
+            byte[] data = new byte[length];
+            Array.Copy(receiveBuffer, data, length);
+            Packet p = Packet.Parse(data);
+            //Hier andere behandlung für den fall das packet nicht parsebar
+            if(p != null)
+            p.OnReceive();
+        });
     }
+    
     public void Disconnect()
     {
     }
