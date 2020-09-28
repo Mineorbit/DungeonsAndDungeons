@@ -68,16 +68,13 @@ public class MainMenuManager : MonoBehaviour
             pages[currentPage].Close();
             //Open 
 
-            Debug.Log("Test");
             pages[x].Open();
             currentPage = x;
             },
             x => {
             pages[currentPage].Close();
-            //Open 
-
-            Debug.Log("Testen");
-            pages[x].Open();
+                //Open 
+                pages[x].Open();
             currentPage = x;
             }
 

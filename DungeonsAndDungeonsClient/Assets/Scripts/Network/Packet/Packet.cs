@@ -26,6 +26,30 @@ public class Packet
     {
         return null;
     }
+
+    public byte[] Compose()
+    {
+        return null;
+    }
+    byte[] Concat(byte[][] data)
+    {
+        int length = 0;
+        for(int i = 0;i<data.Length;i++)
+        {
+            length  += data[i].Length;
+        }
+        byte[] returnData = new byte[length];
+        int z = 0;
+        for (int i = 0;i<length;i += data[i].Length)
+        {
+            for(int j = 0;j<data[i].Length;j++)
+            {
+                returnData[i + j] = data[z][j];
+            }
+            z++;
+        }
+        return returnData;
+    }
     public virtual void OnReceive()
     {
 

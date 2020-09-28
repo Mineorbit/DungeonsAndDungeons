@@ -12,6 +12,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Text;
 
+using UnityEngine.Events;
+
 public class Client
 {
 
@@ -24,15 +26,19 @@ public class Client
 
     public void Connect()
     {
-
-        BlurScreen.blurScreen.Open();
         tcp = new TcpClient();
         tcp.BeginConnect(ip,port, new AsyncCallback(ConnectCallBack),tcp);
+    }
+    public void Connect(UnityEvent onConnectEvent)
+    {
+        tcp = new TcpClient();
+        tcp.BeginConnect(ip, port, new AsyncCallback(ConnectCallBack), onConnectEvent);
     }
     public void ConnectCallBack(IAsyncResult result)
     {
 
-        tcp.EndConnect(result); 
+        tcp.EndConnect(result);
+        
         if (!tcp.Connected)
         {
             return;
@@ -41,8 +47,18 @@ public class Client
         ns = tcp.GetStream();
         Debug.Log("Verbunden");
         receiveBuffer = new byte[dataBufferSize];
-        ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+        if (result.AsyncState is UnityEvent)
+        {
 
+            ThreadManager.ExecuteOnMainThread(
+                () => {
+                UnityEvent connectEvent = (UnityEvent)result.AsyncState;
+                connectEvent.Invoke();
+                }
+            );
+        }
+        ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+        
 
     }
     private void ReceiveCallback(IAsyncResult _result)
@@ -55,6 +71,10 @@ public class Client
     }
     public void Disconnect()
     {
+    }
+    public void Send(Packet p)
+    {
+
     }
     
 

@@ -31,7 +31,6 @@ public class PlayMenu : MenuPage
     {
         string name = transform.gameObject.GetComponentInChildren<InputField>().text;
         
-        MainMenuManager.instance.OpenPage(2);
         Lobby.lobby.Open(name);
     }
 }

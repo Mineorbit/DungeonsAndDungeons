@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Lobby : MonoBehaviour
 {
     public static Lobby lobby;
@@ -15,12 +15,22 @@ public class Lobby : MonoBehaviour
     }
     public void Open(string name)
     {
+
+
         Player player = new Player();
         player.name = name;
         Lobby.lobby.players[0] = player;
         //Open Pop Up with connect
+        UnityEvent onConnectEvent = new UnityEvent();
+        onConnectEvent.AddListener(OpenLobbyMenu);
+        NetworkManager.instance.LobbyConnect(onConnectEvent,name);
 
-        NetworkManager.instance.LobbyConnect();
     }
+
+    void OpenLobbyMenu()
+    {
+        MainMenuManager.instance.OpenPage(2);
+    }
+
 
 }
