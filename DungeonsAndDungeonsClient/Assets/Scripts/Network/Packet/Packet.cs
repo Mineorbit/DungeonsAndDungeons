@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System;
-
+using System.Text;
 public class Packet
 {
+    byte packetId;
     Type[] types;
     object[] content;
     
@@ -29,7 +30,28 @@ public class Packet
 
     public byte[] Compose()
     {
-        return null;
+        byte[][] contentData = new byte[content.Length][];
+        for(int i = 0;i<content.Length;i++)
+        {
+            object o = content[i];
+            if(o.GetType() is int)
+            { 
+                    contentData[i] = BitConverter.GetBytes((int) o);
+            }else if(o.GetType() is string)
+            { 
+                //Hier noch das common encoding raussuchen
+                    contentData[i] = Encoding.ASCII.GetBytes((string) o);                     
+            }
+        }
+        byte[] contentResult = Concat(contentData);
+        short length = (short) contentResult.Length;
+        byte[] front = {0,0 , packetId  };
+        front[0] = (byte)(length & 0xff);
+        front[1] = (byte)((length >> 8) & 0xff);
+        byte[] packetData = new byte[2+contentResult.Length];
+        front.CopyTo(packetData,0);
+        contentResult.CopyTo(packetData, 3 + contentResult.Length);
+        return packetData;
     }
     byte[] Concat(byte[][] data)
     {

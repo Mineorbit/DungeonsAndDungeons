@@ -17,6 +17,15 @@ public class Fade : UIAnimation
 
         canvasGroup.alpha = 1;
     }
+    public override void Close()
+    {
+        if (base.open)
+        { base.Close(); }
+        else return;
+        animationPlaying = true;
+
+        canvasGroup.alpha = 0;
+    }
 
     public override bool Play()
     {

@@ -40,6 +40,15 @@ public class UIAnimation
         open = true;
         InEnded();
     }
+    public virtual void Close()
+    {
+        Setup();
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        open = false;
+        OutEnded();
+
+    }
     public void InEnded()
     {
         canvasGroup.interactable = true;

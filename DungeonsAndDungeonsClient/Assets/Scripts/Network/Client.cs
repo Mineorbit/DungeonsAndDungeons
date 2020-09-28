@@ -17,7 +17,7 @@ using UnityEngine.Events;
 public class Client
 {
 
-    int dataBufferSize = 4096;
+    int dataBufferSize = 1024;
     byte[] receiveBuffer;
     public string ip = "127.0.0.1";
     public int port = 13565;
@@ -45,7 +45,6 @@ public class Client
         }
 
         ns = tcp.GetStream();
-        Debug.Log("Verbunden");
         receiveBuffer = new byte[dataBufferSize];
         if (result.AsyncState is UnityEvent)
         {
@@ -64,8 +63,8 @@ public class Client
     private void ReceiveCallback(IAsyncResult _result)
     {
         int length = ns.EndRead(_result);
-        byte id = receiveBuffer[0];
-        byte[] data = new byte[5];
+        byte[] data = new byte[length];
+        receiveBuffer.CopyTo(data,length);
         Packet p = Packet.Parse(data);
         p.OnReceive();
     }
