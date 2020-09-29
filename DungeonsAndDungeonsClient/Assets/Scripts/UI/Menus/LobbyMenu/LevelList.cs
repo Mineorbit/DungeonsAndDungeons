@@ -7,6 +7,8 @@ public class LevelList : MonoBehaviour
     Vector2 lastPosition;
     Vector2 lastObjectPosition;
     Vector3 targetPosition;
+    LevelElement[] levelElements; 
+    object levelElementPrefab;
     void Start()
     {
         targetPosition = transform.position;
