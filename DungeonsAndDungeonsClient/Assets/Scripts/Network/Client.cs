@@ -83,7 +83,8 @@ public class Client
     }
     public void Send(Packet p)
     {
-
+        byte[] data = p.Compose();
+        ns.Write(data,0,data.Length);
     }
     
 

@@ -37,7 +37,7 @@ public class NetworkManager : MonoBehaviour
     void sendUsernameData()
     {
         //Sende Message with name
-        PlayerConnectedPacket usernamePacket = new PlayerConnectedPacket();
+        PlayerConnectedPacket usernamePacket = new PlayerConnectedPacket(username);
         lobbyClient.Send(usernamePacket);
     }
 
