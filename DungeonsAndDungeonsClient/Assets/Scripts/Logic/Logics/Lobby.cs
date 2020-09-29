@@ -26,10 +26,21 @@ public class Lobby : MonoBehaviour
         NetworkManager.instance.LobbyConnect(onConnectEvent,name);
 
     }
-
+    public void Close()
+    {
+        players = new Player[4];
+        UnityEvent onDisconnectEvent = new UnityEvent();
+        onDisconnectEvent.AddListener(CloseLobbyMenu);
+        NetworkManager.instance.LobbyDisconnect(onDisconnectEvent);
+    }
+    void CloseLobbyMenu()
+    {
+        MainMenuManager.instance.OpenPage(1);
+    }
     void OpenLobbyMenu()
     {
         MainMenuManager.instance.OpenPage(2);
+        PlayerView.playerView.UpdatePlayerView(players);
     }
 
 

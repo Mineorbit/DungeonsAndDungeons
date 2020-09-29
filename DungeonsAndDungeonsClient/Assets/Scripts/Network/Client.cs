@@ -73,8 +73,13 @@ public class Client
         });
     }
     
-    public void Disconnect()
+    public void Disconnect(UnityEvent unityEvent)
     {
+        PlayerDisconnectedPacket packet = new PlayerDisconnectedPacket();
+        Send(packet);
+        ns.Close();
+        tcp.Close();
+        unityEvent.Invoke();
     }
     public void Send(Packet p)
     {

@@ -27,8 +27,11 @@ public class NetworkManager : MonoBehaviour
         AlertScreen.alert.Open();
         onConnectEvent.AddListener(AlertScreen.alert.Close);
         lobbyClient.Connect(onConnectEvent);
-
      
+    }
+    public void LobbyDisconnect(UnityEvent disconnectEvent)
+    {   
+        lobbyClient.Disconnect(disconnectEvent);
     }
 
     void sendUsernameData()
