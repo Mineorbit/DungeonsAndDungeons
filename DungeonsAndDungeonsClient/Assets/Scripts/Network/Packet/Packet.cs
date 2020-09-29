@@ -7,8 +7,8 @@ using System.Text;
 public class Packet
 {
     public byte packetId;
-    Type[] types;
-    object[] content;
+    public Type[] types;
+    public object[] content;
     
     public bool TypeCheck()
     {
@@ -35,8 +35,24 @@ public class Packet
         }
         return null;
     }
-    Packet parseContent(byte[] content)
+    Packet parseContent(byte[] data)
     {
+        int z = 0;
+        for(int i = 0; i < types.Length;i++)
+        {
+            if(types[i] == typeof(string))
+            {
+
+            }else
+            if(types[i] == typeof(int))
+            {
+                byte[] intData = {data[z], data[z+1], data[z+2], data[z+3] };
+                if (BitConverter.IsLittleEndian)
+                    Array.Reverse(intData);
+                content[i] = BitConverter.ToInt32(intData, 0);
+                z += 4;
+            }
+        }
         return this;
     }
     public static Packet Parse(byte[] data)
@@ -55,7 +71,7 @@ public class Packet
         Packet packedPacket = newPacket.parseContent(content);
         return packedPacket;
     }
-
+    
     public byte[] Compose()
     {
         byte[][] contentData = new byte[content.Length][];
@@ -71,6 +87,7 @@ public class Packet
                     contentData[i] = Encoding.ASCII.GetBytes((string) o);                     
             }
         }
+
         byte[] contentResult = Concat(contentData);
         short length = (short) contentResult.Length;
         byte[] front = {0,0 , packetId  };

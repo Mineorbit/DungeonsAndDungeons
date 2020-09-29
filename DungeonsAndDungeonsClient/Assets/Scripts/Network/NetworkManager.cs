@@ -7,7 +7,8 @@ public class NetworkManager : MonoBehaviour
     public static NetworkManager instance;
     Client lobbyClient;
     Client gameClient;
-    string username;
+    public string username;
+    public int globalId;
     void Awake()
     {
         if (instance != null) Destroy(this);
