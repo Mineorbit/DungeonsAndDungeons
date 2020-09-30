@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MainMenu : MenuPage
 {
     Button playModeButton;
+    Button editModeButton;
     Button testModeButton;
     public override void Awake()
     {
@@ -22,8 +23,10 @@ public class MainMenu : MenuPage
     {
         playModeButton = transform.Find("Play").GetComponent<Button>();
         testModeButton = transform.Find("Test").GetComponent<Button>();
+        editModeButton = transform.Find("Edit").GetComponent<Button>();
         testModeButton.onClick.AddListener(enterTest);
         playModeButton.onClick.AddListener(enterPlay);
+        editModeButton.onClick.AddListener(enterEdit);
     }
     void enterPlay()
     {
@@ -32,5 +35,9 @@ public class MainMenu : MenuPage
     void enterTest()
     {
         GameManager.instance.performAction(GameManager.GameAction.EnterTestFromMainMenu);
+    }
+    void enterEdit()
+    {
+        MainMenuManager.instance.OpenPage(3);
     }
 }

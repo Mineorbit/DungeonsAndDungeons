@@ -6,7 +6,9 @@ ScriptsOnlyBuild:
     - BlurScreen
     - CoroutineManager
     - CreateLevelMenu
+    - EditMenu
     - FileManager
+    - FileStructureProfile
     - GameManager
     - LevelList
     - LoadingScreen
@@ -189,11 +191,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12980}
     - Class: 114
+      Script: {instanceID: 13242}
+    - Class: 114
       Script: {instanceID: 13320}
     - Class: 114
       Script: {instanceID: 13404}
     - Class: 114
       Script: {instanceID: 13506}
+    - Class: 114
+      Script: {instanceID: 13534}
     - Class: 114
       Script: {instanceID: 13566}
     - Class: 114
@@ -247,39 +253,41 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 16112}
     - Class: 114
-      Script: {instanceID: 16294}
+      Script: {instanceID: 16252}
     - Class: 114
-      Script: {instanceID: 16444}
+      Script: {instanceID: 16296}
     - Class: 114
-      Script: {instanceID: 16536}
+      Script: {instanceID: 16446}
     - Class: 114
-      Script: {instanceID: 16678}
+      Script: {instanceID: 16538}
     - Class: 114
-      Script: {instanceID: 16934}
+      Script: {instanceID: 16680}
     - Class: 114
-      Script: {instanceID: 16988}
+      Script: {instanceID: 16936}
     - Class: 114
-      Script: {instanceID: 17150}
+      Script: {instanceID: 16990}
     - Class: 114
       Script: {instanceID: 17152}
     - Class: 114
-      Script: {instanceID: 17216}
+      Script: {instanceID: 17154}
     - Class: 114
-      Script: {instanceID: 17224}
+      Script: {instanceID: 17218}
     - Class: 114
-      Script: {instanceID: 17530}
+      Script: {instanceID: 17226}
     - Class: 114
       Script: {instanceID: 17532}
     - Class: 114
-      Script: {instanceID: 17582}
+      Script: {instanceID: 17534}
     - Class: 114
-      Script: {instanceID: 17624}
+      Script: {instanceID: 17584}
     - Class: 114
-      Script: {instanceID: 17734}
+      Script: {instanceID: 17626}
     - Class: 114
-      Script: {instanceID: 17812}
+      Script: {instanceID: 17736}
     - Class: 114
-      Script: {instanceID: 17820}
+      Script: {instanceID: 17814}
+    - Class: 114
+      Script: {instanceID: 17822}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -344,6 +352,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12616}
     - Class: 114
+      Script: {instanceID: 13092}
+    - Class: 114
       Script: {instanceID: 13242}
     - Class: 114
       Script: {instanceID: 13396}
@@ -378,13 +388,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15952}
     - Class: 114
-      Script: {instanceID: 16294}
+      Script: {instanceID: 16296}
     - Class: 114
-      Script: {instanceID: 16646}
+      Script: {instanceID: 16648}
     - Class: 114
-      Script: {instanceID: 17538}
+      Script: {instanceID: 17540}
     - Class: 114
-      Script: {instanceID: 17590}
+      Script: {instanceID: 17592}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -471,15 +481,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15966}
     - Class: 114
-      Script: {instanceID: 16854}
+      Script: {instanceID: 16856}
     - Class: 114
-      Script: {instanceID: 17504}
+      Script: {instanceID: 17506}
     - Class: 114
-      Script: {instanceID: 17538}
+      Script: {instanceID: 17540}
     - Class: 114
-      Script: {instanceID: 17582}
+      Script: {instanceID: 17584}
     - Class: 114
-      Script: {instanceID: 17590}
+      Script: {instanceID: 17592}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 137
@@ -875,7 +885,7 @@ ScriptsOnlyBuild:
     className: SaveManager
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: f450bd92c660880e07a6cb4e4f93cd6d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EditMenu
@@ -1721,6 +1731,12 @@ ScriptsOnlyBuild:
     className: CinemachineImpulseSource
   - hash:
       serializedVersion: 2
+      Hash: 104b59308b009c8598b2b8b38d27b0f0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FileStructureProfile
+  - hash:
+      serializedVersion: 2
       Hash: e4aac510b698bae77a5dbde189fe88e5
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -1931,7 +1947,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerEnumHistory
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: dab2304934788cea72d96f0cf19b3616
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FileManager
@@ -2210,5 +2226,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/main.unity
   - Assets/Scenes/menu.unity
   - Assets/Scenes/test.unity
-  playerPath: C:/Users/mineo/Desktop/ddbuilds/Builds/290920/Dungeons and Dungeons
+  playerPath: C:/Users/mineo/Desktop/ddbuilds/Builds/300920/Dungeons and Dungeons
     Client.exe

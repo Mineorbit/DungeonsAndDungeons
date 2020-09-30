@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EditMenu : MonoBehaviour
+public class EditMenu : MenuPage
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    public override void Awake()
     {
-        
+        base.Awake();
+        index = 3;
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void Start()
     {
-        
+        base.Start();
+
     }
 }
