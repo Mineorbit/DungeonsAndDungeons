@@ -1078,6 +1078,7 @@ GameObject:
   - component: {fileID: 1715383547}
   - component: {fileID: 1715383548}
   - component: {fileID: 1715383549}
+  - component: {fileID: 1715383550}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1173,6 +1174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e89c32e6d2278647847bd69642980e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  root: {fileID: 0}
 --- !u!114 &1715383546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1197,6 +1199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e762884e25884142942283c145a28e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: 
+  globalId: 0
 --- !u!114 &1715383548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,6 +1225,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad1191bd3e238f45b838bb70e2fbb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1715383550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715383538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e89c32e6d2278647847bd69642980e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 11400000, guid: ae62e4d673c39e44e8f0219ef2aa95da, type: 2}
 --- !u!1 &1839362378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,7 +1763,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.95
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1766,7 +1783,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0

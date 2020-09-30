@@ -90,30 +90,33 @@ public class Packet
                 contentData.AddRange (intData);
             }else if(t == typeof(string))
             {
-                Debug.Log("String:"+o);
                 //Hier noch das common encoding raussuchen
                 byte[] stringData = Encoding.ASCII.GetBytes((string) o);
-                byte[] lengthData = BitConverter.GetBytes(stringData.Length);
+                byte[] lengthData = BitConverter.GetBytes( (short) stringData.Length);
                 if (BitConverter.IsLittleEndian)
                     Array.Reverse(lengthData);
                 byte[] elementData = new byte[lengthData.Length+stringData.Length];
-                Array.Copy(lengthData,elementData,4);
-                Array.Copy(stringData,0,elementData,4,stringData.Length);
-                
+                Array.Copy(lengthData,elementData,2);
+                Array.Copy(stringData,0,elementData,2,stringData.Length);
+               
+
                 contentData.AddRange(elementData);
             }
         }
 
         byte[] contentResult = contentData.ToArray();
-        short length = (short) contentResult.Length;
+        short length = ( (short) ( contentResult.Length + 1));
         byte[] front = {0,0 , packetId  };
         front[1] = (byte)(length & 0xff);
         front[0] = (byte)((length >> 8) & 0xff);
         byte[] packetData = new byte[3+contentResult.Length];
         Array.Copy(front,0,packetData,0,front.Length);
         Array.Copy(contentResult,0, packetData, 3,contentResult.Length);
-        
 
+        foreach (byte b in packetData)
+        {
+            Debug.Log(b + " " + ((char)b));
+        }
         return packetData;
     }
     

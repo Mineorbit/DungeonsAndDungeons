@@ -15,7 +15,6 @@ public class PacketTypeHandler : MonoBehaviour
         {
             if(t.BaseType == typeof(Packet))
             {
-                Debug.Log(t);
                 list.Add(t);
             }
         }
