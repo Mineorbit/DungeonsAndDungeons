@@ -6,7 +6,8 @@ Name			Id	Content
 ConnectionInfo		1	Id
 Notification		2	String
 Invitation		3	int lobbyId int invitationId
-PlayerGameDisconnect	4
+LobbyData 4 4*(int + byte)
+PlayerGameDisconnect	5
 GameReady		6	2*4 byte
 PlayerLocomotionData	7	localId 7 float
 PlayerReSpawn		8	localId 3 float
