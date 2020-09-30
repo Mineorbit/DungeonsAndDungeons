@@ -20,14 +20,15 @@ public class Connector {
 		}
 	}
 
-	public byte[] Receive(int amount) {
+	public byte[] Receive(int amount) throws IOException {
 		byte[] data = new byte[amount];
 		for (int i = 0; i < amount; i++) {
 			try {
 				data[i] = inStream.readNBytes(1)[0];
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				inStream.close();
+				outStream.close();
+				socket.close();
 			}
 		}
 		return data;

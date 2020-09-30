@@ -49,7 +49,7 @@ public class FileManager : MonoBehaviour
             if (!Directory.Exists(filePath))
             {
                 Directory.CreateDirectory(filePath);
-            }else Debug.Log("Ordner gibt es schon");
+            }else UnityEngine.Debug.Log("Ordner gibt es schon");
 
         }
         catch (IOException ex)

@@ -25,14 +25,14 @@ public class ClientHandler implements Runnable {
 	Socket socket;
 	InputStream inStream;
 	OutputStream outStream;
-
+	Server server;
 	public ClientHandler(Socket s) {
 		socket = s;
 	}
 
 	@Override
 	public void run() {
-		Server server = Server.getInstance();
+		server = Server.getInstance();
 
 		System.out.println("Neue Verbindung: " + socket);
 
