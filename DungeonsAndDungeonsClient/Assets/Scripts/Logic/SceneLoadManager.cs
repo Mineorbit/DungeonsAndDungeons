@@ -36,7 +36,30 @@ public class SceneLoadManager : MonoBehaviour
         }
 
         StartCoroutine(coroutine);
-    } 
+    }
+    public void load(int loadScene)
+    {
+        if (loadScene >= numberOfScenes)
+        {
+            coroutine = loadAs(1);
+        }
+        else
+        {
+            coroutine = loadAs(loadScene);
+        }
+
+        StartCoroutine(coroutine);
+    }
+    public IEnumerator loadAs(int targetScene)
+    {
+
+        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(targetScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        currentScene = targetScene;
+    }
     public IEnumerator loadAs(int targetScene,UnityEvent finEvent)
     {
 

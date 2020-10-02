@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
 
     UnityEvent afterMenuLoad;
     UnityEvent afterTestLoad;
+    UnityEvent afterEditLoad;
     FSM gameStateFSM;
     public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
     public State currentGameState;
-    public enum GameAction { LoadGameFromBoot = 0,EnterMainMenu ,EnterTestFromMainMenu };
+    public enum GameAction { LoadGameFromBoot = 0,EnterMainMenu ,EnterTestFromMainMenu,EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
 
     void Start()
     {
@@ -40,9 +41,12 @@ public class GameManager : MonoBehaviour
     {
         int[] afterInit = {0,1,1};
         int[] afterMenu = {1,1,3};
+        int[] afterEdit = { };
+        int[] afterTest = { };
         int[][] gameStateTranslationTable =  {afterInit,afterMenu,afterInit,afterInit};
         //x ist GameAction int
         //Wichtige lücke: aktuell können unloading und neues szenen laden passieren obwohl loading screen noch nicht voll da
+        //Consistency tests in den Transfers einbauen
         Action<int>[] stateTable =      { x =>
                                         {
                                             UnityEngine.Debug.Log("Initliasing Game");
@@ -70,16 +74,27 @@ public class GameManager : MonoBehaviour
 
 
                                         }
-                                        , x => { }
+                                        , x => 
+                                        {
+                                            UnityEngine.Debug.Log("Loading Edit");
+                                            if(!LoadingScreen.instance.isOpen())
+                                            {
+                                                UnityEvent editLoad = new UnityEvent();
+                                                editLoad.AddListener(asyncEditLoad);
+                                                LoadingScreen.instance.openLoadingScreen(editLoad);
+                                            }else
+                                            {
+                                                asyncEditLoad();
+                                            }
+                                        }
                                         , x =>
                                         {
                                             UnityEngine.Debug.Log("Loading Test");
-                                            UnityEvent testLoad = new UnityEvent();
-                                            testLoad.AddListener(asyncTestLoad);
                                             
-
                                             if(!LoadingScreen.instance.isOpen())
                                             {
+                                                UnityEvent testLoad = new UnityEvent();
+                                                testLoad.AddListener(asyncTestLoad);
                                                 LoadingScreen.instance.openLoadingScreen(testLoad);
                                             }else
                                             {
@@ -102,6 +117,15 @@ public class GameManager : MonoBehaviour
         currentGameState = State.MainMenu;
         SceneLoadManager.instance.load(1, afterMenuLoad);
     }
+    void asyncEditLoad()
+    {
+
+        SceneLoadManager.instance.unloadCurrentScene();
+        PauseMenu.pauseMenuAvailable = false;
+        currentGameState = State.Edit;
+        SceneLoadManager.instance.load(2);
+        SceneLoadManager.instance.load(3,afterEditLoad);
+    }
     void asyncTestLoad()
     {
     SceneLoadManager.instance.unloadCurrentScene();
@@ -117,6 +141,10 @@ public class GameManager : MonoBehaviour
         gameStateFSM.Move((int) action);
     }
     
+    public void createLevel(LevelData.LevelMetaData data)
+    {
+        LevelManager.levelManager.New(data);
+    }
 
     void Update()
     {
