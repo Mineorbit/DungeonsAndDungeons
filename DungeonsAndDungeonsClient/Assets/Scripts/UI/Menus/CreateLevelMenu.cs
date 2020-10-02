@@ -6,6 +6,7 @@ public class CreateLevelMenu : MenuPage
 {
     public void Awake()
     {
+        base.Awake();
         index = 4;
     }
 }

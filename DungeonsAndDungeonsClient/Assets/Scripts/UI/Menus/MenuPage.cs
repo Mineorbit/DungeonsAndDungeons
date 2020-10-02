@@ -8,12 +8,12 @@ public class MenuPage : MonoBehaviour
     UIAnimation transferAnimation;
     public virtual void Awake()
     {
-        setupUI();
+        setupTransition();
     }
     public virtual void Start()
     {
     }
-    void setupUI()
+    public void setupTransition()
     {
         transferAnimation = new Fade();
         transferAnimation.target = this.transform;
