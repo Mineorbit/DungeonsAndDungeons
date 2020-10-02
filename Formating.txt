@@ -1,10 +1,16 @@
-Bei allen: 2 Byte Length , 1 Byte Id
+Settings:
 
-PlayerData: {LobbyId (LobbyData), LocalId, GlobalId, PrefColor, Name, StubId, { {Name,StubId}, {GlobalId} } }
-LobbyData: {LobbyId, 4x GlobalId (PlayerData), UlId (LevelData), {LobbyId} }
+ServerData;
+
+
+PlayerData: {GlobalId, PrefColor, Name, StubId, { {Name,StubId}, {GlobalId} } } (Permanent)
+LobbyData: {LobbyId, Privacy, MaxSize, UlId (LevelData), {LobbyId} }
+LobbyPlayer: {LobbyId ,GlobalId , LocalId, Color, Accept, {Lobbyid, GlobalId} }
 Invitations: {InvitationId, LobbyId (LobbyData) , GlobalId (PlayerData), {InvitationId, LobbyId} }
-LevelData: {Name, Template, UlId, GlobalId (PlayerData) , {UlId}}
+LevelData: {Name, Template, UlId, GlobalId (PlayerData) , {UlId} } (Permanent)
 
+Packete:
+Bei allen: 2 Byte Length , 1 Byte Id
 Server To Client
 
 Name			Id	Content    
