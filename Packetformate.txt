@@ -1,11 +1,16 @@
 Bei allen: 2 Byte Length , 1 Byte Id
 
+PlayerData: {LobbyId (LobbyData), LocalId, GlobalId, PrefColor, Name, StubId, { {Name,StubId}, {GlobalId} } }
+LobbyData: {LobbyId, 4x GlobalId (PlayerData), UlId (LevelData), {LobbyId} }
+Invitations: {InvitationId, LobbyId (LobbyData) , GlobalId (PlayerData), {InvitationId, LobbyId} }
+LevelData: {Name, Template, UlId, GlobalId (PlayerData) , {UlId}}
+
 Server To Client
 
 Name			Id	Content    
-ConnectionInfo		1	Id
-Notification		2	String
-Invitation		3	int lobbyId int invitationId
+ConnectionInfo		1 	int GlobalId
+Notification		2	String Message
+ForwardInvitation		3 int invitationId
 LobbyData     4     4*(int + byte)
 PlayerGameDisconnect	5
 GameReady		6	2*4 byte
@@ -20,11 +25,12 @@ Name			Id	Content
 PlayerConnected		1	String
 PlayerDisconnect	2	-
 LeaveLobby		3	-
-JoinLobby		4	int lobbyId int invitationId
-ChangeName		5	String
-ChangeItem		6	byte
-ChangeColor		7	byte
-PlayerGameConnect	8	int globalIdd byte localId
-PlayerGameReady		9	-
-PlayerLocomotionData	10	byte localId 7 float
+CreateInvitation 4 string username short stubId
+JoinLobby		5	int invitationId
+ChangeName		6	String
+ChangeItem		7	byte
+ChangeColor		8	byte
+PlayerGameConnect	9	int globalIdd byte localId
+PlayerGameReady		10	-
+PlayerLocomotionData	11	byte localId 7 float
 
