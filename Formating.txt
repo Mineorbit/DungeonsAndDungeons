@@ -17,11 +17,12 @@ Name			Id	Content
 ConnectionInfo		1 	int GlobalId
 Notification		2	String Message
 ForwardInvitation		3 int invitationId
-LobbyData     4     4*(int + byte)
+LobbyData     4     4*(string Name + byte LocalId, bit Accept)
 PlayerGameDisconnect	5
-GameReady		6	2*4 byte
-PlayerLocomotionData	7	localId 7 float
-PlayerReSpawn		8	localId 3 float
+GameReady		6
+PlayerLocomotionData	7	  byte LocalId + 7 *float Position and Rotation
+PlayerReSpawn		8	byte LocalId + 3 float  spawnposition
+AnimationData   9 byte LocalId + int AnimatorState
 
 
 
