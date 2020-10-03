@@ -1,0 +1,43 @@
+Settings:
+
+ServerData;
+
+
+PlayerData: {GlobalId, PrefColor, Name, StubId, { {Name,StubId}, {GlobalId} } } (Permanent)
+LobbyData: {LobbyId, Privacy, MaxSize, UlId (LevelData), {LobbyId} }
+LobbyPlayer: {LobbyId ,GlobalId , LocalId, Color, Accept, {Lobbyid, GlobalId} }
+Invitations: {InvitationId, LobbyId (LobbyData) , GlobalId (PlayerData), {InvitationId, LobbyId} }
+LevelData: {Name, Template, UlId, GlobalId (PlayerData) , {UlId} } (Permanent)
+
+Packete:
+Bei allen: 2 Byte Length , 1 Byte Id
+Server To Client
+
+Name			Id	Content    
+ConnectionInfo		1 	int GlobalId
+Notification		2	String Message
+ForwardInvitation		3 int invitationId
+LobbyData     4     4*(string Name + byte LocalId, bit Accept)
+PlayerGameDisconnect	5
+GameReady		6
+PlayerLocomotionData	7	  byte LocalId + 7 *float Position and Rotation
+PlayerReSpawn		8	byte LocalId + 3 float  spawnposition
+AnimationData   9 byte LocalId + int AnimatorState
+
+
+
+Client To Server
+
+Name			Id	Content    
+PlayerConnected		1	String
+PlayerDisconnect	2	-
+LeaveLobby		3	-
+CreateInvitation 4 string username short stubId
+JoinLobby		5	int invitationId
+ChangeName		6	String
+ChangeItem		7	byte
+ChangeColor		8	byte
+PlayerGameConnect	9	int globalIdd byte localId
+PlayerGameReady		10	-
+PlayerLocomotionData	11	byte localId 7 float
+
