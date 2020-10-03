@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     }
     void StartRound()
     {
+        UpdateLogic();
         if(currentLogic!=null)
         {
             if(currentLogic.running==false)
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         int[] afterInit = {0,1,1,1,1};
         int[] afterMenu = {1,1,3,2,3};
-        int[] afterEdit = { };
+        int[] afterEdit = {};
         int[] afterTest = { };
         int[][] gameStateTranslationTable =  {afterInit,afterMenu,afterInit,afterInit,afterInit,afterInit};
         //x ist GameAction int
@@ -64,8 +65,7 @@ public class GameManager : MonoBehaviour
         //Consistency tests in den Transfers einbauen
         Action<int>[] stateTable =      { x =>
                                         {
-                                            UnityEngine.Debug.Log("Initliasing Game");
-                                            UpdateLogic();
+                                            UnityEngine.Debug.Log("Initiliasing Game");
                                             UnityEvent initEvent = new UnityEvent();
                                             initEvent.AddListener(asyncInit);
                                             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
                                         , x =>
                                         {
                                             UnityEngine.Debug.Log("Loading MainMenu");
-                                            UpdateLogic();
 
                                             UnityEvent menuLoad = new UnityEvent();
                                             menuLoad.AddListener(asyncMenuLoad);
@@ -94,7 +93,6 @@ public class GameManager : MonoBehaviour
                                         , x => 
                                         {
                                             UnityEngine.Debug.Log("Loading Edit");
-                                            UpdateLogic();
                                             if(!LoadingScreen.instance.isOpen())
                                             {
                                                 UnityEvent editLoad = new UnityEvent();

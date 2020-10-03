@@ -19,10 +19,18 @@ public class PlayerController : MonoBehaviour
     float gravity = 1.5f;
     void Start()
     {
+        Setup();
+    }
+    void OnEnable()
+    {
+        Setup();
+    }
+    void Setup()
+    {
         cam = GameObject.Find("Camera").transform;
         controller = transform.GetComponent<CharacterController>();
-    }
 
+    }
     void Update()
     {
        
