@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    Logic currentLogic;
+    public Logic currentLogic;
 
     UnityEvent afterMenuLoad;
     UnityEvent afterTestLoad;
@@ -125,14 +125,12 @@ public class GameManager : MonoBehaviour
     }
     void asyncInit()
     {
-        PauseMenu.pauseMenuAvailable = false;
         currentGameState = State.Init;
         performAction(GameAction.EnterMainMenu);
     }
     void asyncMenuLoad()
     {
         SceneLoadManager.instance.unloadCurrentScene();
-        PauseMenu.pauseMenuAvailable = false;
         currentGameState = State.MainMenu;
         SceneLoadManager.instance.load(1, afterMenuLoad);
     }
@@ -140,7 +138,6 @@ public class GameManager : MonoBehaviour
     {
 
         SceneLoadManager.instance.unloadCurrentScene();
-        PauseMenu.pauseMenuAvailable = false;
         currentGameState = State.Edit;
         int[] toLoad = new int[2];
         toLoad[0] = 2;
@@ -150,7 +147,6 @@ public class GameManager : MonoBehaviour
     void asyncTestLoad()
     {
     SceneLoadManager.instance.unloadCurrentScene();
-    PauseMenu.pauseMenuAvailable = true;
     currentGameState = State.Test;
 
         //Connect to Game Server

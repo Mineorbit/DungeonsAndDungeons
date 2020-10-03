@@ -30,9 +30,29 @@ public class PauseMenu : MonoBehaviour
         Close();
         GameManager.instance.performAction(GameManager.GameAction.EnterMainMenu);
     }
-
+    bool checkAvailability()
+    {
+        switch(GameManager.instance.currentGameState)
+        {
+            case GameManager.State.Init:
+                pauseMenuAvailable = false;
+                break;
+            case GameManager.State.MainMenu:
+                pauseMenuAvailable = false;
+                break;
+            default:
+                pauseMenuAvailable = true;
+                break;
+        }
+        if (LoadingScreen.instance.isOpen())
+        {
+            pauseMenuAvailable = false;
+        }
+        return pauseMenuAvailable;
+    }
     void Open()
     {
+        if (!checkAvailability()) return;
         open = true;
         if(freezeGame)
         //Inform GameManager of Attempt to (stop simulation in local play)
@@ -41,21 +61,22 @@ public class PauseMenu : MonoBehaviour
         {
                 PlayerController.acceptInput = false;
         }
+        BlurScreen.blurScreen.Open();
         animation.Play();
     }
     void Close()
     {
         if (freezeGame)
             //Inform GameManager of Attempt to (unfreeze Sim)
-
                 PlayerController.acceptInput = true;
+        BlurScreen.blurScreen.Close();
         animation.Play();
         open = false;
     }
 
     void Update()
     {
-    if(pauseMenuAvailable&&Input.GetKeyDown(KeyCode.Escape))
+    if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(!open)
             { 
