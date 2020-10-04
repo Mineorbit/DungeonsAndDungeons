@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EditLogic : Logic
 {
+    GameObject[] created;
     GameObject builder;
     public override void Init()
     {
-        builder = GameObject.Find("Builder");
+        Debug.Log("Init Build");
+        created = Instantiator.InstantiateAssets();
+        builder = created[0];
     }
+    
     public override void Start()
     {
         if (running) return;
@@ -17,12 +21,18 @@ public class EditLogic : Logic
     }
     public override void Stop()
     {
-
+        if (!running) return;
+        DespawnBuilder();
+    }
+    void DespawnBuilder()
+    {
+        builder.SetActive(false);
     }
     void SpawnBuilder(Vector3 location)
     {
         builder.transform.position = location;
-        builder.SetActive();
+        builder.SetActive(true);
         //Noch HUD Aktivieren
     }
+
 }
