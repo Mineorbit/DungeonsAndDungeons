@@ -32,6 +32,10 @@ public class UIAnimation
         animationPlaying = true;
         return true;
     }
+    public bool isOpen()
+    {
+        return open&&!animationPlaying;
+    }
     public virtual void Open()
     {
         Setup();

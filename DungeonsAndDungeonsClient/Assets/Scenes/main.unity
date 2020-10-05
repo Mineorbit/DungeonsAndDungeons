@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 554266003}
   - component: {fileID: 554266004}
   m_Layer: 0
-  m_Name: Screen
+  m_Name: BlurScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,6 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t: 0
+  open: 0
 --- !u!1 &713663870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2013,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.7
+  m_fontSize: 18.15
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

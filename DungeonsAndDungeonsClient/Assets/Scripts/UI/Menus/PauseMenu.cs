@@ -78,11 +78,11 @@ public class PauseMenu : MonoBehaviour
     {
     if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!open)
+            if((!open && !animation.isOpen()) && !BlurScreen.blurScreen.isOpen())
             { 
             Open();
             }
-            else
+            else if((open && animation.isOpen()) && BlurScreen.blurScreen.isOpen())
             {
             Close();
             }

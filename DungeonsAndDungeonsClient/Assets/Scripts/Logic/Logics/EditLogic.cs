@@ -9,7 +9,7 @@ public class EditLogic : Logic
     public override void Init()
     {
         Debug.Log("Init Build");
-        created = Instantiator.InstantiateAssets();
+        created = Instantiator.InstantiateAssets("edit");
         builder = created[0];
     }
     

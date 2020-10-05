@@ -128,14 +128,14 @@ public class GameManager : MonoBehaviour
     }
     void asyncMenuLoad()
     {
-        SceneLoadManager.instance.unloadCurrentScene();
+        SceneLoadManager.instance.unloadCurrentScenes();
         currentGameState = State.MainMenu;
         SceneLoadManager.instance.load(1, afterMenuLoad);
     }
     void asyncEditLoad()
     {
 
-        SceneLoadManager.instance.unloadCurrentScene();
+        SceneLoadManager.instance.unloadCurrentScenes();
         currentGameState = State.Edit;
         int[] toLoad = new int[2];
         toLoad[0] = 2;
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
     }
     void asyncTestLoad()
     {
-    SceneLoadManager.instance.unloadCurrentScene();
+    SceneLoadManager.instance.unloadCurrentScenes();
     currentGameState = State.Test;
 
         //Connect to Game Server
@@ -174,6 +174,9 @@ public class GameManager : MonoBehaviour
         {
             case State.Edit:
                 currentLogic = new EditLogic();
+                break;
+            case State.Test:
+                currentLogic = new TestLogic();
                 break;
             case State.PlayOnline:
                 currentLogic = new PlayLogic();
