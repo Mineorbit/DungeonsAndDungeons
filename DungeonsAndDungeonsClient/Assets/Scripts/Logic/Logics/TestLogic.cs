@@ -6,12 +6,10 @@ public class TestLogic : Logic
 {
 
     GameObject[] created;
-    GameObject player;
     public override void Init()
     {
         Debug.Log("Init Test");
         created = Instantiator.InstantiateAssets("test");
-        player = created[0];
     }
 
     public override void Start()
@@ -27,12 +25,14 @@ public class TestLogic : Logic
     }
     void DespawnPlayer()
     {
-        player.SetActive(false);
+        PlayerController.Despawn();
     }
     void SpawnPlayer(Vector3 location)
     {
-        player.transform.position = location;
-        player.SetActive(true);
+        //Move to other class Player eventually
+        PlayerController.Setup();
+        PlayerCameraController.Setup();
+        PlayerController.Spawn(new Vector3(0,0,0));
         //Noch HUD Aktivieren
     }
 }

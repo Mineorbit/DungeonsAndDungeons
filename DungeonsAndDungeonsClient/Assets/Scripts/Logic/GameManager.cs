@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
                                         , x =>
                                         {
                                             UnityEngine.Debug.Log("Loading Test");
-                                            UpdateLogic();
 
                                             if(!LoadingScreen.instance.isOpen())
                                             {

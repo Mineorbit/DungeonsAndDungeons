@@ -80,13 +80,11 @@ public class MainMenuManager : MonoBehaviour
             },
             x => {
             pages[currentPage].Close();
-                Debug.Log("Opening: "+x);
                 pages[x].Open();
             currentPage = x;
             },
             x => {
             pages[currentPage].Close();
-                Debug.Log("Opening: "+x);
                 pages[x].Open();
             currentPage = x;
             }

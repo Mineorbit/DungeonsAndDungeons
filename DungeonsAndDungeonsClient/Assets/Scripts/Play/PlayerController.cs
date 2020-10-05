@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    static PlayerController player;
+
     public static bool acceptInput = true;
     CharacterController controller;
     public Transform cam;
@@ -17,32 +19,39 @@ public class PlayerController : MonoBehaviour
     public static Vector3 movingDirection;
     float speedY = 0;
     float gravity = 1.5f;
-    void Start()
+    public void Awake()
     {
-        Setup();
+        if (player != null) Destroy(this);
+        player = this;
     }
-    void OnEnable()
+    //Setup References for PlayerController and initial values if necessary
+    public static void Setup()
     {
-        Setup();
-    }
-    void Setup()
-    {
-        cam = GameObject.Find("Camera").transform;
-        controller = transform.GetComponent<CharacterController>();
+        if(Camera.main!=null)
+        player.cam = Camera.main.transform;
 
+        player.controller = player.transform.GetComponent<CharacterController>();
+
+    }
+    public static void Spawn(Vector3 location)
+    {
+        player.transform.position = location;
+        player.gameObject.SetActive(true);
+    }
+    public static void Despawn()
+    {
+        player.gameObject.SetActive(false);
     }
     void Update()
     {
-       
-            Move();
-        
+    Move();
     }
     void Move()
     {
         if (acceptInput)
         {
-        targetDirection =
-                    Vector3.Normalize(Vector3.ProjectOnPlane(cam.right, transform.up) * Input.GetAxisRaw("Horizontal") + Vector3.ProjectOnPlane(cam.forward, transform.up) * Input.GetAxisRaw("Vertical"));
+            if(cam!=null)
+        targetDirection = Vector3.Normalize(Vector3.ProjectOnPlane(cam.right, transform.up) * Input.GetAxisRaw("Horizontal") + Vector3.ProjectOnPlane(cam.forward, transform.up) * Input.GetAxisRaw("Vertical"));
         }
 
         if (!controller.isGrounded)
