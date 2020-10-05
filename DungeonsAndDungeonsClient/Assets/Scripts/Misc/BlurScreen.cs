@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlurScreen : MonoBehaviour
 {
     public static BlurScreen blurScreen;
-    float maxDist = 50;
+    float maxDist = 500;
     float minDist = 1;
     public float t;
     bool open = false;

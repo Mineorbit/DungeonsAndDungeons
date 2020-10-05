@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class BuilderCursor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    static float degree;
+    static BuilderCursor builderCursor;
+    public void Awake()
     {
-        
+        if (builderCursor != null) Destroy(this);
+        builderCursor = this;
+        degree = 1;
     }
-
-    // Update is called once per frame
-    void Update()
+    public static void Set(Vector3 loc,Vector3 normal)
     {
-        
+        float x = Mathf.Round(loc.x / degree)  * degree;
+        float y = Mathf.Round(loc.y / degree)  * degree;
+        float z = Mathf.Round(loc.z / degree) * degree;
+        Vector3 pos = new Vector3(x,y,z);
+
+        Debug.Log(loc+ " "+pos);
+        builderCursor.transform.position = pos + normal*degree/2;
+    }
+    public static Vector3 Get()
+    {
+        return builderCursor.transform.position;
     }
 }
