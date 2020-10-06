@@ -26,9 +26,10 @@ public class LevelManager : MonoBehaviour
     {
 
     }
-    public void New(LevelData.LevelMetaData levelMetaData)
+    public static void New(LevelData.LevelMetaData levelMetaData)
     {
-
+        LevelData levelData = new LevelData(levelMetaData);
+        Level.Create(levelData);
     }
     
 }

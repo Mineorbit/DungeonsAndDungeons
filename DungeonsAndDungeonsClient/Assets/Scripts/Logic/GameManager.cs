@@ -158,7 +158,8 @@ public class GameManager : MonoBehaviour
     public void createLevel(LevelData.LevelMetaData data)
     {
         UnityEngine.Debug.Log("Creating new Level");
-        LevelManager.levelManager.New(data);
+        //Das in Init von EditLogic Tun mit Create
+        afterEditLoad.AddListener(()=> { LevelManager.New(data); });
         performAction(GameAction.EnterEditFromMainMenu);
     }
 

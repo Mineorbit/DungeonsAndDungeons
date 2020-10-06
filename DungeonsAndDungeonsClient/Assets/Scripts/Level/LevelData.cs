@@ -21,4 +21,9 @@ public class LevelData
     {
         levelObjectData = new LevelObjectData[1000];
     }
+    public LevelData(LevelMetaData levelLetaData)
+    {
+        metaData = levelLetaData;
+        levelObjectData = new LevelObjectData[1000];
+    }
 }

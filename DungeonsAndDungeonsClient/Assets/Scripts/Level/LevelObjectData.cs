@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelObjectData
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/LevelObjectData", order = 1)]
+public class LevelObjectData : InstantionTarget
 {
-    
+    public string FullName;
+    public Vector3 Scale;
 }

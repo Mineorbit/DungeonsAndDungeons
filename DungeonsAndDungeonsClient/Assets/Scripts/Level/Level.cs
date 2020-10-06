@@ -5,37 +5,50 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public static Level currentLevel;
+    public LevelObjectData floorData;
 
     public LevelData data;
-
-    LevelObject[] objects;
+    
+    List<LevelObject> objects;
     Spawn spawn;
     Goal goal;
-    public Level(LevelData levelData)
-    {
-        data = levelData;
-    }
 
+    public void Awake()
+    {
+        if (currentLevel != null) Destroy(this);
+        currentLevel = this;
+        objects = new List<LevelObject>();
+    }
     public static void Create(LevelData levelData)
     {
-        Level level = new Level(levelData);
-        currentLevel = level;
-        currentLevel.InstantiateFromLevelData();
-    }
-    public static void Create()
-    {
-        Create(null);
-    }
-    public void InstantiateFromLevelData()
-    {
+        currentLevel.data = levelData;
         Clear();
+        Debug.Log(currentLevel);
+        CreateGroundPlane(currentLevel.floorData);
     }
-    public void Clear()
+   
+    static void CreateGroundPlane(LevelObjectData floorObjectData)
     {
-        foreach(Transform child in transform)
+        if (floorObjectData == null) return;
+           for (int i = -10;i<10;i++)
+            for(int j = -10;j<10;j++)
+            {
+                //Here we need to change to the type of LevelData
+                GameObject o = floorObjectData.Create(new Vector3(i,-1, j));
+                o.transform.SetParent(currentLevel.transform);
+                currentLevel.objects.Add(o.GetComponent<LevelObject>());
+            }
+    }
+    public static void Clear()
+    {
+        foreach(Transform child in currentLevel.transform)
         {
             Destroy(child);
         }
+    }
+    public static void Destroy()
+    {
+        Clear();
         currentLevel = null;
     }
 

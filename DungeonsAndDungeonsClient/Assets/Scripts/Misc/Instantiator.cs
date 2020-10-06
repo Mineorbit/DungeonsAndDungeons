@@ -25,21 +25,29 @@ public class Instantiator : MonoBehaviour
             //Enumeration Code wrong later need an asset(ScriptableObject) for instantiation list
             string name = result[i].name;
             string newname = name.Substring(0, name.Length - 7);
-            int cnt = 0;
-            while (GameObject.Find(newname + "" + cnt) != null)
-                cnt++;
-
             result[i].name = newname;
-            if(cnt>0)
-            {
-                result[i].name = newname+""+cnt;
-            }
-
             //Move to the associated scene
             SceneManager.MoveGameObjectToScene(result[i], SceneManager.GetSceneByName(dir));
         }
         return result;
     }
+    public static GameObject Instantiate(UnityEngine.Object prefab, Vector3 location)
+    {
+        GameObject o = Instantiate(prefab) as GameObject;
+        o.transform.position = location;
+        return o;
+    }
+    public static GameObject[] Instantiate(UnityEngine.Object prefab, Vector3[] locations)
+    {
+        GameObject[] o = new GameObject[locations.Length];
+        for(int i = 0;i<locations.Length;i++)
+        {
+            o[i] = Instantiate(prefab) as GameObject;
+            o[i].transform.position = locations[i];
+        }
+        return o;
+    }
+    
     public static void Move(GameObject[] gameObject, string dir)
     {
         for(int i = 0;i<gameObject.Length;i++)

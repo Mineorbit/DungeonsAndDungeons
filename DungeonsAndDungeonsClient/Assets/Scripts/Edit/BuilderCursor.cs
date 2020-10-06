@@ -19,8 +19,8 @@ public class BuilderCursor : MonoBehaviour
         float z = Mathf.Round(loc.z / degree) * degree;
         Vector3 pos = new Vector3(x,y,z);
 
-        Debug.Log(loc+ " "+pos);
-        builderCursor.transform.position = pos + normal*degree/2;
+        //builderCursor.transform.position = pos + normal*degree/2;
+        builderCursor.transform.position = loc + normal*degree/2;
     }
     public static Vector3 Get()
     {
