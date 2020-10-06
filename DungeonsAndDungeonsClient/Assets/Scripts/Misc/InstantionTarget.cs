@@ -7,8 +7,10 @@ public class InstantionTarget : ScriptableObject
 {
     public UnityEngine.Object asset;
     
-    public GameObject Create(Vector3 location)
+    public virtual GameObject Create(Vector3 location, Transform parent)
     {
-        return Instantiator.Instantiate(asset,location);
+        GameObject g = Instantiator.Instantiate(asset, location);
+        g.transform.SetParent(parent);
+        return g;
     }
 }

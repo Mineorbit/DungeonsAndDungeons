@@ -6,5 +6,12 @@ using UnityEngine;
 public class LevelObjectData : InstantionTarget
 {
     public string FullName;
-    public Vector3 Scale;
+    public Vector3 Scale; 
+    public virtual GameObject Create(Vector3 location, Transform parent)
+    {
+
+        GameObject g = base.Create(location,parent);
+        g.transform.localScale = Scale;
+        return g;
+    }
 }

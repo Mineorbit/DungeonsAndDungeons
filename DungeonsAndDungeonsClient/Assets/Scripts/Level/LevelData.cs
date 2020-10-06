@@ -6,17 +6,17 @@ public class LevelData
 {
     public class LevelMetaData
     {
-        public LevelMetaData(string name)
+        public LevelMetaData(string lname)
         {
-
+            name = lname;
         }
-        string name;
+        public string name;
         long ulid;
         enum Template {Regular , Sand, Boss };
         Template template;
     }
-    LevelMetaData metaData;
-    LevelObjectData[] levelObjectData;
+    public LevelMetaData metaData;
+    public LevelObjectData[] levelObjectData;
     public LevelData()
     {
         levelObjectData = new LevelObjectData[1000];
