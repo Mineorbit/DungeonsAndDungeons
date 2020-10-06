@@ -63,6 +63,7 @@ public class PauseMenu : MonoBehaviour
         }
         BlurScreen.blurScreen.Open();
         animation.Play();
+        MouseStateController.UnlockBlocking();
     }
     void Close()
     {
@@ -72,6 +73,7 @@ public class PauseMenu : MonoBehaviour
         BlurScreen.blurScreen.Close();
         animation.Play();
         open = false;
+        MouseStateController.LockUnblocking();
     }
 
     void Update()

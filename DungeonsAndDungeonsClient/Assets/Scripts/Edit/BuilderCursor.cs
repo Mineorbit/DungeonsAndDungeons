@@ -14,13 +14,10 @@ public class BuilderCursor : MonoBehaviour
     }
     public static void Set(Vector3 loc,Vector3 normal)
     {
-        float x = Mathf.Round(loc.x / degree)  * degree;
-        float y = Mathf.Round(loc.y / degree)  * degree;
-        float z = Mathf.Round(loc.z / degree) * degree;
-        Vector3 pos = new Vector3(x,y,z);
+        Vector3 target = loc + normal*degree/2;
+        Vector3 position = new Vector3(Mathf.Round(target.x), Mathf.Round(target.y), Mathf.Round(target.z));
 
-        //builderCursor.transform.position = pos + normal*degree/2;
-        builderCursor.transform.position = loc + normal*degree/2;
+        builderCursor.transform.position = position;
     }
     public static Vector3 Get()
     {

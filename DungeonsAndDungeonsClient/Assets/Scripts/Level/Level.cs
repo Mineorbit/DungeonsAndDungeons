@@ -43,7 +43,7 @@ public class Level : MonoBehaviour
     {
         foreach(Transform child in currentLevel.transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
     }
     public static void Destroy()

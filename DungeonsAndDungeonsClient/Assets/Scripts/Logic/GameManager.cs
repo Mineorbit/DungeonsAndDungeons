@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
                                         }
                                         , x =>
                                         {
+
                                             UnityEngine.Debug.Log("Loading MainMenu");
 
                                             UnityEvent menuLoad = new UnityEvent();

@@ -20,8 +20,13 @@ public class MainMenuManager : MonoBehaviour
     }
     void Start()
     {
+        MouseStateController.UnlockBlocking();
         setupMainMenu();
         OpenPage(0);
+    }
+    void OnDestroy()
+    {
+        MouseStateController.LockUnblocking();
     }
     void sortPages()
     {
