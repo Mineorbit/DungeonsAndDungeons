@@ -38,13 +38,13 @@ public class GameManager : MonoBehaviour
         afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
-        afterTestLoad.AddListener(StartRound);
+        afterTestLoad.AddListener(SetLogic);
         afterEditLoad = new UnityEvent();
         afterEditLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
-        afterEditLoad.AddListener(StartRound);
+        afterEditLoad.AddListener(SetLogic);
 
     }
-    void StartRound()
+    void SetLogic()
     {
         UpdateLogic();
         if(currentLogic!=null)
@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour
     {
         int[] afterInit = {0,1,1,1,1};
         int[] afterMenu = {1,1,3,2,3};
-        int[] afterEdit = {};
+        int[] afterEdit = { 1, 1, 3, 2, 3 };
         int[] afterTest = { };
-        int[][] gameStateTranslationTable =  {afterInit,afterMenu,afterInit,afterInit,afterInit,afterInit};
+        int[][] gameStateTranslationTable =  {afterInit,afterMenu,afterInit,afterInit,afterEdit,afterInit};
         //x ist GameAction int
         //Wichtige lücke: aktuell können unloading und neues szenen laden passieren obwohl loading screen noch nicht voll da
         //Consistency tests in den Transfers einbauen
