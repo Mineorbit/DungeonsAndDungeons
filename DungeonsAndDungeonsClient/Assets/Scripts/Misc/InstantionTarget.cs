@@ -13,4 +13,9 @@ public class InstantionTarget : ScriptableObject
         g.transform.SetParent(parent);
         return g;
     }
+    public virtual GameObject Create(Vector3 location)
+    {
+        GameObject g = Instantiator.Instantiate(asset, location);
+        return g;
+    }
 }

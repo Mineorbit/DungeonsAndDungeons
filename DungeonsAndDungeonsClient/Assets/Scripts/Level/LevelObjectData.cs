@@ -6,12 +6,24 @@ using UnityEngine;
 public class LevelObjectData : InstantionTarget
 {
     public string FullName;
-    public Vector3 Scale; 
+    public Vector3 Scale;
+    Mesh objectMesh;
     public virtual GameObject Create(Vector3 location, Transform parent)
     {
 
         GameObject g = base.Create(location,parent);
         g.transform.localScale = Scale;
         return g;
+    }
+    public Mesh GetMesh()
+    {
+        if(objectMesh==null)
+        {
+            GameObject g = base.Create(new Vector3(0,0,0));
+            g.SetActive(false);
+            objectMesh = g.GetComponent<MeshFilter>().mesh;
+            Destroy(g);
+        }
+        return objectMesh;
     }
 }
