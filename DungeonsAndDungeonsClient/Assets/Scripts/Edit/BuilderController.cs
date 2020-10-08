@@ -16,11 +16,32 @@ public class BuilderController : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetDirection = transform.forward*Input.GetAxis("Vertical") + transform.right*Input.GetAxis("Horizontal") + transform.up * (Input.GetKey("space") ? 1 : 0)+ -transform.up * (Input.GetKey("left shift") ? 1 : 0);
-        transform.position += Time.deltaTime * Vector3.Normalize(targetDirection)*speed;
-        transform.Rotate(-Input.GetAxis("Mouse Y")*transform.right+Input.GetAxis("Mouse X")*Vector3.up,Space.World);
+        UpdatePosition();
+        UpdateRotation();
         ComputeCursorPosition();
-    
+        ProcessBuildInput();
+    }
+    void ProcessBuildInput()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Klick");
+        }
+    }
+    void UpdatePosition()
+    {
+        Vector3 targetDirection = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") + transform.up * (Input.GetKey("space") ? 1 : 0) + -transform.up * (Input.GetKey("left shift") ? 1 : 0);
+        transform.position += Time.deltaTime * Vector3.Normalize(targetDirection) * speed;
+    }
+    void UpdateRotation()
+    {
+        Vector3 currentRotation = transform.localRotation.eulerAngles;
+        currentRotation.y += Input.GetAxis("Mouse X");
+        float oldX = currentRotation.x;
+        currentRotation.x -= Input.GetAxis("Mouse Y");
+        if ( !( (300 <= currentRotation.x && currentRotation.x <= 361) || (-1 <= currentRotation.x && currentRotation.x <= 60)))
+            currentRotation.x = oldX;
+        transform.localRotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z);
     }
     void ComputeCursorPosition()
     {
