@@ -43,10 +43,19 @@ public class Level : MonoBehaviour
             for(int j = -10;j<10;j++)
             {
                 //Here we need to change to use the Template in LevelData
-                GameObject o = floorObjectData.Create(new Vector3(2*i,-2, 2*j), currentLevel.transform);
-                currentLevel.objects.Add(o.GetComponent<LevelObject>());
+                currentLevel.Add(floorObjectData, new Vector3(2 * i, -2, 2 * j));
+
+
             }
     }
+
+
+    void Add(LevelObjectData typeData,Vector3 position)
+    {
+        GameObject o = typeData.Create(position, currentLevel.transform);
+        currentLevel.objects.Add(o.GetComponent<LevelObject>());
+    }
+
     public static void Clear()
     {
         foreach(Transform child in currentLevel.transform)

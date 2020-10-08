@@ -9,8 +9,6 @@ public class BuilderCursor : MonoBehaviour
     static BuilderCursor builderCursor;
 
     public static LevelObjectData currentSelection;
-    //Dummy
-    public LevelObjectData curSel;
 
 
     static Vector3 normalVec;
@@ -36,8 +34,6 @@ public class BuilderCursor : MonoBehaviour
 
     static void UpdateCursor(Vector3 position)
     {
-        //Dummy
-        currentSelection = builderCursor.curSel;
         UpdateMesh();
 
         builderCursor.transform.position = position;
