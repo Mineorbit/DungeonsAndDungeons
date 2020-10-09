@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//courtesy of Tom Weiland
+//später rework
 public class ThreadManager : MonoBehaviour
 {
     private static readonly List<Action> executeOnMainThread = new List<Action>();
     private static readonly List<Action> executeCopiedOnMainThread = new List<Action>();
     private static bool actionToExecuteOnMainThread = false;
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateMain();
     }
@@ -20,7 +20,7 @@ public class ThreadManager : MonoBehaviour
     {
         if (_action == null)
         {
-            Console.WriteLine("No action to execute on main thread!");
+            Debug.Log("No action to execute on main thread!");
             return;
         }
 

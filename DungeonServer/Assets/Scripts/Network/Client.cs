@@ -1,96 +1,91 @@
-﻿using System;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
-using UnityEngine;
+using System;
+using UnityEngine.UI;
+using TMPro;
+using System.Text;
+
+using UnityEngine.Events;
 
 public class Client
 {
 
-    Encoding enc = Encoding.Unicode;
+    int dataBufferSize = 1024;
+    byte[] receiveBuffer;
+    public string ip = "127.0.0.1";
+    public int port = 13565;
+    public TcpClient tcp;
+    NetworkStream ns;
 
-    public byte[] buffer;
-    int bufferSize = 4096;
-
-    public int globalId;
-
-    public int localId;
-    public Player player;
-    public TcpClient tcpClient;
-
-    public enum PacketType { Message = 1 };
-
-    public Client(int _clientId)
+    public void Connect()
     {
-        globalId = _clientId;
-        buffer = new byte[bufferSize];
+        tcp = new TcpClient();
+        tcp.BeginConnect(ip,port, new AsyncCallback(ConnectCallBack),tcp);
     }
+    public void Connect(UnityEvent onConnectEvent)
+    {
+        tcp = new TcpClient();
+        tcp.BeginConnect(ip, port, new AsyncCallback(ConnectCallBack), onConnectEvent);
+    }
+    public void ConnectCallBack(IAsyncResult result)
+    {
 
-    public void Send(byte[] data)
-    {
-
-    }
-    public static Client Connect(int id, TcpClient client)
-    {
-        Client c = new Client(id);
-        c.tcpClient = client;
-        return c;
-    }
-    public void Disconnect()
-    {
-        tcpClient.GetStream().Close();
-        tcpClient.Close();
-    }
-    Byte[] StringToByte(String s)
-    {
-        byte[] stringData = enc.GetBytes(s);
-        return stringData;
-    }
-    Byte[] ShortToByte(short s)
-    {
-        return BitConverter.GetBytes(s);
-    }
-    public void sendMessage(string message)
-    {
-        int messageLength = System.Text.ASCIIEncoding.Unicode.GetByteCount(message);
-        byte[] data = new byte[2 + message.Length + messageLength];
-        byte[] idData = ShortToByte((short)PacketType.Message);
-        data[0] = idData[0];
-        data[1] = idData[1];
-        byte[] mData = StringToByte(message);
-        for (int i = 0; i < messageLength; i++)
+        tcp.EndConnect(result);
+        
+        if (!tcp.Connected)
         {
-            data[2 + i] = mData[i];
+            return;
         }
 
+        ns = tcp.GetStream();
+        receiveBuffer = new byte[dataBufferSize];
+        if (result.AsyncState is UnityEvent)
+        {
 
-    }
-    public void processRead(IAsyncResult result)
-    {
-
-    }
-    public void StartRead()
-    {
-        tcpClient.GetStream().BeginRead(buffer, 0, buffer.Length,
-                                                 new AsyncCallback(processRead),
-                                                 tcpClient.GetStream());
-    }
-
-  
-    public void SendPacket(byte[] data)
-    {
-        tcpClient.GetStream().Write(data,0,data.Length);
-        Debug.Log(buffer[0]);
-
+            ThreadManager.ExecuteOnMainThread(
+                () => {
+                UnityEvent connectEvent = (UnityEvent)result.AsyncState;
+                connectEvent.Invoke();
+                }
+            );
+        }
+        ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         
-    }
 
-    public void Disconnect(string message)
+    }
+    private void ReceiveCallback(IAsyncResult _result)
     {
-
-        Disconnect();
+        int length = ns.EndRead(_result);
+        ThreadManager.ExecuteOnMainThread(()=> {
+            byte[] data = new byte[length];
+            Array.Copy(receiveBuffer, data, length);
+            Packet p = Packet.Parse(data);
+            //Hier andere behandlung für den fall das packet nicht parsebar
+            if(p != null)
+            p.OnReceive();
+        });
     }
+    
+    public void Disconnect(UnityEvent unityEvent)
+    {
+        PlayerDisconnectedPacket packet = new PlayerDisconnectedPacket();
+        Send(packet);
+        ns.Close();
+        tcp.Close();
+        unityEvent.Invoke();
+    }
+    public void Send(Packet p)
+    {
+        byte[] data = p.Compose();
+        ns.Write(data,0,data.Length);
+    }
+    
+
 }
