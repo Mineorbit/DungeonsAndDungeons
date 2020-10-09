@@ -1,3 +1,5 @@
+Grobe Erläuterung
+Jeder GameServer hat genau eine Lobby. Sollte die Lobby Privat sein, so wird ein passwort beim Verbinden verlangt. Matchmaking sucht automatisch eine Freien Server und stellt dort die Lobby entsprechend anforderungen ein (mal schauen ob hier ein gruppen feature geht). Später sollen auch invites möglich sein (Startet einfach verbindung mit Server und bekanntem feature)
 Settings:
 
 ServerData;
@@ -16,7 +18,6 @@ Server To Client
 Name			Id	Content    
 ConnectionInfo		1 	int GlobalId
 Notification		2	String Message
-ForwardInvitation		3 int invitationId
 LobbyData     4     4*(string Name + byte LocalId, bit Accept)
 PlayerGameDisconnect	5
 GameReady		6
@@ -32,7 +33,6 @@ Name			Id	Content
 PlayerConnected		1	String
 PlayerDisconnect	2	-
 LeaveLobby		3	-
-CreateInvitation 4 string username short stubId
 JoinLobby		5	int invitationId
 ChangeName		6	String
 ChangeItem		7	byte
