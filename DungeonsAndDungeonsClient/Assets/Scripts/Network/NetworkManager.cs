@@ -18,17 +18,27 @@ public class NetworkManager : MonoBehaviour
     }
     public void LobbyConnect(UnityEvent onConnectEvent)
     {
-        lobbyClient.Connect(onConnectEvent);
+        LobbyConnect(onConnectEvent,"123456");
     }
     public void LobbyConnect(UnityEvent onConnectEvent, string name)
     {
+        Debug.Log("Name ist "+name);
         username = name;
         onConnectEvent.AddListener(sendUsernameData);
-        AlertScreen.alert.Open();
+
+        UnityEvent cancelEvent = new UnityEvent();
+        cancelEvent.AddListener(LobbyCancelConnect);
+        AlertScreen.alert.Open("Verbinde zu Lobby ...",cancelEvent);
         onConnectEvent.AddListener(AlertScreen.alert.Close);
         lobbyClient.Connect(onConnectEvent);
      
     }
+    public void LobbyCancelConnect()
+    {
+        AlertScreen.alert.Close();
+        lobbyClient.CancelConnect();
+    }
+
     public void LobbyDisconnect(UnityEvent disconnectEvent)
     {   
         lobbyClient.Disconnect(disconnectEvent);
@@ -36,7 +46,6 @@ public class NetworkManager : MonoBehaviour
 
     void sendUsernameData()
     {
-        //Sende Message with name
         PlayerConnectedPacket usernamePacket = new PlayerConnectedPacket(username);
         lobbyClient.Send(usernamePacket);
     }

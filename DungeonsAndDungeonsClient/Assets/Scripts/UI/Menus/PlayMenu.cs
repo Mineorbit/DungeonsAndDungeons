@@ -20,7 +20,7 @@ public class PlayMenu : MenuPage
     {
         Button backButton = transform.Find("Back").GetComponent<Button>();
         backButton.onClick.AddListener(goBack);
-        Button lobbyButton = transform.Find("Online").Find("Go").GetComponent<Button>();
+        Button lobbyButton = transform.Find("Connect").Find("Go").GetComponent<Button>();
         lobbyButton.onClick.AddListener(goLobby);
     }
     void goBack()
@@ -29,8 +29,7 @@ public class PlayMenu : MenuPage
     }
     void goLobby()
     {
-        string name = transform.gameObject.GetComponentInChildren<InputField>().text;
-        
+        string name = transform.Find("Connect").gameObject.GetComponentInChildren<InputField>().text;
         Lobby.lobby.Open(name);
     }
 }

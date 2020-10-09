@@ -73,6 +73,8 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.name = "MainMenu";
         mainMenuFSM.state = Page.None;
         mainMenuFSM.transitions.Add(new Tuple<Page,Transaction>(Page.None,Transaction.FromNoneToMain), new Tuple<Action<Transaction>,Page>(act,Page.Main));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Main, Transaction.FromMainToPlay), new Tuple<Action<Transaction>, Page>(act, Page.Play));
+
     }
 
 }

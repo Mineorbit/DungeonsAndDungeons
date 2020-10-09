@@ -11,7 +11,8 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine.Events;
 
 public class Client
@@ -24,42 +25,43 @@ public class Client
     public TcpClient tcp;
     NetworkStream ns;
 
-    public void Connect()
-    {
-        tcp = new TcpClient();
-        tcp.BeginConnect(ip,port, new AsyncCallback(ConnectCallBack),tcp);
-    }
+    bool retry = true;
     public void Connect(UnityEvent onConnectEvent)
     {
-        tcp = new TcpClient();
-        tcp.BeginConnect(ip, port, new AsyncCallback(ConnectCallBack), onConnectEvent);
+        retry = true;
+        SocketConnect(onConnectEvent);
     }
-    public void ConnectCallBack(IAsyncResult result)
+    
+    public void CancelConnect()
     {
-
-        tcp.EndConnect(result);
-        
-        if (!tcp.Connected)
-        {
-            return;
-        }
-
-        ns = tcp.GetStream();
-        receiveBuffer = new byte[dataBufferSize];
-        if (result.AsyncState is UnityEvent)
-        {
-
-            ThreadManager.ExecuteOnMainThread(
-                () => {
-                UnityEvent connectEvent = (UnityEvent)result.AsyncState;
-                connectEvent.Invoke();
-                }
-            );
-        }
-        ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
-        
-
+        retry = false;
     }
+    public async Task SocketConnect(UnityEvent onConnectEvent)
+    {
+        var tcpClient = new TcpClient();
+        while (retry)
+        {
+            try
+            {
+                await tcpClient.ConnectAsync(ip, port);
+            }
+            catch (Exception ex)
+            {
+                //handle errors
+                continue;
+            }
+            if (tcpClient.Connected) { retry = false; break; }
+        }
+        if (tcpClient.Connected)
+        {
+            retry = false;
+            ns = tcpClient.GetStream();
+            receiveBuffer = new byte[dataBufferSize];
+            onConnectEvent.Invoke();
+            ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+        }
+    }
+
     private void ReceiveCallback(IAsyncResult _result)
     {
         int length = ns.EndRead(_result);
