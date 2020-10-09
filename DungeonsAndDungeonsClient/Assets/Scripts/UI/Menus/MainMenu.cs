@@ -30,7 +30,7 @@ public class MainMenu : MenuPage
     }
     void enterPlay()
     {
-        MainMenuManager.instance.OpenPage(1);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromMainToPlay);
     }
     void enterTest()
     {
@@ -38,6 +38,6 @@ public class MainMenu : MenuPage
     }
     void enterEdit()
     {
-        MainMenuManager.instance.OpenPage(3);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromMainToEdit);
     }
 }

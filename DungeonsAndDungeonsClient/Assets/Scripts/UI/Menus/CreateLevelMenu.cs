@@ -25,7 +25,7 @@ public class CreateLevelMenu : MenuPage
     }
     void GoBack()
     {
-        MainMenuManager.instance.OpenPage(3);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
     }
     void GoNewLevel()
     {

@@ -16,11 +16,17 @@ public class GameManager : MonoBehaviour
     UnityEvent afterMenuLoad;
     UnityEvent afterTestLoad;
     UnityEvent afterEditLoad;
-    FSM gameStateFSM;
     public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
-    public State currentGameState;
     public enum GameAction { LoadGameFromBoot = 0,EnterMainMenu ,EnterTestFromMainMenu,EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
 
+    FSM<State,GameAction> gameStateFSM;
+
+    UnityEvent[] asyncEvent;
+
+    public State GetState()
+    {
+        return gameStateFSM.state;
+    }
     void Start()
     {
         if (instance != null)
@@ -53,90 +59,37 @@ public class GameManager : MonoBehaviour
             currentLogic.Start();
         }
     }
+
+
+   
+
+
     public void SetupGameStateFSM()
     {
-        int[] afterInit = {0,1,1,1,1};
-        int[] afterMenu = {1,1,3,2,3};
-        int[] afterEdit = { 1, 1, 3, 2, 3 };
-        int[] afterTest = { };
-        int[][] gameStateTranslationTable =  {afterInit,afterMenu,afterInit,afterInit,afterEdit,afterInit};
-        //x ist GameAction int
-        //Wichtige lücke: aktuell können unloading und neues szenen laden passieren obwohl loading screen noch nicht voll da
-        //Consistency tests in den Transfers einbauen
-        Action<int>[] stateTable =      { x =>
-                                        {
-                                            UnityEngine.Debug.Log("Initiliasing Game");
-                                            UnityEvent initEvent = new UnityEvent();
-                                            initEvent.AddListener(asyncInit);
-                                            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
-                                            
-                                        }
-                                        , x =>
-                                        {
+    gameStateFSM = new FSM<State,GameAction>();
+    gameStateFSM.state = State.Init;
+    gameStateFSM.name = "GameState";
 
-                                            UnityEngine.Debug.Log("Loading MainMenu");
-
-                                            UnityEvent menuLoad = new UnityEvent();
-                                            menuLoad.AddListener(asyncMenuLoad);
-
-                                            if(!LoadingScreen.instance.isOpen())
-                                            {
-                                                UnityEngine.Debug.Log("Nochmal öffnen");
-                                                LoadingScreen.instance.openLoadingScreen(menuLoad);
-                                            }else
-                                            {
-                                                asyncMenuLoad();
-                                            }
-
-
-
-                                        }
-                                        , x => 
-                                        {
-                                            UnityEngine.Debug.Log("Loading Edit");
-                                            if(!LoadingScreen.instance.isOpen())
-                                            {
-                                                UnityEvent editLoad = new UnityEvent();
-                                                editLoad.AddListener(asyncEditLoad);
-                                                LoadingScreen.instance.openLoadingScreen(editLoad);
-                                            }else
-                                            {
-                                                asyncEditLoad();
-                                            }
-                                        }
-                                        , x =>
-                                        {
-                                            UnityEngine.Debug.Log("Loading Test");
-
-                                            if(!LoadingScreen.instance.isOpen())
-                                            {
-                                                UnityEvent testLoad = new UnityEvent();
-                                                testLoad.AddListener(asyncTestLoad);
-                                                LoadingScreen.instance.openLoadingScreen(testLoad);
-                                            }else
-                                            {
-                                                asyncTestLoad();
-                                            }
-                                        }
+        Action<GameAction> actMenu = x =>
+        {
+            UnityEngine.Debug.Log(x);
+            UnityEvent initEvent = new UnityEvent();
+            initEvent.AddListener(asyncMenuLoad);
+            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
-        gameStateFSM = new FSM("GameState",gameStateTranslationTable,stateTable);
+        gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(actMenu,State.MainMenu));
     }
-    void asyncInit()
-    {
-        currentGameState = State.Init;
-        performAction(GameAction.EnterMainMenu);
-    }
+
+    
     void asyncMenuLoad()
     {
         SceneLoadManager.instance.unloadCurrentScenes();
-        currentGameState = State.MainMenu;
         SceneLoadManager.instance.load(1, afterMenuLoad);
     }
     void asyncEditLoad()
     {
 
         SceneLoadManager.instance.unloadCurrentScenes();
-        currentGameState = State.Edit;
         int[] toLoad = new int[2];
         toLoad[0] = 2;
         toLoad[1] = 3;
@@ -145,7 +98,6 @@ public class GameManager : MonoBehaviour
     void asyncTestLoad()
     {
     SceneLoadManager.instance.unloadCurrentScenes();
-    currentGameState = State.Test;
 
         //Connect to Game Server
 
@@ -153,7 +105,7 @@ public class GameManager : MonoBehaviour
     }
     public void performAction(GameAction action)
     {
-        gameStateFSM.Move((int) action);
+        gameStateFSM.Move(action);
     }
     
     public void createLevel(LevelData.LevelMetaData data)
@@ -171,7 +123,7 @@ public class GameManager : MonoBehaviour
             if (currentLogic.running == true) currentLogic.Stop();
             currentLogic.DeInit();
         }
-        switch(currentGameState)
+        switch(gameStateFSM.state)
         {
             case State.Edit:
                 currentLogic = new EditLogic();

@@ -22,11 +22,11 @@ public class EditMenu : MenuPage
     }
     void OpenNewLevelMenu()
     {
-        MainMenuManager.instance.OpenPage(4);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromEditToCreateMenu);
     }
     void GoBack()
     {
-        MainMenuManager.instance.OpenPage(0);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
     }
     public override void Start()
     {

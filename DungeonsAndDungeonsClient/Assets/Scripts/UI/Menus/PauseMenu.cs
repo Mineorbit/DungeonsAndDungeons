@@ -32,7 +32,7 @@ public class PauseMenu : MonoBehaviour
     }
     bool checkAvailability()
     {
-        switch(GameManager.instance.currentGameState)
+        switch(GameManager.instance.GetState())
         {
             case GameManager.State.Init:
                 pauseMenuAvailable = false;

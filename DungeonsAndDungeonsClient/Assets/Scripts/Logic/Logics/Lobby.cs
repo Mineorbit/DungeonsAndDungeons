@@ -35,11 +35,11 @@ public class Lobby : MonoBehaviour
     }
     void CloseLobbyMenu()
     {
-        MainMenuManager.instance.OpenPage(1);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromPlayToLobby);
     }
     void OpenLobbyMenu()
     {
-        MainMenuManager.instance.OpenPage(2);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
         PlayerView.playerView.UpdatePlayerView(players);
     }
 

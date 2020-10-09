@@ -4,42 +4,29 @@ using System.Diagnostics;
 using System;
 using UnityEngine;
 
-public class FSM 
+public class FSM<T, U>
+    where U : System.Enum
+    where T : System.Enum, new()
 {
-    string name;
-    int currentState;
-    int alphabetSize;
-    int stateSize;
-    public int[][] translationMatrix;
-    public Action<int>[] stateOutput;
-    public FSM(string FSMname, int[][] stateTranslationMatrix, Action<int>[] stateOutputs)
-    {
-        name = FSMname;
-        if(stateTranslationMatrix.Length!=stateOutputs.Length)
-        {
-            UnityEngine.Debug.Log($"{name} FSM config wrong States: {stateTranslationMatrix.Length} Stateoutputs: {stateOutputs.Length}");
-        }
-        currentState = 0;
-        translationMatrix = stateTranslationMatrix;
-        stateSize = stateTranslationMatrix.Length;
-        alphabetSize = stateTranslationMatrix[0].Length;
-        stateOutput = stateOutputs;
-    }
-    public void Move(int input)
-    {
-        if(input >= alphabetSize)
-        {
-            UnityEngine.Debug.Log($"Input {input} ist für FSM {name} nicht erlaubt");
-            return;
-        }
-        int newState = translationMatrix[currentState][input];
-        if(newState>= stateSize || newState == -1)
-        {
+    public string name;
 
-            UnityEngine.Debug.Log($"State {newState} ist für FSM {name} nicht definiert");
-            return;
+    public T state;
+    public Dictionary<Tuple<T, U>, Tuple<Action<U>, T>> transitions;
+    public FSM()
+    {
+        transitions = new Dictionary<Tuple<T, U>, Tuple<Action<U>, T>>();
+    }
+
+    public void Move(U inputValue)
+    {
+        Tuple<Action<U>, T> value;
+        if (transitions.TryGetValue(new Tuple<T, U>(state,inputValue), out value))
+        {
+            state = value.Item2;
+            value.Item1(inputValue);
+        }else
+        {
+            UnityEngine.Debug.Log($"[{name}] In State {state} existiert kein Übergang für {inputValue}");
         }
-        currentState = newState;
-        stateOutput[currentState](input);
     }
 }
