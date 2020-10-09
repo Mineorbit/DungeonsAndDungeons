@@ -8,7 +8,10 @@ using UnityEngine;
 public class BuilderController : MonoBehaviour
 {
     float speed = 4;
-    float maxDistance = 200;
+    public static Vector3 builderPosition;
+    public static Vector3 builderForward;
+
+    public bool acceptInput = true;
     void Start()
     {
         
@@ -16,22 +19,53 @@ public class BuilderController : MonoBehaviour
 
     void Update()
     {
+        UpdateLock();
+        if(acceptInput)
+        {
         UpdatePosition();
         UpdateRotation();
-        ComputeCursorPosition();
         ProcessBuildInput();
+        }
+        builderForward = transform.TransformDirection(Vector3.forward);
+    }
+    void UpdateLock()
+    {
+        //Hier gleicher knopf wie bei mouse lock
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            acceptInput = !acceptInput;
+        }
     }
     void ProcessBuildInput()
     {
         if(Input.GetMouseButtonDown(0))
         {
             Debug.Log("Klick");
+            Place();
         }
+        if(Input.GetMouseButtonDown(1))
+        {
+            Displace();
+        }
+    }
+    void Place()
+    {
+        Debug.Log("Klick");
+        BuilderCursor.Set(Level.currentLevel.floorData);
+        var t = BuilderCursor.Get();
+        Level.currentLevel.Add(t.levelObjectData,t.pos);
+    }
+    void Displace()
+    {
+        Debug.Log("Lol");
+        LevelObject o = BuilderCursor.GetObjectAt();
+        Level.currentLevel.Remove(o);
     }
     void UpdatePosition()
     {
         Vector3 targetDirection = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") + transform.up * (Input.GetKey("space") ? 1 : 0) + -transform.up * (Input.GetKey("left shift") ? 1 : 0);
         transform.position += Time.deltaTime * Vector3.Normalize(targetDirection) * speed;
+        builderPosition = transform.position;
     }
     void UpdateRotation()
     {
@@ -43,20 +77,5 @@ public class BuilderController : MonoBehaviour
             currentRotation.x = oldX;
         transform.localRotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z);
     }
-    void ComputeCursorPosition()
-    {
-        int layerMask = 1 << 8;
-        layerMask = ~layerMask;
-        RaycastHit hit;
-        Vector3 targetLocation;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
-        {
-            targetLocation = transform.position + transform.TransformDirection(Vector3.forward) * hit.distance;
-        }
-        else
-        {
-            targetLocation = transform.position + transform.TransformDirection(Vector3.forward) * maxDistance;
-        }
-        BuilderCursor.Set(targetLocation,hit.normal);
-    }
+    
 }

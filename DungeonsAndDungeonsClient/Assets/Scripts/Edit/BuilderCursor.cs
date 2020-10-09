@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class BuilderCursor : MonoBehaviour
 {
+    float maxDistance = 200;
     static float degree;
     static BuilderCursor builderCursor;
 
-    public static LevelObjectData currentSelection;
+    static LevelObjectData currentSelection;
 
 
     static Vector3 normalVec;
 
     static MeshFilter cursorMesh;
+
+    static GameObject hitObject;
 
     public void Awake()
     {
@@ -32,6 +35,32 @@ public class BuilderCursor : MonoBehaviour
         normalVec = normal;
     }
 
+    public static void Set(LevelObjectData objectType)
+    {
+        currentSelection = objectType;
+        UpdateMesh();
+    }
+    void Update()
+    {
+        ComputeCursorPosition();
+    }
+    void ComputeCursorPosition()
+    {
+        int layerMask = 1 << 8;
+        layerMask = ~layerMask;
+        RaycastHit hit;
+        Vector3 targetLocation;
+        if (Physics.Raycast(BuilderController.builderPosition, BuilderController.builderForward, out hit, Mathf.Infinity, layerMask))
+        {
+            targetLocation = BuilderController.builderPosition + BuilderController.builderForward * hit.distance;
+            hitObject = hit.transform.gameObject;
+        }
+        else
+        {
+            targetLocation = BuilderController.builderPosition + BuilderController.builderForward * maxDistance;
+        }
+        BuilderCursor.Set(targetLocation, hit.normal);
+    }
     static void UpdateCursor(Vector3 position)
     {
         UpdateMesh();
@@ -49,6 +78,15 @@ public class BuilderCursor : MonoBehaviour
         if (targetMesh != null)
             cursorMesh.mesh = targetMesh;
 
+    }
+    public static LevelObject GetObjectAt()
+    {
+        LevelObject o = hitObject.GetComponent<LevelObject>(); 
+        if(o != null)
+        {
+            return o;
+        }
+        return null;
     }
     public static (Vector3 pos, Vector3 norm, LevelObjectData levelObjectData) Get()
     {

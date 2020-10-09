@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 794073620344780604, guid: cba7c68d89fdc5846b7369cf96e0fc28, type: 3}
+      propertyPath: m_FocalLength
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 794073620344780604, guid: cba7c68d89fdc5846b7369cf96e0fc28, type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 794073620344780605, guid: cba7c68d89fdc5846b7369cf96e0fc28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1113,7 +1121,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0b3a3f3175bbc39449d51cfb0b139049, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1645,7 +1653,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 22
+  m_firstOverflowCharacterIndex: 79
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -1674,7 +1682,7 @@ MonoBehaviour:
     spaceCount: 18
     wordCount: 19
     linkCount: 0
-    lineCount: 6
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1942,7 +1950,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18.05
+  m_fontSize: 33.15
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

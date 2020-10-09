@@ -5,17 +5,24 @@ using UnityEngine;
 public class BlurScreen : MonoBehaviour
 {
     public static BlurScreen blurScreen;
-    float maxDist = 500;
+    GameObject screen;
+
+    float maxDist = 50;
     float minDist = 1;
     public float t;
     bool open = false;
     bool finished = true;
+
     void Start()
     {
         if (blurScreen != null) Destroy(this);
         blurScreen = this;
+
         open = false;
         t = 1;
+        screen = transform.Find("Screen").gameObject;
+
+        screen.SetActive(false);
     }
 
     void Update()
@@ -38,6 +45,7 @@ public class BlurScreen : MonoBehaviour
     {
         if (open||!finished) return;
         StartCoroutine("OpenAnim");
+        screen.SetActive(true);
     }
     public void Close()
     {
@@ -72,6 +80,7 @@ public class BlurScreen : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         open = false;
+        screen.SetActive(false);
         finished = true;
     }
 }

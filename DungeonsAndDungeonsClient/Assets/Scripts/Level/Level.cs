@@ -50,10 +50,20 @@ public class Level : MonoBehaviour
     }
 
 
-    void Add(LevelObjectData typeData,Vector3 position)
+    public void Add(LevelObjectData typeData,Vector3 position)
     {
         GameObject o = typeData.Create(position, currentLevel.transform);
         currentLevel.objects.Add(o.GetComponent<LevelObject>());
+    }
+    public void Add(LevelObjectData typeData, Vector3 position, Vector3 normal)
+    {
+        GameObject o = typeData.Create(position, currentLevel.transform);
+        currentLevel.objects.Add(o.GetComponent<LevelObject>());
+    }
+    public void Remove(LevelObject o)
+    {
+        objects.Remove(o);
+        Destroy(o.gameObject);
     }
 
     public static void Clear()

@@ -10,7 +10,7 @@ public class PlayerAnimator : MonoBehaviour
     Animator characterAnimator;
     public ParticleSystem[] runDust;
     bool playingDust;
-
+    public static float speed;
     void Start()
     {
         controller = transform.GetComponent<CharacterController>();
@@ -25,6 +25,7 @@ public class PlayerAnimator : MonoBehaviour
         targetDirection.y = 0;
         Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         characterAnimator.SetFloat("Speed",Mathf.Min(inputVelocity.magnitude,1));
+        speed = Mathf.Min(inputVelocity.magnitude, 1);
         bool movementKeyPressed = Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.D);
 
         if (controller.velocity.magnitude >= 0.5f && controller.isGrounded && !playingDust)
@@ -37,7 +38,7 @@ public class PlayerAnimator : MonoBehaviour
         }
         if (movementKeyPressed)
         { 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.05f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.1f);
         }
 
     }

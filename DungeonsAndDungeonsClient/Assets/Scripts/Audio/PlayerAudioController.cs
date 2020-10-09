@@ -14,7 +14,7 @@ public class PlayerAudioController : AudioController
     {
         moveVel = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         float speed = moveVel.magnitude;
-
+        Blend(0,PlayerAnimator.speed);
         if (controller.isGrounded && speed > 0)
         {
             Play(0);
