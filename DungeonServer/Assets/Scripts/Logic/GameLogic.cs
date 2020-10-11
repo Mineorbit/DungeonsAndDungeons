@@ -28,5 +28,12 @@ public class GameLogic : MonoBehaviour
     {
         t.gameObject.AddComponent<GameLogic>();
     }
+    public void AddPlayer(int localId, Client c)
+    {
 
+    }
+    public void RemovePlayer(int localId)
+    {
+
+    }
 }

@@ -21,13 +21,27 @@ public class Client
     int dataBufferSize = 1024;
     byte[] receiveBuffer;
     public string ip = "127.0.0.1";
-    public int port = 13565;
+    public int port = 13586;
     public TcpClient tcp;
     NetworkStream ns;
 
     bool retry = true;
+
+    public Client(string nip, int nport)
+    {
+        ip = nip;
+        port = nport;
+    }
+    public Client(TcpClient client)
+    {
+        tcp = client;
+        ns = client.GetStream();
+        Work();
+    }
+
     public void Connect(UnityEvent onConnectEvent)
     {
+        Debug.Log($"Connecting on {port}");
         retry = true;
         SocketConnect(onConnectEvent);
     }
@@ -36,6 +50,20 @@ public class Client
     {
         retry = false;
     }
+
+
+    public async Task Work()
+    {
+        if (tcp != null) return;
+        if (tcp.Connected)
+        {
+            retry = false;
+            ns = tcp.GetStream();
+            receiveBuffer = new byte[dataBufferSize];
+            ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+        }
+    }
+
     public async Task SocketConnect(UnityEvent onConnectEvent)
     {
         var tcpClient = new TcpClient();
@@ -52,14 +80,9 @@ public class Client
             }
             if (tcpClient.Connected) { retry = false; break; }
         }
-        if (tcpClient.Connected)
-        {
-            retry = false;
-            ns = tcpClient.GetStream();
-            receiveBuffer = new byte[dataBufferSize];
-            onConnectEvent.Invoke();
-            ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
-        }
+        tcp = tcpClient;
+        onConnectEvent.Invoke();
+        Work();
     }
 
     private void ReceiveCallback(IAsyncResult _result)

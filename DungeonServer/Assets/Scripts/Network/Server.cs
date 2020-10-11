@@ -10,21 +10,39 @@ using UnityEngine;
 
 public class Server
 {
+    public static object idLock = new object();
     TcpListener server;
+    int port;
     public Server()
     {
-        int port = 13565;
+        int lport = 13587;
+        port = lport;
         IPAddress localAddr = IPAddress.Parse("127.0.0.1");
         server = new TcpListener(localAddr,port);
     }
-    public void Start()
+    public async Task Start()
     {
         server.Start();
-        HandleConnection();
+
+        Debug.Log($"Socket {port} open");
+        while(true)
+        {
+            TcpClient client = await server.AcceptTcpClientAsync(); 
+            HandleConnection(client);
+        }
     }
-    async Task HandleConnection()
+    async Task HandleConnection(TcpClient c)
     {
-        int localId = ServerManager.instance.GetFreeId();
+        int localId;
+        Debug.Log($"Neue Verbindung {c}");
+        Client client = new Client(c);
+
+        //Das hier mutex
+        lock (idLock)
+        {
+            localId = ServerManager.instance.GetFreeId();
+            ServerManager.instance.AddClient(localId,client);
+        }
         return;
     }
     public void StopListen()

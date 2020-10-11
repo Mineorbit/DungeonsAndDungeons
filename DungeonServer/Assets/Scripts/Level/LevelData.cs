@@ -1,0 +1,29 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LevelData
+{
+    public class LevelMetaData
+    {
+        public LevelMetaData(string lname)
+        {
+            name = lname;
+        }
+        public string name;
+        long ulid;
+        enum Template {Regular , Sand, Boss };
+        Template template;
+    }
+    public LevelMetaData metaData;
+    public LevelObjectData[] levelObjectData;
+    public LevelData()
+    {
+        levelObjectData = new LevelObjectData[1000];
+    }
+    public LevelData(LevelMetaData levelLetaData)
+    {
+        metaData = levelLetaData;
+        levelObjectData = new LevelObjectData[1000];
+    }
+}
