@@ -13,8 +13,5 @@ public class ConnectionInfoPacket : Packet
         content = new object[1];
         packetId = 1;
     }
-    public override void OnReceive()
-    {
-        NetworkManager.instance.globalId = (int)content[0];
-    }
+    
 }

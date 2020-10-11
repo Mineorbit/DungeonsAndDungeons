@@ -8,7 +8,8 @@ public class NetworkManager : MonoBehaviour
     Client lobbyClient;
     Client gameClient;
     public string username;
-    public int globalId;
+    public int localId;
+
     void Awake()
     {
         if (instance != null) Destroy(this);
@@ -22,7 +23,6 @@ public class NetworkManager : MonoBehaviour
     }
     public void LobbyConnect(UnityEvent onConnectEvent, string name)
     {
-        Debug.Log("Name ist "+name);
         username = name;
         onConnectEvent.AddListener(sendUsernameData);
 

@@ -15,6 +15,6 @@ public class ConnectionInfoPacket : Packet
     }
     public override void OnReceive()
     {
-        NetworkManager.instance.globalId = (int)content[0];
+        NetworkManager.instance.localId = (int)content[0];
     }
 }

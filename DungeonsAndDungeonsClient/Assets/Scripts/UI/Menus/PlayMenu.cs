@@ -25,7 +25,7 @@ public class PlayMenu : MenuPage
     }
     void goBack()
     {
-        MainMenuManager.instance.OpenPage(0);
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
     }
     void goLobby()
     {

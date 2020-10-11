@@ -6,9 +6,18 @@ using System;
 public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
+    public enum State{Setup,Idle,Prepare,Lobby,Play,GameOver};
+    public enum GameAction {GoLive};
+    FSM<State, GameAction> serverState;
+
+    //Networking
+    Server server;
+    Client[] clients;
+    //Settings
+    GameLogic currentGame;
     public bool Local = true;
-    public enum State{Setup,Idle,Prepare,Connect,Play,GameOver};
-    public static State state;
+    string password = "Test";
+
 
     void Start()
     {
@@ -20,24 +29,48 @@ public class ServerManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        SetupGameServer();
-
-       
+        SetupFSM();
+        SetupServer();
+        serverState.Move(GameAction.GoLive);
     }
-
-    void OpenGameServer()
+    void SetupState()
     {
-        if(GameLogic.current!=null && state == State.Prepare)
-        ServerManager.state = State.Connect;
+        clients = new Client[4];
     }
 
-    void SetupGameServer()
+    void SetupServer()
     {
-        state = State.Idle;
-        GameLogic.StartRound(this.transform);
-        Server.CreateServer(this.transform);
+        server = new Server();
     }
+
+    public int GetFreeId()
+    {
+        int i = 0;
+        while(clients[i]!=null)
+        {
+            i++;
+        }
+        return i;
+    }
+
+    public void AddClient(int localId, Client c)
+    {
+
+    }
+
+    public void RemoveClient(int localid)
+    {
+        clients[i].Disconnect();
+        currentGame.RemovePlayer(i);
+    }
+
+
+    void SetupFSM()
+    {
+        serverState = new FSM<State, GameAction>();
+        serverState.state = State.Idle;
+    }
+
 
 
 }

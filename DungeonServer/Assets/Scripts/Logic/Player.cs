@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int id;
+    public int localId;
+    public string name;
     Vector3 targetPosition;
     Quaternion targetRotation;
+    Client client;
+
     void Start()
     {
         
