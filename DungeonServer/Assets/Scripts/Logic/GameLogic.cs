@@ -30,10 +30,12 @@ public class GameLogic : MonoBehaviour
     }
     public void AddPlayer(int localId, Client c)
     {
-
+        GameObject g = ServerManager.instance.playerTarget.Create(new Vector3(0,0,0));
+        Player p = g.GetComponent<Player>();
+        players[localId] = p;
     }
     public void RemovePlayer(int localId)
     {
-
+        Destroy(players[localId].gameObject);
     }
 }

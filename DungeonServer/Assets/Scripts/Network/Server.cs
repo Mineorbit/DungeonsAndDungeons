@@ -10,15 +10,24 @@ using UnityEngine;
 
 public class Server
 {
+
     public static object idLock = new object();
     TcpListener server;
+
+
+    static Client[] clients;
     int port;
     public Server()
     {
+        clients = new Client[4];
         int lport = 13587;
         port = lport;
         IPAddress localAddr = IPAddress.Parse("127.0.0.1");
         server = new TcpListener(localAddr,port);
+    }
+    public static Client GetClient(int l)
+    {
+        return clients[l];
     }
     public async Task Start()
     {
@@ -31,22 +40,60 @@ public class Server
             HandleConnection(client);
         }
     }
+    public static int GetFreeId()
+    {
+        int i = 0;
+        while (clients[i] != null)
+        {
+            i++;
+        }
+        return i;
+    }
     async Task HandleConnection(TcpClient c)
     {
         int localId;
         Debug.Log($"Neue Verbindung {c}");
-        Client client = new Client(c);
-
+        Client client;
         //Das hier mutex
         lock (idLock)
         {
-            localId = ServerManager.instance.GetFreeId();
-            ServerManager.instance.AddClient(localId,client);
+            localId = GetFreeId();
+
+            client = new Client(localId, c);
+            client.StartRead();
+            clients[localId] = client; 
         }
         return;
     }
     public void StopListen()
     {
         server.Stop();
+    }
+    public static void Disconnect(int localId)
+    {
+        if(clients[localId]!=null)
+        clients[localId].Disconnect();
+    }
+    public static void DisconnectAll()
+    {
+        for(int i = 0;i<4; i++)
+        {
+            if (clients[i] != null)
+                clients[i].Disconnect();
+        }
+    }
+    public static void SendPacketToAllExcept(int localId, Packet p)
+    {
+        for(int i = 0;i<4;i++)
+        {
+            if (i != localId) SendPacket(i,p);
+        }
+    }
+    public static void SendPacket(int localId, Packet p)
+    {
+        if(clients[localId]!=null)
+        {
+        clients[localId].Send(p);
+        }
     }
 }

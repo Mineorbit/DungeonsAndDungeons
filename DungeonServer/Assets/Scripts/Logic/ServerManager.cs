@@ -10,11 +10,12 @@ public class ServerManager : MonoBehaviour
     public enum GameAction {GoLive, Prepare};
     FSM<State, GameAction> serverState;
 
+    public InstantionTarget playerTarget;
+
     //Networking
     Server server;
-    Client[] clients;
+
     //Settings
-    GameLogic currentGame;
     public bool Local = true;
     string password = "Test";
 
@@ -34,8 +35,7 @@ public class ServerManager : MonoBehaviour
     }
     void SetupLogic()
     {
-        clients = new Client[4];
-        currentGame = gameObject.AddComponent<GameLogic>();
+        gameObject.AddComponent<GameLogic>();
     }
 
    
@@ -44,26 +44,20 @@ public class ServerManager : MonoBehaviour
         server = new Server();
     }
 
-    public int GetFreeId()
-    {
-        int i = 0;
-        while(clients[i]!=null)
-        {
-            i++;
-        }
-        return i;
-    }
+    
 
     public void AddClient(int localId, Client c)
     {
-        currentGame.AddPlayer(localId,c);
+        GameLogic.current.AddPlayer(localId,c);
     }
 
     public void RemoveClient(int localid)
     {
-        clients[localid].Disconnect();
-        currentGame.RemovePlayer(localid);
+        Server.Disconnect(localid);
+        GameLogic.current.RemovePlayer(localid);
+        Server.GetClient(localid).Remove();
     }
+
 
 
     void SetupFSM()
@@ -89,6 +83,7 @@ public class ServerManager : MonoBehaviour
 
     void Stop()
     {
+        Server.DisconnectAll();
         server.StopListen();
     }
 
@@ -97,7 +92,6 @@ public class ServerManager : MonoBehaviour
         Debug.Log("Server stopping");
         Stop();
     }
-
-
+    
 
 }

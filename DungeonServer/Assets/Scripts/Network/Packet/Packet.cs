@@ -73,42 +73,37 @@ public class Packet
         return packedPacket;
     }
     
-    public List<byte> parseContent(List<byte> contentData)
+    public byte[] Compose()
     {
-        for (int i = 0; i < types.Length; i++)
+        List<byte> contentData = new List<byte>();
+        Debug.Log(content);
+        for(int i = 0;i<types.Length;i++)
         {
             Type t = types[i];
             object o = content[i];
             Debug.Log(t);
-            if (t is int)
+            if(t is int)
             {
                 byte[] intData = BitConverter.GetBytes((int)o);
-                if (BitConverter.IsLittleEndian)
+                if(BitConverter.IsLittleEndian)
                     Array.Reverse(intData);
-                contentData.AddRange(intData);
-            }
-            else if (t == typeof(string))
+                contentData.AddRange (intData);
+            }else if(t == typeof(string))
             {
                 //Hier noch das common encoding raussuchen
-                byte[] stringData = Encoding.ASCII.GetBytes((string)o);
-                byte[] lengthData = BitConverter.GetBytes((short)stringData.Length);
+                byte[] stringData = Encoding.ASCII.GetBytes((string) o);
+                byte[] lengthData = BitConverter.GetBytes( (short) stringData.Length);
                 if (BitConverter.IsLittleEndian)
                     Array.Reverse(lengthData);
-                byte[] elementData = new byte[lengthData.Length + stringData.Length];
-                Array.Copy(lengthData, elementData, 2);
-                Array.Copy(stringData, 0, elementData, 2, stringData.Length);
-
+                byte[] elementData = new byte[lengthData.Length+stringData.Length];
+                Array.Copy(lengthData,elementData,2);
+                Array.Copy(stringData,0,elementData,2,stringData.Length);
+               
 
                 contentData.AddRange(elementData);
             }
         }
-        return contentData;
-    }
 
-    public byte[] Compose()
-    {
-        List<byte> contentData = new List<byte>();
-        contentData = parseContent(contentData);
         byte[] contentResult = contentData.ToArray();
         short length = ( (short) ( contentResult.Length + 1));
         byte[] front = {0,0 , packetId  };
@@ -118,14 +113,14 @@ public class Packet
         Array.Copy(front,0,packetData,0,front.Length);
         Array.Copy(contentResult,0, packetData, 3,contentResult.Length);
 
-        foreach (byte b in packetData)
-        {
-            Debug.Log(b + " " + ((char)b));
-        }
         return packetData;
     }
     
     public virtual void OnReceive()
+    {
+
+    }
+    public virtual void OnReceive(int localId)
     {
 
     }

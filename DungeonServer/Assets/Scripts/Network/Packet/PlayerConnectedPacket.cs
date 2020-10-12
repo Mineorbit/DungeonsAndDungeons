@@ -15,8 +15,9 @@ public class PlayerConnectedPacket : Packet
         content[0] = name;
         packetId = 1;
     }
-    public override void OnReceive()
+    public override void OnReceive(int localId)
     {
-
+        ConnectionInfoPacket cIp = new ConnectionInfoPacket(localId);
+        Server.SendPacket(localId,cIp);
     }
 }

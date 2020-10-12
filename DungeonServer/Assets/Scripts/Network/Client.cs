@@ -15,89 +15,54 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
+//Client from View of Server
 public class Client
 {
 
-    int dataBufferSize = 1024;
+    int dataBufferSize = 32;
     byte[] receiveBuffer;
     public string ip = "127.0.0.1";
     public int port = 13586;
     public TcpClient tcp;
     NetworkStream ns;
 
-    bool retry = true;
 
-    public Client(string nip, int nport)
-    {
-        ip = nip;
-        port = nport;
-    }
-    public Client(TcpClient client)
+    int localId;
+
+    public Client(int lId, TcpClient client)
     {
         tcp = client;
         ns = client.GetStream();
-        Work();
+        localId = lId;
     }
 
-    public void Connect(UnityEvent onConnectEvent)
-    {
-        Debug.Log($"Connecting on {port}");
-        retry = true;
-        SocketConnect(onConnectEvent);
-    }
+   
+  //REWRITE
 
-    public void CancelConnect()
+    public void StartRead()
     {
-        retry = false;
-    }
-
-
-    public async Task Work()
-    {
-        if (tcp != null) return;
         if (tcp.Connected)
         {
-            retry = false;
             ns = tcp.GetStream();
             receiveBuffer = new byte[dataBufferSize];
-            ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+            ns.ReadAsync(receiveBuffer, 0, 32);
+            StartRead();
         }
     }
 
-    public async Task SocketConnect(UnityEvent onConnectEvent)
+  //REWRITE
+    void ProcessPacket(byte[] data)
     {
-        var tcpClient = new TcpClient();
-        while (retry)
-        {
-            try
-            {
-                await tcpClient.ConnectAsync(ip, port);
-            }
-            catch (Exception ex)
-            {
-                //handle errors
-                continue;
-            }
-            if (tcpClient.Connected) { retry = false; break; }
-        }
-        tcp = tcpClient;
-        onConnectEvent.Invoke();
-        Work();
-    }
-
-    private void ReceiveCallback(IAsyncResult _result)
-    {
-        int length = ns.EndRead(_result);
         ThreadManager.ExecuteOnMainThread(() => {
-            byte[] data = new byte[length];
-            Array.Copy(receiveBuffer, data, length);
             Packet p = Packet.Parse(data);
+            Debug.Log("Hussa");
             //Hier andere behandlung für den fall das packet nicht parsebar
             if (p != null)
+                p.OnReceive(localId);
+            if (localId == -1)
                 p.OnReceive();
         });
     }
-
     public void Disconnect(UnityEvent unityEvent)
     {
         Disconnect();
@@ -105,10 +70,16 @@ public class Client
     }
     public void Disconnect()
     {
-        PlayerDisconnectedPacket packet = new PlayerDisconnectedPacket();
+        PlayerDisconnectedPacket packet = new PlayerDisconnectedPacket("Default",localId);
         Send(packet);
         ns.Close();
         tcp.Close();
+        Remove();
+    }
+
+    public void Remove()
+    {
+        ns = null;
     }
     public void Send(Packet p)
     {

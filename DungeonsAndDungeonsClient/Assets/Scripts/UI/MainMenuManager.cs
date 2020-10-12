@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager instance;
     public MenuPage[] pages;
 
-    public enum Page {None = -1, Main = 0, Play,Edit,Lobby,Create };
+    public enum Page {None = -1, Main = 0, Play, Lobby, Edit, Create };
     public enum Transaction {FromNoneToMain, FromMainToPlay,GoBack, FromMainToEdit,FromPlayToLobby, FromEditToCreateMenu };
 
 
@@ -69,12 +69,32 @@ public class MainMenuManager : MonoBehaviour
             pages[(int) mainMenuFSM.state].Open();
             currentPage = (int) mainMenuFSM.state;
         };
+
+        System.Action<Transaction> actLobbyClose = x =>
+        {
+            if (currentPage >= 0)
+                pages[currentPage].Close();
+
+            UnityEvent onDisconnectEvent = new UnityEvent();
+
+
+            NetworkManager.instance.LobbyDisconnect(onDisconnectEvent);
+
+            pages[(int)mainMenuFSM.state].Open();
+            currentPage = (int)mainMenuFSM.state;
+
+        };
+
+
+
         mainMenuFSM = new FSM<Page,Transaction>();
         mainMenuFSM.name = "MainMenu";
         mainMenuFSM.state = Page.None;
         mainMenuFSM.transitions.Add(new Tuple<Page,Transaction>(Page.None,Transaction.FromNoneToMain), new Tuple<Action<Transaction>,Page>(act,Page.Main));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Main, Transaction.FromMainToPlay), new Tuple<Action<Transaction>, Page>(act, Page.Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.FromPlayToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Lobby, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(actLobbyClose, Page.Play));
 
     }
 

@@ -15,8 +15,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-public class Client
+//Client used in game Client
+public class Client : MonoBehaviour
 {
+    string name;
 
     int dataBufferSize = 1024;
     byte[] receiveBuffer;
@@ -25,91 +27,143 @@ public class Client
     public TcpClient tcp;
     NetworkStream ns;
 
+    //Connecting
     bool retry = true;
+    int tries;
 
-    public Client(string nip, int nport)
+    //Events
+    
+    UnityEvent connectEvent;
+
+
+    public void Setup(string nip, int nport,string nname)
     {
         ip = nip;
         port = nport;
+        name = nname;
     }
-    public Client(TcpClient client)
+
+    void TryConnect(UnityEvent onConnectEvent)
     {
-        tcp = client;
-        ns = client.GetStream();
-        Work();
+        connectEvent = onConnectEvent;
+        TryConnect();
+    }
+    void TryConnect()
+    {
+        tcp.BeginConnect(IPAddress.Parse(ip), port, new AsyncCallback(ConnectAttempt), null);
+    }
+    void ConnectAttempt(IAsyncResult result)
+    {
+        tries++;
+        if(tries == 256)
+        {
+            retry = false;
+        }
+        if(!tcp.Connected && retry)
+        {
+            Report("Failed to Connect, trying again");
+            TryConnect();
+        }else if(!retry)
+        {
+            Report("Failed to Connect, not trying again");
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                AlertScreen.alert.Close();
+            });
+        }
+        else
+        {
+            Report("Connected");
+            ThreadManager.ExecuteOnMainThread(()=> {
+                ns = tcp.GetStream();
+                connectEvent.Invoke();
+            });
+        }
     }
 
     public void Connect(UnityEvent onConnectEvent)
     {
-        Debug.Log($"Connecting on {port}");
+        if (tcp == null)
+        {
+            tcp = new TcpClient();
+        }
+        if(!tcp.Connected)
+        {
+        tries = 0;
+        Debug.Log($"[{name}] Connecting on {port}");
         retry = true;
-        SocketConnect(onConnectEvent);
+        TryConnect(onConnectEvent);
+        }
+        
     }
-    
+    public void Report(string m)
+    {
+        if (tcp != null)
+        {
+            Debug.Log($"[{name}] {ip} : {port}  | {tcp.Connected} | "+m);
+        }
+        else
+        {
+            Debug.Log($"[{name}] {ip} : {port}  | No internal TcpClient |"+m);
+        }
+    }
+
+    public void Report()
+    {
+        if(tcp!=null)
+        {
+            Debug.Log($"[{name}] {ip} : {port}  | {tcp.Connected}");
+        }
+        else
+        {
+            Debug.Log($"[{name}] {ip} : {port}  | No internal TcpClient");
+        }
+    }
     public void CancelConnect()
     {
         retry = false;
-    }
-
-
-    public async Task Work()
-    {
-        if (tcp != null) return;
-        if (tcp.Connected)
-        {
-            retry = false;
-            ns = tcp.GetStream();
-            receiveBuffer = new byte[dataBufferSize];
-            ns.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
-        }
-    }
-
-    public async Task SocketConnect(UnityEvent onConnectEvent)
-    {
-        var tcpClient = new TcpClient();
-        while (retry)
-        {
-            try
-            {
-                await tcpClient.ConnectAsync(ip, port);
-            }
-            catch (Exception ex)
-            {
-                //handle errors
-                continue;
-            }
-            if (tcpClient.Connected) { retry = false; break; }
-        }
-        tcp = tcpClient;
-        onConnectEvent.Invoke();
-        Work();
-    }
-
-    private void ReceiveCallback(IAsyncResult _result)
-    {
-        int length = ns.EndRead(_result);
-        ThreadManager.ExecuteOnMainThread(()=> {
-            byte[] data = new byte[length];
-            Array.Copy(receiveBuffer, data, length);
-            Packet p = Packet.Parse(data);
-            //Hier andere behandlung für den fall das packet nicht parsebar
-            if(p != null)
-            p.OnReceive();
-        });
-    }
-    
-    public void Disconnect(UnityEvent unityEvent)
-    {
-        PlayerDisconnectedPacket packet = new PlayerDisconnectedPacket();
-        Send(packet);
-        ns.Close();
-        tcp.Close();
-        unityEvent.Invoke();
+        Disconnect();
     }
     public void Send(Packet p)
     {
-        byte[] data = p.Compose();
-        ns.Write(data,0,data.Length);
+        if(tcp!=null)
+        {
+            if(tcp.Connected)
+            {
+                byte[] data = p.Compose();
+                string s = "";
+                foreach(byte b in data)
+                {
+                    s += b;
+                }
+                Report("Sending: "+s);
+                ns.Write(data,0,data.Length);
+                ns.Flush();
+            }
+        }
+    }
+    public void Disconnect(string r)
+    {
+        if (tcp != null)
+            if (tcp.Connected)
+            {
+                PlayerDisconnectedPacket p = new PlayerDisconnectedPacket(r,NetworkManager.instance.localId);
+                Send(p);
+                ns.Close();
+                tcp.Close();
+                ns = null;
+                tcp = null;
+            }
+        Report("Disconnected");
+    }
+    public void Disconnect()
+    {
+        Disconnect("default");
+    }
+    public void Disconnect(UnityEvent onDisconnectEvent)
+    {
+        Disconnect();
+        onDisconnectEvent.Invoke();
     }
     
 

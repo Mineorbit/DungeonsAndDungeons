@@ -113,10 +113,6 @@ public class Packet
         Array.Copy(front,0,packetData,0,front.Length);
         Array.Copy(contentResult,0, packetData, 3,contentResult.Length);
 
-        foreach (byte b in packetData)
-        {
-            Debug.Log(b + " " + ((char)b));
-        }
         return packetData;
     }
     
