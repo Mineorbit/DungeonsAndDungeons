@@ -55,7 +55,8 @@ public class ServerManager : MonoBehaviour
     {
         Server.Disconnect(localid);
         GameLogic.current.RemovePlayer(localid);
-        Server.GetClient(localid).Remove();
+        Server.RemoveClient(localid);
+        
     }
 
 

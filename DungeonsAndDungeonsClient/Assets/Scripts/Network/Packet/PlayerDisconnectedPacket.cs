@@ -6,6 +6,17 @@ using System.Reflection;
 
 public class PlayerDisconnectedPacket : Packet
 {
+    public PlayerDisconnectedPacket()
+    {
+        Type t = typeof(string);
+        types = new Type[2];
+        types[0] = t;
+        types[1] = typeof(int);
+        content = new object[2];
+        content[0] = "default";
+        content[1] = 0;
+        packetId = 3;
+    }
     public PlayerDisconnectedPacket( string reason, int localId)
     {
         Type t = typeof(string);
@@ -15,15 +26,14 @@ public class PlayerDisconnectedPacket : Packet
         content = new object[2];
         content[0] = reason;
         content[1] = localId;
-        packetId = 1;
+        packetId = 3;
     }
     public override void OnReceive()
     {
         int localId = (int) content[1];
         if(localId == NetworkManager.instance.localId)
         {
-
-            //wenn eigene, dann aus spiel rausgehen bzw schauen was zu tun ist.
+            GameManager.instance.performAction(GameManager.GameAction.Reset);
         }
         else
         {

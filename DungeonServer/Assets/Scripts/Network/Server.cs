@@ -29,6 +29,10 @@ public class Server
     {
         return clients[l];
     }
+    public static void RemoveClient(int local)
+    {
+        clients[local] = null;
+    }
     public async Task Start()
     {
         server.Start();
@@ -58,10 +62,9 @@ public class Server
         lock (idLock)
         {
             localId = GetFreeId();
-
             client = new Client(localId, c);
+            clients[localId] = client;
             client.StartRead();
-            clients[localId] = client; 
         }
         return;
     }
@@ -69,6 +72,7 @@ public class Server
     {
         server.Stop();
     }
+   
     public static void Disconnect(int localId)
     {
         if(clients[localId]!=null)
@@ -86,11 +90,17 @@ public class Server
     {
         for(int i = 0;i<4;i++)
         {
-            if (i != localId) SendPacket(i,p);
+            if (i != localId)
+                if (clients[i] != null)
+                {
+                    Debug.Log("Wir senden an "+i);
+                    SendPacket(i, p);
+                }
         }
     }
     public static void SendPacket(int localId, Packet p)
     {
+        
         if(clients[localId]!=null)
         {
         clients[localId].Send(p);

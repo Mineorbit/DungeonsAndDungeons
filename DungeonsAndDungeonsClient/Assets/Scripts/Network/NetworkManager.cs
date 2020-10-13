@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
-    Client gameClient;
+    public Client gameClient;
     public string username;
     public int localId;
 
@@ -13,8 +13,18 @@ public class NetworkManager : MonoBehaviour
     {
         if (instance != null) Destroy(this);
         instance = this;
+        Setup();
+    }
+    void Setup()
+    {
+
         gameClient = gameObject.AddComponent<Client>();
-        gameClient.Setup("127.0.0.1", 13587,"GameClient");
+        gameClient.Setup("127.0.0.1", 13587, "GameClient");
+    }
+    public void Reset()
+    {
+        gameClient.Kill();
+        Setup();
     }
     public void LobbyConnect(UnityEvent onConnectEvent)
     {

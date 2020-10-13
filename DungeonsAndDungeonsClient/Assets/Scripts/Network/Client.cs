@@ -43,6 +43,14 @@ public class Client : MonoBehaviour
         name = nname;
     }
 
+    public void Kill()
+    {
+        ns.Close();
+        tcp.Close();
+
+        DestroyImmediate(this);
+    }
+
     void TryConnect(UnityEvent onConnectEvent)
     {
         connectEvent = onConnectEvent;
@@ -78,6 +86,7 @@ public class Client : MonoBehaviour
                 ns = tcp.GetStream();
                 connectEvent.Invoke();
             });
+            StartRead();
         }
     }
 
@@ -124,6 +133,44 @@ public class Client : MonoBehaviour
         retry = false;
         Disconnect();
     }
+
+    // hier noch einen try catch für SocketException USW
+    public void StartRead()
+    {
+        if (tcp.Connected)
+        {
+            ns = tcp.GetStream();
+            receiveBuffer = new byte[dataBufferSize];
+            ns.BeginRead(receiveBuffer, 0, dataBufferSize, new AsyncCallback(HandleRead), null);
+        }
+    }
+
+
+    public void HandleRead(IAsyncResult r)
+    {
+        if (!tcp.Connected) return;
+        Report("Handling new Packet");
+        int len = ((int)receiveBuffer[0]) * 256 + (int)receiveBuffer[1];
+
+        byte[] packetData = new byte[len + 2];
+        Array.Copy(receiveBuffer, 0, packetData, 0, len + 2);
+        ProcessPacket(packetData);
+        StartRead();
+    }
+    //REWRITE
+    void ProcessPacket(byte[] data)
+    {
+        ThreadManager.ExecuteOnMainThread(() => {
+            Packet p = Packet.Parse(data);
+
+            Report("Received Packet "+p);
+            //Hier andere behandlung für den fall das packet nicht parsebar
+            if(p!=null)
+            p.OnReceive();
+        });
+    }
+
+
     public void Send(Packet p)
     {
         if(tcp!=null)
@@ -134,7 +181,7 @@ public class Client : MonoBehaviour
                 string s = "";
                 foreach(byte b in data)
                 {
-                    s += b;
+                    s += " "+b;
                 }
                 Report("Sending: "+s);
                 ns.Write(data,0,data.Length);
@@ -149,12 +196,9 @@ public class Client : MonoBehaviour
             {
                 PlayerDisconnectedPacket p = new PlayerDisconnectedPacket(r,NetworkManager.instance.localId);
                 Send(p);
-                ns.Close();
-                tcp.Close();
-                ns = null;
-                tcp = null;
+                Report("Disconnected");
+                NetworkManager.instance.Reset();
             }
-        Report("Disconnected");
     }
     public void Disconnect()
     {

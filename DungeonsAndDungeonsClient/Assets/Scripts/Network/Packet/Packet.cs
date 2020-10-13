@@ -9,13 +9,13 @@ public class Packet
     public byte packetId;
     public Type[] types;
     public object[] content;
-    
+
     public bool TypeCheck()
     {
-        for(int i = 0;i<types.Length;i++)
+        for (int i = 0; i < types.Length; i++)
         {
             Type s = types[i];
-            if (content[i].GetType() !=  s) return false;
+            if (content[i].GetType() != s) return false;
         }
         return true;
     }
@@ -25,9 +25,9 @@ public class Packet
         Type[] subtypes = PacketTypeHandler.SubTypes;
         foreach (Type t in subtypes)
         {
-            Packet instance = (Packet) Activator.CreateInstance(t);
-            
-            if(instance.packetId == id)
+            Packet instance = (Packet)Activator.CreateInstance(t);
+
+            if (instance.packetId == id)
             {
                 return instance;
             }
@@ -38,17 +38,23 @@ public class Packet
     Packet parseContent(byte[] data)
     {
         int z = 0;
-        for(int i = 0; i < types.Length;i++)
+        for (int i = 0; i < types.Length; i++)
         {
-            if(types[i] == typeof(string))
+            if (types[i] == typeof(string))
             {
-                //Aufpassen wegen Encoding
-                
+                int len = (int)data[z] * 256 + (int)data[z + 1];
+                //HIER ENCODING
+                byte[] stringData = new byte[len];
+                Array.Copy(data, z + 2, stringData, 0, len);
+
+                string t = Encoding.UTF8.GetString(stringData);
+                content[i] = t;
+                z += 2 + len;
             }
             else
-            if(types[i] == typeof(int))
+            if (types[i] == typeof(int))
             {
-                byte[] intData = {data[z], data[z+1], data[z+2], data[z+3] };
+                byte[] intData = { data[z], data[z + 1], data[z + 2], data[z + 3] };
                 if (BitConverter.IsLittleEndian)
                     Array.Reverse(intData);
                 content[i] = BitConverter.ToInt32(intData, 0);
@@ -57,14 +63,18 @@ public class Packet
         }
         return this;
     }
+
     public static Packet Parse(byte[] data)
     {
-        short length = (short) ( (256 * (int) data[0]) + (int) data[1]);
-        byte[] shortened = new byte[data.Length-2];
-        Array.Copy(data,2,shortened,0,length);
+        if (data.Length - 2 <= 0) return null;
+
+
+        short length = (short)((256 * (int)data[0]) + (int)data[1]);
+        byte[] shortened = new byte[data.Length - 2];
+        Array.Copy(data, 2, shortened, 0, length);
         byte id = shortened[0];
-        byte[] content = new byte[shortened.Length-1];
-        Array.Copy(shortened,1,content,0,shortened.Length-1);
+        byte[] content = new byte[shortened.Length - 1];
+        Array.Copy(shortened, 1, content, 0, shortened.Length - 1);
         Packet newPacket = Packet.setPacketType(id);
         //nicht parsbarkeit besser handlen
         if (newPacket == null)
@@ -72,51 +82,64 @@ public class Packet
         Packet packedPacket = newPacket.parseContent(content);
         return packedPacket;
     }
-    
+
     public byte[] Compose()
     {
         List<byte> contentData = new List<byte>();
-        Debug.Log(content);
-        for(int i = 0;i<types.Length;i++)
+        Debug.Log("Composing packet " + this.GetType());
+        for (int i = 0; i < types.Length; i++)
         {
             Type t = types[i];
             object o = content[i];
-            Debug.Log(t);
-            if(t is int)
-            {
-                byte[] intData = BitConverter.GetBytes((int)o);
-                if(BitConverter.IsLittleEndian)
-                    Array.Reverse(intData);
-                contentData.AddRange (intData);
-            }else if(t == typeof(string))
-            {
-                //Hier noch das common encoding raussuchen
-                byte[] stringData = Encoding.ASCII.GetBytes((string) o);
-                byte[] lengthData = BitConverter.GetBytes( (short) stringData.Length);
-                if (BitConverter.IsLittleEndian)
-                    Array.Reverse(lengthData);
-                byte[] elementData = new byte[lengthData.Length+stringData.Length];
-                Array.Copy(lengthData,elementData,2);
-                Array.Copy(stringData,0,elementData,2,stringData.Length);
-               
-
-                contentData.AddRange(elementData);
-            }
+            Debug.Log("Adding: " + t + " " + o);
+            contentData.AddRange(AddOfType(t, o));
         }
-
         byte[] contentResult = contentData.ToArray();
-        short length = ( (short) ( contentResult.Length + 1));
-        byte[] front = {0,0 , packetId  };
+        foreach (byte b in contentResult) Debug.Log("content " + b);
+        short length = ((short)(contentResult.Length + 1));
+        byte[] front = { 0, 0, packetId };
         front[1] = (byte)(length & 0xff);
         front[0] = (byte)((length >> 8) & 0xff);
-        byte[] packetData = new byte[3+contentResult.Length];
-        Array.Copy(front,0,packetData,0,front.Length);
-        Array.Copy(contentResult,0, packetData, 3,contentResult.Length);
+        byte[] packetData = new byte[3 + contentResult.Length];
+        Array.Copy(front, 0, packetData, 0, front.Length);
+        Array.Copy(contentResult, 0, packetData, 3, contentResult.Length);
 
         return packetData;
     }
-    
+
+    byte[] AddOfType(Type t, object o)
+    {
+        byte[] elementData = new byte[0];
+        if (t == typeof(int))
+        {
+            Debug.Log("Handling int");
+            elementData = new byte[4];
+            elementData = BitConverter.GetBytes((int)o);
+            foreach (byte b in elementData) Debug.Log(b);
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(elementData);
+        }
+        else if (t == typeof(string))
+        {
+            //Hier noch das common encoding raussuchen
+            byte[] stringData = Encoding.UTF8.GetBytes((string)o);
+            byte[] lengthData = BitConverter.GetBytes((short)stringData.Length);
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(lengthData);
+            elementData = new byte[lengthData.Length + stringData.Length];
+            Array.Copy(lengthData, elementData, 2);
+            Array.Copy(stringData, 0, elementData, 2, stringData.Length);
+
+
+        }
+        return elementData;
+    }
+
     public virtual void OnReceive()
+    {
+
+    }
+    public virtual void OnReceive(int localId)
     {
 
     }

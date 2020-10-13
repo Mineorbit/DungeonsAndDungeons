@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour
     {
         if (current != null) Destroy(this);
         current = this;
+        players = new Player[4];
     }
     public void prepareRound()
     {
@@ -36,6 +37,7 @@ public class GameLogic : MonoBehaviour
     }
     public void RemovePlayer(int localId)
     {
+        if(players[localId]!=null)
         Destroy(players[localId].gameObject);
     }
 }

@@ -12,16 +12,27 @@ public class BlurScreen : MonoBehaviour
     public float t;
     bool open = false;
     bool finished = true;
-
+    enum Task { Open, Close };
+    Queue<Task> todo;
     void Start()
     {
         if (blurScreen != null) Destroy(this);
         blurScreen = this;
 
+        Setup();
+
+    }
+
+    void Reset()
+    {
+        Setup();
+    }
+    void Setup()
+    {
         open = false;
         t = 1;
         screen = transform.Find("Screen").gameObject;
-
+        todo = new Queue<Task>();
         screen.SetActive(false);
     }
 
@@ -32,6 +43,21 @@ public class BlurScreen : MonoBehaviour
         transform.LookAt(Camera.main.transform.position);
         transform.position = LerpPos(t);
         }
+        if(todo.Count>0)
+        if(finished)
+        {
+                Task t = todo.Dequeue();
+                if(t == Task.Close)
+                {
+                    Close();
+                }
+                if (t == Task.Open)
+                {
+                    Open();
+                }
+            }
+
+
     }
 
     Vector3 LerpPos(float t)
@@ -43,13 +69,13 @@ public class BlurScreen : MonoBehaviour
 
     public void Open()
     {
-        if (open||!finished) return;
+        if (open || !finished) { todo.Enqueue(Task.Open); return; }
         StartCoroutine("OpenAnim");
         screen.SetActive(true);
     }
     public void Close()
     {
-        if (!open || !finished) return;
+        if (!open || !finished) { todo.Enqueue(Task.Close); return; }
         StartCoroutine("CloseAnim");
     }
     public bool isOpen()

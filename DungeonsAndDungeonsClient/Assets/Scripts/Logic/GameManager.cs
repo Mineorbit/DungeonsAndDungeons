@@ -8,16 +8,15 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
 
-
     public static GameManager instance;
-
+    bool instanceSet = false;
     public Logic currentLogic;
 
     UnityEvent afterMenuLoad;
     UnityEvent afterTestLoad;
     UnityEvent afterEditLoad;
     public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
-    public enum GameAction { LoadGameFromBoot = 0,EnterMainMenu ,EnterTestFromMainMenu,EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
+    public enum GameAction { LoadGameFromBoot = 0,Reset,EnterMainMenu ,EnterTestFromMainMenu,EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
 
     FSM<State,GameAction> gameStateFSM;
 
@@ -27,17 +26,26 @@ public class GameManager : MonoBehaviour
     {
         return gameStateFSM.state;
     }
-    void Start()
+    public void Start()
     {
-        if (instance != null)
-        {
-            Destroy(this);
-        } else instance = this;
-
-        SetupGameStateFSM();
-        setupAfterLoadEvents();
+        Setup();
         performAction(GameAction.LoadGameFromBoot);
     }
+
+    public void ResetGame()
+    {
+        UnityEngine.Debug.Log("Reseting");
+        Setup();
+    }
+    void Setup()
+    {
+        if (instance != null && !instanceSet) Destroy(this);
+        instance = this;
+        if (!instanceSet) instanceSet = true;
+        SetupGameStateFSM();
+        setupAfterLoadEvents();
+    }
+
     public void setupAfterLoadEvents()
     {
         afterMenuLoad = new UnityEvent();
@@ -72,14 +80,39 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> actMenu = x =>
         {
-            UnityEngine.Debug.Log(x);
             UnityEvent initEvent = new UnityEvent();
-            initEvent.AddListener(asyncMenuLoad);
+            selectasyncLoad(initEvent);
+            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+        };
+
+        Action<GameAction> actResetDisconnect = x =>
+        {
+            UnityEvent initEvent = new UnityEvent();
+            selectasyncLoad(initEvent);
+
+            NetworkManager.instance.Reset();
+
+            initEvent.AddListener(ResetGame);
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
         gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(actMenu,State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu));
     }
 
+    void selectasyncLoad(UnityEvent e)
+    {
+        switch(gameStateFSM.state)
+        {
+            case State.MainMenu:
+                e.AddListener(asyncMenuLoad);
+                break;
+            case State.Edit:
+                e.AddListener(asyncEditLoad);
+                break;
+
+        }
+
+    }
     
     void asyncMenuLoad()
     {

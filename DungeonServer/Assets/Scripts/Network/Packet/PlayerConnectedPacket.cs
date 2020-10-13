@@ -6,6 +6,15 @@ using System.Reflection;
 
 public class PlayerConnectedPacket : Packet
 {
+    public PlayerConnectedPacket()
+    {
+        Type t = typeof(string);
+        types = new Type[1];
+        types[0] = t;
+        content = new object[1];
+        content[0] = "Test";
+        packetId = 1;
+    }
     public PlayerConnectedPacket(string name)
     {
         Type t = typeof(string);
@@ -17,6 +26,9 @@ public class PlayerConnectedPacket : Packet
     }
     public override void OnReceive(int localId)
     {
+        Debug.Log("New player "+content[0]+" "+localId);
+
+        ServerManager.instance.AddClient(localId,Server.GetClient(localId));
         ConnectionInfoPacket cIp = new ConnectionInfoPacket(localId);
         Server.SendPacket(localId,cIp);
     }

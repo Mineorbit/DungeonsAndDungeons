@@ -19,13 +19,12 @@ using UnityEngine.Events;
 public class Client
 {
 
-    int dataBufferSize = 32;
+    int dataBufferSize = 512;
     byte[] receiveBuffer;
     public string ip = "127.0.0.1";
     public int port = 13586;
     public TcpClient tcp;
     NetworkStream ns;
-
 
     int localId;
 
@@ -36,7 +35,13 @@ public class Client
         localId = lId;
     }
 
-   
+   public void Kill()
+    {
+        ns.Close();
+        tcp.Close();
+        ns = null;
+        tcp = null;
+    }
   //REWRITE
 
     public void StartRead()
@@ -45,17 +50,27 @@ public class Client
         {
             ns = tcp.GetStream();
             receiveBuffer = new byte[dataBufferSize];
-            ns.ReadAsync(receiveBuffer, 0, 32);
-            StartRead();
+            ns.BeginRead(receiveBuffer,0,dataBufferSize,new AsyncCallback(HandleRead),null);
         }
     }
 
+
+    public void HandleRead(IAsyncResult r)
+    {
+
+        if (!tcp.Connected) return;
+        int len = ((int) receiveBuffer[0])*256 + (int) receiveBuffer[1];
+
+        byte[] packetData = new byte[len+2];
+        Array.Copy(receiveBuffer,0,packetData,0, len+2);
+        ProcessPacket(packetData);
+        StartRead();
+    }
   //REWRITE
     void ProcessPacket(byte[] data)
     {
         ThreadManager.ExecuteOnMainThread(() => {
             Packet p = Packet.Parse(data);
-            Debug.Log("Hussa");
             //Hier andere behandlung für den fall das packet nicht parsebar
             if (p != null)
                 p.OnReceive(localId);
@@ -63,28 +78,60 @@ public class Client
                 p.OnReceive();
         });
     }
+
+
     public void Disconnect(UnityEvent unityEvent)
     {
-        Disconnect();
         unityEvent.Invoke();
+        Disconnect();
     }
     public void Disconnect()
     {
+        if(tcp.Connected)
+        {
         PlayerDisconnectedPacket packet = new PlayerDisconnectedPacket("Default",localId);
         Send(packet);
-        ns.Close();
-        tcp.Close();
-        Remove();
+        Kill();
+        }
+    }
+    
+    
+    public void Report(string m)
+    {
+        if (tcp != null)
+        {
+            Debug.Log($"[{localId}] {ip} : {port}  | {tcp.Connected} | " + m);
+        }
+        else
+        {
+            Debug.Log($"[{localId}] {ip} : {port}  | No internal TcpClient |" + m);
+        }
     }
 
-    public void Remove()
+    public void Report()
     {
-        ns = null;
+        if (tcp != null)
+        {
+            Debug.Log($"[{localId}] {ip} : {port}  | {tcp.Connected}");
+        }
+        else
+        {
+            Debug.Log($"[{localId}] {ip} : {port}  | No internal TcpClient");
+        }
     }
     public void Send(Packet p)
     {
-        byte[] data = p.Compose();
-        ns.Write(data, 0, data.Length);
+        if(Server.GetClient(localId)!=null)
+        if (tcp != null)
+        {
+            if (tcp.Connected)
+            {
+                byte[] data = p.Compose();
+                Report("Sending Packet " + p);
+                ns.Write(data, 0, data.Length);
+                ns.Flush();
+            }
+        }
     }
 
 
