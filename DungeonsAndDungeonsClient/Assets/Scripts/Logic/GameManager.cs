@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     gameStateFSM.state = State.Init;
     gameStateFSM.name = "GameState";
 
-        Action<GameAction> actMenu = x =>
+        Action<GameAction> act = x =>
         {
             UnityEvent initEvent = new UnityEvent();
             selectasyncLoad(initEvent);
@@ -96,8 +96,13 @@ public class GameManager : MonoBehaviour
             initEvent.AddListener(ResetGame);
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
-        gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(actMenu,State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(act,State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Test));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
+
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(act, State.MainMenu));
+
     }
 
     void selectasyncLoad(UnityEvent e)
@@ -109,6 +114,12 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Edit:
                 e.AddListener(asyncEditLoad);
+                break;
+            case State.Test:
+                e.AddListener(asyncTestLoad);
+                break;
+            case State.PlayOnline:
+                e.AddListener(asyncPlayLoad);
                 break;
 
         }
@@ -133,9 +144,15 @@ public class GameManager : MonoBehaviour
     {
     SceneLoadManager.instance.unloadCurrentScenes();
 
+    SceneLoadManager.instance.load(2, afterTestLoad);
+    }
+    void asyncPlayLoad()
+    {
+        SceneLoadManager.instance.unloadCurrentScenes();
+
         //Connect to Game Server
 
-    SceneLoadManager.instance.load(2, afterTestLoad);
+        SceneLoadManager.instance.load(2, afterTestLoad);
     }
     public void performAction(GameAction action)
     {

@@ -95,6 +95,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.FromPlayToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Lobby, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(actLobbyClose, Page.Play));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Main, Transaction.FromMainToEdit), new Tuple<Action<Transaction>, Page>(act, Page.Edit));
 
     }
 

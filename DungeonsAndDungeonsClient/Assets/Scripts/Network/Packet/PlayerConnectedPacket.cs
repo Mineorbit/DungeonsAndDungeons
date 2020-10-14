@@ -34,7 +34,6 @@ public class PlayerConnectedPacket : Packet
         //Spawn PlayerChar according to mode
         if (GameManager.GetState() == GameManager.State.MainMenu)
         {
-            Debug.Log("Check: "+localId+ " "+content[0]);
             Lobby.lobby.AddPlayer(localId,(string) content[0]);
         }
     }
