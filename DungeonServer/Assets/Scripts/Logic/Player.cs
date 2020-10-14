@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public string name;
     Vector3 targetPosition;
     Quaternion targetRotation;
-    Client client;
+    public Client client;
 
     void Start()
     {

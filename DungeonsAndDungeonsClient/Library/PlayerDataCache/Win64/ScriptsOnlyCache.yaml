@@ -19,7 +19,6 @@ ScriptsOnlyBuild:
     - LevelObject
     - LevelObjectData
     - LoadingScreen
-    - Lobby
     - LobbyMenu
     - MainMenu
     - MainMenuManager
@@ -221,8 +220,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13246}
     - Class: 114
       Script: {instanceID: 13326}
-    - Class: 114
-      Script: {instanceID: 13410}
     - Class: 114
       Script: {instanceID: 13444}
     - Class: 114
@@ -1008,12 +1005,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CreateLevelMenu
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Lobby
   - hash:
       serializedVersion: 2
       Hash: 103aa5d6f899aa7192aeb8b61214e8df
@@ -2292,5 +2283,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/menu.unity
   - Assets/Scenes/test.unity
   - Assets/Scenes/edit.unity
-  playerPath: C:/Users/mineo/Desktop/ddbuilds/Builds/131020/Dungeons and Dungeons
+  playerPath: C:/Users/mineo/Desktop/ddbuilds/Builds/141020/Dungeons and Dungeons
     Client.exe

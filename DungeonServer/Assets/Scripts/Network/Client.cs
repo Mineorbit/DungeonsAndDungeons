@@ -28,6 +28,8 @@ public class Client
 
     int localId;
 
+    public string name;
+
     public Client(int lId, TcpClient client)
     {
         tcp = client;

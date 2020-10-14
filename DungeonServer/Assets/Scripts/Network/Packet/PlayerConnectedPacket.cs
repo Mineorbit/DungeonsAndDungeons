@@ -9,27 +9,61 @@ public class PlayerConnectedPacket : Packet
     public PlayerConnectedPacket()
     {
         Type t = typeof(string);
-        types = new Type[1];
+        types = new Type[2];
         types[0] = t;
-        content = new object[1];
+        types[1] = typeof(int);
+        content = new object[2];
         content[0] = "Test";
+        content[1] = 0;
         packetId = 1;
     }
     public PlayerConnectedPacket(string name)
     {
         Type t = typeof(string);
-        types = new Type[1];
+        types = new Type[2];
         types[0] = t;
-        content = new object[1];
+        types[1] = typeof(int);
+        content = new object[2];
         content[0] = name;
+        content[1] = -1;
+        packetId = 1;
+    }
+    public PlayerConnectedPacket(string name, int l)
+    {
+        Type t = typeof(string);
+        types = new Type[2];
+        types[0] = t;
+        types[1] = typeof(int);
+        content = new object[2];
+        content[0] = name;
+        content[1] = l;
         packetId = 1;
     }
     public override void OnReceive(int localId)
     {
+        if( (int) content[1] == -1)
+        { 
         Debug.Log("New player "+content[0]+" "+localId);
-
+        Server.GetClient(localId).name = (string) content[0];
         ServerManager.instance.AddClient(localId,Server.GetClient(localId));
         ConnectionInfoPacket cIp = new ConnectionInfoPacket(localId);
         Server.SendPacket(localId,cIp);
+
+            //Informiere neuen Spieler über alle bisherigen
+            foreach(Player pl in GameLogic.current.players)
+            {
+                if(pl!=null)
+                {
+                PlayerConnectedPacket newPlayerPacket = new PlayerConnectedPacket(pl.name, pl.localId);
+                Server.SendPacket(localId, newPlayerPacket);
+                }
+            }
+
+        //Informiere alle spieler über neuen Spieler
+
+        PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket((string)content[0],localId);
+        Server.SendPacketToAllExcept(localId,playerConnectedPacket);
+        }
+
     }
 }

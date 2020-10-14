@@ -141,7 +141,13 @@ public class Client : MonoBehaviour
         {
             ns = tcp.GetStream();
             receiveBuffer = new byte[dataBufferSize];
+            try
+            { 
             ns.BeginRead(receiveBuffer, 0, dataBufferSize, new AsyncCallback(HandleRead), null);
+            }catch(Exception e)
+            {
+                StartRead();
+            }
         }
     }
 
@@ -208,6 +214,10 @@ public class Client : MonoBehaviour
     {
         Disconnect();
         onDisconnectEvent.Invoke();
+    }
+    public void OnDisable()
+    {
+        Disconnect("Player quit game");
     }
     
 

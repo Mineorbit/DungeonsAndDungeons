@@ -33,6 +33,7 @@ public class PlayerDisconnectedPacket : Packet
         int localId = (int) content[1];
         if(localId == NetworkManager.instance.localId)
         {
+            //Hier noch alertScreen einbauen
             GameManager.instance.performAction(GameManager.GameAction.Reset);
         }
         else
@@ -40,6 +41,11 @@ public class PlayerDisconnectedPacket : Packet
 
             //wenn nicht
             //wenn in lobby dann lobby updaten
+
+            if(GameManager.GetState() == GameManager.State.MainMenu)
+            {
+                Lobby.lobby.RemovePlayer(localId);
+            }
         }
     }
 }

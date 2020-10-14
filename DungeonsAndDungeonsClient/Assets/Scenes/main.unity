@@ -1236,7 +1236,6 @@ GameObject:
   - component: {fileID: 1715383545}
   - component: {fileID: 1715383546}
   - component: {fileID: 1715383547}
-  - component: {fileID: 1715383548}
   - component: {fileID: 1715383549}
   - component: {fileID: 1715383550}
   - component: {fileID: 1715383551}
@@ -1360,20 +1359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e762884e25884142942283c145a28e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameClient: {fileID: 0}
   username: 
-  globalId: 0
---- !u!114 &1715383548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715383538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7f9f5d3bfaece542ad702b342aeaa99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  localId: 0
 --- !u!114 &1715383549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,7 +1937,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.05
+  m_fontSize: 18.3
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -93,7 +93,6 @@ public class Server
             if (i != localId)
                 if (clients[i] != null)
                 {
-                    Debug.Log("Wir senden an "+i);
                     SendPacket(i, p);
                 }
         }

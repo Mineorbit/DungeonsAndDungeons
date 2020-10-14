@@ -28,7 +28,7 @@ public class PlayerDisconnectedPacket : Packet
     }
     public override void OnReceive(int localId)
     {
-        Debug.Log("By "+localId);
+        Debug.Log($"Player {localId} disconnected: {content[0]}");
         ServerManager.instance.RemoveClient(localId);
 
         PlayerDisconnectedPacket respP = new PlayerDisconnectedPacket((string) content[0] ,localId);

@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
 
     UnityEvent[] asyncEvent;
 
-    public State GetState()
+    public static State GetState()
     {
-        return gameStateFSM.state;
+        return instance.gameStateFSM.state;
     }
     public void Start()
     {
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         afterMenuLoad = new UnityEvent();
         afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterMenuLoad.AddListener(SetLogic);
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterTestLoad.AddListener(SetLogic);
@@ -158,6 +159,9 @@ public class GameManager : MonoBehaviour
         }
         switch(gameStateFSM.state)
         {
+            case State.MainMenu:
+                currentLogic = new Lobby();
+                break;
             case State.Edit:
                 currentLogic = new EditLogic();
                 break;

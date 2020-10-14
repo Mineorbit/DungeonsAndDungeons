@@ -9,23 +9,33 @@ public class PlayerConnectedPacket : Packet
     public PlayerConnectedPacket()
     {
         Type t = typeof(string);
-        types = new Type[1];
+        types = new Type[2];
         types[0] = t;
-        content = new object[1];
+        types[1] = typeof(int);
+        content = new object[2];
         content[0] = "Test";
+        content[1] = 0;
         packetId = 1;
     }
     public PlayerConnectedPacket(string name)
     {
         Type t = typeof(string);
-        types = new Type[1];
+        types = new Type[2];
         types[0] = t;
-        content = new object[1];
+        types[1] = typeof(int);
+        content = new object[2];
         content[0] = name;
+        content[1] = -1;
         packetId = 1;
     }
     public override void OnReceive()
     {
-
+        int localId = (int)content[1];
+        //Spawn PlayerChar according to mode
+        if (GameManager.GetState() == GameManager.State.MainMenu)
+        {
+            Debug.Log("Check: "+localId+ " "+content[0]);
+            Lobby.lobby.AddPlayer(localId,(string) content[0]);
+        }
     }
 }

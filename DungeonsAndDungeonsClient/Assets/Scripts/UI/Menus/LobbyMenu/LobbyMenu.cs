@@ -11,10 +11,14 @@ public class LobbyMenu : MenuPage
         index = 2;
 
         backButton = transform.Find("Back").GetComponent<Button>();
-        backButton.onClick.AddListener(Lobby.lobby.Close);
+        backButton.onClick.AddListener(GoBack);
     }
+    void GoBack()
+    {
 
-    
+    MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
+
+    }
     public override void Open()
     {
         base.Open();

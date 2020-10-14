@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class Lobby : MonoBehaviour
+public class Lobby : Logic
 {
     public static Lobby lobby;
 
     public Player[] players;
-    void Start()
+    int localPlayer = 0;
+    public Lobby()
     {
-        if (lobby != null) Destroy(this);
+        if (lobby == null)
         lobby = this;
+
         players = new Player[4];
     }
     public void Open(string name)
@@ -18,19 +20,35 @@ public class Lobby : MonoBehaviour
 
         players = new Player[4];
 
-        Player player = new Player();
-        player.name = name;
-        Lobby.lobby.players[0] = player;
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenu);
         NetworkManager.instance.LobbyConnect(onConnectEvent,name);
 
     }
-    
-    public void Close()
+    public void AddLocalPlayer(int localId, string name)
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
+        localPlayer = localId;
+        AddPlayer(localId,name);
+    }
+    public void RemoveLocalPlayer()
+    {
+        RemovePlayer(localPlayer);
+    }
+
+    public void AddPlayer(int localId, string name)
+    {
+        Debug.Log("Adding Player "+name);
+        Player player = new Player();
+        player.name = name;
+        players[localId] = player;
+        PlayerView.playerView.UpdatePlayerView(players);
+    }
+    public void RemovePlayer(int localId)
+    {
+        Debug.Log("Removing Player " + localId);
+        players[localId] = null;
+        PlayerView.playerView.UpdatePlayerView(players);
     }
     void OpenLobbyMenu()
     {
