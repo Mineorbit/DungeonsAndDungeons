@@ -82,17 +82,20 @@ public class GameManager : MonoBehaviour
         Action<GameAction> act = x =>
         {
             UnityEvent initEvent = new UnityEvent();
-            selectasyncLoad(initEvent);
+            selectAsyncLoad(initEvent);
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
         Action<GameAction> actEditTest = x =>
         {
+            UnityEvent swapEvent = new UnityEvent();
+            selectAsyncSwap(swapEvent);
+            swapEvent.Invoke();
             SetLogic();
         };
         Action<GameAction> actResetDisconnect = x =>
         {
             UnityEvent initEvent = new UnityEvent();
-            selectasyncLoad(initEvent);
+            selectAsyncLoad(initEvent);
 
             NetworkManager.instance.Reset();
 
@@ -113,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void selectasyncLoad(UnityEvent e)
+    void selectAsyncLoad(UnityEvent e)
     {
         switch(gameStateFSM.state)
         {
@@ -133,20 +136,44 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    void selectAsyncSwap(UnityEvent e)
+    {
+        switch(gameStateFSM.state)
+        {
+            case State.Test:
+                e.AddListener(EditToTest);
+                break;
+            case State.Edit:
+                e.AddListener(TestToEdit);
+                break;
+        }
+    }
     
     void asyncMenuLoad()
     {
         SceneLoadManager.instance.unloadCurrentScenes();
         SceneLoadManager.instance.load(1, afterMenuLoad);
     }
+
+    void EditToTest()
+    {
+        UnityEngine.Debug.Log("Loading Test Scene");
+
+        SceneLoadManager.instance.unload(2);
+        SceneLoadManager.instance.load(2);
+    }
+    void TestToEdit()
+    {
+        UnityEngine.Debug.Log("Loading Edit Scene");
+        SceneLoadManager.instance.unload(3);
+        SceneLoadManager.instance.load(3);
+    }
+
     void asyncEditLoad()
     {
-
+        UnityEngine.Debug.Log("Moin Meister");
         SceneLoadManager.instance.unloadCurrentScenes();
-        int[] toLoad = new int[2];
-        toLoad[0] = 2;
-        toLoad[1] = 3;
-        SceneLoadManager.instance.load(toLoad,afterEditLoad);
+        SceneLoadManager.instance.load(3,afterEditLoad);
     }
     void asyncTestLoad()
     {

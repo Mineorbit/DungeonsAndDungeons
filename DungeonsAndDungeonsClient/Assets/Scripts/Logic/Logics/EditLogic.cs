@@ -7,10 +7,7 @@ public class EditLogic : Logic
     GameObject builder;
     public override void Init()
     {
-        Debug.Log("Init Build");
         sceneIndex = 3;
-
-        RemoveAll();
 
         created = Instantiator.InstantiateAssets("edit");
         builder = created[0];

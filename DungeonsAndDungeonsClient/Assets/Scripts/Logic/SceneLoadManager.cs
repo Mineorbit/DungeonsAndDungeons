@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 public class SceneLoadManager : MonoBehaviour
 {
-    private int numberOfScenes = 3;  
-    public int[] currentScene;
+    private int numberOfScenes = 4;  
+    public List<int> currentScenes;
     private IEnumerator coroutine;
     public static SceneLoadManager instance;
+    
     public void Awake()
     {
         if(instance!=null)
@@ -16,8 +18,8 @@ public class SceneLoadManager : MonoBehaviour
         }
         instance = this;
 
-        currentScene = new int[1];
-        currentScene[0] = 0;
+        currentScenes = new List<int>();
+        currentScenes.Add(0);
     }
     /*
     public void load(int loadScene)
@@ -89,7 +91,7 @@ public class SceneLoadManager : MonoBehaviour
             yield return null;
         }
         }
-        currentScene = targetScenes;
+        currentScenes.AddRange(targetScenes.ToList());
     }
     public IEnumerator loadAs(int[] targetScenes,UnityEvent finEvent)
     {
@@ -101,7 +103,7 @@ public class SceneLoadManager : MonoBehaviour
                 yield return null;
             }
         }
-        currentScene = targetScenes;
+        currentScenes.AddRange(targetScenes.ToList());
         finEvent.Invoke();
     }
     public IEnumerator loadAs(int targetScene)
@@ -112,9 +114,7 @@ public class SceneLoadManager : MonoBehaviour
         {
             yield return null;
         }
-        int[] ret = new int[1];
-        ret[0] = targetScene;
-        currentScene = ret;
+        currentScenes.Add(targetScene);
     }
     public IEnumerator loadAs(int targetScene,UnityEvent finEvent)
     {
@@ -125,20 +125,34 @@ public class SceneLoadManager : MonoBehaviour
             yield return null;
         }
 
-        int[] ret = new int[1];
-        ret[0] = targetScene;
-        currentScene = ret;
+        currentScenes.Add(targetScene);
         finEvent.Invoke();
     }
     public void unloadCurrentScene()
     {
-        if(currentScene[0]!=0)
-        UnityEngine.SceneManagement.SceneManager.UnloadScene(currentScene[0]);
+        if (currentScenes.Count > 0)
+        { 
+            int x = currentScenes[0];
+            UnityEngine.SceneManagement.SceneManager.UnloadScene(x);
+            currentScenes.RemoveAt(0);
+        }
+    }
+
+    public void unload(int i)
+    {
+        if(currentScenes.Contains(i))
+        {
+            currentScenes.Remove(i);
+            UnityEngine.SceneManagement.SceneManager.UnloadScene(i);
+        }
     }
     public void unloadCurrentScenes()
     {
-        for(int i = 0;i < currentScene.Length;i++)
-            if (currentScene[i] != 0)
-                UnityEngine.SceneManagement.SceneManager.UnloadScene(currentScene[i]);
+        for(int i = 0;i < currentScenes.Count;i++)
+        {
+                int x = currentScenes[i];
+                UnityEngine.SceneManagement.SceneManager.UnloadScene(x);
+                currentScenes.RemoveAt(i);
+        }
     }
 }

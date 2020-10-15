@@ -11,6 +11,10 @@ public class MouseStateController : MonoBehaviour
         toggleable[0] = true;
         toggleable[1] = true;
     }
+    public static bool isLocked()
+    {
+        return locked;
+    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt)&&toggleable[0]&&toggleable[1])

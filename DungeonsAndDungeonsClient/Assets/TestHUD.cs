@@ -14,5 +14,11 @@ public class TestHUD : MonoBehaviour
     {
         GameManager.instance.performAction(GameManager.GameAction.EnterEditFromTest);
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            enterEdit.onClick.Invoke();
+        }
+    }
 }

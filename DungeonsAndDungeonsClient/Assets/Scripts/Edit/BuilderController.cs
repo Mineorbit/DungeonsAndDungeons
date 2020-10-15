@@ -33,7 +33,7 @@ public class BuilderController : MonoBehaviour
         //Hier gleicher knopf wie bei mouse lock
         if(Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            acceptInput = !acceptInput;
+            acceptInput = MouseStateController.isLocked();
         }
     }
     void ProcessBuildInput()

@@ -7,9 +7,7 @@ public class TestLogic : Logic
 
     public override void Init()
     {
-        Debug.Log("Init Test");
         sceneIndex = 2;
-        RemoveAll();
         created = Instantiator.InstantiateAssets("test");
     }
 
