@@ -78,7 +78,7 @@ public class MainMenuManager : MonoBehaviour
             UnityEvent onDisconnectEvent = new UnityEvent();
 
 
-            NetworkManager.instance.LobbyDisconnect(onDisconnectEvent);
+            NetworkManager.instance.GameDisconnect(onDisconnectEvent);
 
             pages[(int)mainMenuFSM.state].Open();
             currentPage = (int)mainMenuFSM.state;
@@ -96,6 +96,9 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.FromPlayToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Lobby, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(actLobbyClose, Page.Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Main, Transaction.FromMainToEdit), new Tuple<Action<Transaction>, Page>(act, Page.Edit));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.FromEditToCreateMenu), new Tuple<Action<Transaction>, Page>(act, Page.Create));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Create, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Edit));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
 
     }
 

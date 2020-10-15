@@ -10,6 +10,8 @@ public class Lobby : Logic
     int localPlayer = 0;
     public Lobby()
     {
+        sceneIndex = 1;
+
         if (lobby == null)
         lobby = this;
 
@@ -23,7 +25,7 @@ public class Lobby : Logic
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenu);
-        NetworkManager.instance.LobbyConnect(onConnectEvent,name);
+        NetworkManager.instance.GameConnect(onConnectEvent,name);
 
     }
     public void AddLocalPlayer(int localId, string name)
@@ -38,7 +40,6 @@ public class Lobby : Logic
 
     public void AddPlayer(int localId, string name)
     {
-        Debug.Log("Adding Player "+name);
         Player player = new Player();
         player.name = name;
         players[localId] = player;
@@ -46,7 +47,6 @@ public class Lobby : Logic
     }
     public void RemovePlayer(int localId)
     {
-        Debug.Log("Removing Player " + localId);
         players[localId] = null;
         PlayerView.playerView.UpdatePlayerView(players);
     }

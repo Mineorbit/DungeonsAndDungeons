@@ -26,29 +26,29 @@ public class NetworkManager : MonoBehaviour
         gameClient.Kill();
         Setup();
     }
-    public void LobbyConnect(UnityEvent onConnectEvent)
+    public void GameConnect(UnityEvent onConnectEvent)
     {
-        LobbyConnect(onConnectEvent,"123456");
+        GameConnect(onConnectEvent,"123456");
     }
-    public void LobbyConnect(UnityEvent onConnectEvent, string name)
+    public void GameConnect(UnityEvent onConnectEvent, string name)
     {
         username = name;
 
         UnityEvent cancelEvent = new UnityEvent();
-        cancelEvent.AddListener(LobbyCancelConnect);
+        cancelEvent.AddListener(GameCancelConnect);
         AlertScreen.alert.Open("Verbinde zu Lobby ...",cancelEvent);
         onConnectEvent.AddListener(sendUsernameData);
         onConnectEvent.AddListener(AlertScreen.alert.Close);
         gameClient.Connect(onConnectEvent);
      
     }
-    public void LobbyCancelConnect()
+    public void GameCancelConnect()
     {
         AlertScreen.alert.Close();
         gameClient.CancelConnect();
     }
 
-    public void LobbyDisconnect(UnityEvent disconnectEvent)
+    public void GameDisconnect(UnityEvent disconnectEvent)
     {   
         gameClient.Disconnect(disconnectEvent);
     }

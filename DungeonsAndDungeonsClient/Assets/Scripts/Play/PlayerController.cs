@@ -35,11 +35,13 @@ public class PlayerController : MonoBehaviour
     }
     public static void Spawn(Vector3 location)
     {
+        if (player == null) return;
         player.transform.position = location;
         player.gameObject.SetActive(true);
     }
     public static void Despawn()
     {
+        if (player == null) return;
         player.gameObject.SetActive(false);
     }
     void Update()
@@ -68,5 +70,9 @@ public class PlayerController : MonoBehaviour
             movingDirection = targetDirection;
             controller.Move(targetDirection * Speed * Time.deltaTime);
         }
+    }
+    public void OnDisable()
+    {
+        player = null;
     }
 }

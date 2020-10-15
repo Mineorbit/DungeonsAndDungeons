@@ -85,7 +85,10 @@ public class GameManager : MonoBehaviour
             selectasyncLoad(initEvent);
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
-
+        Action<GameAction> actEditTest = x =>
+        {
+            SetLogic();
+        };
         Action<GameAction> actResetDisconnect = x =>
         {
             UnityEvent initEvent = new UnityEvent();
@@ -100,6 +103,11 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
+
+        //Reset Level
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(act, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterTestFromEdit), new Tuple<Action<GameAction>, State>(actEditTest, State.Test));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterEditFromTest), new Tuple<Action<GameAction>, State>(actEditTest, State.Edit));
 
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(act, State.MainMenu));
 

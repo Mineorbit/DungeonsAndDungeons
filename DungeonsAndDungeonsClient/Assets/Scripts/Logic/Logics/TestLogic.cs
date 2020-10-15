@@ -5,10 +5,11 @@ using UnityEngine;
 public class TestLogic : Logic
 {
 
-    GameObject[] created;
     public override void Init()
     {
         Debug.Log("Init Test");
+        sceneIndex = 2;
+        RemoveAll();
         created = Instantiator.InstantiateAssets("test");
     }
 
@@ -16,13 +17,21 @@ public class TestLogic : Logic
     {
         if (running) return;
         base.Start();
+        SpawnAll();
         SpawnPlayer(new Vector3(0, 0, 0));
     }
+    
     public override void Stop()
     {
         if (!running) return;
         DespawnPlayer();
+        DespawnAll();
     }
+    public override void DeInit()
+    {
+        
+    }
+    
     void DespawnPlayer()
     {
         PlayerController.Despawn();

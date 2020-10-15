@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EditLogic : Logic
 {
-    GameObject[] created;
     GameObject builder;
     public override void Init()
     {
         Debug.Log("Init Build");
+        sceneIndex = 3;
+
+        RemoveAll();
+
         created = Instantiator.InstantiateAssets("edit");
         builder = created[0];
     }
@@ -17,12 +20,21 @@ public class EditLogic : Logic
     {
         if (running) return;
         base.Start();
+        Debug.Log("Starting Edit");
+        SpawnAll();
         SpawnBuilder(new Vector3(0,0,0));
     }
     public override void Stop()
     {
         if (!running) return;
-        DespawnBuilder();
+        base.Stop();
+        Debug.Log("Stopping Edit");
+
+        DespawnAll();
+    }
+    public override void DeInit()
+    {
+        
     }
     void DespawnBuilder()
     {

@@ -37,6 +37,10 @@ public class Instantiator : MonoBehaviour
         o.transform.position = location;
         return o;
     }
+    public static void Remove(GameObject g)
+    {
+        Destroy(g);
+    }
     public static GameObject[] Instantiate(UnityEngine.Object prefab, Vector3[] locations)
     {
         GameObject[] o = new GameObject[locations.Length];

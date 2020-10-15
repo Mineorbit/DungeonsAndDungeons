@@ -18,8 +18,9 @@ public class BuilderCursor : MonoBehaviour
 
     static GameObject hitObject;
 
-    public void Awake()
+    public void Start()
     {
+        Debug.Log("Setting up Cursor");
         if (builderCursor != null) Destroy(this);
         builderCursor = this;
 
@@ -91,5 +92,9 @@ public class BuilderCursor : MonoBehaviour
     public static (Vector3 pos, Vector3 norm, LevelObjectData levelObjectData) Get()
     {
         return (builderCursor.transform.position,normalVec, currentSelection);
+    }
+    public void OnDisable()
+    {
+        builderCursor = null;
     }
 }
