@@ -9,7 +9,7 @@ const client = new Client({
   user: 'max',
   host: '127.0.0.1',
   database: 'levelserver',
-  password: 'Stinker123',
+  password: 'Muinma319',
 })
 client.connect()
 
