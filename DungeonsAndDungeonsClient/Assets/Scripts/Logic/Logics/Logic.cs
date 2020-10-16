@@ -24,22 +24,7 @@ public class Logic
         }
         return objs.ToArray();
     }
-    public void RemoveAll()
-    {
-        if(created == null)
-        {
-            created = FetchAllinScene();
-        }else if(created.Length==0)
-        {
-            created = FetchAllinScene();
-        }
-        if(created!=null)
-        if(created.Length>0)
-        foreach (GameObject g in created)
-        {
-            Instantiator.Remove(g);
-        }
-    }
+   
     public void SpawnAll()
     {
         created = FetchAllinScene();

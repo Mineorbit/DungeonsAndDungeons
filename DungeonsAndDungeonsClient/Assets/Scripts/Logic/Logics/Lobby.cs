@@ -8,19 +8,25 @@ public class Lobby : Logic
 
     public Player[] players;
     int localPlayer = 0;
-    public Lobby()
+
+    public override void Init()
     {
+
         sceneIndex = 1;
 
         if (lobby == null)
-        lobby = this;
+            lobby = this;
 
-        players = new Player[4];
     }
-    public void Open(string name)
+    public override void Start()
     {
 
         players = new Player[4];
+    }
+
+    public void Open(string name)
+    {
+
 
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
