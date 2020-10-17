@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LevelElement : MonoBehaviour
 {
+    enum Task { Open, Close };
+    Queue<Task> tasks;
+    bool finished;
+
     UIAnimation openingAnimation;
-    float bot = 325f;
-    float right = 200f;
+    float bot = 54f;
+    float right = 116f;
     public RectMask2D mask;
-    public RectTransform mainTransform;
-    public RectTransform surfaceTransform;
     public Button openButton;
     bool open = false;
 
@@ -19,42 +21,95 @@ public class LevelElement : MonoBehaviour
     Vector3 targetPosition;
     void Start()
     {
-
+        finished = true;
         targetPosition = transform.position;
-        //mainTransform.offsetMin = new Vector2(0,0);
-        //mainTransform.offsetMax = new Vector2(0,0);
-        openButton.onClick.AddListener(Click);
+       openButton.onClick.AddListener(Click);
+        tasks = new Queue<Task>();
+    }
+    public void Open()
+    {
+        tasks.Enqueue(Task.Open);
+    }
+    public void Close()
+    {
+        tasks.Enqueue(Task.Close);
     }
     public void UpdateElement(LevelData.LevelMetaData data)
     {
 
     }
+    IEnumerator OpenAnim()
+    {
+
+        open = true;
+        for (float ft = 0f; ft <= 1; ft += 3*Time.deltaTime)
+        {
+            Set(ft);
+            yield return new WaitForSeconds(.01f);
+        }
+
+        Set(1);
+        finished = true;
+    }
+    IEnumerator CloseAnim()
+    {
+        for (float ft = 1f; ft >= 0; ft -= 3*Time.deltaTime)
+        {
+            Set(ft);
+            yield return new WaitForSeconds(.01f);
+        }
+        Set(0);
+
+        open = false;
+        finished = true;
+    }
+    void UpdateAnimation()
+    {
+        if(tasks.Count>0)
+        {
+            if(finished)
+            {
+                finished = false;
+                Task t = tasks.Dequeue();
+                if(t == Task.Open)
+                {
+                    if(!open)
+                    StartCoroutine("OpenAnim");
+                }
+                else
+                {
+                    if (open)
+                    StartCoroutine("CloseAnim");
+                }
+            }
+        }
+    }
+    bool target = false;
     public void Click() 
     {
-        Debug.Log("Testtest");
-        if(open)
+        if(!target)
         {
-            
-            //Set(1);
+            Open();
         }else
         {
-            //Set(0);
+            Close();
         }
-        open = !open;
+        target = !target;
     }
     void Set(float t)
     {
         if (t<0 || t> 1) return;
-        float r =  -t* right;
-        float b =  -t * bot;
-        mask.padding = new Vector4(0,r,b,0);
+        float r =  (1-t)* right;
+        float b = (1-t) * bot;
+        mask.padding = new Vector4(0,b,r,0);
         Canvas.ForceUpdateCanvases();
     }
     void Update()
     {
-        updatePosition();
+        UpdatePosition();
+        UpdateAnimation();
     }
-    void updatePosition()
+    void UpdatePosition()
     {
         Vector2 offset;
         if (Input.GetMouseButtonDown(0))
