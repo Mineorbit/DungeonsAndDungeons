@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class LevelElement : MonoBehaviour
 {
     enum Task { Open, Close };
@@ -9,8 +10,8 @@ public class LevelElement : MonoBehaviour
     bool finished;
 
     UIAnimation openingAnimation;
-    float bot = 54f;
-    float right = 116f;
+    float bot = 86;
+    float right = 159;
     public RectMask2D mask;
     public Button openButton;
     bool open = false;
@@ -19,11 +20,16 @@ public class LevelElement : MonoBehaviour
     Vector2 lastPosition;
     Vector2 lastObjectPosition;
     Vector3 targetPosition;
+
+    public TextMeshProUGUI nameTextField;
+    public TextMeshProUGUI infoTextField;
+
     void Start()
     {
         finished = true;
         targetPosition = transform.position;
        openButton.onClick.AddListener(Click);
+        Set(0);
         tasks = new Queue<Task>();
     }
     public void Open()
@@ -36,13 +42,13 @@ public class LevelElement : MonoBehaviour
     }
     public void UpdateElement(LevelData.LevelMetaData data)
     {
-
+        nameTextField.SetText(data.name);
     }
     IEnumerator OpenAnim()
     {
 
         open = true;
-        for (float ft = 0f; ft <= 1; ft += 3*Time.deltaTime)
+        for (float ft = 0f; ft <= 1; ft += 4*Time.deltaTime)
         {
             Set(ft);
             yield return new WaitForSeconds(.01f);
@@ -53,7 +59,7 @@ public class LevelElement : MonoBehaviour
     }
     IEnumerator CloseAnim()
     {
-        for (float ft = 1f; ft >= 0; ft -= 3*Time.deltaTime)
+        for (float ft = 1f; ft >= 0; ft -= 4*Time.deltaTime)
         {
             Set(ft);
             yield return new WaitForSeconds(.01f);
@@ -87,6 +93,7 @@ public class LevelElement : MonoBehaviour
     bool target = false;
     public void Click() 
     {
+        Debug.Log("Hallo");
         if(!target)
         {
             Open();
