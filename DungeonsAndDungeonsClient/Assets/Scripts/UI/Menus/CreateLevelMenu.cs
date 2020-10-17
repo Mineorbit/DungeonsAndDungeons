@@ -30,6 +30,8 @@ public class CreateLevelMenu : MenuPage
     void GoNewLevel()
     {
         string name = inputField.text;
+
+        //Do some checks
         LevelData.LevelMetaData levelMetaData = new LevelData.LevelMetaData(name);
         GameManager.instance.createLevel(levelMetaData);
     }

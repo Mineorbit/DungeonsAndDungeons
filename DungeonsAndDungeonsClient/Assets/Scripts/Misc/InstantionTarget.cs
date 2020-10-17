@@ -13,6 +13,18 @@ public class InstantionTarget : ScriptableObject
         g.transform.SetParent(parent);
         return g;
     }
+    //For UI
+    public virtual GameObject Create(Vector2 location, Transform parent)
+    {
+        Debug.Log("Hallo!"+location);
+        GameObject g = Instantiator.Instantiate(asset, new Vector3(0,0,0));
+        g.SetActive(true);
+        g.transform.SetParent(parent);
+        RectTransform rt = g.GetComponent<RectTransform>();
+        rt.offsetMax = location;
+        rt.offsetMin = location;
+        return g;
+    }
     public virtual GameObject Create(Vector3 location)
     {
         GameObject g = Instantiator.Instantiate(asset, location);

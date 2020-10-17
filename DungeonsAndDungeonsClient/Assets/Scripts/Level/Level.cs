@@ -6,10 +6,10 @@ public class Level : MonoBehaviour
 {
     public static Level currentLevel;
 
-    string name;
+    LevelData.LevelMetaData levelMetaData;
     //Temp
     public LevelObjectData floorData;
-
+    public string name;
     
     List<LevelObject> objects;
     Spawn spawn;
@@ -18,6 +18,7 @@ public class Level : MonoBehaviour
     void Setup(LevelData.LevelMetaData metaData)
     {
         Clear();
+        levelMetaData = metaData;
         name = metaData.name;
     }
     public void Awake()
@@ -30,6 +31,11 @@ public class Level : MonoBehaviour
     {
         currentLevel.Setup(levelMetaData);
         CreateGroundPlane(currentLevel.floorData);
+        //Save right after create
+    }
+    public static void Save()
+    {
+
     }
     public static void Load(LevelData levelData)
     {

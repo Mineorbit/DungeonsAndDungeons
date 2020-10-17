@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 targetDirection;
     public static Vector3 movingDirection;
     float speedY = 0;
-    float gravity = 1.5f;
+    float gravity = 4f;
     public void Awake()
     {
         if (player != null) Destroy(this);
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
         if (controller.isGrounded && acceptInput && Input.GetKeyDown(KeyCode.Space))
         {
-                speedY = 1;
+                speedY = 1.5f;
         }
         targetDirection.y = speedY;
         if (targetDirection.sqrMagnitude >= 0.01f)
