@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7754327315637313518}
-  - component: {fileID: 7754327315637313519}
   - component: {fileID: 7754327315637313512}
+  - component: {fileID: 590944693354092328}
   m_Layer: 5
   m_Name: LevelList
   m_TagString: Untagged
@@ -35,21 +35,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7754327315637313519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7754327315637313517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82748a240955d9d4fa799b9f530fbe8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelElementPrefab: {fileID: 11400000, guid: 0d9f1f92fd9c5e04d81c2e923e747a27, type: 2}
 --- !u!114 &7754327315637313512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,3 +50,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &590944693354092328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7754327315637313517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82748a240955d9d4fa799b9f530fbe8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelElementPrefab: {fileID: 11400000, guid: 0d9f1f92fd9c5e04d81c2e923e747a27, type: 2}

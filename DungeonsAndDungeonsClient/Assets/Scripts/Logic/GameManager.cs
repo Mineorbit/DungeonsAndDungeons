@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     UnityEvent afterTestLoad;
     UnityEvent afterEditLoad;
     public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
-    public enum GameAction { LoadGameFromBoot = 0,Reset,EnterMainMenu ,EnterTestFromMainMenu,EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
+    public enum GameAction { LoadGameFromBoot = 0,Reset,EnterMainMenu ,EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
 
     FSM<State,GameAction> gameStateFSM;
 
@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterTestLoad.AddListener(SetLogic);
+
+
         afterEditLoad = new UnityEvent();
         afterEditLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterEditLoad.AddListener(SetLogic);
@@ -102,10 +104,15 @@ public class GameManager : MonoBehaviour
             initEvent.AddListener(ResetGame);
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
+
+
+
         gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(act,State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(act, State.Edit));
+
 
         //Reset Level
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(act, State.MainMenu));
@@ -193,13 +200,15 @@ public class GameManager : MonoBehaviour
     {
         gameStateFSM.Move(action);
     }
-    
+    UnityAction lastNewLevelAction;
     public void createLevel(LevelData.LevelMetaData data)
     {
-        UnityEngine.Debug.Log("Creating new Level");
-        //Das in Init von EditLogic Tun mit Create
-        afterEditLoad.AddListener(()=> { LevelManager.New(data); });
-        performAction(GameAction.EnterEditFromMainMenu);
+        if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
+        UnityAction NewLevelAction = () => { LevelManager.New(data); };
+        afterEditLoad.AddListener(NewLevelAction);
+        lastNewLevelAction = NewLevelAction;
+
+        performAction(GameAction.EnterEditFromMainMenuNewLevel);
     }
 
     public void UpdateLogic()

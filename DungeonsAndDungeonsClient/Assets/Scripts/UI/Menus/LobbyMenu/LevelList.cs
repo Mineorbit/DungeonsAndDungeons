@@ -14,8 +14,6 @@ public class LevelList : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(Screen.width/1.3f,-Screen.height/5,0);
-        targetPosition = transform.position;
         UpdateList(LevelManager.levelManager.availableLocalLevels);
     }
 
@@ -45,24 +43,6 @@ public class LevelList : MonoBehaviour
         float r = Mathf.Floor(f / cnt);
         Vector2 offset = 150* (r + 1) * new Vector2(Mathf.Sin(2 * f * Mathf.PI / ( cnt)),Mathf.Cos(2*f*Mathf.PI/(cnt)));
         return offset;
-    }
-    void Update()
-    {
-        updatePosition();
-    }
-    void updatePosition()
-    {
-        Vector2 offset;
-        if (Input.GetMouseButtonDown(0))
-        {
-            lastPosition = Input.mousePosition;
-            lastObjectPosition = transform.position;
-        }
-        if (Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
-        {
-            offset = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - lastPosition;
-            targetPosition = new Vector3(lastObjectPosition.x + offset.x, lastObjectPosition.y + offset.y, 0);
-        }
-        transform.position = (transform.position + targetPosition) / 2;
-    }
+    }  
+   
 }
