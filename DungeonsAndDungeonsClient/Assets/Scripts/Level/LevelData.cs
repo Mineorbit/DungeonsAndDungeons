@@ -10,6 +10,7 @@ public class LevelData
     public class LevelMetaData
     {
 
+
         public LevelMetaData(string lname)
         {
             name = lname;
@@ -17,8 +18,11 @@ public class LevelData
         public string name;
         public long ulid;
         public int ullid;
-        public enum Template {Regular , Sand, Boss };
-        public Template template;
+        public LevelCreationTemplate creationTemplate;
+        public LevelObjectData GetFloorType()
+        {
+            return creationTemplate.floorType;
+        }
 
         public static LevelMetaData Load(String path)
         {
@@ -28,7 +32,7 @@ public class LevelData
             return saveManager.Load<LevelMetaData>(path);
         }
 
-        public void Save()
+        public void Save() 
         {
 
             Save("");
@@ -36,28 +40,47 @@ public class LevelData
         public void Save(string mainPath)
         {
 
-            string path = mainPath+"/gameData/levels/" + ullid.ToString();
+            string path = mainPath + "/gameData/levels/" + ullid.ToString();
             //Save LevelMetaData
             SaveManager saveManager = new SaveManager(SaveManager.StorageType.JSON);
             saveManager.Save(this, path + "/MetaData.json");
         }
     }
+
+
     public LevelMetaData metaData;
 
-    public LevelObjectData[] levelObjectData;
+    Dictionary<Tuple<int, int>, int> chunkMapping;
+    List<Chunk.ChunkData> chunks;
+    
+
+
+
     public LevelData()
     {
-        levelObjectData = new LevelObjectData[1000];
+        metaData = new LevelMetaData("Test");
+        chunkMapping = new Dictionary<Tuple<int, int>, int>();
+        chunks = new List<Chunk.ChunkData>();
+    }
+
+    public void Load(int ullid)
+    {
+
     }
 
     public void Save()
     {
         metaData.Save();
+        //SaveChangedChunks();
 
     }
+    
+
+
     public LevelData(LevelMetaData levelLetaData)
     {
         metaData = levelLetaData;
-        levelObjectData = new LevelObjectData[1000];
+        chunkMapping = new Dictionary<Tuple<int, int>, int>();
+        chunks = new List<Chunk.ChunkData>();
     }
 }

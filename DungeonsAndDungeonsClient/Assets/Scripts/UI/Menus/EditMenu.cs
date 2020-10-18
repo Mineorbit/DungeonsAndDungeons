@@ -6,6 +6,8 @@ public class EditMenu : MenuPage
 {
     Button newLevelButton;
     Button backButton;
+    Button editButton;
+    LevelList levelList;
     public override void Awake()
     {
         base.Awake();
@@ -15,19 +17,29 @@ public class EditMenu : MenuPage
     void setupUI()
     {
         Transform Interface = transform.Find("Interface");
+        levelList = transform.Find("LevelList").GetComponent<LevelList>();
+        editButton = Interface.Find("Edit").GetComponent<Button>();
         newLevelButton = Interface.Find("New").GetComponent<Button>();
         backButton = transform.Find("Back").GetComponent<Button>();
         newLevelButton.onClick.AddListener(OpenNewLevelMenu);
         backButton.onClick.AddListener(GoBack);
+        editButton.onClick.AddListener(StartEdit);
     }
     void OpenNewLevelMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromEditToCreateMenu);
     }
+    void StartEdit()
+    {
+        LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        GameManager.instance.editLevel(metaData);
+    }
     void GoBack()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
     }
+
+
     public override void Start()
     {
         base.Start();

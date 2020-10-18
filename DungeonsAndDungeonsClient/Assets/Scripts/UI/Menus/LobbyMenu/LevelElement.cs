@@ -24,6 +24,10 @@ public class LevelElement : MonoBehaviour
     public TextMeshProUGUI nameTextField;
     public TextMeshProUGUI infoTextField;
 
+    LevelList list;
+
+    public LevelData.LevelMetaData d;
+
     void Start()
     {
         finished = true;
@@ -31,9 +35,11 @@ public class LevelElement : MonoBehaviour
        openButton.onClick.AddListener(Click);
         Set(0);
         tasks = new Queue<Task>();
+        list = transform.parent.GetComponent<LevelList>();
     }
     public void Open()
     {
+        list.SetSelectedLevel(d);
         tasks.Enqueue(Task.Open);
     }
     public void Close()
@@ -42,11 +48,13 @@ public class LevelElement : MonoBehaviour
     }
     public void UpdateElement(LevelData.LevelMetaData data)
     {
+        d = data;
         nameTextField.SetText(data.name);
     }
     IEnumerator OpenAnim()
     {
 
+        finished = false;
         open = true;
         for (float ft = 0f; ft <= 1; ft += 4*Time.deltaTime)
         {
@@ -59,6 +67,7 @@ public class LevelElement : MonoBehaviour
     }
     IEnumerator CloseAnim()
     {
+        finished = false;
         for (float ft = 1f; ft >= 0; ft -= 4*Time.deltaTime)
         {
             Set(ft);
@@ -73,14 +82,15 @@ public class LevelElement : MonoBehaviour
     {
         if(tasks.Count>0)
         {
-            if(finished)
+            if (finished)
             {
-                finished = false;
                 Task t = tasks.Dequeue();
                 if(t == Task.Open)
                 {
-                    if(!open)
-                    StartCoroutine("OpenAnim");
+                    if (!open)
+                    {
+                        StartCoroutine("OpenAnim");
+                    }
                 }
                 else
                 {
@@ -93,10 +103,12 @@ public class LevelElement : MonoBehaviour
     bool target = false;
     public void Click() 
     {
-        Debug.Log("Hallo");
         if(!target)
         {
+
+            Debug.Log("Test " + d.name);
             Open();
+            list.CloseOthersFrom(this);
         }else
         {
             Close();

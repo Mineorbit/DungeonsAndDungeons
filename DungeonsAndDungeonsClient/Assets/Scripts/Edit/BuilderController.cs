@@ -12,6 +12,8 @@ public class BuilderController : MonoBehaviour
     public static Vector3 builderForward;
 
     public bool acceptInput = true;
+
+    LevelObjectData selectedObjectType;
     void Start()
     {
         
@@ -51,13 +53,11 @@ public class BuilderController : MonoBehaviour
     void Place()
     {
         Debug.Log("Klick");
-        BuilderCursor.Set(Level.currentLevel.floorData);
         var t = BuilderCursor.Get();
         Level.currentLevel.Add(t.levelObjectData,t.pos);
     }
     void Displace()
     {
-        Debug.Log("Lol");
         LevelObject o = BuilderCursor.GetObjectAt();
         Level.currentLevel.Remove(o);
     }

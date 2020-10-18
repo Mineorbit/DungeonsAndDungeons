@@ -16,7 +16,6 @@ public class InstantionTarget : ScriptableObject
     //For UI
     public virtual GameObject Create(Vector2 location, Transform parent)
     {
-        Debug.Log("Hallo!"+location);
         GameObject g = Instantiator.Instantiate(asset, new Vector3(0,0,0));
         g.SetActive(true);
         g.transform.SetParent(parent);

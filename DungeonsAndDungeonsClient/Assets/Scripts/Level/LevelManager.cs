@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
     {
         levelManager.availableLocalLevels = GetAllLocalLevels();
     }
-    public void Load(long ulid)
+    public static void Load(LevelData.LevelMetaData levelData)
     {
 
     }

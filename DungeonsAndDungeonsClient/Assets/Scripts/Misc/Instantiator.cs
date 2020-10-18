@@ -34,6 +34,7 @@ public class Instantiator : MonoBehaviour
     public static GameObject Instantiate(UnityEngine.Object prefab, Vector3 location)
     {
         GameObject o = Instantiate(prefab) as GameObject;
+        Debug.Log(o);
         o.transform.position = location;
         return o;
     }

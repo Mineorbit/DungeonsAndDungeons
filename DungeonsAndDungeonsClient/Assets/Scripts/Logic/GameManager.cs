@@ -204,13 +204,24 @@ public class GameManager : MonoBehaviour
     public void createLevel(LevelData.LevelMetaData data)
     {
         if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
+        if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
         UnityAction NewLevelAction = () => { LevelManager.New(data); };
         afterEditLoad.AddListener(NewLevelAction);
         lastNewLevelAction = NewLevelAction;
 
         performAction(GameAction.EnterEditFromMainMenuNewLevel);
     }
+    UnityAction lastEditLevelAction;
+    public void editLevel(LevelData.LevelMetaData data)
+    {
+        if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
+        if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
+        UnityAction EditLevelAction = () => { LevelManager.Load(data); };
+        afterEditLoad.AddListener(EditLevelAction);
+        lastEditLevelAction = EditLevelAction;
 
+        performAction(GameAction.EnterEditFromMainMenu);
+    }
     public void UpdateLogic()
     {
         if(currentLogic!=null)

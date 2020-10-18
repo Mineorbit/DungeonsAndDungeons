@@ -9,8 +9,30 @@ public class LevelList : MonoBehaviour
     Vector3 targetPosition;
 
     GameObject[] elements;
-    LevelElement[] levelElements; 
+    public LevelElement[] levelElements; 
     public InstantionTarget levelElementPrefab;
+
+    LevelData.LevelMetaData selected;
+    
+    public void SetSelectedLevel(LevelData.LevelMetaData levelMetaData)
+    {
+        selected = levelMetaData;
+    }
+    public LevelData.LevelMetaData GetSelectedLevel()
+    {
+        return selected;
+    }
+
+    public void CloseOthersFrom(LevelElement e)
+    {
+        foreach(LevelElement x in levelElements)
+        {
+            if(x!=e)
+            {
+                x.Close();
+            }
+        }
+    }
 
     void Start()
     {
@@ -19,7 +41,6 @@ public class LevelList : MonoBehaviour
 
     public void UpdateList(LevelData.LevelMetaData[] localLevels)
     {
-        Debug.Log("Updating List");
         if(elements!=null)
         foreach(GameObject g in elements)
         {
