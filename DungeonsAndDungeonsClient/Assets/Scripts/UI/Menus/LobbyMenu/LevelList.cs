@@ -51,19 +51,21 @@ public class LevelList : MonoBehaviour
         for (int i = 0;i < elements.Length;i++)
         {
 
-            elements[i] = levelElementPrefab.Create(GetPositionOfElement(((float) i)), transform);
+            elements[i] = levelElementPrefab.Create(GetPositionOfElement(i,localLevels.Length), transform);
             levelElements[i] = elements[i].GetComponent<LevelElement>();
             levelElements[i].UpdateElement(localLevels[i]);
         }
 
     }
 
-    Vector2 GetPositionOfElement(float f)
+    Vector2 GetPositionOfElement(int f,int n)
     {
-        float cnt = 8f;
-        float r = Mathf.Floor(f / cnt);
-        Vector2 offset = 150* (r + 1) * new Vector2(Mathf.Sin(2 * f * Mathf.PI / ( cnt)),Mathf.Cos(2*f*Mathf.PI/(cnt)));
-        return offset;
+        Vector2 start = new Vector2(-Screen.width/2,-Screen.height);
+        float cnt = 10f;
+        float h = Mathf.Floor(Screen.height * 0.375f *  Mathf.Floor((float) f/cnt));
+        float w = Mathf.Floor(Screen.width * 0.65f * 5 * ( 1 - ((float) f / cnt - Mathf.Floor((float) f / cnt)))) - 1;
+        Vector2 offset = new Vector2(w,h);
+        return offset+start;
     }  
    
 }

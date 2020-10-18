@@ -33,9 +33,19 @@ public class LevelElement : MonoBehaviour
         finished = true;
         targetPosition = transform.position;
        openButton.onClick.AddListener(Click);
-        Set(0);
+
+
+        UpdateScreen();
         tasks = new Queue<Task>();
         list = transform.parent.GetComponent<LevelList>();
+    }
+
+    void UpdateScreen()
+    {
+        right = Mathf.Ceil((float)Screen.width * 0.5f * 0.65f);
+        bot = Mathf.Ceil((float)Screen.height * 0.5f * 0.75f);
+
+        Set(0);
     }
     public void Open()
     {
