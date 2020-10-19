@@ -793,8 +793,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bed4eceaa4cb9b408215f80bc800c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorData: {fileID: 11400000, guid: a78c268fc9e9f1f42813fc9237430dcf, type: 2}
   name: 
+  chunkPrefab: {fileID: 0}
 --- !u!1 &871833793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 794073620344780593, guid: cba7c68d89fdc5846b7369cf96e0fc28, type: 3}
@@ -1959,7 +1959,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18
+  m_fontSize: 19.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1979,7 +1979,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
