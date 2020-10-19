@@ -30,10 +30,10 @@ public class BuilderCursor : MonoBehaviour
     }
     public static void Set(Vector3 target,Vector3 normal)
     {
-        Vector3 position = new Vector3(Mathf.Round(target.x/degree), Mathf.Round(target.y / degree), Mathf.Round(target.z / degree));
-        position = degree * position + normal * degree;
-        UpdateCursor(position);
+        Vector3 position = new Vector3(Mathf.Round(target.x + normal.x), Mathf.Round(target.y + normal.y), Mathf.Round(target.z + normal.z));
         normalVec = normal;
+
+        UpdateCursor(position);
     }
 
     public static void Set(LevelObjectData objectType)

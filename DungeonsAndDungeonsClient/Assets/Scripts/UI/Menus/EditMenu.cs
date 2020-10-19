@@ -31,7 +31,9 @@ public class EditMenu : MenuPage
     }
     void StartEdit()
     {
+
         LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        if (metaData == null) return;
         GameManager.instance.editLevel(metaData);
     }
     void GoBack()

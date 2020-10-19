@@ -44,6 +44,7 @@ public class LevelList : MonoBehaviour
     {
         if(LevelManager.levelManager.availableLocalLevels!=currentList)
         {
+            Debug.Log("List changed");
             UpdateList(LevelManager.levelManager.availableLocalLevels);
         }
     }

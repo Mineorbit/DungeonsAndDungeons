@@ -54,6 +54,10 @@ public class LevelElement : MonoBehaviour
     }
     public void Close()
     {
+        if(list.GetSelectedLevel() == d)
+        {
+            list.SetSelectedLevel(null);
+        }
         tasks.Enqueue(Task.Close);
     }
     public void UpdateElement(LevelData.LevelMetaData data)

@@ -30,10 +30,6 @@ public class BuilderHUD : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             enterTest.onClick.Invoke();
-        }else
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            saveButton.onClick.Invoke();
         }
     }
     void SetupList()

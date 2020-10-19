@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Save(S)
+  m_text: Save
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fff27cb295b61f744a5a173902ed440f, type: 2}
   m_sharedMaterial: {fileID: 2702953265222545436, guid: fff27cb295b61f744a5a173902ed440f, type: 2}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18
+  m_fontSize: 34.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -139,12 +139,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2199569832368184995}
-    characterCount: 7
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 2
+    wordCount: 1
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18
+  m_fontSize: 23.8
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -417,7 +417,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -839,3 +839,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorPrefab: {fileID: 3704705063190361774, guid: 72a2dd6a06543ef4f81aeba9cdbde669, type: 3}
+  dataObjects: []
