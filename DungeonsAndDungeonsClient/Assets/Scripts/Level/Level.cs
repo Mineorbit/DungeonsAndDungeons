@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class Level : MonoBehaviour
 {
     public static Level currentLevel;
@@ -41,23 +41,51 @@ public class Level : MonoBehaviour
     public static void Create(LevelData.LevelMetaData levelMetaData)
     {
         currentLevel.Setup(levelMetaData);
-        //Save right after create
+
     }
 
     public static void Save()
     {
+        string path = "/gameData/levels/" + currentLevel.levelMetaData.ullid.ToString();
+        Debug.Log("Saving Level: " + path);
+        FileManager.createFolder(path);
 
+        LevelData data = currentLevel.GetLevelData();
+        data.Save();
     }
 
-    public static void Load(int ullid)
+    List<Chunk.ChunkData> GetChunkDatas()
     {
-
+        List<Chunk.ChunkData> chunkDatas = new List<Chunk.ChunkData>();
+        for(int i = 0;i<chunks.Count;i++)
+        {
+            Chunk.ChunkData d = chunks[i].GetChunkData(i);
+            chunkDatas.Add(d);
+        }
+        return chunkDatas;
     }
 
-    public static void Load(LevelData levelData)
+    public LevelData GetLevelData()
     {
-        currentLevel.Setup(levelData.metaData);
+        LevelData d = new LevelData(levelMetaData,this.chunkLocations,GetChunkDatas());
+        return d;
     }
+
+
+    public static void Load(LevelData.LevelMetaData levelMetaData)
+    {
+        currentLevel.Setup(levelMetaData);
+        //Load Index
+        //Load Chunks for every value of index
+    }
+
+
+    public void LoadChunk(Chunk.ChunkData chunkData, Tuple<int,int> location)
+    {
+        Chunk c = InstantiateChunk(location.Item1,location.Item2);
+    }
+
+
 
     public Chunk AddChunk(Tuple<int, int> location)
     {
@@ -74,9 +102,6 @@ public class Level : MonoBehaviour
         return chunkObject.GetComponent<Chunk>();
     }
 
-    public void LoadChunk(Chunk.ChunkData chunkData)
-    { 
-    }
 
     public void Add(LevelObjectData typeData, Vector3 position)
     {
@@ -118,8 +143,8 @@ public class Level : MonoBehaviour
     }
     public void Remove(LevelObject o)
     {
-        //objects.Remove(o);
-        //Destroy(o.gameObject);
+        if(o != null)
+        GetChunk(o.transform.position).Remove(o);
     }
 
     public static void Clear()

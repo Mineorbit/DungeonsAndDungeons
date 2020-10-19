@@ -11,7 +11,6 @@ public class LevelObjectData : InstantionTarget
     public virtual GameObject Create(Vector3 location, Transform parent)
     {
         GameObject g = base.Create(location,parent);
-        Debug.Log(location+" "+parent.transform.position);
         g.transform.localScale = Scale;
         g.transform.position = location;
         return g;

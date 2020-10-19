@@ -26,10 +26,15 @@ public class LevelManager : MonoBehaviour
     {
         levelManager.availableLocalLevels = GetAllLocalLevels();
     }
+
+
     public static void Load(LevelData.LevelMetaData levelData)
     {
-
+        Debug.Log("Loading "+levelData.name);
+        Level.Load(levelData);
     }
+
+
     public static LevelData.LevelMetaData[] GetAllLocalLevels()
     {
        string[] levels = Directory.GetDirectories(FileManager.GetLevelPath());
@@ -70,13 +75,9 @@ public class LevelManager : MonoBehaviour
         //Setup Folder
         levelMetaData.ullid = LevelManager.GetFreeUniqueLocalLevelId();
 
-        string path = "/gameData/levels/" + levelMetaData.ullid.ToString();
-        Debug.Log("Test");
-        FileManager.createFolder(path);
-
-        levelMetaData.Save();
 
         Level.Create(levelMetaData);
+        Level.Save();
     }
 
 

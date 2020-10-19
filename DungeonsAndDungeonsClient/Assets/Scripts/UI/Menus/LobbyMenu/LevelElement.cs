@@ -115,8 +115,6 @@ public class LevelElement : MonoBehaviour
     {
         if(!target)
         {
-
-            Debug.Log("Test " + d.name);
             Open();
             list.CloseOthersFrom(this);
         }else

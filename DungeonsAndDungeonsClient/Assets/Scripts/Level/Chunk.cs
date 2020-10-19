@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 public class Chunk : MonoBehaviour
 {
 
@@ -14,7 +15,7 @@ public class Chunk : MonoBehaviour
     public class ChunkData
     {
         public int saveID;
-        public List<LevelObjectData> levelObjectData;
+        public List<LevelObject.LevelObjectInstanceData> levelObjectInstanceData;
     }
 
     public static void Load(ChunkData data, int x, int y)
@@ -44,9 +45,19 @@ public class Chunk : MonoBehaviour
     }
 
 
-    ChunkData GetChunkData()
+    public ChunkData GetChunkData(int saveID)
     {
-        return null;
+        ChunkData d = new ChunkData();
+        d.saveID = saveID;
+        List<LevelObject.LevelObjectInstanceData> instanceData = new List<LevelObject.LevelObjectInstanceData>();
+
+        foreach(LevelObject o in objects)
+        {
+            instanceData.Add(o.GetLevelObjectInstanceData());
+        }
+
+        d.levelObjectInstanceData = instanceData;
+        return d;
     }
 
     public void Remove(LevelObject o)

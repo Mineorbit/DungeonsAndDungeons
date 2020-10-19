@@ -31,16 +31,10 @@ public class LevelData
             SaveManager saveManager = new SaveManager(SaveManager.StorageType.JSON);
             return saveManager.Load<LevelMetaData>(path);
         }
-
-        public void Save() 
+        public void Save()
         {
 
-            Save("");
-        }
-        public void Save(string mainPath)
-        {
-
-            string path = mainPath + "/gameData/levels/" + ullid.ToString();
+            string path = "/gameData/levels/" + ullid.ToString();
             //Save LevelMetaData
             SaveManager saveManager = new SaveManager(SaveManager.StorageType.JSON);
             saveManager.Save(this, path + "/MetaData.json");
@@ -63,24 +57,32 @@ public class LevelData
         chunks = new List<Chunk.ChunkData>();
     }
 
-    public void Load(int ullid)
-    {
-
-    }
 
     public void Save()
     {
         metaData.Save();
-        //SaveChangedChunks();
+        //Save Index
+        SaveManager binStore = new SaveManager(SaveManager.StorageType.BIN);
+        string path = "/gameData/levels/" + metaData.ullid.ToString();
+        binStore.Save(chunkMapping,path+"/Index.dat");
 
+        foreach(Chunk.ChunkData c in chunks)
+        {
+            string chunkPath = path + $"/{c.saveID}.dat";
+            binStore.Save(c,chunkPath);
+        }
     }
-    
-
 
     public LevelData(LevelMetaData levelLetaData)
     {
         metaData = levelLetaData;
         chunkMapping = new Dictionary<Tuple<int, int>, int>();
         chunks = new List<Chunk.ChunkData>();
+    }
+    public LevelData(LevelMetaData levelLetaData, Dictionary<Tuple<int, int>, int> chunkMappings, List<Chunk.ChunkData> chunkDatas )
+    {
+        metaData = levelLetaData;
+        chunkMapping = chunkMappings;
+        chunks = chunkDatas;
     }
 }

@@ -5,14 +5,21 @@ using UnityEngine.UI;
 public class BuilderHUD : MonoBehaviour
 {
     Button enterTest;
+    Button saveButton;
     public UnityEngine.Object selectorPrefab;
     public LevelObjectData[] dataObjects;
     void Start()
     {
         enterTest = transform.Find("Test").GetComponent<Button>();
-        enterTest.onClick.AddListener(EnterTest);
+        saveButton = transform.Find("Save").GetComponent<Button>();
 
+        enterTest.onClick.AddListener(EnterTest);
+        saveButton.onClick.AddListener(SaveLevel);
         SetupList();
+    }
+    void SaveLevel()
+    {
+        Level.Save();
     }
     void EnterTest()
     {
@@ -23,11 +30,14 @@ public class BuilderHUD : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             enterTest.onClick.Invoke();
+        }else
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            saveButton.onClick.Invoke();
         }
     }
     void SetupList()
     {
-        Debug.Log("TestFest");
         dataObjects = Resources.LoadAll<LevelObjectData>("pref/level/data"); 
         foreach(LevelObjectData d in dataObjects)
         {
