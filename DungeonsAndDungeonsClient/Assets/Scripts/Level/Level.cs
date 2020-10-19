@@ -53,6 +53,36 @@ public class Level : MonoBehaviour
         LevelData data = currentLevel.GetLevelData();
         data.Save();
     }
+    public static void Load(LevelData.LevelMetaData levelMetaData)
+    {
+
+        LevelData data = LevelData.Load(levelMetaData);
+        currentLevel.InstantiateLevelFromLevelData(data);
+       
+    }
+
+    void InstantiateLevelFromLevelData(LevelData d)
+    {
+        currentLevel.Setup(d.metaData);
+        //Load Index
+        chunkLocations = d.chunkMapping;
+        //currentLevel.
+        //Load Chunks for every value of index
+        foreach(Chunk.ChunkData c in d.chunks)
+        {
+            Chunk chunk = FromChunkData(c);
+            chunks.Add(chunk);
+        }
+    }
+
+
+    Chunk FromChunkData(Chunk.ChunkData chunkData)
+    {
+        Tuple<int,int> location = chunkLocations.FirstOrDefault(x => x.Value == chunkData.saveID).Key;
+        Chunk c = InstantiateChunk(location.Item1, location.Item2);
+        c.Instantiate(chunkData);
+        return c;
+    }
 
     List<Chunk.ChunkData> GetChunkDatas()
     {
@@ -72,12 +102,7 @@ public class Level : MonoBehaviour
     }
 
 
-    public static void Load(LevelData.LevelMetaData levelMetaData)
-    {
-        currentLevel.Setup(levelMetaData);
-        //Load Index
-        //Load Chunks for every value of index
-    }
+   
 
 
     public void LoadChunk(Chunk.ChunkData chunkData, Tuple<int,int> location)

@@ -44,8 +44,9 @@ public class LevelData
 
     public LevelMetaData metaData;
 
-    Dictionary<Tuple<int, int>, int> chunkMapping;
-    List<Chunk.ChunkData> chunks;
+    public Dictionary<Tuple<int, int>, int> chunkMapping;
+    
+    public List<Chunk.ChunkData> chunks;
     
 
 
@@ -57,7 +58,14 @@ public class LevelData
         chunks = new List<Chunk.ChunkData>();
     }
 
+    public static LevelData Load(LevelData.LevelMetaData metaData)
+    {
+        var t = Chunk.LoadChunkData(metaData);
+        LevelData data = new LevelData(metaData,t.chunkMappings,t.chunks);
+        //
 
+        return data;
+    }
     public void Save()
     {
         metaData.Save();

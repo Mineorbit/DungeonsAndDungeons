@@ -15,7 +15,6 @@ public class SaveManager
     }
     public T Load<T>(string path)
     {
-
         T result = default(T);
         if (!File.Exists(path)) return result;
 
@@ -27,7 +26,7 @@ public class SaveManager
         }
         else if(storageType == StorageType.BIN)
         {
-            FileStream fs = new FileStream(Application.persistentDataPath + path, FileMode.Open);
+            FileStream fs = new FileStream(path, FileMode.Open);
             try
             {
                 BinaryFormatter formatter = new BinaryFormatter();

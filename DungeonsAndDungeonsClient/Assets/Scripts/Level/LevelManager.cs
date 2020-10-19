@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    static void UpdateLocalLevels()
+    public static void UpdateLocalLevels()
     {
         levelManager.availableLocalLevels = GetAllLocalLevels();
     }

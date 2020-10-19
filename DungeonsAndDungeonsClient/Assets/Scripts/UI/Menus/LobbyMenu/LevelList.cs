@@ -13,7 +13,9 @@ public class LevelList : MonoBehaviour
     public InstantionTarget levelElementPrefab;
 
     LevelData.LevelMetaData selected;
-    
+
+    LevelData.LevelMetaData[] currentList;
+
     public void SetSelectedLevel(LevelData.LevelMetaData levelMetaData)
     {
         selected = levelMetaData;
@@ -38,6 +40,13 @@ public class LevelList : MonoBehaviour
     {
         UpdateList(LevelManager.levelManager.availableLocalLevels);
     }
+    void Update()
+    {
+        if(LevelManager.levelManager.availableLocalLevels!=currentList)
+        {
+            UpdateList(LevelManager.levelManager.availableLocalLevels);
+        }
+    }
 
     public void UpdateList(LevelData.LevelMetaData[] localLevels)
     {
@@ -55,7 +64,7 @@ public class LevelList : MonoBehaviour
             levelElements[i] = elements[i].GetComponent<LevelElement>();
             levelElements[i].UpdateElement(localLevels[i]);
         }
-
+        currentList = localLevels;
     }
 
     Vector2 GetPositionOfElement(int f,int n)

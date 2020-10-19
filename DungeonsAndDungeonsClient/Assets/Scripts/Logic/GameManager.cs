@@ -51,14 +51,17 @@ public class GameManager : MonoBehaviour
         afterMenuLoad = new UnityEvent();
         afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterMenuLoad.AddListener(SetLogic);
+        afterMenuLoad.AddListener(LevelManager.UpdateLocalLevels);
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterTestLoad.AddListener(SetLogic);
+        afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
 
 
         afterEditLoad = new UnityEvent();
         afterEditLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterEditLoad.AddListener(SetLogic);
+        afterEditLoad.AddListener(LevelManager.UpdateLocalLevels);
 
     }
     void SetLogic()
@@ -105,6 +108,7 @@ public class GameManager : MonoBehaviour
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
 
+        
 
 
         gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(act,State.MainMenu));

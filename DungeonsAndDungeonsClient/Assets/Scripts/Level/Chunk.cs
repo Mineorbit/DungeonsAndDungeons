@@ -22,9 +22,26 @@ public class Chunk : MonoBehaviour
     {
 
     }
+   
+    public static (Dictionary<Tuple<int, int>, int> chunkMappings , List<Chunk.ChunkData> chunks) LoadChunkData(LevelData.LevelMetaData data)
+    {
+        SaveManager binManager = new SaveManager(SaveManager.StorageType.BIN);
 
+        List<ChunkData> chunkData = new List<ChunkData>();
+        Dictionary<Tuple<int, int>, int> loadChunkMapping = binManager.Load<Dictionary<Tuple<int, int>, int>>(Application.persistentDataPath+ $"/gameData/levels/{data.ullid}/Index.dat");
+
+
+        foreach(int i in loadChunkMapping.Values)
+        {
+        chunkData.Add(binManager.Load<ChunkData>(Application.persistentDataPath+ $"/gameData/levels/{data.ullid}/{i}.dat"));
+        }
+        return (loadChunkMapping, chunkData);
+    }
+
+    LevelObjectData[] objectDataPrototypes;
     void Awake()
     {
+        objectDataPrototypes = Resources.LoadAll<LevelObjectData>("pref/level/data");
         objects = new List<LevelObject>();
     }
 
@@ -32,9 +49,23 @@ public class Chunk : MonoBehaviour
     {
 
     }
-    static void Instantiate()
+    LevelObjectData GetByID(int id)
     {
-
+        foreach(LevelObjectData d in objectDataPrototypes)
+        {
+            if (d.ID == id) return d;
+        }
+        return null;
+    }
+    public void Instantiate(ChunkData chunkData)
+    {
+        foreach(LevelObject.LevelObjectInstanceData instanceObj in chunkData.levelObjectInstanceData)
+        {
+            Vector3 position = new Vector3(instanceObj.location[0], instanceObj.location[1], instanceObj.location[2]);
+            int typeID = instanceObj.objectData;
+            LevelObjectData d = GetByID(typeID);
+            Add(d, position);
+        }
     }
 
     public void Add(LevelObjectData typeData, Vector3 localPosition)
