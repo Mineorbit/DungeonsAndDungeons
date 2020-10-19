@@ -22,6 +22,7 @@ public class SaveManager
         { 
         StreamReader reader = new StreamReader(path);
         string data = reader.ReadToEnd();
+        reader.Close();
         result = JsonUtility.FromJson<T>(data);
         }
         else if(storageType == StorageType.BIN)

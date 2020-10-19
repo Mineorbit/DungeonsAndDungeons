@@ -70,7 +70,7 @@ public class LevelList : MonoBehaviour
 
     Vector2 GetPositionOfElement(int f,int n)
     {
-        Vector2 start = new Vector2(-Screen.width/2,-Screen.height);
+        Vector2 start = new Vector2(-Screen.width*2, (0.65f - 1 )*Screen.height);
         float cnt = 10f;
         float h = Mathf.Floor(Screen.height * 0.375f *  Mathf.Floor((float) f/cnt));
         float w = Mathf.Floor(Screen.width * 0.65f * 5 * ( 1 - ((float) f / cnt - Mathf.Floor((float) f / cnt)))) - 1;
