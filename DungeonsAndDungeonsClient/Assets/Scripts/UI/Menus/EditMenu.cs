@@ -7,6 +7,7 @@ public class EditMenu : MenuPage
     Button newLevelButton;
     Button backButton;
     Button editButton;
+    Button deleteButton;
     LevelList levelList;
     public override void Awake()
     {
@@ -20,10 +21,18 @@ public class EditMenu : MenuPage
         levelList = transform.Find("LevelList").GetComponent<LevelList>();
         editButton = Interface.Find("Edit").GetComponent<Button>();
         newLevelButton = Interface.Find("New").GetComponent<Button>();
+        deleteButton = Interface.Find("Delete").GetComponent<Button>();
         backButton = transform.Find("Back").GetComponent<Button>();
         newLevelButton.onClick.AddListener(OpenNewLevelMenu);
         backButton.onClick.AddListener(GoBack);
         editButton.onClick.AddListener(StartEdit);
+        deleteButton.onClick.AddListener(RemoveLevel);
+    }
+    void RemoveLevel()
+    {
+        LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        if (metaData == null) return;
+        LevelManager.Delete(metaData);
     }
     void OpenNewLevelMenu()
     {

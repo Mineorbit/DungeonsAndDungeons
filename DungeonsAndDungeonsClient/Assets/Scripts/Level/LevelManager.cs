@@ -50,9 +50,10 @@ public class LevelManager : MonoBehaviour
         }
         return data.ToArray();
     }
-    public void Delete()
+    public static void Delete(LevelData.LevelMetaData levelMetaData)
     {
-
+        FileManager.deleteFolder($"/gameData/levels/{levelMetaData.ullid}");
+        UpdateLocalLevels();
     }
     static int GetFreeUniqueLocalLevelId()
     {

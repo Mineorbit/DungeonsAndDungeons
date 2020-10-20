@@ -43,6 +43,14 @@ public class FileManager : MonoBehaviour
         }
         return paths.ToArray();
     }
+    public static void deleteFolder(string path)
+    {
+        string filePath = Application.persistentDataPath + path;
+        if(Directory.Exists(filePath))
+        {
+            Directory.Delete(filePath,true);
+        }
+    }
     public static void createFolder(string path)
     {
         string filePath = Application.persistentDataPath+path;

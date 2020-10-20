@@ -28,6 +28,7 @@ public class PauseMenu : MonoBehaviour
     void GotoMainMenu()
     {
         Close();
+        UnityEngine.Debug.Log("Entering Main Menu from Pause Menu");
         GameManager.instance.performAction(GameManager.GameAction.EnterMainMenu);
     }
     bool checkAvailability()
@@ -67,6 +68,9 @@ public class PauseMenu : MonoBehaviour
     }
     void Close()
     {
+
+        if (!checkAvailability()) return;
+
         if (freezeGame)
             //Inform GameManager of Attempt to (unfreeze Sim)
                 PlayerController.acceptInput = true;
