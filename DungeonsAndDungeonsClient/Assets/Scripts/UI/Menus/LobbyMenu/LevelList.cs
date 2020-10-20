@@ -61,21 +61,48 @@ public class LevelList : MonoBehaviour
         for (int i = 0;i < elements.Length;i++)
         {
 
-            elements[i] = levelElementPrefab.Create(GetPositionOfElement(i,localLevels.Length), transform);
+            elements[i] = levelElementPrefab.Create(GetPositionOfElement(i,elements.Length), transform);
             levelElements[i] = elements[i].GetComponent<LevelElement>();
             levelElements[i].UpdateElement(localLevels[i]);
         }
         currentList = localLevels;
     }
 
+    int GetClosestDiv(int N)
+    {
+        float f = Mathf.Ceil(Mathf.Sqrt((float) N));
+        int i = 0;
+        while(N-i > 0)
+        {
+            if(N % ((int)f  + i) == 0 )
+            {
+                return (int) f + i;
+            }else
+            if (N % ((int)f - i) == 0)
+            {
+                    return (int)f - i;
+            }
+            i++;
+        }
+        return (int) Mathf.Ceil(Mathf.Sqrt((float)N));
+    }
     Vector2 GetPositionOfElement(int f,int n)
     {
-        Vector2 start = new Vector2(-Screen.width*2, (0.65f - 1 )*Screen.height);
-        float cnt = 10f;
-        float h = Mathf.Floor(Screen.height * 0.375f *  Mathf.Floor((float) f/cnt));
-        float w = Mathf.Floor(Screen.width * 0.65f * 5 * ( 1 - ((float) f / cnt - Mathf.Floor((float) f / cnt)))) - 1;
-        Vector2 offset = new Vector2(w,h);
-        return offset+start;
+        int cnt = GetClosestDiv(n);
+        float boxHeight = Screen.height * 0.75f * 0.5f;
+        float boxWidth = Screen.width * 0.65f * 0.5f;
+
+        int tableWidth = cnt;
+        int tableHeight = (int)Mathf.Floor((float)n/ (float) cnt);
+
+        float widthScale = (float)tableWidth / 2 - 1;
+        float heightScale = (float)tableHeight / 2 - 1; 
+        int height = (int) Mathf.Floor(f/((float) cnt));
+        int width =   f % cnt;
+        Vector2 placeOffset = new Vector2(-width*boxWidth,height*boxHeight);
+        Vector2 stockOffset = new Vector2(widthScale*boxWidth,-heightScale*boxHeight);
+        Vector2 start = new Vector2(Screen.width/2, -Screen.height/2);
+        return start+placeOffset+stockOffset;
     }  
    
 }
