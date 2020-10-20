@@ -7,7 +7,7 @@ ServerData;
 
 PlayerData: {GlobalId, PrefColor, Name, StubId, { {Name,StubId}, {GlobalId} } } (Permanent)
 Rating:     {UlId (LevelData) ,GlobalId (PlayerData),Rating ,{UlId, GlobalId} }
-Server:   {IP, Region, Availability, {IP} }
+Server:   {LobbyId, IP, Region, Availability, {LobbyId} }
 Invitations: {InvitationId, LobbyId (LobbyData) , GlobalId (PlayerData), {InvitationId, LobbyId} }
 LevelData: {Name, UploadDate, Template, UlId, GlobalId (PlayerData) , {UlId} } (Permanent)
 
