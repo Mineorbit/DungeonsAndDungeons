@@ -108,7 +108,13 @@ public class GameManager : MonoBehaviour
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
 
-        
+        Action<GameAction> actLevelClear = x =>
+        {
+            UnityEvent initEvent = new UnityEvent();
+            selectAsyncLoad(initEvent);
+            Level.Clear();
+            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+        };
 
 
         gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(act,State.MainMenu));
@@ -119,11 +125,11 @@ public class GameManager : MonoBehaviour
 
 
         //Reset Level
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(act, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterTestFromEdit), new Tuple<Action<GameAction>, State>(actEditTest, State.Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterEditFromTest), new Tuple<Action<GameAction>, State>(actEditTest, State.Edit));
 
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(act, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, State.MainMenu));
 
     }
 
@@ -170,12 +176,14 @@ public class GameManager : MonoBehaviour
     {
         UnityEngine.Debug.Log("Loading Test Scene");
 
+        SceneLoadManager.instance.unload(1);
         SceneLoadManager.instance.unload(2);
         SceneLoadManager.instance.load(2);
     }
     void TestToEdit()
     {
         UnityEngine.Debug.Log("Loading Edit Scene");
+        SceneLoadManager.instance.unload(1);
         SceneLoadManager.instance.unload(3);
         SceneLoadManager.instance.load(3);
     }

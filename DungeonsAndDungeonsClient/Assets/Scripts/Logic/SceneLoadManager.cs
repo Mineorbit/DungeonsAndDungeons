@@ -134,34 +134,36 @@ public class SceneLoadManager : MonoBehaviour
         { 
             int x = currentScenes[0];
             if(x>0)
-            { 
-            UnityEngine.SceneManagement.SceneManager.UnloadScene(x);
+            {
+                Debug.LogError("Unloading " + x);
+                UnityEngine.SceneManagement.SceneManager.UnloadScene(x);
             currentScenes.RemoveAt(0);
             }
         }
     }
 
+
     public void unload(int i)
     {
-        Debug.Log("Unloading "+i);
         if(currentScenes.Contains(i))
         {
             if(i>0)
-            { 
-            currentScenes.Remove(i);
+            {
+                currentScenes.Remove(i);
             UnityEngine.SceneManagement.SceneManager.UnloadScene(i);
             }
         }
     }
     public void unloadCurrentScenes()
     {
-        for(int i = 0;i < currentScenes.Count;i++)
+
+        List<int> toUnload = new List<int>(currentScenes);
+        foreach (int x in toUnload)
         {
-                int x = currentScenes[i];
                 if (x > 0)
                 {
                 UnityEngine.SceneManagement.SceneManager.UnloadScene(x);
-                currentScenes.RemoveAt(i);
+                currentScenes.Remove(x);
                 }
         }
     }
