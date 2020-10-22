@@ -34,10 +34,11 @@ public class BuilderHUD : MonoBehaviour
     }
     void SetupList()
     {
+        Transform hook = transform.Find("LevelTypeBar").Find("Viewport").Find("Content");
         dataObjects = Resources.LoadAll<LevelObjectData>("pref/level/data"); 
         foreach(LevelObjectData d in dataObjects)
         {
-            GameObject selObject = Instantiate(selectorPrefab,transform.Find("LevelTypeBar")) as GameObject;
+            GameObject selObject = Instantiate(selectorPrefab,hook) as GameObject;
             selObject.GetComponent<LevelObjectDataSelector>().SetData(d);
         }
     }
