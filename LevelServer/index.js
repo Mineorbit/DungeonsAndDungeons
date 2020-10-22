@@ -4,14 +4,17 @@ var Long = require("long");
 const fileUpload = require('express-fileupload');
 var app = express(); // here I use the express() method, instead of the createServer()
 
-const { Client } = require('pg')
-const client = new Client({  
-  user: 'max',
-  host: '127.0.0.1',
-  database: 'levelserver',
-  password: 'Muinma319',
-})
-client.connect()
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "user2",
+  password: "schmonzes"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+
 
 
 app.use(fileUpload());
