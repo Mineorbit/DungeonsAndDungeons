@@ -6,10 +6,12 @@ ServerData;
 
 
 PlayerData: {GlobalId, PrefColor, Name, StubId, { {Name,StubId}, {GlobalId} } } (Permanent)
-Rating:     {UlId (LevelData) ,GlobalId (PlayerData),Rating ,{UlId, GlobalId} }
+Rating:     {UlId (LevelMetaData) ,GlobalId (PlayerData),Rating ,{UlId, GlobalId} } (Permanent)
+Follow:   { Player1 (GlobalId, PlayerData) ,Player2 (GlobalId,PlayerData) } (Permanent)
+Tags:   {UlId (LevelMetaData) ,Tag1 ,Tag2 ,Tag3 , {UlId} }
 Server:   {LobbyId, IP, Region, Availability, {LobbyId} }
-Invitations: {InvitationId, LobbyId (LobbyData) , GlobalId (PlayerData), {InvitationId, LobbyId} }
-LevelData: {Name, UploadDate, Template, UlId, GlobalId (PlayerData) , {UlId} } (Permanent)
+Invitations: {InvitationId, LobbyId (Server) , GlobalId (PlayerData), {InvitationId, LobbyId} }
+LevelMetaData: {Name, UploadDate, Template, UlId, Description, GlobalId (PlayerData) , {UlId} } (Permanent)
 
 Packete:
 Bei allen: 2 Byte Length , 1 Byte Id
