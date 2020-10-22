@@ -6,6 +6,8 @@ var Long = require("long");
 const fileUpload = require('express-fileupload');
 var app = express(); // here I use the express() method, instead of the createServer()
 
+const session = require('express-session');
+
 var con = mysql.createConnection({
   host: "localhost",
   user: "user2",
