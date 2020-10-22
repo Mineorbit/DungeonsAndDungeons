@@ -1,3 +1,5 @@
+//We use express, express-session,express-fileupload, long and mysql
+
 var express = require('express');
 var Long = require("long");
 
