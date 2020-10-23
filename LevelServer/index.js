@@ -55,7 +55,7 @@ app.post('/upl', function(req, res){
   
  con.connect(function(err) {
   if (err) throw err;
-  var sql = "INSERT INTO LevelMetaData (name) VALUES (".name.")";
+  var sql = "INSERT INTO LevelMetaData (name) VALUES (".concat(name,")");
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted, ID: " + result.insertId);
