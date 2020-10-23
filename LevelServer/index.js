@@ -56,16 +56,14 @@ app.post('/upl', function(req, res){
   var sql = "INSERT INTO LevelMetaData (name) VALUES ('"+name+"');";
   console.log(sql);
   var ulid = 0;
-  con.query(sql, function (err, result) {
+  ulid = con.query(sql, function (err, result) {
     if (err) throw err;
-    ulid = result.insertId;
-    console.log("Inserted "+ulid);
+    return result.insertId;
   });
   
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
   
-  res.write('Level hochgeladen');
   res.write("Added: "+ulid);
   res.end();
 });
