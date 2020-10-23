@@ -60,7 +60,7 @@ app.post('/upl', function(req, res){
     ulid = result.insertId;
   });
   
-  levelFile.mv(__dirname+'/levels/'+luid.toString()+'.lev',function(err) {
+  levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
   
   res.send('Level hochgeladen');
