@@ -53,7 +53,8 @@ app.post('/upl', function(req, res){
 
   let name = req.body.name;
   
-  var sql = "INSERT INTO LevelMetaData (name) VALUES ('"+name+"')";
+  var sql = "INSERT INTO LevelMetaData (name) VALUES ('"+name+"');";
+  console.log(sql);
   var ulid = 0;
   con.query(sql, function (err, result) {
     if (err) throw err;
