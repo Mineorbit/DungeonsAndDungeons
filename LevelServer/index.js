@@ -63,8 +63,9 @@ app.post('/upl', function(req, res){
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
   
-  res.send('Level hochgeladen');
-  res.send("Added: "+ulid);
+  res.write('Level hochgeladen');
+  res.write("Added: "+ulid);
+  res.end();
 });
 
 app.get('/pull', function(req, res){
