@@ -39,6 +39,7 @@ app.get('/upload', function(req,res){
       res.write('action="/upl"'); 
       res.write('method="post"'); 
       res.write('encType="multipart/form-data"><input type="file" name="level" />');
+      res.write('<input type="text" name="name" />');
       res.write('<input type="submit" value="Upload!" /></form></body>');
 res.write('</html>');
 res.end();
@@ -49,8 +50,18 @@ app.post('/upl', function(req, res){
     return res.status(400).send('No files were uploaded.');
   }
  let levelFile = req.files.level;
- var luid = new Long(0xFFFFFFFF, 0x7FFFFFFF);
 
+  let name = req.params.name;
+  
+ con.connect(function(err) {
+  if (err) throw err;
+  var sql = "INSERT INTO LevelMetaData (name) VALUES (".name.")";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted, ID: " + result.insertId);
+  });
+});
+  
   levelFile.mv(__dirname+'/levels/'+luid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err);
   res.send('Level hochgeladen'); });
