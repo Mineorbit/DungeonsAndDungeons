@@ -38,9 +38,10 @@ app.get('/upload', function(req,res){
       res.write('id="uploadForm"');
       res.write('action="/upl"'); 
       res.write('method="post"'); 
-      res.write('encType="multipart/form-data"><input type="file" name="level" />');
-      res.write('<input type="text" name="name" />');
-      res.write('<input type="submit" value="Upload!" /></form></body>');
+      res.write('encType="multipart/form-data">');
+      res.write('<table><tr> File: <input type="file" name="level" /></tr>');
+      res.write('<tr> Name: <input type="text" name="name" /></tr>');
+      res.write('<tr><input type="submit" value="Upload!" /><tr></table></form></body>');
 res.write('</html>');
 res.end();
 });
@@ -62,8 +63,11 @@ app.post('/upl', function(req, res){
     
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
+  res.write("<table>");
+  res.write("<tr><td> Name: </td><td>"+name+"</td></tr>");
+  res.write("<tr><td> ULID: </td><td><b>"+ulid+"</b></td></tr>");
     
-  res.write("Added: "+ulid);
+  res.write("</table>");
   res.end();
   });
   
