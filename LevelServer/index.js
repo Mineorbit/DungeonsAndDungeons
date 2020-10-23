@@ -63,6 +63,7 @@ app.post('/upl', function(req, res){
     
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
+  res.write("Level successfully uploaded!</br>");
   res.write("<table>");
   res.write("<tr><td> Name: </td><td>"+name+"</td></tr>");
   res.write("<tr><td> ULID: </td><td><b>"+ulid+"</b></td></tr>");
