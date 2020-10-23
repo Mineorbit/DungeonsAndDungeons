@@ -59,7 +59,7 @@ app.post('/upl', function(req, res){
   con.query(sql, function (err, result) {
     if (err) throw err;
     ulid = result.insertId;
-    console.log("Inserted");
+    console.log("Inserted "+ulid);
   });
   
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
