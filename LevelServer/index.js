@@ -51,9 +51,9 @@ app.post('/upl', function(req, res){
   }
  let levelFile = req.files.level;
 
-  let name = req.params.name;
+  let name = req.body.uploadForm.name;
   
-  var sql = "INSERT INTO LevelMetaData (name) VALUES (".concat(name,")");
+  var sql = "INSERT INTO LevelMetaData (name) VALUES ('"+name+"')";
   var ulid = 0;
   console.log(sql);
   con.query(sql, function (err, result) {
