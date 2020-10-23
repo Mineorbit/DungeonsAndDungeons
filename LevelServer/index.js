@@ -53,14 +53,11 @@ app.post('/upl', function(req, res){
 
   let name = req.params.name;
   
- con.connect(function(err) {
-  if (err) throw err;
   var sql = "INSERT INTO LevelMetaData (name) VALUES (".concat(name,")");
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted, ID: " + result.insertId);
   });
-});
   
   levelFile.mv(__dirname+'/levels/'+luid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err);
