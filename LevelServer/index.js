@@ -54,7 +54,7 @@ app.post('/upl', function(req, res){
 
   let name = req.body.name;
   
-  var sql = "INSERT INTO LevelMetaData (name) VALUES ('"+name+"');";
+  var sql = "INSERT INTO LevelMetaData (name,,description, creationdate) VALUES ('"+name+"','Moin Servus Moin!',NOW()  );";
   console.log(sql);
   var ulid = 0;
   con.query(sql, function (err, result) {
