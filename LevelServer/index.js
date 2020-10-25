@@ -88,9 +88,16 @@ app.get('/pull', function(req, res){
   const file = `${__dirname}/levels/0000000000000000.lev`;
   res.download(file);
 });
+
+app.get('/show', function(req,res){
+  var ulid = req.query.ulid;
+  res.write(ulid);
+  res.end();
+});
+
 app.get('/list', function(req,res){
 res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
-res.write('<html> \n <head>\n <title>D + D - Level</title> \n </head> \n');
+res.write('<html> \n <head>\n <title>D + D - Das große Archiv</title> \n </head> \n');
 res.write('<body>\n ');
 res.write('<h1>Das große Archiv</h1>\n ');
 res.write("<a href='/'>Start</a>\n ");
@@ -105,7 +112,7 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th><th>Created on</th></tr>\n '
     if (err) throw err;
     for(i = 0;i<result.length;i++)
     {
-    res.write('<tr><td>'+result[i].ULId+'</td><td>'+result[i].Name+'</td> <td> #Test #Cool </td><td> ' +result[i].CreationDate+ ' </td></tr>\n ');
+    res.write('<tr><td>'+result[i].ULId+'</td><td> <a href="/show?ulid='+result[i].ULId+'" > '+result[i].Name+'</a> </td> <td> #Test #Cool </td><td> ' +result[i].CreationDate+ ' </td></tr>\n ');
     }
     
   res.write('</table>\n </body>\n </html>\n ');
