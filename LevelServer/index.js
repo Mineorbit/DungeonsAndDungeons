@@ -95,10 +95,9 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
   var ulid = 0;
   con.query(sql, function (err, result) {
     if (err) throw err;
-    ulid = result.insertId;
-    for(i = 0;i<result.rowCount;i++)
+    for(i = 0;i<result.length;i++)
     {
-    res.write('<tr><td>'+result[i].GlobalID+'</td><td>result[i].name</td> <td> Test </td></tr>');
+    res.write('<tr><td>'+result[i].ulid+'</td><td>result[i].name</td> <td> Test </td></tr>');
     }
   });
   
