@@ -93,11 +93,12 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
   var sql = "SELECT * FROM LevelMetaData;";
   console.log(sql);
   var ulid = 0;
-  con.query(sql, function (err, result) {
+  con.query(sql, function (err, result, fields) {
     if (err) throw err;
+    console.log(fields);
     for(i = 0;i<result.length;i++)
     {
-    res.write('<tr><td>'+result[i].ulid+'</td><td>result[i].name</td> <td> Test </td></tr>');
+    res.write('<tr><td>'+result[i].ulid+'</td><td>'+result[i].name+'</td> <td> Test </td></tr>');
     }
   });
   
