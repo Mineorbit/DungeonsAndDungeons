@@ -83,6 +83,8 @@ app.get('/pull', function(req, res){
 });
 app.get('/list', function(req,res){
 res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
+res.write('<html><head>D + D - Level</head>');
+res.write('<body>');
 res.write('<h1>Das große Archiv</h1>');
 res.write("<a href='/'>Start</a>");
 res.write('<table style="width:100%">');
@@ -101,7 +103,7 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th><th>Created on</th></tr>');
     res.write('<tr><td>'+result[i].ULId+'</td><td>'+result[i].Name+'</td> <td> #Test #Cool </td><td> ' +result[i].CreationDate+ ' </td></tr>');
     }
     
-  res.write('</table>');
+  res.write('</table></body></html>');
   });
   
 });
