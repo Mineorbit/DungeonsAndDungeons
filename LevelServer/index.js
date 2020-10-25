@@ -118,6 +118,7 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th><th>Created on</th></tr>\n '
     }
     
   res.write('</table>\n </body>\n </html>\n ');
+  res.end();
   });
   
 });
