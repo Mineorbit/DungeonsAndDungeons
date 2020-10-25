@@ -23,12 +23,20 @@ con.connect(function(err) {
 
 
 
+
 app.use(fileUpload());
 
 app.get('/', function(req, res){
   res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
+  
+res.write('<html> \n <head>\n <title>D + D - Startseite</title> \n </head> \n');
+res.write('<body>\n ');
+  
   res.write("<h1>Willkommen auf dem Dungeons & Dungeons Level Finder</h1>");
   res.write("<a href='/list'>Das große Archiv</a>");
+  
+res.write('</body>\n ');
+res.write('</html>\n ');
   res.end();
 });
 app.get('/upload', function(req,res){
@@ -77,7 +85,6 @@ app.post('/upl', function(req, res){
 
 app.get('/pull', function(req, res){
   //Hier download processen
-  console.log('Test');
   const file = `${__dirname}/levels/0000000000000000.lev`;
   res.download(file);
 });
