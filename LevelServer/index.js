@@ -88,7 +88,7 @@ res.write("<a href='/'>Start</a>");
 res.write('<table style="width:100%">');
 var i;
 
-res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
+res.write('<tr><th>ID</th><th>Name</th><th>Tags</th><th>Created on</th></tr>');
   
   var sql = "SELECT * FROM LevelMetaData;";
   console.log(sql);
@@ -98,7 +98,7 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
     for(i = 0;i<result.length;i++)
     {
     console.log(result);
-    res.write('<tr><td>'+result[i].ulid+'</td><td>'+result[i].name+'</td> <td> Test </td></tr>');
+    res.write('<tr><td>'+result[i].ULId+'</td><td>'+result[i].Name+'</td> <td> '+result[i].Description+' </td><td> ' +result[i].CreationDate+ ' </td></tr>');
     }
     
   res.write('</table>');
