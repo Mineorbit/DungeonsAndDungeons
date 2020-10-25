@@ -23,12 +23,20 @@ con.connect(function(err) {
 
 
 
+
 app.use(fileUpload());
 
 app.get('/', function(req, res){
   res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
+  
+res.write('<html> \n <head>\n <title>D + D - Startseite</title> \n </head> \n');
+res.write('<body>\n ');
+  
   res.write("<h1>Willkommen auf dem Dungeons & Dungeons Level Finder</h1>");
   res.write("<a href='/list'>Das große Archiv</a>");
+  
+res.write('</body>\n ');
+res.write('</html>\n ');
   res.end();
 });
 app.get('/upload', function(req,res){
@@ -39,9 +47,9 @@ app.get('/upload', function(req,res){
       res.write('action="/upl"'); 
       res.write('method="post"'); 
       res.write('encType="multipart/form-data">');
-      res.write('<table><tr> File: <input type="file" name="level" /></tr>');
-      res.write('<tr> Name: <input type="text" name="name" /></tr>');
-      res.write('<tr><input type="submit" value="Upload!" /><tr></table></form></body>');
+      res.write('<table><tr> <td> File: </td>  <td> <input type="file" name="level" /></td> </tr>');
+      res.write('<tr> <td> Name: </td>  <td><input type="text" name="name" /></td> </tr>');
+      res.write('<tr> <td> Level Status : <b> in Ordnung </b>   </td> <td><input type="submit" value="Upload!" /></td>  </tr> </table> </form></body>');
 res.write('</html>');
 res.end();
 });
@@ -63,10 +71,12 @@ app.post('/upl', function(req, res){
     
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
-  res.write("Level successfully uploaded!</br>");
+    
+  res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
+  res.write("Level successfully uploaded!<br>");
   res.write("<table>");
-  res.write("<tr><td> Name: </td><td>"+name+"</td></tr>");
-  res.write("<tr><td> ULID: </td><td><b>"+ulid+"</b></td></tr>");
+  res.write("<tr> <td> Name: </td><td>"+name+"</td> </tr>");
+  res.write("<tr> <td> ULID: </td><td> <b>"+ulid+"</b> </td></tr>");
     
   res.write("</table>");
   res.end();
@@ -77,26 +87,40 @@ app.post('/upl', function(req, res){
 
 app.get('/pull', function(req, res){
   //Hier download processen
-  console.log('Test');
   const file = `${__dirname}/levels/0000000000000000.lev`;
   res.download(file);
 });
+
+app.get('/show', function(req,res){
+  var ulid = req.query.ulid;
+  res.write(ulid);
+  res.end();
+});
+
 app.get('/list', function(req,res){
 res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
-res.write('<h1>Das große Archiv</h1>');
-res.write("<a href='/'>Start</a>");
-res.write('<table style="width:100%">');
+res.write('<html> \n <head>\n <title>D + D - Das große Archiv</title> \n </head> \n');
+res.write('<body>\n ');
+res.write('<h1>Das große Archiv</h1>\n ');
+res.write("<a href='/'>Start</a>\n ");
+res.write('<table style="width:100%">\n ');
 var i;
 
-res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
-
-client.query('SELECT * FROM level', (err, resp) => {  
-for(i = 0;i<resp.rowCount;i++)
-{
-res.write('<tr><td>'+i+'</td><td>Test</td> <td>'+resp.rows[0].name+'</td></tr>');
-}
-res.write('</table>');
-})
+res.write('<tr><th>ID</th><th>Name</th><th>Tags</th><th>Created on</th></tr>\n ');
+  
+  var sql = "SELECT * FROM LevelMetaData;";
+  var ulid = 0;
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    for(i = 0;i<result.length;i++)
+    {
+    res.write('<tr><td>'+result[i].ULId+'</td><td> <a href="/show?ulid='+result[i].ULId+'" > '+result[i].Name+'</a> </td> <td> #Test #Cool </td><td> ' +result[i].CreationDate+ ' </td></tr>\n ');
+    }
+    
+  res.write('</table>\n </body>\n </html>\n ');
+  res.end();
+  });
+  
 });
 var server = app.listen(13337, function() {
   console.log('Listening on port %d', server.address().port);
