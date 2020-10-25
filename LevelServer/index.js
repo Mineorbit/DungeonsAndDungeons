@@ -47,9 +47,9 @@ app.get('/upload', function(req,res){
       res.write('action="/upl"'); 
       res.write('method="post"'); 
       res.write('encType="multipart/form-data">');
-      res.write('<table><tr> File: <input type="file" name="level" /></tr>');
-      res.write('<tr> Name: <input type="text" name="name" /></tr>');
-      res.write('<tr><input type="submit" value="Upload!" /><tr></table></form></body>');
+      res.write('<table><tr> <td> File: </td>  <td> <input type="file" name="level" /></td> </tr>');
+      res.write('<tr> <td> Name: </td>  <td><input type="text" name="name" /></td> </tr>');
+      res.write('<tr> <td> Level Status : <b> in Ordnung </b>   </td> <td><input type="submit" value="Upload!" /></td>  </tr> </table> </form></body>');
 res.write('</html>');
 res.end();
 });
