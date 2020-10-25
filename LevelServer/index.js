@@ -89,12 +89,18 @@ res.write('<table style="width:100%">');
 var i;
 
 res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
-
-client.query('SELECT * FROM level', (err, resp) => {  
-for(i = 0;i<resp.rowCount;i++)
-{
-res.write('<tr><td>'+i+'</td><td>Test</td> <td>'+resp.rows[0].name+'</td></tr>');
-}
+  
+  var sql = "SELECT * FROM LevelMetaData;";
+  console.log(sql);
+  var ulid = 0;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    ulid = result.insertId;
+    for(i = 0;i<result.rowCount;i++)
+    {
+    res.write('<tr><td>'+result[i].GlobalID+'</td><td>result[i].name</td> <td> Test </td></tr>');
+    }
+  });
 res.write('</table>');
 })
 });
