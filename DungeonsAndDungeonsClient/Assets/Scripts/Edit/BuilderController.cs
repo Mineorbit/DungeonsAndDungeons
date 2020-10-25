@@ -42,7 +42,6 @@ public class BuilderController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Klick");
             Place();
         }
         if(Input.GetMouseButtonDown(1))

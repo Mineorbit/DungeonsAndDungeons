@@ -15,28 +15,37 @@ public class BuilderCursor : MonoBehaviour
     static Vector3 normalVec;
 
     static MeshFilter cursorMesh;
+    static MeshRenderer cursorRender;
 
 
     static GameObject hitObject;
+    static Transform cursorModel;
+    static bool placementLegal = false;
+    static Vector3 offset;
 
-    static bool placementLegal = true;
-
+    public Material legalMat;
+    public Material illlegalMat;
+    
     public void Start()
     {
         Debug.Log("Setting up Cursor");
         if (builderCursor != null) Destroy(this);
         builderCursor = this;
-
-        cursorMesh = GetComponent<MeshFilter>();
-
+        cursorModel = transform.Find("model");
+        cursorMesh = cursorModel.GetComponent<MeshFilter>();
+        cursorRender = cursorModel.GetComponent<MeshRenderer>();
+        
         degree = 1f;
     }
     public static void Set(Vector3 target,Vector3 normal)
     {
         Vector3 position = new Vector3(Mathf.Round(target.x + normal.x), Mathf.Round(target.y + normal.y), Mathf.Round(target.z + normal.z));
         normalVec = normal;
-
-        UpdateCursor(position);
+        if(currentSelection!= null)
+        {
+            offset = currentSelection.offset;
+        }
+        UpdateCursor(position,offset);
     }
 
     public static void Set(LevelObjectData objectType)
@@ -52,7 +61,22 @@ public class BuilderCursor : MonoBehaviour
     void Update()
     {
         ComputeCursorPosition();
-        placementLegal = UpdateLegal();
+        UpdateMaterial();
+    }
+    void UpdateMaterial()
+    {
+        bool newLegal = UpdateLegal();
+        if(newLegal!=placementLegal)
+        {
+            placementLegal = newLegal;
+            if(placementLegal)
+            {
+                cursorRender.material = builderCursor.legalMat;
+            }else
+            {
+                cursorRender.material = builderCursor.illlegalMat;
+            }
+        }
     }
 
     bool UpdateLegal()
@@ -62,12 +86,12 @@ public class BuilderCursor : MonoBehaviour
         layerMask = ~layerMask;
         RaycastHit hit;
         float dist = 0.5f;
-        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position - 0.5f*dist* Vector3.forward, Vector3.forward, out hit, dist, layerMask)) return false;
-        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position + 0.5f * dist * Vector3.forward, -Vector3.forward, out hit, dist, layerMask)) return false;
-        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position - 0.5f * dist * Vector3.up, Vector3.up, out hit, dist, layerMask)) return false;
-        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position + 0.5f * dist * Vector3.up, -Vector3.up, out hit, dist, layerMask)) return false;
-        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position - 0.5f * dist * Vector3.right, Vector3.right, out hit, dist, layerMask)) return false;
-        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position + 0.5f * dist * Vector3.right, -Vector3.right, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(cursorModel.transform.position - 0.5f*dist* Vector3.forward, Vector3.forward, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(cursorModel.transform.position + 0.5f * dist * Vector3.forward, -Vector3.forward, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(cursorModel.transform.position - 0.5f * dist * Vector3.up, Vector3.up, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(cursorModel.transform.position + 0.5f * dist * Vector3.up, -Vector3.up, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(cursorModel.transform.position - 0.5f * dist * Vector3.right, Vector3.right, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(cursorModel.transform.position + 0.5f * dist * Vector3.right, -Vector3.right, out hit, dist, layerMask)) return false;
         return true;
     }
 
@@ -88,20 +112,19 @@ public class BuilderCursor : MonoBehaviour
         }
         BuilderCursor.Set(targetLocation, hit.normal);
     }
-    static void UpdateCursor(Vector3 position)
+    static void UpdateCursor(Vector3 position,Vector3 offset)
     {
+
         builderCursor.transform.position = position;
+        cursorModel.transform.position = position+offset;
     }
     static void UpdateMesh()
     {
-        Debug.Log("Updating Mesh");
         Mesh targetMesh = null;
         if(currentSelection!=null)
         {
             targetMesh = currentSelection.GetMesh();
-            Debug.Log("SM:"+targetMesh.subMeshCount);
             targetMesh.SetTriangles(targetMesh.triangles, 0);
-            Debug.Log("SMN:" + targetMesh.subMeshCount);
             builderCursor.transform.localScale = currentSelection.Scale;
         }
         if (targetMesh != null)

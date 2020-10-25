@@ -8,14 +8,15 @@ public class LevelObjectData : InstantionTarget
     public string FullName;
     public Vector3 Scale;
     public Vector3 rotation;
+    public Vector3 offset;
     public int ID;
     Mesh objectMesh;
     public virtual GameObject Create(Vector3 location, Transform parent)
-    {
+    { 
         GameObject g = base.Create(location,parent);
         g.GetComponent<LevelObject>().ObjectDataID = this.ID;
         g.transform.localScale = Scale;
-        g.transform.position = location;
+        g.transform.position = location + offset;
         return g;
     }
     public Mesh GetMesh()
