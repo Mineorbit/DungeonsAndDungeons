@@ -8,6 +8,7 @@ public class EditMenu : MenuPage
     Button backButton;
     Button editButton;
     Button deleteButton;
+    Button uploadButton;
     LevelList levelList;
     public override void Awake()
     {
@@ -23,6 +24,8 @@ public class EditMenu : MenuPage
         newLevelButton = Interface.Find("New").GetComponent<Button>();
         deleteButton = Interface.Find("Delete").GetComponent<Button>();
         backButton = transform.Find("Back").GetComponent<Button>();
+        uploadButton = Interface.Find("Upload").GetComponent<Button>();
+        uploadButton.onClick.AddListener(OpenUploadMenu);
         newLevelButton.onClick.AddListener(OpenNewLevelMenu);
         backButton.onClick.AddListener(GoBack);
         editButton.onClick.AddListener(StartEdit);
@@ -33,6 +36,12 @@ public class EditMenu : MenuPage
         LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
         if (metaData == null) return;
         LevelManager.Delete(metaData);
+    }
+    void OpenUploadMenu()
+    {
+        LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        UploadMenu.levelToUpload = metaData;
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromEditToUploadMenu);
     }
     void OpenNewLevelMenu()
     {

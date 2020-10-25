@@ -10,8 +10,8 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager instance;
     public MenuPage[] pages;
 
-    public enum Page {None = -1, Main = 0, Play, Lobby, Edit, Create };
-    public enum Transaction {FromNoneToMain, FromMainToPlay,GoBack, FromMainToEdit,FromPlayToLobby, FromEditToCreateMenu };
+    public enum Page {None = -1, Main = 0, Play, Lobby, Edit, Create, Upload };
+    public enum Transaction {FromNoneToMain, FromMainToPlay,GoBack, FromMainToEdit,FromPlayToLobby, FromEditToCreateMenu, FromEditToUploadMenu };
 
 
     FSM<Page,Transaction> mainMenuFSM;
@@ -99,6 +99,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.FromEditToCreateMenu), new Tuple<Action<Transaction>, Page>(act, Page.Create));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Create, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Edit));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.FromEditToUploadMenu), new Tuple<Action<Transaction>, Page>(act, Page.Upload));
 
     }
 
