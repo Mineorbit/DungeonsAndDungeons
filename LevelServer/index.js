@@ -98,7 +98,7 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th><th>Created on</th></tr>');
     for(i = 0;i<result.length;i++)
     {
     console.log(result);
-    res.write('<tr><td>'+result[i].ULId+'</td><td>'+result[i].Name+'</td> <td> '+result[i].Description+' </td><td> ' +result[i].CreationDate+ ' </td></tr>');
+    res.write('<tr><td>'+result[i].ULId+'</td><td>'+result[i].Name+'</td> <td> #Test #Cool </td><td> ' +result[i].CreationDate+ ' </td></tr>');
     }
     
   res.write('</table>');
