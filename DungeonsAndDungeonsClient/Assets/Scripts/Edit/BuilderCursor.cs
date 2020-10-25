@@ -42,7 +42,12 @@ public class BuilderCursor : MonoBehaviour
     public static void Set(LevelObjectData objectType)
     {
         currentSelection = objectType;
+        UpdateRotation();
         UpdateMesh();
+    }
+    static void UpdateRotation()
+    {
+        builderCursor.transform.rotation = Quaternion.Euler(currentSelection.rotation);
     }
     void Update()
     {
@@ -85,16 +90,18 @@ public class BuilderCursor : MonoBehaviour
     }
     static void UpdateCursor(Vector3 position)
     {
-        UpdateMesh();
-
         builderCursor.transform.position = position;
     }
     static void UpdateMesh()
     {
+        Debug.Log("Updating Mesh");
         Mesh targetMesh = null;
         if(currentSelection!=null)
         {
             targetMesh = currentSelection.GetMesh();
+            Debug.Log("SM:"+targetMesh.subMeshCount);
+            targetMesh.SetTriangles(targetMesh.triangles, 0);
+            Debug.Log("SMN:" + targetMesh.subMeshCount);
             builderCursor.transform.localScale = currentSelection.Scale;
         }
         if (targetMesh != null)

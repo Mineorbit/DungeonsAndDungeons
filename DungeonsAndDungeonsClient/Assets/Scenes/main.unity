@@ -844,6 +844,8 @@ GameObject:
   - component: {fileID: 417448022}
   - component: {fileID: 417448021}
   - component: {fileID: 417448020}
+  - component: {fileID: 417448023}
+  - component: {fileID: 417448019}
   m_Layer: 0
   m_Name: Screen
   m_TagString: Untagged
@@ -851,6 +853,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &417448019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417448018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797b187e35c6d7a479fdd0472b6a685c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectDataID: 0
 --- !u!23 &417448020
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -914,6 +929,20 @@ Transform:
   m_Father: {fileID: 554266003}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!64 &417448023
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417448018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &468868258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1762,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 591898767}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.52290076
+  m_Size: 0.5006658
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3918,7 +3947,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.35
+  m_fontSize: 27.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
