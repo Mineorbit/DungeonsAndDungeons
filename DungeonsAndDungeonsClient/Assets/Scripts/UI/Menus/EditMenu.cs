@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class EditMenu : MenuPage
 {
     Button newLevelButton;
-    Button backButton;
     Button editButton;
     Button deleteButton;
     Button uploadButton;
@@ -23,11 +22,9 @@ public class EditMenu : MenuPage
         editButton = Interface.Find("Edit").GetComponent<Button>();
         newLevelButton = Interface.Find("New").GetComponent<Button>();
         deleteButton = Interface.Find("Delete").GetComponent<Button>();
-        backButton = transform.Find("Back").GetComponent<Button>();
         uploadButton = Interface.Find("Upload").GetComponent<Button>();
         uploadButton.onClick.AddListener(OpenUploadMenu);
         newLevelButton.onClick.AddListener(OpenNewLevelMenu);
-        backButton.onClick.AddListener(GoBack);
         editButton.onClick.AddListener(StartEdit);
         deleteButton.onClick.AddListener(RemoveLevel);
     }
@@ -53,10 +50,6 @@ public class EditMenu : MenuPage
         LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
         if (metaData == null) return;
         GameManager.instance.editLevel(metaData);
-    }
-    void GoBack()
-    {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
     }
 
 

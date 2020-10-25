@@ -52,8 +52,8 @@ public class BuilderController : MonoBehaviour
     }
     void Place()
     {
-        Debug.Log("Klick");
         var t = BuilderCursor.Get();
+        if(t.legal)
         Level.currentLevel.Add(t.levelObjectData,t.pos);
     }
     void Displace()

@@ -18,14 +18,8 @@ public class PlayMenu : MenuPage
     }
     public void Setup()
     {
-        Button backButton = transform.Find("Back").GetComponent<Button>();
-        backButton.onClick.AddListener(goBack);
         Button lobbyButton = transform.Find("Connect").Find("Go").GetComponent<Button>();
         lobbyButton.onClick.AddListener(goLobby);
-    }
-    void goBack()
-    {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
     }
     void goLobby()
     {

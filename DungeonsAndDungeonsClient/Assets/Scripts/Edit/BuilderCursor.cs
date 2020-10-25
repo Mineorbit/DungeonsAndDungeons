@@ -16,7 +16,10 @@ public class BuilderCursor : MonoBehaviour
 
     static MeshFilter cursorMesh;
 
+
     static GameObject hitObject;
+
+    static bool placementLegal = true;
 
     public void Start()
     {
@@ -44,10 +47,28 @@ public class BuilderCursor : MonoBehaviour
     void Update()
     {
         ComputeCursorPosition();
+        placementLegal = UpdateLegal();
     }
+
+    bool UpdateLegal()
+    {
+
+        int layerMask = 1 << 2;
+        layerMask = ~layerMask;
+        RaycastHit hit;
+        float dist = 0.5f;
+        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position - 0.5f*dist* Vector3.forward, Vector3.forward, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position + 0.5f * dist * Vector3.forward, -Vector3.forward, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position - 0.5f * dist * Vector3.up, Vector3.up, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position + 0.5f * dist * Vector3.up, -Vector3.up, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position - 0.5f * dist * Vector3.right, Vector3.right, out hit, dist, layerMask)) return false;
+        if (Physics.Raycast(BuilderCursor.builderCursor.transform.position + 0.5f * dist * Vector3.right, -Vector3.right, out hit, dist, layerMask)) return false;
+        return true;
+    }
+
     void ComputeCursorPosition()
     {
-        int layerMask = 1 << 8;
+        int layerMask = 1 << 2;
         layerMask = ~layerMask;
         RaycastHit hit;
         Vector3 targetLocation;
@@ -77,8 +98,9 @@ public class BuilderCursor : MonoBehaviour
             builderCursor.transform.localScale = currentSelection.Scale;
         }
         if (targetMesh != null)
+        { 
             cursorMesh.mesh = targetMesh;
-
+        }
     }
     public static LevelObject GetObjectAt()
     {
@@ -89,9 +111,9 @@ public class BuilderCursor : MonoBehaviour
         }
         return null;
     }
-    public static (Vector3 pos, Vector3 norm, LevelObjectData levelObjectData) Get()
+    public static (Vector3 pos, Vector3 norm, LevelObjectData levelObjectData, bool legal) Get()
     {
-        return (builderCursor.transform.position,normalVec, currentSelection);
+        return (builderCursor.transform.position,normalVec, currentSelection, placementLegal);
     }
     public void OnDisable()
     {
