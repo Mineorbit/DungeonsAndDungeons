@@ -101,8 +101,8 @@ res.write('<tr><th>ID</th><th>Name</th><th>Tags</th></tr>');
     res.write('<tr><td>'+result[i].GlobalID+'</td><td>result[i].name</td> <td> Test </td></tr>');
     }
   });
-res.write('</table>');
-})
+  
+  res.write('</table>');
 });
 var server = app.listen(13337, function() {
   console.log('Listening on port %d', server.address().port);
