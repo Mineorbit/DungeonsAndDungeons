@@ -100,6 +100,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Create, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Edit));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Edit, Transaction.FromEditToUploadMenu), new Tuple<Action<Transaction>, Page>(act, Page.Upload));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Upload, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Edit));
 
     }
 
