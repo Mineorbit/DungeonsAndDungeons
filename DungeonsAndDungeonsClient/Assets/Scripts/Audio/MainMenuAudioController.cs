@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MainMenuAudioController : MonoBehaviour
+public class MainMenuAudioController : AudioController
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        Button[] components = Resources.FindObjectsOfTypeAll<Button>();
+        foreach(Button b in components)
+        {
+            b.onClick.AddListener(Select);
+        }
+        Blend(0,0);
     }
-
-    // Update is called once per frame
-    void Update()
+    void Select()
     {
-        
+        Play(0);
     }
 }
