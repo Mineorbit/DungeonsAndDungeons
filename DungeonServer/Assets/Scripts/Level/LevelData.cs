@@ -18,7 +18,8 @@ public class LevelData
         public string name;
         public long ulid;
         public int ullid;
-
+        public string description;
+        public string creationDate;
         public static LevelMetaData Load(String path)
         {
             //Hier noch safety feature wenn dateien illegal

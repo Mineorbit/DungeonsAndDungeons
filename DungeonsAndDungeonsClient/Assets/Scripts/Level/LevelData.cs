@@ -19,6 +19,8 @@ public class LevelData
         public long ulid;
         public int ullid;
         public LevelCreationTemplate creationTemplate;
+        public string creationDate;
+        public string description;
         public LevelObjectData GetFloorType()
         {
             return creationTemplate.floorType;
