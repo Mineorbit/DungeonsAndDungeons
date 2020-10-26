@@ -70,9 +70,10 @@ app.post('/upl', function(req, res){
     ulid = result.insertId;
   
   if(levelFile!=null)
+  {
   levelFile.mv(__dirname+'/levels/'+ulid.toString()+'.lev',function(err) {
   if(err) return res.status(500).send(err); });
-    
+  }else return res.status(500).send("Form error"); 
   res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
   res.write("Level successfully uploaded!<br>");
   res.write("<table>");
