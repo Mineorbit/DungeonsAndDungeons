@@ -26,6 +26,17 @@ con.connect(function(err) {
 
 app.use(fileUpload());
 
+app.get('/gameServerLoad', function(req, res){
+  
+  var sql = "SELECT * FROM LevelMetaData;";
+  var ulid = 0;
+  con.query(sql, function (err, result, fields) {
+  res.write(JSON.stringify(result));
+  res.end();
+  });
+  
+
+});
 app.get('/', function(req, res){
   res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
   
@@ -88,8 +99,10 @@ app.post('/upl', function(req, res){
 });
 
 app.get('/pull', function(req, res){
+  
+  var ulid = req.query.ulid;
   //Hier download processen
-  const file = `${__dirname}/levels/0000000000000000.lev`;
+  const file = `${__dirname}/levels/'+ulid+'.lev`;
   res.download(file);
 });
 
