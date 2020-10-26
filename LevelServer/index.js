@@ -31,8 +31,7 @@ app.get('/gameServerLoad', function(req, res){
   var sql = "SELECT * FROM LevelMetaData;";
   var ulid = 0;
   con.query(sql, function (err, result, fields) {
-  console.log(result);
-  res.write(result.toString());
+  res.write(JSON.stringify(result));
   res.end();
   });
   
