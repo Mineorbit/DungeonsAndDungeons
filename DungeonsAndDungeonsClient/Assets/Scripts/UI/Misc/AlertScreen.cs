@@ -48,9 +48,10 @@ public class AlertScreen : MonoBehaviour
     {
 
     }
-    public void Open(string text)
+    public void Open(string t)
     {
-
+        Open();
+        text.text = t;
     }
     public void Open(string t, UnityEvent cancelEvent)
     {

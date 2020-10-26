@@ -37,8 +37,11 @@ public class EditMenu : MenuPage
     void OpenUploadMenu()
     {
         LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        if(metaData!=null)
+        { 
         UploadMenu.levelToUpload = metaData;
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromEditToUploadMenu);
+        }
     }
     void OpenNewLevelMenu()
     {
