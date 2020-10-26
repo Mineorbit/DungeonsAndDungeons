@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    PlayerController playerController;
     CharacterController controller;
     Animator characterAnimator;
     public ParticleSystem[] runDust;
@@ -14,6 +15,7 @@ public class PlayerAnimator : MonoBehaviour
     void Start()
     {
         controller = transform.GetComponent<CharacterController>();
+        playerController = transform.GetComponent<PlayerController>();
         characterAnimator = transform.Find("character").GetComponent<Animator>();
         runDust = transform.Find("Particles").Find("Running").GetComponentsInChildren<ParticleSystem>();
         StopDust();
@@ -21,7 +23,7 @@ public class PlayerAnimator : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetDirection = PlayerController.movingDirection;
+        Vector3 targetDirection = playerController.movingDirection;
         targetDirection.y = 0;
         Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         characterAnimator.SetFloat("Speed",Mathf.Min(inputVelocity.magnitude,1));
@@ -36,7 +38,7 @@ public class PlayerAnimator : MonoBehaviour
         {
         StopDust();
         }
-        if (movementKeyPressed)
+        if (movementKeyPressed && playerController.doInput)
         { 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.1f);
         }

@@ -165,7 +165,15 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-    
+    //this is ugly need better way
+    void Update()
+    {
+        if(currentLogic.GetType() == typeof(TestLogic))
+        {
+            (currentLogic as TestLogic).Update();
+        }
+    }
+
     void asyncMenuLoad()
     {
         SceneLoadManager.instance.unloadCurrentScenes();

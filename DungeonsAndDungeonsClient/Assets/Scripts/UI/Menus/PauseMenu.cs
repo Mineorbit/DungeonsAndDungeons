@@ -59,9 +59,10 @@ public class PauseMenu : MonoBehaviour
         //Inform GameManager of Attempt to (stop simulation in local play)
         
         if(freezePlayer)
-        {
-                PlayerController.acceptInput = false;
-        }
+            {
+                if (PlayerController.currentPlayer != null)
+                    PlayerManager.acceptInput = false;
+            }
         BlurScreen.blurScreen.Open();
         animation.Play();
         MouseStateController.UnlockBlocking();
@@ -72,8 +73,11 @@ public class PauseMenu : MonoBehaviour
         if (!checkAvailability()) return;
 
         if (freezeGame)
-            //Inform GameManager of Attempt to (unfreeze Sim)
-                PlayerController.acceptInput = true;
+        //Inform GameManager of Attempt to (unfreeze Sim)
+        {
+            if(PlayerController.currentPlayer!=null)
+            PlayerManager.acceptInput = true;
+        }
         BlurScreen.blurScreen.Close();
         animation.Play();
         open = false;
