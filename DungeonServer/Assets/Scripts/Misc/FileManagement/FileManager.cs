@@ -39,7 +39,19 @@ public class FileManager : MonoBehaviour
         }
         return paths.ToArray();
     }
-    void createFolder(string path)
+    public static string GetLevelPath()
+    {
+        return Application.persistentDataPath + "/gameData/levels/";
+    }
+    public static void deleteFolder(string path)
+    {
+        string filePath = Application.persistentDataPath + path;
+        if (Directory.Exists(filePath))
+        {
+            Directory.Delete(filePath, true);
+        }
+    }
+    public static void createFolder(string path)
     {
         string filePath = Application.persistentDataPath+path;
 

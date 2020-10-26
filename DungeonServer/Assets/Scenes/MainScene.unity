@@ -133,6 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1325356696}
+  - component: {fileID: 1325356697}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -154,6 +155,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1325356697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325356695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bed4eceaa4cb9b408215f80bc800c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  chunkPrefab: {fileID: 0}
 --- !u!1 &2136707977
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +182,7 @@ GameObject:
   - component: {fileID: 2136707980}
   - component: {fileID: 2136707981}
   - component: {fileID: 2136707982}
+  - component: {fileID: 2136707983}
   m_Layer: 0
   m_Name: ServerManager
   m_TagString: Untagged
@@ -214,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e89c32e6d2278647847bd69642980e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root: {fileID: 0}
+  root: {fileID: 11400000, guid: ae62e4d673c39e44e8f0219ef2aa95da, type: 2}
 --- !u!114 &2136707981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,3 +255,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad1191bd3e238f45b838bb70e2fbb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2136707983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136707977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481a9e4ed1cd60e45a2bd010ef432b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableLocalLevels: []
