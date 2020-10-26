@@ -32,7 +32,7 @@ app.get('/gameServerLoad', function(req, res){
   var ulid = 0;
   con.query(sql, function (err, result, fields) {
   console.log(result);
-  res.write(result);
+  res.write(result.toString());
   res.end();
   });
   
