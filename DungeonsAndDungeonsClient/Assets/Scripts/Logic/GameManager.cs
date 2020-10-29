@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
     UnityEvent afterMenuLoad;
     UnityEvent afterTestLoad;
     UnityEvent afterEditLoad;
-    public enum State {Init = 0, MainMenu, PlayLocal, PlayOnline, Edit , Test};
-    public enum GameAction { LoadGameFromBoot = 0,Reset,EnterMainMenu ,EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest};
+    UnityEvent afterPlayLoad;
+
+    public enum State {Init = 0, MainMenu, Play, Edit , Test};
+    public enum GameAction { LoadGameFromBoot = 0,Reset,EnterMainMenu ,EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest, StartPlay};
 
     FSM<State,GameAction> gameStateFSM;
 
@@ -57,6 +59,10 @@ public class GameManager : MonoBehaviour
         afterTestLoad.AddListener(SetLogic);
         afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
 
+
+        afterPlayLoad = new UnityEvent();
+        afterPlayLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterPlayLoad.AddListener(SetLogic);
 
         afterEditLoad = new UnityEvent();
         afterEditLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
@@ -114,6 +120,17 @@ public class GameManager : MonoBehaviour
             selectAsyncLoad(initEvent);
             Level.Clear();
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+        }; 
+        
+        Action<GameAction> actStartPlay = x =>
+        {
+            UnityEvent initEvent = new UnityEvent();
+            selectAsyncLoad(initEvent);
+            Level.Clear();
+
+            //Send Request for levelData
+
+            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
 
 
@@ -122,6 +139,7 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(act, State.Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
 
 
         //Reset Level
@@ -146,7 +164,7 @@ public class GameManager : MonoBehaviour
             case State.Test:
                 e.AddListener(asyncTestLoad);
                 break;
-            case State.PlayOnline:
+            case State.Play:
                 e.AddListener(asyncPlayLoad);
                 break;
 
@@ -168,6 +186,7 @@ public class GameManager : MonoBehaviour
     //this is ugly need better way
     void Update()
     {
+        if(currentLogic!=null)
         if(currentLogic.GetType() == typeof(TestLogic))
         {
             (currentLogic as TestLogic).Update();
@@ -212,9 +231,10 @@ public class GameManager : MonoBehaviour
     {
         SceneLoadManager.instance.unloadCurrentScenes();
 
-        //Connect to Game Server
+        //Stall until Leveldata is there
+        UnityEngine.Debug.Log("Hallo");
 
-        SceneLoadManager.instance.load(2, afterTestLoad);
+        SceneLoadManager.instance.load(4, afterPlayLoad);
     }
     public void performAction(GameAction action)
     {
@@ -260,10 +280,7 @@ public class GameManager : MonoBehaviour
             case State.Test:
                 currentLogic = new TestLogic();
                 break;
-            case State.PlayOnline:
-                currentLogic = new PlayLogic();
-                break;
-            case State.PlayLocal:
+            case State.Play:
                 currentLogic = new PlayLogic();
                 break;
         }

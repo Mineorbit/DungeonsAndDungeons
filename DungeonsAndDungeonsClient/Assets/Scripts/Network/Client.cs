@@ -48,7 +48,7 @@ public class Client : MonoBehaviour
         ns.Close();
         tcp.Close();
 
-        DestroyImmediate(this);
+        Destroy(this);
     }
 
     void TryConnect(UnityEvent onConnectEvent)
@@ -81,12 +81,13 @@ public class Client : MonoBehaviour
         }
         else
         {
-            Report("Connected");
             ThreadManager.ExecuteOnMainThread(()=> {
+
+                Report("Connected");
                 ns = tcp.GetStream();
                 connectEvent.Invoke();
+                StartRead();
             });
-            StartRead();
         }
     }
 
@@ -142,7 +143,8 @@ public class Client : MonoBehaviour
             ns = tcp.GetStream();
             receiveBuffer = new byte[dataBufferSize];
             try
-            { 
+            {
+            Report("Waiting for new Packet");
             ns.BeginRead(receiveBuffer, 0, dataBufferSize, new AsyncCallback(HandleRead), null);
             }catch(Exception e)
             {

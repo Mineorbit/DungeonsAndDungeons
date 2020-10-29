@@ -58,5 +58,9 @@ public class NetworkManager : MonoBehaviour
         PlayerConnectedPacket usernamePacket = new PlayerConnectedPacket(username);
         gameClient.Send(usernamePacket);
     }
-
+    public void CallReady()
+    {
+        GameReadyPacket gameReadyPacket = new GameReadyPacket(localId);
+        gameClient.Send(gameReadyPacket);
+    }
 }

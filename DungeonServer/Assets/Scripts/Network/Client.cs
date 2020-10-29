@@ -50,8 +50,9 @@ public class Client
     {
         if (tcp.Connected)
         {
-            ns = tcp.GetStream();
+            //ns = tcp.GetStream();
             receiveBuffer = new byte[dataBufferSize];
+            Report("Waiting for Packet");
             ns.BeginRead(receiveBuffer,0,dataBufferSize,new AsyncCallback(HandleRead),null);
         }
     }

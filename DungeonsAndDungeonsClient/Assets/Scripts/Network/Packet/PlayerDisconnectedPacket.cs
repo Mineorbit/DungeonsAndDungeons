@@ -16,6 +16,7 @@ public class PlayerDisconnectedPacket : Packet
         content[0] = "default";
         content[1] = 0;
         packetId = 3;
+
     }
     public PlayerDisconnectedPacket( string reason, int localId)
     {
@@ -27,25 +28,27 @@ public class PlayerDisconnectedPacket : Packet
         content[0] = reason;
         content[1] = localId;
         packetId = 3;
+
+
+        PlayerManager.Remove(localId);
+
     }
     public override void OnReceive()
     {
         int localId = (int) content[1];
-        if(localId == NetworkManager.instance.localId)
+        Debug.Log("Wallllllaaaa");
+        if (GameManager.GetState() == GameManager.State.MainMenu)
+        {
+            Lobby.lobby.RemovePlayer(localId);
+        }
+        if (localId == NetworkManager.instance.localId)
         {
             //Hier noch alertScreen einbauen
             GameManager.instance.performAction(GameManager.GameAction.Reset);
         }
         else
         {
-
-            //wenn nicht
-            //wenn in lobby dann lobby updaten
-
-            if(GameManager.GetState() == GameManager.State.MainMenu)
-            {
-                Lobby.lobby.RemovePlayer(localId);
-            }
+            
         }
     }
 }

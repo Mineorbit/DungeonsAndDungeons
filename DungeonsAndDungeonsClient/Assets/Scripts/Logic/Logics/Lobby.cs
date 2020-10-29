@@ -46,9 +46,11 @@ public class Lobby : Logic
 
     public void AddPlayer(int localId, string name)
     {
+
+
         GameObject pM = GameObject.Find("PlayerManager");
         InstantionTarget t = Resources.Load("pref/play/data/Player") as InstantionTarget;
-        GameObject g = t.Create(new Vector3(0,0,0) ,pM.transform);
+        GameObject g = t.Create(new Vector3(26+localId*5,6,-7) ,pM.transform);
 
         Player player = g.AddComponent<Player>();
         player.name = name;
@@ -59,12 +61,14 @@ public class Lobby : Logic
 
         PlayerView.playerView.UpdatePlayerView(players);
     }
+
+
     public void RemovePlayer(int localId)
     {
         PlayerManager.Remove(localId);
-        Instantiator.Remove(players[localId].gameObject);
         PlayerView.playerView.UpdatePlayerView(players);
     }
+
     void OpenLobbyMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromPlayToLobby);

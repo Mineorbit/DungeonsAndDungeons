@@ -29,6 +29,8 @@ public class GameLogic : MonoBehaviour
     {
         t.gameObject.AddComponent<GameLogic>();
     }
+
+
     public void AddPlayer(int localId, Client c)
     {
         GameObject g = ServerManager.instance.playerTarget.Create(new Vector3(0,0,0));

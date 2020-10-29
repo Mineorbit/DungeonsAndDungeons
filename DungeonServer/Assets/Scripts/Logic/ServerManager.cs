@@ -7,7 +7,7 @@ public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
     public enum State{Setup,Prepare,Lobby,Play,GameOver};
-    public enum GameAction {GoLive, Prepare};
+    public enum GameAction {GoLive, Prepare,StartGame};
     FSM<State, GameAction> serverState;
 
     public InstantionTarget playerTarget;
@@ -75,17 +75,36 @@ public class ServerManager : MonoBehaviour
         Action<GameAction> actLive = x => {
             Debug.Log("Opening Socket");
             server.Start();
-        }; 
-        
+        };
+
+
+        Action<GameAction> actStartGame = x => {
+
+
+            Debug.Log("Starting Round, no new connections");
+            GameReadyPacket answerPacket = new GameReadyPacket(true);
+            Server.SendPacketToAll(answerPacket);
+            server.StopListen();
+
+        };
+
+
+
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Setup, GameAction.Prepare), new Tuple<Action<GameAction>, State>(actSetup, State.Prepare));
 
         serverState.transitions.Add(new Tuple<State,GameAction>(State.Prepare,GameAction.GoLive),new Tuple<Action<GameAction>,State>(actLive,State.Lobby));
+        serverState.transitions.Add(new Tuple<State, GameAction>(State.Lobby, GameAction.StartGame), new Tuple<Action<GameAction>, State>(actStartGame, State.Play));
     }
 
     void Stop()
     {
         Server.DisconnectAll();
         server.StopListen();
+    }
+
+    public void performAction(GameAction action)
+    {
+        serverState.Move(action);
     }
 
     void OnDisable()

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using System.Linq;
 public class SceneLoadManager : MonoBehaviour
 {
-    private int numberOfScenes = 4;  
+    private int numberOfScenes = 5;  
     public List<int> currentScenes;
     private IEnumerator coroutine;
     public static SceneLoadManager instance;

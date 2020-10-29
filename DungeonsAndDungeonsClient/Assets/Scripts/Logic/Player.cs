@@ -9,4 +9,9 @@ public class Player : MonoBehaviour
     public string name;
     public enum Color {Blue, Red, Green, Yellow};
     public Color playerColor;
+
+    public void Start()
+    {
+        gameObject.name = "Player" + localId;
+    }
 }

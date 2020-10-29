@@ -6,13 +6,18 @@ public class Player : MonoBehaviour
 {
     public int localId;
     public string name;
+
+    public bool ready;
+
     Vector3 targetPosition;
     Quaternion targetRotation;
+
+
     public Client client;
 
     void Start()
     {
-        
+        ready = false;
     }
     void Update()
     {

@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Reflection;
 using System;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization;
+
 public class Packet
 {
     public byte packetId;
@@ -59,6 +62,19 @@ public class Packet
                     Array.Reverse(intData);
                 content[i] = BitConverter.ToInt32(intData, 0);
                 z += 4;
+            }else
+            if(types[i] == typeof(Chunk.ChunkData))
+            {
+
+                using (var memStream = new MemoryStream(data))
+                {
+                    var serializer = new DataContractSerializer(typeof(Chunk.ChunkData));
+                    Chunk.ChunkData obj = (Chunk.ChunkData) serializer.ReadObject(memStream);
+                    content[i] = obj;
+                    z += (int) memStream.Position;
+                    memStream.Close();
+                }
+
             }
         }
         return this;
@@ -130,7 +146,14 @@ public class Packet
             Array.Copy(lengthData, elementData, 2);
             Array.Copy(stringData, 0, elementData, 2, stringData.Length);
 
-
+        }else if(t == typeof(Chunk.ChunkData))
+        {
+            using (var ms = new MemoryStream())
+            {
+                var serializer = new DataContractSerializer(typeof(Chunk.ChunkData));
+                serializer.WriteObject(ms, o);
+                elementData = ms.ToArray();
+            }
         }
         return elementData;
     }

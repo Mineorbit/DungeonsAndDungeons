@@ -40,6 +40,7 @@ public class LevelList : MonoBehaviour
 
     void Start()
     {
+        //Debug.LogError(transform.parent.name+" "+listType);
         RefreshList();
     }
     void RefreshList()

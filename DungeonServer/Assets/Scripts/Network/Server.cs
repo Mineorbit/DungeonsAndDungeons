@@ -86,6 +86,16 @@ public class Server
                 clients[i].Disconnect();
         }
     }
+    public static void SendPacketToAll(Packet p)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+                if (clients[i] != null)
+                {
+                    SendPacket(i, p);
+                }
+        }
+    }
     public static void SendPacketToAllExcept(int localId, Packet p)
     {
         for(int i = 0;i<4;i++)
