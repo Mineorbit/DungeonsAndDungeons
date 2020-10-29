@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static bool acceptInput = true;
     static PlayerController[] playerControllers;
+    static int currentPlayerLocalId;
     public void Start()
     {
         playerControllers = new PlayerController[4];
@@ -23,7 +24,23 @@ public class PlayerManager : MonoBehaviour
         PlayerController.currentPlayer = playerControllers[localId];
 
         PlayerCameraController.SetTarget(localId);
+
+        currentPlayerLocalId = localId;
     }
+    public static void Remove(int localId)
+    {
+        if (localId > 3 || localId < 0) return;
+        playerControllers[localId] = null;
+
+        if(currentPlayerLocalId == localId)
+        {
+            PlayerController.currentPlayer = null;
+            PlayerCameraController.SetTarget(-1);
+            currentPlayerLocalId = -1;
+        }
+
+    }
+
 
     public static int Add(PlayerController playerController)
     {

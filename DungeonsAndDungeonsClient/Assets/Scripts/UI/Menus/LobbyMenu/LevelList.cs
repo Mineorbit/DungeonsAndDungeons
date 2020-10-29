@@ -16,6 +16,8 @@ public class LevelList : MonoBehaviour
 
     LevelData.LevelMetaData[] currentList;
 
+    public enum ListType { Net, Local };
+    public ListType listType;
     public void SetSelectedLevel(LevelData.LevelMetaData levelMetaData)
     {
         selected = levelMetaData;
@@ -38,15 +40,31 @@ public class LevelList : MonoBehaviour
 
     void Start()
     {
-        UpdateList(LevelManager.levelManager.availableLocalLevels);
+        RefreshList();
+    }
+    void RefreshList()
+    {
+        switch(listType)
+        {
+            case ListType.Net:
+                if (LevelManager.levelManager.availableNetworkLevels != currentList)
+                {
+                    Debug.Log("List changed");
+                    UpdateList(LevelManager.levelManager.availableNetworkLevels);
+                }
+                break;
+            case ListType.Local:
+                if (LevelManager.levelManager.availableLocalLevels != currentList)
+                {
+                    Debug.Log("List changed");
+                    UpdateList(LevelManager.levelManager.availableLocalLevels);
+                }
+                break;
+        }
     }
     void Update()
     {
-        if(LevelManager.levelManager.availableLocalLevels!=currentList)
-        {
-            Debug.Log("List changed");
-            UpdateList(LevelManager.levelManager.availableLocalLevels);
-        }
+        RefreshList();
     }
 
     public void UpdateList(LevelData.LevelMetaData[] localLevels)

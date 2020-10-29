@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager levelManager;
 
 
+    public LevelData.LevelMetaData[] availableNetworkLevels;
     public LevelData.LevelMetaData[] availableLocalLevels;
 
     void Awake()

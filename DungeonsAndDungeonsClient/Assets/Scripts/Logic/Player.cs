@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player
+public class Player : MonoBehaviour
 {
     public long globalId;
     public int localId;
