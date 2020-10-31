@@ -539,6 +539,7 @@ GameObject:
   - component: {fileID: 274516932}
   - component: {fileID: 274516931}
   - component: {fileID: 274516935}
+  - component: {fileID: 274516936}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -604,7 +605,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 32
   m_TargetDisplay: 0
 --- !u!224 &274516934
 RectTransform:
@@ -639,6 +640,19 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &274516936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274516930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb669a0d058dba1498a5dc138b5bac71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  open: 0
 --- !u!1 &305577355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2047,23 +2061,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
+      propertyPath: m_fontSize
+      value: 12.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152307089795365684, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2152307091295872811, guid: a3794e070e3166d4695796dbfc1c1451, type: 3}
       propertyPath: m_Name
