@@ -40,10 +40,10 @@ public class LevelElement : MonoBehaviour
         list = transform.parent.GetComponent<LevelList>();
     }
 
-    void UpdateScreen()
+    public void UpdateScreen()
     {
-        right = Mathf.Ceil((float)Screen.width * 0.5f * 0.65f);
-        bot = Mathf.Ceil((float)Screen.height * 0.5f * 0.75f);
+        right = (float)Screen.width * 0.5f * 0.65f;
+        bot = (float)Screen.height * 0.5f * 0.75f;
 
         Set(0);
     }
@@ -64,6 +64,7 @@ public class LevelElement : MonoBehaviour
     {
         d = data;
         nameTextField.SetText(data.name);
+        UpdateScreen();
     }
     IEnumerator OpenAnim()
     {

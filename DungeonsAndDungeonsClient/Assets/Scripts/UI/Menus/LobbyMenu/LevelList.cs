@@ -9,12 +9,18 @@ public class LevelList : MonoBehaviour
     Vector3 targetPosition;
 
     GameObject[] elements;
-    public LevelElement[] levelElements; 
+
+    public LevelElement[] levelElements;
+
     public InstantionTarget levelElementPrefab;
 
     LevelData.LevelMetaData selected;
 
     LevelData.LevelMetaData[] currentList;
+
+    //Lol
+    public static HashSet<LevelList> levelLists;
+
 
     public enum ListType { Net, Local };
     public ListType listType;
@@ -37,10 +43,25 @@ public class LevelList : MonoBehaviour
             }
         }
     }
+    public static void UpdateDisplay()
+    {
+        foreach(LevelList l in levelLists)
+        l.UpdateList(l.currentList);
+    }
+
+    void Awake()
+    {
+
+        if (levelLists == null)
+        {
+            levelLists = new HashSet<LevelList>();
+        }
+    }
 
     void Start()
     {
-        //Debug.LogError(transform.parent.name+" "+listType);
+        levelLists.Add(this);
+
         RefreshList();
     }
     void RefreshList()
