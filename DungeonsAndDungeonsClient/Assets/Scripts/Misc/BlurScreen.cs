@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlurScreen : MonoBehaviour
+public class BlurScreen : Openable
 {
     public static BlurScreen blurScreen;
     GameObject screen;
-
-    float maxDist = 50;
-    float minDist = 1;
+    public float maxDist = 50;
+    public float minDist = 1;
     public float t;
-    bool open = false;
-    bool finished = true;
-    enum Task { Open, Close };
-    Queue<Task> todo;
+
+
     void Start()
     {
         if (blurScreen != null) Destroy(this);
@@ -29,36 +26,11 @@ public class BlurScreen : MonoBehaviour
     }
     void Setup()
     {
-        open = false;
         t = 1;
         screen = transform.Find("Screen").gameObject;
-        todo = new Queue<Task>();
         screen.SetActive(false);
     }
 
-    void Update()
-    {
-    if(Camera.main != null)
-        { 
-        transform.LookAt(Camera.main.transform.position);
-        transform.position = LerpPos(t);
-        }
-        if(todo.Count>0)
-        if(finished)
-        {
-                Task t = todo.Dequeue();
-                if(t == Task.Close)
-                {
-                    Close();
-                }
-                if (t == Task.Open)
-                {
-                    Open();
-                }
-            }
-
-
-    }
 
     Vector3 LerpPos(float t)
     {
@@ -67,46 +39,41 @@ public class BlurScreen : MonoBehaviour
         return (1 - t) * (camPos + camFor * minDist) + t * (camPos + camFor * maxDist);
     }
 
-    public void Open()
+    public override void OnOpen()
     {
-        if (open || !finished) { todo.Enqueue(Task.Open); return; }
-        StartCoroutine("OpenAnim");
         screen.SetActive(true);
+        StartCoroutine("OpenAnim");
     }
-    public void Close()
+    public override void OnClose()
     {
-        if (!open || !finished) { todo.Enqueue(Task.Close); return; }
         StartCoroutine("CloseAnim");
     }
+
     public bool isOpen()
     {
         return open;
     }
+
+
     IEnumerator OpenAnim()
     {
-
-        finished = false;
-        open = false;
-        for (float ft = 1f; ft >= 0; ft -= 2* Time.deltaTime)
+        for (float ft = 1f; ft >= 0; ft -=  Time.deltaTime)
         {
             t = ft;
+            screen.transform.position = LerpPos(t);
             yield return new WaitForSeconds(Time.deltaTime);
         }
-
-        open = true;
-        finished = true;
+        Finished = true;
     }
     IEnumerator CloseAnim()
     {
-        open = true;
-        finished = false;
-        for (float ft = 0f; ft <= 1; ft += 2 * Time.deltaTime)
+        for (float ft = 0f; ft <= 1; ft +=  Time.deltaTime)
         {
             t = ft;
+            screen.transform.position = LerpPos(t);
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        open = false;
         screen.SetActive(false);
-        finished = true;
+        Finished = true;
     }
 }

@@ -1214,6 +1214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37222ed198fd99240994151e762abcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  open: 0
+  maxDist: 10
+  minDist: 1
   t: 0
 --- !u!1 &591898766
 GameObject:
@@ -1762,7 +1765,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 591898767}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.62349397
+  m_Size: 0.54710144
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3524,7 +3527,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 17.95
+  m_fontSize: 16
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3544,7 +3547,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 79
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -3991,7 +3994,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45.85
+  m_fontSize: 33.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
