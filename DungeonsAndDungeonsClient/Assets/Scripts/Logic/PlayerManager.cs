@@ -6,21 +6,24 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static bool acceptInput = true;
-    static PlayerController[] playerControllers;
+    public static PlayerController[] playerControllers;
     static int currentPlayerLocalId;
+
     public void Start()
     {
         playerControllers = new PlayerController[4];
-
     }
+
     public static void SetCurrentPlayer(int localId)
     {
         if (localId > 3 || localId < 0) return;
+        Debug.Log(localId);
         if(playerControllers[localId]==null)
         {
             playerControllers[localId] = GameObject.Find("Player"+localId).GetComponent<PlayerController>();
         }
 
+        Debug.Log(playerControllers[localId]);
 
         PlayerController.currentPlayer = playerControllers[localId];
 
@@ -28,6 +31,7 @@ public class PlayerManager : MonoBehaviour
 
         currentPlayerLocalId = localId;
     }
+
     public static void Remove(int localId)
     {
         if (localId > 3 || localId < 0) return;

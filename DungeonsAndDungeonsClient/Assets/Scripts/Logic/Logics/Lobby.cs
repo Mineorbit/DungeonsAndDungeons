@@ -49,7 +49,7 @@ public class Lobby : Logic
 
 
         GameObject pM = GameObject.Find("PlayerManager");
-        InstantionTarget t = Resources.Load("pref/play/data/Player") as InstantionTarget;
+        InstantionTarget t = Resources.Load("pref/lobby/data/Player") as InstantionTarget;
         GameObject g = t.Create(new Vector3(32+localId*8,2,0) ,pM.transform);
 
         Player player = g.AddComponent<Player>();

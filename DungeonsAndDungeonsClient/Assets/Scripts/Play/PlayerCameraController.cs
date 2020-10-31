@@ -18,8 +18,8 @@ public class PlayerCameraController : MonoBehaviour
     {
         if (localId > 3 || localId < 0) return;
 
-        GameObject target = GameObject.Find("Player"+localId);
-        cam.LookAt = target.transform;
-        cam.Follow = target.transform;
+        Transform target = PlayerManager.playerControllers[localId].transform;
+        cam.LookAt = target;
+        cam.Follow = target;
     }
 }
