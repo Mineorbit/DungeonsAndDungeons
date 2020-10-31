@@ -120,8 +120,21 @@ public class GameManager : MonoBehaviour
             selectAsyncLoad(initEvent);
             Level.Clear();
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
-        }; 
-        
+        };
+
+
+        Action<GameAction> actClearAfterGame = x =>
+        {
+            UnityEvent initEvent = new UnityEvent();
+            selectAsyncLoad(initEvent);
+
+            initEvent.AddListener(ResetGame);
+            NetworkManager.instance.Reset();
+            Level.Clear();
+            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+        };
+
+
         Action<GameAction> actStartPlay = x =>
         {
             UnityEvent initEvent = new UnityEvent();
@@ -140,6 +153,8 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(act, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.Reset), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.MainMenu));
 
 
         //Reset Level

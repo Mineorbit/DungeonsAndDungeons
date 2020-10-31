@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     public bool freezePlayer = true;
 
     public Button backToMainMenuButton;
+    public Button optionsButton;
+
     void Start()
     {
         Setup();
@@ -22,9 +24,14 @@ public class PauseMenu : MonoBehaviour
         animation = new FadeAndGrow();
         animation.target = this.transform;
         backToMainMenuButton = transform.Find("Main").GetComponent<Button>();
+        optionsButton = transform.Find("Opt").GetComponent<Button>();
+        optionsButton.onClick.AddListener(GotoOptions);
         backToMainMenuButton.onClick.AddListener(GotoMainMenu);
     }
-
+    void GotoOptions()
+    {
+        Options.options.Open();
+    }
     void GotoMainMenu()
     {
         Close();
