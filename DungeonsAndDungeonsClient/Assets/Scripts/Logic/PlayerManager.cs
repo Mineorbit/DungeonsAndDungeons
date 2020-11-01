@@ -6,13 +6,16 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static bool acceptInput = true;
-    public static PlayerController[] playerControllers;
-    public static Player[] players;
+    public static PlayerManager playerManager;
+public PlayerController[] playerControllers;
+    public Player[] players;
 
     static int currentPlayerLocalId;
 
     public void Start()
     {
+if(playerManager!=null) Destroy(this);
+playerManager= this;
         playerControllers = new PlayerController[4];
         players = new Player[4];
     }
