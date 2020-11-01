@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
 
         targetPosition = transform.position;
 
-        isMe = localId == NetworkManager.instance.localId;
-
+        
         lastPosition = transform.position;
 
     }
@@ -44,6 +43,9 @@ public class Player : MonoBehaviour
     }
     public void Update()
     {
+isMe = localId == NetworkManager.instance.localId;
+
+
         if(netInput)
         { 
         transform.position = (transform.position + targetPosition) / 2;
