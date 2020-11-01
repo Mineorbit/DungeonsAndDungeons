@@ -6,7 +6,6 @@ public class Lobby : Logic
 {
     public static Lobby lobby;
 
-    public Player[] players;
     int localPlayer = 0;
 
     public override void Init()
@@ -17,11 +16,6 @@ public class Lobby : Logic
         if (lobby == null)
             lobby = this;
 
-    }
-    public override void Start()
-    {
-
-        players = new Player[4];
     }
 
     public void Open(string name)
@@ -39,6 +33,7 @@ public class Lobby : Logic
         localPlayer = localId;
         AddPlayer(localId,name);
     }
+
     public void RemoveLocalPlayer()
     {
         RemovePlayer(localPlayer);
@@ -48,32 +43,24 @@ public class Lobby : Logic
     {
 
 
-        GameObject pM = GameObject.Find("PlayerManager");
-        InstantionTarget t = Resources.Load("pref/lobby/data/Player") as InstantionTarget;
-        GameObject g = t.Create(new Vector3(32+localId*8,2,0) ,pM.transform);
 
-        Player player = g.AddComponent<Player>();
-        player.name = name;
-        player.localId = localId;
-        players[localId] = player;
-
-        PlayerManager.Add(g.GetComponent<PlayerController>());
+        PlayerManager.playerManager.Add(localId,name);
 
 
-        PlayerView.playerView.UpdatePlayerView(players);
+        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
     }
 
 
     public void RemovePlayer(int localId)
     {
-        PlayerManager.Remove(localId);
-        PlayerView.playerView.UpdatePlayerView(players);
+        PlayerManager.playerManager.Remove(localId);
+        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
     }
 
     void OpenLobbyMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromPlayToLobby);
-        PlayerView.playerView.UpdatePlayerView(players);
+        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
     }
 
 

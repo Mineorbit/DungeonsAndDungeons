@@ -32,24 +32,24 @@ public class TestLogic : Logic
     {
             Debug.Log("Test");
             player = (player + 1) % 4;
-            PlayerManager.SetCurrentPlayer(player);
+            PlayerManager.playerManager.SetCurrentPlayer(player);
     }
     void SpawnPlayers()
     {
         for(int i = 0;i<4;i++)
         {
-            PlayerManager.DespawnPlayer(i);
+            PlayerManager.playerManager.DespawnPlayer(i);
             //HIER CHECK FÜR SPAWN PLACE LOGIC
-            PlayerManager.SpawnPlayer(i,new Vector3((float)i*5, 0, 0));
+            PlayerManager.playerManager.SpawnPlayer(i,new Vector3((float)i*5, 0, 0));
         }
 
-        PlayerManager.SetCurrentPlayer(player);
+        PlayerManager.playerManager.SetCurrentPlayer(player);
     }
     void DespawnPlayers()
     {
         for (int i = 0; i < 4; i++)
         {
-            PlayerManager.DespawnPlayer(i);
+            PlayerManager.playerManager.DespawnPlayer(i);
         }
     }
 

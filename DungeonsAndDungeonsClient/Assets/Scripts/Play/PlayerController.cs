@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
         controller = transform.GetComponent<CharacterController>();
 
-        int localId = PlayerManager.Add(this);
 
     }
    

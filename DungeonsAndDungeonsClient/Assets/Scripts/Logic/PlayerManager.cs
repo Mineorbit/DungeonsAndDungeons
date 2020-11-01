@@ -7,20 +7,29 @@ public class PlayerManager : MonoBehaviour
 {
     public static bool acceptInput = true;
     public static PlayerManager playerManager;
-public PlayerController[] playerControllers;
+    public PlayerController[] playerControllers;
     public Player[] players;
 
     static int currentPlayerLocalId;
 
     public void Start()
     {
-if(playerManager!=null) Destroy(this);
-playerManager= this;
+        if(playerManager!=null) Destroy(this);
+        playerManager= this;
         playerControllers = new PlayerController[4];
         players = new Player[4];
     }
 
-    public static void SetCurrentPlayer(int localId)
+    public void Reset()
+    {
+        for(int i = 0;i<4;i++)
+        {
+           Remove(i);
+        }
+    }
+
+
+    public void SetCurrentPlayer(int localId)
     {
         if (localId > 3 || localId < 0) return;
         Debug.Log(localId);
@@ -44,11 +53,12 @@ playerManager= this;
 
 
 
-    public static void Remove(int localId)
+    public void Remove(int localId)
     {
         if (localId > 3 || localId < 0) return;
         if(playerControllers[localId]!=null)
         if (playerControllers[localId].gameObject!=null)
+
         Destroy(playerControllers[localId].gameObject);
 
         if(currentPlayerLocalId == localId)
@@ -61,25 +71,21 @@ playerManager= this;
     }
 
 
-    public static int Add(PlayerController playerController)
+    public void Add(int freeLocalId, string name)
     {
-        int i = 0;
-        while(playerControllers[i] != null && i < playerControllers.Length)
-        {
-            i++;
-        }
-        if(playerControllers[i] == null)
-        {
-            playerControllers[i] = playerController;
-            players[i] = playerController.gameObject.GetComponent<Player>();
-            return i;
-        }else
-        {
-            return -1;
-        }
+
+        InstantionTarget t = Resources.Load("pref/lobby/data/Player") as InstantionTarget;
+        GameObject g = t.Create(new Vector3(32 + freeLocalId * 8, 6, 0), transform);
+
+        Player player = g.AddComponent<Player>();
+        player.name = name;
+        player.localId = freeLocalId;
+        players[freeLocalId] = player;
+        playerControllers[freeLocalId] = g.GetComponent<PlayerController>();
+
     }
 
-    public static void DespawnPlayer(int localId)
+    public void DespawnPlayer(int localId)
     {
         if (localId > 3 || localId < 0) return;
         if(playerControllers[localId]!= null)
@@ -87,7 +93,7 @@ playerManager= this;
 
     }
 
-    public static void SpawnPlayer(int localId,Vector3 location)
+    public void SpawnPlayer(int localId,Vector3 location)
     {
         if (localId > 3 || localId < 0) return;
 

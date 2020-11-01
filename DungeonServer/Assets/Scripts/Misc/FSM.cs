@@ -19,12 +19,17 @@ public class FSM<T, U>
 
     public void Move(U inputValue)
     {
+        T oldState = state;
         Tuple<Action<U>, T> value;
         if (transitions.TryGetValue(new Tuple<T, U>(state,inputValue), out value))
         {
             state = value.Item2;
+
+            UnityEngine.Debug.Log($"[{name}] {oldState} -> {inputValue} -> {state}");
             value.Item1(inputValue);
-        }else
+
+        }
+        else
         {
             UnityEngine.Debug.Log($"[{name}] In State {state} existiert kein Übergang für {inputValue}");
         }

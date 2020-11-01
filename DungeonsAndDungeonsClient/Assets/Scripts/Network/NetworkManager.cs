@@ -49,7 +49,10 @@ public class NetworkManager : MonoBehaviour
     }
 
     public void GameDisconnect(UnityEvent disconnectEvent)
-    {   
+    {
+
+
+        PlayerManager.playerManager.Remove(localId);
         gameClient.Disconnect(disconnectEvent);
     }
 
@@ -66,7 +69,6 @@ public class NetworkManager : MonoBehaviour
 
     public void SendLocomotionData(PlayerLocomotionPacket p)
     {
-        Debug.LogError(localId+" sending ");
         gameClient.Send(p);
     }
 }

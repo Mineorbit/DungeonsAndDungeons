@@ -30,8 +30,6 @@ public class PlayerDisconnectedPacket : Packet
         packetId = 3;
 
 
-        PlayerManager.Remove(localId);
-
     }
     public override void OnReceive()
     {
@@ -42,7 +40,7 @@ public class PlayerDisconnectedPacket : Packet
             Lobby.lobby.RemovePlayer(localId);
         }else if(GameManager.GetState() == GameManager.State.Play)
         {
-            PlayerManager.Remove(localId);
+            PlayerManager.playerManager.Remove(localId);
         }
         if (localId == NetworkManager.instance.localId)
         {

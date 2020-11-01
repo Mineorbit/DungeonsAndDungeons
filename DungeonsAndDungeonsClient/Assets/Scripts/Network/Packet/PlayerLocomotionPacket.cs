@@ -56,10 +56,10 @@ public class PlayerLocomotionPacket : Packet
         Vector3 position = new Vector3((float)content[0], (float)content[1], (float)content[2]);
 
         if(localId>=0)
-            if(PlayerManager.players[localId]!=null)
+            if(PlayerManager.playerManager.players[localId]!=null)
             {
                 Debug.LogError("Test");
-        PlayerManager.players[localId].SetTargetLocomotion(position);
+                PlayerManager.playerManager.players[localId].SetTargetLocomotion(position);
             }
 
 

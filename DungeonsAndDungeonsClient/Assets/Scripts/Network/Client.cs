@@ -45,6 +45,7 @@ public class Client : MonoBehaviour
 
     public void Kill()
     {
+        Disconnect();
         ns.Close();
         tcp.Close();
 

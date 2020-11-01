@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
             selectAsyncLoad(initEvent);
 
             initEvent.AddListener(ResetGame);
+            PlayerManager.playerManager.Reset();
             NetworkManager.instance.Reset();
             Level.Clear();
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);

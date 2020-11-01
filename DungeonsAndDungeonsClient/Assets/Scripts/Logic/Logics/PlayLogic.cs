@@ -15,6 +15,6 @@ public class PlayLogic : Logic
         if (running) return;
         base.Start();
 
-        PlayerManager.SetCurrentPlayer(NetworkManager.instance.localId);
+        PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
     }
 }
