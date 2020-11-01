@@ -15,6 +15,9 @@ public class Options : Openable
 
     TMP_Dropdown resolutionSelector;
 
+    Toggle fullScreenToggle;
+
+
     public void Start()
     {
 
@@ -29,9 +32,7 @@ public class Options : Openable
         
 
         SetupRes();
-
-        Screen.fullScreen = false;
-
+        SetupFull();
 
         backButton.onClick.AddListener(Close);
         transition = new Fade();
@@ -41,6 +42,13 @@ public class Options : Openable
 
     }
 
+    void SetupFull()
+    {
+        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full").GetComponent<Toggle>();
+        fullScreenToggle.onValueChanged.AddListener(delegate {
+            FullChange();
+        });
+    }
 
     void SetupRes()
     {
@@ -64,7 +72,6 @@ public class Options : Openable
 
             i++;
         }
-
         resolutionSelector.onValueChanged.AddListener(delegate {
             ResolutionChange();
         });
@@ -80,6 +87,14 @@ public class Options : Openable
             res = new Vector2(Screen.width, Screen.height);
         }
     }
+
+    void FullChange()
+    {
+
+        Screen.fullScreen = fullScreenToggle.isOn;
+
+    }
+
     void HandleResChange()
     {
         LevelList.UpdateDisplay();
