@@ -286,7 +286,7 @@ public class GameManager : MonoBehaviour
             if (currentLogic.running == true) currentLogic.Stop();
             currentLogic.DeInit();
         }
-        Debug.LogError("Selecting new Logic");
+        UnityEngine.Debug.LogError("Selecting new Logic "+ gameStateFSM.state);
         switch(gameStateFSM.state)
         {
             case State.MainMenu:
@@ -301,9 +301,12 @@ public class GameManager : MonoBehaviour
             case State.Play:
                 currentLogic = new PlayLogic();
                 break;
+            case State.Init:
+                currentLogic = null;
+                break;
         }
 
-        Debug.LogError("New Logic: "+currentLogic);
+        UnityEngine.Debug.LogError("New Logic: "+currentLogic);
         if (currentLogic != null)
         {
             currentLogic.Init();

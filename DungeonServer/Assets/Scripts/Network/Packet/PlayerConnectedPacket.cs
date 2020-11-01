@@ -50,7 +50,7 @@ public class PlayerConnectedPacket : Packet
         Server.SendPacket(localId,cIp);
 
             //Informiere neuen Spieler über alle bisherigen
-            foreach(Player pl in GameLogic.current.players)
+            foreach(Player pl in PlayerManager.playerManager.players)
             {
                 if(pl!=null)
                 {

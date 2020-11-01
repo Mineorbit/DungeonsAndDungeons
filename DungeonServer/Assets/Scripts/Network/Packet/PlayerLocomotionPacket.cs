@@ -53,7 +53,7 @@ public class PlayerLocomotionPacket : Packet
 
         Vector3 position = new Vector3((float)content[0], (float)content[1], (float)content[2]);
 
-        PlayerManager.players[localId].updateLocomotionData(position, new Quaternion(0,0,0,0));
+        PlayerManager.playerManager.players[localId].updateLocomotionData(position, new Quaternion(0,0,0,0));
 
         //Update Player Locally
         PlayerLocomotionPacket p = new PlayerLocomotionPacket(position,new Quaternion(0,0,0,0),localId);

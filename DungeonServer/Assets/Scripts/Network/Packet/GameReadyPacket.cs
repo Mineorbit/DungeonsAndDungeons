@@ -31,7 +31,7 @@ public class GameReadyPacket : Packet
     {
 
 
-        GameLogic.current.players[localId].ready = !GameLogic.current.players[localId].ready;
+        PlayerManager.playerManager.players[localId].ready = !PlayerManager.playerManager.players[localId].ready;
 
 
 
@@ -43,9 +43,9 @@ public class GameReadyPacket : Packet
         for (int i = 0;i<4;i++)
         {
             
-            if(GameLogic.current.players[i] != null)
+            if(PlayerManager.playerManager.players[i] != null)
             { 
-            if(!GameLogic.current.players[i].ready)
+            if(!PlayerManager.playerManager.players[i].ready)
             {
                 return;
             }

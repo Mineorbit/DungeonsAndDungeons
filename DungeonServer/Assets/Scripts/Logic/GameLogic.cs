@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
-    public Player[] players;
 
     long levelId = 0;
     public static GameLogic current;
@@ -12,7 +11,6 @@ public class GameLogic : MonoBehaviour
     {
         if (current != null) Destroy(this);
         current = this;
-        players = new Player[4];
     }
     public void prepareRound()
     {
@@ -33,19 +31,17 @@ public class GameLogic : MonoBehaviour
 
     public void AddPlayer(int localId, Client c)
     {
-        GameObject g = ServerManager.instance.playerTarget.Create(new Vector3(0,0,0));
+        GameObject g = ServerManager.instance.playerTarget.Create(new Vector3(32+localId*8,0,0));
         g.name = "Player"+c.name;
         Player p = g.GetComponent<Player>();
         p.name = c.name;
         p.localId = localId;
         p.client = c;
-        players[localId] = p;
+        p.Setup();
     }
-
-    
     public void RemovePlayer(int localId)
     {
-        if(players[localId]!=null)
-        Destroy(players[localId].gameObject);
+        PlayerManager.playerManager.RemovePlayer(localId);
     }
+    
 }

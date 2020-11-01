@@ -17,8 +17,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Setup();
+    }
+    public void Setup()
+    {
         ready = false;
-        PlayerManager.players[localId] = this;
+        PlayerManager.playerManager.AddPlayer(this,localId);
     }
     void Update()
     {
@@ -35,6 +39,7 @@ public class Player : MonoBehaviour
     }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)
     {
+        Debug.Log("Changing target "+localId);
         targetPosition = loc;
         targetRotation = rot;
     }
