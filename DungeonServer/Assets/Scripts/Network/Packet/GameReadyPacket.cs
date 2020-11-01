@@ -43,14 +43,15 @@ public class GameReadyPacket : Packet
         for (int i = 0;i<4;i++)
         {
             
-            if(GameLogic.current.players[localId] != null)
+            if(GameLogic.current.players[i] != null)
             { 
-            if(!GameLogic.current.players[localId].ready)
+            if(!GameLogic.current.players[i].ready)
             {
                 return;
             }
             }
         }
+
         ServerManager.instance.performAction(ServerManager.GameAction.StartGame);
     }
 }

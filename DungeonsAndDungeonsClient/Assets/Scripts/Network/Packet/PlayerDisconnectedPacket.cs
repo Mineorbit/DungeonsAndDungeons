@@ -40,6 +40,9 @@ public class PlayerDisconnectedPacket : Packet
         if (GameManager.GetState() == GameManager.State.MainMenu)
         {
             Lobby.lobby.RemovePlayer(localId);
+        }else if(GameManager.GetState() == GameManager.State.Play)
+        {
+            PlayerManager.Remove(localId);
         }
         if (localId == NetworkManager.instance.localId)
         {

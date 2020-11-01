@@ -63,4 +63,10 @@ public class NetworkManager : MonoBehaviour
         GameReadyPacket gameReadyPacket = new GameReadyPacket(localId);
         gameClient.Send(gameReadyPacket);
     }
+
+    public void SendLocomotionData(PlayerLocomotionPacket p)
+    {
+        Debug.LogError(localId+" sending ");
+        gameClient.Send(p);
+    }
 }

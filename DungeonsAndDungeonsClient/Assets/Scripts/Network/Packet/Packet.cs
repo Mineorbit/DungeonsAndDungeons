@@ -38,6 +38,7 @@ public class Packet
         }
         return null;
     }
+
     Packet parseContent(byte[] data)
     {
         int z = 0;
@@ -74,8 +75,16 @@ public class Packet
                     z += (int) memStream.Position;
                     memStream.Close();
                 }
-
+            }else
+            if(types[i] == typeof(float))
+            {
+                //float macht keine endianness bisher (muss evtl hin)
+                content[i] = BitConverter.ToSingle(data,z);
+                z += 4;
             }
+
+
+
         }
         return this;
     }
@@ -154,6 +163,9 @@ public class Packet
                 serializer.WriteObject(ms, o);
                 elementData = ms.ToArray();
             }
+        }else if( t == typeof(float))
+        {
+            elementData = BitConverter.GetBytes((float) o);
         }
         return elementData;
     }

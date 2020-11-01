@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         ready = false;
+        PlayerManager.players[localId] = this;
     }
     void Update()
     {

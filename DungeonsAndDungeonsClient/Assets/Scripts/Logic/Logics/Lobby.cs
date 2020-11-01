@@ -54,6 +54,7 @@ public class Lobby : Logic
 
         Player player = g.AddComponent<Player>();
         player.name = name;
+        player.localId = localId;
         players[localId] = player;
 
         PlayerManager.Add(g.GetComponent<PlayerController>());

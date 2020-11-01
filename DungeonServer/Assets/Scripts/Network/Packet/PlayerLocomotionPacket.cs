@@ -1,0 +1,64 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using System.Reflection;
+
+public class PlayerLocomotionPacket : Packet
+{
+    public PlayerLocomotionPacket()
+    {
+        types = new Type[8];
+        
+        content = new object[8];
+
+        for (int i = 0; i < 7; i++)
+        {
+            types[i] = typeof(float);
+            content[i] = 0f;
+        }
+        types[7] = typeof(int);
+
+        content[7] = -1;
+
+        packetId = 6;
+    }
+    public PlayerLocomotionPacket(Vector3 position, Quaternion rotation, int localId)
+    {
+        types = new Type[8];
+
+        for (int i = 0; i < 7; i++)
+        {
+            types[i] = typeof(float);
+        }
+
+        types[7] = typeof(int);
+
+        content = new object[8];
+        content[0] = position.x;
+        content[1] = position.y;
+        content[2] = position.z;
+
+        content[3] = rotation.x;
+        content[4] = rotation.y;
+        content[5] = rotation.z;
+        content[6] = rotation.w;
+
+        content[7] = localId;
+        packetId = 6;
+    }
+
+    public override void OnReceive(int localId)
+    {
+
+        Vector3 position = new Vector3((float)content[0], (float)content[1], (float)content[2]);
+
+        PlayerManager.players[localId].updateLocomotionData(position, new Quaternion(0,0,0,0));
+
+        //Update Player Locally
+        PlayerLocomotionPacket p = new PlayerLocomotionPacket(position,new Quaternion(0,0,0,0),localId);
+        //Send info to others
+        Server.SendPacketToAllExcept(localId,p);
+        
+    }
+}

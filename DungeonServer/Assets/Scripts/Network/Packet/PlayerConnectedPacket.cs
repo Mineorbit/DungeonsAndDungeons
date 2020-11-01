@@ -43,7 +43,7 @@ public class PlayerConnectedPacket : Packet
     {
         if( (int) content[1] == -1)
         { 
-        Debug.Log("New player "+content[0]+" "+localId);
+        Debug.LogError("New player "+content[0]+" "+localId);
         Server.GetClient(localId).name = (string) content[0];
         ServerManager.instance.AddClient(localId,Server.GetClient(localId));
         ConnectionInfoPacket cIp = new ConnectionInfoPacket(localId);

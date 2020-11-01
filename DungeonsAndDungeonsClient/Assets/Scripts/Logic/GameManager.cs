@@ -126,6 +126,8 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actClearAfterGame = x =>
         {
             UnityEvent initEvent = new UnityEvent();
+            UnityEngine.Debug.LogError("Left to: "+ gameStateFSM.state);
+            
             selectAsyncLoad(initEvent);
 
             initEvent.AddListener(ResetGame);
@@ -284,6 +286,7 @@ public class GameManager : MonoBehaviour
             if (currentLogic.running == true) currentLogic.Stop();
             currentLogic.DeInit();
         }
+        Debug.LogError("Selecting new Logic");
         switch(gameStateFSM.state)
         {
             case State.MainMenu:
@@ -299,6 +302,8 @@ public class GameManager : MonoBehaviour
                 currentLogic = new PlayLogic();
                 break;
         }
+
+        Debug.LogError("New Logic: "+currentLogic);
         if (currentLogic != null)
         {
             currentLogic.Init();

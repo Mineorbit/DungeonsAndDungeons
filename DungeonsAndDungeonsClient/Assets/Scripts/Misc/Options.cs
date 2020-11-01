@@ -17,14 +17,21 @@ public class Options : Openable
 
     public void Start()
     {
+
+
         if (options != null) Destroy(this);
         options = this;
+
+
+
 
         backButton = transform.Find("Scroll View").Find("Back").GetComponent<Button>();
         
 
         SetupRes();
-        
+
+        Screen.fullScreen = false;
+
 
         backButton.onClick.AddListener(Close);
         transition = new Fade();

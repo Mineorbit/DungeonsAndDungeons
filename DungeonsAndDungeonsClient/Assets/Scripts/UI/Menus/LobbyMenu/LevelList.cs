@@ -45,6 +45,7 @@ public class LevelList : MonoBehaviour
     }
     public static void UpdateDisplay()
     {
+        if(levelLists != null)
         foreach(LevelList l in levelLists)
         l.UpdateList(l.currentList);
     }

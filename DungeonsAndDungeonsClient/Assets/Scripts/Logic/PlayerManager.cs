@@ -7,11 +7,14 @@ public class PlayerManager : MonoBehaviour
 {
     public static bool acceptInput = true;
     public static PlayerController[] playerControllers;
+    public static Player[] players;
+
     static int currentPlayerLocalId;
 
     public void Start()
     {
         playerControllers = new PlayerController[4];
+        players = new Player[4];
     }
 
     public static void SetCurrentPlayer(int localId)
@@ -21,6 +24,7 @@ public class PlayerManager : MonoBehaviour
         if(playerControllers[localId]==null)
         {
             playerControllers[localId] = GameObject.Find("Player"+localId).GetComponent<PlayerController>();
+            players[localId] = GameObject.Find("Player" + localId).GetComponent<Player>();
         }
 
         Debug.Log(playerControllers[localId]);
@@ -30,7 +34,12 @@ public class PlayerManager : MonoBehaviour
         PlayerCameraController.SetTarget(localId);
 
         currentPlayerLocalId = localId;
+        Debug.LogError("Active Player: "+localId);
     }
+
+
+
+
 
     public static void Remove(int localId)
     {
@@ -59,12 +68,14 @@ public class PlayerManager : MonoBehaviour
         if(playerControllers[i] == null)
         {
             playerControllers[i] = playerController;
+            players[i] = playerController.gameObject.GetComponent<Player>();
             return i;
         }else
         {
             return -1;
         }
     }
+
     public static void DespawnPlayer(int localId)
     {
         if (localId > 3 || localId < 0) return;
@@ -72,6 +83,7 @@ public class PlayerManager : MonoBehaviour
         playerControllers[localId].gameObject.SetActive(false);
 
     }
+
     public static void SpawnPlayer(int localId,Vector3 location)
     {
         if (localId > 3 || localId < 0) return;

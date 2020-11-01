@@ -31,6 +31,9 @@ public class PlayerConnectedPacket : Packet
     public override void OnReceive()
     {
         int localId = (int)content[1];
+
+        Debug.LogError("Spieler "+localId+ " heißt "+content[0]);
+
         //Spawn PlayerChar according to mode
         if (GameManager.GetState() == GameManager.State.MainMenu)
         {

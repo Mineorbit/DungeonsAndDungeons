@@ -27,6 +27,8 @@ public class Instantiator : MonoBehaviour
             string newname = name.Substring(0, name.Length - 7);
             result[i].name = newname;
             //Move to the associated scene
+
+            if(SceneManager.GetSceneByName(dir) != null)
             SceneManager.MoveGameObjectToScene(result[i], SceneManager.GetSceneByName(dir));
         }
         return result;
