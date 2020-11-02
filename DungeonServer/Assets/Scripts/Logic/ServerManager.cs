@@ -33,9 +33,11 @@ public class ServerManager : MonoBehaviour
         SetupFSM();
         serverState.Move(GameAction.Prepare);
     }
+
+
     void SetupLogic()
     {
-        gameObject.AddComponent<GameLogic>();
+
     }
 
    
@@ -67,7 +69,9 @@ public class ServerManager : MonoBehaviour
         serverState.state = State.Setup;
         Action<GameAction> actSetup = x => {
             Debug.Log("Setting up");
-            SetupLogic();
+
+            GameLogic.PrepareRound(this);
+
             SetupServer();
             Debug.Log("Setup done");
             serverState.Move(GameAction.GoLive);
@@ -81,10 +85,12 @@ public class ServerManager : MonoBehaviour
         Action<GameAction> actStartGame = x => {
 
 
+
             Debug.Log("Starting Round, no new connections");
             GameReadyPacket answerPacket = new GameReadyPacket(true);
-            Server.SendPacketToAll(answerPacket);
             server.StopListen();
+            Server.SendPacketToAll(answerPacket);
+            GameLogic.current.StartRound();
 
         };
 

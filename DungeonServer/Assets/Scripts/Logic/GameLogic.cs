@@ -7,15 +7,21 @@ public class GameLogic : MonoBehaviour
 
     long levelId = 0;
     public static GameLogic current;
+    
+    
     public void Start()
     {
         if (current != null) Destroy(this);
         current = this;
+        Setup();
     }
-    public void prepareRound()
+    
+
+    public void Setup()
     {
 
     }
+
     public static void ClearRound()
     {
         if (GameLogic.current != null)
@@ -23,11 +29,23 @@ public class GameLogic : MonoBehaviour
             Destroy(GameLogic.current);
         }
     }
-    public static void StartRound(Transform t)
+    public static void PrepareRound(Transform t)
     {
         t.gameObject.AddComponent<GameLogic>();
     }
 
+    public void StartRound()
+    {
+        //Set Level As Selected
+
+
+
+        //Send LevelData
+
+
+
+        //SpawnPlayers in Positions
+    }
 
     public void AddPlayer(int localId, Client c)
     {

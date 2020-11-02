@@ -15,8 +15,10 @@ public class LevelObjectData : InstantionTarget
     { 
         GameObject g = base.Create(location,parent);
         g.GetComponent<LevelObject>().ObjectDataID = this.ID;
+        g.GetComponent<LevelObject>().chunk = parent.GetComponent<Chunk>();
         g.transform.localScale = Scale;
         g.transform.position = location + offset;
+
         return g;
     }
     public Mesh GetMesh()

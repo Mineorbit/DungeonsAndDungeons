@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 5000
       objectReference: {fileID: 0}
+    - target: {fileID: 794073620344780604, guid: cba7c68d89fdc5846b7369cf96e0fc28, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 794073620344780605, guid: cba7c68d89fdc5846b7369cf96e0fc28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3068,7 +3072,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 591898767}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.38322365
+  m_Size: 0.3811881
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3644,7 +3648,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 10.1
+  m_fontSize: 10.05
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1

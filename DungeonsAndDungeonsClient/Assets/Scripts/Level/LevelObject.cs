@@ -22,13 +22,15 @@ public class LevelObject : MonoBehaviour
         //LevelObjectData typeData
     }
 
-    public int ObjectDataID;
 
+    public int ObjectDataID;
+    public Chunk chunk;
     public LevelObjectInstanceData GetLevelObjectInstanceData()
     {
         LevelObjectInstanceData d =  new LevelObjectInstanceData(transform.position,ObjectDataID);
         return d;
     }
+
     UnityEvent actionEvent;
     public void Awake()
     {

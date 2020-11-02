@@ -169,7 +169,7 @@ public class Level : MonoBehaviour
     public void Remove(LevelObject o)
     {
         if(o != null)
-        GetChunk(o.transform.position).Remove(o);
+        o.chunk.Remove(o);
     }
 
     public static void Clear()
