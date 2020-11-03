@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Net;
 using System.IO.Compression;
+using System.IO;
 
 public class OnlineLevelOrganizer : MonoBehaviour
 {
@@ -59,10 +60,20 @@ public class OnlineLevelOrganizer : MonoBehaviour
 
 
 
+
+
         long ulid = metaData.ulid;
+
         string url = $"http://www.josch557.xyz:13337/pull?ulid={ ulid }";
 
         string path = Application.persistentDataPath + $"/gameData/c_levels/g{ulid}.zip";
+
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
 
         WebClient client = new WebClient();
 
@@ -72,8 +83,12 @@ public class OnlineLevelOrganizer : MonoBehaviour
 
         ZipFile.ExtractToDirectory(path, unzipPath);
 
-        return null;
 
+        LevelData.LevelMetaData d = LevelData.LevelMetaData.Load(unzipPath);
+        d.ullid = newlocalId;
+        d.Save();
+
+        return d;
     }
 
     public LevelData.LevelMetaData GetTopLevel()

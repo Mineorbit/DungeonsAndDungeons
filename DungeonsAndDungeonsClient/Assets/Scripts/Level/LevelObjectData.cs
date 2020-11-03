@@ -18,7 +18,7 @@ public class LevelObjectData : InstantionTarget
         g.GetComponent<LevelObject>().chunk = parent.GetComponent<Chunk>();
         g.transform.localScale = Scale;
         g.transform.position = location + offset;
-
+        g.GetComponent<LevelObject>().OnCreate();
         return g;
     }
     public Mesh GetMesh()

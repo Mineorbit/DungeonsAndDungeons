@@ -42,7 +42,10 @@ public class LevelManager : MonoBehaviour
 
         LevelData.LevelMetaData newLevelData = OnlineLevelOrganizer.onlineLevelOrganizer.FetchLevel(levelData,localId);
 
+        UpdateLocalLevels();
+
         Level.Load(newLevelData);
+
     }
 
 

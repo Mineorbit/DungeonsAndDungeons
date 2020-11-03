@@ -34,6 +34,10 @@ public class LevelObject : MonoBehaviour
     {
 
     }
+    public virtual void OnCreate()
+    {
+
+    }
     public void Action()
     {
         actionEvent.Invoke();

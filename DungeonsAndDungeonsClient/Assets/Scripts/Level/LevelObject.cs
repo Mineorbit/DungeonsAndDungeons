@@ -25,6 +25,7 @@ public class LevelObject : MonoBehaviour
 
     public int ObjectDataID;
     public Chunk chunk;
+
     public LevelObjectInstanceData GetLevelObjectInstanceData()
     {
         LevelObjectInstanceData d =  new LevelObjectInstanceData(transform.position,ObjectDataID);
@@ -32,10 +33,14 @@ public class LevelObject : MonoBehaviour
     }
 
     UnityEvent actionEvent;
-    public void Awake()
+    
+    public virtual void OnCreate()
     {
 
     }
+    
+
+
     public void Action()
     {
         actionEvent.Invoke();

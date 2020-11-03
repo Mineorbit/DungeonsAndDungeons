@@ -16,8 +16,10 @@ public class Level : MonoBehaviour
 
     Dictionary<Tuple<int, int>, int> chunkLocations;
     List<Chunk> chunks;
-    Spawn spawn;
-    Goal goal;
+
+    public Spawn[] spawn;
+
+    public Goal goal;
 
     void Setup(LevelData.LevelMetaData metaData)
     {
@@ -36,6 +38,7 @@ public class Level : MonoBehaviour
     {
         if (currentLevel != null) Destroy(this);
         currentLevel = this;
+        spawn = new Spawn[4];
     }
 
     public static void Create(LevelData.LevelMetaData levelMetaData)
@@ -53,6 +56,7 @@ public class Level : MonoBehaviour
         LevelData data = currentLevel.GetLevelData();
         data.Save();
     }
+
     public static void Load(LevelData.LevelMetaData levelMetaData)
     {
         //Check if level exists

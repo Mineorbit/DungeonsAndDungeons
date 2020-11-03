@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Spawn : LevelObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnCreate()
     {
-        
-    }
+        int i = ObjectDataID - 4;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Level.currentLevel.spawn[i] != null) Level.currentLevel.Remove(this);
+
+        Level.currentLevel.spawn[i] = this;
+
     }
 }

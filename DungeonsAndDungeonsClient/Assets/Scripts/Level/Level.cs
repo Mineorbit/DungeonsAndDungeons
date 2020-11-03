@@ -15,12 +15,16 @@ public class Level : MonoBehaviour
 
 
     Dictionary<Tuple<int, int>, int> chunkLocations;
+    
     List<Chunk> chunks;
-    Spawn spawn;
-    Goal goal;
+
+    public Spawn[] spawn;
+
+    public Goal goal;
 
     void Setup(LevelData.LevelMetaData metaData)
     {
+
         Clear();
         levelMetaData = metaData;
         name = metaData.name;
@@ -36,10 +40,13 @@ public class Level : MonoBehaviour
     {
         if (currentLevel != null) Destroy(this);
         currentLevel = this;
+
+        spawn = new Spawn[4];
     }
 
     public static void Create(LevelData.LevelMetaData levelMetaData)
     {
+
         currentLevel.Setup(levelMetaData);
 
     }
@@ -48,17 +55,19 @@ public class Level : MonoBehaviour
     {
         string path = "/gameData/levels/" + currentLevel.levelMetaData.ullid.ToString();
         Debug.Log("Saving Level: " + path);
+
         FileManager.createFolder(path);
 
         LevelData data = currentLevel.GetLevelData();
         data.Save();
     }
+
     public static void Load(LevelData.LevelMetaData levelMetaData)
     {
 
         LevelData data = LevelData.Load(levelMetaData);
         currentLevel.InstantiateLevelFromLevelData(data);
-       
+
     }
 
     void InstantiateLevelFromLevelData(LevelData d)

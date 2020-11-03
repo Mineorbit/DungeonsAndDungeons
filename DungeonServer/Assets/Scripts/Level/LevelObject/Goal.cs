@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goal : MonoBehaviour
+public class Goal : LevelObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnCreate()
     {
-        
-    }
+        if (Level.currentLevel.goal != null) Level.currentLevel.Remove(this);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Level.currentLevel.goal = this;
     }
 }
