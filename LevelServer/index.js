@@ -44,7 +44,7 @@ res.write('<html> \n <head>\n <title>D + D - Startseite</title> \n </head> \n');
 res.write('<body>\n ');
   
   res.write("<h1>Willkommen auf dem Dungeons & Dungeons Level Finder</h1>");
-  res.write("<a href='/list'>Das große Archiv</a>");
+  res.write("<a href='/list'>Das groÃŸe Archiv</a>");
   
 res.write('</body>\n ');
 res.write('</html>\n ');
@@ -102,7 +102,7 @@ app.get('/pull', function(req, res){
   
   var ulid = req.query.ulid;
   //Hier download processen
-  const file = `${__dirname}/levels/'+ulid+'.lev`;
+  const file = __dirname+'/levels/'+ ulid +'.lev';
   res.download(file);
 });
 
@@ -114,9 +114,9 @@ app.get('/show', function(req,res){
 
 app.get('/list', function(req,res){
 res.writeHeader(200 , {"Content-Type" : "text/html; charset=utf-8"});
-res.write('<html> \n <head>\n <title>D + D - Das große Archiv</title> \n </head> \n');
+res.write('<html> \n <head>\n <title>D + D - Das groÃŸe Archiv</title> \n </head> \n');
 res.write('<body>\n ');
-res.write('<h1>Das große Archiv</h1>\n ');
+res.write('<h1>Das groÃŸe Archiv</h1>\n ');
 res.write("<a href='/'>Start</a>\n ");
 res.write('<table style="width:100%">\n ');
 var i;
