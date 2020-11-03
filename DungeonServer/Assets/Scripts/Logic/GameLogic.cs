@@ -38,7 +38,7 @@ public class GameLogic : MonoBehaviour
     {
         //Set Level As Selected
 
-
+        LevelManager.LoadOnline(OnlineLevelOrganizer.onlineLevelOrganizer.GetTopLevel());
 
         //Send LevelData
 

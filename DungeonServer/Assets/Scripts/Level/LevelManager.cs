@@ -34,6 +34,17 @@ public class LevelManager : MonoBehaviour
         Level.Load(levelData);
     }
 
+    public static void LoadOnline(LevelData.LevelMetaData levelData)
+    {
+        Debug.Log("Loading online " + levelData.name);
+
+        int localId = GetFreeUniqueLocalLevelId();
+
+        LevelData.LevelMetaData newLevelData = OnlineLevelOrganizer.onlineLevelOrganizer.FetchLevel(levelData,localId);
+
+        Level.Load(newLevelData);
+    }
+
 
     public static LevelData.LevelMetaData[] GetAllLocalLevels()
     {
@@ -71,6 +82,7 @@ public class LevelManager : MonoBehaviour
         }
         return id;
     }
+
     public static void New(LevelData.LevelMetaData levelMetaData)
     {
         //Setup Folder

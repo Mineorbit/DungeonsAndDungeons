@@ -55,8 +55,13 @@ public class Level : MonoBehaviour
     }
     public static void Load(LevelData.LevelMetaData levelMetaData)
     {
+        //Check if level exists
+
+
+
 
         LevelData data = LevelData.Load(levelMetaData);
+
         currentLevel.InstantiateLevelFromLevelData(data);
        
     }

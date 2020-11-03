@@ -68,13 +68,15 @@ public class ServerManager : MonoBehaviour
         serverState = new FSM<State, GameAction>();
         serverState.state = State.Setup;
         Action<GameAction> actSetup = x => {
+
             Debug.Log("Setting up");
 
-            GameLogic.PrepareRound(this);
+            GameLogic.PrepareRound(this.transform);
 
             SetupServer();
             Debug.Log("Setup done");
             serverState.Move(GameAction.GoLive);
+
         };
         Action<GameAction> actLive = x => {
             Debug.Log("Opening Socket");

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Net;
+using System.IO.Compression;
 
 public class OnlineLevelOrganizer : MonoBehaviour
 {
@@ -30,16 +32,60 @@ public class OnlineLevelOrganizer : MonoBehaviour
         public ReceiveLevelMetaData[] levels;
     }
 
+    public static OnlineLevelOrganizer onlineLevelOrganizer;
+
     LevelData.LevelMetaData[] levels;
+
     public void Start()
     {
+        if (onlineLevelOrganizer != null) Destroy(this);
+        onlineLevelOrganizer = this;
         FetchPopularLevels();
     }
+
     public void FetchPopularLevels()
     {
         Debug.Log("Fetching List of online Levels");
         StartCoroutine("FetchList");
     }
+
+    
+
+
+    public LevelData.LevelMetaData FetchLevel(LevelData.LevelMetaData metaData, int newlocalId)
+    {
+
+        if (metaData == null) return null;
+
+
+
+        long ulid = metaData.ulid;
+        string url = $"http://www.josch557.xyz:13337/pull?ulid={ ulid }";
+
+        string path = Application.persistentDataPath + $"/gameData/c_levels/g{ulid}.zip";
+
+        WebClient client = new WebClient();
+
+        client.DownloadFile(url, path);
+
+        string unzipPath = Application.persistentDataPath + $"/gameData/levels/{newlocalId}";
+
+        ZipFile.ExtractToDirectory(path, unzipPath);
+
+        return null;
+
+    }
+
+    public LevelData.LevelMetaData GetTopLevel()
+    {
+        if(levels[0]!=null)
+        return levels[0];
+
+        return null;
+    }
+
+   
+
     IEnumerator FetchList()
     {
 
