@@ -10,6 +10,14 @@ public class TestLogic : Logic
     {
         sceneIndex = 2;
         created = Instantiator.InstantiateAssets("test");
+        LookUpPlayers();
+    }
+    void LookUpPlayers()
+    {
+        for(int i = 0;i<4;i++)
+        {
+            PlayerManager.playerManager.playerControllers[i] = GameObject.Find($"Player{i}").GetComponent<PlayerController>();
+        }
     }
 
     public override void Start()
@@ -34,17 +42,26 @@ public class TestLogic : Logic
             player = (player + 1) % 4;
             PlayerManager.playerManager.SetCurrentPlayer(player);
     }
+    Vector3 GetSpawnLocation(int i)
+    {
+
+        if (Level.currentLevel.spawn[i] != null) return (Level.currentLevel.spawn[i].transform.position+new Vector3(0,0.25f,0));
+        return new Vector3(i*4,0.25f,0);
+    }
+
     void SpawnPlayers()
     {
         for(int i = 0;i<4;i++)
         {
             PlayerManager.playerManager.DespawnPlayer(i);
             //HIER CHECK FÜR SPAWN PLACE LOGIC
-            PlayerManager.playerManager.SpawnPlayer(i,new Vector3((float)i*5, 0, 0));
+            Vector3 location = GetSpawnLocation(i);
+            PlayerManager.playerManager.SpawnPlayer(i,location);
         }
 
         PlayerManager.playerManager.SetCurrentPlayer(player);
     }
+
     void DespawnPlayers()
     {
         for (int i = 0; i < 4; i++)
