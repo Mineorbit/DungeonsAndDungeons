@@ -93,10 +93,17 @@ public class OnlineLevelOrganizer : MonoBehaviour
 
     public LevelData.LevelMetaData GetTopLevel()
     {
-        if(levels[0]!=null)
-        return levels[0];
-
-        return null;
+        long i = 0;
+        LevelData.LevelMetaData r = null;
+        foreach(LevelData.LevelMetaData levelMetaData in levels)
+        {
+            if(i < levelMetaData.ulid)
+            {
+                i = levelMetaData.ulid;
+                r = levelMetaData;
+            }
+        }
+        return r;
     }
 
    

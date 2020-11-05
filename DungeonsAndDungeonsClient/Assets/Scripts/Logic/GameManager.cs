@@ -37,15 +37,16 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         UnityEngine.Debug.Log("Reseting");
-        Setup();
+        setupAfterLoadEvents();
     }
     void Setup()
     {
         if (instance != null && !instanceSet) Destroy(this);
         instance = this;
         if (!instanceSet) instanceSet = true;
-        SetupGameStateFSM();
+
         setupAfterLoadEvents();
+        SetupGameStateFSM();
     }
 
     public void setupAfterLoadEvents()
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterMenuLoad.AddListener(SetLogic);
         afterMenuLoad.AddListener(LevelManager.UpdateLocalLevels);
+        afterMenuLoad.AddListener(Options.HandleSimpleLobbyChange);
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
         afterTestLoad.AddListener(SetLogic);
@@ -148,15 +150,20 @@ public class GameManager : MonoBehaviour
 
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
+        Action<GameAction> nop = x =>
+        {
+        };
+
 
 
         gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(act,State.MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu)); 
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(nop, State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(act, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.Reset), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.Init));
+        //Hier evtl mod
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.MainMenu));
 
 
@@ -213,6 +220,7 @@ public class GameManager : MonoBehaviour
 
     void asyncMenuLoad()
     {
+        UnityEngine.Debug.Log("Menu Load Procedure");
         SceneLoadManager.instance.unloadCurrentScenes();
         SceneLoadManager.instance.load(1, afterMenuLoad);
     }
@@ -250,7 +258,6 @@ public class GameManager : MonoBehaviour
         SceneLoadManager.instance.unloadCurrentScenes();
 
         //Stall until Leveldata is there
-        UnityEngine.Debug.Log("Hallo");
 
         SceneLoadManager.instance.load(4, afterPlayLoad);
     }

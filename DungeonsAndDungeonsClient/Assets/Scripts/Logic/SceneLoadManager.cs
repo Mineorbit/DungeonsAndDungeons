@@ -162,6 +162,7 @@ public class SceneLoadManager : MonoBehaviour
         {
                 if (x > 0)
                 {
+                Debug.Log("Unloading "+x);
                 UnityEngine.SceneManagement.SceneManager.UnloadScene(x);
                 currentScenes.Remove(x);
                 }

@@ -34,7 +34,7 @@ public class Client : MonoBehaviour
     //Events
     
     UnityEvent connectEvent;
-
+    UnityEvent disconnectEvent;
 
     public void Setup(string nip, int nport,string nname)
     {
@@ -46,9 +46,13 @@ public class Client : MonoBehaviour
     public void Kill()
     {
         Disconnect();
+        Dispose();
+    }
+    public void Dispose()
+    {
+
         ns.Close();
         tcp.Close();
-
         Destroy(this);
     }
 
@@ -160,12 +164,26 @@ public class Client : MonoBehaviour
         if (!tcp.Connected) return;
         Report("Handling new Packet");
         int len = ((int)receiveBuffer[0]) * 256 + (int)receiveBuffer[1];
-
+        if(len == 0)
+        {
+            Disconnect();
+        }
         byte[] packetData = new byte[len + 2];
         Array.Copy(receiveBuffer, 0, packetData, 0, len + 2);
         ProcessPacket(packetData);
         StartRead();
     }
+
+    public void OnConnect()
+    {
+
+    }
+
+    public void OnDisconnect()
+    {
+        disconnectEvent.Invoke();
+    }
+
     //REWRITE
     void ProcessPacket(byte[] data)
     {
@@ -206,7 +224,7 @@ public class Client : MonoBehaviour
                 PlayerDisconnectedPacket p = new PlayerDisconnectedPacket(r,NetworkManager.instance.localId);
                 Send(p);
                 Report("Disconnected");
-                NetworkManager.instance.Reset();
+                //NetworkManager.instance.Reset();
             }
     }
     public void Disconnect()
@@ -215,8 +233,9 @@ public class Client : MonoBehaviour
     }
     public void Disconnect(UnityEvent onDisconnectEvent)
     {
+        disconnectEvent = onDisconnectEvent;
         Disconnect();
-        onDisconnectEvent.Invoke();
+        OnDisconnect();
     }
     public void OnDisable()
     {

@@ -17,6 +17,7 @@ public class Options : Openable
 
     Toggle fullScreenToggle;
 
+    Toggle simpleLobbyToggle;
 
     public void Start()
     {
@@ -29,10 +30,10 @@ public class Options : Openable
 
 
         backButton = transform.Find("Scroll View").Find("Back").GetComponent<Button>();
-        
 
         SetupRes();
         SetupFull();
+        SetupSimple();
 
         backButton.onClick.AddListener(Close);
         transition = new Fade();
@@ -42,6 +43,37 @@ public class Options : Openable
 
     }
 
+    void SetupSimple()
+    {
+        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Lobby").Find("SimpleLobby").GetComponent<Toggle>();
+        fullScreenToggle.onValueChanged.AddListener(delegate {
+            SimpleChange();
+        });
+        int storedVal = PlayerPrefs.GetInt("SimpleLobby", -1);
+        if(storedVal != 0)
+        fullScreenToggle.isOn = true;
+        else
+        fullScreenToggle.isOn = false;
+
+        SimpleChange();
+    }
+
+    void SimpleChange()
+    {
+        bool set = fullScreenToggle.isOn;
+        HandleSimpleLobbyChange();
+        PlayerPrefs.SetInt("SimpleLobby", set ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+    public static void HandleSimpleLobbyChange()
+    {
+        bool set = Options.options.fullScreenToggle.isOn;
+        for (int i = 0; i < 4; i++)
+        {
+            if (GameObject.Find("PlayerStore" + i) != null)
+                GameObject.Find("PlayerStore" + i).SetActive(!set);
+        }
+    }
     void SetupFull()
     {
         fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full").GetComponent<Toggle>();

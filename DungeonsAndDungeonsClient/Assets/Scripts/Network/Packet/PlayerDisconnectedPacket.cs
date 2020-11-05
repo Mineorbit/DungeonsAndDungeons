@@ -42,10 +42,11 @@ public class PlayerDisconnectedPacket : Packet
         {
             PlayerManager.playerManager.Remove(localId);
         }
+
         if (localId == NetworkManager.instance.localId)
         {
             //Hier noch alertScreen einbauen
-            GameManager.instance.performAction(GameManager.GameAction.Reset);
+            GameManager.instance.performAction(GameManager.GameAction.EnterMainMenu);
         }
         else
         {

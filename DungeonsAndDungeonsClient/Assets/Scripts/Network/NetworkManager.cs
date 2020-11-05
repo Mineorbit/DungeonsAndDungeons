@@ -23,8 +23,9 @@ public class NetworkManager : MonoBehaviour
     }
     public void Reset()
     {
-        gameClient.Kill();
-        Setup();
+        GameDisconnect();
+        localId = -1;
+        username = "";
     }
     public void GameConnect(UnityEvent onConnectEvent)
     {
@@ -47,11 +48,13 @@ public class NetworkManager : MonoBehaviour
         AlertScreen.alert.Close();
         gameClient.CancelConnect();
     }
-
+    public void GameDisconnect()
+    {
+        PlayerManager.playerManager.Remove(localId);
+        gameClient.Disconnect();
+    }
     public void GameDisconnect(UnityEvent disconnectEvent)
     {
-
-
         PlayerManager.playerManager.Remove(localId);
         gameClient.Disconnect(disconnectEvent);
     }
