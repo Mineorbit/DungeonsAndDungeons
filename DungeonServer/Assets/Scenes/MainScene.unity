@@ -169,6 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   chunkPrefab: {fileID: 0}
+  spawn: []
+  goal: {fileID: 0}
 --- !u!1 &2136707977
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,3 +296,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaa12117776bd84596f504704d00b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: []
