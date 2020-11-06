@@ -99,7 +99,6 @@ public class PlayerManager : MonoBehaviour
 
         if (playerControllers[localId] == null) return;
 
-        Debug.Log("Spawning: "+localId);
 
             playerControllers[localId].gameObject.SetActive(true);
         //Move to other class Player eventually

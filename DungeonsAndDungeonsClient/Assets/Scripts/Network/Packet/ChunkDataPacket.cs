@@ -20,7 +20,6 @@ public class ChunkDataPacket : Packet
     }
     public override void OnReceive()
     {
-        Debug.Log("Received Chunk Data");
         Tuple<int, int> chunkLocation = new Tuple<int, int>((int) content[0], (int) content[1]);
         Chunk.ChunkData chunkData = (Chunk.ChunkData)content[2];
         Level.currentLevel.FromChunkData(chunkData,chunkLocation);

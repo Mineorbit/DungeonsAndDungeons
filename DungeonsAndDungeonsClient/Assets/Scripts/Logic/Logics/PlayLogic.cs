@@ -22,8 +22,6 @@ public class PlayLogic : Logic
 
         if (!CheckReady()) return;
 
-        Debug.Log("Hussa wir sind im Modus");
-
 
         PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
 

@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
 
     public void setTargetLocomotionData(Vector3 targetPos, Quaternion targetRot)
     {
-        Debug.LogError("New Target");
         netInput = true;
         targetPosition = targetPos;
         targetRotation = targetRot;
