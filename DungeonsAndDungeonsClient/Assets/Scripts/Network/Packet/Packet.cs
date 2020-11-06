@@ -66,13 +66,18 @@ public class Packet
             }else
             if(types[i] == typeof(Chunk.ChunkData))
             {
-
-                using (var memStream = new MemoryStream(data))
+                byte[] intData = { data[z], data[z + 1], data[z + 2], data[z + 3] };
+                if (BitConverter.IsLittleEndian)
+                    Array.Reverse(intData);
+                int len = BitConverter.ToInt32(intData, 0);
+                byte[] streamData = new byte[len];
+                Array.Copy(data,z+4,streamData,0,len);
+                using (var memStream = new MemoryStream(streamData))
                 {
                     var serializer = new DataContractSerializer(typeof(Chunk.ChunkData));
                     Chunk.ChunkData obj = (Chunk.ChunkData) serializer.ReadObject(memStream);
                     content[i] = obj;
-                    z += (int) memStream.Position;
+                    z += (int) len+4;
                     memStream.Close();
                 }
             }else

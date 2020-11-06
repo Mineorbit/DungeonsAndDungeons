@@ -29,11 +29,16 @@ public class Level : MonoBehaviour
         levelMetaData = metaData;
         name = metaData.name;
 
+        SetupChunkData();
+
+
+    }
+
+    void SetupChunkData()
+    {
         chunkLocations = new Dictionary<Tuple<int, int>, int>();
         chunks = new List<Chunk>();
-
         chunkPrefab = Resources.Load("pref/level/ChunkPref") as InstantionTarget;
-
     }
 
     public void Awake()
@@ -42,6 +47,8 @@ public class Level : MonoBehaviour
         currentLevel = this;
 
         spawn = new Spawn[4];
+
+        SetupChunkData(); 
     }
 
     public static void Create(LevelData.LevelMetaData levelMetaData)
@@ -80,17 +87,21 @@ public class Level : MonoBehaviour
         foreach(Chunk.ChunkData c in d.chunks)
         {
             Chunk chunk = FromChunkData(c);
-            chunks.Add(chunk);
         }
     }
 
+    public Chunk FromChunkData(Chunk.ChunkData chunkData,Tuple<int,int> location)
+    {
+        Chunk c = InstantiateChunk(location.Item1, location.Item2);
+        c.Instantiate(chunkData);
+        chunks.Add(c);
 
+        return c;
+    }
     Chunk FromChunkData(Chunk.ChunkData chunkData)
     {
         Tuple<int,int> location = chunkLocations.FirstOrDefault(x => x.Value == chunkData.saveID).Key;
-        Chunk c = InstantiateChunk(location.Item1, location.Item2);
-        c.Instantiate(chunkData);
-        return c;
+        return FromChunkData(chunkData,location);
     }
 
     List<Chunk.ChunkData> GetChunkDatas()
@@ -154,6 +165,8 @@ public class Level : MonoBehaviour
        // GameObject o = typeData.Create(position, currentLevel.transform);
        // currentLevel.objects.Add(o.GetComponent<LevelObject>());
     }
+
+
     Tuple<int,int> GetChunkLocation(Vector3 position)
     {
 

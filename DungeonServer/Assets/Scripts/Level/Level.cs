@@ -15,11 +15,14 @@ public class Level : MonoBehaviour
 
 
     Dictionary<Tuple<int, int>, int> chunkLocations;
+
     List<Chunk> chunks;
 
     public Spawn[] spawn;
 
     public Goal goal;
+
+    public bool isLoaded;
 
     void Setup(LevelData.LevelMetaData metaData)
     {
@@ -27,8 +30,7 @@ public class Level : MonoBehaviour
         levelMetaData = metaData;
         name = metaData.name;
 
-        chunkLocations = new Dictionary<Tuple<int, int>, int>();
-        chunks = new List<Chunk>();
+        SetupChunkData();
 
         chunkPrefab = Resources.Load("pref/level/ChunkPref") as InstantionTarget;
 
@@ -39,6 +41,12 @@ public class Level : MonoBehaviour
         if (currentLevel != null) Destroy(this);
         currentLevel = this;
         spawn = new Spawn[4];
+        SetupChunkData();
+    }
+    public void SetupChunkData()
+    {
+        chunkLocations = new Dictionary<Tuple<int, int>, int>();
+        chunks = new List<Chunk>();
     }
 
     public static void Create(LevelData.LevelMetaData levelMetaData)
@@ -57,6 +65,8 @@ public class Level : MonoBehaviour
         data.Save();
     }
 
+
+
     public static void Load(LevelData.LevelMetaData levelMetaData)
     {
         //Check if level exists
@@ -67,6 +77,7 @@ public class Level : MonoBehaviour
         LevelData data = LevelData.Load(levelMetaData);
 
         currentLevel.InstantiateLevelFromLevelData(data);
+        currentLevel.isLoaded = true;
        
     }
 
@@ -137,6 +148,16 @@ public class Level : MonoBehaviour
     }
 
 
+    public int GetSaveID(Tuple<int, int> location)
+    {
+        int r = 0;
+        if (chunkLocations.TryGetValue(location, out r))
+        {
+            return r;
+        }
+        else return -1;
+    }
+
     public void Add(LevelObjectData typeData, Vector3 position)
     {
         Chunk targetChunk = GetChunk(position);
@@ -154,7 +175,8 @@ public class Level : MonoBehaviour
        // GameObject o = typeData.Create(position, currentLevel.transform);
        // currentLevel.objects.Add(o.GetComponent<LevelObject>());
     }
-    Tuple<int,int> GetChunkLocation(Vector3 position)
+
+    public Tuple<int,int> GetChunkLocation(Vector3 position)
     {
 
         int x = (int)Mathf.Floor(position.x / 32);
@@ -163,7 +185,8 @@ public class Level : MonoBehaviour
          return new Tuple<int, int>(x, y);
         
     }
-    Chunk GetChunk(Vector3 position)
+
+    public Chunk GetChunk(Vector3 position)
     {
         int chunkId;
         Tuple<int, int> loc = GetChunkLocation(position);

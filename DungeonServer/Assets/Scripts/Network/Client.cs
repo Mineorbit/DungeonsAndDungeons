@@ -19,7 +19,7 @@ using UnityEngine.Events;
 public class Client
 {
 
-    int dataBufferSize = 512;
+    int dataBufferSize = 4096*4;
     byte[] receiveBuffer;
     public string ip = "127.0.0.1";
     public int port = 13586;
@@ -130,7 +130,7 @@ public class Client
             if (tcp.Connected)
             {
                 byte[] data = p.Compose();
-                Report("Sending Packet " + p);
+                Report("Sending Packet " + p+" "+data.Length);
                 ns.Write(data, 0, data.Length);
                 ns.Flush();
             }

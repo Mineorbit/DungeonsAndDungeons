@@ -20,7 +20,7 @@ public class Client : MonoBehaviour
 {
     string name;
 
-    int dataBufferSize = 1024;
+    int dataBufferSize = 8192;
     byte[] receiveBuffer;
     public string ip = "127.0.0.1";
     public int port = 13586;

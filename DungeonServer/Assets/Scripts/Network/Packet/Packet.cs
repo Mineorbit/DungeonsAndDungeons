@@ -140,7 +140,6 @@ public class Packet
             Debug.Log("Handling int");
             elementData = new byte[4];
             elementData = BitConverter.GetBytes((int)o);
-            foreach (byte b in elementData) Debug.Log(b);
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(elementData);
         }
@@ -157,12 +156,22 @@ public class Packet
 
         }else if(t == typeof(Chunk.ChunkData))
         {
+            byte[] data;
             using (var ms = new MemoryStream())
             {
                 var serializer = new DataContractSerializer(typeof(Chunk.ChunkData));
                 serializer.WriteObject(ms, o);
-                elementData = ms.ToArray();
+                data = ms.ToArray();
             }
+            int len = data.Length;
+            
+            elementData = new byte[4 + len];
+            byte[] lenData = BitConverter.GetBytes(len);
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(lenData);
+            Array.Copy(lenData,0,elementData,0,4);
+            Array.Copy(data,0,elementData,4,len);
+
         }else if( t == typeof(float))
         {
             elementData = BitConverter.GetBytes((float) o);

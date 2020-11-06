@@ -62,7 +62,10 @@ public class ServerManager : MonoBehaviour
     }
 
 
-
+    public State GetState()
+    {
+        return serverState.state;
+    }
     void SetupFSM()
     {
         serverState = new FSM<State, GameAction>();

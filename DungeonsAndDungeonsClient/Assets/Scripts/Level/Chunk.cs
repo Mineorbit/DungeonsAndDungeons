@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+
 public class Chunk : MonoBehaviour
 {
 
@@ -49,6 +51,7 @@ public class Chunk : MonoBehaviour
     {
 
     }
+
     LevelObjectData GetByID(int id)
     {
         foreach(LevelObjectData d in objectDataPrototypes)
@@ -57,6 +60,7 @@ public class Chunk : MonoBehaviour
         }
         return null;
     }
+
     public void Instantiate(ChunkData chunkData)
     {
         foreach(LevelObject.LevelObjectInstanceData instanceObj in chunkData.levelObjectInstanceData)

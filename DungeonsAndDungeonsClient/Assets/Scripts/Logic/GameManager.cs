@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
 
         afterPlayLoad = new UnityEvent();
         afterPlayLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
-        afterPlayLoad.AddListener(SetLogic);
 
         afterEditLoad = new UnityEvent();
         afterEditLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
@@ -72,6 +71,8 @@ public class GameManager : MonoBehaviour
         afterEditLoad.AddListener(LevelManager.UpdateLocalLevels);
 
     }
+
+
     void SetLogic()
     {
         UpdateLogic();
@@ -146,7 +147,6 @@ public class GameManager : MonoBehaviour
             selectAsyncLoad(initEvent);
             Level.Clear();
 
-            //Send Request for levelData
 
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
@@ -256,15 +256,21 @@ public class GameManager : MonoBehaviour
     void asyncPlayLoad()
     {
         SceneLoadManager.instance.unloadCurrentScenes();
-
-        //Stall until Leveldata is there
-
-        SceneLoadManager.instance.load(4, afterPlayLoad);
+        UnityEvent afterPlaySceneLoad = new UnityEvent();
+        afterPlaySceneLoad.AddListener(UpdateLogic);
+        SceneLoadManager.instance.load(4,afterPlaySceneLoad);
     }
+
+    public void CompletePlayLoad()
+    {
+        afterPlayLoad.Invoke();
+    }
+
     public void performAction(GameAction action)
     {
         gameStateFSM.Move(action);
     }
+
     UnityAction lastNewLevelAction;
     public void createLevel(LevelData.LevelMetaData data)
     {

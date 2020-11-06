@@ -55,10 +55,6 @@ public class PlayerLocomotionPacket : Packet
 
         PlayerManager.playerManager.players[localId].updateLocomotionData(position, new Quaternion(0,0,0,0));
 
-        //Update Player Locally
-        PlayerLocomotionPacket p = new PlayerLocomotionPacket(position,new Quaternion(0,0,0,0),localId);
-        //Send info to others
-        Server.SendPacketToAllExcept(localId,p);
-        
+       
     }
 }
