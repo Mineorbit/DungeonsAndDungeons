@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
 
     public Client client;
-    List<int> visitedChunks;
+    public List<int> visitedChunks;
     void Start()
     {
         Setup();
@@ -34,26 +34,7 @@ public class Player : MonoBehaviour
     }
     void UpdatePlay()
     {
-        if(Level.currentLevel!=null)
-        {
-            if(Level.currentLevel.isLoaded)
-            { 
-            Tuple<int, int> chunkLocation = Level.currentLevel.GetChunkLocation(transform.position);
-            int saveID = Level.currentLevel.GetSaveID(chunkLocation);
-            if(!visitedChunks.Contains(saveID))
-            {
-            //Send chunk
-            Chunk c = Level.currentLevel.GetChunk(transform.position);
-                    if(c != null)
-                    { 
-                        Chunk.ChunkData d = c.GetChunkData(saveID);
-                        ChunkDataPacket packet = new ChunkDataPacket(chunkLocation.Item1,chunkLocation.Item2,d);
-                        Server.SendPacket(localId,packet);
-                        visitedChunks.Add(saveID);
-                    }
-                }
-            }
-        }
+        Level.currentLevel.SendChunkAt(transform.position,localId);
     }
     void FixedUpdate()
     {
@@ -70,9 +51,14 @@ public class Player : MonoBehaviour
         }
 
     }
+    public void setPositionData(Vector3 loc, Quaternion rot)
+    {
+        transform.position = loc;
+        transform.rotation = rot;
+        updateLocomotionData(loc,rot);
+    }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)
     {
-        Debug.Log("Changing target "+localId);
         targetPosition = loc;
         targetRotation = rot;
     }

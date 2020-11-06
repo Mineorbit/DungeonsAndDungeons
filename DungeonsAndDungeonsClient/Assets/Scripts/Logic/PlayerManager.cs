@@ -39,7 +39,6 @@ public class PlayerManager : MonoBehaviour
             players[localId] = GameObject.Find("Player" + localId).GetComponent<Player>();
         }
 
-        Debug.Log(playerControllers[localId]);
 
         PlayerController.currentPlayer = playerControllers[localId];
 
@@ -99,6 +98,8 @@ public class PlayerManager : MonoBehaviour
 
 
         if (playerControllers[localId] == null) return;
+
+        Debug.Log("Spawning: "+localId);
 
             playerControllers[localId].gameObject.SetActive(true);
         //Move to other class Player eventually

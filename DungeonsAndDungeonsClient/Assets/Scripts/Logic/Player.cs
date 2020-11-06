@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     bool netInput;
     Vector3 targetPosition;
+    Quaternion targetRotation;
 
     Vector3 lastPosition;
 
@@ -28,19 +29,23 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetTargetLocomotion(Vector3 targetPos)
+    public void setTargetLocomotionData(Vector3 targetPos, Quaternion targetRot)
     {
         Debug.LogError("New Target");
         netInput = true;
         targetPosition = targetPos;
+        targetRotation = targetRot;
     }
 
-    public void SetPosition(Vector3 targetPos, Quaternion targetRot)
+    
+    public void setPositionData(Vector3 loc, Quaternion rot)
     {
-        netInput = true;
-        transform.position = targetPos;
-        targetPosition = targetPos;
+        transform.position = loc;
+        transform.rotation = rot;
+        lastPosition = loc;
+        setTargetLocomotionData(loc, rot);
     }
+
     public void Update()
     {
 isMe = localId == NetworkManager.instance.localId;

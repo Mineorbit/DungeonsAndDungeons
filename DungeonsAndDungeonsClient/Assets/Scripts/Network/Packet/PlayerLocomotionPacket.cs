@@ -59,7 +59,7 @@ public class PlayerLocomotionPacket : Packet
             if(PlayerManager.playerManager.players[localId]!=null)
             {
                 Debug.LogError("Test");
-                PlayerManager.playerManager.players[localId].SetTargetLocomotion(position);
+                PlayerManager.playerManager.players[localId].setTargetLocomotionData(position,new Quaternion(0,0,0,0));
             }
 
 

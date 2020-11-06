@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     float gravity = 4f;
 
     public bool doInput;
+    public bool isMe;
     //Setup References for PlayerController and initial values if necessary
     public void Awake()
     {
@@ -27,18 +28,19 @@ public class PlayerController : MonoBehaviour
 
         controller = transform.GetComponent<CharacterController>();
 
-
     }
    
     void Update()
     {
-    Move();
+        isMe = (currentPlayer == this);
+        Move();
     }
 
     void Move()
-    { 
-        doInput = PlayerManager.acceptInput && (currentPlayer == this);
-        if (!controller.isGrounded)
+    {
+
+        doInput = PlayerManager.acceptInput && isMe;
+        if (!controller.isGrounded && isMe)
         {
             speedY -= gravity * Time.deltaTime;
         }

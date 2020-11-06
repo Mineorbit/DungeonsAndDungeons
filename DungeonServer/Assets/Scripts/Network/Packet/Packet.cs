@@ -116,11 +116,9 @@ public class Packet
         {
             Type t = types[i];
             object o = content[i];
-            Debug.Log("Adding: " + t + " " + o);
             contentData.AddRange(AddOfType(t, o));
         }
         byte[] contentResult = contentData.ToArray();
-        foreach (byte b in contentResult) Debug.Log("content " + b);
         short length = ((short)(contentResult.Length + 1));
         byte[] front = { 0, 0, packetId };
         front[1] = (byte)(length & 0xff);

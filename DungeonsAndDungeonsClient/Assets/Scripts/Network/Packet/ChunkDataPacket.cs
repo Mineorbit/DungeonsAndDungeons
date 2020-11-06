@@ -24,5 +24,10 @@ public class ChunkDataPacket : Packet
         Tuple<int, int> chunkLocation = new Tuple<int, int>((int) content[0], (int) content[1]);
         Chunk.ChunkData chunkData = (Chunk.ChunkData)content[2];
         Level.currentLevel.FromChunkData(chunkData,chunkLocation);
+        if(Level.currentLevel.spawn[NetworkManager.instance.localId] != null)
+        { 
+            ((PlayLogic)GameManager.instance.currentLogic).SpawnChunkReceived = true;
+            ((PlayLogic)GameManager.instance.currentLogic).Start();
+        }
     }
 }

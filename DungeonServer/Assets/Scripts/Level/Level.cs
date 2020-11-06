@@ -158,6 +158,33 @@ public class Level : MonoBehaviour
         else return -1;
     }
 
+    public void SendChunkAt(Vector3 position, int localId)
+    {
+        Player p = PlayerManager.playerManager.players[localId];
+        if (p == null) return;
+        //TODO check if player exists
+        if (Level.currentLevel != null)
+        {
+            if (Level.currentLevel.isLoaded)
+            {
+                Tuple<int, int> chunkLocation = Level.currentLevel.GetChunkLocation(position);
+                int saveID = Level.currentLevel.GetSaveID(chunkLocation);
+                if (!p.visitedChunks.Contains(saveID))
+                {
+                    //Send chunk
+                    Chunk c = Level.currentLevel.GetChunk(position);
+                    if (c != null)
+                    {
+                        Chunk.ChunkData d = c.GetChunkData(saveID);
+                        ChunkDataPacket packet = new ChunkDataPacket(chunkLocation.Item1, chunkLocation.Item2, d);
+                        Server.SendPacket(localId, packet);
+                        p.visitedChunks.Add(saveID);
+                    }
+                }
+            }
+        }
+    }
+
     public void Add(LevelObjectData typeData, Vector3 position)
     {
         Chunk targetChunk = GetChunk(position);

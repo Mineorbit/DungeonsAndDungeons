@@ -42,9 +42,28 @@ public class GameLogic : MonoBehaviour
 
         //Send LevelData
 
+        //and Spawn Players in Positions
+        for (int i = 0;i<4;i++)
+        {
+
+            Level.currentLevel.SendChunkAt(Level.currentLevel.spawn[i].transform.position, i);
+            SpawnPlayer(i);
+        }
 
 
-        //SpawnPlayers in Positions
+
+    }
+
+    public void SpawnPlayer(int localId)
+    {
+        if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
+        Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
+        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId,spawnLocation);
+
+        PlayerManager.playerManager.players[localId].transform.position = spawnLocation;
+
+        Server.SendPacketToAll(packet);
+
     }
 
     public void AddPlayer(int localId, Client c)
