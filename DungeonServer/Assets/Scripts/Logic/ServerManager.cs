@@ -7,7 +7,7 @@ public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
     public enum State{Setup,Prepare,Lobby,Play,GameOver};
-    public enum GameAction {GoLive, Prepare,StartGame};
+    public enum GameAction {GoLive, Prepare,StartGame,EndGame};
     FSM<State, GameAction> serverState;
 
     public InstantionTarget playerTarget;
@@ -53,6 +53,7 @@ public class ServerManager : MonoBehaviour
         GameLogic.current.AddPlayer(localId,c);
     }
 
+
     public void RemoveClient(int localid)
     {
         Server.Disconnect(localid);
@@ -92,19 +93,26 @@ public class ServerManager : MonoBehaviour
 
 
             Debug.Log("Starting Round, no new connections");
-            GameReadyPacket answerPacket = new GameReadyPacket(true);
             server.StopListen();
+            GameReadyPacket answerPacket = new GameReadyPacket(true);
             Server.SendPacketToAll(answerPacket);
             GameLogic.current.StartRound();
 
         };
+        Action<GameAction> actQuitGame = x => {
+            Debug.Log("Restarting");
+            GameLogic.EndRound();
+            server.StopListen();
+            server.Start();
 
+        };
 
 
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Setup, GameAction.Prepare), new Tuple<Action<GameAction>, State>(actSetup, State.Prepare));
 
         serverState.transitions.Add(new Tuple<State,GameAction>(State.Prepare,GameAction.GoLive),new Tuple<Action<GameAction>,State>(actLive,State.Lobby));
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Lobby, GameAction.StartGame), new Tuple<Action<GameAction>, State>(actStartGame, State.Play));
+        serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EndGame), new Tuple<Action<GameAction>, State>(actQuitGame, State.Lobby));
     }
 
     void Stop()

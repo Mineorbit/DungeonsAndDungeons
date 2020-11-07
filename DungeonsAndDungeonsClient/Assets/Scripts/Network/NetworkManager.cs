@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviour
     }
     void Setup()
     {
-
+        if(gameClient == null)
         gameClient = gameObject.AddComponent<Client>();
         gameClient.Setup("127.0.0.1", 13587, "GameClient");
     }
@@ -33,6 +33,8 @@ public class NetworkManager : MonoBehaviour
     }
     public void GameConnect(UnityEvent onConnectEvent, string name)
     {
+        Setup();
+
         username = name;
 
         UnityEvent cancelEvent = new UnityEvent();

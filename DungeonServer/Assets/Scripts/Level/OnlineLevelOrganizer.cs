@@ -95,6 +95,7 @@ public class OnlineLevelOrganizer : MonoBehaviour
     {
         long i = 0;
         LevelData.LevelMetaData r = null;
+        if (levels == null) return null;
         foreach(LevelData.LevelMetaData levelMetaData in levels)
         {
             if(i < levelMetaData.ulid)

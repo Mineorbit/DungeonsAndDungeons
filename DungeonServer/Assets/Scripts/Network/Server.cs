@@ -12,13 +12,24 @@ public class Server
 {
 
     public static object idLock = new object();
-    TcpListener server;
+    public TcpListener server;
 
 
-    static Client[] clients;
+    static Server instance;
+
+    public Client[] clients;
     int port;
+    bool accept;
+
+    static Client[] GetClients()
+    {
+        return instance.clients;
+    }
+
     public Server()
     {
+
+        if (instance == null) instance = this;
         clients = new Client[4];
         int lport = 13587;
         port = lport;
@@ -27,18 +38,18 @@ public class Server
     }
     public static Client GetClient(int l)
     {
-        return clients[l];
+        return instance.clients[l];
     }
     public static void RemoveClient(int local)
     {
-        clients[local] = null;
+        instance.clients[local] = null;
     }
     public async Task Start()
     {
         server.Start();
-
+        accept = true;
         Debug.Log($"Socket {port} open");
-        while(true)
+        for(int i = 0;(i<4)&&accept;i++)
         {
             TcpClient client = await server.AcceptTcpClientAsync(); 
             HandleConnection(client);
@@ -47,7 +58,7 @@ public class Server
     public static int GetFreeId()
     {
         int i = 0;
-        while (clients[i] != null)
+        while (instance.clients[i] != null)
         {
             i++;
         }
@@ -70,27 +81,27 @@ public class Server
     }
     public void StopListen()
     {
+        accept = false;
         server.Stop();
     }
    
     public static void Disconnect(int localId)
     {
-        if(clients[localId]!=null)
-        clients[localId].Disconnect();
+        if(instance.clients[localId]!=null)
+        instance.clients[localId].Disconnect();
     }
     public static void DisconnectAll()
     {
         for(int i = 0;i<4; i++)
         {
-            if (clients[i] != null)
-                clients[i].Disconnect();
+            Disconnect(i);
         }
     }
     public static void SendPacketToAll(Packet p)
     {
         for (int i = 0; i < 4; i++)
         {
-                if (clients[i] != null)
+                if (instance.clients[i] != null)
                 {
                     SendPacket(i, p);
                 }
@@ -101,18 +112,15 @@ public class Server
         for(int i = 0;i<4;i++)
         {
             if (i != localId)
-                if (clients[i] != null)
-                {
                     SendPacket(i, p);
-                }
         }
     }
     public static void SendPacket(int localId, Packet p)
     {
         
-        if(clients[localId]!=null)
+        if(instance.clients[localId]!=null)
         {
-        clients[localId].Send(p);
+        instance.clients[localId].Send(p);
         }
     }
 }

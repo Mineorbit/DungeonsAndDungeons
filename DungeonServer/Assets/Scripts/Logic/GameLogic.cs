@@ -33,24 +33,35 @@ public class GameLogic : MonoBehaviour
     {
         t.gameObject.AddComponent<GameLogic>();
     }
+    public static void EndRound()
+    {
+        Level.Clear();
+
+        for (int i = 0; i < 4; i++)
+        {
+            ServerManager.instance.RemoveClient(i);
+        }
+    }
 
     public void StartRound()
     {
         //Set Level As Selected
+        var levelMetaData = OnlineLevelOrganizer.onlineLevelOrganizer.GetTopLevel();
+        if (levelMetaData == null)
+        { ServerManager.instance.performAction(ServerManager.GameAction.EndGame); }
+        else
+        { 
+            LevelManager.LoadOnline(levelMetaData);
 
-        LevelManager.LoadOnline(OnlineLevelOrganizer.onlineLevelOrganizer.GetTopLevel());
+            //Send LevelData
 
-        //Send LevelData
-
-        //and Spawn Players in Positions
-        for (int i = 0;i<4;i++)
-        {
-
+            //and Spawn Players in Positions
+            for (int i = 0;i<4;i++)
+            {
             Level.currentLevel.SendChunkAt(Level.currentLevel.spawn[i].transform.position, i);
             SpawnPlayer(i);
+            }
         }
-
-
 
     }
 
@@ -58,6 +69,8 @@ public class GameLogic : MonoBehaviour
     {
         if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
         Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
+
+
         PlayerSpawnPacket packet = new PlayerSpawnPacket(localId,spawnLocation);
 
         PlayerManager.playerManager.players[localId].transform.position = spawnLocation;

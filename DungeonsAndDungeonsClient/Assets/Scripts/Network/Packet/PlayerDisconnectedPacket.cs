@@ -34,7 +34,6 @@ public class PlayerDisconnectedPacket : Packet
     public override void OnReceive()
     {
         int localId = (int) content[1];
-        Debug.Log("Wallllllaaaa");
         if (GameManager.GetState() == GameManager.State.MainMenu)
         {
             Lobby.lobby.RemovePlayer(localId);
@@ -47,6 +46,7 @@ public class PlayerDisconnectedPacket : Packet
         {
             //Hier noch alertScreen einbauen
             GameManager.instance.performAction(GameManager.GameAction.EnterMainMenu);
+            NetworkManager.instance.gameClient.OnDisconnect();
         }
         else
         {

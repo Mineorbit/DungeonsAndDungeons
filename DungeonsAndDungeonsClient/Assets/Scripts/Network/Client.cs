@@ -59,6 +59,8 @@ public class Client : MonoBehaviour
     void TryConnect(UnityEvent onConnectEvent)
     {
         connectEvent = onConnectEvent;
+        retry = true;
+        tries = 0;
         TryConnect();
     }
     void TryConnect()
@@ -181,7 +183,10 @@ public class Client : MonoBehaviour
 
     public void OnDisconnect()
     {
+        Debug.Log("Disposing");
+        if(disconnectEvent!=null)
         disconnectEvent.Invoke();
+        Dispose();
     }
 
     //REWRITE
