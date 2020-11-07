@@ -18,8 +18,9 @@ public abstract class Openable : MonoBehaviour
         set { finished = value; if(finished) Process(); }
     }
 
-    public void Awake()
+    public virtual void Awake()
     {
+        Debug.Log("Awakening");
         actions = new Queue<Act>();
         Finished = true;
     }
@@ -27,12 +28,11 @@ public abstract class Openable : MonoBehaviour
     public void Open()
     {
         actions.Enqueue(Act.Open);
+        Debug.Log("Opening "+this);
         Process();
     }
     public void Close()
     {
-
-        Debug.Log("Closing");
         actions.Enqueue(Act.Close);
         Process();
     }
@@ -45,9 +45,12 @@ public abstract class Openable : MonoBehaviour
             {
                 Finished = false;
                 Act todo = actions.Dequeue();
+                Debug.Log(this+" "+todo+" "+open);
                 if (todo == Openable.Act.Open && !open)
                 {
                     open = true;
+
+                    Debug.Log("Test");
                     OnOpen();
                 }
                 else if ( todo == Openable.Act.Close && open)

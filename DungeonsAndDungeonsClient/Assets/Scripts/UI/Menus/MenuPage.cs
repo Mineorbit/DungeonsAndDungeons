@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuPage : MonoBehaviour
+public class MenuPage : Openable
 {
     public int index;
     UIAnimation transferAnimation;
-    public virtual void Awake()
+    public override void Awake()
     {
         setupTransition();
+        base.Awake();
     }
     public virtual void Start()
     {
@@ -18,13 +19,16 @@ public class MenuPage : MonoBehaviour
         transferAnimation = new Fade();
         transferAnimation.target = this.transform;
     }
-    public virtual void Open()
+    public override void OnOpen()
     {
+        Debug.Log("Playing animation: "+this);
         transferAnimation.Play();
+        Finished = true;
     }
-    public virtual void Close()
+    public override void OnClose()
     {
         transferAnimation.Play();
+        Finished = true;
     }
 
 }

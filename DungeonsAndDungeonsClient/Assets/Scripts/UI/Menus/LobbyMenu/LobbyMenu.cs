@@ -17,13 +17,4 @@ public class LobbyMenu : MenuPage
     {
         NetworkManager.instance.CallReady();
     }
-    public override void Open()
-    {
-        base.Open();
-
-    }
-    public override void Close()
-    {
-        base.Close();
-    }
 }

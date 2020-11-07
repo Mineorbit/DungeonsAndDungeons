@@ -53,7 +53,7 @@ public class UploadMenu : MenuPage
         }
     }
 
-    public override void Open()
+    public override void OnOpen()
     {
         nameText.text = "Name: " + levelToUpload.name+ " \nLocalID: "+levelToUpload.ullid;
         base.Open();

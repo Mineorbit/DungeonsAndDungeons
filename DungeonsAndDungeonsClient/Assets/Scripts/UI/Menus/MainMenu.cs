@@ -25,6 +25,7 @@ public class MainMenu : MenuPage
         playModeButton.onClick.AddListener(enterPlay);
         editModeButton.onClick.AddListener(enterEdit);
     }
+    
     void enterPlay()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromMainToPlay);

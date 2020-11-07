@@ -73,6 +73,7 @@ public class MainMenuManager : MonoBehaviour
         {
             if( currentPage >= 0)
             pages[currentPage].Close();
+            Debug.Log("CurrentPage is: "+ currentPage);
             pages[(int) mainMenuFSM.state].Open();
             currentPage = (int) mainMenuFSM.state;
         };
@@ -93,7 +94,7 @@ public class MainMenuManager : MonoBehaviour
         };
 
 
-
+        currentPage = -1;
         mainMenuFSM = new FSM<Page,Transaction>();
         mainMenuFSM.name = "MainMenu";
         mainMenuFSM.state = Page.None;
