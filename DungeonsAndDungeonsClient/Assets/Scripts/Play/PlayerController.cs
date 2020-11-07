@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public bool doInput;
     public bool isMe;
+    public static bool doSim;
     //Setup References for PlayerController and initial values if necessary
     public void Awake()
     {
@@ -40,11 +41,14 @@ public class PlayerController : MonoBehaviour
     {
 
         doInput = PlayerManager.acceptInput && isMe;
-        if (!controller.isGrounded && isMe)
+        if (!controller.isGrounded && isMe && doSim)
         {
             speedY -= gravity * Time.deltaTime;
         }
-
+        if(controller.isGrounded)
+        {
+            speedY = 0;
+        }
         targetDirection = new Vector3(0,0,0);
         
         if (doInput)

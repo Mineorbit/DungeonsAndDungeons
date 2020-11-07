@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
         playerManager = this;
         players = new Player[4];
     }
-
+    
     public void RemovePlayer(int localId)
     {
         if (PlayerManager.playerManager.players[localId] != null)

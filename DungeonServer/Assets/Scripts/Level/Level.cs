@@ -177,6 +177,7 @@ public class Level : MonoBehaviour
                     {
                         Chunk.ChunkData d = c.GetChunkData(saveID);
                         ChunkDataPacket packet = new ChunkDataPacket(chunkLocation.Item1, chunkLocation.Item2, d);
+                        Debug.Log("Sending chunk: "+chunkLocation.Item1+" "+chunkLocation.Item2);
                         Server.SendPacket(localId, packet);
                         p.visitedChunks.Add(saveID);
                     }

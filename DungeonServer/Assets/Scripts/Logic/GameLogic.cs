@@ -9,37 +9,61 @@ public class GameLogic : MonoBehaviour
     public static GameLogic current;
     
     
-    public void Start()
+    public void Awake()
     {
         if (current != null) Destroy(this);
         current = this;
-        Setup();
-    }
-    
-
-    public void Setup()
-    {
-
     }
 
-    public static void ClearRound()
+    public static void CheckForWin(bool[] insidePlayers)
     {
+        bool win = true;
+        for(int i = 0;i<4;i++)
+        {
+            if (PlayerManager.playerManager.players[i] != null)
+                win = win && insidePlayers[i];
+        }
+        if(win)
+        ServerManager.instance.performAction(ServerManager.GameAction.WinGame);
+    }
+
+    //Called on Victory
+    public static void EndRound()
+    {
+        //Reset each players temp data
+        //And Send winpacket
+        for (int i = 0; i < 4; i++)
+        {
+            if(PlayerManager.playerManager.players[i]!=null)
+            PlayerManager.playerManager.players[i].Reset();
+        }
+
+        WinPacket packet = new WinPacket();
+        Server.SendPacketToAll(packet);
+
         if (GameLogic.current != null)
         {
             Destroy(GameLogic.current);
         }
     }
+
     public static void PrepareRound(Transform t)
     {
         t.gameObject.AddComponent<GameLogic>();
+        //Hier war mal ein player spawn ist aber falsch per se
     }
-    public static void EndRound()
+
+    public static void ClearRound()
     {
         Level.Clear();
 
         for (int i = 0; i < 4; i++)
         {
             ServerManager.instance.RemoveClient(i);
+        }
+        if (GameLogic.current != null)
+        {
+            Destroy(GameLogic.current);
         }
     }
 
@@ -69,20 +93,37 @@ public class GameLogic : MonoBehaviour
     {
         if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
         Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
+        SetPlayerPosition(localId,spawnLocation);
+    }
+    public void SetPlayerPosition(int localId,Vector3 pos)
+    {
+        if (PlayerManager.playerManager.players[localId] == null) return;
 
+        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId, pos);
 
-        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId,spawnLocation);
-
-        PlayerManager.playerManager.players[localId].transform.position = spawnLocation;
+        PlayerManager.playerManager.players[localId].transform.position = pos;
 
         Server.SendPacketToAll(packet);
-
     }
 
+    public static void SpawnPlayersInLobby()
+    {
+        for(int i = 0;i<4;i++)
+        {
+            GameLogic.current.SetPlayerPosition(i,GetLobbyPosition(i));
+        }
+    }
+
+    public static Vector3 GetLobbyPosition(int localId)
+    {
+        return new Vector3(32 + localId * 8, 0, 0);
+    }
     public void AddPlayer(int localId, Client c)
     {
-        GameObject g = ServerManager.instance.playerTarget.Create(new Vector3(32+localId*8,0,0));
-        g.name = "Player"+c.name;
+        Vector3 spawnPosition = GetLobbyPosition(localId);
+        GameObject g = ServerManager.instance.playerTarget.Create(spawnPosition);
+        g.transform.position = spawnPosition;
+        g.name = "Player|"+c.name+"|"+localId;
         Player p = g.GetComponent<Player>();
         p.name = c.name;
         p.localId = localId;

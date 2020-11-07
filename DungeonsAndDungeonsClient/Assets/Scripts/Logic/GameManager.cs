@@ -18,12 +18,13 @@ public class GameManager : MonoBehaviour
     UnityEvent afterPlayLoad;
 
     public enum State {Init = 0, MainMenu, Play, Edit , Test};
-    public enum GameAction { LoadGameFromBoot = 0,Reset,EnterMainMenu ,EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest, StartPlay};
+    public enum GameAction { LoadGameFromBoot = 0 ,Reset ,EnterMainMenu ,EnterMainMenuFromWin , EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest, StartPlay};
 
     FSM<State,GameAction> gameStateFSM;
 
     UnityEvent[] asyncEvent;
 
+    public bool wonLastGame = false;
     public static State GetState()
     {
         return instance.gameStateFSM.state;
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> act = x =>
         {
+            wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
         };
         Action<GameAction> actResetDisconnect = x =>
         {
+            wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
 
@@ -119,6 +122,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> actLevelClear = x =>
         {
+            wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
             Level.Clear();
@@ -128,8 +132,8 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> actClearAfterGame = x =>
         {
+            wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
-            UnityEngine.Debug.LogError("Left to: "+ gameStateFSM.state);
             
             selectAsyncLoad(initEvent);
 
@@ -150,6 +154,16 @@ public class GameManager : MonoBehaviour
 
             LoadingScreen.instance.setLoadingScreenOpen(initEvent);
         };
+
+        Action<GameAction> actWin = x =>
+        {
+            wonLastGame = true;
+            UnityEvent initEvent = new UnityEvent();
+            selectAsyncLoad(initEvent);
+            Level.Clear();
+            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+        };
+
         Action<GameAction> nop = x =>
         {
         };
@@ -165,6 +179,7 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
         //Hier evtl mod
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenuFromWin), new Tuple<Action<GameAction>, State>(actWin, State.MainMenu));
 
 
         //Reset Level
@@ -300,7 +315,6 @@ public class GameManager : MonoBehaviour
             if (currentLogic.running == true) currentLogic.Stop();
             currentLogic.DeInit();
         }
-        UnityEngine.Debug.LogError("Selecting new Logic "+ gameStateFSM.state);
         switch(gameStateFSM.state)
         {
             case State.MainMenu:
@@ -320,7 +334,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        UnityEngine.Debug.LogError("New Logic: "+currentLogic);
         if (currentLogic != null)
         {
             currentLogic.Init();

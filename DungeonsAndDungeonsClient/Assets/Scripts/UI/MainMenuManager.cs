@@ -11,7 +11,7 @@ public class MainMenuManager : MonoBehaviour
     public MenuPage[] pages;
 
     public enum Page {None = -1, Main = 0, Play, Lobby, Edit, Create, Upload };
-    public enum Transaction {FromNoneToMain, FromMainToPlay,GoBack, FromMainToEdit,FromPlayToLobby, FromEditToCreateMenu, FromEditToUploadMenu };
+    public enum Transaction {FromNoneToMain, FromMainToPlay,GoBack, FromMainToEdit,FromPlayToLobby, FromEditToCreateMenu, FromEditToUploadMenu, FromNoneToLobby };
 
 
     FSM<Page,Transaction> mainMenuFSM;
@@ -28,7 +28,14 @@ public class MainMenuManager : MonoBehaviour
     {
         MouseStateController.UnlockBlocking();
         setupMainMenu();
-        OpenPage(0);
+
+        if(GameManager.instance.wonLastGame)
+        {
+        MainMenuManager.instance.OpenPage(Transaction.FromNoneToLobby);
+        }else
+        {
+        MainMenuManager.instance.OpenPage(Transaction.FromNoneToMain);
+        }
     }
     void OnDestroy()
     {
@@ -91,6 +98,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.name = "MainMenu";
         mainMenuFSM.state = Page.None;
         mainMenuFSM.transitions.Add(new Tuple<Page,Transaction>(Page.None,Transaction.FromNoneToMain), new Tuple<Action<Transaction>,Page>(act,Page.Main));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.None, Transaction.FromNoneToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Main, Transaction.FromMainToPlay), new Tuple<Action<Transaction>, Page>(act, Page.Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.FromPlayToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));

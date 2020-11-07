@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public int localId;
     public string name;
 
+    //Reset after win
     public bool ready;
 
     Vector3 targetPosition;
@@ -21,11 +22,15 @@ public class Player : MonoBehaviour
     {
         Setup();
     }
-    public void Setup()
+    public void Reset()
     {
         ready = false;
         visitedChunks = new List<int>();
+    }
+    public void Setup()
+    {
         PlayerManager.playerManager.AddPlayer(this,localId);
+        Reset();
     }
     void Update()
     {
@@ -38,8 +43,9 @@ public class Player : MonoBehaviour
     }
     void SendVicinity()
     {
-        for(int i = -1; i<1;i++)
-            for(int j = -1; j<1;j++)
+        Debug.Log("Sending vicinity");
+        for(int i = -1; i<=1;i++)
+            for(int j = -1; j<=1;j++)
                 Level.currentLevel.SendChunkAt(transform.position+ new Vector3(32*i,0,32*j), localId);
     }
     void FixedUpdate()

@@ -7,7 +7,7 @@ public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
     public enum State{Setup,Prepare,Lobby,Play,GameOver};
-    public enum GameAction {GoLive, Prepare,StartGame,EndGame};
+    public enum GameAction {GoLive, Prepare,StartGame,EndGame,WinGame};
     FSM<State, GameAction> serverState;
 
     public InstantionTarget playerTarget;
@@ -101,8 +101,17 @@ public class ServerManager : MonoBehaviour
         };
         Action<GameAction> actQuitGame = x => {
             Debug.Log("Restarting");
+            GameLogic.ClearRound();
+            server.Start();
+
+        };
+        Action<GameAction> actWin = x => {
+            Debug.Log("Game won");
+
+            Level.Clear();
             GameLogic.EndRound();
-            server.StopListen();
+            GameLogic.PrepareRound(this.transform);
+            GameLogic.SpawnPlayersInLobby();
             server.Start();
 
         };
@@ -113,6 +122,7 @@ public class ServerManager : MonoBehaviour
         serverState.transitions.Add(new Tuple<State,GameAction>(State.Prepare,GameAction.GoLive),new Tuple<Action<GameAction>,State>(actLive,State.Lobby));
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Lobby, GameAction.StartGame), new Tuple<Action<GameAction>, State>(actStartGame, State.Play));
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EndGame), new Tuple<Action<GameAction>, State>(actQuitGame, State.Lobby));
+        serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.WinGame), new Tuple<Action<GameAction>, State>(actWin, State.Lobby));
     }
 
     void Stop()
