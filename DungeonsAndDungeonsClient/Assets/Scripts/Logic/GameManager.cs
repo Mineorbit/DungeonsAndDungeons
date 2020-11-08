@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> actStartPlay = x =>
         {
+            wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
 
