@@ -1,6 +1,6 @@
 # Dungeons and Dungeons
 Build Dungeons or journey them together with friends.
-# Requirements for building
+# Requirements
 | Tool          |                                                           |
 |---------------|-----------------------------------------------------------|
 | Unity         | 2020.0.0f1                                                |
