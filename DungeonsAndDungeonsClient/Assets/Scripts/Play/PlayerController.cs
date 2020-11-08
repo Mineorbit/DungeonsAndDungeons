@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             speedY -= gravity * Time.deltaTime;
         }
-        if(controller.isGrounded)
+        if(controller.isGrounded || !doSim)
         {
             speedY = 0;
         }

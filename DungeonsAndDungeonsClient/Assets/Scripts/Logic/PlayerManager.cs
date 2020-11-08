@@ -20,21 +20,18 @@ public class PlayerManager : MonoBehaviour
         players = new Player[4];
     }
 
-    public void Update()
+    
+    void Update()
     {
-        void Update()
+        if (GameManager.GetState() == GameManager.State.Play || GameManager.GetState() == GameManager.State.Test)
         {
-            if (GameManager.GetState() == GameManager.State.Play || GameManager.GetState() == GameManager.State.Test)
-            {
-                PlayerController.doSim = true;
-            }
-            else
-            {
-                PlayerController.doSim = false;
-            }
+            PlayerController.doSim = true;
+        }
+        else
+        {
+            PlayerController.doSim = false;
         }
     }
-
     public void Reset()
     {
         for(int i = 0;i<4;i++)
