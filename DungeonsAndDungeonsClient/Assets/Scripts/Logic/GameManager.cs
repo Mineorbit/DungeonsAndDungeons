@@ -53,20 +53,20 @@ public class GameManager : MonoBehaviour
     public void setupAfterLoadEvents()
     {
         afterMenuLoad = new UnityEvent();
-        afterMenuLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterMenuLoad.AddListener(LoadingScreen.instance.Close);
         afterMenuLoad.AddListener(SetLogic);
         afterMenuLoad.AddListener(LevelManager.UpdateLocalLevels);
         afterMenuLoad.AddListener(Options.HandleSimpleLobbyChange);
         afterTestLoad = new UnityEvent();
-        afterTestLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterTestLoad.AddListener(LoadingScreen.instance.Close);
         afterTestLoad.AddListener(SetLogic);
         afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
 
         afterPlayLoad = new UnityEvent();
-        afterPlayLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterPlayLoad.AddListener(LoadingScreen.instance.Close);
 
         afterEditLoad = new UnityEvent();
-        afterEditLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
+        afterEditLoad.AddListener(LoadingScreen.instance.Close);
         afterEditLoad.AddListener(SetLogic);
         afterEditLoad.AddListener(LevelManager.UpdateLocalLevels);
 
@@ -98,7 +98,8 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
-            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
         };
         Action<GameAction> actEditTest = x =>
         {
@@ -116,7 +117,9 @@ public class GameManager : MonoBehaviour
             NetworkManager.instance.Reset();
 
             initEvent.AddListener(ResetGame);
-            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
         };
 
         Action<GameAction> actLevelClear = x =>
@@ -125,7 +128,8 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
             Level.Clear();
-            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
         };
 
 
@@ -140,7 +144,8 @@ public class GameManager : MonoBehaviour
             PlayerManager.playerManager.Reset();
             NetworkManager.instance.Reset();
             Level.Clear();
-            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
         };
 
 
@@ -154,7 +159,8 @@ public class GameManager : MonoBehaviour
             Level.Clear();
 
 
-            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
         };
 
         Action<GameAction> actWin = x =>
@@ -163,7 +169,8 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
             Level.Clear();
-            LoadingScreen.instance.setLoadingScreenOpen(initEvent);
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
         };
 
         Action<GameAction> nop = x =>

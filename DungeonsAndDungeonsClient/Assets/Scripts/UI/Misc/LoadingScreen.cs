@@ -8,7 +8,7 @@ using TMPro;
 using System;
 using System.Diagnostics;
 
-public class LoadingScreen : MonoBehaviour
+public class LoadingScreen : Openable
 {
     UIAnimation animationScreen;
     UIAnimation animationInfoText;
@@ -16,6 +16,7 @@ public class LoadingScreen : MonoBehaviour
     public Transform text;
     public TextMeshProUGUI infoTextField;
     public static LoadingScreen instance;
+    public UnityEvent openEvent;
     //Helps with blocking UI
     GraphicRaycaster rc;
     string[] infoText = { "Benutze W/A/S/D zum laufen",
@@ -36,7 +37,6 @@ public class LoadingScreen : MonoBehaviour
         UnityEvent infoTextClosedEvent = new UnityEvent();
 
         screenOpenedEvent.AddListener(updateInfoText);
-        infoTextClosedEvent.AddListener(closeScreen);
 
         animationScreen = new Fade();
         animationScreen.target = this.transform;
@@ -47,44 +47,7 @@ public class LoadingScreen : MonoBehaviour
         animationInfoText.OutEndedEvent = infoTextClosedEvent;
 
     }
-
-    public void openLoadingScreen()
-    {
-        rc.enabled = true;
-        animationScreen.Play();
-    }
-    public void openLoadingScreen(UnityEvent screenOpenedEvent)
-    {
-        rc.enabled = true;
-        animationInfoText.InEndedEvent = screenOpenedEvent;
-        animationScreen.Play();
-    }
-
-    public void closeLoadingScreen()
-    {
-        rc.enabled = false;
-        animationInfoText.Play();
-    }
-    public void setLoadingScreenOpen()
-    {
-        rc.enabled = true;
-        setInfoText();
-        animationScreen.Open();
-        animationInfoText.Open();
-    }
-    public void setLoadingScreenOpen(UnityEvent screenOpenedEvent)
-    {
-        rc.enabled = true;
-        animationInfoText.InEndedEvent = screenOpenedEvent;
-        setInfoText();
-        animationScreen.Open();
-        animationInfoText.Open();
-    }
-
-    public bool isOpen()
-    {
-        return rc.enabled;
-    }
+  
     public void setInfoText()
     {
         int rnd = UnityEngine.Random.Range(0, infoText.Length - 1);
@@ -95,9 +58,17 @@ public class LoadingScreen : MonoBehaviour
         setInfoText();
         animationInfoText.Play();
     }
-    public void closeScreen()
+    public override void OnOpen()
     {
-        animationScreen.Play();
+
+        //animationScreen.Play();
+        Finished = true;
+        openEvent.Invoke();
+    }
+    public override void OnClose()
+    {   
+        //animationScreen.Play();
+        Finished = true;
     }
     
    

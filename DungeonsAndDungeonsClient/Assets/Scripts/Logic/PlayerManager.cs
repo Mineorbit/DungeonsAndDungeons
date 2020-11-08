@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerController[] playerControllers;
     public Player[] players;
 
-    static int currentPlayerLocalId;
+    public static int currentPlayerLocalId;
 
     public void Start()
     {
@@ -57,7 +57,6 @@ public class PlayerManager : MonoBehaviour
 
         PlayerController.currentPlayer = playerControllers[localId];
 
-        PlayerCameraController.SetTarget(localId);
 
         currentPlayerLocalId = localId;
     }
@@ -77,7 +76,6 @@ public class PlayerManager : MonoBehaviour
         if(currentPlayerLocalId == localId)
         {
             PlayerController.currentPlayer = null;
-            PlayerCameraController.SetTarget(-1);
             currentPlayerLocalId = -1;
         }
 

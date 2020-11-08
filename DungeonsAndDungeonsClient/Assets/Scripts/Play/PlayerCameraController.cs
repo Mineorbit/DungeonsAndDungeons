@@ -12,14 +12,15 @@ public class PlayerCameraController : MonoBehaviour
     }
     public static void Setup()
     {
-        SetTarget(0);
     }
-    public static void SetTarget(int localId)
+    public void Update()
     {
-        if (localId > 3 || localId < 0) return;
+        int localId = PlayerManager.currentPlayerLocalId;
+        if (localId < 0 || localId > 3) return;
 
         Transform target = PlayerManager.playerManager.playerControllers[localId].transform;
         cam.LookAt = target;
         cam.Follow = target;
+        
     }
 }

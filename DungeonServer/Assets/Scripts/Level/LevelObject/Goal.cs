@@ -20,8 +20,8 @@ public class Goal : LevelObject
         if(p!=null)
         {
             inside[p.localId] = true;
+            GameLogic.CheckForWin(inside);
         }
-        GameLogic.CheckForWin(inside);
     }
     public void OnTriggerExit(Collider other)
     {

@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
                 pauseMenuAvailable = true;
                 break;
         }
-        if (LoadingScreen.instance.isOpen())
+        if (LoadingScreen.instance.open)
         {
             pauseMenuAvailable = false;
         }
