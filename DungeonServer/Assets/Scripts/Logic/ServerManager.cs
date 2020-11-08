@@ -7,7 +7,7 @@ public class ServerManager : MonoBehaviour
 {
     public static ServerManager instance;
     public enum State{Setup,Prepare,Lobby,Play,GameOver};
-    public enum GameAction {GoLive, Prepare,StartGame,EndGame,WinGame};
+    public enum GameAction {GoLive, Prepare,StartGame,EndGame,WinGame,CancelGame};
     FSM<State, GameAction> serverState;
 
     public InstantionTarget playerTarget;
@@ -99,9 +99,21 @@ public class ServerManager : MonoBehaviour
             GameLogic.current.StartRound();
 
         };
-        Action<GameAction> actQuitGame = x => {
+        Action<GameAction> actDropGame = x => {
             Debug.Log("Restarting");
             GameLogic.ClearRound();
+            server.Start();
+
+        };
+        Action<GameAction> actCancel = x => {
+            Debug.Log("Game canceled");
+
+            Level.Clear();
+
+            GameLogic.EndRound();
+
+            GameLogic.PrepareRound(this.transform);
+            GameLogic.SpawnPlayersInLobby();
             server.Start();
 
         };
@@ -109,6 +121,9 @@ public class ServerManager : MonoBehaviour
             Debug.Log("Game won");
 
             Level.Clear();
+
+            WinPacket packet = new WinPacket();
+            Server.SendPacketToAll(packet);
             GameLogic.EndRound();
             GameLogic.PrepareRound(this.transform);
             GameLogic.SpawnPlayersInLobby();
@@ -116,13 +131,13 @@ public class ServerManager : MonoBehaviour
 
         };
 
-
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Setup, GameAction.Prepare), new Tuple<Action<GameAction>, State>(actSetup, State.Prepare));
 
         serverState.transitions.Add(new Tuple<State,GameAction>(State.Prepare,GameAction.GoLive),new Tuple<Action<GameAction>,State>(actLive,State.Lobby));
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Lobby, GameAction.StartGame), new Tuple<Action<GameAction>, State>(actStartGame, State.Play));
-        serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EndGame), new Tuple<Action<GameAction>, State>(actQuitGame, State.Lobby));
+        serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EndGame), new Tuple<Action<GameAction>, State>(actDropGame, State.Lobby));
         serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.WinGame), new Tuple<Action<GameAction>, State>(actWin, State.Lobby));
+        serverState.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.CancelGame), new Tuple<Action<GameAction>, State>(actCancel, State.Lobby));
     }
 
     void Stop()

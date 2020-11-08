@@ -38,9 +38,6 @@ public class GameLogic : MonoBehaviour
             PlayerManager.playerManager.players[i].Reset();
         }
 
-        WinPacket packet = new WinPacket();
-        Server.SendPacketToAll(packet);
-
         if (GameLogic.current != null)
         {
             Destroy(GameLogic.current);
@@ -76,7 +73,7 @@ public class GameLogic : MonoBehaviour
         else
         { 
 
-            LevelManager.LoadOnline(levelMetaData);
+            LevelManager.Load(levelMetaData);
 
             //Send LevelData
 

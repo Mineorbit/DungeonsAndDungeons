@@ -40,21 +40,44 @@ public class LevelManager : MonoBehaviour
     public static void Load(LevelData.LevelMetaData levelData)
     {
         Debug.Log("Loading "+levelData.name);
+
+        LevelData.LevelMetaData newMetaData = FetchOnline(levelData);
+            
+        if(levelAvail(levelData))
+        {
         Level.Load(levelData);
+        }else
+        {
+            //Cancel and back to lobby
+            ServerManager.instance.performAction(ServerManager.GameAction.CancelGame);
+        }
+    }
+    static bool levelAvail(LevelData.LevelMetaData levelToCheck)
+    {
+        foreach(LevelData.LevelMetaData l in levelManager.availableLocalLevels)
+        {
+            if(l.ulid == levelToCheck.ulid)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public static void LoadOnline(LevelData.LevelMetaData levelData)
+    public static LevelData.LevelMetaData FetchOnline(LevelData.LevelMetaData levelData)
     {
+        if (!levelAvail(levelData))
+        {
         Debug.Log("Loading online " + levelData.name);
 
         int localId = GetFreeUniqueLocalLevelId();
 
-        LevelData.LevelMetaData newLevelData = OnlineLevelOrganizer.onlineLevelOrganizer.FetchLevel(levelData,localId);
+        LevelData.LevelMetaData newLevelData = OnlineLevelOrganizer.onlineLevelOrganizer.FetchLevel(levelData, localId);
 
         UpdateLocalLevels();
-
-        Level.Load(newLevelData);
-
+        return newLevelData;
+        }
+    return levelData;
     }
 
 
