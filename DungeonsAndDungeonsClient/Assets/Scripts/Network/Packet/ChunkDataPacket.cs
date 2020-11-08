@@ -24,7 +24,8 @@ public class ChunkDataPacket : Packet
         Chunk.ChunkData chunkData = (Chunk.ChunkData)content[2];
         Level.currentLevel.FromChunkData(chunkData,chunkLocation);
         if(Level.currentLevel.spawn[NetworkManager.instance.localId] != null)
-        { 
+        {
+            Debug.Log(GameManager.instance.currentLogic);
             ((PlayLogic)GameManager.instance.currentLogic).SpawnChunkReceived = true;
             ((PlayLogic)GameManager.instance.currentLogic).Start();
         }

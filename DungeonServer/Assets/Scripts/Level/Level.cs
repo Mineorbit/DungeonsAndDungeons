@@ -7,7 +7,7 @@ public class Level : MonoBehaviour
 {
     public static Level currentLevel;
 
-    LevelData.LevelMetaData levelMetaData;
+    public LevelData.LevelMetaData levelMetaData;
     //Temp
     public string name;
 

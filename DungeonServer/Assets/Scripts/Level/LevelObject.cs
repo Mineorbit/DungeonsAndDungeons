@@ -38,6 +38,10 @@ public class LevelObject : MonoBehaviour
     {
 
     }
+    public virtual void OnDestroy()
+    {
+        Level.currentLevel.Remove(this);
+    }
     public void Action()
     {
         actionEvent.Invoke();

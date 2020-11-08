@@ -15,9 +15,9 @@ public class Options : Openable
 
     TMP_Dropdown resolutionSelector;
 
-    Toggle fullScreenToggle;
+    public Toggle fullScreenToggle;
 
-    Toggle simpleLobbyToggle;
+    public Toggle simpleLobbyToggle;
 
     public void Start()
     {
@@ -45,19 +45,31 @@ public class Options : Openable
 
     void SetupSimple()
     {
-        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Lobby").Find("SimpleLobby").GetComponent<Toggle>();
-        fullScreenToggle.onValueChanged.AddListener(delegate {
+        simpleLobbyToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Lobby").Find("SimpleLobby").GetComponent<Toggle>();
+        simpleLobbyToggle.onValueChanged.AddListener(delegate {
             SimpleChange();
         });
         int storedVal = PlayerPrefs.GetInt("SimpleLobby", -1);
         if(storedVal != 0)
-        fullScreenToggle.isOn = true;
+            simpleLobbyToggle.isOn = true;
         else
-        fullScreenToggle.isOn = false;
+            simpleLobbyToggle.isOn = false;
 
         SimpleChange();
     }
-
+    void SetupFull()
+    {
+        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full").GetComponent<Toggle>();
+        fullScreenToggle.onValueChanged.AddListener(delegate {
+            FullChange();
+        });
+        int storedVal = PlayerPrefs.GetInt("FullScreen", -1);
+        if (storedVal != 0)
+            fullScreenToggle.isOn = true;
+        else
+            fullScreenToggle.isOn = false;
+        FullChange();
+    }
     void SimpleChange()
     {
         bool set = fullScreenToggle.isOn;
@@ -74,13 +86,7 @@ public class Options : Openable
                 GameObject.Find("PlayerStore" + i).SetActive(!set);
         }
     }
-    void SetupFull()
-    {
-        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full").GetComponent<Toggle>();
-        fullScreenToggle.onValueChanged.AddListener(delegate {
-            FullChange();
-        });
-    }
+    
 
     void SetupRes()
     {
@@ -122,9 +128,10 @@ public class Options : Openable
 
     void FullChange()
     {
-
-        Screen.fullScreen = fullScreenToggle.isOn;
-
+        bool set = fullScreenToggle.isOn;
+        Screen.fullScreen = set;
+        PlayerPrefs.SetInt("FullScreen", set ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     void HandleResChange()

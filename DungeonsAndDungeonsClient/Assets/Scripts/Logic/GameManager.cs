@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour
         afterTestLoad.AddListener(SetLogic);
         afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
 
-
         afterPlayLoad = new UnityEvent();
+        afterPlayLoad.AddListener(SetLogic);
         afterPlayLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
 
         afterEditLoad = new UnityEvent();
