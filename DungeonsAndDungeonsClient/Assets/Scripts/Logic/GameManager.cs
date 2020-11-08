@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
         afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
 
         afterPlayLoad = new UnityEvent();
-        afterPlayLoad.AddListener(SetLogic);
         afterPlayLoad.AddListener(LoadingScreen.instance.closeLoadingScreen);
 
         afterEditLoad = new UnityEvent();
@@ -149,6 +148,9 @@ public class GameManager : MonoBehaviour
         {
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
+
+            SetLogic();
+
             Level.Clear();
 
 

@@ -25,9 +25,11 @@ public class ChunkDataPacket : Packet
         Level.currentLevel.FromChunkData(chunkData,chunkLocation);
         if(Level.currentLevel.spawn[NetworkManager.instance.localId] != null)
         {
-            Debug.Log(GameManager.instance.currentLogic);
+            if(GameManager.instance.currentLogic.GetType() == typeof(PlayLogic))
+            { 
             ((PlayLogic)GameManager.instance.currentLogic).SpawnChunkReceived = true;
             ((PlayLogic)GameManager.instance.currentLogic).Start();
+            }
         }
     }
 }
