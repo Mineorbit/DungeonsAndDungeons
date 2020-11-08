@@ -21,6 +21,11 @@ public class LevelData
         public LevelCreationTemplate creationTemplate;
         public string creationDate;
         public string description;
+        public bool availBlue;
+        public bool availYellow;
+        public bool availRed;
+        public bool availGreen;
+
         public LevelObjectData GetFloorType()
         {
             return creationTemplate.floorType;

@@ -7,7 +7,7 @@ public class Level : MonoBehaviour
 {
     public static Level currentLevel;
 
-    LevelData.LevelMetaData levelMetaData;
+    public LevelData.LevelMetaData levelMetaData;
     //Temp
     public string name;
 
@@ -155,15 +155,11 @@ public class Level : MonoBehaviour
         {
          targetChunk =  AddChunk(GetChunkLocation(position));
         }
-        targetChunk.Add(typeData,position);
-      //  GameObject o = typeData.Create(position, currentLevel.transform);
-      //  currentLevel.objects.Add(o.GetComponent<LevelObject>());
+        targetChunk.Add(typeData,position); 
     }
 
     public void Add(LevelObjectData typeData, Vector3 position, Vector3 normal)
     {
-       // GameObject o = typeData.Create(position, currentLevel.transform);
-       // currentLevel.objects.Add(o.GetComponent<LevelObject>());
     }
 
 

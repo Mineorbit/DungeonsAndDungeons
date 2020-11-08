@@ -70,11 +70,12 @@ public class GameLogic : MonoBehaviour
     public void StartRound()
     {
         //Set Level As Selected
-        var levelMetaData = OnlineLevelOrganizer.onlineLevelOrganizer.GetTopLevel();
+        LevelData.LevelMetaData levelMetaData = LevelManager.GetTopLevel();
         if (levelMetaData == null)
         { ServerManager.instance.performAction(ServerManager.GameAction.EndGame); }
         else
         { 
+
             LevelManager.LoadOnline(levelMetaData);
 
             //Send LevelData

@@ -16,15 +16,24 @@ public class LevelManager : MonoBehaviour
         levelManager = this;
     
     }
+
     void OnEnable()
     {
         UpdateLocalLevels();
     }
 
-
     public static void UpdateLocalLevels()
     {
         levelManager.availableLocalLevels = GetAllLocalLevels();
+    }
+
+    
+    public static LevelData.LevelMetaData GetTopLevel()
+    {
+        if(levelManager.availableLocalLevels!=null)
+        return levelManager.availableLocalLevels[0];
+
+        return null;
     }
 
 

@@ -20,6 +20,11 @@ public class LevelData
         public int ullid;
         public string description;
         public string creationDate;
+        public bool availBlue = false;
+        public bool availYellow = false;
+        public bool availRed = false;
+        public bool availGreen = false;
+
         public static LevelMetaData Load(String path)
         {
             //Hier noch safety feature wenn dateien illegal
@@ -62,6 +67,7 @@ public class LevelData
 
         return data;
     }
+
     public void Save()
     {
         metaData.Save();
@@ -83,6 +89,7 @@ public class LevelData
         chunkMapping = new Dictionary<Tuple<int, int>, int>();
         chunks = new List<Chunk.ChunkData>();
     }
+
     public LevelData(LevelMetaData levelLetaData, Dictionary<Tuple<int, int>, int> chunkMappings, List<Chunk.ChunkData> chunkDatas )
     {
         metaData = levelLetaData;

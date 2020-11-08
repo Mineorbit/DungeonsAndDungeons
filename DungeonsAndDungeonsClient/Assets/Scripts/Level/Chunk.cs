@@ -18,6 +18,10 @@ public class Chunk : MonoBehaviour
     {
         public int saveID;
         public List<LevelObject.LevelObjectInstanceData> levelObjectInstanceData;
+        public static ChunkData FromBytes(byte[] data)
+        {
+            return null;
+        }
     }
 
     public static void Load(ChunkData data, int x, int y)

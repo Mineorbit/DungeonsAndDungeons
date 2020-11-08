@@ -53,14 +53,17 @@ public class BlurScreen : Openable
     {
         return open;
     }
-
+    public void Update()
+    {
+        screen.transform.position = LerpPos(t);
+        screen.transform.LookAt(Camera.main.transform);
+    }
 
     IEnumerator OpenAnim()
     {
         for (float ft = 1f; ft >= 0; ft -=  Time.deltaTime)
         {
             t = ft;
-            screen.transform.position = LerpPos(t);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Finished = true;
@@ -70,7 +73,6 @@ public class BlurScreen : Openable
         for (float ft = 0f; ft <= 1; ft +=  Time.deltaTime)
         {
             t = ft;
-            screen.transform.position = LerpPos(t);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         screen.SetActive(false);
