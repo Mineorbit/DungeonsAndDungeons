@@ -47,18 +47,15 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-isMe = localId == NetworkManager.instance.localId;
+        isMe = localId == NetworkManager.instance.localId;
 
 
-        if(netInput)
+        if(netInput && !isMe)
         { 
         transform.position = (transform.position + targetPosition) / 2;
         }
 
-        if((targetPosition-transform.position).magnitude < 0.0005f)
-        {
-            netInput = false;
-        }
+       
         if(isMe)
         {
             if ((lastPosition-transform.position).magnitude > 0.0005f)
