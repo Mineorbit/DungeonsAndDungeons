@@ -10,22 +10,33 @@ public class PlayLogic : Logic
         created = Instantiator.InstantiateAssets("play");
     }
 
-    public bool SpawnPositionSet;
-    public bool SpawnChunkReceived;
-    public bool CheckReady()
+    public static bool spawnPositionSet;
+    public static bool spawnChunkReceived;
+    public static bool SpawnChunkReceived
     {
-        return SpawnPositionSet && SpawnChunkReceived;
+        set { spawnChunkReceived = value; CheckReady(); }
+        get { return spawnChunkReceived; }
+    }
+    public static bool SpawnPositionSet
+    {
+        set { spawnPositionSet = value; CheckReady(); }
+        get { return spawnPositionSet; }
+    }
+    public static void CheckReady()
+    {
+         if(spawnPositionSet && spawnChunkReceived)
+        {
+            if(GameManager.instance.currentLogic.GetType() == typeof(PlayLogic))
+            GameManager.instance.currentLogic.Start();
+        }
     }
     public override void Start()
     {
         if (running) return;
 
-        if (!CheckReady()) return;
-
         base.Start();
-
-        PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
         LoadingScreen.instance.Close();
+        PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
 
     }
 

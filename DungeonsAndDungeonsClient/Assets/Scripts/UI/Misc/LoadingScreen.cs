@@ -35,24 +35,31 @@ public class LoadingScreen : Openable
 
         UnityEvent screenOpenedEvent = new UnityEvent();
         UnityEvent screenClosedEvent = new UnityEvent();
+        UnityEvent textOpenedEvent = new UnityEvent();
+        UnityEvent textClosedEvent = new UnityEvent();
 
 
-        screenOpenedEvent.AddListener(FinishOpen);
         screenOpenedEvent.AddListener(updateInfoText);
+        screenOpenedEvent.AddListener(FinishOpen);
 
         screenClosedEvent.AddListener(FinishClose);
         
         animationScreen = new Fade();
         animationScreen.target = this.transform;
+        animationInfoText = new Fade();
+        animationInfoText.target = text;
         animationScreen.InEndedEvent = screenOpenedEvent;
         animationScreen.OutEndedEvent = screenClosedEvent;
+        animationInfoText.InEndedEvent = textOpenedEvent;
+        animationInfoText.OutEndedEvent = textClosedEvent;
 
 
     }
     void FinishOpen()
     {
-        Finished = true;
+        UnityEngine.Debug.LogError("Open Finished");
         openEvent.Invoke();
+        Finished = true;
     }
     void FinishClose()
     {
@@ -67,6 +74,11 @@ public class LoadingScreen : Openable
     {
         setInfoText();
         animationInfoText.Play();
+    }
+    public override void Open()
+    {
+        UnityEngine.Debug.LogError("Open called");
+        base.Open();
     }
     public override void OnOpen()
     {

@@ -25,10 +25,9 @@ public abstract class Openable : MonoBehaviour
         Finished = true;
     }
 
-    public void Open()
+    public virtual void Open()
     {
         actions.Enqueue(Act.Open);
-        Debug.Log("Opening "+this);
         Process();
     }
     public void Close()

@@ -91,13 +91,13 @@ public class GameLogic : MonoBehaviour
     {
         if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
         Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
-        SetPlayerPosition(localId,spawnLocation);
+        SetPlayerPosition(localId,spawnLocation,true);
     }
-    public void SetPlayerPosition(int localId,Vector3 pos)
+    public void SetPlayerPosition(int localId,Vector3 pos, bool allowMove)
     {
         if (PlayerManager.playerManager.players[localId] == null) return;
 
-        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId, pos);
+        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId, pos, allowMove);
 
         PlayerManager.playerManager.players[localId].transform.position = pos;
 
@@ -108,7 +108,7 @@ public class GameLogic : MonoBehaviour
     {
         for(int i = 0;i<4;i++)
         {
-            GameLogic.current.SetPlayerPosition(i,GetLobbyPosition(i));
+            GameLogic.current.SetPlayerPosition(i,GetLobbyPosition(i),false);
         }
     }
 

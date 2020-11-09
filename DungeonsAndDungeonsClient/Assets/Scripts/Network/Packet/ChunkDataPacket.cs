@@ -27,8 +27,7 @@ public class ChunkDataPacket : Packet
         {
             if(GameManager.instance.currentLogic.GetType() == typeof(PlayLogic))
             { 
-            ((PlayLogic)GameManager.instance.currentLogic).SpawnChunkReceived = true;
-            ((PlayLogic)GameManager.instance.currentLogic).Start();
+            PlayLogic.SpawnChunkReceived = true;
             }
         }
     }

@@ -164,7 +164,6 @@ public class Client : MonoBehaviour
     public void HandleRead(IAsyncResult r)
     {
         if (!tcp.Connected) return;
-        Report("Handling new Packet");
         int len = ((int)receiveBuffer[0]) * 256 + (int)receiveBuffer[1];
         if(len == 0)
         {

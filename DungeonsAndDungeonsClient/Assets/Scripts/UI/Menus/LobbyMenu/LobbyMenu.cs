@@ -13,6 +13,11 @@ public class LobbyMenu : MenuPage
         readyButton = transform.Find("Actions").Find("Ready").GetComponent<Button>();
         readyButton.onClick.AddListener(CallReady);
     }
+    public static void UpdateDisplay()
+    {
+
+        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
+    }
     void CallReady()
     {
         NetworkManager.instance.CallReady();

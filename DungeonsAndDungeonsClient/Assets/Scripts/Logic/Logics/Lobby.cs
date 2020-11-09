@@ -46,21 +46,20 @@ public class Lobby : Logic
 
         PlayerManager.playerManager.Add(localId,name);
 
-
-        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
+        LobbyMenu.UpdateDisplay();
     }
 
 
     public void RemovePlayer(int localId)
     {
         PlayerManager.playerManager.Remove(localId);
-        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
+        LobbyMenu.UpdateDisplay();
     }
 
     void OpenLobbyMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromPlayToLobby);
-        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
+        LobbyMenu.UpdateDisplay();
     }
 
 

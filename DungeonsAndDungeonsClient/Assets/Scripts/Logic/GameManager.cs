@@ -153,13 +153,11 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
-            selectAsyncLoad(initEvent);
-
-            SetLogic();
-
+            UnityEngine.Debug.LogError("Guten Morgen: " + GetState());
             Level.Clear();
+            UpdateLogic();
 
-
+            selectAsyncLoad(initEvent);
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -203,7 +201,7 @@ public class GameManager : MonoBehaviour
 
     void selectAsyncLoad(UnityEvent e)
     {
-        switch(gameStateFSM.state)
+        switch(GetState())
         {
             case State.MainMenu:
                 e.AddListener(asyncMenuLoad);
@@ -268,22 +266,19 @@ public class GameManager : MonoBehaviour
 
     void asyncEditLoad()
     {
-        UnityEngine.Debug.Log("Moin Meister");
         SceneLoadManager.instance.unloadCurrentScenes();
         SceneLoadManager.instance.load(3,afterEditLoad);
     }
     void asyncTestLoad()
     {
     SceneLoadManager.instance.unloadCurrentScenes();
-
     SceneLoadManager.instance.load(2, afterTestLoad);
     }
     void asyncPlayLoad()
     {
+        UnityEngine.Debug.LogError("Guten Morgen");
         SceneLoadManager.instance.unloadCurrentScenes();
-        UnityEvent afterPlaySceneLoad = new UnityEvent();
-        afterPlaySceneLoad.AddListener(UpdateLogic);
-        SceneLoadManager.instance.load(4,afterPlaySceneLoad);
+        SceneLoadManager.instance.load(4);
     }
 
 

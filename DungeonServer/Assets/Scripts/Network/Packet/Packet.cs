@@ -81,6 +81,11 @@ public class Packet
                 //float macht keine endianness bisher (muss evtl hin)
                 content[i] = BitConverter.ToSingle(data,z);
                 z += 4;
+            }else
+            if(types[i] == typeof(bool))
+            {
+                content[i] = (data[z] == 1) ? true : false;
+                z++;
             }
 
 
@@ -173,6 +178,11 @@ public class Packet
         }else if( t == typeof(float))
         {
             elementData = BitConverter.GetBytes((float) o);
+        }
+        else if (t == typeof(bool))
+        {
+            elementData = new byte[1];
+            elementData[0] = ((bool)o == true) ? (byte)1 : (byte)0;
         }
         return elementData;
     }

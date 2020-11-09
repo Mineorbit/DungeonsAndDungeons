@@ -73,7 +73,6 @@ public class MainMenuManager : MonoBehaviour
         {
             if( currentPage >= 0)
             pages[currentPage].Close();
-            Debug.Log("CurrentPage is: "+ currentPage);
             pages[(int) mainMenuFSM.state].Open();
             currentPage = (int) mainMenuFSM.state;
         };
@@ -92,6 +91,14 @@ public class MainMenuManager : MonoBehaviour
             currentPage = (int)mainMenuFSM.state;
 
         };
+        System.Action<Transaction> actWin = x =>
+        {
+            if (currentPage >= 0)
+                pages[currentPage].Close();
+            pages[(int)mainMenuFSM.state].Open();
+            currentPage = (int)mainMenuFSM.state;
+            LobbyMenu.UpdateDisplay();
+        };
 
 
         currentPage = -1;
@@ -99,7 +106,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.name = "MainMenu";
         mainMenuFSM.state = Page.None;
         mainMenuFSM.transitions.Add(new Tuple<Page,Transaction>(Page.None,Transaction.FromNoneToMain), new Tuple<Action<Transaction>,Page>(act,Page.Main));
-        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.None, Transaction.FromNoneToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.None, Transaction.FromNoneToLobby), new Tuple<Action<Transaction>, Page>(actWin, Page.Lobby));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Main, Transaction.FromMainToPlay), new Tuple<Action<Transaction>, Page>(act, Page.Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.GoBack), new Tuple<Action<Transaction>, Page>(act, Page.Main));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Page.Play, Transaction.FromPlayToLobby), new Tuple<Action<Transaction>, Page>(act, Page.Lobby));

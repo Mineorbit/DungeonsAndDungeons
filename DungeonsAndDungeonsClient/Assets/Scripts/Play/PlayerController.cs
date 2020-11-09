@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool doInput;
     public bool isMe;
     public static bool doSim;
+    public bool allowedToMove = true;
     //Setup References for PlayerController and initial values if necessary
     public void Awake()
     {
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
 
-        doInput = PlayerManager.acceptInput && isMe;
+        doInput = PlayerManager.acceptInput && allowedToMove && isMe;
         if (!controller.isGrounded && isMe && doSim)
         {
             speedY -= gravity * Time.deltaTime;
