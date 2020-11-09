@@ -53,22 +53,22 @@ public class GameManager : MonoBehaviour
     public void setupAfterLoadEvents()
     {
         afterMenuLoad = new UnityEvent();
-        afterMenuLoad.AddListener(LoadingScreen.instance.Close);
         afterMenuLoad.AddListener(SetLogic);
         afterMenuLoad.AddListener(LevelManager.UpdateLocalLevels);
         afterMenuLoad.AddListener(Options.HandleSimpleLobbyChange);
+        afterMenuLoad.AddListener(LoadingScreen.instance.Close);
+
         afterTestLoad = new UnityEvent();
-        afterTestLoad.AddListener(LoadingScreen.instance.Close);
         afterTestLoad.AddListener(SetLogic);
         afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
+        afterTestLoad.AddListener(LoadingScreen.instance.Close);
 
         afterPlayLoad = new UnityEvent();
-        afterPlayLoad.AddListener(LoadingScreen.instance.Close);
 
         afterEditLoad = new UnityEvent();
-        afterEditLoad.AddListener(LoadingScreen.instance.Close);
         afterEditLoad.AddListener(SetLogic);
         afterEditLoad.AddListener(LevelManager.UpdateLocalLevels);
+        afterEditLoad.AddListener(LoadingScreen.instance.Close);
 
     }
 
@@ -286,10 +286,6 @@ public class GameManager : MonoBehaviour
         SceneLoadManager.instance.load(4,afterPlaySceneLoad);
     }
 
-    public void CompletePlayLoad()
-    {
-        afterPlayLoad.Invoke();
-    }
 
     public void performAction(GameAction action)
     {

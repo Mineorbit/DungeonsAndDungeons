@@ -23,11 +23,9 @@ public class PlayLogic : Logic
         if (!CheckReady()) return;
 
         base.Start();
-        Debug.LogError("HUUSSA");
 
-        GameManager.instance.CompletePlayLoad();
         PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
-
+        LoadingScreen.instance.Close();
 
     }
 

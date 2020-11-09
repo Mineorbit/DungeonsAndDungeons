@@ -34,20 +34,30 @@ public class LoadingScreen : Openable
         rc = transform.GetComponent<GraphicRaycaster>();
 
         UnityEvent screenOpenedEvent = new UnityEvent();
-        UnityEvent infoTextClosedEvent = new UnityEvent();
+        UnityEvent screenClosedEvent = new UnityEvent();
 
+
+        screenOpenedEvent.AddListener(FinishOpen);
         screenOpenedEvent.AddListener(updateInfoText);
 
+        screenClosedEvent.AddListener(FinishClose);
+        
         animationScreen = new Fade();
         animationScreen.target = this.transform;
         animationScreen.InEndedEvent = screenOpenedEvent;
+        animationScreen.OutEndedEvent = screenClosedEvent;
 
-        animationInfoText = new FadeAndGrow();
-        animationInfoText.target = text;
-        animationInfoText.OutEndedEvent = infoTextClosedEvent;
 
     }
-  
+    void FinishOpen()
+    {
+        Finished = true;
+        openEvent.Invoke();
+    }
+    void FinishClose()
+    {
+        Finished = true;
+    }
     public void setInfoText()
     {
         int rnd = UnityEngine.Random.Range(0, infoText.Length - 1);
@@ -61,14 +71,13 @@ public class LoadingScreen : Openable
     public override void OnOpen()
     {
 
-        //animationScreen.Play();
-        Finished = true;
-        openEvent.Invoke();
+        UnityEngine.Debug.Log("Opening");
+        animationScreen.Play();
     }
     public override void OnClose()
-    {   
-        //animationScreen.Play();
-        Finished = true;
+    {
+        UnityEngine.Debug.Log("Closing");
+        animationScreen.Play();
     }
     
    

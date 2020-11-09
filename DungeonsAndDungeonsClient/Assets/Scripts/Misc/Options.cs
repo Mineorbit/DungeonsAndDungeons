@@ -18,6 +18,7 @@ public class Options : Openable
     public Toggle fullScreenToggle;
 
     public Toggle simpleLobbyToggle;
+    public GameObject[] playerStores;
 
     public void Start()
     {
@@ -45,6 +46,9 @@ public class Options : Openable
 
     void SetupSimple()
     {
+        playerStores = new GameObject[4];
+
+
         simpleLobbyToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Lobby").Find("SimpleLobby").GetComponent<Toggle>();
         simpleLobbyToggle.onValueChanged.AddListener(delegate {
             SimpleChange();
@@ -79,13 +83,21 @@ public class Options : Openable
     }
     public static void HandleSimpleLobbyChange()
     {
-        bool set = Options.options.fullScreenToggle.isOn;
+
         for (int i = 0; i < 4; i++)
         {
-            if (GameObject.Find("PlayerStore" + i) != null)
-                GameObject.Find("PlayerStore" + i).SetActive(!set);
+            if(options.playerStores[i] == null)
+            options.playerStores[i] = GameObject.Find("PlayerStore" + i);
+        }
+        bool set = Options.options.simpleLobbyToggle.isOn;
+        Debug.Log(set);
+        for (int i = 0; i < 4; i++)
+        {
+            if (options.playerStores[i] != null)
+                options.playerStores[i].SetActive(!set);
         }
     }
+
     
 
     void SetupRes()
