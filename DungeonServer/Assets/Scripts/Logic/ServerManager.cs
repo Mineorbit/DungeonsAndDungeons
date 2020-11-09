@@ -94,7 +94,7 @@ public class ServerManager : MonoBehaviour
 
             Debug.Log("Starting Round, no new connections");
             server.StopListen();
-            GameReadyPacket answerPacket = new GameReadyPacket(true);
+            GameReadyPacket answerPacket = new GameReadyPacket(4,true);
             Server.SendPacketToAll(answerPacket);
             GameLogic.current.StartRound();
 
@@ -120,14 +120,17 @@ public class ServerManager : MonoBehaviour
         Action<GameAction> actWin = x => {
             Debug.Log("Game won");
 
-            Level.Clear();
 
             WinPacket packet = new WinPacket();
             Server.SendPacketToAll(packet);
-            GameLogic.EndRound();
-            GameLogic.PrepareRound(this.transform);
+
+            Level.Clear();
+
+
             GameLogic.SpawnPlayersInLobby();
             server.Start();
+            GameLogic.EndRound();
+            GameLogic.PrepareRound(this.transform);
 
         };
 

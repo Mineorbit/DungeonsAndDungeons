@@ -17,7 +17,16 @@ public class Lobby : Logic
             lobby = this;
 
     }
+    public void OpenImmediate(string name)
+    {
 
+
+        //Open Pop Up with connect
+        UnityEvent onConnectEvent = new UnityEvent();
+        onConnectEvent.AddListener(OpenLobbyMenuImmediate);
+        NetworkManager.instance.GameConnect(onConnectEvent, name);
+
+    }
     public void Open(string name)
     {
 
@@ -59,6 +68,11 @@ public class Lobby : Logic
     void OpenLobbyMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromPlayToLobby);
+        LobbyMenu.UpdateDisplay();
+    }
+    void OpenLobbyMenuImmediate()
+    {
+        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromNoneToLobby);
         LobbyMenu.UpdateDisplay();
     }
 

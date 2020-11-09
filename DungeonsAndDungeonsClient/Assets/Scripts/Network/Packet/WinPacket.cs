@@ -16,12 +16,7 @@ public class WinPacket : Packet
     public override void OnReceive()
     {
         //Hier noch Open von AlertScreen mit Win Message
-        UnityEvent winEvent = new UnityEvent();
-        winEvent.AddListener(CloseWin);
-        AlertScreen.alert.Open("You win!",winEvent);
-    }
-    void CloseWin()
-    {
-        GameManager.instance.performAction(GameManager.GameAction.EnterMainMenuFromWin);
+        GameManager.instance.performAction(GameManager.GameAction.BackToLobbyAfterWin);
+        AlertScreen.alert.Open("You win!");
     }
 }

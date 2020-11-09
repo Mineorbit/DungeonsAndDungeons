@@ -18,24 +18,26 @@ public class GameLogic : MonoBehaviour
     public static void CheckForWin(bool[] insidePlayers)
     {
         bool win = true;
+        bool anyone = false;
         for(int i = 0;i<4;i++)
         {
             if (PlayerManager.playerManager.players[i] != null)
+            {
+                anyone = true;
                 win = win && insidePlayers[i];
+            }
         }
-        if(win)
+        if(win&&anyone)
         ServerManager.instance.performAction(ServerManager.GameAction.WinGame);
     }
 
     //Called on Victory
     public static void EndRound()
     {
-        //Reset each players temp data
-        //And Send winpacket
-        for (int i = 0; i < 4; i++)
+        //Despawn Players
+        for(int i = 0;i<4;i++)
         {
-            if(PlayerManager.playerManager.players[i]!=null)
-            PlayerManager.playerManager.players[i].Reset();
+            current.DespawnPlayer(i);
         }
 
         if (GameLogic.current != null)
@@ -58,16 +60,19 @@ public class GameLogic : MonoBehaviour
         {
             ServerManager.instance.RemoveClient(i);
         }
-        if (GameLogic.current != null)
-        {
-            Destroy(GameLogic.current);
-        }
+        EndRound();
     }
 
     public void StartRound()
     {
-        //Set Level As Selected
-        LevelData.LevelMetaData levelMetaData = LevelManager.GetTopLevel();
+        //Reset Player Data if exists
+        for (int i = 0; i < 4; i++)
+        {
+            if (PlayerManager.playerManager.players[i] != null)
+                PlayerManager.playerManager.players[i].Reset();
+        }
+            //Set Level As Selected
+            LevelData.LevelMetaData levelMetaData = LevelManager.GetTopLevel();
         if (levelMetaData == null)
         { ServerManager.instance.performAction(ServerManager.GameAction.EndGame); }
         else
@@ -86,11 +91,17 @@ public class GameLogic : MonoBehaviour
         }
 
     }
-
+    public void DespawnPlayer(int localId)
+    {
+        if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
+        PlayerManager.playerManager.players[localId].gameObject.SetActive(false);
+        SetPlayerPosition(localId, new Vector3(0,0,0), true);
+    }
     public void SpawnPlayer(int localId)
     {
         if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
         Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
+        PlayerManager.playerManager.players[localId].gameObject.SetActive(true);
         SetPlayerPosition(localId,spawnLocation,true);
     }
     public void SetPlayerPosition(int localId,Vector3 pos, bool allowMove)

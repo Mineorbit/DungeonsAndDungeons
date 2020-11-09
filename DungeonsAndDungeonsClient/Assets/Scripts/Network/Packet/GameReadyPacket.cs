@@ -6,22 +6,26 @@ using System.Reflection;
 
 public class GameReadyPacket : Packet
 {
-    //One Field LocalId of PlayerReady if -1 discard, if 4 start PlayMode
-    public GameReadyPacket(int localId)
+    //One Field LocalId of PlayerReady if -1 discard else mark players
+    public GameReadyPacket(int localId, bool go)
     {
-        types = new Type[1];
+        types = new Type[2];
         types[0] = typeof(int);
-        content = new object[1];
+        types[1] = typeof(bool);
+        content = new object[2];
         content[0] = localId;
+        content[1] = go;
         packetId = 5;
 
     }
     public GameReadyPacket()
     {
-        types = new Type[1];
+        types = new Type[2];
         types[0] = typeof(int);
-        content = new object[1];
+        types[1] = typeof(bool);
+        content = new object[2];
         content[0] = -1;
+        content[1] = false;
         packetId = 5;
 
     }

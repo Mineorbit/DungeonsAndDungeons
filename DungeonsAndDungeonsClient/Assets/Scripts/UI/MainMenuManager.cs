@@ -29,13 +29,14 @@ public class MainMenuManager : MonoBehaviour
         MouseStateController.UnlockBlocking();
         setupMainMenu();
 
-        if(GameManager.instance.wonLastGame)
+        if(!GameManager.instance.wonLastGame)
         {
-        MainMenuManager.instance.OpenPage(Transaction.FromNoneToLobby);
+            instance.OpenPage(Transaction.FromNoneToMain);
         }else
         {
-        MainMenuManager.instance.OpenPage(Transaction.FromNoneToMain);
+            instance.OpenPage(Transaction.FromNoneToLobby);
         }
+
     }
     void OnDestroy()
     {
@@ -99,6 +100,7 @@ public class MainMenuManager : MonoBehaviour
             currentPage = (int)mainMenuFSM.state;
             LobbyMenu.UpdateDisplay();
         };
+
 
 
         currentPage = -1;

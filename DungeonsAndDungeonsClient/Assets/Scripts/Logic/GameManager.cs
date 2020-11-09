@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     UnityEvent afterPlayLoad;
 
     public enum State {Init = 0, MainMenu, Play, Edit , Test};
-    public enum GameAction { LoadGameFromBoot = 0 ,Reset ,EnterMainMenu ,EnterMainMenuFromWin , EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest, StartPlay};
+    public enum GameAction { LoadGameFromBoot = 0 ,Reset ,EnterMainMenu ,BackToLobbyAfterWin , EnterTestFromMainMenu, EnterEditFromMainMenuNewLevel, EnterEditFromMainMenu, EnterTestFromEdit,EnterEditFromTest, StartPlay};
 
     FSM<State,GameAction> gameStateFSM;
 
@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
             UpdateLogic();
 
             selectAsyncLoad(initEvent);
+
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -165,9 +166,12 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actWin = x =>
         {
             wonLastGame = true;
-            UnityEvent initEvent = new UnityEvent();
-            selectAsyncLoad(initEvent);
             Level.Clear();
+
+            UnityEvent initEvent = new UnityEvent();
+
+            selectAsyncLoad(initEvent);
+
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -187,7 +191,7 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
         //Hier evtl mod
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenuFromWin), new Tuple<Action<GameAction>, State>(actWin, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.BackToLobbyAfterWin), new Tuple<Action<GameAction>, State>(actWin, State.MainMenu));
 
 
         //Reset Level
