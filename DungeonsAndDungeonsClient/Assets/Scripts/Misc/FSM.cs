@@ -25,13 +25,13 @@ public class FSM<T, U>
         {
             state = value.Item2;
 
-            UnityEngine.Debug.LogError($"[{name}] {oldState} -> {inputValue} -> {state}");
+            UnityEngine.Debug.Log($"[{name}] {oldState} -> {inputValue} -> {state}");
             value.Item1(inputValue);
 
         }
         else
         {
-            UnityEngine.Debug.LogError($"[{name}] In State {state} existiert kein Übergang für {inputValue}");
+            UnityEngine.Debug.Log($"[{name}] In State {state} existiert kein Übergang für {inputValue}");
         }
     }
 }

@@ -57,7 +57,6 @@ public class LoadingScreen : Openable
     }
     void FinishOpen()
     {
-        UnityEngine.Debug.LogError("Open Finished");
         openEvent.Invoke();
         Finished = true;
     }
@@ -77,18 +76,14 @@ public class LoadingScreen : Openable
     }
     public override void Open()
     {
-        UnityEngine.Debug.LogError("Open called");
         base.Open();
     }
     public override void OnOpen()
     {
-
-        UnityEngine.Debug.Log("Opening");
         animationScreen.Play();
     }
     public override void OnClose()
     {
-        UnityEngine.Debug.Log("Closing");
         animationScreen.Play();
     }
     
