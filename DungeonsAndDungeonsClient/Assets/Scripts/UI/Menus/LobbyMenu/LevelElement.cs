@@ -28,6 +28,16 @@ public class LevelElement : MonoBehaviour
 
     public LevelData.LevelMetaData d;
 
+    GameObject[] colorBars;
+
+    void Awake()
+    {
+        colorBars = new GameObject[4];
+        for (int i = 0; i < 4; i++)
+        {
+            colorBars[i] = transform.Find("ColorSelect").Find(i.ToString()).gameObject;
+        }
+    }
     void Start()
     {
         finished = true;
@@ -38,6 +48,7 @@ public class LevelElement : MonoBehaviour
         UpdateScreen();
         tasks = new Queue<Task>();
         list = transform.parent.GetComponent<LevelList>();
+        
     }
 
     public void UpdateScreen()
@@ -65,6 +76,14 @@ public class LevelElement : MonoBehaviour
         d = data;
         nameTextField.SetText(data.name);
         UpdateScreen();
+        UpdateAvailColors();
+    }
+    void UpdateAvailColors()
+    {
+        colorBars[0].SetActive(d.availBlue);
+        colorBars[1].SetActive(d.availYellow);
+        colorBars[2].SetActive(d.availRed);
+        colorBars[3].SetActive(d.availGreen);
     }
     IEnumerator OpenAnim()
     {
