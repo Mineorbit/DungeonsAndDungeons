@@ -18,7 +18,7 @@ public class PlayerAnimator : MonoBehaviour
         playerController = transform.GetComponent<PlayerController>();
         characterAnimator = transform.Find("character").GetComponent<Animator>();
         runDust = transform.Find("Particles").Find("Running").GetComponentsInChildren<ParticleSystem>();
-        StopDust();
+        
     }
 
     void Update()
@@ -30,17 +30,17 @@ public class PlayerAnimator : MonoBehaviour
         speed = Mathf.Min(inputVelocity.magnitude, 1);
         bool movementKeyPressed = Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.D);
 
-        if (controller.velocity.magnitude >= 0.5f && controller.isGrounded && !playingDust)
+        if (controller.velocity.magnitude >= 0.25f && controller.isGrounded && !playingDust)
         {
         StartDust();
         }
-        if ((controller.velocity.magnitude <= 0.5f || !controller.isGrounded) && playingDust)
+        if ((controller.velocity.magnitude <= 0.25f || !controller.isGrounded) && playingDust)
         {
         StopDust();
         }
         if (movementKeyPressed && playerController.doInput)
         { 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.1f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.2f);
         }
 
     }

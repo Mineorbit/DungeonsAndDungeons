@@ -4,10 +4,59 @@ using UnityEngine;
 
 public class Goal : LevelObject
 {
+    bool[] Inside;
     public override void OnCreate()
     {
-        if (Level.currentLevel.goal != null) Level.currentLevel.Remove(this);
-
+        if (Level.currentLevel.goal != null)
+        {
+            Debug.Log("Doppelt");
+            Destroy(this.gameObject);
+        }else
+        { 
         Level.currentLevel.goal = this;
+            Inside = new bool[4];
+        }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if(GameManager.instance.GetState() == GameManager.State.Test)
+        {
+            Player p = other.gameObject.GetComponent<Player>();
+            if(p != null)
+            {
+                Inside[p.localId] = true;
+            CheckWin();
+            }
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (GameManager.instance.GetState() == GameManager.State.Test)
+        {
+            Player p = other.gameObject.GetComponent<Player>();
+            if (p != null)
+            {
+                Inside[p.localId] = false;
+            }
+        }
+    }
+
+    public void CheckWin()
+    {
+        bool anyone = false;
+        bool win = true;
+        for(int i = 0;i<4;i++)
+        {
+            if(PlayerManager.players[i] != null)
+            {
+                anyone = true;
+                win = win && Inside[i];
+            }
+        }
+        if (anyone && win) Win();
+    }
+    public void Win()
+    {
+        Debug.Log("Win in Test");
     }
 }

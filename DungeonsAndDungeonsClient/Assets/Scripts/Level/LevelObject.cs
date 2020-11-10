@@ -41,6 +41,7 @@ public class LevelObject : MonoBehaviour
 
     public virtual void OnDestroy()
     {
+        if(chunk!=null)
         chunk.objects.Remove(this);
     }
 

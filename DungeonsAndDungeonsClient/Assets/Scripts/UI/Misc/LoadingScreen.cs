@@ -36,7 +36,11 @@ public class LoadingScreen : Openable
                           "Wer anderen eine Bratwurst brät, der hat ein Bratwurstbratgerät",
                           "Immer wenn ich traurig bin, trink ich einen ...",
                           "Ba-Ba-Banküberfall",
-                          "Für Garderobe keine Haftung"};
+                          "Für Garderobe keine Haftung",
+                          "Gut gebügelt ist halb genäht",
+                          "Jede Farbe kann besonders gut mit einem Element umgehen",
+                          "Wir sind die wahren Spezialisten, unsere Spezialausrüstung ist dort in den Kisten",
+                          "Wir produzieren Fleisch - Fleisch, Fleisch, Fleisch"};
 
 
     void Start()
