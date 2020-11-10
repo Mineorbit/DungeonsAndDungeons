@@ -39,9 +39,9 @@ public class LoadingScreen : Openable
         UnityEvent textClosedEvent = new UnityEvent();
 
 
-        screenOpenedEvent.AddListener(updateInfoText);
-        screenOpenedEvent.AddListener(FinishOpen);
-
+        screenOpenedEvent.AddListener(OpenText);
+        textOpenedEvent.AddListener(FinishOpen);
+        textClosedEvent.AddListener(CloseScreen);
         screenClosedEvent.AddListener(FinishClose);
         
         animationScreen = new Fade();
@@ -55,9 +55,20 @@ public class LoadingScreen : Openable
 
 
     }
+    void OpenText()
+    {
+        updateInfoText();
+        animationInfoText.Play();
+
+    }
+    void CloseScreen()
+    {
+        animationScreen.Play();
+    }
     void FinishOpen()
     {
         openEvent.Invoke();
+
         Finished = true;
     }
     void FinishClose()
@@ -84,7 +95,7 @@ public class LoadingScreen : Openable
     }
     public override void OnClose()
     {
-        animationScreen.Play();
+        animationInfoText.Play();
     }
     
    
