@@ -48,8 +48,6 @@ public abstract class Openable : MonoBehaviour
                 if (todo == Openable.Act.Open && !open)
                 {
                     open = true;
-
-                    Debug.Log("Test");
                     OnOpen();
                 }
                 else if ( todo == Openable.Act.Close && open)

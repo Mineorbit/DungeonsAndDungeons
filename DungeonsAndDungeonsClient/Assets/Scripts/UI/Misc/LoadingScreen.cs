@@ -22,7 +22,21 @@ public class LoadingScreen : Openable
     string[] infoText = { "Benutze W/A/S/D zum laufen",
                           "Manche Dungeons sind nur zu viert schaffbar",
                           "Wenn du mal nicht weiter kommst, kannst du jeder Zeit ohne Strafe die Runde abbrechen",
-                          "Der Plural von Wischmops ist Wischmöpse"};
+                          "Der Plural von Wischmops ist Wischmöpse",
+                          "Vielleicht gewinnst du etwas wenn du die Bestzeit schlägst",
+                          "Wenn du einen Gegner schlägst, der die gleiche Farbe wie du hat, verursachst du mehr Schaden",
+                          "Eier und Salz, Milch und Mehl",
+                          "Auf, auf und davon!",
+                          "Vorwärts immer, rückwärts nimmer",
+                          "Nach meiner Kenntnis ist das sofort",
+                          "Niemand hat die Absicht einen Dungeon zu errichten",
+                          "Kein Walkout",
+                          "So ein geiles Produkt",
+                          "Wer das liest, niest",
+                          "Wer anderen eine Bratwurst brät, der hat ein Bratwurstbratgerät",
+                          "Immer wenn ich traurig bin, trink ich einen ...",
+                          "Ba-Ba-Banküberfall",
+                          "Für Garderobe keine Haftung"};
 
 
     void Start()
