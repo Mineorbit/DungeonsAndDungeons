@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
 
     public Client client;
     public List<int> visitedChunks;
+
+    bool netUpdate = true;
+
+    bool Interpolate = true;
     void Start()
     {
         Setup();
@@ -35,8 +39,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if(Interpolate = true)
+        { 
         transform.position = Vector3.Lerp(targetPosition,transform.position,0.5f);
         transform.rotation = Quaternion.Lerp(targetRotation,transform.rotation,0.5f);
+        }
+        else
+        {
+            transform.position = targetPosition;
+            transform.rotation = targetRotation;
+        }
     }
     void UpdatePlay()
     {
@@ -63,24 +75,35 @@ public class Player : MonoBehaviour
         {
             UpdatePlay();
         }
-        if(targetPosition!=transform.position)
+
+
+        if((targetPosition-transform.position).magnitude>0.05)
         {
-            //Update Player Locally
+            Interpolate = false;
+            if(netUpdate)
+            {
+
             PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
             //Send info to others
             Server.SendPacketToAll(p);
+            }
+        }else
+        {
+            Interpolate = true;
         }
 
     }
     public void setPositionData(Vector3 loc, Quaternion rot)
     {
-        updateLocomotionData(loc, rot);
+        Interpolate = false;
         transform.position = loc;
         transform.rotation = rot;
+        targetPosition = loc;
+        targetRotation = rot;
     }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)
     {
-
+        Interpolate = true;
         targetPosition = loc;
         targetRotation = rot;
     }
