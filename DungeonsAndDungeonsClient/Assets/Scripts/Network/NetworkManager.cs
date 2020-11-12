@@ -72,6 +72,12 @@ public class NetworkManager : MonoBehaviour
         gameClient.Send(gameReadyPacket);
     }
 
+    public void SendLevelSelection(LevelData.LevelMetaData d)
+    {
+        LevelSelectPacket levelSelectPacket = new LevelSelectPacket(d);
+        gameClient.Send(levelSelectPacket);
+    }
+
     public void SendLocomotionData(PlayerLocomotionPacket p)
     {
         gameClient.Send(p);

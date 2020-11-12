@@ -24,6 +24,7 @@ public class LevelList : MonoBehaviour
 
     public enum ListType { Net, Local };
     public ListType listType;
+
     public void SetSelectedLevel(LevelData.LevelMetaData levelMetaData)
     {
         selected = levelMetaData;
@@ -31,6 +32,18 @@ public class LevelList : MonoBehaviour
     public LevelData.LevelMetaData GetSelectedLevel()
     {
         return selected;
+    }
+    public void SetSelected(long ulid)
+    {
+        LevelElement element = null;
+        foreach(LevelElement e in levelElements)
+        {
+            if (e.d.ulid == ulid) element = e;
+        }
+        if(element!=null)
+        {
+            element.Open();
+        }
     }
 
     public void CloseOthersFrom(LevelElement e)

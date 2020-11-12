@@ -73,7 +73,7 @@ public class GameLogic : MonoBehaviour
         }
         
         //Set Level As Selected
-            LevelData.LevelMetaData levelMetaData = LevelManager.GetTopLevel();
+        LevelData.LevelMetaData levelMetaData = LevelManager.GetSelectedLevel();
 
 
         if (levelMetaData == null)

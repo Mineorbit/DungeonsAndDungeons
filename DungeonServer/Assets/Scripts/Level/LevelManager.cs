@@ -10,11 +10,12 @@ public class LevelManager : MonoBehaviour
 
     public LevelData.LevelMetaData[] availableLocalLevels;
 
+    public LevelData.LevelMetaData selectedLevel;
     void Awake()
     {
         if (levelManager != null) Destroy(this);
         levelManager = this;
-    
+        selectedLevel = null;
     }
 
     void OnEnable()
@@ -28,14 +29,22 @@ public class LevelManager : MonoBehaviour
     }
 
     
-    public static LevelData.LevelMetaData GetTopLevel()
+    public static LevelData.LevelMetaData GetSelectedLevel()
     {
         if(levelManager.availableLocalLevels!=null)
-        return levelManager.availableLocalLevels[0];
+        return levelManager.selectedLevel;
 
         return null;
     }
 
+    public static LevelData.LevelMetaData SetSelectedLevel(long ulid)
+    {
+        foreach(LevelData.LevelMetaData d in levelManager.availableLocalLevels)
+        {
+            if (d.ulid == ulid) levelManager.selectedLevel = d;
+        }
+        return levelManager.selectedLevel;
+    }
 
     public static void Load(LevelData.LevelMetaData levelData)
     {

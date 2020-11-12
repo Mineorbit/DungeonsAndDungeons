@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LobbyMenu : MenuPage
 {
+    static LevelList netList;
     Toggle readyButton;
     public override void Awake()
     {
         base.Awake();
         index = 2;
+
+        netList = transform.Find("LevelList").GetComponent<LevelList>();
 
         readyButton = transform.Find("Actions").Find("Ready").GetComponent<Toggle>();
 
@@ -18,6 +21,10 @@ public class LobbyMenu : MenuPage
     {
 
         PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
+    }
+    public static void SetSelectedLevel(long ulid)
+    {
+        netList.SetSelected(ulid);
     }
     void CallReady()
     {

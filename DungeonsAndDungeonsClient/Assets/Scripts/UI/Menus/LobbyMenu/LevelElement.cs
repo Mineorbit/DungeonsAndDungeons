@@ -123,6 +123,8 @@ public class LevelElement : MonoBehaviour
                 {
                     if (!open)
                     {
+
+                        list.CloseOthersFrom(this);
                         StartCoroutine("OpenAnim");
                     }
                 }
@@ -139,8 +141,11 @@ public class LevelElement : MonoBehaviour
     {
         if(!target)
         {
+            if(list.listType == LevelList.ListType.Net)
+            {
+                NetworkManager.instance.SendLevelSelection(d);
+            }
             Open();
-            list.CloseOthersFrom(this);
         }else
         {
             Close();
