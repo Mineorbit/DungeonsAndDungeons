@@ -8,7 +8,7 @@ public class LevelListPacket : Packet
 {
     public LevelListPacket()
     {
-        packetId = 9;
+        packetId = 10;
         types = new Type[8];
         types[0] = typeof(long);
         types[1] = typeof(string);
@@ -22,7 +22,7 @@ public class LevelListPacket : Packet
     }
     public LevelListPacket(LevelData.LevelMetaData levelMetaData)
     {
-        packetId = 9;
+        packetId = 10;
         types = new Type[8];
         types[0] = typeof(long);
         types[1] = typeof(string);

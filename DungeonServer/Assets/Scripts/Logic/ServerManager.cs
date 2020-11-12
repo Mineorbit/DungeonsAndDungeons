@@ -118,7 +118,6 @@ public class ServerManager : MonoBehaviour
 
         };
         Action<GameAction> actWin = x => {
-            Debug.Log("Game won");
 
 
             WinPacket packet = new WinPacket();
@@ -131,6 +130,14 @@ public class ServerManager : MonoBehaviour
             server.Start();
             GameLogic.EndRound();
             GameLogic.PrepareRound(this.transform);
+
+            foreach(Player p in PlayerManager.playerManager.players)
+            {
+                if(p!=null)
+                {
+                    //p.SendLevelList();
+                }
+            }
 
         };
 

@@ -213,12 +213,6 @@ public class Client : MonoBehaviour
             if(tcp.Connected)
             {
                 byte[] data = p.Compose();
-                string s = "";
-                foreach(byte b in data)
-                {
-                    s += " "+b;
-                }
-                Report("Sending: "+s);
                 ns.Write(data,0,data.Length);
                 ns.Flush();
             }
