@@ -45,7 +45,6 @@ public class LevelListPacket : Packet
     }
     public override void OnReceive()
     {
-        Debug.Log("Added Level to List");
         LevelData.LevelMetaData levelData = new LevelData.LevelMetaData("");
         levelData.ulid = (long)content[0];
         levelData.name = (string)content[1];
@@ -56,6 +55,7 @@ public class LevelListPacket : Packet
         levelData.availRed = (bool)content[6];
         levelData.availGreen = (bool)content[7];
         LevelManager.AddOnlineLevel(levelData);
+        Debug.Log("Added Level to List"+levelData.ulid+" "+levelData.name);
         LevelList.UpdateDisplay();
     }
 }

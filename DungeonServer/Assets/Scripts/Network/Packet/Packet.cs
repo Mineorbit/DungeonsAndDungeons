@@ -197,6 +197,7 @@ public class Packet
         {
             elementData = new byte[8];
             elementData = BitConverter.GetBytes((long)o);
+            Debug.Log(BitConverter.GetBytes((long)o).Length);
         }
 
         return elementData;

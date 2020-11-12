@@ -62,6 +62,7 @@ public class Lobby : Logic
     public void RemovePlayer(int localId)
     {
         PlayerManager.playerManager.Remove(localId);
+        LevelManager.levelManager.availableNetworkLevels = new LevelData.LevelMetaData[0];
         LobbyMenu.UpdateDisplay();
     }
 

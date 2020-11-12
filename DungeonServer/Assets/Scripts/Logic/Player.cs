@@ -37,8 +37,9 @@ public class Player : MonoBehaviour
     {
         foreach(LevelData.LevelMetaData levelData in LevelManager.levelManager.availableLocalLevels)
         {
+            Debug.Log("Sending "+levelData.name);
             LevelListPacket p = new LevelListPacket(levelData);
-            client.Send(p);
+            Server.SendPacket(localId,p);
         }
     }
 
