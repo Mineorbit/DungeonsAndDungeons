@@ -92,7 +92,16 @@ public class Packet
             {
                 content[i] = (data[z] == 1) ? true : false;
                 z++;
+            }else
+            if(types[i] == typeof(long))
+            {
+                byte[] longData = { data[z], data[z + 1], data[z + 2], data[z + 3], data[z + 4], data[z + 5], data[z + 6], data[z + 7] };
+                if (BitConverter.IsLittleEndian)
+                    Array.Reverse(longData);
+                content[i] = BitConverter.ToInt64(longData, z);
+                z += 8;
             }
+            
 
 
 
@@ -179,6 +188,12 @@ public class Packet
             elementData = new byte[1];
             elementData[0] = ((bool) o == true)? (byte)1: (byte )0;
         }
+        else if (t == typeof(long))
+        {
+            elementData = new byte[8];
+            elementData = BitConverter.GetBytes((long) o);
+        }
+
         return elementData;
     }
 

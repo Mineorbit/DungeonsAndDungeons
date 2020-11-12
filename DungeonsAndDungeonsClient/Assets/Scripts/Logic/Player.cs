@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     bool isMe;
 
     bool netInput;
-    Vector3 targetPosition;
-    Quaternion targetRotation;
+    public Vector3 targetPosition;
+    public Quaternion targetRotation;
 
     Vector3 lastPosition;
 
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         transform.rotation = rot;
         lastPosition = loc;
         setTargetLocomotionData(loc, rot);
+        Debug.Log("Test");
     }
 
     public void Update()
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour
         isMe = localId == NetworkManager.instance.localId;
 
 
-        if(netInput && !isMe)
+        if(netInput&&(transform.position - targetPosition).magnitude>1)
         { 
         transform.position = (transform.position + targetPosition) / 2;
         }

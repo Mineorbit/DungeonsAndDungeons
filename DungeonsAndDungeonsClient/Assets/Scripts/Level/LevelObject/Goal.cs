@@ -19,7 +19,7 @@ public class Goal : LevelObject
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(GameManager.instance.GetState() == GameManager.State.Test)
+        if(GameManager.GetState() == GameManager.State.Test)
         {
             Player p = other.gameObject.GetComponent<Player>();
             if(p != null)
@@ -31,7 +31,7 @@ public class Goal : LevelObject
     }
     public void OnTriggerExit(Collider other)
     {
-        if (GameManager.instance.GetState() == GameManager.State.Test)
+        if (GameManager.GetState() == GameManager.State.Test)
         {
             Player p = other.gameObject.GetComponent<Player>();
             if (p != null)
@@ -47,7 +47,7 @@ public class Goal : LevelObject
         bool win = true;
         for(int i = 0;i<4;i++)
         {
-            if(PlayerManager.players[i] != null)
+            if(PlayerManager.playerManager.players[i] != null)
             {
                 anyone = true;
                 win = win && Inside[i];

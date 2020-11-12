@@ -39,9 +39,10 @@ public class PlayerSpawnPacket : Packet
     public override void OnReceive()
     {
         int id = (int) content[0];
-        Debug.Log(id);
         Vector3 location = new Vector3((float) content[1], (float)content[2], (float)content[3]);
         PlayerManager.playerManager.players[id].setPositionData(location,new Quaternion(0,0,0,0));
+
+        Debug.Log(id+" : "+location);
         PlayerManager.playerManager.playerControllers[id].allowedToMove = (bool)content[4];
 
         if (id == NetworkManager.instance.localId)

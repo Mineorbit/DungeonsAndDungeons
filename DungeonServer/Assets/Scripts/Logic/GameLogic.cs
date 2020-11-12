@@ -101,6 +101,7 @@ public class GameLogic : MonoBehaviour
     {
         if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
         Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
+        Debug.Log(localId+" : "+spawnLocation);
         PlayerManager.playerManager.players[localId].gameObject.SetActive(true);
         SetPlayerPosition(localId,spawnLocation,true);
     }
@@ -110,7 +111,7 @@ public class GameLogic : MonoBehaviour
 
         PlayerSpawnPacket packet = new PlayerSpawnPacket(localId, pos, allowMove);
 
-        PlayerManager.playerManager.players[localId].transform.position = pos;
+        PlayerManager.playerManager.players[localId].setPositionData(pos,new Quaternion(0,0,0,0));
 
         Server.SendPacketToAll(packet);
     }

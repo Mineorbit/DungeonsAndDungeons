@@ -42,10 +42,11 @@ public class PlayerConnectedPacket : Packet
     public override void OnReceive(int localId)
     {
         if( (int) content[1] == -1)
-        { 
-        Debug.LogError("New player "+content[0]+" "+localId);
+        {
         Server.GetClient(localId).name = (string) content[0];
+
         ServerManager.instance.AddClient(localId,Server.GetClient(localId));
+
         ConnectionInfoPacket cIp = new ConnectionInfoPacket(localId);
         Server.SendPacket(localId,cIp);
 

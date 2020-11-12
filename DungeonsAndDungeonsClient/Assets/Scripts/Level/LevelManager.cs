@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using System;
+
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager levelManager;
@@ -22,6 +24,15 @@ public class LevelManager : MonoBehaviour
         UpdateLocalLevels();
     }
 
+    public static void AddOnlineLevel(LevelData.LevelMetaData levelMetaData)
+    {
+        int length = levelManager.availableNetworkLevels.Length;
+        LevelData.LevelMetaData[] existingLevels = levelManager.availableNetworkLevels;
+        levelManager.availableNetworkLevels = new LevelData.LevelMetaData[length+1];
+        Array.Copy(existingLevels,0,levelManager.availableNetworkLevels,0,length);
+        levelManager.availableNetworkLevels[length] = levelMetaData;
+
+    }
 
     public static void UpdateLocalLevels()
     {

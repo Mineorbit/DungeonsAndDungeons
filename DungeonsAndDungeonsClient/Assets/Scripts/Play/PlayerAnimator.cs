@@ -30,14 +30,7 @@ public class PlayerAnimator : MonoBehaviour
         speed = Mathf.Min(inputVelocity.magnitude, 1);
         bool movementKeyPressed = Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.D);
 
-        if (controller.velocity.magnitude >= 0.25f && controller.isGrounded && !playingDust)
-        {
-        StartDust();
-        }
-        if ((controller.velocity.magnitude <= 0.25f || !controller.isGrounded) && playingDust)
-        {
-        StopDust();
-        }
+       
         if (movementKeyPressed && playerController.doInput)
         { 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.2f);
@@ -47,6 +40,7 @@ public class PlayerAnimator : MonoBehaviour
 
     void StartDust()
     {
+            
         
             playingDust = true;
             runDust[0].Play();

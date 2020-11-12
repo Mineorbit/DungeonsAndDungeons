@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     //Reset after win
     public bool ready;
 
-    Vector3 targetPosition;
-    Quaternion targetRotation;
+    public Vector3 targetPosition;
+    public Quaternion targetRotation;
 
 
     public Client client;
@@ -30,8 +30,18 @@ public class Player : MonoBehaviour
     public void Setup()
     {
         PlayerManager.playerManager.AddPlayer(this,localId);
+        SendLevelList();
         Reset();
     }
+    void SendLevelList()
+    {
+        foreach(LevelData.LevelMetaData levelData in LevelManager.levelManager.availableLocalLevels)
+        {
+            LevelListPacket p = new LevelListPacket(levelData);
+            client.Send(p);
+        }
+    }
+
     void Update()
     {
         transform.position = Vector3.Lerp(targetPosition,transform.position,0.5f);
@@ -58,7 +68,7 @@ public class Player : MonoBehaviour
             //Update Player Locally
             PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
             //Send info to others
-            Server.SendPacketToAllExcept(localId, p);
+            Server.SendPacketToAll(p);
         }
 
     }
