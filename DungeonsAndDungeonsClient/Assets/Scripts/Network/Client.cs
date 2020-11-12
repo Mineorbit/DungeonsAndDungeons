@@ -193,8 +193,12 @@ public class Client : MonoBehaviour
     {
         ThreadManager.ExecuteOnMainThread(() => {
             Packet p = Packet.Parse(data);
-
-            Report("Received Packet "+p);
+            string s = "";
+            foreach (byte b in data)
+            {
+                s += " " + b;
+            }
+            Report("Received Packet "+p+" | "+s);
             //Hier andere behandlung für den fall das packet nicht parsebar
             if(p!=null)
             p.OnReceive();

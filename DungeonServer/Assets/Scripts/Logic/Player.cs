@@ -30,18 +30,9 @@ public class Player : MonoBehaviour
     public void Setup()
     {
         PlayerManager.playerManager.AddPlayer(this,localId);
-        SendLevelList();
         Reset();
     }
-    void SendLevelList()
-    {
-        foreach(LevelData.LevelMetaData levelData in LevelManager.levelManager.availableLocalLevels)
-        {
-            Debug.Log("Sending "+levelData.name);
-            LevelListPacket p = new LevelListPacket(levelData);
-            Server.SendPacket(localId,p);
-        }
-    }
+    
 
     void Update()
     {
@@ -51,6 +42,15 @@ public class Player : MonoBehaviour
     void UpdatePlay()
     {
         SendVicinity();
+    }
+    public void SendLevelList()
+    {
+        foreach (LevelData.LevelMetaData levelData in LevelManager.levelManager.availableLocalLevels)
+        {
+            Debug.Log("Sending " + levelData.name);
+            LevelListPacket p = new LevelListPacket(levelData);
+            Server.SendPacket(localId, p);
+        }
     }
     void SendVicinity()
     {

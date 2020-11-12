@@ -93,7 +93,7 @@ public class Packet
                 byte[] longData = { data[z], data[z + 1], data[z + 2], data[z + 3], data[z + 4], data[z + 5], data[z + 6], data[z + 7] };
                 if (BitConverter.IsLittleEndian)
                     Array.Reverse(longData);
-                content[i] = BitConverter.ToInt64(longData, z);
+                content[i] = BitConverter.ToInt64(longData, 0);
                 z += 8;
             }
 

@@ -130,8 +130,14 @@ public class Client
             if (tcp.Connected)
             {
                 byte[] data = p.Compose();
-                Report("Sending Packet " + p+" "+data.Length);
-                ns.Write(data, 0, data.Length);
+                    string s = "";
+                    foreach (byte b in data)
+                    {
+                        s += " " + b;
+                    }
+                    Report("Sending Packet " + p+" "+data.Length+ " | "+s);
+                    
+                    ns.Write(data, 0, data.Length);
                 ns.Flush();
             }
         }

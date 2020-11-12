@@ -60,9 +60,13 @@ public class PlayerConnectedPacket : Packet
                 }
             }
 
-        //Informiere alle spieler über neuen Spieler
+            //Sende LevelListe später wo anders
 
-        PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket((string)content[0],localId);
+            PlayerManager.playerManager.players[localId].SendLevelList();
+
+            //Informiere alle spieler über neuen Spieler
+
+            PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket((string)content[0],localId);
         Server.SendPacketToAllExcept(localId,playerConnectedPacket);
         }
 

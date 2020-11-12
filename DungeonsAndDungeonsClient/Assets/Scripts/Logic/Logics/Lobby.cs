@@ -21,6 +21,7 @@ public class Lobby : Logic
     {
 
 
+        LevelManager.levelManager.availableNetworkLevels = new LevelData.LevelMetaData[0];
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenuImmediate);
@@ -29,7 +30,7 @@ public class Lobby : Logic
     }
     public void Open(string name)
     {
-
+        LevelManager.levelManager.availableNetworkLevels = new LevelData.LevelMetaData[0];
 
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
