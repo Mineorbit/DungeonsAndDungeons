@@ -44,7 +44,6 @@ public class PlayerManager : MonoBehaviour
     public void SetCurrentPlayer(int localId)
     {
         if (localId > 3 || localId < 0) return;
-        Debug.Log(localId);
         if(playerControllers[localId]==null)
         {
             playerControllers[localId] = GameObject.Find("Player"+localId).GetComponent<PlayerController>();

@@ -50,14 +50,14 @@ public class ServerManager : MonoBehaviour
 
     public void AddClient(int localId, Client c)
     {
-        GameLogic.current.AddPlayer(localId,c);
+        PlayerManager.AddPlayer(localId,c);
     }
 
 
     public void RemoveClient(int localid)
     {
         Server.Disconnect(localid);
-        GameLogic.current.RemovePlayer(localid);
+        PlayerManager.RemovePlayer(localid);
         Server.RemoveClient(localid);
         
     }
@@ -113,7 +113,7 @@ public class ServerManager : MonoBehaviour
             GameLogic.EndRound();
 
             GameLogic.PrepareRound(this.transform);
-            GameLogic.SpawnPlayersInLobby();
+            PlayerManager.SpawnPlayersInLobby();
             server.Start();
 
         };
@@ -126,7 +126,7 @@ public class ServerManager : MonoBehaviour
             Level.Clear();
 
 
-            GameLogic.SpawnPlayersInLobby();
+            PlayerManager.SpawnPlayersInLobby();
             server.Start();
             GameLogic.EndRound();
             GameLogic.PrepareRound(this.transform);

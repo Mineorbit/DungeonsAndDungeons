@@ -31,19 +31,21 @@ public class Player : MonoBehaviour
 
     public void setTargetLocomotionData(Vector3 targetPos, Quaternion targetRot)
     {
-        netInput = true;
         targetPosition = targetPos;
         targetRotation = targetRot;
+
+        netInput = true;
     }
 
     
     public void setPositionData(Vector3 loc, Quaternion rot)
     {
+        Debug.Log($"Player {localId} Setting Position: {loc}");
+
         transform.position = loc;
         transform.rotation = rot;
         lastPosition = loc;
         setTargetLocomotionData(loc, rot);
-        Debug.Log("Test");
     }
 
     public void Update()

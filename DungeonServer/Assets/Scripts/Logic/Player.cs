@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     }
     public void Setup()
     {
-        PlayerManager.playerManager.AddPlayer(this,localId);
         Reset();
     }
     
@@ -75,12 +74,13 @@ public class Player : MonoBehaviour
     }
     public void setPositionData(Vector3 loc, Quaternion rot)
     {
+        updateLocomotionData(loc, rot);
         transform.position = loc;
         transform.rotation = rot;
-        updateLocomotionData(loc,rot);
     }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)
     {
+
         targetPosition = loc;
         targetRotation = rot;
     }
