@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     public bool isMe;
     public bool lockNetUpdate;
 
-    public Queue<Vector3> targetPositions;
     public Vector3 targetPosition;
     public Quaternion targetRotation;
 
@@ -27,7 +26,6 @@ public class Player : MonoBehaviour
     {
         gameObject.name = "Player" + localId;
 
-        targetPositions = new Queue<Vector3>();
 
         targetPosition = transform.position;
 
@@ -39,8 +37,8 @@ public class Player : MonoBehaviour
     public void setTargetLocomotionData(Vector3 targetPos, Quaternion targetRot)
     {
         if(!lockNetUpdate)
-        { 
-        targetPositions.Enqueue(targetPos);
+        {
+        targetPosition = targetPos;
         targetRotation = targetRot;
         }
     }
@@ -59,24 +57,11 @@ public class Player : MonoBehaviour
 
     }
 
-    void GetTargetLocation()
-    {
-        if(!lockNetUpdate)
-        {
-        Vector3 t = targetPosition;
-        if (targetPositions.Count > 0)
-        {
-            t = targetPositions.Dequeue();
-        }
-        targetPosition = t;
-        }
-    }
+    
     public void Update()
     {
         isMe = localId == NetworkManager.instance.localId;
 
-
-        GetTargetLocation();
 
         if ((targetPosition-transform.position).magnitude < moveDelta)
         {
