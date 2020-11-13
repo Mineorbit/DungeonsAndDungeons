@@ -76,6 +76,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public static void SpawnPlayerInLobby(int i)
+    {
+    PlayerManager.SetPlayerPosition(i, GetLobbyPosition(i), false);
+    }
+
     public static Vector3 GetLobbyPosition(int localId)
     {
         return new Vector3(32 + localId * 8, 0, 0);

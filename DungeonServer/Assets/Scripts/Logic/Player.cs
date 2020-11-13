@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
     //Reset after win
     public bool ready;
 
-    Queue<Vector3> positionQueue;
-    Queue<Quaternion> rotationQueue;
 
     public Vector3 targetPosition;
     public Quaternion targetRotation;
@@ -22,9 +20,10 @@ public class Player : MonoBehaviour
     public Client client;
     public List<int> visitedChunks;
 
-    bool netUpdate = true;
 
-    bool Interpolate = true;
+    public bool lockNetUpdate = false;
+
+    float moveDelta = 0.005f;
     void Start()
     {
         Setup();
@@ -32,8 +31,6 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         ready = false;
-        positionQueue = new Queue<Vector3>();
-        rotationQueue = new Queue<Quaternion>();
         visitedChunks = new List<int>();
     }
     public void Setup()
@@ -44,7 +41,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(Interpolate = true)
+        if ((targetPosition - transform.position).magnitude < moveDelta)
+        {
+            lockNetUpdate = false;
+            transform.position = targetPosition;
+            transform.rotation = targetRotation;
+            var t = GetTarget();
+            targetPosition = t.pos;
+            targetRotation = t.rot;
+        }
+
+        if (!lockNetUpdate)
         { 
         transform.position = Vector3.Lerp(targetPosition,transform.position,0.5f);
         transform.rotation = Quaternion.Lerp(targetRotation,transform.rotation,0.5f);
@@ -82,38 +89,22 @@ public class Player : MonoBehaviour
         }
 
 
-        if((targetPosition-transform.position).magnitude>0.05f)
-        {
-            Interpolate = false;
-            if(netUpdate)
-            {
-            PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
-            //Send info to others
-            Server.SendPacketToAllExcept(localId,p);
-            }
+       
 
-        }else
-        {
-            Interpolate = true;
-
-            transform.position = targetPosition;
-            transform.rotation = targetRotation;
-            var t = GetTarget();
-            targetPosition = t.pos;
-            targetRotation = t.rot;
-        }
+        PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
+        //Send info to others
+        Server.SendPacketToAllExcept(localId, p);
 
     }
     (Vector3 pos, Quaternion rot) GetTarget()
     {
-        Vector3 pos = positionQueue.Dequeue();
-        Quaternion rot = rotationQueue.Dequeue();
-
-        return (pos,rot);
+        return (targetPosition,targetRotation);
     }
+
     public void setPositionData(Vector3 loc, Quaternion rot)
     {
-        Interpolate = false;
+
+        lockNetUpdate = true;
         transform.position = loc;
         transform.rotation = rot;
         targetPosition = loc;
@@ -121,14 +112,12 @@ public class Player : MonoBehaviour
     }
     public void updateLocomotionData(Vector3 loc,Quaternion rot)
     {
-        Interpolate = true;
-        targetPosition = loc;
-        targetRotation = rot;
+        if(!lockNetUpdate)
+        {
+            targetPosition = loc;
+            targetRotation = rot;
+        }
     }
 
-    void AddTarget(Vector3 targetPosition,Quaternion targetRotation)
-    {
-        positionQueue.Enqueue(targetPosition);
-        rotationQueue.Enqueue(targetRotation);
-    }
+  
 }

@@ -11,16 +11,23 @@ public class Player : MonoBehaviour
     public Color playerColor;
 
     public bool isMe;
+    public bool lockNetUpdate;
 
-    bool netInput;
+    public Queue<Vector3> targetPositions;
     public Vector3 targetPosition;
     public Quaternion targetRotation;
 
     Vector3 lastPosition;
 
+    float moveDelta = 0.005f;
+
+
+
     public void Start()
     {
         gameObject.name = "Player" + localId;
+
+        targetPositions = new Queue<Vector3>();
 
         targetPosition = transform.position;
 
@@ -31,29 +38,53 @@ public class Player : MonoBehaviour
 
     public void setTargetLocomotionData(Vector3 targetPos, Quaternion targetRot)
     {
-        targetPosition = targetPos;
+        if(!lockNetUpdate)
+        { 
+        targetPositions.Enqueue(targetPos);
         targetRotation = targetRot;
-
-        netInput = true;
+        }
     }
 
     
     public void setPositionData(Vector3 loc, Quaternion rot)
     {
+       
         Debug.Log($"Player {localId} Setting Position: {loc}");
 
+        lockNetUpdate = true;
         transform.position = loc;
         transform.rotation = rot;
-        lastPosition = loc;
-        setTargetLocomotionData(loc, rot);
+        targetPosition = loc;
+        targetRotation = rot;
+
     }
 
+    void GetTargetLocation()
+    {
+        if(!lockNetUpdate)
+        {
+        Vector3 t = targetPosition;
+        if (targetPositions.Count > 0)
+        {
+            t = targetPositions.Dequeue();
+        }
+        targetPosition = t;
+        }
+    }
     public void Update()
     {
         isMe = localId == NetworkManager.instance.localId;
 
 
-        if(!isMe&&netInput&&(transform.position - targetPosition).magnitude>1)
+        GetTargetLocation();
+
+        if ((targetPosition-transform.position).magnitude < moveDelta)
+        {
+            lockNetUpdate = false;
+            transform.position = targetPosition;
+        }
+
+        if(!isMe)
         { 
         transform.position = (transform.position + targetPosition) / 2;
         }
@@ -61,10 +92,13 @@ public class Player : MonoBehaviour
        
         if(isMe)
         {
-            if ((lastPosition-transform.position).magnitude > 0.0005f)
+            if ((lastPosition-transform.position).magnitude > moveDelta)
             {
+                if(!lockNetUpdate)
+                { 
                 PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position,transform.rotation, localId);
                 NetworkManager.instance.SendLocomotionData(p);
+                }
             }
         }
         lastPosition = transform.position;

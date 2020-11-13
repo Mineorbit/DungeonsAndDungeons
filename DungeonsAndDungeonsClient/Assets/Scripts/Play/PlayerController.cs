@@ -8,6 +8,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController currentPlayer;
+
+    Player player;
     CharacterController controller;
     public Transform cam;
     float convergenceSpeed = 0.1f;
@@ -29,19 +31,22 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main.transform;
 
         controller = transform.GetComponent<CharacterController>();
-
     }
-   
+    void Start()
+    {
+        player = transform.GetComponent<Player>();
+    }
     void Update()
     {
         isMe = (currentPlayer == this);
+        doSim = isMe && !player.lockNetUpdate;
         Move();
     }
 
     void Move()
     {
 
-        doInput = PlayerManager.acceptInput && allowedToMove && isMe;
+        doInput = PlayerManager.acceptInput && allowedToMove && isMe && !player.lockNetUpdate;
         if (!controller.isGrounded && isMe && doSim)
         {
             speedY -= gravity * Time.deltaTime;

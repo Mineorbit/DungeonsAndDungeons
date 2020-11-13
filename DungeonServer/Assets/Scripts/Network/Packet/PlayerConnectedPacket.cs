@@ -63,6 +63,7 @@ public class PlayerConnectedPacket : Packet
             //Sende LevelListe später wo anders
 
             PlayerManager.playerManager.players[localId].SendLevelList();
+            PlayerManager.SpawnPlayerInLobby(localId);
 
             //Informiere alle spieler über neuen Spieler
 
