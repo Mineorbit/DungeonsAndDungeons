@@ -50,11 +50,8 @@ public class PlayerLocomotionPacket : Packet
 
     public override void OnReceive(int localId)
     {
-
         Vector3 position = new Vector3((float)content[0], (float)content[1], (float)content[2]);
-
+        if((position- PlayerManager.playerManager.players[localId].targetPosition).magnitude<0.5f)
         PlayerManager.playerManager.players[localId].updateLocomotionData(position, new Quaternion(0,0,0,0));
-
-       
     }
 }

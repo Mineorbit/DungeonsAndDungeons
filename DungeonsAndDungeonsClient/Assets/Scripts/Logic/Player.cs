@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public enum Color {Blue, Red, Green, Yellow};
     public Color playerColor;
 
-    bool isMe;
+    public bool isMe;
 
     bool netInput;
     public Vector3 targetPosition;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         isMe = localId == NetworkManager.instance.localId;
 
 
-        if(netInput&&(transform.position - targetPosition).magnitude>1)
+        if(!isMe&&netInput&&(transform.position - targetPosition).magnitude>1)
         { 
         transform.position = (transform.position + targetPosition) / 2;
         }

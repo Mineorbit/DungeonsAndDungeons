@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     //Reset after win
     public bool ready;
 
+    Queue<Vector3> positionQueue;
+    Queue<Quaternion> rotationQueue;
+
     public Vector3 targetPosition;
     public Quaternion targetRotation;
 
@@ -29,6 +32,8 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         ready = false;
+        positionQueue = new Queue<Vector3>();
+        rotationQueue = new Queue<Quaternion>();
         visitedChunks = new List<int>();
     }
     public void Setup()
@@ -77,21 +82,34 @@ public class Player : MonoBehaviour
         }
 
 
-        if((targetPosition-transform.position).magnitude>0.05)
+        if((targetPosition-transform.position).magnitude>0.05f)
         {
             Interpolate = false;
             if(netUpdate)
             {
-
             PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
             //Send info to others
-            Server.SendPacketToAll(p);
+            Server.SendPacketToAllExcept(localId,p);
             }
+
         }else
         {
             Interpolate = true;
+
+            transform.position = targetPosition;
+            transform.rotation = targetRotation;
+            var t = GetTarget();
+            targetPosition = t.pos;
+            targetRotation = t.rot;
         }
 
+    }
+    (Vector3 pos, Quaternion rot) GetTarget()
+    {
+        Vector3 pos = positionQueue.Dequeue();
+        Quaternion rot = rotationQueue.Dequeue();
+
+        return (pos,rot);
     }
     public void setPositionData(Vector3 loc, Quaternion rot)
     {
@@ -106,5 +124,11 @@ public class Player : MonoBehaviour
         Interpolate = true;
         targetPosition = loc;
         targetRotation = rot;
+    }
+
+    void AddTarget(Vector3 targetPosition,Quaternion targetRotation)
+    {
+        positionQueue.Enqueue(targetPosition);
+        rotationQueue.Enqueue(targetRotation);
     }
 }
