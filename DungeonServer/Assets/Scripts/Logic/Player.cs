@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     //Reset after win
     public bool ready;
 
-
+    Vector3 lastPosition;
     public Vector3 targetPosition;
     public Quaternion targetRotation;
 
@@ -26,12 +26,14 @@ public class Player : MonoBehaviour
     float moveDelta = 0.005f;
     void Start()
     {
+        
         Setup();
     }
     public void Reset()
     {
         ready = false;
         visitedChunks = new List<int>();
+        lastPosition = transform.position;
     }
     public void Setup()
     {
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
             transform.position = targetPosition;
             transform.rotation = targetRotation;
         }
+        lastPosition = transform.position;
     }
     void UpdatePlay()
     {
@@ -89,12 +92,12 @@ public class Player : MonoBehaviour
         }
 
 
-       
-
-        PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
-        //Send info to others
-        Server.SendPacketToAllExcept(localId, p);
-
+       if((transform.position-lastPosition).magnitude>moveDelta)
+       {
+       PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, new Quaternion(0, 0, 0, 0), localId);
+       //Send info to others
+       Server.SendPacketToAllExcept(localId, p);
+       }
     }
     (Vector3 pos, Quaternion rot) GetTarget()
     {
