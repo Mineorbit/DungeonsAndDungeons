@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 274516935}
   - component: {fileID: 274516936}
   m_Layer: 5
-  m_Name: Options
+  m_Name: OptionsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1118,12 +1118,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 274516930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb669a0d058dba1498a5dc138b5bac71, type: 3}
+  m_Script: {fileID: 11500000, guid: d8854671d0d4e0848bd5a679f6a7c343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finished: 0
   open: 0
+  backButton: {fileID: 0}
+  resolutionSelector: {fileID: 0}
   fullScreenToggle: {fileID: 0}
   simpleLobbyToggle: {fileID: 0}
+  playerStores: []
+  res: {x: 0, y: 0}
 --- !u!1 &305577355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,7 +2935,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.35
+  m_fontSize: 14.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3078,7 +3083,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 591898767}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.523507
+  m_Size: 0.48665294
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3729,7 +3734,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.5
+  m_fontSize: 14.5
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5411,7 +5416,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.15
+  m_fontSize: 15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5585,7 +5590,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 90
+  m_firstOverflowCharacterIndex: 40
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -5900,7 +5905,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12.55
+  m_fontSize: 11.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6216,7 +6221,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.4
+  m_fontSize: 26.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
