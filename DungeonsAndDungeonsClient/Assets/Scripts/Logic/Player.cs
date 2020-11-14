@@ -24,14 +24,21 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
-        gameObject.name = "Player" + localId;
-
+        if(GameManager.GetState() == GameManager.State.Play)
+        {
+            SetupPlay();
+        }
 
         targetPosition = transform.position;
 
         
         lastPosition = transform.position;
 
+    }
+
+    void SetupPlay()
+    {
+    gameObject.name = "Player" + localId;
     }
 
     public void setTargetLocomotionData(Vector3 targetPos, Quaternion targetRot)

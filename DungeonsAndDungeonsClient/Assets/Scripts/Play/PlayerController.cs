@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     float speedY = 0;
     float gravity = 4f;
 
+
+    public bool IsGrounded;
     public bool doInput;
     public bool isMe;
     public static bool doSim;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        UpdateGround();
         if (GameManager.GetState() == GameManager.State.Play)
         {
             PlayUpdate();
@@ -57,6 +60,13 @@ public class PlayerController : MonoBehaviour
     {
         isMe = (currentPlayer == this);
         doSim = isMe && !player.lockNetUpdate;
+    }
+
+    void UpdateGround()
+    {
+        int mask = 1 << 10;
+        RaycastHit hit;
+        IsGrounded = controller.isGrounded || Physics.Raycast(transform.position,-Vector3.up,out hit, 1.5f,mask);
     }
 
     void Move()
@@ -94,6 +104,7 @@ public class PlayerController : MonoBehaviour
             controller.Move(targetDirection * Speed * Time.deltaTime);
         }
     }
+
     public void OnDisable()
     {
         if (currentPlayer == this) currentPlayer = null;

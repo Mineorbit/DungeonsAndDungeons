@@ -14,6 +14,7 @@ public class PlayerAnimator : MonoBehaviour
     public static float speed;
 
     Vector3 lastPosition;
+    Vector3 dif;
     void Start()
     {
         controller = transform.GetComponent<CharacterController>();
@@ -42,18 +43,17 @@ public class PlayerAnimator : MonoBehaviour
 
 
 
-        Vector3 dif = lastPosition - transform.position;
-        Debug.Log("Change: " + dif.magnitude + " "+lastPosition+" "+transform.position);
-        if ((dif).magnitude > 0)
+        dif = lastPosition - transform.position;
+
+        if ((dif).magnitude > 0 && playerController.IsGrounded)
         {
-            Debug.Log("Starting");
             StartDust();
         }
         else
         {
-            Debug.Log("Stopping: "+controller.isGrounded+" "+dif.magnitude);
             StopDust();
         }
+
         lastPosition = transform.position;
     }
 
