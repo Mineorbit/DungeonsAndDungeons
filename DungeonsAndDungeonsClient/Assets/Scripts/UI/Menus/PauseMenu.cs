@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
     }
     void GotoOptions()
     {
-        Options.options.Open();
+        OptionsMenu.options.Open();
     }
     void GotoMainMenu()
     {

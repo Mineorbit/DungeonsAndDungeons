@@ -57,35 +57,42 @@ public class Player : MonoBehaviour
 
     }
 
-    
-    public void Update()
+    void PlayUpdate()
     {
         isMe = localId == NetworkManager.instance.localId;
 
 
-        if ((targetPosition-transform.position).magnitude < moveDelta)
+        if ((targetPosition - transform.position).magnitude < moveDelta)
         {
             lockNetUpdate = false;
             transform.position = targetPosition;
         }
 
-        if(!isMe)
-        { 
-        transform.position = (transform.position + targetPosition) / 2;
+        if (!isMe)
+        {
+            transform.position = (transform.position + targetPosition) / 2;
         }
 
-       
-        if(isMe)
+
+        if (isMe)
         {
-            if ((lastPosition-transform.position).magnitude > moveDelta)
+            if ((lastPosition - transform.position).magnitude > moveDelta)
             {
-                if(!lockNetUpdate)
-                { 
-                PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position,transform.rotation, localId);
-                NetworkManager.instance.SendLocomotionData(p);
+                if (!lockNetUpdate)
+                {
+                    PlayerLocomotionPacket p = new PlayerLocomotionPacket(transform.position, transform.rotation, localId);
+                    NetworkManager.instance.SendLocomotionData(p);
                 }
             }
         }
         lastPosition = transform.position;
+    }
+    
+    public void Update()
+    {
+        if(GameManager.GetState() == GameManager.State.Play)
+        {
+            PlayUpdate();
+        }
     }
 }

@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 8663978344402381459}
   - component: {fileID: 8663978344402381457}
   - component: {fileID: 8663978344402381456}
+  - component: {fileID: 3087132544250898796}
   m_Layer: 0
   m_Name: Player0
   m_TagString: Untagged
@@ -67,12 +68,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4ba52449622644395839654fb308a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceptInput: 1
   cam: {fileID: 0}
   Speed: 4
   targetDirection: {x: 0, y: 0, z: 0}
   movingDirection: {x: 0, y: 0, z: 0}
   doInput: 0
+  isMe: 0
+  allowedToMove: 1
 --- !u!143 &8663978344402381459
 CharacterController:
   m_ObjectHideFlags: 0
@@ -119,6 +121,26 @@ MonoBehaviour:
   audioProfiles:
   - {fileID: 11400000, guid: ec7965c5338dbb548b982bf9033bf5bb, type: 2}
   controller: {fileID: 0}
+--- !u!114 &3087132544250898796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663978344402381461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb076dcdb3a84e6408755c342df9538f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalId: 0
+  localId: 0
+  name: 
+  playerColor: 0
+  isMe: 0
+  lockNetUpdate: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8663978344446798218
 GameObject:
   m_ObjectHideFlags: 0

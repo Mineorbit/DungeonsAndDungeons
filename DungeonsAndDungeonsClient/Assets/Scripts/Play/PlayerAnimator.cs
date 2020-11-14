@@ -12,13 +12,17 @@ public class PlayerAnimator : MonoBehaviour
     public ParticleSystem[] runDust;
     bool playingDust;
     public static float speed;
+
+    Vector3 lastPosition;
     void Start()
     {
         controller = transform.GetComponent<CharacterController>();
         playerController = transform.GetComponent<PlayerController>();
         characterAnimator = transform.Find("character").GetComponent<Animator>();
         runDust = transform.Find("Particles").Find("Running").GetComponentsInChildren<ParticleSystem>();
-        
+        playingDust = true;
+        StopDust();
+        lastPosition = transform.position;
     }
 
     void Update()
@@ -36,22 +40,39 @@ public class PlayerAnimator : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), 0.2f);
         }
 
+
+
+        Vector3 dif = lastPosition - transform.position;
+        Debug.Log("Change: " + dif.magnitude + " "+lastPosition+" "+transform.position);
+        if ((dif).magnitude > 0)
+        {
+            Debug.Log("Starting");
+            StartDust();
+        }
+        else
+        {
+            Debug.Log("Stopping: "+controller.isGrounded+" "+dif.magnitude);
+            StopDust();
+        }
+        lastPosition = transform.position;
     }
 
     void StartDust()
     {
-            
-        
+        if(!playingDust)
+        { 
             playingDust = true;
             runDust[0].Play();
             runDust[1].Play();
-        
+        }
     }
     void StopDust()
     {
-
+        if(playingDust)
+        { 
         playingDust = false;
         runDust[0].Stop();
         runDust[1].Stop();
+        }
     }
 }

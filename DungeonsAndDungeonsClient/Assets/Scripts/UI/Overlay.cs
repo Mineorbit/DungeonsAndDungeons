@@ -21,7 +21,7 @@ public class Overlay : MonoBehaviour
     void GoOptions()
     {
         Debug.Log("Opening");
-        Options.options.Open();
+        OptionsMenu.options.Open();
     }
     
 }

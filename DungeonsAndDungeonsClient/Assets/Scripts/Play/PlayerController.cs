@@ -38,16 +38,32 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (GameManager.GetState() == GameManager.State.Play)
+        {
+            PlayUpdate();
+        }
+        else if (GameManager.GetState() == GameManager.State.Test)
+        {
+            TestUpdate();
+        }
+        Move();
+    }
+    void TestUpdate()
+    {
+        isMe = (currentPlayer == this);
+        doSim = true;
+    }
+    void PlayUpdate()
+    {
         isMe = (currentPlayer == this);
         doSim = isMe && !player.lockNetUpdate;
-        Move();
     }
 
     void Move()
     {
 
         doInput = PlayerManager.acceptInput && allowedToMove && isMe && !player.lockNetUpdate;
-        if (!controller.isGrounded && isMe && doSim)
+        if (!controller.isGrounded && doSim)
         {
             speedY -= gravity * Time.deltaTime;
         }

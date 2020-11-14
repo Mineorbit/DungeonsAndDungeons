@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
 
-public class Options : Openable
+public class OptionsMenu : Openable
 {
     UIAnimation transition;
 
-    public static Options options;
+    public static OptionsMenu options;
 
     Button backButton;
 
@@ -46,7 +46,7 @@ public class Options : Openable
 
     void SetupSimple()
     {
-        playerStores = new GameObject[4];
+        options.playerStores = new GameObject[4];
 
 
         simpleLobbyToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Lobby").Find("SimpleLobby").GetComponent<Toggle>();
@@ -83,13 +83,14 @@ public class Options : Openable
     }
     public static void HandleSimpleLobbyChange()
     {
-
+        if (options.playerStores == null)
+            options.playerStores = new GameObject[4];
         for (int i = 0; i < 4; i++)
         {
             if(options.playerStores[i] == null)
             options.playerStores[i] = GameObject.Find("PlayerStore" + i);
         }
-        bool set = Options.options.simpleLobbyToggle.isOn;
+        bool set = OptionsMenu.options.simpleLobbyToggle.isOn;
         Debug.Log(set);
         for (int i = 0; i < 4; i++)
         {

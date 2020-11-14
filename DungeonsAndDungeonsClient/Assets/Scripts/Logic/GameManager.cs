@@ -55,7 +55,9 @@ public class GameManager : MonoBehaviour
         afterMenuLoad = new UnityEvent();
         afterMenuLoad.AddListener(SetLogic);
         afterMenuLoad.AddListener(LevelManager.UpdateLocalLevels);
-        afterMenuLoad.AddListener(Options.HandleSimpleLobbyChange);
+
+        afterMenuLoad.AddListener(OptionsMenu.HandleSimpleLobbyChange);
+
         afterMenuLoad.AddListener(LoadingScreen.instance.Close);
 
         afterTestLoad = new UnityEvent();
