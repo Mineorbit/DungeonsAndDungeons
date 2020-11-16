@@ -19,10 +19,12 @@ public class FileManager : MonoBehaviour
             createFolder(s);
         }
     }
+
     public static string GetLevelPath()
     {
         return Application.persistentDataPath + "/gameData/levels/";
     }
+
     string[] List(FileStructureProfile profile)
     {
         if (profile == null) return new string[0];
@@ -43,6 +45,7 @@ public class FileManager : MonoBehaviour
         }
         return paths.ToArray();
     }
+
     public static void deleteFolder(string path)
     {
         string filePath = Application.persistentDataPath + path;
@@ -51,6 +54,7 @@ public class FileManager : MonoBehaviour
             Directory.Delete(filePath,true);
         }
     }
+
     public static void createFolder(string path)
     {
         string filePath = Application.persistentDataPath+path;
