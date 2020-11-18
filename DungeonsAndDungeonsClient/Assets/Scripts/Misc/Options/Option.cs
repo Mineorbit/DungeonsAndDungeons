@@ -33,7 +33,19 @@ public class Option : ScriptableObject
 
     }
 
-    public string defaultValue;
+    string defaultValue;
+
+    public string DefaultValue
+    {
+        get
+        {
+
+        }
+        set
+        {
+            defaultValue = value;
+        }
+    }
     
     string optionValue;
     
@@ -46,7 +58,7 @@ public class Option : ScriptableObject
             
             if (optionValue == "")
             {
-                optionValue = defaultValue;
+                optionValue = DefaultValue;
                 Save();
             }
             return optionValue;
@@ -75,14 +87,13 @@ public class Option : ScriptableObject
             return Value;
         }
         else
-            return defaultValue;
+            return DefaultValue;
     }
 
     string path;
 
     void OnEnable()
     {
-        Debug.Log("HAAAAAAAAAAALOOOOOO");
         path = Application.persistentDataPath + "/gameData/settings/settings.txt";
         Debug.Log(OptionTag+" is set to "+Value);
     }
@@ -110,7 +121,7 @@ public class Option : ScriptableObject
             file.Close();
         }
 
-        return defaultValue;
+        return DefaultValue;
     }
 
     void Save()
