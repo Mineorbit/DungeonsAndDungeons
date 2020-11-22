@@ -77,8 +77,16 @@ public class Level : MonoBehaviour
         LevelData data = LevelData.Load(levelMetaData);
 
         currentLevel.InstantiateLevelFromLevelData(data);
+
+        GenerateNavMesh();
+
         currentLevel.isLoaded = true;
        
+    }
+
+    static void GenerateNavMesh()
+    {
+
     }
 
     void InstantiateLevelFromLevelData(LevelData d)

@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (Level.currentLevel.spawn[localId] == null || PlayerManager.playerManager.players[localId] == null) return;
         PlayerManager.playerManager.players[localId].gameObject.SetActive(false);
-        SetPlayerPosition(localId, new Vector3(0, 0, 0), false);
+        SetPlayerPosition(localId, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), false);
     }
     public static void SpawnPlayer(int localId)
     {
@@ -54,14 +54,14 @@ public class PlayerManager : MonoBehaviour
         Vector3 spawnLocation = Level.currentLevel.spawn[localId].transform.position;
         Debug.Log(localId + " : " + spawnLocation);
         PlayerManager.playerManager.players[localId].gameObject.SetActive(true);
-        SetPlayerPosition(localId, spawnLocation, true);
+        SetPlayerPosition(localId, spawnLocation,new Quaternion(0,0,0,0), true);
     }
-    public static void SetPlayerPosition(int localId, Vector3 pos, bool allowMove)
+    public static void SetPlayerPosition(int localId, Vector3 pos,Quaternion rot, bool allowMove)
     {
         if (PlayerManager.playerManager.players[localId] == null) return;
 
         Debug.Log($"Setting Player {localId} Position to: {pos} ");
-        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId, pos, allowMove);
+        PlayerSpawnPacket packet = new PlayerSpawnPacket(localId, pos, rot, allowMove);
 
         PlayerManager.playerManager.players[localId].setPositionData(pos, new Quaternion(0, 0, 0, 0));
 
@@ -72,13 +72,13 @@ public class PlayerManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            PlayerManager.SetPlayerPosition(i, GetLobbyPosition(i), false);
+            SpawnPlayerInLobby(i);
         }
     }
 
     public static void SpawnPlayerInLobby(int i)
     {
-    PlayerManager.SetPlayerPosition(i, GetLobbyPosition(i), false);
+    PlayerManager.SetPlayerPosition(i, GetLobbyPosition(i), new Quaternion(0, 0, 0, 0), false);
     }
 
     public static Vector3 GetLobbyPosition(int localId)

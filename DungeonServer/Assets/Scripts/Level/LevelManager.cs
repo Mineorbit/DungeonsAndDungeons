@@ -48,7 +48,6 @@ public class LevelManager : MonoBehaviour
 
     public static void Load(LevelData.LevelMetaData levelData)
     {
-        Debug.Log("Loading "+levelData.name);
 
         LevelData.LevelMetaData newMetaData = FetchOnline(levelData);
             
@@ -77,7 +76,6 @@ public class LevelManager : MonoBehaviour
     {
         if (!levelAvail(levelData))
         {
-        Debug.Log("Loading online " + levelData.name);
 
         int localId = GetFreeUniqueLocalLevelId();
 

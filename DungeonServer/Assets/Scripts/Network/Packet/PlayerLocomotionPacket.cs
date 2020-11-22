@@ -51,6 +51,7 @@ public class PlayerLocomotionPacket : Packet
     public override void OnReceive(int localId)
     {
         Vector3 position = new Vector3((float)content[0], (float)content[1], (float)content[2]);
-        PlayerManager.playerManager.players[localId].updateLocomotionData(position, new Quaternion(0,0,0,0));
+        Quaternion rotation = new Quaternion((float)content[3], (float)content[4], (float)content[5],(float) content[6]);
+        PlayerManager.playerManager.players[localId].updateLocomotionData(position, rotation);
     }
 }

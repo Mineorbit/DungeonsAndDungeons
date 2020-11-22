@@ -39,7 +39,7 @@ public class Option : ScriptableObject
     {
         get
         {
-
+            return defaultValue;
         }
         set
         {

@@ -54,11 +54,11 @@ public class PlayerLocomotionPacket : Packet
         int localId = (int)content[7];
 
         Vector3 position = new Vector3((float)content[0], (float)content[1], (float)content[2]);
-
+        Quaternion rotation = new Quaternion((float)content[3], (float)content[4], (float)content[5], (float)content[6]);
         if(localId>=0)
             if(PlayerManager.playerManager.players[localId]!=null)
             {
-                PlayerManager.playerManager.players[localId].setTargetLocomotionData(position,new Quaternion(0,0,0,0));
+                PlayerManager.playerManager.players[localId].setTargetLocomotionData(position,rotation);
             }
 
 

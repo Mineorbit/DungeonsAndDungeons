@@ -73,11 +73,13 @@ public class Player : MonoBehaviour
         {
             lockNetUpdate = false;
             transform.position = targetPosition;
+            transform.rotation = targetRotation;
         }
 
         if (!isMe)
         {
             transform.position = (transform.position + targetPosition) / 2;
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.5f);
         }
 
 
