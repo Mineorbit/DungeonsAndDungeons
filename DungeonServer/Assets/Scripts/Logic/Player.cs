@@ -69,11 +69,14 @@ public class Player : MonoBehaviour
     }
     void UpdatePlay()
     {
-        SendVicinity();
-	if(transform.position.x<=0)
+
+    SendVicinity();
+	
+    if(transform.position.y <= -8)
 	{
 	Kill();
 	}
+
     }
 
     public void Kill()
@@ -82,9 +85,7 @@ public class Player : MonoBehaviour
 
 	PlayerDeathPacket p = new PlayerDeathPacket(localId);
 	Server.SendPacketToAll(p);
-	
-	PlayerManager.SetPosition(localId, new Vector3(0,0,0),new Quaternion(0,0,0,0),false);
-	
+    PlayerManager.DespawnPlayer(localId);
     }
 
     public void SendLevelList()
