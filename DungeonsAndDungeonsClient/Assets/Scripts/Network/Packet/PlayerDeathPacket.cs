@@ -24,7 +24,6 @@ public class PlayerDeathPacket : Packet
     }
     public override void OnReceive()
     {
-        if (NetworkManager.instance.localId == (int)content[0])
-            { PlayerManager.playerManager.DespawnPlayer(NetworkManager.instance.localId); }
+        PlayerManager.playerManager.player[content[0]].Kil();
     }
 }

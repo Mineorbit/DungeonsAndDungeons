@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     float moveDelta = 0.005f;
 
 
+    bool alive = true;
+    int health = 100;
+
 
     public void Start()
     {
@@ -97,6 +100,17 @@ public class Player : MonoBehaviour
         lastPosition = transform.position;
     }
     
+    public void Kill()
+    {
+        health = 0;
+        alive = false;
+        PlayerManager.playerManager.DespawnPlayer(localId);
+        //HIER STATTDESSEN GAME LOGIC CALLEN für übergreifenden  effekt
+        if (NetworkManager.instance.localId == (int)content[0])
+        { DeathScreen.instance.Open(); }
+    }
+
+
     public void Update()
     {
         if(GameManager.GetState() == GameManager.State.Play)
