@@ -55,13 +55,7 @@ public class PlayerSpawnPacket : Packet
         int id = (int) content[0];
         Vector3 location = new Vector3((float) content[1], (float)content[2], (float)content[3]);
         Quaternion rotation = new Quaternion((float)content[5], (float)content[6], (float)content[7],(float) content[8]);
-        PlayerManager.playerManager.players[id].setPositionData(location, rotation);
-
-        PlayerManager.playerManager.playerControllers[id].allowedToMove = (bool)content[4];
-
-        if (id == NetworkManager.instance.localId)
-        {
-            PlayLogic.SpawnPositionSet = true;
-        }
+        bool allowedToMove = (bool)content[4];
+        PlayerManager.playerManager.players[id].Spawn(location,rotation,allowedToMove);
     }
 }

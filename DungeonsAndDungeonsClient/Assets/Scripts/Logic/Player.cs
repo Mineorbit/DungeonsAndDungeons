@@ -99,14 +99,37 @@ public class Player : MonoBehaviour
         }
         lastPosition = transform.position;
     }
-    
+
+    public void  Spawn(Vector3 location,Quaternion rotation, bool allowedToMove)
+    {
+        health = 100;
+        alive = true;
+
+
+        PlayerManager.playerManager.SpawnPlayer(localId, location);
+
+        setPositionData(location, rotation);
+
+        setMovementStatus(allowedToMove);
+
+        if (localId == NetworkManager.instance.localId)
+        {
+            PlayLogic.SpawnPositionSet = true;
+        }
+    }
+
+    public void setMovementStatus(bool allowedToMove)
+    {
+        PlayerManager.playerManager.playerControllers[localId].allowedToMove = allowedToMove;
+    }
+
     public void Kill()
     {
         health = 0;
         alive = false;
         PlayerManager.playerManager.DespawnPlayer(localId);
         //HIER STATTDESSEN GAME LOGIC CALLEN für übergreifenden  effekt
-        if (NetworkManager.instance.localId == (int)content[0])
+        if (NetworkManager.instance.localId == localId)
         { DeathScreen.instance.Open(); }
     }
 

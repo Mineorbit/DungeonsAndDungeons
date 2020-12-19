@@ -24,6 +24,6 @@ public class PlayerDeathPacket : Packet
     }
     public override void OnReceive()
     {
-        PlayerManager.playerManager.player[content[0]].Kil();
+        PlayerManager.playerManager.players[(int) content[0]].Kill();
     }
 }
