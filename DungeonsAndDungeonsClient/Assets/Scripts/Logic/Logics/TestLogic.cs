@@ -10,13 +10,13 @@ public class TestLogic : Logic
     {
         sceneIndex = 2;
         created = Instantiator.InstantiateAssets("test");
-        LookUpPlayers();
+        CreatePlayers();
     }
-    void LookUpPlayers()
+    void CreatePlayers()
     {
         for(int i = 0;i<4;i++)
         {
-            PlayerManager.playerManager.playerControllers[i] = GameObject.Find($"Player{i}").GetComponent<PlayerController>();
+            PlayerManager.playerManager.Add(i,"Rot");
         }
     }
 

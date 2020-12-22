@@ -48,7 +48,7 @@ public class PlayerLocomotionPacket : Packet
         content[7] = localId;
         packetId = 6;
     }
-
+    //State Must be  Play
     public override void OnReceive()
     {
         int localId = (int)content[7];
@@ -58,7 +58,7 @@ public class PlayerLocomotionPacket : Packet
         if(localId>=0)
             if(PlayerManager.playerManager.players[localId]!=null)
             {
-                PlayerManager.playerManager.players[localId].setTargetLocomotionData(position,rotation);
+                ( (NetPlayer) PlayerManager.playerManager.players[localId]).setTargetLocomotionData(position,rotation);
             }
 
 

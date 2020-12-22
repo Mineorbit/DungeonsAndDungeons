@@ -7,8 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController currentPlayer;
-
+    //public static PlayerController currentPlayer;
     Player player;
     CharacterController controller;
     public Transform cam;
@@ -34,45 +33,22 @@ public class PlayerController : MonoBehaviour
 
         controller = transform.GetComponent<CharacterController>();
     }
+
     void Start()
     {
         player = transform.GetComponent<Player>();
     }
-    void Update()
-    {
-        UpdateGround();
-        if (GameManager.GetState() == GameManager.State.Play)
-        {
-            PlayUpdate();
-        }
-        else if (GameManager.GetState() == GameManager.State.Test)
-        {
-            TestUpdate();
-        }
-        Move();
-    }
-    void TestUpdate()
-    {
-        isMe = (currentPlayer == this);
-        doSim = true;
-    }
-    void PlayUpdate()
-    {
-        isMe = (currentPlayer == this);
-        doSim = isMe && !player.lockNetUpdate;
-    }
 
-    void UpdateGround()
+    public void UpdateGround()
     {
         int mask = 1 << 10;
         RaycastHit hit;
         IsGrounded = controller.isGrounded || Physics.Raycast(transform.position,-Vector3.up,out hit, 1.5f,mask);
     }
 
-    void Move()
+    public void Move()
     {
 
-        doInput = PlayerManager.acceptInput && allowedToMove && isMe && !player.lockNetUpdate;
         if (!controller.isGrounded && doSim)
         {
             speedY -= gravity * Time.deltaTime;
@@ -107,6 +83,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnDisable()
     {
-        if (currentPlayer == this) currentPlayer = null;
+    //    if (currentPlayer == this) currentPlayer = null;
     }
 }
