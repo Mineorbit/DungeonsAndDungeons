@@ -62,18 +62,18 @@ public class TestLogic : Logic
         PlayerManager.playerManager.SetCurrentPlayer(player);
     }
 
-    void DespawnPlayers()
+    void RemovePlayers()
     {
         for (int i = 0; i < 4; i++)
         {
-            PlayerManager.playerManager.DespawnPlayer(i);
+            PlayerManager.playerManager.Remove(i);
         }
     }
 
     public override void Stop()
     {
         if (!running) return;
-        DespawnPlayers();
+        RemovePlayers();
         DespawnAll();
     }
     public override void DeInit()

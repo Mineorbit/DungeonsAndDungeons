@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Transform cam;
     float convergenceSpeed = 0.1f;
     float turnSmoothVel;
-    public float Speed = 1f;
+    public float Speed = 3f;
     public Vector3 targetDirection;
     public Vector3 movingDirection;
     float speedY = 0;

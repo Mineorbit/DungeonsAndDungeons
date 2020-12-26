@@ -4,30 +4,63 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int localId;
+    public PlayerController playerController;
+    public ColorChanger colorChanger;
+    public int _localId;
+
+    public int localId
+    {
+        set { _localId = value;
+            changeColor(_localId);
+        }
+        get { return _localId; }
+    }
+
+
     public string name;
     public enum Color {Blue, Red, Green, Yellow};
     public Color playerColor;
 
     bool alive = true;
     int health = 100;
-
-
-    public void Start()
+    public virtual void Awake()
     {
+        colorChanger = gameObject.GetComponent<ColorChanger>();
+    }
+    public virtual void Start()
+    {
+        playerController = gameObject.GetComponent<PlayerController>();
+    }
 
-        if(GameManager.GetState() == GameManager.State.Play)
-        {
-            SetupPlay();
+    public void changeColor(int id)
+    {
+        switch(id)
+        { 
+            case 0:
+                playerColor = Color.Blue;
+                setColor(UnityEngine.Color.blue);
+                break;
+            case 1:
+                playerColor = Color.Yellow;
+                setColor(UnityEngine.Color.yellow);
+                break;
+            case 2:
+                playerColor = Color.Red;
+                setColor(UnityEngine.Color.red);
+                break;
+            case 3:
+                playerColor = Color.Green;
+                setColor(UnityEngine.Color.green);
+                break;
         }
-
     }
-
-    void SetupPlay()
+    void setColor(UnityEngine.Color baseC)
     {
-    gameObject.name = "Player" + localId;
-    }
 
+        colorChanger.SetColor(3, baseC);
+        colorChanger.SetColor(4, colorChanger.comp(baseC));
+        colorChanger.SetColor(7,UnityEngine.Color.Lerp(baseC,UnityEngine.Color.white,0.75f));
+    }
 
     public virtual void  Spawn(Vector3 location,Quaternion rotation, bool allowedToMove)
     {

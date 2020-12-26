@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LocalPlayer : Player
 {
-    public void Start()
+    public override void Start()
     {
+        base.Start();
         SetupPlay();
     }
     void SetupPlay()

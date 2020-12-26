@@ -84,19 +84,24 @@ public class PlayerManager : MonoBehaviour
 
 
         Player player = null;
+        PlayerController playerController = null;
+
         Debug.Log("Adding Player:" + GameManager.GetState());
         if(GameManager.GetState() == GameManager.State.Play)
         { 
             player = g.AddComponent<NetPlayer>();
+            playerController = g.AddComponent<NetPlayerController>();
         }else 
         if(GameManager.GetState()  == GameManager.State.Test)
         {
             player = g.AddComponent<LocalPlayer>();
+            playerController = g.AddComponent<LocalPlayerController>();
         }
+
         player.name = name;
         player.localId = freeLocalId;
         players[freeLocalId] = player;
-        playerControllers[freeLocalId] = g.GetComponent<PlayerController>();
+        playerControllers[freeLocalId] = playerController;
 
     }
 
