@@ -21,7 +21,7 @@ public class LocalPlayerController : PlayerController
     {
         doSim = true;
 
-        doInput = PlayerManager.acceptInput && allowedToMove; //&& !player.lockNetUpdate;
+        doInput = PlayerManager.acceptInput && allowedToMove && activated; //&& !player.lockNetUpdate;
     }
 
 }

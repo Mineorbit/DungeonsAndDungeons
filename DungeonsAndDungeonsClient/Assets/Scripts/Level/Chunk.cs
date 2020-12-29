@@ -70,10 +70,18 @@ public class Chunk : MonoBehaviour
         foreach(LevelObject.LevelObjectInstanceData instanceObj in chunkData.levelObjectInstanceData)
         {
             Vector3 position = new Vector3(instanceObj.location[0], instanceObj.location[1], instanceObj.location[2]);
+            Quaternion rotation = new Quaternion(instanceObj.rotation[0], instanceObj.rotation[1], instanceObj.rotation[2], instanceObj.rotation[3]);
             int typeID = instanceObj.objectData;
             LevelObjectData d = GetByID(typeID);
-            Add(d, position);
+            Add(d, position, rotation);
         }
+    }
+
+    public void Add(LevelObjectData typeData, Vector3 localPosition, Quaternion localRotation)
+    {
+        if (typeData == null) return;
+        GameObject o = typeData.Create(localPosition, localRotation, transform);
+        objects.Add(o.GetComponent<LevelObject>());
     }
 
     public void Add(LevelObjectData typeData, Vector3 localPosition)

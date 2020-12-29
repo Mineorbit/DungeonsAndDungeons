@@ -48,12 +48,17 @@ public class BuilderController : MonoBehaviour
         {
             Displace();
         }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            BuilderCursor.builderCursor.RotateRight();
+        }
     }
+    
     void Place()
     {
         var t = BuilderCursor.Get();
         if(t.legal)
-        Level.currentLevel.Add(t.levelObjectData,t.pos);
+        Level.currentLevel.Add(t.levelObjectData,t.pos,t.rot);
     }
     void Displace()
     {

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     float gravity = 4f;
 
 
+    public bool activated;
     public bool IsGrounded;
     public bool doInput;
     public bool isMe;

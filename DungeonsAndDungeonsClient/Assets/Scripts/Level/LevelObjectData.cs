@@ -9,6 +9,7 @@ public class LevelObjectData : InstantionTarget
     public Vector3 Scale;
     public Vector3 rotation;
     public Vector3 offset;
+    public Vector3 centerOfRotation;
     public int ID;
     Mesh objectMesh;
     public virtual GameObject Create(Vector3 location, Transform parent)
@@ -17,7 +18,18 @@ public class LevelObjectData : InstantionTarget
         g.GetComponent<LevelObject>().ObjectDataID = this.ID;
         g.GetComponent<LevelObject>().chunk = parent.GetComponent<Chunk>();
         g.transform.localScale = Scale;
-        g.transform.position = location + offset;
+        g.transform.position = location;
+        g.GetComponent<LevelObject>().OnCreate();
+        return g;
+    }
+    public virtual GameObject Create(Vector3 location, Quaternion rotation, Transform parent)
+    {
+        GameObject g = base.Create(location, parent);
+        g.GetComponent<LevelObject>().ObjectDataID = this.ID;
+        g.GetComponent<LevelObject>().chunk = parent.GetComponent<Chunk>();
+        g.transform.localScale = Scale;
+        g.transform.position = location;
+        g.transform.rotation = rotation;
         g.GetComponent<LevelObject>().OnCreate();
         return g;
     }

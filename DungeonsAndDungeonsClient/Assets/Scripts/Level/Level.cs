@@ -157,6 +157,15 @@ public class Level : MonoBehaviour
         }
         targetChunk.Add(typeData,position); 
     }
+    public void Add(LevelObjectData typeData, Vector3 position, Quaternion rotation)
+    {
+        Chunk targetChunk = GetChunk(position);
+        if (targetChunk == null)
+        {
+            targetChunk = AddChunk(GetChunkLocation(position));
+        }
+        targetChunk.Add(typeData, position, rotation);
+    }
 
     public void Add(LevelObjectData typeData, Vector3 position, Vector3 normal)
     {

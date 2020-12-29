@@ -7,7 +7,7 @@ public class BuilderCursor : MonoBehaviour
 {
     float maxDistance = 200;
     static float degree;
-    static BuilderCursor builderCursor;
+    public static BuilderCursor builderCursor;
 
     static LevelObjectData currentSelection;
 
@@ -25,10 +25,13 @@ public class BuilderCursor : MonoBehaviour
 
     public Material legalMat;
     public Material illlegalMat;
-    
+
+    public int direction;
+
+
+
     public void Start()
     {
-        Debug.Log("Setting up Cursor");
         if (builderCursor != null) Destroy(this);
         builderCursor = this;
         cursorModel = transform.Find("model");
@@ -51,12 +54,18 @@ public class BuilderCursor : MonoBehaviour
     public static void Set(LevelObjectData objectType)
     {
         currentSelection = objectType;
-        UpdateRotation();
         UpdateMesh();
     }
-    static void UpdateRotation()
+
+
+    public void RotateLeft()
     {
-        builderCursor.transform.rotation = Quaternion.Euler(currentSelection.rotation);
+        direction = (direction - 1) % 4;
+    }
+
+    public void RotateRight()
+    {
+        direction = (direction + 1) % 4;
     }
     void Update()
     {
@@ -116,7 +125,13 @@ public class BuilderCursor : MonoBehaviour
     {
 
         builderCursor.transform.position = position;
+
+        Vector3 rot = new Vector3(0,0,0);
+        if (currentSelection!=null) rot = currentSelection.rotation;
+        builderCursor.transform.rotation = Quaternion.Euler(rot);
+
         cursorModel.transform.position = position+offset;
+        builderCursor.transform.RotateAround(builderCursor.transform.position, Vector3.up, builderCursor.direction * 90f);
     }
     static void UpdateMesh()
     {
@@ -141,9 +156,9 @@ public class BuilderCursor : MonoBehaviour
         }
         return null;
     }
-    public static (Vector3 pos, Vector3 norm, LevelObjectData levelObjectData, bool legal) Get()
+    public static (Vector3 pos, Quaternion rot, Vector3 norm, LevelObjectData levelObjectData, bool legal) Get()
     {
-        return (builderCursor.transform.position,normalVec, currentSelection, placementLegal);
+        return (cursorModel.transform.position, builderCursor.transform.rotation, normalVec, currentSelection, placementLegal);
     }
     public void OnDisable()
     {

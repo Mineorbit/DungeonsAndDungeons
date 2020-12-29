@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
         }
         for(int i = 0; i<4;i++)
         {
-            playerControllers[i].enabled = localId == i;
+            playerControllers[i].activated = localId == i;
         }
         currentPlayerLocalId = localId;
     }
@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour
         Player player = null;
         PlayerController playerController = null;
 
-        Debug.Log("Adding Player:" + GameManager.GetState());
+        Debug.Log("Adding Player: " + GameManager.GetState());
         if(GameManager.GetState() == GameManager.State.Play)
         { 
             player = g.AddComponent<NetPlayer>();

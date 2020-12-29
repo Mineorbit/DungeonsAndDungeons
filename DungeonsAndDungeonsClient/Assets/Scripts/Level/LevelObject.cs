@@ -9,16 +9,22 @@ public class LevelObject : MonoBehaviour
     [Serializable]
     public class LevelObjectInstanceData
     {
-        public LevelObjectInstanceData(Vector3 loc, int data)
+        public LevelObjectInstanceData(Vector3 loc, Quaternion rot, int data)
         {
             objectData = data;
             location = new float[3];
             location[0] = loc.x;
             location[1] = loc.y;
             location[2] = loc.z;
+            rotation = new float[4];
+            rotation[0] = rot.x;
+            rotation[1] = rot.y;
+            rotation[2] = rot.z;
+            rotation[3] = rot.w;
         }
         public int objectData;
         public float[] location;
+        public float[] rotation;
         //LevelObjectData typeData
     }
 
@@ -28,7 +34,7 @@ public class LevelObject : MonoBehaviour
 
     public LevelObjectInstanceData GetLevelObjectInstanceData()
     {
-        LevelObjectInstanceData d =  new LevelObjectInstanceData(transform.position,ObjectDataID);
+        LevelObjectInstanceData d =  new LevelObjectInstanceData(transform.position,transform.rotation,ObjectDataID);
         return d;
     }
 
