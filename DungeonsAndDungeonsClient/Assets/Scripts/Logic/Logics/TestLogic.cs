@@ -38,14 +38,13 @@ public class TestLogic : Logic
     }
     public void Swap()
     {
-            Debug.Log("Test");
             player = (player + 1) % 4;
             PlayerManager.playerManager.SetCurrentPlayer(player);
     }
     Vector3 GetSpawnLocation(int i)
     {
 
-        if (Level.currentLevel.spawn[i] != null) return (Level.currentLevel.spawn[i].transform.position+new Vector3(0,0.25f,0));
+        if (Level.currentLevel.spawn[i] != null) return (Level.currentLevel.spawn[i].transform.position+new Vector3(0,1.5f,0));
         return new Vector3(i*4,0.25f,0);
     }
 
@@ -56,6 +55,7 @@ public class TestLogic : Logic
             PlayerManager.playerManager.DespawnPlayer(i);
             //HIER CHECK FÜR SPAWN PLACE LOGIC
             Vector3 location = GetSpawnLocation(i);
+            Debug.Log("Spawning player at: " + location);
             PlayerManager.playerManager.SpawnPlayer(i,location);
         }
 

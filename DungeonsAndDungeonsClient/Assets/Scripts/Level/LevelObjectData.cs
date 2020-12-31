@@ -10,6 +10,7 @@ public class LevelObjectData : InstantionTarget
     public Vector3 rotation;
     public Vector3 offset;
     public Vector3 centerOfRotation;
+    public float granularity;
     public int ID;
     Mesh objectMesh;
     public virtual GameObject Create(Vector3 location, Transform parent)

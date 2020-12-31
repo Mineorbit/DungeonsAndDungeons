@@ -42,7 +42,9 @@ public class BuilderCursor : MonoBehaviour
     }
     public static void Set(Vector3 target,Vector3 normal)
     {
-        Vector3 position = new Vector3(Mathf.Round(target.x + normal.x), Mathf.Round(target.y + normal.y), Mathf.Round(target.z + normal.z));
+        float g = currentSelection.granularity;
+        if (g == 0) g = 1;
+        Vector3 position = new Vector3(Mathf.Round((target.x)/g)*g, Mathf.Round((target.y) / g) * g, Mathf.Round((target.z) / g) * g)+normal*g;
         normalVec = normal;
         if(currentSelection!= null)
         {

@@ -77,7 +77,7 @@ public class BuilderController : MonoBehaviour
         currentRotation.y += Input.GetAxis("Mouse X");
         float oldX = currentRotation.x;
         currentRotation.x -= Input.GetAxis("Mouse Y");
-        if ( !( (300 <= currentRotation.x && currentRotation.x <= 361) || (-1 <= currentRotation.x && currentRotation.x <= 60)))
+        if ( !( (280 <= currentRotation.x && currentRotation.x <= 361) || (-1 <= currentRotation.x && currentRotation.x <= 80)))
             currentRotation.x = oldX;
         transform.localRotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z);
     }

@@ -9,7 +9,6 @@ public class Goal : LevelObject
     {
         if (Level.currentLevel.goal != null)
         {
-            Debug.Log("Doppelt");
             Destroy(this.gameObject);
         }else
         { 
