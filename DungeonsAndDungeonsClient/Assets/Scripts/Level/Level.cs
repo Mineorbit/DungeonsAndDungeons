@@ -164,7 +164,6 @@ public class Level : MonoBehaviour
     }
     public static void storeCache()
     {
-
         lastData = currentLevel.GetLevelData();
     }
 
@@ -208,10 +207,14 @@ public class Level : MonoBehaviour
     {
         if(o != null)
         o.chunk.Remove(o);
+
+        storeCache();
     }
 
     public static void Clear()
     {
+        currentLevel.goal = null;
+        for (int i = 0; i < 4; i++) currentLevel.spawn[i] = null;
         foreach(Transform child in currentLevel.transform)
         {
             Destroy(child.gameObject);
@@ -223,7 +226,7 @@ public class Level : MonoBehaviour
     {
         Debug.Log("Resetting Level");
         Clear();
-        currentLevel.InstantiateLevelFromLevelData(lastData);
+        Load(lastData.metaData);
     }
     public static void Destroy()
     {
