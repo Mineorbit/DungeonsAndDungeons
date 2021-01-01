@@ -8,13 +8,9 @@ public class PlayerAnimator : MonoBehaviour
 {
     PlayerController playerController;
     CharacterController controller;
-    Animator characterAnimator;
+    public Animator characterAnimator;
     public ParticleSystem[] runDust;
     bool playingDust;
-    public static float speed;
-
-    Vector3 lastPosition;
-    Vector3 dif;
     void Start()
     {
         controller = transform.GetComponent<CharacterController>();
@@ -23,7 +19,6 @@ public class PlayerAnimator : MonoBehaviour
         runDust = transform.Find("Particles").Find("Running").GetComponentsInChildren<ParticleSystem>();
         playingDust = true;
         StopDust();
-        lastPosition = transform.position;
     }
 
     void Update()
@@ -31,8 +26,9 @@ public class PlayerAnimator : MonoBehaviour
         Vector3 targetDirection = playerController.movingDirection;
         targetDirection.y = 0;
         Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
-        characterAnimator.SetFloat("Speed",Mathf.Min(inputVelocity.magnitude,1));
-        speed = Mathf.Min(inputVelocity.magnitude, 1);
+
+        float movementSpeed = playerController.currentSpeed;
+        characterAnimator.SetFloat("Speed",movementSpeed);
         bool movementKeyPressed = Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.D);
 
        
@@ -43,9 +39,7 @@ public class PlayerAnimator : MonoBehaviour
 
 
 
-        dif = lastPosition - transform.position;
-
-        if ((dif).magnitude > 0 && playerController.IsGrounded)
+        if (movementSpeed > 0 && playerController.IsGrounded)
         {
             StartDust();
         }
@@ -54,7 +48,6 @@ public class PlayerAnimator : MonoBehaviour
             StopDust();
         }
 
-        lastPosition = transform.position;
     }
 
     void StartDust()

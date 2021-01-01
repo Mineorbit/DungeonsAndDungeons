@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //public static PlayerController currentPlayer;
     Player player;
-    CharacterController controller;
+    public CharacterController controller;
     public Transform cam;
     float convergenceSpeed = 0.1f;
     float turnSmoothVel;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     float speedY = 0;
     float gravity = 4f;
 
+    public float currentSpeed;
 
     public bool activated;
     public bool IsGrounded;
@@ -78,8 +79,11 @@ public class PlayerController : MonoBehaviour
         if (targetDirection.sqrMagnitude >= 0.01f)
         {
             movingDirection = targetDirection;
-            controller.Move(targetDirection * Speed * Time.deltaTime);
+        }else
+        {
+            movingDirection = new Vector3(0, 0, 0);
         }
+        controller.Move(targetDirection * Speed * Time.deltaTime);
     }
 
     public void OnDisable()

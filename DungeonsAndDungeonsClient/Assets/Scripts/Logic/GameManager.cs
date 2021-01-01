@@ -181,6 +181,14 @@ public class GameManager : MonoBehaviour
         Action<GameAction> nop = x =>
         {
         };
+        Action<GameAction> actTestEdit = x =>
+        {
+            Level.Reset();
+            UnityEvent swapEvent = new UnityEvent();
+            selectAsyncSwap(swapEvent);
+            swapEvent.Invoke();
+            SetLogic();
+        };
 
 
 
@@ -199,7 +207,7 @@ public class GameManager : MonoBehaviour
         //Reset Level
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterTestFromEdit), new Tuple<Action<GameAction>, State>(actEditTest, State.Test));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterEditFromTest), new Tuple<Action<GameAction>, State>(actEditTest, State.Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterEditFromTest), new Tuple<Action<GameAction>, State>(actTestEdit, State.Edit));
 
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, State.MainMenu));
 

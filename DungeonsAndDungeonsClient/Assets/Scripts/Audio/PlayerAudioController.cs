@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerAudioController : AudioController
 {
-    public CharacterController controller;
+    public PlayerController controller;
     void Start()
     {
-        controller = transform.GetComponent<CharacterController>();    
+        controller = transform.GetComponent<PlayerController>();    
     }
     void Update()
     {
-        float speed = controller.velocity.magnitude;
-        Blend(0,PlayerAnimator.speed);
-        if (controller.isGrounded && speed > 0)
+        Blend(0, controller.currentSpeed);
+        if (controller.IsGrounded && controller.currentSpeed > 0)
         {
             Play(0);
         }

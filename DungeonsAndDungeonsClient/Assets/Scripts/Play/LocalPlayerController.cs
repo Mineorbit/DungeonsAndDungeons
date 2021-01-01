@@ -20,7 +20,7 @@ public class LocalPlayerController : PlayerController
     void TestUpdate()
     {
         doSim = true;
-
+        currentSpeed = controller.velocity.magnitude / 3;
         doInput = PlayerManager.acceptInput && allowedToMove && activated; //&& !player.lockNetUpdate;
     }
 

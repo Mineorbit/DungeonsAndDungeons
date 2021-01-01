@@ -22,6 +22,9 @@ public class Level : MonoBehaviour
 
     public Goal goal;
 
+
+    public static LevelData lastData;
+
     void Setup(LevelData.LevelMetaData metaData)
     {
 
@@ -74,6 +77,7 @@ public class Level : MonoBehaviour
 
         LevelData data = LevelData.Load(levelMetaData);
         currentLevel.InstantiateLevelFromLevelData(data);
+        storeCache();
 
     }
 
@@ -155,8 +159,15 @@ public class Level : MonoBehaviour
         {
          targetChunk =  AddChunk(GetChunkLocation(position));
         }
-        targetChunk.Add(typeData,position); 
+        targetChunk.Add(typeData,position);
+        storeCache();
     }
+    public static void storeCache()
+    {
+
+        lastData = currentLevel.GetLevelData();
+    }
+
     public void Add(LevelObjectData typeData, Vector3 position, Quaternion rotation)
     {
         Chunk targetChunk = GetChunk(position);
@@ -207,6 +218,13 @@ public class Level : MonoBehaviour
         }
     }
 
+
+    public static void Reset()
+    {
+        Debug.Log("Resetting Level");
+        Clear();
+        currentLevel.InstantiateLevelFromLevelData(lastData);
+    }
     public static void Destroy()
     {
         Clear();

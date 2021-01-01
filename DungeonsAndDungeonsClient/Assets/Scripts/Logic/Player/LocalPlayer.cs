@@ -13,5 +13,7 @@ public class LocalPlayer : Player
     {
         gameObject.name = "Player" + localId;
     }
-
+    void Update()
+    {
+    }
 }
