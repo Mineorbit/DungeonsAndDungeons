@@ -52,6 +52,10 @@ public class BuilderController : MonoBehaviour
         {
             BuilderCursor.builderCursor.RotateRight();
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            BuilderCursor.builderCursor.RotateLeft();
+        }
     }
     
     void Place()

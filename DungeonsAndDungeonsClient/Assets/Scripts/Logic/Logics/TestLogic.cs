@@ -25,9 +25,9 @@ public class TestLogic : Logic
         if (running) return;
         base.Start();
         SpawnAll();
-
         SpawnPlayers();
     }
+
     //This is ugly need better way
     public void Update()
     {
@@ -36,11 +36,13 @@ public class TestLogic : Logic
             Swap();
         }
     }
+
     public void Swap()
     {
             player = (player + 1) % 4;
             PlayerManager.playerManager.SetCurrentPlayer(player);
     }
+
     Vector3 GetSpawnLocation(int i)
     {
 
@@ -76,6 +78,7 @@ public class TestLogic : Logic
         RemovePlayers();
         DespawnAll();
     }
+
     public override void DeInit()
     {
         

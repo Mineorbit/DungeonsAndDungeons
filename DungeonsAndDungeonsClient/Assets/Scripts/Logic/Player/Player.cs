@@ -5,7 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController playerController;
+    public ItemHandle[] itemHandles;
+    
     public ColorChanger colorChanger;
+
     public int _localId;
 
     public float speed;
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour
     public virtual void Start()
     {
         playerController = gameObject.GetComponent<PlayerController>();
+        itemHandles = gameObject.GetComponentsInChildren<ItemHandle>();
     }
 
     public void changeColor(int id)
