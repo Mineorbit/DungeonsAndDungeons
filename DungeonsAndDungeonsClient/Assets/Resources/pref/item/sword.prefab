@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7304354147411499333}
   - component: {fileID: 7304354147411499332}
   - component: {fileID: 7304354147411499335}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7304354147411499329}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 3.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.73, z: 0}
+  m_LocalScale: {x: 0.5, y: 3.2367635, z: 0.80919087}
   m_Children: []
   m_Father: {fileID: 7304354148584884278}
   m_RootOrder: 0
@@ -105,8 +105,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7304354148584884278}
   - component: {fileID: 7304354148584884272}
-  - component: {fileID: 7304354148584884275}
-  m_Layer: 0
+  - component: {fileID: 456513915717623983}
+  m_Layer: 11
   m_Name: sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,15 +120,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7304354148584884274}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.27059805, y: 0.27059805, z: 0.6532815, w: 0.6532815}
+  m_LocalPosition: {x: -0.101, y: 0.136, z: 0.101}
   m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
   m_Children:
   - {fileID: 7304354147411499334}
   - {fileID: 7304354148860585986}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 90}
 --- !u!114 &7304354148584884272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d18b71e7d471c4c9d8557a685cbf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &7304354148584884275
+--- !u!65 &456513915717623983
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,11 +149,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7304354148584884274}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4, z: 1}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Size: {x: 1, y: 3.364413, z: 1}
+  m_Center: {x: -2.893905e-14, y: 1.8085285, z: -3.6415315e-14}
 --- !u!1 &7304354148860586045
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7304354148860585985}
   - component: {fileID: 7304354148860585984}
   - component: {fileID: 7304354148860585987}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: shaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,8 +181,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7304354148860586045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.06, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.24, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.80919087, z: 0.40459543}
   m_Children: []
   m_Father: {fileID: 7304354148584884278}
   m_RootOrder: 1

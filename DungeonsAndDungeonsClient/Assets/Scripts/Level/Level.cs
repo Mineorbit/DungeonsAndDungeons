@@ -31,13 +31,21 @@ public class Level : MonoBehaviour
     public static UnityEvent playRoundStart;
 
     Enemy[] enemies;
+
+    public bool unsavedChanges = false;
     void Setup(LevelData.LevelMetaData metaData)
     {
 
         Clear();
-        levelMetaData = metaData;
-        name = metaData.name;
+        if(metaData!=null)
+        {
+            levelMetaData = metaData;
+            name = metaData.name;
+        }
 
+        spawn = new Spawn[4];
+
+        SetupEvents();
         SetupChunkData();
     }
 
@@ -58,6 +66,11 @@ public class Level : MonoBehaviour
         playRoundStart.Invoke();
     }
 
+    public static void StoreCache()
+    {
+        lastData = currentLevel.GetLevelData();
+        currentLevel.unsavedChanges = true;
+    }
 
     public static Enemy[] GetAllEnemies()
     {
@@ -78,10 +91,7 @@ public class Level : MonoBehaviour
         if (currentLevel != null) Destroy(this);
         currentLevel = this;
 
-        spawn = new Spawn[4];
-
-        SetupEvents();
-        SetupChunkData(); 
+        Setup(null);
     }
 
     public static void Create(LevelData.LevelMetaData levelMetaData)
@@ -100,6 +110,7 @@ public class Level : MonoBehaviour
 
         LevelData data = currentLevel.GetLevelData();
         data.Save();
+        currentLevel.unsavedChanges = false;
     }
 
     public static void Load(LevelData.LevelMetaData levelMetaData)
@@ -107,7 +118,8 @@ public class Level : MonoBehaviour
 
         LevelData data = LevelData.Load(levelMetaData);
         currentLevel.InstantiateLevelFromLevelData(data);
-        storeCache();
+        StoreCache();
+        currentLevel.unsavedChanges = false;
 
     }
 
@@ -185,12 +197,9 @@ public class Level : MonoBehaviour
          targetChunk =  AddChunk(GetChunkLocation(position));
         }
         targetChunk.Add(typeData,position);
-        storeCache();
+        StoreCache();
     }
-    public static void storeCache()
-    {
-        lastData = currentLevel.GetLevelData();
-    }
+    
 
     public void Add(LevelObjectData typeData, Vector3 position, Quaternion rotation)
     {
@@ -200,12 +209,8 @@ public class Level : MonoBehaviour
             targetChunk = AddChunk(GetChunkLocation(position));
         }
         targetChunk.Add(typeData, position, rotation);
+        currentLevel.unsavedChanges = true;
     }
-
-    public void Add(LevelObjectData typeData, Vector3 position, Vector3 normal)
-    {
-    }
-
 
     Tuple<int,int> GetChunkLocation(Vector3 position)
     {
@@ -233,16 +238,23 @@ public class Level : MonoBehaviour
         if(o != null)
         o.chunk.Remove(o);
 
-        storeCache();
+        StoreCache();
+        currentLevel.unsavedChanges = true;
     }
 
     public static void Clear()
     {
-        currentLevel.goal = null;
-        for (int i = 0; i < 4; i++) currentLevel.spawn[i] = null;
+        if (currentLevel != null)
+        {
+            currentLevel.goal = null;
+            if(currentLevel.spawn.Length>=4)
+            for (int i = 0; i < 4; i++) 
+                if(currentLevel.spawn[i] != null)
+                    currentLevel.spawn[i] = null;
         foreach(Transform child in currentLevel.transform)
         {
             Destroy(child.gameObject);
+        }
         }
     }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController playerController;
+
+    public Item[] items;
     public ItemHandle[] itemHandles;
     
     public ColorChanger colorChanger;
@@ -36,6 +38,9 @@ public class Player : MonoBehaviour
     {
         playerController = gameObject.GetComponent<PlayerController>();
         itemHandles = gameObject.GetComponentsInChildren<ItemHandle>();
+        items = gameObject.GetComponentsInChildren<Item>();
+
+        itemHandles[0].Attach(items[0]);
     }
 
     public void changeColor(int id)
