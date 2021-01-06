@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
             
 
             
-            if (controller.isGrounded && Input.GetKeyDown(KeyCode.Space))
+            if (IsGrounded && Input.GetKeyDown(KeyCode.Space))
             {
                 speedY = 1.5f;
             }

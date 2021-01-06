@@ -1,192 +1,172 @@
 Using pre-set license
-Built from 'trunk' branch; Version is '2020.2.0a19 (8037ac78137e) revision 8402860'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10  (10.0.0) 64bit' Language: 'de' Physical Memory: 16225 MB
+Built from '2020.2/release' branch; Version is '2020.2.1f1 (270dd8c3da1c) revision 2559448'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10  (10.0.0) 64bit' Language: 'de' Physical Memory: 32681 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
-D:\UnityEditors\2020.2.0a19\Editor\Unity.exe
+C:\Program Files\Unity\Hub\Editor\2020.2.1f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient
+C:/Users/Max/DungeonsAndDungeons/DungeonsAndDungeonsClient
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-51684
-Successfully changed project path to: C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient
-C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient
+55131
+Successfully changed project path to: C:/Users/Max/DungeonsAndDungeons/DungeonsAndDungeonsClient
+C:/Users/Max/DungeonsAndDungeons/DungeonsAndDungeonsClient
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 113.25 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 64.02 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Initialize engine version: 2020.2.0a19 (8037ac78137e)
-[Subsystems] Discovering subsystems at path D:/UnityEditors/2020.2.0a19/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/mineo/Desktop/DungeonsAndDungeons/DungeonsAndDungeonsClient/Assets
+Initialize engine version: 2020.2.1f1 (270dd8c3da1c)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Max/DungeonsAndDungeons/DungeonsAndDungeonsClient/Assets
 GfxDevice: creating device client; threaded=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 980 Ti (ID=0x17c8)
+    Renderer: NVIDIA GeForce RTX 3070 (ID=0x2484)
     Vendor:   
-    VRAM:     6097 MB
-    Driver:   26.21.14.4575
+    VRAM:     8043 MB
+    Driver:   27.21.14.5751
 Initialize mono
-Mono path[0] = 'D:/UnityEditors/2020.2.0a19/Editor/Data/Managed'
-Mono path[1] = 'D:/UnityEditors/2020.2.0a19/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'D:/UnityEditors/2020.2.0a19/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56256
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56348
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.003501 seconds.
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+Registered in 0.002146 seconds.
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 109.40 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 65.35 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.563 seconds
-Registering precompiled user dll's ...
-Registered in 0.187221 seconds.
+- Completed reload, in  0.873 seconds
 Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001133 seconds.
 Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
-Refreshing native plugins compatible for Editor in 306.11 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 67.18 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
+HDRP Internally changed the storage of Cube Cookie to use Octahedral Projection inside the 2D Cookie Atlas. It is recommended that you increase the size of the 2D Cookie Atlas if your cookies no longer fit.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset/<>c:<.cctor>b__110_12 (UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset) (at Library/PackageCache/com.unity.render-pipelines.high-definition@10.2.2/Runtime/RenderPipeline/HDRenderPipelineAsset.Migration.cs:126)
+UnityEngine.Rendering.HighDefinition.MigrationStep`2<UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset/Version, UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset>:Migrate (UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset) (at Library/PackageCache/com.unity.render-pipelines.high-definition@10.2.2/Runtime/Core/Migration/MigrationStep.cs:52)
+UnityEngine.Rendering.HighDefinition.MigrationDescription`2<UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset/Version, UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset>:Migrate (UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset) (at Library/PackageCache/com.unity.render-pipelines.high-definition@10.2.2/Runtime/Core/Migration/MigrationDescription.cs:101)
+UnityEngine.Rendering.HighDefinition.HDRenderPipelineAsset:OnEnable () (at Library/PackageCache/com.unity.render-pipelines.high-definition@10.2.2/Runtime/RenderPipeline/HDRenderPipelineAsset.Migration.cs:146)
+UnityEngine.Rendering.GraphicsSettings:get_currentRenderPipeline ()
+UnityEditor.Rendering.HighDefinition.HDBakedReflectionSystem:Initialize () (at Library/PackageCache/com.unity.render-pipelines.high-definition@10.2.2/Editor/Lighting/Reflection/HDBakedReflectionSystem.cs:42)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.high-definition@10.2.2/Runtime/RenderPipeline/HDRenderPipelineAsset.Migration.cs Line: 126)
+
 Mono: successfully reloaded assembly
-- Completed reload, in  2.358 seconds
+- Completed reload, in  1.005 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.12 seconds
-Refreshing native plugins compatible for Editor in 1.71 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.82 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.5 MB.
-System memory in use after: 117.5 MB.
+Unloading 3569 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 175.0 MB.
+System memory in use after: 175.3 MB.
 
-Unloading 64 unused Assets to reduce memory usage. Loaded Objects now: 3222.
-Total: 14.979200 ms (FindLiveObjects: 1.281600 ms CreateObjectMapping: 0.551400 ms MarkObjects: 4.446400 ms  DeleteObjects: 8.697600 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 4033.
+Total: 5.633700 ms (FindLiveObjects: 0.818900 ms CreateObjectMapping: 0.226900 ms MarkObjects: 4.483000 ms  DeleteObjects: 0.102600 ms)
 
 ========================================================================
 Received Import Request.
-  path: Assets/Scripts/Edit/BuilderController.cs
-  artifactKey: Guid(8e778d68f814af245835eb764f042235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Edit/BuilderController.cs using Guid(8e778d68f814af245835eb764f042235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcee3c8270ab5b3cfb4fa17cea3a7c90') in 0.168314 seconds
-  Import took 0.183659 seconds .
+  path: Assets/Scripts/Play/PlayerController.cs
+  artifactKey: Guid(af4ba52449622644395839654fb308a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Play/PlayerController.cs using Guid(af4ba52449622644395839654fb308a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96fd602082882046216523a0b13fd930') in 0.074894 seconds
+  Import took 0.082861 seconds .
 
 ========================================================================
 Received Prepare
-Reloading mono domain
+Refreshing native plugins compatible for Editor in 1.28 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 97.5 MB.
+System memory in use after: 97.8 MB.
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 4033.
+Total: 2.360800 ms (FindLiveObjects: 0.439300 ms CreateObjectMapping: 0.083300 ms MarkObjects: 1.822900 ms  DeleteObjects: 0.013800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001369 seconds.
 Begin MonoManager ReloadAssembly
-Registering precompiled unity dll's ...
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Register platform support module: D:/UnityEditors/2020.2.0a19/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.003171 seconds.
-Symbol file LoadedFromMemory doesn't match image C:\Users\mineo\Desktop\DungeonsAndDungeons\DungeonsAndDungeonsClient\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
-d3d11: failed to create staging 2D texture w=128 h=1024 d3dfmt=28 [8007000e]
-d3d11: failed to create 2D texture id=203 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.65 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.848 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.65 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3282 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 162.6 MB.
+System memory in use after: 162.8 MB.
 
-d3d11: failed to create 2D texture shader resource view id=203 [D3D error was 80070057]
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 4035.
+Total: 2.398900 ms (FindLiveObjects: 0.410700 ms CreateObjectMapping: 0.084800 ms MarkObjects: 1.888000 ms  DeleteObjects: 0.014400 ms)
 
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
+========================================================================
+Received Import Request.
+  Time since last request: 186.523508 seconds.
+  path: Assets/Scripts/Play/PlayerController.cs
+  artifactKey: Guid(af4ba52449622644395839654fb308a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Play/PlayerController.cs using Guid(af4ba52449622644395839654fb308a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ff8613b0eb92913905d0947ec14da0d') in 0.005832 seconds
+  Import took 0.012321 seconds .
 
-d3d11: failed to create 2D texture id=205 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001614 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.87 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.880 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.83 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3282 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 162.7 MB.
+System memory in use after: 162.9 MB.
 
-d3d11: failed to create 2D texture shader resource view id=205 [D3D error was 80070057]
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 4037.
+Total: 2.812800 ms (FindLiveObjects: 0.532900 ms CreateObjectMapping: 0.082700 ms MarkObjects: 2.174000 ms  DeleteObjects: 0.021700 ms)
 
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create 2D texture id=207 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
-
-d3d11: failed to create 2D texture shader resource view id=207 [D3D error was 80070057]
-
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create 2D texture id=209 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
-
-d3d11: failed to create 2D texture shader resource view id=209 [D3D error was 80070057]
-
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create 2D texture id=211 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
-
-d3d11: failed to create 2D texture shader resource view id=211 [D3D error was 80070057]
-
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create 2D texture id=213 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
-
-d3d11: failed to create 2D texture shader resource view id=213 [D3D error was 80070057]
-
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create 2D texture id=215 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
-
-d3d11: failed to create 2D texture shader resource view id=215 [D3D error was 80070057]
-
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create 2D texture id=217 width=512 height=512 mips=1 dxgifmt=65 [D3D error was 8007000e]
-
-d3d11: failed to create 2D texture shader resource view id=217 [D3D error was 80070057]
-
-d3d11: Failed to create 2D texture in GfxDeviceD3D11
-
-d3d11: failed to create Cube texture id=225 width=128 height=128 mips=8 dxgifmt=95 [D3D error was 8007000e]
-
-d3d11: failed to create Cube texture shader resource view id=225 [D3D error was 80070057]
-
-failed to create cubemap
-
-Received signal SIGSEGV
-Stack trace:
-0x00007ff7791a3b67 (Unity) 
-0x00007ff779199234 (Unity) 
-0x00007ff7791809e5 (Unity) 
-0x00007ff779195dbc (Unity) 
-0x00007ff779a85cdd (Unity) 
-0x00007ff77a17cc43 (Unity) 
-0x00007ff77a17d602 (Unity) 
-0x00007ff77a17d77a (Unity) 
-0x00007ff77a10c96e (Unity) 
-0x00007ff77a10d117 (Unity) 
-0x00007ff77a1106a3 (Unity) 
-0x00007ff77878a426 (Unity) 
-0x00007ff77a01ed04 (Unity) 
-0x00007ff77a0a1390 (Unity) 
-0x00007ff77a0c3592 (Unity) 
-0x00007ff778919a36 (Unity) 
-0x00007ff779b79f1e (Unity) 
-0x00007ff779b7872f (Unity) 
-0x00007ff779b748a8 (Unity) 
-0x00007ff779b7479f (Unity) 
-0x00007ff77a0e8a2c (Unity) 
-0x00007ff77a02d2e0 (Unity) 
-0x00007ff77a034279 (Unity) 
-0x00007ff77b3c5e69 (Unity) 
-0x00007ff77b7dd8cf (Unity) 
-0x00007ff77b8a1f02 (Unity) 
-0x00007ff77b8a4060 (Unity) 
-0x00007ff77b8a77ee (Unity) 
-0x00007ff77b82318b (Unity) 
-0x00007ff77b8231e0 (Unity) 
-0x00007ff77ad5f1de (Unity) 
-0x00007ff77b6b8f72 (Unity) 
-0x00007ff77d47ced6 (Unity) 
-0x00007ffa24647bd4 (KERNEL32) 
-0x00007ffa258ace51 (ntdll) RtlUserThreadStart
-
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
