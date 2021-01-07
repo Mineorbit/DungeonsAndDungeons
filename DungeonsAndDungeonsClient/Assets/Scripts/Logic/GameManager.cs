@@ -105,6 +105,15 @@ public class GameManager : MonoBehaviour
         };
         Action<GameAction> actEditTest = x =>
         {
+            Level.SetupTestRound();
+            UnityEvent swapEvent = new UnityEvent();
+            selectAsyncSwap(swapEvent);
+            swapEvent.Invoke();
+            SetLogic();
+        };
+        Action<GameAction> actTestEdit = x =>
+        {
+            Level.Reset();
             UnityEvent swapEvent = new UnityEvent();
             selectAsyncSwap(swapEvent);
             swapEvent.Invoke();
@@ -181,14 +190,7 @@ public class GameManager : MonoBehaviour
         Action<GameAction> nop = x =>
         {
         };
-        Action<GameAction> actTestEdit = x =>
-        {
-            Level.Reset();
-            UnityEvent swapEvent = new UnityEvent();
-            selectAsyncSwap(swapEvent);
-            swapEvent.Invoke();
-            SetLogic();
-        };
+        
 
 
 

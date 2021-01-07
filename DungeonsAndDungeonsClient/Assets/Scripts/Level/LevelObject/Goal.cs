@@ -7,6 +7,7 @@ public class Goal : LevelObject
     bool[] Inside;
     public override void OnCreate()
     {
+        base.OnCreate();
         if (Level.currentLevel.goal != null)
         {
             Destroy(this.gameObject);
@@ -52,10 +53,12 @@ public class Goal : LevelObject
                 win = win && Inside[i];
             }
         }
-        if (anyone && win) Win();
+        if (anyone && win) Action();
     }
-    public void Win()
+
+    public override void Action()
     {
+        base.Action();
         Debug.Log("Win in Test");
     }
 }
