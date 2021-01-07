@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System.Linq;
+
 public class Level : MonoBehaviour
 {
     public static Level currentLevel;
@@ -25,6 +27,10 @@ public class Level : MonoBehaviour
 
     public static LevelData lastData;
 
+    public static UnityEvent testRoundStart;
+    public static UnityEvent playRoundStart;
+
+    Enemy[] enemies;
     void Setup(LevelData.LevelMetaData metaData)
     {
 
@@ -33,9 +39,32 @@ public class Level : MonoBehaviour
         name = metaData.name;
 
         SetupChunkData();
-
-
     }
+
+    void SetupEvents()
+    {
+        testRoundStart = new UnityEvent();
+        playRoundStart = new UnityEvent();
+
+        Level.testRoundStart.AddListener(LevelNavGenerator.UpdateNavMesh);
+    }
+    public static void SetupTestRound()
+    {
+        testRoundStart.Invoke();
+    }
+
+    public static void SetupPlayRound()
+    {
+        playRoundStart.Invoke();
+    }
+
+
+    public static Enemy[] GetAllEnemies()
+    {
+        if(currentLevel.enemies  == null) currentLevel.enemies = currentLevel.gameObject.GetComponentsInChildren<Enemy>();
+        return currentLevel.enemies;
+    }
+
 
     void SetupChunkData()
     {
@@ -51,6 +80,7 @@ public class Level : MonoBehaviour
 
         spawn = new Spawn[4];
 
+        SetupEvents();
         SetupChunkData(); 
     }
 
@@ -102,6 +132,7 @@ public class Level : MonoBehaviour
 
         return c;
     }
+
     Chunk FromChunkData(Chunk.ChunkData chunkData)
     {
         Tuple<int,int> location = chunkLocations.FirstOrDefault(x => x.Value == chunkData.saveID).Key;
@@ -125,16 +156,10 @@ public class Level : MonoBehaviour
         return d;
     }
 
-
-   
-
-
     public void LoadChunk(Chunk.ChunkData chunkData, Tuple<int,int> location)
     {
         Chunk c = InstantiateChunk(location.Item1,location.Item2);
     }
-
-
 
     public Chunk AddChunk(Tuple<int, int> location)
     {
@@ -228,6 +253,7 @@ public class Level : MonoBehaviour
         Clear();
         Load(lastData.metaData);
     }
+
     public static void Destroy()
     {
         Clear();

@@ -5,14 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController playerController;
+
+    public Item[] items;
+    public ItemHandle[] itemHandles;
+
     public ColorChanger colorChanger;
+
     public int _localId;
 
     public float speed;
 
     public int localId
     {
-        set { _localId = value;
+        set
+        {
+            _localId = value;
             changeColor(_localId);
         }
         get { return _localId; }
@@ -20,7 +27,7 @@ public class Player : MonoBehaviour
 
 
     public string name;
-    public enum Color {Blue, Red, Green, Yellow};
+    public enum Color { Blue, Red, Green, Yellow };
     public Color playerColor;
 
     bool alive = true;
@@ -32,12 +39,16 @@ public class Player : MonoBehaviour
     public virtual void Start()
     {
         playerController = gameObject.GetComponent<PlayerController>();
+        itemHandles = gameObject.GetComponentsInChildren<ItemHandle>();
+        items = gameObject.GetComponentsInChildren<Item>();
+
+        itemHandles[0].Attach(items[0]);
     }
 
     public void changeColor(int id)
     {
-        switch(id)
-        { 
+        switch (id)
+        {
             case 0:
                 playerColor = Color.Blue;
                 setColor(UnityEngine.Color.blue);
@@ -61,10 +72,10 @@ public class Player : MonoBehaviour
 
         colorChanger.SetColor(7, baseC);
         colorChanger.SetColor(2, colorChanger.comp(baseC));
-        colorChanger.SetColor(8,UnityEngine.Color.Lerp(baseC,UnityEngine.Color.white,0.75f));
+        colorChanger.SetColor(8, UnityEngine.Color.Lerp(baseC, UnityEngine.Color.white, 0.75f));
     }
 
-    public virtual void  Spawn(Vector3 location,Quaternion rotation, bool allowedToMove)
+    public virtual void Spawn(Vector3 location, Quaternion rotation, bool allowedToMove)
     {
         health = 100;
         alive = true;

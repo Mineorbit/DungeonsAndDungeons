@@ -39,20 +39,27 @@ public class LevelObject : MonoBehaviour
     }
 
     UnityEvent actionEvent;
-    
+
+
     public virtual void OnCreate()
+    {
+        Level.testRoundStart.AddListener(OnTestRoundStart);
+    }
+
+    public virtual void OnTestRoundStart()
     {
 
     }
 
     public virtual void OnDestroy()
     {
-        if(chunk!=null)
+        Level.testRoundStart.AddListener(OnTestRoundStart);
+        if (chunk!=null)
         chunk.objects.Remove(this);
     }
 
 
-    public void Action()
+    public virtual void Action()
     {
         actionEvent.Invoke();
     }
