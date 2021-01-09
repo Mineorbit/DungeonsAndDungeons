@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     //public static PlayerController currentPlayer;
     Player player;
     public CharacterController controller;
+    public PlayerAnimator playerAnimator;
     public Transform cam;
     float convergenceSpeed = 0.1f;
     float turnSmoothVel;
@@ -27,6 +28,10 @@ public class PlayerController : MonoBehaviour
     public bool isMe;
     public static bool doSim;
     public bool allowedToMove = true;
+
+
+
+
     //Setup References for PlayerController and initial values if necessary
     public void Awake()
     {
@@ -34,11 +39,15 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main.transform;
 
         controller = transform.GetComponent<CharacterController>();
+        playerAnimator = GetComponent<PlayerAnimator>();
+
     }
 
     void Start()
     {
         player = transform.GetComponent<Player>();
+
+        playerAnimator.playerAnimationEventHandler.attackFinishedEvent.AddListener(AttackFinished);
     }
 
     public void UpdateGround()
@@ -68,10 +77,16 @@ public class PlayerController : MonoBehaviour
 
             
 
-            
-            if (IsGrounded && Input.GetKeyDown(KeyCode.Space))
+            if(IsGrounded)
             {
-                speedY = 1.5f;
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    speedY = 1.5f;
+                }else if (Input.GetMouseButtonDown(0))
+                {
+                    Attack();
+                }
             }
         }
 
@@ -86,8 +101,24 @@ public class PlayerController : MonoBehaviour
         controller.Move(targetDirection * Speed * Time.deltaTime);
     }
 
+    public virtual void Attack()
+    {
+        allowedToMove = false;
+        playerAnimator.Attack();
+    }
+
+    IEnumerator attackWaitTime(float t)
+    {
+        yield return new WaitForSeconds(t);
+        allowedToMove = true;
+    }
+
+    public virtual void AttackFinished()
+    {
+        StartCoroutine(attackWaitTime(0.025f));
+    }
+
     public void OnDisable()
     {
-    //    if (currentPlayer == this) currentPlayer = null;
     }
 }

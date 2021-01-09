@@ -5,18 +5,36 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     Player seenPlayer;
+
+    public int health;
+    public int damage;
+
+
     float viewDistance = 15;
     float attackDistance = 4;
-    public float distToTarget = float.MaxValue;
-    public enum EnemyState { Idle = 1, Track, Attack };
-    public EnemyState enemyState;
 
+
+    public float distToTarget = float.MaxValue;
+    public enum EnemyState { Idle = 1, Track, Attack, Strike };
+    public EnemyState enemyState;
     Vector3 lastPositionOfPlayer;
+
+    BlobAnimator animator;
+
     NavMeshAgent navMeshAgent;
 
     void Start()
     {
+        health = 100;
+
+        damage = 2;
+
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        animator = GetComponentInChildren<BlobAnimator>();
+
+        animator.endAttackEvent.AddListener(FinishStrike);
+
         enemyState = EnemyState.Idle;
     }
 
@@ -25,6 +43,12 @@ public class EnemyController : MonoBehaviour
         UpdateDistance();
         UpdateState();
 
+        UpdateTarget();
+      
+    }
+
+    void UpdateTarget()
+    {
         if (enemyState == EnemyState.Track)
         {
             navMeshAgent.SetDestination(lastPositionOfPlayer);
@@ -51,22 +75,111 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public IEnumerator strikeTimer;
+
     void UpdateState()
     {
+        if(enemyState != EnemyState.Strike)
+        {
+
         if (attackDistance <= distToTarget && distToTarget <= viewDistance)
         {
             if (seenPlayer != null)
-                enemyState = EnemyState.Track;
+                {
+                    enemyState = EnemyState.Track;
+                    if(strikeTimer != null)
+                    { 
+                        StopCoroutine(strikeTimer);
+                        strikeTimer = null;
+                    }
+                }
         }
         else if (distToTarget <= attackDistance)
         {
             if (seenPlayer != null)
+                { 
                 enemyState = EnemyState.Attack;
-        }
+                    if (strikeTimer == null)
+                    {
+                        strikeTimer = StrikeTimer(2);
+                        StartCoroutine(strikeTimer);
+                    }
+                }
+            }
         else
         {
             enemyState = EnemyState.Idle;
+                if (strikeTimer != null)
+                    StopCoroutine(strikeTimer);
         }
+
+        }
+    }
+
+    IEnumerator StrikeTimer(float strikeTime)
+    {
+        yield return new WaitForSeconds(strikeTime);
+        Strike();
+    }
+
+    void Strike()
+    {
+        strikeTimer = null;
+        enemyState = EnemyState.Strike;
+        animator.Attack();
+    }
+
+    public void  FinishStrike()
+    {
+        enemyState = EnemyState.Attack;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        GameObject col = collision.collider.gameObject;
+        if (col.tag == "Item")
+        {
+            //int damage = col.GetComponent<EnemyController>().damage;
+            int damage = 20;
+            if (damage > 0)
+            {
+                Hit(damage);
+            }
+        }
+    }
+
+    bool hitCooldown = false;
+
+    IEnumerator HitTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        hitCooldown = false;
+    }
+
+
+    void StartHitCooldown()
+    {
+        hitCooldown = true;
+        StartCoroutine(HitTimer(2));
+    }
+
+    public virtual void Hit(int damage)
+    {
+        if (!hitCooldown)
+        {
+            StartHitCooldown();
+            health = health - damage;
+            if (health == 0)
+            {
+                Kill();
+            }
+        }
+
+    }
+
+    public void Kill()
+    {
+        Level.currentLevel.RemoveObject(GetComponent<Enemy>());
     }
 
     Player CheckVisiblePlayer()
@@ -78,12 +191,16 @@ public class EnemyController : MonoBehaviour
             Player p = PlayerManager.playerManager.players[i];
             if (p != null)
             {
+                if(p.IsAlive())
+                { 
                 Vector3 dir = p.transform.position - transform.position;
                 float dist = dir.magnitude;
-                if (Vector3.Dot(transform.forward, dir) > 0 && dist <= viewDistance && dist < minDist)
-                {
+
+                    if (Vector3.Dot(transform.forward, dir) > 0 && dist <= viewDistance && dist < minDist)
+                    {
                     minPlayer = p;
                     minDist = dist;
+                    }
                 }
             }
         }

@@ -77,18 +77,20 @@ public class Chunk : MonoBehaviour
         }
     }
 
-    public void Add(LevelObjectData typeData, Vector3 localPosition, Quaternion localRotation)
+    public LevelObject Add(LevelObjectData typeData, Vector3 localPosition, Quaternion localRotation)
     {
-        if (typeData == null) return;
+        if (typeData == null) return null;
         GameObject o = typeData.Create(localPosition, localRotation, transform);
         objects.Add(o.GetComponent<LevelObject>());
+        return o.GetComponent<LevelObject>();
     }
 
-    public void Add(LevelObjectData typeData, Vector3 localPosition)
+    public LevelObject Add(LevelObjectData typeData, Vector3 localPosition)
     {
-        if (typeData == null) return;
+        if (typeData == null) return null;
         GameObject o = typeData.Create(localPosition, transform);
         objects.Add(o.GetComponent<LevelObject>());
+        return o.GetComponent<LevelObject>();
     }
 
 

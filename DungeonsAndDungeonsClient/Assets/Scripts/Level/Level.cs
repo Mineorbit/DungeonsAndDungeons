@@ -15,6 +15,8 @@ public class Level : MonoBehaviour
 
     public InstantionTarget chunkPrefab;
 
+    List<LevelObject> dynamicObjects;
+
 
     Dictionary<Tuple<int, int>, int> chunkLocations;
     
@@ -179,28 +181,40 @@ public class Level : MonoBehaviour
 
     public void Add(LevelObjectData typeData, Vector3 position)
     {
-        Chunk targetChunk = GetChunk(position);
-        if(targetChunk == null)
-        {
-         targetChunk =  AddChunk(GetChunkLocation(position));
-        }
-        targetChunk.Add(typeData,position);
+        AddObject(typeData, position, new Quaternion(0,0,0,0));
         storeCache();
-    }
-    public static void storeCache()
-    {
-        lastData = currentLevel.GetLevelData();
     }
 
     public void Add(LevelObjectData typeData, Vector3 position, Quaternion rotation)
+    {
+        AddObject(typeData,position,rotation);
+        storeCache();
+    }
+
+    public void AddDynamic(LevelObjectData typeData, Vector3 position, Quaternion rotation)
+    {
+        LevelObject levelObject = AddObject(typeData, position, rotation);
+        if(levelObject != null)
+        dynamicObjects.Add(levelObject);
+    }
+
+    public LevelObject AddObject(LevelObjectData typeData, Vector3 position, Quaternion rotation)
     {
         Chunk targetChunk = GetChunk(position);
         if (targetChunk == null)
         {
             targetChunk = AddChunk(GetChunkLocation(position));
         }
-        targetChunk.Add(typeData, position, rotation);
+        return targetChunk.Add(typeData, position);
     }
+    public static void storeCache()
+    {
+        lastData = currentLevel.GetLevelData();
+    }
+
+
+
+
 
     public void Add(LevelObjectData typeData, Vector3 position, Vector3 normal)
     {
@@ -235,6 +249,12 @@ public class Level : MonoBehaviour
 
         storeCache();
     }
+    public void RemoveObject(LevelObject o)
+    {
+        if (o != null)
+            o.chunk.Remove(o);
+    }
+
 
     public static void Clear()
     {

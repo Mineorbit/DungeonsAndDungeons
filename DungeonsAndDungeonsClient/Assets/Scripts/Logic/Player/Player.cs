@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
 
     public float speed;
 
+
+
+    bool hitCooldown = false;
+
     public int localId
     {
         set
@@ -31,7 +35,9 @@ public class Player : MonoBehaviour
     public Color playerColor;
 
     bool alive = true;
-    int health = 100;
+    public int health = 100;
+    float cooldownTime = 2f;
+ 
     public virtual void Awake()
     {
         colorChanger = gameObject.GetComponent<ColorChanger>();
@@ -43,6 +49,11 @@ public class Player : MonoBehaviour
         items = gameObject.GetComponentsInChildren<Item>();
 
         itemHandles[0].Attach(items[0]);
+    }
+
+    public virtual bool IsAlive()
+    {
+        return alive;
     }
 
     public void changeColor(int id)
@@ -85,6 +96,35 @@ public class Player : MonoBehaviour
     public void setMovementStatus(bool allowedToMove)
     {
         PlayerManager.playerManager.playerControllers[localId].allowedToMove = allowedToMove;
+    }
+
+
+    IEnumerator HitTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        hitCooldown = false;
+    }
+
+
+    void StartHitCooldown()
+    {
+
+        hitCooldown = true;
+        StartCoroutine(HitTimer(cooldownTime));
+    }
+    
+    public virtual void Hit(int damage)
+    {
+        if(!hitCooldown)
+        {
+        StartHitCooldown();
+        health = health - damage;
+        if(health == 0)
+        {
+            Kill();
+        }
+        }
+
     }
 
     public virtual void Kill()

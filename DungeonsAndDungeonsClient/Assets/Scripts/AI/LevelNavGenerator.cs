@@ -17,6 +17,7 @@ public class LevelNavGenerator : MonoBehaviour
     Enemy[] enemies = Level.GetAllEnemies();
     foreach(Enemy e in enemies)
     {
+            if(e != null)
             e.gameObject.SetActive(false);
     }
 
@@ -24,7 +25,8 @@ public class LevelNavGenerator : MonoBehaviour
 
     foreach (Enemy e in enemies)
     {
-        e.gameObject.SetActive(true);
+            if (e != null)
+                e.gameObject.SetActive(true);
     }
     }
 }

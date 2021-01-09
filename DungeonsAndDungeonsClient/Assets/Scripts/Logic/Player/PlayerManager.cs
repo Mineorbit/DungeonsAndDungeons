@@ -121,7 +121,7 @@ public class PlayerManager : MonoBehaviour
         if (playerControllers[localId] == null) return;
 
 
-            playerControllers[localId].gameObject.SetActive(true);
+        playerControllers[localId].gameObject.SetActive(true);
         //Move to other class Player eventually
         playerControllers[localId].transform.position = location;
         //Noch HUD Aktivieren

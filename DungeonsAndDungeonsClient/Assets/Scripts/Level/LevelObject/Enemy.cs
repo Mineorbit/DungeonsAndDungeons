@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class Enemy : LevelObject
 {
+
    public override void OnTestRoundStart()
-    {
+   {
         gameObject.AddComponent<EnemyController>();
         gameObject.AddComponent<NavMeshAgent>();
-    }
+        Destroy(GetComponent<SphereCollider>());
+   }
 }
