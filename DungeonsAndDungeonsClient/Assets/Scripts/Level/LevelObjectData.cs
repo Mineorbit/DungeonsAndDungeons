@@ -40,7 +40,7 @@ public class LevelObjectData : InstantionTarget
         {
             GameObject g = base.Create(new Vector3(0,0,0));
             g.SetActive(false);
-            objectMesh = g.GetComponent<MeshFilter>().mesh;
+            objectMesh = g.GetComponentInChildren<MeshFilter>().mesh;
             Destroy(g);
         }
         return objectMesh;

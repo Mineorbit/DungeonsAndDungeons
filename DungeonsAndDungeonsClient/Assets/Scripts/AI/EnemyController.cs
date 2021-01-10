@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
-    Player seenPlayer;
-
+    Enemy me;
+    public Player seenPlayer;
+    public Enemy seenAlly;
     public int health;
     public int damage;
 
@@ -14,17 +17,22 @@ public class EnemyController : MonoBehaviour
     float attackDistance = 4;
 
 
-    public float distToTarget = float.MaxValue;
-    public enum EnemyState { Idle = 1, Track, Attack, Strike };
+    float distToTarget = float.MaxValue;
+
+    public enum EnemyState {Idle = 1, Track, Attack, PrepareStrike ,Strike, Dead};
     public EnemyState enemyState;
     Vector3 lastPositionOfPlayer;
 
     BlobAnimator animator;
 
     NavMeshAgent navMeshAgent;
+    System.Random rand;
 
     void Start()
     {
+        me = GetComponent<Enemy>();
+
+        rand = new System.Random();
         health = 100;
 
         damage = 2;
@@ -62,7 +70,7 @@ public class EnemyController : MonoBehaviour
 
     void UpdateDistance()
     {
-
+        seenAlly = CheckClosestAlley();
         seenPlayer = CheckVisiblePlayer();
         if (seenPlayer != null)
         {
@@ -79,7 +87,7 @@ public class EnemyController : MonoBehaviour
 
     void UpdateState()
     {
-        if(enemyState != EnemyState.Strike)
+        if(enemyState != EnemyState.Strike || enemyState!= EnemyState.PrepareStrike)
         {
 
         if (attackDistance <= distToTarget && distToTarget <= viewDistance)
@@ -98,11 +106,14 @@ public class EnemyController : MonoBehaviour
         {
             if (seenPlayer != null)
                 { 
-                enemyState = EnemyState.Attack;
-                    if (strikeTimer == null)
+                    enemyState = EnemyState.Attack;
+                    if(seenAlly == null)
                     {
-                        strikeTimer = StrikeTimer(2);
-                        StartCoroutine(strikeTimer);
+                        TryStrike();
+                    }else
+                    if(seenAlly.GetState() != EnemyState.Strike || seenAlly.GetState() != EnemyState.PrepareStrike)
+                    {
+                        TryStrike();
                     }
                 }
             }
@@ -116,6 +127,15 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void TryStrike()
+    {
+        if (strikeTimer == null)
+        {
+            enemyState = EnemyState.PrepareStrike;
+            strikeTimer = StrikeTimer((1 +  5 * (float) rand.NextDouble()));
+            StartCoroutine(strikeTimer);
+        }
+    }
     IEnumerator StrikeTimer(float strikeTime)
     {
         yield return new WaitForSeconds(strikeTime);
@@ -124,9 +144,24 @@ public class EnemyController : MonoBehaviour
 
     void Strike()
     {
-        strikeTimer = null;
-        enemyState = EnemyState.Strike;
-        animator.Attack();
+        if(seenAlly!=null)
+        {
+        if (seenAlly.GetState() != EnemyState.Strike || seenAlly.GetState() != EnemyState.PrepareStrike)
+            {
+                strikeTimer = null;
+                enemyState = EnemyState.Strike;
+                animator.Attack();
+            }
+            else
+            {
+            enemyState = EnemyState.Attack;
+            }
+        }else
+        {
+            strikeTimer = null;
+            enemyState = EnemyState.Strike;
+            animator.Attack();
+        }
     }
 
     public void  FinishStrike()
@@ -134,9 +169,9 @@ public class EnemyController : MonoBehaviour
         enemyState = EnemyState.Attack;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        GameObject col = collision.collider.gameObject;
+        GameObject col = collision.gameObject;
         if (col.tag == "Item")
         {
             //int damage = col.GetComponent<EnemyController>().damage;
@@ -179,7 +214,30 @@ public class EnemyController : MonoBehaviour
 
     public void Kill()
     {
+        enemyState = EnemyState.Dead;
         Level.currentLevel.RemoveObject(GetComponent<Enemy>());
+    }
+
+    Enemy CheckClosestAlley()
+    {
+        float minDist = float.MaxValue;
+        Enemy minEnemy = null;
+        foreach (Enemy e in Level.GetAllEnemies())
+        {
+            if (e != null  && e!=me && e.GetState() != EnemyState.Dead)
+            {
+               
+                    Vector3 dir = e.transform.position - transform.position;
+                    float dist = dir.magnitude;
+
+                    if (dist <= attackDistance && dist < minDist)
+                    {
+                        minEnemy = e;
+                        minDist = dist;
+                    }
+            }
+        }
+        return minEnemy;
     }
 
     Player CheckVisiblePlayer()
