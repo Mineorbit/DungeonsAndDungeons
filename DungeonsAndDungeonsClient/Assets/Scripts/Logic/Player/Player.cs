@@ -38,10 +38,29 @@ public class Player : MonoBehaviour
     public int health = 100;
     float cooldownTime = 2f;
  
+    public ItemHandle GetLeftHandle()
+    {
+        foreach(ItemHandle i in itemHandles)
+        {
+            if (i.handleType == ItemHandle.HandleType.LeftHand) return i;
+        }
+        return null;
+    }
+
+    public ItemHandle GetRightHandle()
+    {
+        foreach(ItemHandle i in itemHandles)
+        {
+            if (i.handleType == ItemHandle.HandleType.RightHand) return i;
+        }
+        return null;
+    }
+
     public virtual void Awake()
     {
         colorChanger = gameObject.GetComponent<ColorChanger>();
     }
+ 
     public virtual void Start()
     {
         playerController = gameObject.GetComponent<PlayerController>();

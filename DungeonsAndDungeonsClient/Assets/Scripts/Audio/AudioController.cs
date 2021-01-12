@@ -29,6 +29,7 @@ public class AudioController : MonoBehaviour
                 audioSources[j][i] = transform.gameObject.AddComponent<AudioSource>();
                 audioSources[j][i].loop = ap.loop;
                 audioSources[j][i].mute = true;
+                audioSources[j][i].spatialBlend = ap.spatialFactor;
                 audioSources[j][i].playOnAwake = ap.onAwake;
                 audioSources[j][i].clip = ap.audioClip[i];
                 i++;

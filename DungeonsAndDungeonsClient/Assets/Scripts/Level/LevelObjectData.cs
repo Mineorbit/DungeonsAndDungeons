@@ -30,6 +30,7 @@ public class LevelObjectData : InstantionTarget
         g.GetComponent<LevelObject>().chunk = parent.GetComponent<Chunk>();
         g.transform.localScale = Scale;
         g.transform.position = location;
+        Debug.Log("Rotation: "+rotation);
         g.transform.rotation = rotation;
         g.GetComponent<LevelObject>().OnCreate();
         return g;

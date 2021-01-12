@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
     public virtual void Attack()
     {
         allowedToMove = false;
+        player.GetLeftHandle().Use();
         playerAnimator.Attack();
     }
 
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
     public virtual void AttackFinished()
     {
+        player.GetLeftHandle().StopUse();
         StartCoroutine(attackWaitTime(0.025f));
     }
 

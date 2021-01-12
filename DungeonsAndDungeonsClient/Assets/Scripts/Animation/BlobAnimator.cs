@@ -29,6 +29,10 @@ public class BlobAnimator : MonoBehaviour
         animator.SetTrigger("Strike");
         attackEvent.Invoke();
     }
+    public void Hit()
+    {
+        animator.SetTrigger("Hit");
+    }
 
     public void EndAttack()
     {

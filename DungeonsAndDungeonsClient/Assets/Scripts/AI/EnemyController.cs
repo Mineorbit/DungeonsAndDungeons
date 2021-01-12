@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent navMeshAgent;
     System.Random rand;
 
+    public float currentSpeed;
+
     void Start()
     {
         me = GetComponent<Enemy>();
@@ -44,6 +46,11 @@ public class EnemyController : MonoBehaviour
         animator.endAttackEvent.AddListener(FinishStrike);
 
         enemyState = EnemyState.Idle;
+    }
+
+    void Update()
+    {
+        currentSpeed = navMeshAgent.velocity.magnitude;
     }
 
     void FixedUpdate()
@@ -169,19 +176,7 @@ public class EnemyController : MonoBehaviour
         enemyState = EnemyState.Attack;
     }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        GameObject col = collision.gameObject;
-        if (col.tag == "Item")
-        {
-            //int damage = col.GetComponent<EnemyController>().damage;
-            int damage = 20;
-            if (damage > 0)
-            {
-                Hit(damage);
-            }
-        }
-    }
+
 
     bool hitCooldown = false;
 
@@ -195,19 +190,23 @@ public class EnemyController : MonoBehaviour
     void StartHitCooldown()
     {
         hitCooldown = true;
-        StartCoroutine(HitTimer(2));
+        StartCoroutine(HitTimer(0.5f));
     }
+
 
     public virtual void Hit(int damage)
     {
         if (!hitCooldown)
         {
+            
             StartHitCooldown();
             health = health - damage;
             if (health == 0)
             {
                 Kill();
             }
+            animator.Hit();
+            FreezeFramer.freeze(0.0075f);
         }
 
     }
