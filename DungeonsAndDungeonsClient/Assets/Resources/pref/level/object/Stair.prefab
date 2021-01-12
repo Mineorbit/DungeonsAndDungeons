@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2977619061585777393}
   - component: {fileID: 712684440013445834}
   - component: {fileID: -8477338502435530351}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: bfe50482d30957a44b88a7e5e0461c00, type: 3}
 --- !u!114 &-8477338502435530351
