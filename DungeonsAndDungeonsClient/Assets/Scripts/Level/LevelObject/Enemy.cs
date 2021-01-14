@@ -9,7 +9,8 @@ public class Enemy : LevelObject
    public override void OnTestRoundStart()
    {
         enemyController = gameObject.AddComponent<EnemyController>();
-        Destroy(GetComponent<SphereCollider>());
+        gameObject.AddComponent<NavMeshAgent>();
+        Destroy(GetComponent<BoxCollider>());
    }
    public EnemyController.EnemyState GetState()
    {
