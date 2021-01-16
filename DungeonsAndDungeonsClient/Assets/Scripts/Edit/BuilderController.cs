@@ -48,14 +48,16 @@ public class BuilderController : MonoBehaviour
         {
             Displace();
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.R))
         {
             BuilderCursor.builderCursor.RotateRight();
         }
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         {
             BuilderCursor.builderCursor.RotateLeft();
         }
+        */
     }
     
     void Place()

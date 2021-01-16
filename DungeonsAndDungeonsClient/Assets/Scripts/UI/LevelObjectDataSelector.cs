@@ -21,7 +21,6 @@ public class LevelObjectDataSelector : MonoBehaviour
     }
     void Select()
     {
-        Debug.Log("Pressed "+data.FullName);
         BuilderCursor.Set(data);
     }
 }

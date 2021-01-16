@@ -6,8 +6,6 @@ public class BuilderHUD : MonoBehaviour
 {
     Button enterTest;
     Button saveButton;
-    public UnityEngine.Object selectorPrefab;
-    public LevelObjectData[] dataObjects;
     void Start()
     {
         enterTest = transform.Find("Test").GetComponent<Button>();
@@ -15,7 +13,6 @@ public class BuilderHUD : MonoBehaviour
 
         enterTest.onClick.AddListener(EnterTest);
         saveButton.onClick.AddListener(SaveLevel);
-        SetupList();
     }
     void SaveLevel()
     {
@@ -30,16 +27,6 @@ public class BuilderHUD : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             enterTest.onClick.Invoke();
-        }
-    }
-    void SetupList()
-    {
-        Transform hook = transform.Find("LevelTypeBar").Find("Viewport").Find("Content");
-        dataObjects = Resources.LoadAll<LevelObjectData>("pref/level/data"); 
-        foreach(LevelObjectData d in dataObjects)
-        {
-            GameObject selObject = Instantiate(selectorPrefab,hook) as GameObject;
-            selObject.GetComponent<LevelObjectDataSelector>().SetData(d);
         }
     }
 }
