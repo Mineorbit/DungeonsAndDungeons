@@ -11,7 +11,7 @@ public class LevelObjectDataSelector : MonoBehaviour
     void Awake()
     {
         selectButton = GetComponent<Button>();
-        selectButton.onClick.AddListener(Select);
+        selectButton.onClick.AddListener(Change);
         nameTextField = transform.Find("Name").GetComponent<TextMeshProUGUI>();
     }
     public void SetData(LevelObjectData d)
@@ -19,8 +19,13 @@ public class LevelObjectDataSelector : MonoBehaviour
         data = d;
         nameTextField.SetText(d.FullName);
     }
-    void Select()
+    public void Change()
     {
+
+    }
+    public void Select()
+    {
+        Debug.Log("Setting: "+data);
         BuilderCursor.Set(data);
     }
 }
