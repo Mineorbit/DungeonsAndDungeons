@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 3873534812094027939, guid: 295dc9b4480fba147b944974d1e0630d, type: 3}
   FullName: Green Spawn
-  Scale: {x: 50, y: 40, z: 50}
-  rotation: {x: -90, y: 0, z: 0}
-  offset: {x: 0, y: -0.7, z: 0}
-  centerOfRotation: {x: 0, y: 0, z: 0}
+  granularity: 0
   ID: 7
+  objectMesh: {fileID: 0}
+  cursorCenterOfRotation: {x: 0, y: 0, z: 0}
+  cursorOffset: {x: 0, y: 0, z: -0.0125}
+  cursorScale: {x: 50, y: 40, z: 50}
+  cursorRotation: {x: -90, y: 0, z: 0}
+  place_scale: {x: 50, y: 40, z: 50}
+  place_rotation: {x: 0, y: 0, z: 0}
+  place_offset: {x: 0, y: 0, z: 0}

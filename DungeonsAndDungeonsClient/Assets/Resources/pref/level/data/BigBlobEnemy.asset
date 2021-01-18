@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 2765771229108727246, guid: fc4d6b1bc73245542aa21a7b409fa223, type: 3}
   FullName: Big Blob Enemy
-  Scale: {x: 5, y: 5, z: 5}
+  scale: {x: 1, y: 1, z: 1}
   rotation: {x: 0, y: 0, z: 0}
-  offset: {x: -1, y: 1.25, z: 0}
+  offset: {x: 0, y: 0, z: 0}
   centerOfRotation: {x: 0, y: 0, z: 0}
   granularity: 0
   ID: 3
+  objectMesh: {fileID: -5668984478841134232, guid: 8416b2eacbcf7d44d8bb5ff7fb5a8fdf, type: 3}
+  cursorScale: {x: 70, y: 70, z: 70}
+  cursorRotation: {x: 0, y: 0, z: 0}

@@ -20,7 +20,7 @@ public class Level : MonoBehaviour
 
     Dictionary<Tuple<int, int>, int> chunkLocations;
     
-    List<Chunk> chunks;
+    public List<Chunk> chunks;
 
     public Spawn[] spawn;
 
@@ -31,6 +31,8 @@ public class Level : MonoBehaviour
 
     public static UnityEvent testRoundStart;
     public static UnityEvent playRoundStart;
+
+ 
 
     Enemy[] enemies;
     void Setup(LevelData.LevelMetaData metaData)
@@ -52,11 +54,13 @@ public class Level : MonoBehaviour
     }
     public static void SetupTestRound()
     {
+        ChunkManager.ActivateAllChunks();
         testRoundStart.Invoke();
     }
 
     public static void SetupPlayRound()
     {
+        ChunkManager.ActivateAllChunks();
         playRoundStart.Invoke();
     }
 
@@ -95,6 +99,7 @@ public class Level : MonoBehaviour
 
     public static void Save()
     {
+        ChunkManager.ActivateAllChunks();
         string path = "/gameData/levels/" + currentLevel.levelMetaData.ullid.ToString();
         Debug.Log("Saving Level: " + path);
 
@@ -146,6 +151,11 @@ public class Level : MonoBehaviour
     {
         Tuple<int,int> location = chunkLocations.FirstOrDefault(x => x.Value == chunkData.saveID).Key;
         return FromChunkData(chunkData,location);
+    }
+
+    public static List<Chunk> GetChunks()
+    {
+        return currentLevel.chunks;
     }
 
     List<Chunk.ChunkData> GetChunkDatas()

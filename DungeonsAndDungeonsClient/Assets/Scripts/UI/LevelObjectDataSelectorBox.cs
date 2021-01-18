@@ -43,15 +43,15 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
         
 
         GetInput();
-        if (!moving)
+        if (!moving&&changed)
         {
             pos = new Vector2(0.5f, 0.5f);
             SetListFromT();
-            if(changed)
-            {
-                Select(selected);
-                changed = false;
-            }
+        }
+        if(changed)
+        {
+            Select(selected);
+            changed = false;
         }
         scrollRect.normalizedPosition = pos;
         StartMoving();
@@ -67,19 +67,24 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
             if(d == Direction.Right)
             {
                 if (t < dataObjects.Length-numberOfSelectorsVisible-1)
-                StartCoroutine(goRight(0.25f));
+                {
+                    moving = true;
+                    StartCoroutine(goRight(0.25f));
+                }
             }else
             if (d == Direction.Left)
             {
                 if (t > -1)
-                StartCoroutine(goLeft(0.25f));
+                {
+                    moving = true;
+                    StartCoroutine(goLeft(0.25f));
+                }
             }
         }
     }
     float eps = 0.000001f;
     IEnumerator goRight(float time)
     {
-        moving = true;
         float oldT = t;
         for (float x = 0; (time - x) > eps; x += Time.deltaTime)
         {
@@ -91,6 +96,7 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
         }
         t = oldT + 1;
         moving = false;
+        changed = true;
     }
     IEnumerator goLeft(float time)
     {
@@ -107,6 +113,7 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
 
         t = oldT - 1;
         moving = false;
+        changed = true;
     }
 
 
@@ -144,6 +151,7 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
 
     void Select(int i)
     {
+        Debug.Log("Selecting "+i);
         if(i>=1&&i<=numberOfSelectorsVisible)
         {
             selected = i;

@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 40965191164601697, guid: d8202c584c981b141a6708810397751f, type: 3}
   FullName: Level Goal
-  Scale: {x: 70, y: 70, z: 70}
-  rotation: {x: -90, y: 0, z: 0}
-  offset: {x: 0, y: 0, z: 0}
-  centerOfRotation: {x: 0, y: 0, z: 0}
   granularity: 0
   ID: 8
+  objectMesh: {fileID: 0}
+  cursorCenterOfRotation: {x: 0, y: 0, z: 0}
+  cursorOffset: {x: 0, y: 0, z: 0}
+  cursorScale: {x: 70, y: 70, z: 70}
+  cursorRotation: {x: 0, y: 0, z: 0}
+  place_scale: {x: 70, y: 70, z: 70}
+  place_rotation: {x: 0, y: 0, z: 0}
+  place_offset: {x: 0, y: 0, z: 0}

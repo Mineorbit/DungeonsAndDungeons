@@ -49,7 +49,7 @@ public class BuilderCursor : MonoBehaviour
         normalVec = normal;
         if(currentSelection!= null)
         {
-            offset = currentSelection.offset;
+            offset = currentSelection.cursorOffset;
         }
         UpdateCursor(position,offset);
     }
@@ -130,10 +130,15 @@ public class BuilderCursor : MonoBehaviour
         builderCursor.transform.position = position;
 
         Vector3 rot = new Vector3(0,0,0);
-        if (currentSelection!=null) rot = currentSelection.rotation;
+        Vector3 scal = new Vector3(1,1,1);
+        if (currentSelection != null)
+        {
+            rot = currentSelection.cursorRotation;
+            scal = currentSelection.cursorScale;
+        }
         builderCursor.transform.rotation = Quaternion.Euler(rot);
-
-        cursorModel.transform.position = position+offset;
+        builderCursor.transform.localScale = scal;
+        cursorModel.transform.position = position + cursorModel.transform.TransformVector(offset);
         builderCursor.transform.RotateAround(builderCursor.transform.position, Vector3.up, builderCursor.direction * 90f);
     }
     static void UpdateMesh()
@@ -143,7 +148,6 @@ public class BuilderCursor : MonoBehaviour
         {
             targetMesh = currentSelection.GetMesh();
             targetMesh.SetTriangles(targetMesh.triangles, 0);
-            builderCursor.transform.localScale = currentSelection.Scale;
         }
         if (targetMesh != null)
         { 

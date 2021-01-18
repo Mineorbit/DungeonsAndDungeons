@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 148884851584110937, guid: 04f65ac6e92df4341b8f435e7e1972a3, type: 3}
   FullName: Small Tile
-  Scale: {x: 1, y: 1, z: 1}
-  rotation: {x: 0, y: 0, z: 0}
-  offset: {x: 0, y: 0, z: 0}
-  centerOfRotation: {x: 0, y: 0, z: 0}
   granularity: 0.5
   ID: 1
+  objectMesh: {fileID: 0}
+  cursorCenterOfRotation: {x: 0, y: 0, z: 0}
+  cursorOffset: {x: 0, y: 0, z: 0}
+  cursorScale: {x: 1, y: 1, z: 1}
+  cursorRotation: {x: 0, y: 0, z: 0}
+  place_scale: {x: 1, y: 1, z: 1}
+  place_rotation: {x: 0, y: 0, z: 0}
+  place_offset: {x: 0, y: 0, z: 0}
