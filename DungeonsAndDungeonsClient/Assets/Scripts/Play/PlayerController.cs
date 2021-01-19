@@ -83,10 +83,11 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     speedY = 1.5f;
-                }else if (Input.GetMouseButtonDown(0))
-                {
-                    Attack();
                 }
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack();
             }
         }
 
