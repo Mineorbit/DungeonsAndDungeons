@@ -10,20 +10,19 @@ using System.Text;
 public class Option : ScriptableObject
 {
     
-    public enum SettingType { INT,STRING,BOOL }
+    public enum SettingType { INT,STRING,BOOL,FLOAT }
     
-    public SettingType settingType;
-    
+
     string optionTag;
     
     public string OptionTag
     {
 
         get {
-            if (optionTag == "" || optionTag.Length == 0)
-                {
+            if (optionTag == "" || optionTag == String.Empty)
+            {
                 optionTag = this.name;
-                }
+            }
             return optionTag;
         }
 
@@ -33,43 +32,118 @@ public class Option : ScriptableObject
 
     }
 
-    string defaultValue;
 
-    public string DefaultValue
+
+
+
+    object _defValue;
+
+    public object DefaultValue
     {
         get
         {
-            return defaultValue;
-        }
-        set
-        {
-            defaultValue = value;
+            if (defaultValue != String.Empty)
+            {
+                if (settingType == SettingType.BOOL)
+                {
+                    _defValue = Convert.ToBoolean(defaultValue);
+                }
+                if (settingType == SettingType.INT)
+                {
+                    _defValue = Convert.ToInt32(defaultValue);
+                }
+                if (settingType == SettingType.STRING)
+                {
+                    _defValue = defaultValue;
+                }
+                if (settingType == SettingType.FLOAT)
+                {
+                    _defValue = Convert.ToSingle(defaultValue);
+                }
+
+            }
+            else
+            {
+
+                if (settingType == SettingType.BOOL)
+                {
+                    _defValue = false;
+                }
+                if (settingType == SettingType.INT)
+                {
+                    _defValue = 0;
+                }
+                if (settingType == SettingType.STRING)
+                {
+                    _defValue = "default";
+                }
+                if (settingType == SettingType.FLOAT)
+                {
+                    _defValue = 0.0f;
+                }
+
+            }
+            return _defValue;
         }
     }
-    
-    string optionValue;
-    
-    public string Value
+
+    object optionValue;
+
+    public object Value
     {
-    
-        get { 
-        
-            optionValue = Load();
-            
-            if (optionValue == "")
+
+        get
+        {
+            if (optionValue == null)
             {
                 optionValue = DefaultValue;
-                Save();
             }
             return optionValue;
         }
 
-        set {
-            optionValue = value;
-            Save();
+        set
+        {
+            if (value != String.Empty)
+            {
+                if (settingType == SettingType.BOOL)
+                {
+                    optionValue = Convert.ToBoolean(value);
+                }
+                if (settingType == SettingType.INT)
+                {
+                    optionValue = Convert.ToInt32(value);
+                }
+                if (settingType == SettingType.STRING)
+                {
+                    optionValue = value;
+                }
+                if (settingType == SettingType.FLOAT)
+                {
+                    optionValue = Convert.ToSingle(value);
+                }
+
+            }
+            else
+            {
+                optionValue = DefaultValue;
+            }
+
+            if(optionHandler  != null)
+            {
+                optionHandler.OnValueChanged(optionValue);
+            }
         }
 
     }
+
+    public OptionHandler optionHandler;
+
+    //Visible Options: 
+    public string defaultValue;
+
+    public SettingType settingType;
+    public string optionHandlerName;
+
 
     public int GetIntValue()
     {
@@ -84,84 +158,16 @@ public class Option : ScriptableObject
     {
         if (settingType == SettingType.STRING)
         {
-            return Value;
+            return (string) Value;
         }
         else
-            return DefaultValue;
+            return (string) DefaultValue;
     }
-
-    string path;
 
     void OnEnable()
     {
-        path = Application.persistentDataPath + "/gameData/settings/settings.txt";
-        Debug.Log(OptionTag+" is set to "+Value);
-    }
-
-    string Load()
-    {
-
-        int counter = 0;
-        string line;
-        if (File.Exists(path))
-        {
-            System.IO.StreamReader file = new System.IO.StreamReader(@path);
-            while ((line = file.ReadLine()) != null)
-            {
-                if (line.Contains("="))
-                {
-                    string[] pair = line.Split('=');
-                    if (pair[0] == OptionTag)
-                    {
-                        file.Close();
-                        return pair[1];
-                    }
-                }
-            }
-            file.Close();
-        }
-
-        return DefaultValue;
-    }
-
-    void Save()
-    {
-        bool contains = false;
-        string content = "";
-        if(File.Exists(path))
-        { 
-            using (StreamReader sr = new StreamReader(@path))
-                {
-                int i = 0;
-                do
-                {
-                    i++;
-                    string line = sr.ReadLine();
-                    if (line != "")
-                    {
-                        string tag = OptionTag;
-                        if(line.Contains(tag+"="))
-                        {
-                            line = tag + "=" + optionValue;
-                            contains = true;
-                        }
-                    }
-                    content = content + line + Environment.NewLine;
-                } while (sr.EndOfStream == false);
-                sr.Close();
-                }
-        }
-        if (!contains)
-        {
-        content = OptionTag + "=" + optionValue + Environment.NewLine;
-        }
-        if(File.Exists(path)) File.Delete(path);
-        using (StreamWriter sw = File.CreateText(path))
-        {
-            sw.Write(content);
-            sw.Close();
-        }
 
     }
+    
 
 }

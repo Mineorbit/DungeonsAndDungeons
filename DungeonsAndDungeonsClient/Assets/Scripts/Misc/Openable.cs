@@ -20,7 +20,6 @@ public abstract class Openable : MonoBehaviour
 
     public virtual void Awake()
     {
-        Debug.Log("Awakening");
         actions = new Queue<Act>();
         Finished = true;
     }

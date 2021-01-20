@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class OptionHandler
 {
-    void Start()
+    public virtual void OnValueChanged(object val)
     {
-        
-    }
 
+    }
 }
