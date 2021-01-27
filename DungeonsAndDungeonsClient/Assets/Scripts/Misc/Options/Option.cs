@@ -19,10 +19,7 @@ public class Option : ScriptableObject
     {
 
         get {
-            if (optionTag == "" || optionTag == String.Empty)
-            {
-                optionTag = this.name;
-            }
+            optionTag = this.name;
             return optionTag;
         }
 

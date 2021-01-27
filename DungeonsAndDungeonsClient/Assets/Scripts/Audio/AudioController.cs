@@ -29,6 +29,7 @@ public class AudioController : MonoBehaviour
                 audioSources[j][i] = transform.gameObject.AddComponent<AudioSource>();
                 audioSources[j][i].loop = ap.loop;
                 audioSources[j][i].mute = true;
+                audioSources[j][i].volume = ap.VolumeCoefficient();
                 audioSources[j][i].spatialBlend = ap.spatialFactor;
                 audioSources[j][i].playOnAwake = ap.onAwake;
                 audioSources[j][i].clip = ap.audioClip[i];
@@ -39,7 +40,7 @@ public class AudioController : MonoBehaviour
     }
     public void Blend(int index, float t)
     {
-        audioSources[index][currentPlay[index]].volume = (1 - t) * audioProfiles[index].minVolume + t * audioProfiles[index].maxVolume;
+        audioSources[index][currentPlay[index]].volume = audioProfiles[index].VolumeCoefficient()*((1 - t) * audioProfiles[index].minVolume + t * audioProfiles[index].maxVolume);
     }
     void prePlay(int index)
     {

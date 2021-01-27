@@ -14,10 +14,10 @@ public class OptionManager : MonoBehaviour
 
     static string optionFilePath;
 
-    public void Start()
+    public void Awake()
     {
-        SetupOptions();
         optionFilePath = Application.persistentDataPath + "/gameData/settings/settings.txt";
+        SetupOptions();
         if(File.Exists(optionFilePath))
         {
             Load();
@@ -38,6 +38,7 @@ public class OptionManager : MonoBehaviour
         foreach(UnityEngine.Object o in optionsLoaded)
         {
             Option opt = (Option)o;
+            Debug.Log(opt.OptionTag);
             options.Add(opt.OptionTag, opt);
         }
 
