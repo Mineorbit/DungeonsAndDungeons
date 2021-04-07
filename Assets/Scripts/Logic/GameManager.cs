@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class GameManager : MonoBehaviour
 {
@@ -304,7 +305,7 @@ public class GameManager : MonoBehaviour
     }
 
     UnityAction lastNewLevelAction;
-    public void createLevel(LevelData.LevelMetaData data)
+    public void createLevel(LevelMetaData data)
     {
         if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
         if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
@@ -315,7 +316,7 @@ public class GameManager : MonoBehaviour
         performAction(GameAction.EnterEditFromMainMenuNewLevel);
     }
     UnityAction lastEditLevelAction;
-    public void editLevel(LevelData.LevelMetaData data)
+    public void editLevel(LevelMetaData data)
     {
         if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
         if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);

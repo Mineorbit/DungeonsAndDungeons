@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class BuilderController : MonoBehaviour
 {
     float speed = 4;

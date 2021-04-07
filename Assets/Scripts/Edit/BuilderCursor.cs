@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class BuilderCursor : MonoBehaviour
 {
     float maxDistance = 200;

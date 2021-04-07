@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class LevelObjectDataSelectorBox : MonoBehaviour
 {
     public ScrollRect scrollRect;

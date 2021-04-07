@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO.Compression;
 
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class UploadMenu : MenuPage
 {
-    public static LevelData.LevelMetaData levelToUpload;
+    public static LevelMetaData levelToUpload;
 
 
     TMPro.TextMeshProUGUI nameText;

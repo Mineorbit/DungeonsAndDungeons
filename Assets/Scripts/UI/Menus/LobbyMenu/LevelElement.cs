@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class LevelElement : MonoBehaviour
 {
     enum Task { Open, Close };
@@ -26,7 +28,7 @@ public class LevelElement : MonoBehaviour
 
     LevelList list;
 
-    public LevelData.LevelMetaData d;
+    public LevelMetaData d;
 
     GameObject[] colorBars;
 
@@ -71,7 +73,7 @@ public class LevelElement : MonoBehaviour
         }
         tasks.Enqueue(Task.Close);
     }
-    public void UpdateElement(LevelData.LevelMetaData data)
+    public void UpdateElement(LevelMetaData data)
     {
         d = data;
         nameTextField.SetText(data.name);

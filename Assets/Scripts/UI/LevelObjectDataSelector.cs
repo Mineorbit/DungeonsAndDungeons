@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class LevelObjectDataSelector : MonoBehaviour
 {
     public LevelObjectData data;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class LevelList : MonoBehaviour
 {
@@ -14,9 +15,9 @@ public class LevelList : MonoBehaviour
 
     public InstantionTarget levelElementPrefab;
 
-    LevelData.LevelMetaData selected;
+    LevelMetaData selected;
 
-    LevelData.LevelMetaData[] currentList;
+    LevelMetaData[] currentList;
 
     //Lol
     public static HashSet<LevelList> levelLists;
@@ -25,11 +26,11 @@ public class LevelList : MonoBehaviour
     public enum ListType { Net, Local };
     public ListType listType;
 
-    public void SetSelectedLevel(LevelData.LevelMetaData levelMetaData)
+    public void SetSelectedLevel(LevelMetaData levelMetaData)
     {
         selected = levelMetaData;
     }
-    public LevelData.LevelMetaData GetSelectedLevel()
+    public LevelMetaData GetSelectedLevel()
     {
         return selected;
     }
@@ -103,7 +104,7 @@ public class LevelList : MonoBehaviour
         RefreshList();
     }
 
-    public void UpdateList(LevelData.LevelMetaData[] localLevels)
+    public void UpdateList(LevelMetaData[] localLevels)
     {
         if(elements!=null)
         foreach(GameObject g in elements)
