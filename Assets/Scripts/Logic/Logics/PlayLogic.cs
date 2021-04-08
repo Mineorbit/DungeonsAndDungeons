@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class PlayLogic : Logic
 {
@@ -37,6 +38,8 @@ public class PlayLogic : Logic
         base.Start();
         LoadingScreen.instance.Close();
         PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
+
+        PlayerController.doSim = true;
 
     }
 

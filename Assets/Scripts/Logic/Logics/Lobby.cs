@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class Lobby : Logic
 {
     public static Lobby lobby;
@@ -21,21 +23,21 @@ public class Lobby : Logic
     {
 
 
-        LevelManager.levelManager.availableNetworkLevels = new LevelData.LevelMetaData[0];
+        LevelDataManager.networkLevels = new LevelMetaData[0];
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenuImmediate);
-        NetworkManager.instance.GameConnect(onConnectEvent, name);
+        //NetworkManager.instance.GameConnect(onConnectEvent, name);
 
     }
     public void Open(string name)
     {
-        LevelManager.levelManager.availableNetworkLevels = new LevelData.LevelMetaData[0];
+        LevelDataManager.networkLevels = new LevelMetaData[0];
 
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenu);
-        NetworkManager.instance.GameConnect(onConnectEvent,name);
+        //NetworkManager.instance.GameConnect(onConnectEvent,name);
 
     }
     public void AddLocalPlayer(int localId, string name)
@@ -54,7 +56,7 @@ public class Lobby : Logic
 
 
 
-        PlayerManager.playerManager.Add(localId,name);
+        PlayerManager.playerManager.Add(localId,name,false);
 
         LobbyMenu.UpdateDisplay();
     }
@@ -63,7 +65,7 @@ public class Lobby : Logic
     public void RemovePlayer(int localId)
     {
         PlayerManager.playerManager.Remove(localId);
-        LevelManager.levelManager.availableNetworkLevels = new LevelData.LevelMetaData[0];
+        LevelDataManager.networkLevels = new LevelMetaData[0];
         LobbyMenu.UpdateDisplay();
     }
 

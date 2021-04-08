@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using com.mineorbit.dungeonsanddungeonscommon;
 public class EditLogic : Logic
 {
     GameObject builder;
@@ -20,6 +20,7 @@ public class EditLogic : Logic
         Debug.Log("Starting Edit");
         SpawnAll();
         SpawnBuilder(new Vector3(0,0,0));
+        PlayerController.doSim = false;
     }
     public override void Stop()
     {

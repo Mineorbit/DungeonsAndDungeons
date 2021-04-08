@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class PlayerView : MonoBehaviour
 {
     public static PlayerView playerView;

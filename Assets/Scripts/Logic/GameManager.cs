@@ -54,8 +54,10 @@ public class GameManager : MonoBehaviour
     public void setupAfterLoadEvents()
     {
         afterMenuLoad = new UnityEvent();
+        
         afterMenuLoad.AddListener(SetLogic);
-        afterMenuLoad.AddListener(LevelManager.UpdateLocalLevels);
+        
+        afterMenuLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
 
         afterMenuLoad.AddListener(OptionsMenu.HandleSimpleLobbyChange);
 
@@ -63,14 +65,14 @@ public class GameManager : MonoBehaviour
 
         afterTestLoad = new UnityEvent();
         afterTestLoad.AddListener(SetLogic);
-        afterTestLoad.AddListener(LevelManager.UpdateLocalLevels);
+        afterTestLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
         afterTestLoad.AddListener(LoadingScreen.instance.Close);
 
         afterPlayLoad = new UnityEvent();
 
         afterEditLoad = new UnityEvent();
         afterEditLoad.AddListener(SetLogic);
-        afterEditLoad.AddListener(LevelManager.UpdateLocalLevels);
+        afterEditLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
         afterEditLoad.AddListener(LoadingScreen.instance.Close);
 
     }
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
         };
         Action<GameAction> actEditTest = x =>
         {
-            Level.SetupTestRound();
+            LevelManager.StartRound();
             UnityEvent swapEvent = new UnityEvent();
             selectAsyncSwap(swapEvent);
             swapEvent.Invoke();
@@ -114,7 +116,7 @@ public class GameManager : MonoBehaviour
         };
         Action<GameAction> actTestEdit = x =>
         {
-            Level.Reset();
+            LevelManager.Reset();
             UnityEvent swapEvent = new UnityEvent();
             selectAsyncSwap(swapEvent);
             swapEvent.Invoke();
@@ -126,7 +128,7 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
 
-            NetworkManager.instance.Reset();
+            //NetworkManager.instance.Reset();
 
             initEvent.AddListener(ResetGame);
 
@@ -139,7 +141,7 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             selectAsyncLoad(initEvent);
-            Level.Clear();
+            LevelManager.Clear();
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -154,8 +156,8 @@ public class GameManager : MonoBehaviour
 
             initEvent.AddListener(ResetGame);
             PlayerManager.playerManager.Reset();
-            NetworkManager.instance.Reset();
-            Level.Clear();
+            //NetworkManager.instance.Reset();
+            LevelManager.Clear();
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -166,7 +168,7 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             UnityEngine.Debug.LogError("Guten Morgen: " + GetState());
-            Level.Clear();
+            LevelManager.Clear();
             UpdateLogic();
 
             selectAsyncLoad(initEvent);
@@ -178,7 +180,7 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actWin = x =>
         {
             wonLastGame = true;
-            Level.Clear();
+            LevelManager.Clear();
 
             UnityEvent initEvent = new UnityEvent();
 
@@ -309,7 +311,7 @@ public class GameManager : MonoBehaviour
     {
         if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
         if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
-        UnityAction NewLevelAction = () => { LevelManager.New(data); };
+        UnityAction NewLevelAction = () => { LevelDataManager.New(data); };
         afterEditLoad.AddListener(NewLevelAction);
         lastNewLevelAction = NewLevelAction;
 
@@ -320,7 +322,7 @@ public class GameManager : MonoBehaviour
     {
         if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
         if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
-        UnityAction EditLevelAction = () => { LevelManager.Load(data); };
+        UnityAction EditLevelAction = () => { LevelDataManager.Load(data); };
         afterEditLoad.AddListener(EditLevelAction);
         lastEditLevelAction = EditLevelAction;
 

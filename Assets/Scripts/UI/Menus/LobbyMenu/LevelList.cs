@@ -39,7 +39,7 @@ public class LevelList : MonoBehaviour
         LevelElement element = null;
         foreach(LevelElement e in levelElements)
         {
-            if (e.d.ulid == ulid) element = e;
+            if (e.d.uniqueLevelId == ulid) element = e;
         }
         if(element!=null)
         {
@@ -84,17 +84,16 @@ public class LevelList : MonoBehaviour
         switch(listType)
         {
             case ListType.Net:
-                if (LevelManager.levelManager.availableNetworkLevels != currentList)
+                if (LevelDataManager.networkLevels != currentList)
                 {
-                    Debug.Log("List changed");
-                    UpdateList(LevelManager.levelManager.availableNetworkLevels);
+                    UpdateList(LevelDataManager.networkLevels);
                 }
                 break;
             case ListType.Local:
-                if (LevelManager.levelManager.availableLocalLevels != currentList)
+                if (LevelDataManager.localLevels != currentList)
                 {
                     Debug.Log("List changed");
-                    UpdateList(LevelManager.levelManager.availableLocalLevels);
+                    UpdateList(LevelDataManager.localLevels);
                 }
                 break;
         }

@@ -38,7 +38,7 @@ public class UploadMenu : MenuPage
         byte[] fileByte = File.ReadAllBytes(path);
         WWWForm form = new WWWForm();
         form.AddField("name", levelToUpload.name);
-        form.AddBinaryData("level", fileByte, levelToUpload.ulid + ".zip", "application / zip");
+        form.AddBinaryData("level", fileByte, levelToUpload.uniqueLevelId + ".zip", "application / zip");
 
         using (UnityWebRequest www = UnityWebRequest.Post(url, form))
         {
@@ -57,7 +57,7 @@ public class UploadMenu : MenuPage
 
     public override void OnOpen()
     {
-        nameText.text = "Name: " + levelToUpload.name+ " \nLocalID: "+levelToUpload.ullid;
+        nameText.text = "Name: " + levelToUpload.name+ " \nLocalID: "+levelToUpload.localLevelId;
         base.Open();
     }
 
@@ -68,8 +68,8 @@ public class UploadMenu : MenuPage
     }
     string AssembleZip()
     {
-        string levelPath = Application.persistentDataPath + "/gameData/levels/" + levelToUpload.ullid;
-        string resultPath = Application.persistentDataPath + "/gameData/c_levels/" + levelToUpload.ullid + ".zip";
+        string levelPath = Application.persistentDataPath + "/gameData/levels/" + levelToUpload.localLevelId;
+        string resultPath = Application.persistentDataPath + "/gameData/c_levels/" + levelToUpload.localLevelId + ".zip";
         File.Delete(resultPath);
         ZipFile.CreateFromDirectory(levelPath, resultPath);
         return resultPath;

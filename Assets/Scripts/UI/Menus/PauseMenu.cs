@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class PauseMenu : MonoBehaviour
 {
     public static bool pauseMenuAvailable;

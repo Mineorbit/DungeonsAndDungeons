@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class PlayerCameraController : MonoBehaviour
 {
     static CinemachineFreeLook cam;

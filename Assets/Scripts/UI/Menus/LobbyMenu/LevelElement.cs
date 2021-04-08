@@ -145,7 +145,7 @@ public class LevelElement : MonoBehaviour
         {
             if(list.listType == LevelList.ListType.Net)
             {
-                NetworkManager.instance.SendLevelSelection(d);
+               // NetworkManager.instance.SendLevelSelection(d);
             }
             Open();
         }else

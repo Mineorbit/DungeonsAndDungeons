@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class TestLogic : Logic
 {
@@ -16,7 +17,7 @@ public class TestLogic : Logic
     {
         for(int i = 0;i<4;i++)
         {
-            PlayerManager.playerManager.Add(i,"Rot");
+            PlayerManager.playerManager.Add(i,"Rot", true);
         }
     }
 
@@ -46,7 +47,7 @@ public class TestLogic : Logic
     Vector3 GetSpawnLocation(int i)
     {
 
-        if (Level.currentLevel.spawn[i] != null) return (Level.currentLevel.spawn[i].transform.position+new Vector3(0,1.5f,0));
+        if (LevelManager.currentLevel.spawn[i] != null) return (LevelManager.currentLevel.spawn[i].transform.position+new Vector3(0,1.5f,0));
         return new Vector3(i*4,0.25f,0);
     }
 
@@ -60,7 +61,7 @@ public class TestLogic : Logic
             Debug.Log("Spawning player at: " + location);
             PlayerManager.playerManager.SpawnPlayer(i,location);
         }
-
+        PlayerController.doSim = true;
         PlayerManager.playerManager.SetCurrentPlayer(player);
     }
 

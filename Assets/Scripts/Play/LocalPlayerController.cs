@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Security.Cryptography;
 using UnityEngine;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 //Only in state Test or PlayLocal (Local Play)
 public class LocalPlayerController : PlayerController

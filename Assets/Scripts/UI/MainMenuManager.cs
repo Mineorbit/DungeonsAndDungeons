@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -86,7 +87,7 @@ public class MainMenuManager : MonoBehaviour
             UnityEvent onDisconnectEvent = new UnityEvent();
 
 
-            NetworkManager.instance.GameDisconnect(onDisconnectEvent);
+            //NetworkManager.instance.GameDisconnect(onDisconnectEvent);
 
             pages[(int)mainMenuFSM.state].Open();
             currentPage = (int)mainMenuFSM.state;

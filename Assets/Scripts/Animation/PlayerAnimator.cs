@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class PlayerAnimator : MonoBehaviour
 {

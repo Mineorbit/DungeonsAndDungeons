@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class LobbyMenu : MenuPage
 {
     static LevelList netList;
@@ -28,6 +30,6 @@ public class LobbyMenu : MenuPage
     }
     void CallReady()
     {
-        NetworkManager.instance.CallReady(readyButton.isOn);
+        //NetworkManager.instance.CallReady(readyButton.isOn);
     }
 }

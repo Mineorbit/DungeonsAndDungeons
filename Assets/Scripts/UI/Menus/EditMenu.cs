@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class EditMenu : MenuPage
 {
     Button newLevelButton;
@@ -30,13 +32,13 @@ public class EditMenu : MenuPage
     }
     void RemoveLevel()
     {
-        LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        LevelMetaData metaData = levelList.GetSelectedLevel();
         if (metaData == null) return;
-        LevelManager.Delete(metaData);
+        LevelDataManager.Delete(metaData);
     }
     void OpenUploadMenu()
     {
-        LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        LevelMetaData metaData = levelList.GetSelectedLevel();
         if(metaData!=null)
         { 
         UploadMenu.levelToUpload = metaData;
@@ -50,7 +52,7 @@ public class EditMenu : MenuPage
     void StartEdit()
     {
 
-        LevelData.LevelMetaData metaData = levelList.GetSelectedLevel();
+        LevelMetaData metaData = levelList.GetSelectedLevel();
         if (metaData == null) return;
         GameManager.instance.editLevel(metaData);
     }

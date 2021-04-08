@@ -66,12 +66,12 @@ public class BuilderController : MonoBehaviour
     {
         var t = BuilderCursor.Get();
         if(t.legal)
-        Level.currentLevel.Add(t.levelObjectData,t.pos,t.rot);
+        LevelManager.currentLevel.Add(t.levelObjectData,t.pos,t.rot);
     }
     void Displace()
     {
         LevelObject o = BuilderCursor.GetObjectAt();
-        Level.currentLevel.Remove(o);
+        LevelManager.currentLevel.Remove(o);
     }
     void UpdatePosition()
     {

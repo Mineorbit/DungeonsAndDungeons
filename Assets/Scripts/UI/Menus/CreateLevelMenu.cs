@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class CreateLevelMenu : MenuPage
 {
@@ -26,7 +27,7 @@ public class CreateLevelMenu : MenuPage
         string name = inputField.text;
 
         //Do some checks
-        LevelData.LevelMetaData levelMetaData = new LevelData.LevelMetaData(name);
+        LevelMetaData levelMetaData = new LevelMetaData(name);
         GameManager.instance.createLevel(levelMetaData);
     }
 }

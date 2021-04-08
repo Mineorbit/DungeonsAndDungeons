@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using com.mineorbit.dungeonsanddungeonscommon;
+
 public class BuilderHUD : MonoBehaviour
 {
     Button enterTest;
@@ -16,7 +18,7 @@ public class BuilderHUD : MonoBehaviour
     }
     void SaveLevel()
     {
-        Level.Save();
+        LevelDataManager.Save();
     }
     void EnterTest()
     {

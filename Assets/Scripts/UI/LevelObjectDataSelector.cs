@@ -19,7 +19,7 @@ public class LevelObjectDataSelector : MonoBehaviour
     public void SetData(LevelObjectData d)
     {
         data = d;
-        nameTextField.SetText(d.FullName);
+        nameTextField.SetText(d.name);
     }
     public void Change()
     {
