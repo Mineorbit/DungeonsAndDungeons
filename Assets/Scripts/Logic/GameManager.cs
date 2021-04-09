@@ -109,6 +109,8 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actEditTest = x =>
         {
             LevelManager.StartRound();
+
+            UnityEngine.Debug.Log("Test lol"+LevelManager.currentLevel.spawn.Length);
             UnityEvent swapEvent = new UnityEvent();
             selectAsyncSwap(swapEvent);
             swapEvent.Invoke();
