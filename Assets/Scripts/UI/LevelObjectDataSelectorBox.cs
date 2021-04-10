@@ -18,6 +18,7 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
     public float t = -1;
 
     int selected = 0;
+    int n;
 
     enum Direction {Left, Right};
     Queue<Direction> directionQueue;
@@ -30,7 +31,11 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
         selectorPrefab = Resources.Load("pref/level/UI/LevelObjectSelector");
         scrollRect = GetComponent<ScrollRect>();
 
+        dataObjects = LevelObjectData.GetAllBuildable();
         marker = transform.GetComponentInChildren<Scrollbar>();
+
+
+        n = Math.Min(numberOfSelectorsVisible + 2, dataObjects.Length);
 
         SetupList();
         t = -1;
@@ -142,7 +147,7 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
 
     void SetListFromT()
     {
-        for(int i = 0;i < numberOfSelectorsVisible+2;i++)
+        for(int i = 0;i < n;i++)
         {
             int p = (int)t + i;
             if (0 <= p && p < dataObjects.Length)
@@ -174,9 +179,9 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
 
     void SetupList()
     {
-        int n = numberOfSelectorsVisible + 2;
         Transform hook = transform.Find("Viewport").Find("Content");
-        dataObjects = Resources.LoadAll<LevelObjectData>("pref/level/data");
+
+        Debug.Log("Anzahl: "+dataObjects.Length);
         selectors = new LevelObjectDataSelector[n];
         
         for (int i = (int) t;i<(int) t+n;i++)
