@@ -7,6 +7,9 @@ public class SceneLoadManager : MonoBehaviour
 {
     private int numberOfScenes = 5;  
     public List<int> currentScenes;
+
+    public enum SceneIndex { main = 0, menu, test, edit, play };
+
     private IEnumerator coroutine;
     public static SceneLoadManager instance;
     
@@ -54,6 +57,15 @@ public class SceneLoadManager : MonoBehaviour
         }
 
         StartCoroutine(coroutine);
+    }
+    public void load(SceneIndex index,UnityEvent finishEvent)
+    {
+        load((int) index, finishEvent);
+    }
+
+    public void load(SceneIndex index)
+    {
+        load((int) index);
     }
     public void load(int loadScene)
     {

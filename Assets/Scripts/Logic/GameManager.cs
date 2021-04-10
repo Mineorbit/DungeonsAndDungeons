@@ -102,7 +102,13 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
-            selectAsyncLoad(initEvent);
+
+            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            initEvent.AddListener(()=> {
+            SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu,menuLoadFinishedEvent);
+            });
+            
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -110,9 +116,7 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.StartRound();
 
-            UnityEngine.Debug.Log("Test lol"+LevelManager.currentLevel.spawn.Length);
             UnityEvent swapEvent = new UnityEvent();
-            selectAsyncSwap(swapEvent);
             swapEvent.Invoke();
             SetLogic();
         };
@@ -120,21 +124,19 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.Reset();
             UnityEvent swapEvent = new UnityEvent();
-            selectAsyncSwap(swapEvent);
             swapEvent.Invoke();
             SetLogic();
         };
         Action<GameAction> actResetDisconnect = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
-            selectAsyncLoad(initEvent);
+            UnityEvent connectionResetEvent = new UnityEvent();
 
             //NetworkManager.instance.Reset();
 
-            initEvent.AddListener(ResetGame);
+            connectionResetEvent.AddListener(ResetGame);
 
-            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.openEvent = connectionResetEvent;
             LoadingScreen.instance.Open();
         };
 
@@ -142,7 +144,6 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
-            selectAsyncLoad(initEvent);
             LevelManager.Clear();
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
@@ -154,7 +155,6 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             
-            selectAsyncLoad(initEvent);
 
             initEvent.AddListener(ResetGame);
             PlayerManager.playerManager.Reset();
@@ -173,7 +173,6 @@ public class GameManager : MonoBehaviour
             LevelManager.Clear();
             UpdateLogic();
 
-            selectAsyncLoad(initEvent);
 
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
@@ -184,11 +183,10 @@ public class GameManager : MonoBehaviour
             wonLastGame = true;
             LevelManager.Clear();
 
-            UnityEvent initEvent = new UnityEvent();
+            UnityEvent onWinEvent = new UnityEvent();
 
-            selectAsyncLoad(initEvent);
 
-            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.openEvent = onWinEvent;
             LoadingScreen.instance.Open();
         };
 
@@ -220,38 +218,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void selectAsyncLoad(UnityEvent e)
-    {
-        switch(GetState())
-        {
-            case State.MainMenu:
-                e.AddListener(asyncMenuLoad);
-                break;
-            case State.Edit:
-                e.AddListener(asyncEditLoad);
-                break;
-            case State.Test:
-                e.AddListener(asyncTestLoad);
-                break;
-            case State.Play:
-                e.AddListener(asyncPlayLoad);
-                break;
-
-        }
-
-    }
-    void selectAsyncSwap(UnityEvent e)
-    {
-        switch(gameStateFSM.state)
-        {
-            case State.Test:
-                e.AddListener(EditToTest);
-                break;
-            case State.Edit:
-                e.AddListener(TestToEdit);
-                break;
-        }
-    }
     //this is ugly need better way
     void Update()
     {
@@ -262,49 +228,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void asyncMenuLoad()
-    {
-        UnityEngine.Debug.Log("Menu Load Procedure");
-        SceneLoadManager.instance.unloadCurrentScenes();
-        SceneLoadManager.instance.load(1, afterMenuLoad);
-    }
-
-    void EditToTest()
-    {
-        UnityEngine.Debug.Log("Loading Test Scene");
-
-        SceneLoadManager.instance.unload(1);
-        SceneLoadManager.instance.unload(2);
-        SceneLoadManager.instance.load(2);
-    }
-    void TestToEdit()
-    {
-        UnityEngine.Debug.Log("Loading Edit Scene");
-        SceneLoadManager.instance.unload(1);
-        SceneLoadManager.instance.unload(3);
-        SceneLoadManager.instance.load(3);
-    }
-
-    void asyncEditLoad()
-    {
-        SceneLoadManager.instance.unloadCurrentScenes();
-        SceneLoadManager.instance.load(3,afterEditLoad);
-    }
-    void asyncTestLoad()
-    {
-    SceneLoadManager.instance.unloadCurrentScenes();
-    SceneLoadManager.instance.load(2, afterTestLoad);
-    }
-    void asyncPlayLoad()
-    {
-        UnityEngine.Debug.LogError("Guten Morgen");
-        SceneLoadManager.instance.unloadCurrentScenes();
-        SceneLoadManager.instance.load(4);
-    }
-
 
     public void performAction(GameAction action)
     {
+        UnityEngine.Debug.Log("GameManager: "+action.ToString());
         gameStateFSM.Move(action);
     }
 
@@ -319,6 +246,7 @@ public class GameManager : MonoBehaviour
 
         performAction(GameAction.EnterEditFromMainMenuNewLevel);
     }
+    
     UnityAction lastEditLevelAction;
     public void editLevel(LevelMetaData data)
     {
