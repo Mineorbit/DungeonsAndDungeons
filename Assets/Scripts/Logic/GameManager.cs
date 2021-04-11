@@ -89,7 +89,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-   
+
+    public LevelMetaData levelMetaDataForNewLevel;
 
 
     public void SetupGameStateFSM()
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
     gameStateFSM.state = State.Init;
     gameStateFSM.name = "GameState";
 
-        Action<GameAction> act = x =>
+        Action<GameAction> fromInitToMainMenu = x =>
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
@@ -112,7 +113,60 @@ public class GameManager : MonoBehaviour
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
-        Action<GameAction> actEditTest = x =>
+
+        Action<GameAction> fromMainMenuToEdit = x =>
+        {
+            wonLastGame = false;
+            UnityEvent initEvent = new UnityEvent();
+
+            UnityEvent editLoadFinishedEvent = new UnityEvent();
+            editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            initEvent.AddListener(() => {
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.edit, editLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
+        };
+
+        Action<GameAction> fromMainMenuToEditNewLevel = x =>
+        {
+            wonLastGame = false;
+            UnityEvent initEvent = new UnityEvent();
+
+            UnityEvent editLoadFinishedEvent = new UnityEvent();
+            editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            initEvent.AddListener(() => {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelDataManager.New(levelMetaDataForNewLevel);
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.edit, editLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
+        };
+
+        Action<GameAction> fromEditToMainMenu = x =>
+        {
+            // Ask for safe?
+
+            wonLastGame = false;
+            UnityEvent initEvent = new UnityEvent();
+
+            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            initEvent.AddListener(() => {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
+        };
+
+
+        Action<GameAction> fromEditToTest = x =>
         {
             LevelManager.StartRound();
 
@@ -120,7 +174,7 @@ public class GameManager : MonoBehaviour
             swapEvent.Invoke();
             SetLogic();
         };
-        Action<GameAction> actTestEdit = x =>
+        Action<GameAction> fromTestToEdit = x =>
         {
             LevelManager.Reset();
             UnityEvent swapEvent = new UnityEvent();
@@ -197,12 +251,12 @@ public class GameManager : MonoBehaviour
 
 
 
-        gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(act,State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State,GameAction>(State.Init,GameAction.LoadGameFromBoot), new Tuple<Action<GameAction>,State>(fromInitToMainMenu,State.MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, State.MainMenu)); 
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(nop, State.MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Test));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(act, State.Edit));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(act, State.Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, State.Test));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, State.Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(fromMainMenuToEditNewLevel, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
         //Hier evtl mod
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Play, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, State.MainMenu));
@@ -210,9 +264,9 @@ public class GameManager : MonoBehaviour
 
 
         //Reset Level
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, State.MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterTestFromEdit), new Tuple<Action<GameAction>, State>(actEditTest, State.Test));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterEditFromTest), new Tuple<Action<GameAction>, State>(actTestEdit, State.Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(fromEditToMainMenu, State.MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Edit, GameAction.EnterTestFromEdit), new Tuple<Action<GameAction>, State>(fromEditToTest, State.Test));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterEditFromTest), new Tuple<Action<GameAction>, State>(fromTestToEdit, State.Edit));
 
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.Test, GameAction.EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, State.MainMenu));
 
@@ -235,25 +289,19 @@ public class GameManager : MonoBehaviour
         gameStateFSM.Move(action);
     }
 
-    UnityAction lastNewLevelAction;
-    public void createLevel(LevelMetaData data)
+    public void createLevel(LevelMetaData newLevelData)
     {
-        if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
-        if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
-        UnityAction NewLevelAction = () => { LevelDataManager.New(data); };
-        afterEditLoad.AddListener(NewLevelAction);
-        lastNewLevelAction = NewLevelAction;
-
+        levelMetaDataForNewLevel = newLevelData;
         performAction(GameAction.EnterEditFromMainMenuNewLevel);
     }
     
     UnityAction lastEditLevelAction;
     public void editLevel(LevelMetaData data)
     {
-        if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
-        if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
+       // if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
+      //  if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
         UnityAction EditLevelAction = () => { LevelDataManager.Load(data); };
-        afterEditLoad.AddListener(EditLevelAction);
+      //  afterEditLoad.AddListener(EditLevelAction);
         lastEditLevelAction = EditLevelAction;
 
         performAction(GameAction.EnterEditFromMainMenu);
