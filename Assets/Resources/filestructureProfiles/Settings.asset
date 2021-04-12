@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   name: settings
+  parent: {fileID: 11400000, guid: ae62e4d673c39e44e8f0219ef2aa95da, type: 2}
   subStructures:
-  - {fileID: 0}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: c3a8bc29f919aa744acba32aa5dce57e, type: 2}
