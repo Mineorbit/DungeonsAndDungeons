@@ -45,9 +45,7 @@ public class BuilderCursor : MonoBehaviour
     public static void Set(Vector3 target,Vector3 normal)
     {
         float g = 1;
-        if(currentSelection!=null) g = currentSelection.granularity;
-        if (g == 0) g = 1;
-        Vector3 position = new Vector3(Mathf.Round((target.x)/g)*g, Mathf.Round((target.y) / g) * g, Mathf.Round((target.z) / g) * g)+normal*g;
+        Vector3 position = LevelManager.GetGridPosition(target+normal, currentSelection);
         normalVec = normal;
         if(currentSelection!= null)
         {
