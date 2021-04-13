@@ -16,14 +16,17 @@ public class BuilderHUD : MonoBehaviour
         enterTest.onClick.AddListener(EnterTest);
         saveButton.onClick.AddListener(SaveLevel);
     }
+
     void SaveLevel()
     {
         LevelDataManager.Save();
     }
+
     void EnterTest()
     {
         GameManager.instance.performAction(GameManager.GameAction.EnterTestFromEdit);
     }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.T))

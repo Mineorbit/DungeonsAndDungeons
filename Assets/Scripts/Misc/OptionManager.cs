@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using System.Reflection;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class OptionManager : MonoBehaviour
 {
@@ -14,17 +15,25 @@ public class OptionManager : MonoBehaviour
 
     static string optionFilePath;
 
+    public FileStructureProfile settingsFolder;
+
     public void Awake()
     {
-        optionFilePath = Application.persistentDataPath + "/gameData/settings/settings.txt";
+        optionFilePath = settingsFolder.GetPath()+"settings.txt";
         SetupOptions();
         if(File.Exists(optionFilePath))
         {
             Load();
         }else
         {
-            Save();
+            SetupOptionsFile();
         }
+    }
+
+    async void SetupOptionsFile()
+    {
+        await FileManager.foldersCreated.Task;
+        Save();
     }
 
 
