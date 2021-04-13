@@ -28,6 +28,7 @@ public class CreateLevelMenu : MenuPage
 
         //Do some checks
         LevelMetaData levelMetaData = LevelDataManager.GetNewLevelMetaData();
+        levelMetaData.FullName = name;
         GameManager.instance.createLevel(levelMetaData);
     }
 }
