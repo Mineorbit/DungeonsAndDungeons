@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
+using UnityEngine.SceneManagement;
+
 public class SceneLoadManager : MonoBehaviour
 {
     private int numberOfScenes = 5;  
@@ -24,6 +26,17 @@ public class SceneLoadManager : MonoBehaviour
         currentScenes = new List<int>();
         currentScenes.Add(0);
     }
+
+    public static void SetSceneState(SceneIndex index,bool active)
+    {
+        Scene testScene = SceneManager.GetSceneByBuildIndex((int)index);
+        GameObject[] testObjects = testScene.GetRootGameObjects();
+        foreach (GameObject g in testObjects)
+        {
+            g.SetActive(active);
+        }
+    }
+
     /*
     public void load(int loadScene)
     {
@@ -58,10 +71,23 @@ public class SceneLoadManager : MonoBehaviour
 
         StartCoroutine(coroutine);
     }
+
     public void load(SceneIndex index,UnityEvent finishEvent)
     {
         load((int) index, finishEvent);
     }
+
+    public void load(SceneIndex[] indices, UnityEvent finishEvent)
+    {
+        int[] indicesInt = new int[indices.Length];
+        for(int i = 0;i<indices.Length;i++)
+        {
+            indicesInt[i] = (int)indices[i];
+        }
+        load(indicesInt, finishEvent);
+    }
+
+
 
     public void load(SceneIndex index)
     {

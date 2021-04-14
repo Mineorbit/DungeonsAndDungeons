@@ -93,6 +93,9 @@ public class GameManager : MonoBehaviour
     public LevelMetaData levelMetaDataForNewLevel;
 
 
+ 
+
+
     public void SetupGameStateFSM()
     {
     gameStateFSM = new FSM<State,GameAction>();
@@ -139,7 +142,7 @@ public class GameManager : MonoBehaviour
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelDataManager.New(levelMetaDataForNewLevel);
-                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.edit, editLoadFinishedEvent);
+                SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[]{ SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
             });
 
             LoadingScreen.instance.openEvent = initEvent;
@@ -170,17 +173,22 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.StartRound();
 
-            UnityEvent swapEvent = new UnityEvent();
-            swapEvent.Invoke();
+
+            SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit,false);
+            SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, true);
             SetLogic();
         };
+
         Action<GameAction> fromTestToEdit = x =>
         {
             LevelManager.Reset();
-            UnityEvent swapEvent = new UnityEvent();
-            swapEvent.Invoke();
+
+
+            SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit, true);
+            SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, false);
             SetLogic();
         };
+
         Action<GameAction> actResetDisconnect = x =>
         {
             wonLastGame = false;
@@ -257,6 +265,7 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, State.Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, State.Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(fromMainMenuToEditNewLevel, State.Edit));
+
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(State.MainMenu, GameAction.StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, State.Play));
 
         //Hier evtl mod
