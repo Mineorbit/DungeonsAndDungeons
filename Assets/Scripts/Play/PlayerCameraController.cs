@@ -20,7 +20,10 @@ public class PlayerCameraController : MonoBehaviour
         int localId = PlayerManager.currentPlayerLocalId;
         if (localId < 0 || localId > 3) return;
 
-        Transform target = PlayerManager.playerManager.playerControllers[localId].transform;
+        Transform target = null;
+
+        if (PlayerManager.playerManager.playerControllers[localId] != null)
+        target = PlayerManager.playerManager.playerControllers[localId].transform;
 
         if (target != null)
         { 
