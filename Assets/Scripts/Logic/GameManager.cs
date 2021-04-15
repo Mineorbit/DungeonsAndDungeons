@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> fromTestToEdit = x =>
         {
-            LevelManager.Reset();
+            LevelManager.EndRound();
 
 
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit, true);

@@ -57,7 +57,6 @@ public class TestLogic : Logic
             PlayerManager.playerManager.DespawnPlayer(i);
             //HIER CHECK FÜR SPAWN PLACE LOGIC
             Vector3 location = GetSpawnLocation(i);
-            Debug.Log("Spawning player at: " + location);
             PlayerManager.playerManager.SpawnPlayer(i,location);
         }
         PlayerController.doSim = true;

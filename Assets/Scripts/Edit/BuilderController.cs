@@ -16,9 +16,11 @@ public class BuilderController : MonoBehaviour
     public bool acceptInput = true;
 
     LevelObjectData selectedObjectType;
+
+    public BuilderCursor builderCursor;
+
     void Start()
     {
-        
     }
 
     void Update()
@@ -52,7 +54,7 @@ public class BuilderController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
-            BuilderCursor.builderCursor.RotateRight();
+            builderCursor.RotateRight();
         }
         /*
         if (Input.GetKeyDown(KeyCode.Q))
@@ -64,13 +66,13 @@ public class BuilderController : MonoBehaviour
     
     void Place()
     {
-        var t = BuilderCursor.Get();
+        var t = builderCursor.Get();
         if(t.legal)
         LevelManager.currentLevel.Add(t.levelObjectData,t.pos,t.rot);
     }
     void Displace()
     {
-        LevelObject o = BuilderCursor.GetObjectAt();
+        LevelObject o = builderCursor.GetObjectAt();
         LevelManager.currentLevel.Remove(o);
     }
     void UpdatePosition()

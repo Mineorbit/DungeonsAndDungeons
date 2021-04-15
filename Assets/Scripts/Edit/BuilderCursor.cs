@@ -22,6 +22,7 @@ public class BuilderCursor : MonoBehaviour
 
     static GameObject hitObject;
     static Transform cursorModel;
+
     static bool placementLegal = false;
     static Vector3 offset;
 
@@ -32,7 +33,7 @@ public class BuilderCursor : MonoBehaviour
 
 
 
-    public void Start()
+    public void OnEnable()
     {
         if (builderCursor != null) Destroy(this);
         builderCursor = this;
@@ -42,7 +43,7 @@ public class BuilderCursor : MonoBehaviour
         
         degree = 1f;
     }
-    public static void Set(Vector3 target,Vector3 normal)
+    public void SetLocation(Vector3 target,Vector3 normal)
     {
         float g = 1;
         Vector3 position = LevelManager.GetGridPosition(target+normal, currentSelection);
@@ -114,20 +115,23 @@ public class BuilderCursor : MonoBehaviour
         layerMask = ~layerMask;
         RaycastHit hit;
         Vector3 targetLocation;
-        if (Physics.Raycast(BuilderController.builderPosition, BuilderController.builderForward, out hit, Mathf.Infinity, layerMask))
+
+        Vector3 start = Camera.main.transform.position;
+        Vector3 forward = Camera.main.transform.forward;
+
+        if (Physics.Raycast(start, forward, out hit, Mathf.Infinity, layerMask))
         {
-            targetLocation = BuilderController.builderPosition + BuilderController.builderForward * hit.distance;
+            targetLocation = start + forward * hit.distance;
             hitObject = hit.transform.gameObject;
         }
         else
         {
-            targetLocation = BuilderController.builderPosition + BuilderController.builderForward * maxDistance;
+            targetLocation = start + forward * maxDistance;
         }
-        BuilderCursor.Set(targetLocation, hit.normal);
+        SetLocation(targetLocation, hit.normal);
     }
-    static void UpdateCursor(Vector3 position,Vector3 offset)
+    void UpdateCursor(Vector3 position,Vector3 offset)
     {
-
         builderCursor.transform.position = position;
 
         Vector3 rot = new Vector3(0,0,0);
@@ -155,7 +159,7 @@ public class BuilderCursor : MonoBehaviour
             cursorMesh.mesh = targetMesh;
         }
     }
-    public static LevelObject GetObjectAt()
+    public LevelObject GetObjectAt()
     {
         LevelObject o = hitObject.GetComponent<LevelObject>(); 
         if(o != null)
@@ -164,7 +168,7 @@ public class BuilderCursor : MonoBehaviour
         }
         return null;
     }
-    public static (Vector3 pos, Quaternion rot, Vector3 norm, LevelObjectData levelObjectData, bool legal) Get()
+    public (Vector3 pos, Quaternion rot, Vector3 norm, LevelObjectData levelObjectData, bool legal) Get()
     {
         return (cursorModel.transform.position, builderCursor.transform.rotation, normalVec, currentSelection, placementLegal);
     }
