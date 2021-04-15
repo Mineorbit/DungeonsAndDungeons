@@ -9,7 +9,6 @@ public class EditLogic : Logic
     {
         sceneIndex = 3;
 
-        created = Instantiator.InstantiateAssets("edit");
         builder = created[0];
     }
     

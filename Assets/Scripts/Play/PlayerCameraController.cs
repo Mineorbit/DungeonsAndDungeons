@@ -21,8 +21,11 @@ public class PlayerCameraController : MonoBehaviour
         if (localId < 0 || localId > 3) return;
 
         Transform target = PlayerManager.playerManager.playerControllers[localId].transform;
-        cam.LookAt = target;
-        cam.Follow = target;
-        
+
+        if (target != null)
+        { 
+            cam.LookAt = target;
+            cam.Follow = target;
+        }
     }
 }

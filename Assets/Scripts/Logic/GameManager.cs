@@ -173,7 +173,6 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.StartRound();
 
-
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit,false);
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, true);
             SetLogic();

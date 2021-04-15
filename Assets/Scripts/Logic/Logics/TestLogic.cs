@@ -10,7 +10,6 @@ public class TestLogic : Logic
     public override void Init()
     {
         sceneIndex = 2;
-        created = Instantiator.InstantiateAssets("test");
         CreatePlayers();
     }
     void CreatePlayers()
