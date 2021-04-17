@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         
         afterMenuLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
 
-        afterMenuLoad.AddListener(OptionsMenu.HandleSimpleLobbyChange);
+        //afterMenuLoad.AddListener(OptionsMenu.HandleSimpleLobbyChange);
 
         afterMenuLoad.AddListener(LoadingScreen.instance.Close);
 

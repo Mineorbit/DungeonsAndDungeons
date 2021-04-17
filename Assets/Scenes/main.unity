@@ -1361,7 +1361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   open: 0
   fullScreenToggle: {fileID: 0}
-  simpleLobbyToggle: {fileID: 0}
   playerStores: []
 --- !u!1 &305577355
 GameObject:
@@ -3500,6 +3499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09dca9df0a3d1db4e8add09be53aa16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localLevels: []
+  networkLevels: []
   levelFolder: {fileID: 11400000, guid: 487c7e89fa519234aa38e3ccaf9254a3, type: 2}
 --- !u!1 &832199119
 GameObject:
@@ -3911,7 +3912,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.85
+  m_fontSize: 18.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4119,7 +4120,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 591898767}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5479204
+  m_Size: 0.5179948
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5116,7 +5117,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.05
+  m_fontSize: 16.2
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5328,7 +5329,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.75
+  m_fontSize: 18.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5827,6 +5828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334315362}
   - component: {fileID: 1334315363}
+  - component: {fileID: 1334315364}
   m_Layer: 5
   m_Name: SimpleLobby
   m_TagString: Untagged
@@ -5903,6 +5905,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &1334315364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334315361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce821b3ea14e6a4aa06b93ae129fae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: {fileID: 11400000, guid: fe6734cf7f1e6434296bd1afb0c0200f, type: 2}
+  toggle: {fileID: 0}
 --- !u!1 &1370674585
 GameObject:
   m_ObjectHideFlags: 0
@@ -6213,7 +6229,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.75
+  m_fontSize: 18.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6813,7 +6829,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wonLastGame: 0
-  levelMetaDataForNewLevel: {fileID: 0}
+  levelMetaDataForNewLevel:
+    localLevelId: 0
+    uniqueLevelId: 0
+    FullName: 
+    Description: 
+    availBlue: 0
+    availYellow: 0
+    availRed: 0
+    availGreen: 0
 --- !u!114 &1715383541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7428,7 +7452,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.05
+  m_fontSize: 16
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7773,7 +7797,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.75
+  m_fontSize: 18.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8090,7 +8114,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.5
+  m_fontSize: 12.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8387,7 +8411,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.55
+  m_fontSize: 29.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

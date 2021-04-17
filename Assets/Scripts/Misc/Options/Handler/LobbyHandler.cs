@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyHandler : MonoBehaviour
+public class LobbyHandler : OptionHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnValueChanged(object val)
     {
-        
+        bool simpleLobby = (bool) val;
+
+        PlayerStore.Set(!simpleLobby);
     }
 }

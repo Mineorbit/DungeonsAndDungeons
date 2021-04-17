@@ -17,7 +17,6 @@ public class OptionsMenu : Openable
 
     public Toggle fullScreenToggle;
 
-    public Toggle simpleLobbyToggle;
     public GameObject[] playerStores;
 
     public void Start()
@@ -34,7 +33,6 @@ public class OptionsMenu : Openable
 
         SetupRes();
         SetupFull();
-        SetupSimple();
 
         backButton.onClick.AddListener(Close);
         transition = new Fade();
@@ -44,23 +42,6 @@ public class OptionsMenu : Openable
 
     }
 
-    void SetupSimple()
-    {
-        options.playerStores = new GameObject[4];
-
-
-        simpleLobbyToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Lobby").Find("SimpleLobby").GetComponent<Toggle>();
-        simpleLobbyToggle.onValueChanged.AddListener(delegate {
-            SimpleChange();
-        });
-        int storedVal = PlayerPrefs.GetInt("SimpleLobby", -1);
-        if(storedVal != 0)
-            simpleLobbyToggle.isOn = true;
-        else
-            simpleLobbyToggle.isOn = false;
-
-        SimpleChange();
-    }
     void SetupFull()
     {
         fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full").GetComponent<Toggle>();
@@ -74,30 +55,7 @@ public class OptionsMenu : Openable
             fullScreenToggle.isOn = false;
         FullChange();
     }
-    void SimpleChange()
-    {
-        bool set = fullScreenToggle.isOn;
-        HandleSimpleLobbyChange();
-        PlayerPrefs.SetInt("SimpleLobby", set ? 1 : 0);
-        PlayerPrefs.Save();
-    }
-    public static void HandleSimpleLobbyChange()
-    {
-        if (options.playerStores == null)
-            options.playerStores = new GameObject[4];
-        for (int i = 0; i < 4; i++)
-        {
-            if(options.playerStores[i] == null)
-            options.playerStores[i] = GameObject.Find("PlayerStore" + i);
-        }
-        bool set = OptionsMenu.options.simpleLobbyToggle.isOn;
-        Debug.Log(set);
-        for (int i = 0; i < 4; i++)
-        {
-            if (options.playerStores[i] != null)
-                options.playerStores[i].SetActive(!set);
-        }
-    }
+   
 
     
 
