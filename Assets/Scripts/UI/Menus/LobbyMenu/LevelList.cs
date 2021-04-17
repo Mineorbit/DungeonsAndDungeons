@@ -84,16 +84,16 @@ public class LevelList : MonoBehaviour
         switch(listType)
         {
             case ListType.Net:
-                if (LevelDataManager.networkLevels != currentList)
+                if (LevelDataManager.instance.networkLevels != currentList)
                 {
-                    UpdateList(LevelDataManager.networkLevels);
+                    UpdateList(LevelDataManager.instance.networkLevels);
                 }
                 break;
             case ListType.Local:
-                if (LevelDataManager.localLevels != currentList)
+                if (LevelDataManager.instance.localLevels != currentList)
                 {
                     Debug.Log("List changed");
-                    UpdateList(LevelDataManager.localLevels);
+                    UpdateList(LevelDataManager.instance.localLevels);
                 }
                 break;
         }

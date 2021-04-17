@@ -37,7 +37,7 @@ public class UploadMenu : MenuPage
 
         byte[] fileByte = File.ReadAllBytes(path);
         WWWForm form = new WWWForm();
-        form.AddField("name", levelToUpload.name);
+        form.AddField("name", levelToUpload.FullName);
         form.AddBinaryData("level", fileByte, levelToUpload.uniqueLevelId + ".zip", "application / zip");
 
         using (UnityWebRequest www = UnityWebRequest.Post(url, form))
@@ -57,7 +57,7 @@ public class UploadMenu : MenuPage
 
     public override void OnOpen()
     {
-        nameText.text = "Name: " + levelToUpload.name+ " \nLocalID: "+levelToUpload.localLevelId;
+        nameText.text = "Name: " + levelToUpload.FullName+ " \nLocalID: "+levelToUpload.localLevelId;
         base.Open();
     }
 

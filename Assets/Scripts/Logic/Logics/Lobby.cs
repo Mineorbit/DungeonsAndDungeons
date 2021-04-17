@@ -23,7 +23,7 @@ public class Lobby : Logic
     {
 
 
-        LevelDataManager.networkLevels = new LevelMetaData[0];
+        LevelDataManager.instance.networkLevels = new LevelMetaData[0];
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenuImmediate);
@@ -32,7 +32,7 @@ public class Lobby : Logic
     }
     public void Open(string name)
     {
-        LevelDataManager.networkLevels = new LevelMetaData[0];
+        LevelDataManager.instance.networkLevels = new LevelMetaData[0];
 
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
@@ -65,7 +65,7 @@ public class Lobby : Logic
     public void RemovePlayer(int localId)
     {
         PlayerManager.playerManager.Remove(localId);
-        LevelDataManager.networkLevels = new LevelMetaData[0];
+        LevelDataManager.instance.networkLevels = new LevelMetaData[0];
         LobbyMenu.UpdateDisplay();
     }
 

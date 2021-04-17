@@ -76,7 +76,7 @@ public class LevelElement : MonoBehaviour
     public void UpdateElement(LevelMetaData data)
     {
         d = data;
-        nameTextField.SetText(data.name);
+        nameTextField.SetText(data.FullName);
         UpdateScreen();
         UpdateAvailColors();
     }
