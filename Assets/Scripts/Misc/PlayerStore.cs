@@ -8,11 +8,11 @@ public class PlayerStore : MonoBehaviour
 
     public GameObject[] playerStores;
 
+    public Option lobbyOption;
+
     public static void Set(bool active)
     {
         if(q == null) q = new Queue<bool>();
-
-        Debug.Log("Enqueueing: "+active);
         q.Enqueue(active);
         Debug.Log(q);
     }
@@ -26,6 +26,8 @@ public class PlayerStore : MonoBehaviour
             playerStores[i] = t.gameObject;
             i++;
         }
+        if(lobbyOption != null)
+        Set(!((bool) lobbyOption.Value));
     }
 
     // Update is called once per frame
@@ -34,7 +36,6 @@ public class PlayerStore : MonoBehaviour
         if(q.Count>0)
         {
             bool b = q.Dequeue();
-            Debug.Log("Dequeued: "+b);
             playerStores[0].SetActive(b);
             playerStores[1].SetActive(b);
             playerStores[2].SetActive(b);

@@ -158,7 +158,6 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
 
     void Select(int i)
     {
-        Debug.Log("Selecting "+i);
         if(i>=1&&i<=numberOfSelectorsVisible)
         {
             selected = i;

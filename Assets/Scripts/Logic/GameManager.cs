@@ -92,8 +92,9 @@ public class GameManager : MonoBehaviour
 
     public LevelMetaData levelMetaDataForNewLevel;
 
+    public LevelMetaData levelMetaDataForEditLevel;
 
- 
+
 
 
     public void SetupGameStateFSM()
@@ -125,6 +126,9 @@ public class GameManager : MonoBehaviour
             UnityEvent editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
             initEvent.AddListener(() => {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                UnityEngine.Debug.Log("Loading "+levelMetaDataForEditLevel.FullName);
+                LevelDataManager.Load(levelMetaDataForEditLevel);
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.edit, editLoadFinishedEvent);
             });
 
@@ -304,15 +308,9 @@ public class GameManager : MonoBehaviour
         performAction(GameAction.EnterEditFromMainMenuNewLevel);
     }
     
-    UnityAction lastEditLevelAction;
     public void editLevel(LevelMetaData data)
     {
-       // if (lastNewLevelAction != null) afterEditLoad.RemoveListener(lastNewLevelAction);
-      //  if (lastEditLevelAction != null) afterEditLoad.RemoveListener(lastEditLevelAction);
-        UnityAction EditLevelAction = () => { LevelDataManager.Load(data); };
-      //  afterEditLoad.AddListener(EditLevelAction);
-        lastEditLevelAction = EditLevelAction;
-
+        levelMetaDataForEditLevel = data;
         performAction(GameAction.EnterEditFromMainMenu);
     }
     public void UpdateLogic()
