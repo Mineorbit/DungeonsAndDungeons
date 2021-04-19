@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
                 SceneLoadManager.instance.unloadCurrentScenes();
                 UnityEngine.Debug.Log("Loading "+levelMetaDataForEditLevel.FullName);
                 LevelDataManager.Load(levelMetaDataForEditLevel);
-                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.edit, editLoadFinishedEvent);
+                SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[] { SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test }, editLoadFinishedEvent);
             });
 
             LoadingScreen.instance.openEvent = initEvent;
