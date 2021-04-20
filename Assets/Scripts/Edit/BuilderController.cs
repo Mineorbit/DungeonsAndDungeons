@@ -72,7 +72,7 @@ public class BuilderController : MonoBehaviour
     }
     void Displace()
     {
-        LevelObject o = builderCursor.GetObjectAt();
+        GameObject o = builderCursor.GetGameObjectAt();
         LevelManager.currentLevel.Remove(o);
     }
     void UpdatePosition()

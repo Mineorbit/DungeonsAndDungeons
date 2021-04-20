@@ -159,7 +159,8 @@ public class BuilderCursor : MonoBehaviour
             cursorMesh.mesh = targetMesh;
         }
     }
-    public LevelObject GetObjectAt()
+
+    public LevelObject GetLevelObjectAt()
     {
         LevelObject o = hitObject.GetComponent<LevelObject>(); 
         if(o != null)
@@ -168,6 +169,17 @@ public class BuilderCursor : MonoBehaviour
         }
         return null;
     }
+
+    public GameObject GetGameObjectAt()
+    {
+        GameObject o = hitObject;
+        if (o != null)
+        {
+            return o;
+        }
+        return null;
+    }
+
     public (Vector3 pos, Quaternion rot, Vector3 norm, LevelObjectData levelObjectData, bool legal) Get()
     {
         return (cursorModel.transform.position, builderCursor.transform.rotation, normalVec, currentSelection, placementLegal);
