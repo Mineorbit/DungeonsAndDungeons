@@ -23,7 +23,7 @@ public class TestLogic : Logic
     {
         if (running) return;
         base.Start();
-        LevelManager.StartRound();
+        LevelManager.StartRound(resetDynamic: false);
         SpawnAll();
         CreatePlayers();
         PlayerManager.playerManager.SetCurrentPlayer(player);
