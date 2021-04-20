@@ -23,10 +23,10 @@ public class TestLogic : Logic
     {
         if (running) return;
         base.Start();
+        LevelManager.StartRound();
         SpawnAll();
         CreatePlayers();
         Debug.Log("Players spawned");
-        LevelManager.StartRound();
     }
 
     //This is ugly need better way
@@ -67,6 +67,7 @@ public class TestLogic : Logic
         if (!running) return;
         RemovePlayers();
         DespawnAll();
+        LevelManager.EndRound();
     }
 
     public override void DeInit()
