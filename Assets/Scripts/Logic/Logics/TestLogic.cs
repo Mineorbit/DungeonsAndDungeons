@@ -10,7 +10,6 @@ public class TestLogic : Logic
     public override void Init()
     {
         sceneIndex = 2;
-        CreatePlayers();
     }
     void CreatePlayers()
     {
@@ -25,7 +24,9 @@ public class TestLogic : Logic
         if (running) return;
         base.Start();
         SpawnAll();
-        SpawnPlayers();
+        CreatePlayers();
+        Debug.Log("Players spawned");
+        LevelManager.StartRound();
     }
 
     //This is ugly need better way
@@ -50,18 +51,7 @@ public class TestLogic : Logic
         return new Vector3(i*4,0.25f,0);
     }
 
-    void SpawnPlayers()
-    {
-        for(int i = 0;i<4;i++)
-        {
-            PlayerManager.playerManager.DespawnPlayer(i);
-            //HIER CHECK FÜR SPAWN PLACE LOGIC
-            Vector3 location = GetSpawnLocation(i);
-            PlayerManager.playerManager.SpawnPlayer(i,location);
-        }
-        PlayerController.doSim = true;
-        PlayerManager.playerManager.SetCurrentPlayer(player);
-    }
+    
 
     void RemovePlayers()
     {
@@ -73,6 +63,7 @@ public class TestLogic : Logic
 
     public override void Stop()
     {
+        //LevelManager.StopRound();
         if (!running) return;
         RemovePlayers();
         DespawnAll();
