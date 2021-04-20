@@ -26,6 +26,8 @@ public class TestLogic : Logic
         LevelManager.StartRound();
         SpawnAll();
         CreatePlayers();
+        PlayerManager.playerManager.SetCurrentPlayer(player);
+
         Debug.Log("Players spawned");
     }
 
