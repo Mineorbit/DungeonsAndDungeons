@@ -65,7 +65,6 @@ public class TestLogic : Logic
 
     public override void Stop()
     {
-        //LevelManager.StopRound();
         if (!running) return;
         RemovePlayers();
         DespawnAll();

@@ -175,7 +175,6 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> fromEditToTest = x =>
         {
-            LevelManager.StartRound();
 
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit,false);
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, true);
@@ -184,7 +183,6 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> fromTestToEdit = x =>
         {
-            LevelManager.EndRound();
 
 
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit, true);
