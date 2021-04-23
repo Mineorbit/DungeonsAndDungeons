@@ -26,9 +26,8 @@ public class TestLogic : Logic
         LevelManager.StartRound(resetDynamic: false);
         SpawnAll();
         CreatePlayers();
+        PlayerManager.playerManager.StartRound();
         PlayerManager.playerManager.SetCurrentPlayer(player);
-
-        Debug.Log("Players spawned");
     }
 
     //This is ugly need better way
@@ -66,9 +65,17 @@ public class TestLogic : Logic
     public override void Stop()
     {
         if (!running) return;
+
         RemovePlayers();
         DespawnAll();
-        LevelManager.EndRound();
+
+       
+        LevelManager.EndRound(resetDynamic: false);
+
+        foreach (Transform t in LevelManager.currentLevel.dynamicObjects)
+        {
+            Debug.Log("Test " + t.gameObject.name);
+        }
     }
 
     public override void DeInit()

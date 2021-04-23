@@ -16,6 +16,7 @@ public class EditLogic : Logic
         if (running) return;
         base.Start();
         Debug.Log("Starting Edit");
+
         PlayerController.doSim = false;
     }
     public override void Stop()

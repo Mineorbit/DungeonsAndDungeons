@@ -100,6 +100,7 @@ public class LevelList : MonoBehaviour
     }
     void Update()
     {
+        if(GameManager.GetState() == GameManager.State.MainMenu)
         RefreshList();
     }
 

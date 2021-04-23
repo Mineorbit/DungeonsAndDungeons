@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     public LevelMetaData levelMetaDataForNewLevel;
 
     public LevelMetaData levelMetaDataForEditLevel;
@@ -183,7 +182,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> fromTestToEdit = x =>
         {
-
+            LevelManager.ResetDynamicState();
 
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit, true);
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, false);
