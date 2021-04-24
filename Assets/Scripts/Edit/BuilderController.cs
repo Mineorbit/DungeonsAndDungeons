@@ -42,6 +42,7 @@ public class BuilderController : MonoBehaviour
             acceptInput = MouseStateController.isLocked();
         }
     }
+    InteractiveLevelObject sender = null;
     void ProcessBuildInput()
     {
         if(Input.GetMouseButtonDown(0))
@@ -52,7 +53,28 @@ public class BuilderController : MonoBehaviour
         {
             Displace();
         }
-        if(Input.GetKeyDown(KeyCode.R))
+
+
+        if(Input.GetMouseButtonDown(2))
+        {
+
+            GameObject o = builderCursor.GetGameObjectAt();
+            Debug.Log(o.name);
+            sender = o.GetComponent<InteractiveLevelObject>();
+        }
+
+        if (Input.GetMouseButtonUp(2))
+        {
+            if(sender != null)
+            {
+                GameObject o = builderCursor.GetGameObjectAt();
+                Debug.Log(o.name);
+                sender.AddReceiver(o.transform.position,o.GetComponent<InteractiveLevelObject>());
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
             builderCursor.RotateRight();
         }
