@@ -68,10 +68,13 @@ public class UploadMenu : MenuPage
     }
     string AssembleZip()
     {
+        /*
         string levelPath = Application.persistentDataPath + "/gameData/levels/" + levelToUpload.localLevelId;
         string resultPath = Application.persistentDataPath + "/gameData/c_levels/" + levelToUpload.localLevelId + ".zip";
         File.Delete(resultPath);
         ZipFile.CreateFromDirectory(levelPath, resultPath);
         return resultPath;
+        */
+        return "";
     }
 }
