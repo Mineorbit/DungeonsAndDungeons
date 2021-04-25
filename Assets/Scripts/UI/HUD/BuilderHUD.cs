@@ -17,6 +17,8 @@ public class BuilderHUD : MonoBehaviour
         saveButton.onClick.AddListener(SaveLevel);
     }
 
+    
+
     void SaveLevel()
     {
         LevelDataManager.Save();
@@ -32,6 +34,10 @@ public class BuilderHUD : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             enterTest.onClick.Invoke();
+        }
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+        {
+            saveButton.onClick.Invoke();
         }
     }
 }

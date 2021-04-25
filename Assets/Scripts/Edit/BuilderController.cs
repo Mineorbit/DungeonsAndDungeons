@@ -59,7 +59,6 @@ public class BuilderController : MonoBehaviour
         {
 
             GameObject o = builderCursor.GetGameObjectAt();
-            Debug.Log(o.name);
             sender = o.GetComponent<InteractiveLevelObject>();
         }
 
@@ -68,7 +67,6 @@ public class BuilderController : MonoBehaviour
             if(sender != null)
             {
                 GameObject o = builderCursor.GetGameObjectAt();
-                Debug.Log(o.name);
                 sender.AddReceiverDynamic(o.transform.position,o.GetComponent<InteractiveLevelObject>());
             }
         }
@@ -99,9 +97,13 @@ public class BuilderController : MonoBehaviour
     }
     void UpdatePosition()
     {
+        // lock if control pressed
+        if(! Input.GetKey(KeyCode.LeftControl))
+        { 
         Vector3 targetDirection = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") + transform.up * (Input.GetKey("space") ? 1 : 0) + -transform.up * (Input.GetKey("left shift") ? 1 : 0);
         transform.position += Time.deltaTime * Vector3.Normalize(targetDirection) * speed;
         builderPosition = transform.position;
+        }
     }
     void UpdateRotation()
     {
