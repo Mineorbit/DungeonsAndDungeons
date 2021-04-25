@@ -31,6 +31,7 @@ public class BuilderCursor : MonoBehaviour
 
     public int direction;
 
+    public static Vector3 targetPosition;
 
 
     public void OnEnable()
@@ -121,6 +122,7 @@ public class BuilderCursor : MonoBehaviour
 
         if (Physics.Raycast(start, forward, out hit, Mathf.Infinity, layerMask))
         {
+            targetPosition = hit.point;
             targetLocation = start + forward * hit.distance;
             hitObject = hit.transform.gameObject;
         }

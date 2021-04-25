@@ -43,6 +43,15 @@ public class BuilderController : MonoBehaviour
         }
     }
     InteractiveLevelObject sender = null;
+    InteractiveLevelObject receiver = null;
+    Wire w = null;
+
+    InteractiveLevelObject pickAtCursor()
+    {
+        GameObject o = builderCursor.GetGameObjectAt();
+        return o.GetComponent<InteractiveLevelObject>();
+    }
+
     void ProcessBuildInput()
     {
         if(Input.GetMouseButtonDown(0))
@@ -54,21 +63,45 @@ public class BuilderController : MonoBehaviour
             Displace();
         }
 
-
         if(Input.GetMouseButtonDown(2))
         {
-
-            GameObject o = builderCursor.GetGameObjectAt();
-            sender = o.GetComponent<InteractiveLevelObject>();
+            sender = pickAtCursor();
+            if(sender != null)
+            {
+                Debug.Log("Wire started");
+                w = Wire.CreateDynamic(sender.transform.position,sender.transform.position,Color.black);
+            }
         }
-
+        else
+        if(Input.GetMouseButton(2))
+        {
+            if(w != null)
+            {
+                Vector3 targetPoint = BuilderCursor.targetPosition;
+                receiver = pickAtCursor();
+                if(receiver != null)
+                {
+                    targetPoint = receiver.transform.position;
+                }
+                w.SetReceiverPosition(targetPoint);
+            }
+        }else
         if (Input.GetMouseButtonUp(2))
         {
             if(sender != null)
             {
-                GameObject o = builderCursor.GetGameObjectAt();
-                sender.AddReceiverDynamic(o.transform.position,o.GetComponent<InteractiveLevelObject>());
+                receiver = pickAtCursor();
+                if(receiver != null)
+                {
+                    sender.AddReceiverDynamic(receiver.transform.position, receiver);
+                }
+                if(w != null)
+                Destroy(w.gameObject);
             }
+        }else
+        {
+            if (w != null)
+                Destroy(w.gameObject);
         }
 
 
