@@ -69,7 +69,7 @@ public class BuilderController : MonoBehaviour
             {
                 GameObject o = builderCursor.GetGameObjectAt();
                 Debug.Log(o.name);
-                sender.AddReceiver(o.transform.position,o.GetComponent<InteractiveLevelObject>());
+                sender.AddReceiverDynamic(o.transform.position,o.GetComponent<InteractiveLevelObject>());
             }
         }
 
