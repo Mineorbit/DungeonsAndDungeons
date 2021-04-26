@@ -71,12 +71,12 @@ public class Lobby : Logic
 
     void OpenLobbyMenu()
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromPlayToLobby);
+        MainMenuManager.instance.OpenPage(MainMenuManager.FromPlayToLobby);
         LobbyMenu.UpdateDisplay();
     }
     void OpenLobbyMenuImmediate()
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromNoneToLobby);
+        MainMenuManager.instance.OpenPage(MainMenuManager.FromNoneToLobby);
         LobbyMenu.UpdateDisplay();
     }
 

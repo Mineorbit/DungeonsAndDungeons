@@ -42,12 +42,12 @@ public class EditMenu : MenuPage
         if(metaData!=null)
         { 
         UploadMenu.levelToUpload = metaData;
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromEditToUploadMenu);
+        MainMenuManager.instance.OpenPage(MainMenuManager.FromEditToUploadMenu);
         }
     }
     void OpenNewLevelMenu()
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromEditToCreateMenu);
+        MainMenuManager.instance.OpenPage(MainMenuManager.FromEditToCreateMenu);
     }
     void StartEdit()
     {

@@ -28,10 +28,10 @@ public class MainMenu : MenuPage
     
     void enterPlay()
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromMainToPlay);
+        MainMenuManager.instance.OpenPage(MainMenuManager.FromMainToPlay);
     }
     void enterEdit()
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.FromMainToEdit);
+        MainMenuManager.instance.OpenPage(MainMenuManager.FromMainToEdit);
     }
 }

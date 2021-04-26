@@ -19,7 +19,7 @@ public class Overlay : MonoBehaviour
     }
     void GoBack()
     {
-        MainMenuManager.instance.OpenPage(MainMenuManager.Transaction.GoBack);
+        MainMenuManager.instance.OpenPage(MainMenuManager.GoBack);
     }
     void GoOptions()
     {

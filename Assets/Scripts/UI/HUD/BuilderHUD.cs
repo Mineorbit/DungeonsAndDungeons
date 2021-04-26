@@ -26,7 +26,7 @@ public class BuilderHUD : MonoBehaviour
 
     void EnterTest()
     {
-        GameManager.instance.performAction(GameManager.GameAction.EnterTestFromEdit);
+        GameManager.instance.performAction(GameManager.EnterTestFromEdit);
     }
 
     void Update()

@@ -38,22 +38,21 @@ public class PauseMenu : MonoBehaviour
     {
         Close();
         UnityEngine.Debug.Log("Entering Main Menu from Pause Menu");
-        GameManager.instance.performAction(GameManager.GameAction.EnterMainMenu);
+        GameManager.instance.performAction(GameManager.EnterMainMenu);
     }
     bool checkAvailability()
     {
-        switch(GameManager.GetState())
+        
+        if(GameManager.GetState() == GameManager.Init)
         {
-            case GameManager.State.Init:
-                pauseMenuAvailable = false;
-                break;
-            case GameManager.State.MainMenu:
-                pauseMenuAvailable = false;
-                break;
-            default:
-                pauseMenuAvailable = true;
-                break;
+            pauseMenuAvailable = false;
         }
+        if (GameManager.GetState() == GameManager.MainMenu)
+        {
+            pauseMenuAvailable = false;
+        }
+        else
+            pauseMenuAvailable = true;
         if (LoadingScreen.instance.open)
         {
             pauseMenuAvailable = false;

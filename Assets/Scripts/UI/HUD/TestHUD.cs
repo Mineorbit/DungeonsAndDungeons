@@ -12,7 +12,7 @@ public class TestHUD : MonoBehaviour
     }
     void EnterEdit()
     {
-        GameManager.instance.performAction(GameManager.GameAction.EnterEditFromTest);
+        GameManager.instance.performAction(GameManager.EnterEditFromTest);
     }
     void Update()
     {
