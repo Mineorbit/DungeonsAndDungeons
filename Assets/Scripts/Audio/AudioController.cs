@@ -42,6 +42,39 @@ public class AudioController : MonoBehaviour
     {
         audioSources[index][currentPlay[index]].volume = audioProfiles[index].VolumeCoefficient()*((1 - t) * audioProfiles[index].minVolume + t * audioProfiles[index].maxVolume);
     }
+
+    IEnumerator CrossFader(int indexA, int indexB, float time)
+    {
+        float t = 0;
+
+        Blend(indexA, 1);
+        Play(indexB);
+        Blend(indexB, 0);
+        while (t<time)
+        {
+            t += Time.deltaTime;
+            float fraction = t / time;
+
+            Blend(indexA, 1 - fraction);
+            Blend(indexB, fraction);
+
+            yield return 0;
+
+        }
+
+        Blend(indexA, 0);
+        Blend(indexB, 1);
+        if(indexA!=indexB)
+        Stop(indexA);
+    }
+
+    public void CrossFade(int indexA, int indexB, float timeForFade)
+    {
+        IEnumerator fader = CrossFader(indexA,indexB,timeForFade);
+        StartCoroutine(fader);
+    }
+
+
     void prePlay(int index)
     {
         //Prüfen ob schon läuft
@@ -81,14 +114,16 @@ public class AudioController : MonoBehaviour
 
     public void Stop(int index)
     {
-        if(audioProfiles[index].loop)
+        audioSources[index][currentPlay[index]].Stop();
+        /*
+        if (audioProfiles[index].loop)
         {
             audioProfiles[index].loop = false;
         }
         else
         {
-            audioSources[index][currentPlay[index]].Stop();
         }
+        */
     }
     public void StopAll(int index)
     {
