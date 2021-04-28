@@ -216,6 +216,25 @@ public class GameManager : MonoBehaviour
             LoadingScreen.instance.Open();
         };
 
+        Action<GameAction> fromTestToMainMenu = x =>
+        {
+            // Ask for safe?
+
+            wonLastGame = false;
+            UnityEvent initEvent = new UnityEvent();
+
+            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            initEvent.AddListener(() => {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
+        };
+
 
         Action<GameAction> fromEditToTest = x =>
         {
@@ -324,10 +343,10 @@ public class GameManager : MonoBehaviour
 
         //Reset Level
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Edit, EnterMainMenu), new Tuple<Action<GameAction>, State>(fromEditToMainMenu, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterMainMenu), new Tuple<Action<GameAction>, State>(fromTestToMainMenu, MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Edit, EnterTestFromEdit), new Tuple<Action<GameAction>, State>(fromEditToTest, Test));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterEditFromTest), new Tuple<Action<GameAction>, State>(fromTestToEdit, Edit));
 
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterMainMenu), new Tuple<Action<GameAction>, State>(actLevelClear, MainMenu));
 
     }
 
