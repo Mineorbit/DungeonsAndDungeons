@@ -22,7 +22,7 @@ public class MusicController : AudioController
         
         if(GameManager.GetState() != lastState)
         {
-            if(music[lastState] != null && music[GameManager.GetState()] !=null)
+            if(music.ContainsKey(lastState) && music.ContainsKey(GameManager.GetState()))
             CrossFade(music[lastState],music[GameManager.GetState()],2f);
             lastState = GameManager.GetState();
         }
