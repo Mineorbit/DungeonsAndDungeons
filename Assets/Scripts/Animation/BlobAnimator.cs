@@ -4,38 +4,49 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
-public class BlobAnimator : MonoBehaviour
+namespace com.mineorbit.dungeonsanddungeonscommon
 {
-    Animator animator;
-    public float speed;
-    public UnityEvent attackEvent;
-    public UnityEvent endAttackEvent;
+    public class BlobAnimator : MonoBehaviour
+    {
+        Animator animator;
+        public float speed;
 
-    void Start()
-    {
-        animator = gameObject.GetComponent<Animator>();
-        attackEvent = new UnityEvent();
-        endAttackEvent = new UnityEvent();
-    }
+        public Vector3 target;
 
-    void Update()
-    {
-        if(animator != null)
-        animator.SetFloat("Speed",speed);
-    }
+        public UnityEvent attackEvent;
+        public UnityEvent endAttackEvent;
 
-    public void Attack()
-    {
-        animator.SetTrigger("Strike");
-        attackEvent.Invoke();
-    }
-    public void Hit()
-    {
-        animator.SetTrigger("Hit");
-    }
+        void Start()
+        {
+            animator = gameObject.GetComponent<Animator>();
+            attackEvent = new UnityEvent();
+            endAttackEvent = new UnityEvent();
+        }
 
-    public void EndAttack()
-    {
-        endAttackEvent.Invoke();
+        void Update()
+        {
+            if (animator != null)
+                animator.SetFloat("Speed", speed);
+
+
+            float angle = 180 + (180 / Mathf.PI) * Mathf.Atan2(target.x, target.z);
+
+            transform.eulerAngles = new Vector3(0, angle, 0);
+        }
+
+        public void Attack()
+        {
+            animator.SetTrigger("Strike");
+            attackEvent.Invoke();
+        }
+        public void Hit()
+        {
+            animator.SetTrigger("Hit");
+        }
+
+        public void EndAttack()
+        {
+            endAttackEvent.Invoke();
+        }
     }
 }
