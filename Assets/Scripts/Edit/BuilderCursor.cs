@@ -33,6 +33,7 @@ public class BuilderCursor : MonoBehaviour
 
     public static Vector3 targetPosition;
 
+    public Mesh defaultMesh;
 
     public void OnEnable()
     {
@@ -49,12 +50,8 @@ public class BuilderCursor : MonoBehaviour
         float g = 1;
         Vector3 position = LevelManager.GetGridPosition(target+normal, currentSelection);
         normalVec = normal;
-        if(currentSelection!= null)
-        {
-            //offset = currentSelection.cursorOffset;
-            offset = new Vector3(0,0,0);
-        }
-        UpdateCursor(position,offset);
+        
+        UpdateCursor(position);
     }
 
     public static void Set(LevelObjectData objectType)
@@ -132,30 +129,36 @@ public class BuilderCursor : MonoBehaviour
         }
         SetLocation(targetLocation, hit.normal);
     }
-    void UpdateCursor(Vector3 position,Vector3 offset)
+    void UpdateCursor(Vector3 position)
     {
         builderCursor.transform.position = position;
 
+        Vector3 off = new Vector3(0,0,0);
         Vector3 rot = new Vector3(0,0,0);
         Vector3 scal = new Vector3(1,1,1);
         if (currentSelection != null)
         {
-            //rot = currentSelection.cursorRotation;
-            //scal = currentSelection.cursorScale;
+            off = currentSelection.cursorOffset;
+            rot = currentSelection.cursorRotation;
+            scal = currentSelection.cursorScale;
         }
-        builderCursor.transform.rotation = Quaternion.Euler(rot);
-        builderCursor.transform.localScale = scal;
-        cursorModel.transform.position = position + cursorModel.transform.TransformVector(offset);
-        builderCursor.transform.RotateAround(builderCursor.transform.position, Vector3.up, builderCursor.direction * 90f);
+        cursorModel.transform.localEulerAngles = rot;
+        cursorModel.transform.localScale = scal;
+        cursorModel.transform.position = position + cursorModel.transform.TransformVector(off);
+        builderCursor.transform.localEulerAngles = new Vector3(0, builderCursor.direction * 90f, 0);
     }
     static void UpdateMesh()
     {
         Mesh targetMesh = null;
         if(currentSelection!=null)
         {
-           // targetMesh = currentSelection.GetMesh();
-           // targetMesh.SetTriangles(targetMesh.triangles, 0);
+           targetMesh = currentSelection.GetMesh();
+           targetMesh.SetTriangles(targetMesh.triangles, 0);
+        }else
+        {
+            targetMesh = builderCursor.defaultMesh;
         }
+
         if (targetMesh != null)
         { 
             cursorMesh.mesh = targetMesh;
