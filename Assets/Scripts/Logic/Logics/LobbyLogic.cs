@@ -18,7 +18,6 @@ public class LobbyLogic : Logic
         if (lobbyLogic == null)
             lobbyLogic = this;
 
-        Debug.Log("TEST");
 
     }
     public void OpenImmediate(string name)
@@ -26,17 +25,14 @@ public class LobbyLogic : Logic
 
 
         LevelDataManager.instance.networkLevels = new LevelMetaData[0];
-        NetworkManager.instance.Connect(name);
+        NetworkManager.instance.Connect(name, OpenLobbyMenu);
 
     }
     public void Open(string name)
     {
         LevelDataManager.instance.networkLevels = new LevelMetaData[0];
 
-        //Open Pop Up with connect
-        UnityEvent onConnectEvent = new UnityEvent();
-        onConnectEvent.AddListener(OpenLobbyMenu);
-        NetworkManager.instance.Connect(name);
+        NetworkManager.instance.Connect(name, OpenLobbyMenu);
 
     }
     public void AddLocalPlayer(int localId, string name)
