@@ -1,12 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using com.mineorbit.dungeonsanddungeonscommon;
 
-public class Lobby : Logic
+public class LobbyLogic : Logic
 {
-    public static Lobby lobby;
+    public static LobbyLogic lobbyLogic;
 
     int localPlayer = 0;
 
@@ -15,8 +15,10 @@ public class Lobby : Logic
 
         sceneIndex = 1;
 
-        if (lobby == null)
-            lobby = this;
+        if (lobbyLogic == null)
+            lobbyLogic = this;
+
+        Debug.Log("TEST");
 
     }
     public void OpenImmediate(string name)
@@ -24,10 +26,7 @@ public class Lobby : Logic
 
 
         LevelDataManager.instance.networkLevels = new LevelMetaData[0];
-        //Open Pop Up with connect
-        UnityEvent onConnectEvent = new UnityEvent();
-        onConnectEvent.AddListener(OpenLobbyMenuImmediate);
-        //NetworkManager.instance.GameConnect(onConnectEvent, name);
+        NetworkManager.instance.Connect(name);
 
     }
     public void Open(string name)
@@ -37,13 +36,13 @@ public class Lobby : Logic
         //Open Pop Up with connect
         UnityEvent onConnectEvent = new UnityEvent();
         onConnectEvent.AddListener(OpenLobbyMenu);
-        //NetworkManager.instance.GameConnect(onConnectEvent,name);
+        NetworkManager.instance.Connect(name);
 
     }
     public void AddLocalPlayer(int localId, string name)
     {
         localPlayer = localId;
-        AddPlayer(localId,name);
+        AddPlayer(localId, name);
     }
 
     public void RemoveLocalPlayer()
@@ -56,7 +55,7 @@ public class Lobby : Logic
 
 
 
-        PlayerManager.playerManager.Add(localId,name,false);
+        PlayerManager.playerManager.Add(localId, name, false);
 
         LobbyMenu.UpdateDisplay();
     }

@@ -157,7 +157,10 @@ public class GameManager : MonoBehaviour
             initEvent.AddListener(()=> {
             SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu,menuLoadFinishedEvent);
             });
-            
+
+            SetLogic();
+
+
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -176,6 +179,8 @@ public class GameManager : MonoBehaviour
                 SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[] { SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test }, editLoadFinishedEvent);
             });
 
+            SetLogic();
+
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -192,6 +197,8 @@ public class GameManager : MonoBehaviour
                 LevelDataManager.New(levelMetaDataForNewLevel);
                 SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[]{ SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
             });
+
+            SetLogic();
 
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
@@ -212,6 +219,8 @@ public class GameManager : MonoBehaviour
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
             });
 
+            SetLogic();
+
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
         };
@@ -230,6 +239,8 @@ public class GameManager : MonoBehaviour
                 LevelManager.Clear();
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
             });
+
+            SetLogic();
 
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
@@ -280,8 +291,8 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
-            
 
+            SetLogic();
             initEvent.AddListener(ResetGame);
             PlayerManager.playerManager.Reset();
             //NetworkManager.instance.Reset();
@@ -297,7 +308,7 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
             UnityEngine.Debug.LogError("Guten Morgen: " + GetState());
             LevelManager.Clear();
-            UpdateLogic();
+            SetLogic();
 
 
             LoadingScreen.instance.openEvent = initEvent;
@@ -388,15 +399,25 @@ public class GameManager : MonoBehaviour
             if (currentLogic.running == true) currentLogic.Stop();
             currentLogic.DeInit();
         }
+
+        UnityEngine.Debug.Log("UPDATING LOGIC");
+
             if(GetState() == MainMenu)
-                currentLogic = new Lobby();
+        { 
+            UnityEngine.Debug.Log("UPDATING LOGICT");
+        currentLogic = new LobbyLogic();
+        }
+        else
             if (GetState() == Edit)
                 currentLogic = new EditLogic();
-            if (GetState() == Test)
+        else    
+        if (GetState() == Test)
                 currentLogic = new TestLogic();
-            if (GetState() == Play)
+        else    
+        if (GetState() == Play)
                 currentLogic = new PlayLogic();
-            if (GetState() == Init)
+        else    
+        if (GetState() == Init)
                 currentLogic = null;
 
         if (currentLogic != null)

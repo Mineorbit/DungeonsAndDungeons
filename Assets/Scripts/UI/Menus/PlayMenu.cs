@@ -24,6 +24,6 @@ public class PlayMenu : MenuPage
     void goLobby()
     {
         string name = transform.Find("Connect").gameObject.GetComponentInChildren<InputField>().text;
-        Lobby.lobby.Open(name);
+        LobbyLogic.lobbyLogic.Open(name);
     }
 }
