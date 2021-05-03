@@ -400,24 +400,22 @@ public class GameManager : MonoBehaviour
             currentLogic.DeInit();
         }
 
-        UnityEngine.Debug.Log("UPDATING LOGIC");
 
             if(GetState() == MainMenu)
-        { 
-            UnityEngine.Debug.Log("UPDATING LOGICT");
-        currentLogic = new LobbyLogic();
-        }
-        else
+            { 
+            currentLogic = new LobbyLogic();
+            }
+            else
             if (GetState() == Edit)
                 currentLogic = new EditLogic();
-        else    
-        if (GetState() == Test)
+            else    
+            if (GetState() == Test)
                 currentLogic = new TestLogic();
-        else    
-        if (GetState() == Play)
+            else    
+            if (GetState() == Play)
                 currentLogic = new PlayLogic();
-        else    
-        if (GetState() == Init)
+            else    
+            if (GetState() == Init)
                 currentLogic = null;
 
         if (currentLogic != null)
