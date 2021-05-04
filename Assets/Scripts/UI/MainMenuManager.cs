@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using com.mineorbit.dungeonsanddungeonscommon;
-
 public class MainMenuManager : MonoBehaviour
 {
 
@@ -66,6 +65,9 @@ public class MainMenuManager : MonoBehaviour
         {
             instance.OpenPage(FromNoneToLobby);
         }
+
+        // May only add once !
+
 
     }
     void OnDestroy()
@@ -140,7 +142,7 @@ public class MainMenuManager : MonoBehaviour
             UnityEvent onDisconnectEvent = new UnityEvent();
 
 
-            //NetworkManager.instance.GameDisconnect(onDisconnectEvent);
+            NetworkManager.instance.Disconnect();
 
             pages[mainMenuFSM.state.Cardinal()].Open();
             currentPage = mainMenuFSM.state.Cardinal();
@@ -152,7 +154,22 @@ public class MainMenuManager : MonoBehaviour
                 pages[currentPage].Close();
             pages[mainMenuFSM.state.Cardinal()].Open();
             currentPage = mainMenuFSM.state.Cardinal();
+
+            NetworkManager.instance.client.onDisconnectEvent.AddListener(() => { OpenPage(GoBack); });
             LobbyMenu.UpdateDisplay();
+        };
+
+
+
+        System.Action<Transaction> actLobbyOpen = x =>
+        {
+            if (currentPage >= 0)
+                pages[currentPage].Close();
+
+            NetworkManager.instance.client.onDisconnectEvent.AddListener(() => { MainCaller.Do(() => { OpenPage(GoBack); }); });
+
+            pages[mainMenuFSM.state.Cardinal()].Open();
+            currentPage = mainMenuFSM.state.Cardinal();
         };
 
 
@@ -165,7 +182,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(None, FromNoneToLobby), new Tuple<Action<Transaction>, Page>(actWin, Lobby));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Main, FromMainToPlay), new Tuple<Action<Transaction>, Page>(act, Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Play, GoBack), new Tuple<Action<Transaction>, Page>(act, Main));
-        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Play, FromPlayToLobby), new Tuple<Action<Transaction>, Page>(act, Lobby));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Play, FromPlayToLobby), new Tuple<Action<Transaction>, Page>(actLobbyOpen, Lobby));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Lobby, GoBack), new Tuple<Action<Transaction>, Page>(actLobbyClose, Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Main, FromMainToEdit), new Tuple<Action<Transaction>, Page>(act, Edit));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Edit, FromEditToCreateMenu), new Tuple<Action<Transaction>, Page>(act, Create));
