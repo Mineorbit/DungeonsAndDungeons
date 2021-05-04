@@ -22,7 +22,7 @@ public class LobbyMenu : MenuPage
     public static void UpdateDisplay()
     {
 
-        PlayerView.playerView.UpdatePlayerView(PlayerManager.playerManager.players);
+        PlayerView.playerView.UpdatePlayerView();
     }
     public static void SetSelectedLevel(long ulid)
     {

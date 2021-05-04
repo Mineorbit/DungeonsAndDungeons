@@ -7,7 +7,6 @@ using com.mineorbit.dungeonsanddungeonscommon;
 public class PlayerView : MonoBehaviour
 {
     public static PlayerView playerView;
-    Player[] playerData;
     PlayerElement[] playerElements;
     void Start()
     {
@@ -15,7 +14,6 @@ public class PlayerView : MonoBehaviour
         playerView = this;
 
 
-        playerData = new Player[4];
         playerElements = new PlayerElement[4];
         for(int i = 0;i<playerElements.Length;i++)
         {
@@ -23,14 +21,17 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    public void UpdatePlayerView(Player[] playerInfo)
+
+    public void UpdatePlayerView()
     {
-        Player[] playerInfos = new Player[4];
-        Array.Copy(playerInfo,0,playerInfos,0,playerInfo.Length);
-        playerData = playerInfos;
-        for(int i = 0; i < playerElements.Length; i++)
+        for (int i = 0; i < playerElements.Length; i++)
         {
-            playerElements[i].UpdateElement(playerData[i]);
+        playerElements[i].UpdateElement(PlayerManager.playerManager.players[i]);
         }
+    }
+
+    public void Update()
+    {
+        UpdatePlayerView();
     }
 }
