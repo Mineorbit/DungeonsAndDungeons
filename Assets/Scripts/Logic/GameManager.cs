@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
                 SceneLoadManager.instance.unloadCurrentScenes();
                 UnityEngine.Debug.Log("Loading "+levelMetaDataForEditLevel.FullName);
                 LevelDataManager.Load(levelMetaDataForEditLevel);
+
                 SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[] { SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test }, editLoadFinishedEvent);
             });
 
@@ -195,6 +196,8 @@ public class GameManager : MonoBehaviour
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelDataManager.New(levelMetaDataForNewLevel);
+
+
                 SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[]{ SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
             });
 

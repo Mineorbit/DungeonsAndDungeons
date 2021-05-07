@@ -24,11 +24,16 @@ public class TestLogic : Logic
         if (running) return;
         base.Start();
         LevelManager.StartRound(resetDynamic: false);
+
+        PlayerGoal.GameWinEvent.AddListener(()=> { GameManager.instance.performAction(GameManager.EnterEditFromTest); });
+        
         SpawnAll();
         CreatePlayers();
         PlayerManager.playerManager.StartRound();
         PlayerManager.playerManager.SetCurrentPlayer(player);
     }
+
+
 
     //This is ugly need better way
     public void Update()
