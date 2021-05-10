@@ -323,12 +323,13 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> actPrepareGame = x =>
         {
-            wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
-            UnityEngine.Debug.LogError("Guten Morgen: " + GetState());
             LevelManager.Clear();
-            SetLogic();
-
+            UnityEvent initEvent = new UnityEvent();
+            initEvent.AddListener(() => {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.play);
+            });
 
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
@@ -338,13 +339,12 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
-            UnityEngine.Debug.LogError("Guten Morgen: " + GetState());
+            UnityEngine.Debug.LogError("Starte Runde in State " + GetState());
             LevelManager.Clear();
             SetLogic();
 
 
-            LoadingScreen.instance.openEvent = initEvent;
-            LoadingScreen.instance.Open();
+            LoadingScreen.instance.Close();
         };
 
         Action<GameAction> actWin = x =>
