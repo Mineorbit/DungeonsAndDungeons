@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public static State Play = new State("Play",2);
     public static State Edit = new State("Edit",3);
     public static State Test = new State("Test",4);
+    public static State PrepareGame = new State("PrepareGame", 5);
 
     public class GameAction: CustomEnum
     {
@@ -60,8 +61,9 @@ public class GameManager : MonoBehaviour
     public static GameAction EnterTestFromEdit = new GameAction("EnterTestFromEdit", 7);
     public static GameAction EnterEditFromTest = new GameAction("EnterEditFromTest", 8);
     public static GameAction StartPlay = new GameAction("StartPlay", 9);
+    public static GameAction PrepareGameFromMainMenu = new GameAction("PrepareGameFromMainMenu", 10);
 
-    
+
     FSM<State,GameAction> gameStateFSM;
 
     UnityEvent[] asyncEvent;
@@ -74,6 +76,10 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         Setup();
+
+        NetworkManager.prepareRoundEvent.AddListener(()=> { performAction(PrepareGameFromMainMenu); });
+        NetworkManager.startRoundEvent.AddListener(() => { performAction(StartPlay); });
+
         performAction(LoadGameFromBoot);
     }
 
@@ -315,8 +321,20 @@ public class GameManager : MonoBehaviour
             LoadingScreen.instance.Open();
         };
 
+        Action<GameAction> actPrepareGame = x =>
+        {
+            wonLastGame = false;
+            UnityEvent initEvent = new UnityEvent();
+            UnityEngine.Debug.LogError("Guten Morgen: " + GetState());
+            LevelManager.Clear();
+            SetLogic();
 
-        Action<GameAction> actStartPlay = x =>
+
+            LoadingScreen.instance.openEvent = initEvent;
+            LoadingScreen.instance.Open();
+        };
+
+        Action<GameAction> actStartGame = x =>
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
@@ -359,7 +377,9 @@ public class GameManager : MonoBehaviour
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, Edit));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(fromMainMenuToEditNewLevel, Edit));
 
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, StartPlay), new Tuple<Action<GameAction>, State>(actStartPlay, Play));
+
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, PrepareGameFromMainMenu), new Tuple<Action<GameAction>, State>(actPrepareGame, PrepareGame));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(PrepareGame, StartPlay), new Tuple<Action<GameAction>, State>(actStartGame, Play));
 
         //Hier evtl mod
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, MainMenu));
