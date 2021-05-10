@@ -152,6 +152,9 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
 
+
+            LevelDataManager.instance.loadType = LevelDataManager.LoadType.Near;
+
             UnityEvent menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
             initEvent.AddListener(()=> {
@@ -169,6 +172,8 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
+
+            LevelDataManager.instance.loadType = LevelDataManager.LoadType.All;
 
             UnityEvent editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -190,6 +195,9 @@ public class GameManager : MonoBehaviour
         {
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
+
+
+            LevelDataManager.instance.loadType = LevelDataManager.LoadType.All;
 
             UnityEvent editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -213,6 +221,8 @@ public class GameManager : MonoBehaviour
 
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
+
+            LevelDataManager.instance.loadType = LevelDataManager.LoadType.Near;
 
             UnityEvent menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -299,6 +309,7 @@ public class GameManager : MonoBehaviour
             initEvent.AddListener(ResetGame);
             PlayerManager.playerManager.Reset();
             //NetworkManager.instance.Reset();
+            UnityEngine.Debug.Log("Leaving lobby");
             LevelManager.Clear();
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
