@@ -327,7 +327,6 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
-                LevelManager.Clear();
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.play);
             });
 
@@ -340,7 +339,6 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
             UnityEngine.Debug.LogError("Starte Runde in State " + GetState());
-            LevelManager.Clear();
             SetLogic();
 
 
