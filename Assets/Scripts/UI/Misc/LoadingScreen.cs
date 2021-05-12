@@ -76,9 +76,11 @@ public class LoadingScreen : Openable
         
         animationScreen = new Fade();
         animationScreen.target = this.transform;
+        // THIS DOES NOT TRACK FIX THIS LATER!
+        /*
         animationScreen.InEndedEvent.AddListener( () => { UnityEngine.Debug.Log("FINISHED"); Finished = true; });
         animationScreen.OutEndedEvent.AddListener(()=> { UnityEngine.Debug.Log("FINISHED"); Finished = true; });
-        
+        */
         animationInfoText = new Fade();
         animationInfoText.target = text;
 

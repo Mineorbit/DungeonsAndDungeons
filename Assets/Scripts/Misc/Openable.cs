@@ -42,10 +42,6 @@ public abstract class Openable : MonoBehaviour
         Process();
     }
 
-    private void Update()
-    {
-        Process();
-    }
 
     void Process()
     {
@@ -58,29 +54,30 @@ public abstract class Openable : MonoBehaviour
                     Act todo = actions.Dequeue();
                     Debug.Log("We got "+todo);
                     if (todo == Openable.Act.Open && !open)
-                   {
-
-                       open = true;
-                       Debug.Log(this + " open calling " + openEvent);
-                       openEvent.Invoke();
-                       OnOpen();
-                   }
-                   else 
-                   if (todo == Openable.Act.Close && open)
-                   {
-                       Finished = false;
-
-                       open = false;
-                       Debug.Log(this + " close calling " + closeEvent);
-                       closeEvent.Invoke();
-
-                       OnClose();
-
-                   }
+                    {
+                        open = true;
+                        Debug.Log(this + " open calling " + openEvent);
+                        openEvent.Invoke();
+                        OnOpen();
+                        MainCaller.Do(() => { Invoke("Finish", 1f); });
+                    }
+                    else 
+                    if (todo == Openable.Act.Close && open)
+                    {
+                        open = false;
+                        Debug.Log(this + " close calling " + closeEvent);
+                        closeEvent.Invoke();
+                        OnClose();
+                        MainCaller.Do(() =>{Invoke("Finish", 1f);});
+                    }
                }
            }
     }
 
+    void Finish()
+    {
+        Finished = true;
+    }
     public abstract void OnOpen();
     public abstract void OnClose();
 }

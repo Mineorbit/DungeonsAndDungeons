@@ -312,7 +312,7 @@ public class GameManager : MonoBehaviour
 
             LoadingScreen.instance.openEvent = initEvent;
 
-            MainCaller.Do(() => { LoadingScreen.instance.Open(); });
+            LoadingScreen.instance.Open();
         };
 
         Action<GameAction> actStartGame = x =>
@@ -321,12 +321,7 @@ public class GameManager : MonoBehaviour
             UnityEngine.Debug.LogError("Starte Runde in State " + GetState());
             SetLogic();
 
-          
-
-            MainCaller.Do(() =>
-            {
-                LoadingScreen.instance.Close();
-            });
+            LoadingScreen.instance.Close();
         };
 
         Action<GameAction> actWin = x =>
