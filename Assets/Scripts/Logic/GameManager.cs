@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
 
 
-            LevelDataManager.instance.loadType = LevelDataManager.LoadType.Near;
+            Level.instantiateType = Level.InstantiateType.Default;
 
             UnityEvent menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -179,15 +179,13 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
 
-            LevelDataManager.instance.loadType = LevelDataManager.LoadType.All;
 
             UnityEvent editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 UnityEngine.Debug.Log("Loading "+levelMetaDataForEditLevel.FullName);
-                LevelDataManager.Load(levelMetaDataForEditLevel);
-
+                LevelDataManager.Load(levelMetaDataForEditLevel, Level.InstantiateType.Edit);
                 SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[] { SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test }, editLoadFinishedEvent);
             });
 
@@ -203,7 +201,7 @@ public class GameManager : MonoBehaviour
             UnityEvent initEvent = new UnityEvent();
 
 
-            LevelDataManager.instance.loadType = LevelDataManager.LoadType.All;
+            Level.instantiateType = Level.InstantiateType.Edit;
 
             UnityEvent editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -228,7 +226,7 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
 
-            LevelDataManager.instance.loadType = LevelDataManager.LoadType.Near;
+            Level.instantiateType = Level.InstantiateType.Default;
 
             UnityEvent menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -246,7 +244,9 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> fromTestToMainMenu = x =>
         {
-            // Ask for safe?
+            // Ask for save?
+
+            Level.instantiateType = Level.InstantiateType.Default;
 
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
@@ -268,6 +268,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> fromEditToTest = x =>
         {
+            Level.instantiateType = Level.InstantiateType.Test;
 
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit,false);
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, true);
@@ -278,6 +279,7 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.ResetDynamicState();
 
+            Level.instantiateType = Level.InstantiateType.Edit;
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit, true);
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, false);
             SetLogic();
@@ -314,16 +316,27 @@ public class GameManager : MonoBehaviour
             SetLogic();
             initEvent.AddListener(ResetGame);
             PlayerManager.playerManager.Reset();
-            //NetworkManager.instance.Reset();
+            NetworkManager.instance.Disconnect();
             UnityEngine.Debug.Log("Leaving lobby");
-            LevelManager.Clear();
             LoadingScreen.instance.openEvent = initEvent;
-            LoadingScreen.instance.Open();
+
+
+            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            initEvent.AddListener(() => {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
+            });
+
+
+            MainCaller.Do(() => { LoadingScreen.instance.Open(); });
         };
 
         Action<GameAction> actPrepareGame = x =>
         {
             LevelManager.Clear();
+            Level.instantiateType = Level.InstantiateType.Online;
             UnityEvent initEvent = new UnityEvent();
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
