@@ -25,14 +25,14 @@ public class LobbyLogic : Logic
 
 
         LevelDataManager.instance.networkLevels = new LevelMetaData[0];
-        NetworkManager.instance.Connect(name, OpenLobbyMenu);
+        NetworkManager.instance.Connect("127.0.0.1",name, OpenLobbyMenu);
 
     }
-    public void Open(string name)
+    public void Open(string ip, string name)
     {
         LevelDataManager.instance.networkLevels = new LevelMetaData[0];
 
-        NetworkManager.instance.Connect(name, OpenLobbyMenu);
+        NetworkManager.instance.Connect(ip,name, OpenLobbyMenu);
 
     }
     public void AddLocalPlayer(int localId, string name)

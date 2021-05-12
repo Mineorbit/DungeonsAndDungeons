@@ -23,7 +23,8 @@ public class PlayMenu : MenuPage
     }
     void goLobby()
     {
-        string name = transform.Find("Connect").gameObject.GetComponentInChildren<InputField>().text;
-        LobbyLogic.lobbyLogic.Open(name);
+        string name = transform.Find("Connect").Find("Name").GetComponentInChildren<InputField>().text;
+        string ip = transform.Find("Connect").Find("IP").GetComponentInChildren<InputField>().text;
+        LobbyLogic.lobbyLogic.Open(ip,name);
     }
 }
