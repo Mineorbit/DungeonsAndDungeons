@@ -17,8 +17,6 @@ public class LoadingScreen : Openable
     public Transform text;
     public TextMeshProUGUI infoTextField;
     public static LoadingScreen instance;
-    public UnityEvent openEvent;
-
     //Helps with blocking UI
     GraphicRaycaster rc;
     string[] infoText = { "Benutze W/A/S/D zum laufen",
@@ -65,77 +63,36 @@ public class LoadingScreen : Openable
                           "Wein auf Bier, das rat ich dir. Bier auf Wein ... das rat ich dir"};
 
 
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
         if (instance != null) Destroy(this);
         instance = this;
         text = this.transform.Find("Screen").Find("TextInfo");
         infoTextField = text.GetComponent<TextMeshProUGUI>();
         rc = transform.GetComponent<GraphicRaycaster>();
 
-        UnityEvent screenOpenedEvent = new UnityEvent();
-        UnityEvent screenClosedEvent = new UnityEvent();
-        UnityEvent textOpenedEvent = new UnityEvent();
-        UnityEvent textClosedEvent = new UnityEvent();
 
-
-        screenOpenedEvent.AddListener(OpenText);
-        textOpenedEvent.AddListener(FinishOpen);
-        textClosedEvent.AddListener(CloseScreen);
-        screenClosedEvent.AddListener(FinishClose);
         
         animationScreen = new Fade();
         animationScreen.target = this.transform;
+        animationScreen.InEndedEvent.AddListener( () => { UnityEngine.Debug.Log("FINISHED"); Finished = true; });
+        animationScreen.OutEndedEvent.AddListener(()=> { UnityEngine.Debug.Log("FINISHED"); Finished = true; });
+        
         animationInfoText = new Fade();
         animationInfoText.target = text;
-        animationScreen.InEndedEvent = screenOpenedEvent;
-        animationScreen.OutEndedEvent = screenClosedEvent;
-        animationInfoText.InEndedEvent = textOpenedEvent;
-        animationInfoText.OutEndedEvent = textClosedEvent;
 
 
     }
-    void OpenText()
-    {
-        updateInfoText();
-        animationInfoText.Play();
-
-    }
-    void CloseScreen()
-    {
-        animationScreen.Play();
-    }
-    void FinishOpen()
-    {
-        openEvent.Invoke();
-
-        Finished = true;
-    }
-    void FinishClose()
-    {
-        Finished = true;
-    }
-    public void setInfoText()
-    {
-        int rnd = UnityEngine.Random.Range(0, infoText.Length - 1);
-        infoTextField.SetText(infoText[rnd]);
-    }
-    public void updateInfoText()
-    {
-        setInfoText();
-        animationInfoText.Play();
-    }
-    public override void Open()
-    {
-        base.Open();
-    }
+    
+  
     public override void OnOpen()
     {
         animationScreen.Play();
     }
     public override void OnClose()
     {
-        animationInfoText.Play();
+        animationScreen.Play();
     }
     
    

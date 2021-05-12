@@ -67,10 +67,6 @@ public class DeathScreen : Openable
     {
         Finished = true;
     }
-    public override void Open()
-    {
-        base.Open();
-    }
     public override void OnOpen()
     {
         animationScreen.Play();

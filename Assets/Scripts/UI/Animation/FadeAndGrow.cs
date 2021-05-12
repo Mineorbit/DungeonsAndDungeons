@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -25,12 +26,12 @@ public class FadeAndGrow : UIAnimation
         {
             open = false;
 
-            CoroutineManager.instance.StartCoroutine(FadeOut());
+            MainCaller.startCoroutine(FadeOut());
         }else
         {
             open = true;
 
-            CoroutineManager.instance.StartCoroutine(FadeIn());
+            MainCaller.startCoroutine(FadeIn());
         }
         return true;
     }

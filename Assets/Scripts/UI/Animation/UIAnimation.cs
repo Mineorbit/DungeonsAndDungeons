@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
@@ -9,18 +10,14 @@ public class UIAnimation
     public Transform target;
     public RectTransform targetTransform;
     public CanvasGroup canvasGroup;
-    public UnityEvent InEndedEvent;
-    public UnityEvent OutEndedEvent;
+    public UnityEvent InEndedEvent = new UnityEvent();
+    public UnityEvent OutEndedEvent = new UnityEvent();
     public bool animationPlaying = false;
     public bool open = false;
     public bool setup = false;
     public void Setup()
     {
         if (setup) return;
-        if(CoroutineManager.instance==null)
-        {
-            UnityEngine.Debug.Log("Kein CoroutineManager verfügbar, UIAnimation nicht möglich");
-        }
         if (targetTransform == null) targetTransform = target.GetComponent<RectTransform>();
         if (canvasGroup == null) canvasGroup = target.GetComponent<CanvasGroup>();
         setup = true;
@@ -32,6 +29,7 @@ public class UIAnimation
         animationPlaying = true;
         return true;
     }
+
     public bool isOpen()
     {
         return open&&!animationPlaying;
@@ -53,13 +51,15 @@ public class UIAnimation
         OutEnded();
 
     }
+
     public void InEnded()
     {
+        UnityEngine.Debug.Log("In Ended");
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
         if (InEndedEvent != null)
         {
-            InEndedEvent.Invoke();
+              InEndedEvent.Invoke();
         }
     }
     public void OutEnded()

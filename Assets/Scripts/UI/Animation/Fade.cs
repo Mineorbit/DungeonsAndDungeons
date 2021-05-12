@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -10,7 +11,6 @@ public class Fade : UIAnimation
     float fadeSpeed = 2;
     public override void Open()
     {
-        if (CoroutineManager.instance == null) return;
         if (!base.open)
         { base.Open(); }
         else return;
@@ -20,7 +20,6 @@ public class Fade : UIAnimation
     }
     public override void Close()
     {
-        if (CoroutineManager.instance == null) return;
         if (base.open)
         { base.Close(); }
         else return;
@@ -31,19 +30,18 @@ public class Fade : UIAnimation
 
     public override bool Play()
     {
-        if (CoroutineManager.instance == null) return false;
         if (!base.Play()) return false;
         if (open)
         {
             open = false;
 
-            CoroutineManager.instance.StartCoroutine(FadeOut());
+            MainCaller.startCoroutine(FadeOut());
         }
         else
         {
             open = true;
 
-            CoroutineManager.instance.StartCoroutine(FadeIn());
+            MainCaller.startCoroutine(FadeIn());
         }
         return true;
     }

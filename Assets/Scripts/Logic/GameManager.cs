@@ -13,11 +13,6 @@ public class GameManager : MonoBehaviour
     bool instanceSet = false;
     public Logic currentLogic;
 
-    UnityEvent afterMenuLoad;
-    UnityEvent afterTestLoad;
-    UnityEvent afterEditLoad;
-    UnityEvent afterPlayLoad;
-
     public class State : CustomEnum
     {
 
@@ -83,11 +78,6 @@ public class GameManager : MonoBehaviour
         performAction(LoadGameFromBoot);
     }
 
-    public void ResetGame()
-    {
-        UnityEngine.Debug.Log("Reseting");
-        setupAfterLoadEvents();
-    }
     void Setup()
     {
         if (instance != null && !instanceSet) Destroy(this);
@@ -96,35 +86,9 @@ public class GameManager : MonoBehaviour
 
 
 
-        setupAfterLoadEvents();
         SetupGameStateFSM();
     }
 
-    public void setupAfterLoadEvents()
-    {
-        afterMenuLoad = new UnityEvent();
-        
-        afterMenuLoad.AddListener(SetLogic);
-        
-        afterMenuLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
-
-        //afterMenuLoad.AddListener(OptionsMenu.HandleSimpleLobbyChange);
-
-        afterMenuLoad.AddListener(LoadingScreen.instance.Close);
-
-        afterTestLoad = new UnityEvent();
-        afterTestLoad.AddListener(SetLogic);
-        afterTestLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
-        afterTestLoad.AddListener(LoadingScreen.instance.Close);
-
-        afterPlayLoad = new UnityEvent();
-
-        afterEditLoad = new UnityEvent();
-        afterEditLoad.AddListener(SetLogic);
-        afterEditLoad.AddListener(LevelDataManager.UpdateLocalLevelList);
-        afterEditLoad.AddListener(LoadingScreen.instance.Close);
-
-    }
 
 
     void SetLogic()
@@ -162,7 +126,7 @@ public class GameManager : MonoBehaviour
             Level.instantiateType = Level.InstantiateType.Default;
 
             UnityEvent menuLoadFinishedEvent = new UnityEvent();
-            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            menuLoadFinishedEvent.AddListener(() => { MainCaller.Do(() => { LoadingScreen.instance.Close(); }); });
             initEvent.AddListener(()=> {
             SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu,menuLoadFinishedEvent);
             });
@@ -292,7 +256,6 @@ public class GameManager : MonoBehaviour
 
             //NetworkManager.instance.Reset();
 
-            connectionResetEvent.AddListener(ResetGame);
 
             LoadingScreen.instance.openEvent = connectionResetEvent;
             LoadingScreen.instance.Open();
@@ -313,30 +276,34 @@ public class GameManager : MonoBehaviour
             wonLastGame = false;
             UnityEvent initEvent = new UnityEvent();
 
-            SetLogic();
-            initEvent.AddListener(ResetGame);
-            PlayerManager.playerManager.Reset();
-            NetworkManager.instance.Disconnect();
-            UnityEngine.Debug.Log("Leaving lobby");
-            LoadingScreen.instance.openEvent = initEvent;
-
+           
 
             UnityEvent menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelManager.Clear();
+                PlayerManager.playerManager.Reset();
+                NetworkManager.instance.Disconnect();
+
+                SetLogic();
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
             });
 
+            LoadingScreen.instance.openEvent = initEvent;
 
-            MainCaller.Do(() => { LoadingScreen.instance.Open(); });
+
+            MainCaller.Do(() =>
+            {
+                UnityEngine.Debug.Log("Mario");
+                LoadingScreen.instance.Open();
+            });
         };
 
         Action<GameAction> actPrepareGame = x =>
         {
-            LevelManager.Clear();
             Level.instantiateType = Level.InstantiateType.Online;
+
             UnityEvent initEvent = new UnityEvent();
             initEvent.AddListener(() => {
                 SceneLoadManager.instance.unloadCurrentScenes();
@@ -344,18 +311,22 @@ public class GameManager : MonoBehaviour
             });
 
             LoadingScreen.instance.openEvent = initEvent;
-            LoadingScreen.instance.Open();
+
+            MainCaller.Do(() => { LoadingScreen.instance.Open(); });
         };
 
         Action<GameAction> actStartGame = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
             UnityEngine.Debug.LogError("Starte Runde in State " + GetState());
             SetLogic();
 
+          
 
-            LoadingScreen.instance.Close();
+            MainCaller.Do(() =>
+            {
+                LoadingScreen.instance.Close();
+            });
         };
 
         Action<GameAction> actWin = x =>
