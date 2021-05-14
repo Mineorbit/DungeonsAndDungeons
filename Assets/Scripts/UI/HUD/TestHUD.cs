@@ -7,7 +7,6 @@ public class TestHUD : MonoBehaviour
     Button enterEdit;
     void Start()
     {
-        enterEdit = transform.Find("Edit").GetComponent<Button>();
         enterEdit.onClick.AddListener(EnterEdit);
     }
     void EnterEdit()
