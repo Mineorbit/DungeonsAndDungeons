@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TestHUD : MonoBehaviour
 {
-    Button enterEdit;
+    public Button enterEdit;
     void Start()
     {
         enterEdit.onClick.AddListener(EnterEdit);
