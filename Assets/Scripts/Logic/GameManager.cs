@@ -74,7 +74,8 @@ public class GameManager : MonoBehaviour
 
         NetworkManager.prepareRoundEvent.AddListener(()=> { performAction(PrepareGameFromMainMenu); });
         NetworkManager.startRoundEvent.AddListener(() => { performAction(StartPlay); });
-
+        NetworkManager.disconnectEvent.AddListener(() => { performAction(EnterMainMenu); });
+        NetworkManager.winEvent.AddListener(() => { performAction(BackToLobbyAfterWin); });
         performAction(LoadGameFromBoot);
     }
 
