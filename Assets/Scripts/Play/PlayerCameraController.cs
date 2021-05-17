@@ -1,34 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Cinemachine;
+﻿using Cinemachine;
 using com.mineorbit.dungeonsanddungeonscommon;
+using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
 {
-    static CinemachineFreeLook cam;
+    private static CinemachineFreeLook cam;
 
     public void Awake()
     {
         cam = GetComponent<CinemachineFreeLook>();
     }
-    public static void Setup()
-    {
-    }
+
     public void Update()
     {
-        int localId = PlayerManager.currentPlayerLocalId;
+        var localId = PlayerManager.currentPlayerLocalId;
         if (localId < 0 || localId > 3) return;
 
         Transform target = null;
 
         if (PlayerManager.playerManager.playerControllers[localId] != null)
-        target = PlayerManager.playerManager.playerControllers[localId].transform;
+            target = PlayerManager.playerManager.playerControllers[localId].transform;
 
         if (target != null)
-        { 
+        {
             cam.LookAt = target;
             cam.Follow = target;
         }
+    }
+
+    public static void Setup()
+    {
     }
 }

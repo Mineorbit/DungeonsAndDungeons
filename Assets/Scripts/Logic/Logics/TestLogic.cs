@@ -1,32 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class TestLogic : Logic
 {
+    private int player;
 
-    int player = 0;
     public override void Init()
     {
         sceneIndex = 2;
     }
-    void CreatePlayers()
+
+    private void CreatePlayers()
     {
-        for(int i = 0;i<4;i++)
-        {
-            PlayerManager.playerManager.Add(i,"Rot", true);
-        }
+        for (var i = 0; i < 4; i++) PlayerManager.playerManager.Add(i, "Rot", true);
     }
 
     public override void Start()
     {
         if (running) return;
         base.Start();
-        LevelManager.StartRound(resetDynamic: false);
+        LevelManager.StartRound(false);
 
-        PlayerGoal.GameWinEvent.AddListener(()=> { GameManager.instance.performAction(GameManager.EnterEditFromTest); });
-        
+        PlayerGoal.GameWinEvent.AddListener(
+            () => { GameManager.instance.performAction(GameManager.EnterEditFromTest); });
+
         SpawnAll();
         CreatePlayers();
         PlayerManager.playerManager.StartRound();
@@ -34,37 +31,29 @@ public class TestLogic : Logic
     }
 
 
-
     //This is ugly need better way
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Swap();
-        }
+        if (Input.GetKeyDown(KeyCode.R)) Swap();
     }
 
     public void Swap()
     {
-            player = (player + 1) % 4;
-            PlayerManager.playerManager.SetCurrentPlayer(player);
+        player = (player + 1) % 4;
+        PlayerManager.playerManager.SetCurrentPlayer(player);
     }
 
-    Vector3 GetSpawnLocation(int i)
+    private Vector3 GetSpawnLocation(int i)
     {
-
-        if (LevelManager.currentLevel.spawn[i] != null) return (LevelManager.currentLevel.spawn[i].transform.position+new Vector3(0,1.5f,0));
-        return new Vector3(i*4,0.25f,0);
+        if (LevelManager.currentLevel.spawn[i] != null)
+            return LevelManager.currentLevel.spawn[i].transform.position + new Vector3(0, 1.5f, 0);
+        return new Vector3(i * 4, 0.25f, 0);
     }
 
-    
 
-    void RemovePlayers()
+    private void RemovePlayers()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            PlayerManager.playerManager.Remove(i);
-        }
+        for (var i = 0; i < 4; i++) PlayerManager.playerManager.Remove(i);
     }
 
     public override void Stop()
@@ -74,19 +63,13 @@ public class TestLogic : Logic
         RemovePlayers();
         DespawnAll();
 
-       
-        LevelManager.EndRound(resetDynamic: false);
 
-        foreach (Transform t in LevelManager.currentLevel.dynamicObjects)
-        {
-            Debug.Log("Test " + t.gameObject.name);
-        }
+        LevelManager.EndRound(false);
+
+        foreach (Transform t in LevelManager.currentLevel.dynamicObjects) Debug.Log("Test " + t.gameObject.name);
     }
 
     public override void DeInit()
     {
-        
     }
-    
-    
 }

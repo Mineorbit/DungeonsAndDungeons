@@ -1,33 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine.UI;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class CreateLevelMenu : MenuPage
 {
-    Button startCreateButton;
-    InputField inputField;
+    private InputField inputField;
+    private Button startCreateButton;
+
     public void Awake()
     {
         base.Awake();
         index = 4;
         setupUI();
     }
-    void setupUI()
+
+    private void setupUI()
     {
-        Transform Interface = transform.Find("Interface");
+        var Interface = transform.Find("Interface");
         startCreateButton = Interface.Find("StartCreateLevel").GetComponent<Button>();
         startCreateButton.onClick.AddListener(GoNewLevel);
         inputField = Interface.Find("Name").GetComponent<InputField>();
     }
-    
-    void GoNewLevel()
+
+    private void GoNewLevel()
     {
-        string name = inputField.text;
+        var name = inputField.text;
 
         //Do some checks
-        LevelMetaData levelMetaData = LevelDataManager.GetNewLevelMetaData();
+        var levelMetaData = LevelDataManager.GetNewLevelMetaData();
         levelMetaData.FullName = name;
         GameManager.instance.createLevel(levelMetaData);
     }

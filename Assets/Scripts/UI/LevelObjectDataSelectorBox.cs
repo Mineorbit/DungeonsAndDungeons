@@ -1,30 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using com.mineorbit.dungeonsanddungeonscommon;
+using Object = UnityEngine.Object;
 
 public class LevelObjectDataSelectorBox : MonoBehaviour
 {
     public ScrollRect scrollRect;
 
-    public UnityEngine.Object selectorPrefab;
+    public Object selectorPrefab;
     public LevelObjectData[] dataObjects;
 
-    int numberOfSelectorsVisible = 5;
-    LevelObjectDataSelector[] selectors;
-
     public float t = -1;
+    private bool changed;
+    private Queue<Direction> directionQueue;
+    private readonly float eps = 0.000001f;
 
-    int selected = 0;
-    int n;
+    private Scrollbar marker;
 
-    enum Direction {Left, Right};
-    Queue<Direction> directionQueue;
+    private bool moving;
+    private int n;
 
-    Scrollbar marker;
-    void Start()
+    private readonly int numberOfSelectorsVisible = 5;
+    private Vector2 pos;
+
+    private int selected;
+    private LevelObjectDataSelector[] selectors;
+
+    private void Start()
     {
         directionQueue = new Queue<Direction>();
 
@@ -40,46 +45,43 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
         SetupList();
         t = -1;
         SetListFromT();
-        scrollRect.normalizedPosition = new Vector2(0.5f,0.5f);
+        scrollRect.normalizedPosition = new Vector2(0.5f, 0.5f);
         Select(1);
     }
-    Vector2 pos;
-    bool changed = false;
-    void Update()
-    {
-        
 
+    private void Update()
+    {
         GetInput();
-        if (!moving&&changed)
+        if (!moving && changed)
         {
             pos = new Vector2(0.5f, 0.5f);
             SetListFromT();
         }
-        if(changed)
+
+        if (changed)
         {
             Select(selected);
             changed = false;
         }
+
         scrollRect.normalizedPosition = pos;
         StartMoving();
     }
 
-    bool moving = false;
-
-    void StartMoving()
+    private void StartMoving()
     {
-        if(!moving&&directionQueue.Count>0)
+        if (!moving && directionQueue.Count > 0)
         {
-            Direction d = directionQueue.Dequeue();
-            if(d == Direction.Right)
+            var d = directionQueue.Dequeue();
+            if (d == Direction.Right)
             {
-                if (t < dataObjects.Length-numberOfSelectorsVisible-1)
+                if (t < dataObjects.Length - numberOfSelectorsVisible - 1)
                 {
                     moving = true;
                     StartCoroutine(goRight(0.25f));
                 }
-            }else
-            if (d == Direction.Left)
+            }
+            else if (d == Direction.Left)
             {
                 if (t > -1)
                 {
@@ -89,32 +91,34 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
             }
         }
     }
-    float eps = 0.000001f;
-    IEnumerator goRight(float time)
+
+    private IEnumerator goRight(float time)
     {
-        float oldT = t;
-        for (float x = 0; (time - x) > eps; x += Time.deltaTime)
+        var oldT = t;
+        for (float x = 0; time - x > eps; x += Time.deltaTime)
         {
             t += Time.deltaTime;
 
-            pos = new Vector2(0.5f, 0.5f) + (x/time)* new Vector2(0.5f, 0.5f);
-            
+            pos = new Vector2(0.5f, 0.5f) + x / time * new Vector2(0.5f, 0.5f);
+
             yield return null;
         }
+
         t = oldT + 1;
         moving = false;
         changed = true;
     }
-    IEnumerator goLeft(float time)
+
+    private IEnumerator goLeft(float time)
     {
         moving = true;
-        float oldT = t;
-        for (float x = 0; (time-x) > eps; x += Time.deltaTime)
+        var oldT = t;
+        for (float x = 0; time - x > eps; x += Time.deltaTime)
         {
             t += Time.deltaTime;
 
-            pos = new Vector2(0.5f, 0.5f) - (x / time) * new Vector2(0.5f, 0.5f);
-            
+            pos = new Vector2(0.5f, 0.5f) - x / time * new Vector2(0.5f, 0.5f);
+
             yield return null;
         }
 
@@ -124,70 +128,64 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
     }
 
 
-
-    void GetInput()
+    private void GetInput()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
+        if (Input.GetKeyDown(KeyCode.Q))
             directionQueue.Enqueue(Direction.Left);
-        }else
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            directionQueue.Enqueue(Direction.Right );
-        }
-        for(int i = 1;i <= numberOfSelectorsVisible;i++)
-        {
-            if(Input.GetKeyDown(i.ToString()))
-            {
+        else if (Input.GetKeyDown(KeyCode.E)) directionQueue.Enqueue(Direction.Right);
+        for (var i = 1; i <= numberOfSelectorsVisible; i++)
+            if (Input.GetKeyDown(i.ToString()))
                 Select(i);
-            }
-        }
     }
 
 
-    void SetListFromT()
+    private void SetListFromT()
     {
-        for(int i = 0;i < n;i++)
+        for (var i = 0; i < n; i++)
         {
-            int p = (int)t + i;
+            var p = (int) t + i;
             if (0 <= p && p < dataObjects.Length)
-            selectors[i].SetData(dataObjects[(int)t+i]);
+                selectors[i].SetData(dataObjects[(int) t + i]);
         }
+
         changed = true;
     }
 
-    void Select(int i)
+    private void Select(int i)
     {
-        if(i>=1&&i<=numberOfSelectorsVisible)
+        if (i >= 1 && i <= numberOfSelectorsVisible)
         {
             selected = i;
-            marker.value = (float)(i - 1) / (numberOfSelectorsVisible-1);
+            marker.value = (float) (i - 1) / (numberOfSelectorsVisible - 1);
             try
             {
                 selectors[i].Select();
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
-
             }
         }
     }
 
 
-
-
-
-    void SetupList()
+    private void SetupList()
     {
-        Transform hook = transform.Find("Viewport").Find("Content");
+        var hook = transform.Find("Viewport").Find("Content");
 
-        Debug.Log("Anzahl: "+dataObjects.Length);
+        Debug.Log("Anzahl: " + dataObjects.Length);
         selectors = new LevelObjectDataSelector[n];
-        
-        for (int i = (int) t;i<(int) t+n;i++)
+
+        for (var i = (int) t; i < (int) t + n; i++)
         {
-            GameObject selObject = Instantiate(selectorPrefab, hook) as GameObject;
+            var selObject = Instantiate(selectorPrefab, hook) as GameObject;
             selectors[i] = selObject.GetComponent<LevelObjectDataSelector>();
             selectors[i].SetData(dataObjects[i]);
         }
+    }
+
+    private enum Direction
+    {
+        Left,
+        Right
     }
 }

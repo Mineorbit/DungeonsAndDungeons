@@ -1,78 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using com.mineorbit.dungeonsanddungeonscommon;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class LevelElement : MonoBehaviour
 {
-    enum Task { Open, Close };
-    Queue<Task> tasks;
-    bool finished;
-
-    UIAnimation openingAnimation;
-    float bot = 86;
-    float right = 159;
     public RectMask2D mask;
     public Button openButton;
-    bool open = false;
-
-
-    Vector2 lastPosition;
-    Vector2 lastObjectPosition;
-    Vector3 targetPosition;
 
     public TextMeshProUGUI nameTextField;
     public TextMeshProUGUI infoTextField;
 
-    LevelList list;
-
     public LevelMetaData d;
+    private float bot = 86;
 
-    GameObject[] colorBars;
+    private GameObject[] colorBars;
+    private bool finished;
+    private Vector2 lastObjectPosition;
 
-    void Awake()
+
+    private Vector2 lastPosition;
+
+    private LevelList list;
+    private bool open;
+
+    private UIAnimation openingAnimation;
+    private float right = 159;
+    private bool target;
+    private Vector3 targetPosition;
+    private Queue<Task> tasks;
+
+    private void Awake()
     {
         colorBars = new GameObject[4];
-        for (int i = 0; i < 4; i++)
-        {
-            colorBars[i] = transform.Find("ColorSelect").Find(i.ToString()).gameObject;
-        }
+        for (var i = 0; i < 4; i++) colorBars[i] = transform.Find("ColorSelect").Find(i.ToString()).gameObject;
     }
-    void Start()
+
+    private void Start()
     {
         finished = true;
         targetPosition = transform.position;
-       openButton.onClick.AddListener(Click);
+        openButton.onClick.AddListener(Click);
 
 
         UpdateScreen();
         tasks = new Queue<Task>();
         list = transform.parent.GetComponent<LevelList>();
-        
+    }
+
+    private void Update()
+    {
+        UpdatePosition();
+        UpdateAnimation();
     }
 
     public void UpdateScreen()
     {
-        right = (float)Screen.width * 0.5f * 0.65f;
-        bot = (float)Screen.height * 0.5f * 0.75f;
+        right = Screen.width * 0.5f * 0.65f;
+        bot = Screen.height * 0.5f * 0.75f;
 
         Set(0);
     }
+
     public void Open()
     {
         list.SetSelectedLevel(d);
         tasks.Enqueue(Task.Open);
     }
+
     public void Close()
     {
-        if(list.GetSelectedLevel() == d)
-        {
-            list.SetSelectedLevel(null);
-        }
+        if (list.GetSelectedLevel() == d) list.SetSelectedLevel(null);
         tasks.Enqueue(Task.Close);
     }
+
     public void UpdateElement(LevelMetaData data)
     {
         d = data;
@@ -80,19 +83,20 @@ public class LevelElement : MonoBehaviour
         UpdateScreen();
         UpdateAvailColors();
     }
-    void UpdateAvailColors()
+
+    private void UpdateAvailColors()
     {
         colorBars[0].SetActive(d.availBlue);
         colorBars[1].SetActive(d.availYellow);
         colorBars[2].SetActive(d.availRed);
         colorBars[3].SetActive(d.availGreen);
     }
-    IEnumerator OpenAnim()
-    {
 
+    private IEnumerator OpenAnim()
+    {
         finished = false;
         open = true;
-        for (float ft = 0f; ft <= 1; ft += 4*Time.deltaTime)
+        for (var ft = 0f; ft <= 1; ft += 4 * Time.deltaTime)
         {
             Set(ft);
             yield return new WaitForSeconds(.01f);
@@ -101,31 +105,32 @@ public class LevelElement : MonoBehaviour
         Set(1);
         finished = true;
     }
-    IEnumerator CloseAnim()
+
+    private IEnumerator CloseAnim()
     {
         finished = false;
-        for (float ft = 1f; ft >= 0; ft -= 4*Time.deltaTime)
+        for (var ft = 1f; ft >= 0; ft -= 4 * Time.deltaTime)
         {
             Set(ft);
             yield return new WaitForSeconds(.01f);
         }
+
         Set(0);
 
         open = false;
         finished = true;
     }
-    void UpdateAnimation()
+
+    private void UpdateAnimation()
     {
-        if(tasks.Count>0)
-        {
+        if (tasks.Count > 0)
             if (finished)
             {
-                Task t = tasks.Dequeue();
-                if(t == Task.Open)
+                var t = tasks.Dequeue();
+                if (t == Task.Open)
                 {
                     if (!open)
                     {
-
                         list.CloseOthersFrom(this);
                         StartCoroutine("OpenAnim");
                     }
@@ -133,41 +138,40 @@ public class LevelElement : MonoBehaviour
                 else
                 {
                     if (open)
-                    StartCoroutine("CloseAnim");
+                        StartCoroutine("CloseAnim");
                 }
             }
-        }
     }
-    bool target = false;
-    public void Click() 
+
+    public void Click()
     {
-        if(!target)
+        if (!target)
         {
-            if(list.listType == LevelList.ListType.Net)
+            if (list.listType == LevelList.ListType.Net)
             {
-               // NetworkManager.instance.SendLevelSelection(d);
+                // NetworkManager.instance.SendLevelSelection(d);
             }
+
             Open();
-        }else
+        }
+        else
         {
             Close();
         }
+
         target = !target;
     }
-    void Set(float t)
+
+    private void Set(float t)
     {
-        if (t<0 || t> 1) return;
-        float r =  (1-t)* right;
-        float b = (1-t) * bot;
-        mask.padding = new Vector4(0,b,r,0);
+        if (t < 0 || t > 1) return;
+        var r = (1 - t) * right;
+        var b = (1 - t) * bot;
+        mask.padding = new Vector4(0, b, r, 0);
         Canvas.ForceUpdateCanvases();
     }
-    void Update()
-    {
-        UpdatePosition();
-        UpdateAnimation();
-    }
-    void UpdatePosition()
+
+    private void UpdatePosition()
     {
         Vector2 offset;
         if (Input.GetMouseButtonDown(0))
@@ -175,12 +179,19 @@ public class LevelElement : MonoBehaviour
             lastPosition = Input.mousePosition;
             lastObjectPosition = transform.position;
         }
+
         if (Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
         {
             offset = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - lastPosition;
             targetPosition = new Vector3(lastObjectPosition.x + offset.x, lastObjectPosition.y + offset.y, 0);
         }
+
         transform.position = (transform.position + targetPosition) / 2;
     }
 
+    private enum Task
+    {
+        Open,
+        Close
+    }
 }

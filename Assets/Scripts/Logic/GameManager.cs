@@ -1,135 +1,110 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 using UnityEngine.Events;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
-    bool instanceSet = false;
-    public Logic currentLogic;
-
-    public class State : CustomEnum
-    {
-
-        public State(string val, int card) : base(val,card)
-        {
-            Value = val;
-            cardinal = card;
-        }
-    }
 
 
-    public static State Init = new State("Init",0);
-    public static State MainMenu = new State("Main Menu",1);
-    public static State Play = new State("Play",2);
-    public static State Edit = new State("Edit",3);
-    public static State Test = new State("Test",4);
+    public static State Init = new State("Init", 0);
+    public static State MainMenu = new State("Main Menu", 1);
+    public static State Play = new State("Play", 2);
+    public static State Edit = new State("Edit", 3);
+    public static State Test = new State("Test", 4);
     public static State PrepareGame = new State("PrepareGame", 5);
-
-    public class GameAction: CustomEnum
-    {
-        
-
-        public GameAction(int card) : base(card)
-        {
-            cardinal = card;
-        }
-        public GameAction(string val, int card) : base(val, card)
-        {
-            Value = val;
-            cardinal = card;
-        }
-    }
 
     public static GameAction LoadGameFromBoot = new GameAction("LoadGameFromBoot", 0);
     public static GameAction Reset = new GameAction("Reset", 1);
-    public static GameAction EnterMainMenu = new GameAction("EnterMainMenu",2);
+    public static GameAction EnterMainMenu = new GameAction("EnterMainMenu", 2);
     public static GameAction BackToLobbyAfterWin = new GameAction("BackToLobbyAfterWin", 3);
     public static GameAction EnterTestFromMainMenu = new GameAction("EnterTestFromMainMenu", 4);
-    public static GameAction EnterEditFromMainMenuNewLevel = new GameAction("EnterEditFromMainMenuNewLevel",5);
+    public static GameAction EnterEditFromMainMenuNewLevel = new GameAction("EnterEditFromMainMenuNewLevel", 5);
     public static GameAction EnterEditFromMainMenu = new GameAction("EnterEditFromMainMenu", 6);
     public static GameAction EnterTestFromEdit = new GameAction("EnterTestFromEdit", 7);
     public static GameAction EnterEditFromTest = new GameAction("EnterEditFromTest", 8);
     public static GameAction StartPlay = new GameAction("StartPlay", 9);
     public static GameAction PrepareGameFromMainMenu = new GameAction("PrepareGameFromMainMenu", 10);
 
-
-    FSM<State,GameAction> gameStateFSM;
-
-    UnityEvent[] asyncEvent;
-
-    public bool wonLastGame = false;
-    public static State GetState()
-    {
-        return instance.gameStateFSM.state;
-    }
-    public void Start()
-    {
-        Setup();
-
-        NetworkManager.prepareRoundEvent.AddListener(()=> { performAction(PrepareGameFromMainMenu); });
-        NetworkManager.startRoundEvent.AddListener(() => { performAction(StartPlay); });
-        NetworkManager.disconnectEvent.AddListener(() => { performAction(EnterMainMenu); });
-        NetworkManager.winEvent.AddListener(() => { performAction(BackToLobbyAfterWin); });
-        performAction(LoadGameFromBoot);
-    }
-
-    void Setup()
-    {
-        if (instance != null && !instanceSet) Destroy(this);
-        instance = this;
-        if (!instanceSet) instanceSet = true;
-
-
-
-        SetupGameStateFSM();
-    }
-
-
-
-    void SetLogic()
-    {
-        UpdateLogic();
-        if(currentLogic!=null)
-        {
-            if(currentLogic.running==false)
-            currentLogic.Start();
-        }
-    }
+    public bool wonLastGame;
 
 
     public LevelMetaData levelMetaDataForNewLevel;
 
     public LevelMetaData levelMetaDataForEditLevel;
 
+    private UnityEvent[] asyncEvent;
+    public Logic currentLogic;
 
+
+    private FSM<State, GameAction> gameStateFSM;
+    private bool instanceSet;
+
+    public void Start()
+    {
+        Setup();
+
+        NetworkManager.prepareRoundEvent.AddListener(() => { performAction(PrepareGameFromMainMenu); });
+        NetworkManager.startRoundEvent.AddListener(() => { performAction(StartPlay); });
+        NetworkManager.disconnectEvent.AddListener(() => { performAction(EnterMainMenu); });
+        NetworkManager.winEvent.AddListener(() => { performAction(BackToLobbyAfterWin); });
+        performAction(LoadGameFromBoot);
+    }
+
+    //this is ugly need better way
+    private void Update()
+    {
+        if (currentLogic != null)
+            if (currentLogic.GetType() == typeof(TestLogic))
+                (currentLogic as TestLogic).Update();
+    }
+
+    public static State GetState()
+    {
+        return instance.gameStateFSM.state;
+    }
+
+    private void Setup()
+    {
+        if (instance != null && !instanceSet) Destroy(this);
+        instance = this;
+        if (!instanceSet) instanceSet = true;
+
+
+        SetupGameStateFSM();
+    }
+
+
+    private void SetLogic()
+    {
+        UpdateLogic();
+        if (currentLogic != null)
+            if (currentLogic.running == false)
+                currentLogic.Start();
+    }
 
 
     public void SetupGameStateFSM()
     {
-
-    UnityEngine.Debug.Log(Init);
-    gameStateFSM = new FSM<State,GameAction>();
-    gameStateFSM.state = Init;
-    gameStateFSM.name = "GameState";
+        Debug.Log(Init);
+        gameStateFSM = new FSM<State, GameAction>();
+        gameStateFSM.state = Init;
+        gameStateFSM.name = "GameState";
 
         Action<GameAction> fromInitToMainMenu = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
 
             Level.instantiateType = Level.InstantiateType.Default;
 
-            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(() => { MainCaller.Do(() => { LoadingScreen.instance.Close(); }); });
-            initEvent.AddListener(()=> {
-            SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu,menuLoadFinishedEvent);
+            initEvent.AddListener(() =>
+            {
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
             });
 
             SetLogic();
@@ -142,16 +117,18 @@ public class GameManager : MonoBehaviour
         Action<GameAction> fromMainMenuToEdit = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
 
-            UnityEvent editLoadFinishedEvent = new UnityEvent();
+            var editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            initEvent.AddListener(() => {
+            initEvent.AddListener(() =>
+            {
                 SceneLoadManager.instance.unloadCurrentScenes();
-                UnityEngine.Debug.Log("Loading "+levelMetaDataForEditLevel.FullName);
+                Debug.Log("Loading " + levelMetaDataForEditLevel.FullName);
                 LevelDataManager.Load(levelMetaDataForEditLevel, Level.InstantiateType.Edit);
-                SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[] { SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test }, editLoadFinishedEvent);
+                SceneLoadManager.instance.load(
+                    new[] {SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
             });
 
             SetLogic();
@@ -163,19 +140,21 @@ public class GameManager : MonoBehaviour
         Action<GameAction> fromMainMenuToEditNewLevel = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
 
             Level.instantiateType = Level.InstantiateType.Edit;
 
-            UnityEvent editLoadFinishedEvent = new UnityEvent();
+            var editLoadFinishedEvent = new UnityEvent();
             editLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            initEvent.AddListener(() => {
+            initEvent.AddListener(() =>
+            {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelDataManager.New(levelMetaDataForNewLevel);
 
 
-                SceneLoadManager.instance.load(new SceneLoadManager.SceneIndex[]{ SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
+                SceneLoadManager.instance.load(
+                    new[] {SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
             });
 
             SetLogic();
@@ -189,13 +168,14 @@ public class GameManager : MonoBehaviour
             // Ask for safe?
 
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
             Level.instantiateType = Level.InstantiateType.Default;
 
-            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            initEvent.AddListener(() => {
+            initEvent.AddListener(() =>
+            {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelManager.Clear();
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
@@ -214,11 +194,12 @@ public class GameManager : MonoBehaviour
             Level.instantiateType = Level.InstantiateType.Default;
 
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
-            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            initEvent.AddListener(() => {
+            initEvent.AddListener(() =>
+            {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelManager.Clear();
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
@@ -235,7 +216,7 @@ public class GameManager : MonoBehaviour
         {
             Level.instantiateType = Level.InstantiateType.Test;
 
-            SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit,false);
+            SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.edit, false);
             SceneLoadManager.SetSceneState(SceneLoadManager.SceneIndex.test, true);
             SetLogic();
         };
@@ -253,7 +234,7 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actResetDisconnect = x =>
         {
             wonLastGame = false;
-            UnityEvent connectionResetEvent = new UnityEvent();
+            var connectionResetEvent = new UnityEvent();
 
             //NetworkManager.instance.Reset();
 
@@ -265,7 +246,7 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actLevelClear = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
             LevelManager.Clear();
             LoadingScreen.instance.openEvent = initEvent;
             LoadingScreen.instance.Open();
@@ -275,13 +256,13 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actClearAfterGame = x =>
         {
             wonLastGame = false;
-            UnityEvent initEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
-           
 
-            UnityEvent menuLoadFinishedEvent = new UnityEvent();
+            var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            initEvent.AddListener(() => {
+            initEvent.AddListener(() =>
+            {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelManager.Clear();
                 PlayerManager.playerManager.Reset();
@@ -296,7 +277,7 @@ public class GameManager : MonoBehaviour
 
             MainCaller.Do(() =>
             {
-                UnityEngine.Debug.Log("Mario");
+                Debug.Log("Mario");
                 LoadingScreen.instance.Open();
             });
         };
@@ -305,8 +286,9 @@ public class GameManager : MonoBehaviour
         {
             Level.instantiateType = Level.InstantiateType.Online;
 
-            UnityEvent initEvent = new UnityEvent();
-            initEvent.AddListener(() => {
+            var initEvent = new UnityEvent();
+            initEvent.AddListener(() =>
+            {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.play);
             });
@@ -319,7 +301,7 @@ public class GameManager : MonoBehaviour
         Action<GameAction> actStartGame = x =>
         {
             wonLastGame = false;
-            UnityEngine.Debug.LogError("Starte Runde in State " + GetState());
+            Debug.LogError("Starte Runde in State " + GetState());
             SetLogic();
 
             LoadingScreen.instance.Close();
@@ -330,63 +312,57 @@ public class GameManager : MonoBehaviour
             wonLastGame = true;
             LevelManager.Clear();
 
-            UnityEvent onWinEvent = new UnityEvent();
+            var onWinEvent = new UnityEvent();
 
 
             LoadingScreen.instance.openEvent = onWinEvent;
             LoadingScreen.instance.Open();
         };
 
-        Action<GameAction> nop = x =>
-        {
-        };
-        
+        Action<GameAction> nop = x => { };
 
 
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Init, LoadGameFromBoot),
+            new Tuple<Action<GameAction>, State>(fromInitToMainMenu, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, Reset),
+            new Tuple<Action<GameAction>, State>(actResetDisconnect, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterMainMenu),
+            new Tuple<Action<GameAction>, State>(nop, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterTestFromMainMenu),
+            new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, Test));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterEditFromMainMenu),
+            new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, Edit));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterEditFromMainMenuNewLevel),
+            new Tuple<Action<GameAction>, State>(fromMainMenuToEditNewLevel, Edit));
 
 
-
-
-
-        gameStateFSM.transitions.Add(new Tuple<State,GameAction>(Init,LoadGameFromBoot), new Tuple<Action<GameAction>,State>(fromInitToMainMenu,MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, Reset), new Tuple<Action<GameAction>, State>(actResetDisconnect, MainMenu)); 
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterMainMenu), new Tuple<Action<GameAction>, State>(nop, MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterTestFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, Test));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterEditFromMainMenu), new Tuple<Action<GameAction>, State>(fromMainMenuToEdit, Edit));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, EnterEditFromMainMenuNewLevel), new Tuple<Action<GameAction>, State>(fromMainMenuToEditNewLevel, Edit));
-
-
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, PrepareGameFromMainMenu), new Tuple<Action<GameAction>, State>(actPrepareGame, PrepareGame));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(PrepareGame, StartPlay), new Tuple<Action<GameAction>, State>(actStartGame, Play));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(MainMenu, PrepareGameFromMainMenu),
+            new Tuple<Action<GameAction>, State>(actPrepareGame, PrepareGame));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(PrepareGame, StartPlay),
+            new Tuple<Action<GameAction>, State>(actStartGame, Play));
 
         //Hier evtl mod
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, EnterMainMenu), new Tuple<Action<GameAction>, State>(actClearAfterGame, MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, BackToLobbyAfterWin), new Tuple<Action<GameAction>, State>(actWin, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, EnterMainMenu),
+            new Tuple<Action<GameAction>, State>(actClearAfterGame, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, BackToLobbyAfterWin),
+            new Tuple<Action<GameAction>, State>(actWin, MainMenu));
 
 
         //Reset Level
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Edit, EnterMainMenu), new Tuple<Action<GameAction>, State>(fromEditToMainMenu, MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterMainMenu), new Tuple<Action<GameAction>, State>(fromTestToMainMenu, MainMenu));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Edit, EnterTestFromEdit), new Tuple<Action<GameAction>, State>(fromEditToTest, Test));
-        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterEditFromTest), new Tuple<Action<GameAction>, State>(fromTestToEdit, Edit));
-
-
-    }
-
-    //this is ugly need better way
-    void Update()
-    {
-        if(currentLogic!=null)
-        if(currentLogic.GetType() == typeof(TestLogic))
-        {
-            (currentLogic as TestLogic).Update();
-        }
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Edit, EnterMainMenu),
+            new Tuple<Action<GameAction>, State>(fromEditToMainMenu, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterMainMenu),
+            new Tuple<Action<GameAction>, State>(fromTestToMainMenu, MainMenu));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Edit, EnterTestFromEdit),
+            new Tuple<Action<GameAction>, State>(fromEditToTest, Test));
+        gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Test, EnterEditFromTest),
+            new Tuple<Action<GameAction>, State>(fromTestToEdit, Edit));
     }
 
 
     public void performAction(GameAction action)
     {
-        UnityEngine.Debug.Log("GameManager: "+action.ToString());
+        Debug.Log("GameManager: " + action);
         gameStateFSM.Move(action);
     }
 
@@ -395,7 +371,7 @@ public class GameManager : MonoBehaviour
         levelMetaDataForNewLevel = newLevelData;
         performAction(EnterEditFromMainMenuNewLevel);
     }
-    
+
     public void editLevel(LevelMetaData data)
     {
         levelMetaDataForEditLevel = data;
@@ -406,33 +382,47 @@ public class GameManager : MonoBehaviour
 
     public void UpdateLogic()
     {
-        if(currentLogic!=null)
+        if (currentLogic != null)
         {
-            if (currentLogic.running == true) currentLogic.Stop();
+            if (currentLogic.running) currentLogic.Stop();
             currentLogic.DeInit();
         }
 
 
-            if(GetState() == MainMenu)
-            { 
+        if (GetState() == MainMenu)
             currentLogic = new LobbyLogic();
-            }
-            else
-            if (GetState() == Edit)
-                currentLogic = new EditLogic();
-            else    
-            if (GetState() == Test)
-                currentLogic = new TestLogic();
-            else    
-            if (GetState() == Play)
-                currentLogic = new PlayLogic();
-            else    
-            if (GetState() == Init)
-                currentLogic = null;
+        else if (GetState() == Edit)
+            currentLogic = new EditLogic();
+        else if (GetState() == Test)
+            currentLogic = new TestLogic();
+        else if (GetState() == Play)
+            currentLogic = new PlayLogic();
+        else if (GetState() == Init)
+            currentLogic = null;
 
-        if (currentLogic != null)
+        if (currentLogic != null) currentLogic.Init();
+    }
+
+    public class State : CustomEnum
+    {
+        public State(string val, int card) : base(val, card)
         {
-            currentLogic.Init();
+            Value = val;
+            cardinal = card;
+        }
+    }
+
+    public class GameAction : CustomEnum
+    {
+        public GameAction(int card) : base(card)
+        {
+            cardinal = card;
+        }
+
+        public GameAction(string val, int card) : base(val, card)
+        {
+            Value = val;
+            cardinal = card;
         }
     }
 }

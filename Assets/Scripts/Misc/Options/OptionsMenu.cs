@@ -1,32 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Audio;
 
 public class OptionsMenu : Openable
 {
-    UIAnimation transition;
-
     public static OptionsMenu options;
-
-    Button backButton;
-
-    TMP_Dropdown resolutionSelector;
 
     public Toggle fullScreenToggle;
 
     public GameObject[] playerStores;
 
+    private Button backButton;
+
+    private Vector2 res;
+
+    private TMP_Dropdown resolutionSelector;
+    private UIAnimation transition;
+
     public void Start()
     {
-
-
         if (options != null) Destroy(this);
         options = this;
-
-
 
 
         backButton = transform.Find("Scroll View").Find("Back").GetComponent<Button>();
@@ -36,86 +30,74 @@ public class OptionsMenu : Openable
 
         backButton.onClick.AddListener(Close);
         transition = new Fade();
-        transition.target = this.transform;
+        transition.target = transform;
 
-        res = new Vector2(Screen.width,Screen.height);
-
+        res = new Vector2(Screen.width, Screen.height);
     }
 
-    void SetupFull()
+    private void Update()
     {
-        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full").GetComponent<Toggle>();
-        fullScreenToggle.onValueChanged.AddListener(delegate {
-            FullChange();
-        });
-        int storedVal = PlayerPrefs.GetInt("FullScreen", -1);
-        if (storedVal != 0)
-            fullScreenToggle.isOn = true;
-        else
-            fullScreenToggle.isOn = false;
-        FullChange();
-    }
-   
-
-    
-
-    void SetupRes()
-    {
-        resolutionSelector = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Resolutions").GetComponent<TMP_Dropdown>();
-
-        resolutionSelector.ClearOptions();
-        int i = 0;
-        string cur = Screen.currentResolution.ToString();
-        foreach (Resolution r in Screen.resolutions)
-        {
-
-
-            TMP_Dropdown.OptionData t = new TMP_Dropdown.OptionData();
-            t.text = r.ToString();
-            resolutionSelector.options.Insert(i,t);
-            
-            if(r.ToString().Equals(cur))
-            {
-                resolutionSelector.value = i;
-            }
-
-            i++;
-        }
-        resolutionSelector.onValueChanged.AddListener(delegate {
-            ResolutionChange();
-        });
-    }
-
-    Vector2 res;
-
-    void Update()
-    {
-        if(res != new Vector2(Screen.width, Screen.height))
+        if (res != new Vector2(Screen.width, Screen.height))
         {
             HandleResChange();
             res = new Vector2(Screen.width, Screen.height);
         }
     }
 
-    void FullChange()
+    private void SetupFull()
     {
-        bool set = fullScreenToggle.isOn;
+        fullScreenToggle = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp").Find("Full")
+            .GetComponent<Toggle>();
+        fullScreenToggle.onValueChanged.AddListener(delegate { FullChange(); });
+        var storedVal = PlayerPrefs.GetInt("FullScreen", -1);
+        if (storedVal != 0)
+            fullScreenToggle.isOn = true;
+        else
+            fullScreenToggle.isOn = false;
+        FullChange();
+    }
+
+
+    private void SetupRes()
+    {
+        resolutionSelector = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Disp")
+            .Find("Resolutions").GetComponent<TMP_Dropdown>();
+
+        resolutionSelector.ClearOptions();
+        var i = 0;
+        var cur = Screen.currentResolution.ToString();
+        foreach (var r in Screen.resolutions)
+        {
+            var t = new TMP_Dropdown.OptionData();
+            t.text = r.ToString();
+            resolutionSelector.options.Insert(i, t);
+
+            if (r.ToString().Equals(cur)) resolutionSelector.value = i;
+
+            i++;
+        }
+
+        resolutionSelector.onValueChanged.AddListener(delegate { ResolutionChange(); });
+    }
+
+    private void FullChange()
+    {
+        var set = fullScreenToggle.isOn;
         Screen.fullScreen = set;
         PlayerPrefs.SetInt("FullScreen", set ? 1 : 0);
         PlayerPrefs.Save();
     }
 
-    void HandleResChange()
+    private void HandleResChange()
     {
         LevelList.UpdateDisplay();
     }
 
-    void ResolutionChange()
+    private void ResolutionChange()
     {
-        int r = resolutionSelector.value;
+        var r = resolutionSelector.value;
         if (r > Screen.resolutions.Length) return;
-        Screen.SetResolution(Screen.resolutions[r].width, Screen.resolutions[r].height,true);
-
+        Screen.SetResolution(Screen.resolutions[r].width, Screen.resolutions[r].height, true);
     }
 
     public override void OnOpen()
@@ -124,12 +106,11 @@ public class OptionsMenu : Openable
         transition.Play();
         Finished = true;
     }
+
     public override void OnClose()
     {
-
         Debug.Log("Close");
         transition.Play();
         Finished = true;
-        
     }
 }

@@ -1,114 +1,92 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
-using System.Threading;
-using UnityEngine;
-
 using com.mineorbit.dungeonsanddungeonscommon;
+using UnityEngine;
 
 public class BuilderController : MonoBehaviour
 {
-    float speed = 4;
     public static Vector3 builderPosition;
     public static Vector3 builderForward;
 
     public bool acceptInput = true;
 
-    LevelObjectData selectedObjectType;
-
     public BuilderCursor builderCursor;
+    private InteractiveLevelObject receiver;
 
-    void Start()
+    private LevelObjectData selectedObjectType;
+    private InteractiveLevelObject sender;
+    private readonly float speed = 4;
+    private Wire w;
+
+    private void Start()
     {
     }
 
-    void Update()
+    private void Update()
     {
         UpdateLock();
-        if(acceptInput)
+        if (acceptInput)
         {
-        UpdatePosition();
-        UpdateRotation();
-        ProcessBuildInput();
+            UpdatePosition();
+            UpdateRotation();
+            ProcessBuildInput();
         }
+
         builderForward = transform.TransformDirection(Vector3.forward);
     }
-    void UpdateLock()
+
+    private void UpdateLock()
     {
         //Hier gleicher knopf wie bei mouse lock
-        if(Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            acceptInput = MouseStateController.isLocked();
-        }
+        if (Input.GetKeyDown(KeyCode.LeftAlt)) acceptInput = MouseStateController.isLocked();
     }
-    InteractiveLevelObject sender = null;
-    InteractiveLevelObject receiver = null;
-    Wire w = null;
 
-    InteractiveLevelObject pickAtCursor()
+    private InteractiveLevelObject pickAtCursor()
     {
-        GameObject o = builderCursor.GetGameObjectAt();
+        var o = builderCursor.GetGameObjectAt();
         return o.GetComponent<InteractiveLevelObject>();
     }
 
-    void ProcessBuildInput()
+    private void ProcessBuildInput()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Place();
-        }
-        if(Input.GetMouseButtonDown(1))
-        {
-            Displace();
-        }
+        if (Input.GetMouseButtonDown(0)) Place();
+        if (Input.GetMouseButtonDown(1)) Displace();
 
-        if(Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(2))
         {
             sender = pickAtCursor();
-            if(sender != null)
+            if (sender != null)
             {
                 Debug.Log("Wire started");
-                w = Wire.CreateDynamic(sender.transform.position,sender.transform.position,Color.black);
+                w = Wire.CreateDynamic(sender.transform.position, sender.transform.position, Color.black);
+            }
+        }
+        else if (Input.GetMouseButton(2))
+        {
+            if (w != null)
+            {
+                var targetPoint = BuilderCursor.targetPosition;
+                receiver = pickAtCursor();
+                if (receiver != null) targetPoint = receiver.transform.position;
+                w.SetReceiverPosition(targetPoint);
+            }
+        }
+        else if (Input.GetMouseButtonUp(2))
+        {
+            if (sender != null)
+            {
+                receiver = pickAtCursor();
+                if (receiver != null) sender.AddReceiverDynamic(receiver.transform.position, receiver);
+                if (w != null)
+                    Destroy(w.gameObject);
             }
         }
         else
-        if(Input.GetMouseButton(2))
-        {
-            if(w != null)
-            {
-                Vector3 targetPoint = BuilderCursor.targetPosition;
-                receiver = pickAtCursor();
-                if(receiver != null)
-                {
-                    targetPoint = receiver.transform.position;
-                }
-                w.SetReceiverPosition(targetPoint);
-            }
-        }else
-        if (Input.GetMouseButtonUp(2))
-        {
-            if(sender != null)
-            {
-                receiver = pickAtCursor();
-                if(receiver != null)
-                {
-                    sender.AddReceiverDynamic(receiver.transform.position, receiver);
-                }
-                if(w != null)
-                Destroy(w.gameObject);
-            }
-        }else
         {
             if (w != null)
                 Destroy(w.gameObject);
         }
 
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            builderCursor.RotateRight();
-        }
+        if (Input.GetKeyDown(KeyCode.R)) builderCursor.RotateRight();
         /*
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -116,37 +94,43 @@ public class BuilderController : MonoBehaviour
         }
         */
     }
-    
-    void Place()
+
+    private void Place()
     {
         var t = builderCursor.Get();
-        if(t.legal)
-        LevelManager.currentLevel.Add(t.levelObjectData,t.pos,t.rot);
+        if (t.legal)
+            LevelManager.currentLevel.Add(t.levelObjectData, t.pos, t.rot);
     }
-    void Displace()
+
+    private void Displace()
     {
-        GameObject o = builderCursor.GetGameObjectAt();
+        var o = builderCursor.GetGameObjectAt();
         LevelManager.currentLevel.Remove(o);
     }
-    void UpdatePosition()
+
+    private void UpdatePosition()
     {
         // lock if control pressed
-        if(! Input.GetKey(KeyCode.LeftControl))
-        { 
-        Vector3 targetDirection = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") + transform.up * (Input.GetKey("space") ? 1 : 0) + -transform.up * (Input.GetKey("left shift") ? 1 : 0);
-        transform.position += Time.deltaTime * Vector3.Normalize(targetDirection) * speed;
-        builderPosition = transform.position;
+        if (!Input.GetKey(KeyCode.LeftControl))
+        {
+            var targetDirection = transform.forward * Input.GetAxis("Vertical") +
+                                  transform.right * Input.GetAxis("Horizontal") +
+                                  transform.up * (Input.GetKey("space") ? 1 : 0) +
+                                  -transform.up * (Input.GetKey("left shift") ? 1 : 0);
+            transform.position += Time.deltaTime * Vector3.Normalize(targetDirection) * speed;
+            builderPosition = transform.position;
         }
     }
-    void UpdateRotation()
+
+    private void UpdateRotation()
     {
-        Vector3 currentRotation = transform.localRotation.eulerAngles;
+        var currentRotation = transform.localRotation.eulerAngles;
         currentRotation.y += Input.GetAxis("Mouse X");
-        float oldX = currentRotation.x;
+        var oldX = currentRotation.x;
         currentRotation.x -= Input.GetAxis("Mouse Y");
-        if ( !( (280 <= currentRotation.x && currentRotation.x <= 361) || (-1 <= currentRotation.x && currentRotation.x <= 80)))
+        if (!(280 <= currentRotation.x && currentRotation.x <= 361 ||
+              -1 <= currentRotation.x && currentRotation.x <= 80))
             currentRotation.x = oldX;
         transform.localRotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z);
     }
-    
 }

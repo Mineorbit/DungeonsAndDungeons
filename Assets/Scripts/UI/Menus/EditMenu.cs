@@ -1,25 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine.UI;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class EditMenu : MenuPage
 {
-    Button newLevelButton;
-    Button editButton;
-    Button deleteButton;
-    Button uploadButton;
-    LevelList levelList;
+    private Button deleteButton;
+    private Button editButton;
+    private LevelList levelList;
+    private Button newLevelButton;
+    private Button uploadButton;
+
     public override void Awake()
     {
         base.Awake();
         index = 3;
         setupUI();
     }
-    void setupUI()
+
+
+    public override void Start()
     {
-        Transform Interface = transform.Find("Interface");
+        base.Start();
+    }
+
+    private void setupUI()
+    {
+        var Interface = transform.Find("Interface");
         levelList = transform.Find("LevelList").GetComponent<LevelList>();
         editButton = Interface.Find("Edit").GetComponent<Button>();
         newLevelButton = Interface.Find("New").GetComponent<Button>();
@@ -30,37 +35,33 @@ public class EditMenu : MenuPage
         editButton.onClick.AddListener(StartEdit);
         deleteButton.onClick.AddListener(RemoveLevel);
     }
-    void RemoveLevel()
+
+    private void RemoveLevel()
     {
-        LevelMetaData metaData = levelList.GetSelectedLevel();
+        var metaData = levelList.GetSelectedLevel();
         if (metaData == null) return;
         LevelDataManager.Delete(metaData);
     }
-    void OpenUploadMenu()
+
+    private void OpenUploadMenu()
     {
-        LevelMetaData metaData = levelList.GetSelectedLevel();
-        if(metaData!=null)
-        { 
-        UploadMenu.levelToUpload = metaData;
-        MainMenuManager.instance.OpenPage(MainMenuManager.FromEditToUploadMenu);
+        var metaData = levelList.GetSelectedLevel();
+        if (metaData != null)
+        {
+            UploadMenu.levelToUpload = metaData;
+            MainMenuManager.instance.OpenPage(MainMenuManager.FromEditToUploadMenu);
         }
     }
-    void OpenNewLevelMenu()
+
+    private void OpenNewLevelMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.FromEditToCreateMenu);
     }
-    void StartEdit()
-    {
 
-        LevelMetaData metaData = levelList.GetSelectedLevel();
+    private void StartEdit()
+    {
+        var metaData = levelList.GetSelectedLevel();
         if (metaData == null) return;
         GameManager.instance.editLevel(metaData);
-    }
-
-
-    public override void Start()
-    {
-        base.Start();
-
     }
 }

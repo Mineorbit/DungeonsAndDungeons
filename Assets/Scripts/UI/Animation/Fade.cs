@@ -1,27 +1,25 @@
-﻿using com.mineorbit.dungeonsanddungeonscommon;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Threading;
+﻿using System.Collections;
+using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 
 public class Fade : UIAnimation
 {
-    float fadeSpeed = 2;
+    private readonly float fadeSpeed = 2;
+
     public override void Open()
     {
-        if (!base.open)
-        { base.Open(); }
+        if (!open)
+            base.Open();
         else return;
         animationPlaying = false;
 
         canvasGroup.alpha = 1;
     }
+
     public override void Close()
     {
-        if (base.open)
-        { base.Close(); }
+        if (open)
+            base.Close();
         else return;
         animationPlaying = true;
 
@@ -43,11 +41,13 @@ public class Fade : UIAnimation
 
             MainCaller.startCoroutine(FadeIn());
         }
+
         return true;
     }
+
     public IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1.05; i += fadeSpeed*Time.deltaTime)
+        for (float i = 0; i <= 1.05; i += fadeSpeed * Time.deltaTime)
         {
             canvasGroup.alpha = i;
             yield return null;
@@ -56,7 +56,7 @@ public class Fade : UIAnimation
         canvasGroup.alpha = 1;
         animationPlaying = false;
         InEnded();
-     }
+    }
 
     public IEnumerator FadeOut()
     {
@@ -65,6 +65,7 @@ public class Fade : UIAnimation
             canvasGroup.alpha = i;
             yield return null;
         }
+
         canvasGroup.alpha = 0;
         animationPlaying = false;
         OutEnded();

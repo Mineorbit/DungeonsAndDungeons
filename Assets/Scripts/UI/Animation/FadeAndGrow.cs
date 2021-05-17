@@ -1,18 +1,15 @@
-﻿using com.mineorbit.dungeonsanddungeonscommon;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
+﻿using System.Collections;
+using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 
 public class FadeAndGrow : UIAnimation
 {
-    float Speed = 2;
+    private readonly float Speed = 2;
+
     public override void Open()
     {
-        if (!base.open)
-        { base.Open(); }
+        if (!open)
+            base.Open();
         else return;
         animationPlaying = false;
         canvasGroup.alpha = 1;
@@ -21,28 +18,32 @@ public class FadeAndGrow : UIAnimation
 
     public override bool Play()
     {
-        if(!base.Play()) return false;
+        if (!base.Play()) return false;
         if (open)
         {
             open = false;
 
             MainCaller.startCoroutine(FadeOut());
-        }else
+        }
+        else
         {
             open = true;
 
             MainCaller.startCoroutine(FadeIn());
         }
+
         return true;
     }
+
     public IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1.05; i += Speed*Time.deltaTime)
+        for (float i = 0; i <= 1.05; i += Speed * Time.deltaTime)
         {
             canvasGroup.alpha = i;
-            target.localScale = new Vector3(i,i,i);
+            target.localScale = new Vector3(i, i, i);
             yield return null;
         }
+
         canvasGroup.alpha = 1;
         target.localScale = new Vector3(1, 1, 1);
         animationPlaying = false;
@@ -51,12 +52,13 @@ public class FadeAndGrow : UIAnimation
 
     public IEnumerator FadeOut()
     {
-        for (float i = 1; i >= -0.05; i -= Speed*Time.deltaTime)
+        for (float i = 1; i >= -0.05; i -= Speed * Time.deltaTime)
         {
             canvasGroup.alpha = i;
             target.localScale = new Vector3(i, i, i);
             yield return null;
         }
+
         canvasGroup.alpha = 0;
         target.localScale = new Vector3(0, 0, 0);
         animationPlaying = false;

@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 using UnityEngine.UI;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class BuilderHUD : MonoBehaviour
 {
-    Button enterTest;
-    Button saveButton;
-    void Start()
+    private Button enterTest;
+    private Button saveButton;
+
+    private void Start()
     {
         enterTest = transform.Find("Test").GetComponent<Button>();
         saveButton = transform.Find("Save").GetComponent<Button>();
@@ -17,27 +16,20 @@ public class BuilderHUD : MonoBehaviour
         saveButton.onClick.AddListener(SaveLevel);
     }
 
-    
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T)) enterTest.onClick.Invoke();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S)) saveButton.onClick.Invoke();
+    }
 
-    void SaveLevel()
+
+    private void SaveLevel()
     {
         LevelDataManager.Save();
     }
 
-    void EnterTest()
+    private void EnterTest()
     {
         GameManager.instance.performAction(GameManager.EnterTestFromEdit);
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            enterTest.onClick.Invoke();
-        }
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
-        {
-            saveButton.onClick.Invoke();
-        }
     }
 }

@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class FreezeFramer : MonoBehaviour
 {
-    static Queue<float> times;
-    static IEnumerator run;
+    private static Queue<float> times;
+
+    private static IEnumerator run;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         times = new Queue<float>();
     }
-    static IEnumerator FreezeCam(float t)
+
+    private void Update()
+    {
+        if (times.Count > 0)
+            if (run == null)
+            {
+                var t = times.Dequeue();
+                run = FreezeCam(t);
+                StartCoroutine(run);
+            }
+    }
+
+    private static IEnumerator FreezeCam(float t)
     {
         //yield return null;
         var flags = Camera.main.clearFlags;
@@ -25,18 +39,7 @@ public class FreezeFramer : MonoBehaviour
         Camera.main.cullingMask = mask;
         run = null;
     }
-    void Update()
-    {
-        if(times.Count>0)
-        {
-            if(run == null)
-            {
-            float t = times.Dequeue();
-            run = FreezeCam(t);
-            StartCoroutine(run);
-            }
-        }
-    }
+
     public static void freeze(float time)
     {
         times.Enqueue(time);

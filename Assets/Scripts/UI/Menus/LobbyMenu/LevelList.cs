@@ -1,93 +1,90 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using com.mineorbit.dungeonsanddungeonscommon;
+using UnityEngine;
 
 public class LevelList : MonoBehaviour
 {
-    Vector2 lastPosition;
-    Vector2 lastObjectPosition;
-    Vector3 targetPosition;
-
-    GameObject[] elements;
-
-    public LevelElement[] levelElements;
-
-    public InstantionTarget levelElementPrefab;
-
-    LevelMetaData selected;
-
-    LevelMetaData[] currentList;
+    public enum ListType
+    {
+        Net,
+        Local
+    }
 
     //Lol
     public static HashSet<LevelList> levelLists;
 
+    public LevelElement[] levelElements;
 
-    public enum ListType { Net, Local };
+    public InstantionTarget levelElementPrefab;
     public ListType listType;
 
-    public void SetSelectedLevel(LevelMetaData levelMetaData)
+    private LevelMetaData[] currentList;
+
+    private GameObject[] elements;
+    private Vector2 lastObjectPosition;
+    private Vector2 lastPosition;
+
+    private LevelMetaData selected;
+    private Vector3 targetPosition;
+
+    private void Awake()
     {
-        selected = levelMetaData;
-    }
-    public LevelMetaData GetSelectedLevel()
-    {
-        return selected;
-    }
-    public void SetSelected(long ulid)
-    {
-        LevelElement element = null;
-        foreach(LevelElement e in levelElements)
-        {
-            if (e.d.uniqueLevelId == ulid) element = e;
-        }
-        if(element!=null)
-        {
-            element.Open();
-        }
+        if (levelLists == null) levelLists = new HashSet<LevelList>();
     }
 
-    public void CloseOthersFrom(LevelElement e)
-    {
-        foreach(LevelElement x in levelElements)
-        {
-            if(x!=e)
-            {
-                x.Close();
-            }
-        }
-    }
-    public static void UpdateDisplay()
-    {
-        if(levelLists != null)
-        foreach(LevelList l in levelLists)
-        l.UpdateList(l.currentList);
-    }
-
-    void Awake()
-    {
-
-        if (levelLists == null)
-        {
-            levelLists = new HashSet<LevelList>();
-        }
-    }
-
-    void Start()
+    private void Start()
     {
         levelLists.Add(this);
 
         RefreshList();
     }
-    void RefreshList()
+
+    private void Update()
     {
-        switch(listType)
+        if (GameManager.GetState() == GameManager.MainMenu)
+            RefreshList();
+    }
+
+    public void SetSelectedLevel(LevelMetaData levelMetaData)
+    {
+        selected = levelMetaData;
+    }
+
+    public LevelMetaData GetSelectedLevel()
+    {
+        return selected;
+    }
+
+    public void SetSelected(long ulid)
+    {
+        LevelElement element = null;
+        foreach (var e in levelElements)
+            if (e.d.uniqueLevelId == ulid)
+                element = e;
+        if (element != null) element.Open();
+    }
+
+    public void CloseOthersFrom(LevelElement e)
+    {
+        foreach (var x in levelElements)
+            if (x != e)
+                x.Close();
+    }
+
+    public static void UpdateDisplay()
+    {
+        if (levelLists != null)
+            foreach (var l in levelLists)
+                l.UpdateList(l.currentList);
+    }
+
+    private void RefreshList()
+    {
+        switch (listType)
         {
             case ListType.Net:
                 if (LevelDataManager.instance.networkLevels != currentList)
-                {
                     UpdateList(LevelDataManager.instance.networkLevels);
-                }
                 break;
             case ListType.Local:
                 if (LevelDataManager.instance.localLevels != currentList)
@@ -95,69 +92,59 @@ public class LevelList : MonoBehaviour
                     Debug.Log("List changed");
                     UpdateList(LevelDataManager.instance.localLevels);
                 }
+
                 break;
         }
-    }
-    void Update()
-    {
-        if(GameManager.GetState() == GameManager.MainMenu)
-        RefreshList();
     }
 
     public void UpdateList(LevelMetaData[] localLevels)
     {
-        if(elements!=null)
-        foreach(GameObject g in elements)
-        {
-            Destroy(g);
-        }
+        if (elements != null)
+            foreach (var g in elements)
+                Destroy(g);
         elements = new GameObject[localLevels.Length];
         levelElements = new LevelElement[localLevels.Length];
-        for (int i = 0;i < elements.Length;i++)
+        for (var i = 0; i < elements.Length; i++)
         {
-
-            elements[i] = levelElementPrefab.Create(GetPositionOfElement(i,elements.Length), transform);
+            elements[i] = levelElementPrefab.Create(GetPositionOfElement(i, elements.Length), transform);
             levelElements[i] = elements[i].GetComponent<LevelElement>();
             levelElements[i].UpdateElement(localLevels[i]);
         }
+
         currentList = localLevels;
     }
 
-    int GetClosestDiv(int N)
+    private int GetClosestDiv(int N)
     {
-        float f = Mathf.Ceil(Mathf.Sqrt((float) N));
-        int i = 0;
-        while(N-i > 0)
+        var f = Mathf.Ceil(Mathf.Sqrt(N));
+        var i = 0;
+        while (N - i > 0)
         {
-            if(N % ((int)f  + i) == 0 )
-            {
+            if (N % ((int) f + i) == 0)
                 return (int) f + i;
-            }else
-            if (N % ((int)f - i) == 0)
-            {
-                    return (int)f - i;
-            }
+            if (N % ((int) f - i) == 0) return (int) f - i;
             i++;
         }
-        return (int) Mathf.Ceil(Mathf.Sqrt((float)N));
+
+        return (int) Mathf.Ceil(Mathf.Sqrt(N));
     }
-    Vector2 GetPositionOfElement(int f,int n)
+
+    private Vector2 GetPositionOfElement(int f, int n)
     {
-        int cnt = GetClosestDiv(n);
-        float boxHeight = Screen.height * 0.75f * 0.5f;
-        float boxWidth = Screen.width * 0.65f * 0.5f;
+        var cnt = GetClosestDiv(n);
+        var boxHeight = Screen.height * 0.75f * 0.5f;
+        var boxWidth = Screen.width * 0.65f * 0.5f;
 
-        int tableWidth = cnt;
-        int tableHeight = (int)Mathf.Floor((float)n/ (float) cnt);
+        var tableWidth = cnt;
+        var tableHeight = (int) Mathf.Floor(n / (float) cnt);
 
-        float widthScale = (float)tableWidth / 2 - 1;
-        float heightScale = (float)tableHeight / 2 - 1; 
-        int height = (int) Mathf.Floor(f/((float) cnt));
-        int width =   f % cnt;
-        Vector2 placeOffset = new Vector2(-width*boxWidth,height*boxHeight);
-        Vector2 stockOffset = new Vector2(widthScale*boxWidth,-heightScale*boxHeight);
-        Vector2 start = new Vector2(Screen.width/2, -Screen.height/2);
-        return start+placeOffset+stockOffset;
-    }  
-   
+        var widthScale = (float) tableWidth / 2 - 1;
+        var heightScale = (float) tableHeight / 2 - 1;
+        var height = (int) Mathf.Floor(f / (float) cnt);
+        var width = f % cnt;
+        var placeOffset = new Vector2(-width * boxWidth, height * boxHeight);
+        var stockOffset = new Vector2(widthScale * boxWidth, -heightScale * boxHeight);
+        var start = new Vector2(Screen.width / 2, -Screen.height / 2);
+        return start + placeOffset + stockOffset;
+    }
 }

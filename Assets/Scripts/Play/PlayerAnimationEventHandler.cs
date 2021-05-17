@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 public class PlayerAnimationEventHandler : MonoBehaviour
 {
     public UnityEvent attackEvent;
     public UnityEvent attackFinishedEvent;
 
-    void Awake()
+    private void Awake()
     {
         attackEvent = new UnityEvent();
         attackFinishedEvent = new UnityEvent();

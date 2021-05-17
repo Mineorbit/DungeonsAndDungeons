@@ -1,36 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : MenuPage
 {
-    Button playModeButton;
-    Button editModeButton;
+    private Button editModeButton;
+    private Button playModeButton;
+
     public override void Awake()
     {
         base.Awake();
         index = 0;
     }
+
     public override void Start()
     {
         base.Start();
-        setupButtons(); 
+        setupButtons();
     }
-    void setupButtons()
+
+    private void setupButtons()
     {
         playModeButton = transform.Find("Play").GetComponent<Button>();
         editModeButton = transform.Find("Edit").GetComponent<Button>();
         playModeButton.onClick.AddListener(enterPlay);
         editModeButton.onClick.AddListener(enterEdit);
     }
-    
-    void enterPlay()
+
+    private void enterPlay()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.FromMainToPlay);
     }
-    void enterEdit()
+
+    private void enterEdit()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.FromMainToEdit);
     }

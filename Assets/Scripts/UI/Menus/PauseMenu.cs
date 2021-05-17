@@ -1,107 +1,90 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 using UnityEngine.UI;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool pauseMenuAvailable;
     public bool freezeGame;
-    public UIAnimation animation;
     public bool open;
     public bool freezePlayer = true;
 
     public Button backToMainMenuButton;
     public Button optionsButton;
+    public UIAnimation animation;
 
-    void Start()
+    private void Start()
     {
         Setup();
     }
 
-    void Setup()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!open && !animation.isOpen() && !BlurScreen.blurScreen.isOpen())
+                Open();
+            else if (open && animation.isOpen() && BlurScreen.blurScreen.isOpen()) Close();
+        }
+    }
+
+    private void Setup()
     {
         animation = new FadeAndGrow();
-        animation.target = this.transform;
+        animation.target = transform;
         backToMainMenuButton = transform.Find("Main").GetComponent<Button>();
         optionsButton = transform.Find("Opt").GetComponent<Button>();
         optionsButton.onClick.AddListener(GotoOptions);
         backToMainMenuButton.onClick.AddListener(GotoMainMenu);
     }
-    void GotoOptions()
+
+    private void GotoOptions()
     {
         OptionsMenu.options.Open();
     }
-    void GotoMainMenu()
+
+    private void GotoMainMenu()
     {
         Close();
-        UnityEngine.Debug.Log("Entering Main Menu from Pause Menu");
+        Debug.Log("Entering Main Menu from Pause Menu");
         GameManager.instance.performAction(GameManager.EnterMainMenu);
     }
-    bool checkAvailability()
+
+    private bool checkAvailability()
     {
-        
-        if(GameManager.GetState() == GameManager.Init)
-        {
-            pauseMenuAvailable = false;
-        }
+        if (GameManager.GetState() == GameManager.Init) pauseMenuAvailable = false;
         if (GameManager.GetState() == GameManager.MainMenu)
-        {
             pauseMenuAvailable = false;
-        }
         else
             pauseMenuAvailable = true;
-        if (LoadingScreen.instance.open)
-        {
-            pauseMenuAvailable = false;
-        }
+        if (LoadingScreen.instance.open) pauseMenuAvailable = false;
         return pauseMenuAvailable;
     }
-    void Open()
+
+    private void Open()
     {
         if (!checkAvailability()) return;
         open = true;
-        if(freezeGame)
-        //Inform GameManager of Attempt to (stop simulation in local play)
-        
-        if(freezePlayer)
-         {
-                    PlayerManager.acceptInput = false;
-         }
+        if (freezeGame)
+            //Inform GameManager of Attempt to (stop simulation in local play)
+
+            if (freezePlayer)
+                PlayerManager.acceptInput = false;
         BlurScreen.blurScreen.Open();
         animation.Play();
         MouseStateController.UnlockBlocking();
     }
-    void Close()
-    {
 
+    private void Close()
+    {
         if (!checkAvailability()) return;
 
         if (freezeGame)
-        //Inform GameManager of Attempt to (unfreeze Sim)
-        {
+            //Inform GameManager of Attempt to (unfreeze Sim)
             PlayerManager.acceptInput = true;
-        }
         BlurScreen.blurScreen.Close();
         animation.Play();
         open = false;
         MouseStateController.LockUnblocking();
     }
-
-    void Update()
-    {
-    if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if((!open && !animation.isOpen()) && !BlurScreen.blurScreen.isOpen())
-            { 
-            Open();
-            }
-            else if((open && animation.isOpen()) && BlurScreen.blurScreen.isOpen())
-            {
-            Close();
-            }
-        }
-       }
-    }
+}

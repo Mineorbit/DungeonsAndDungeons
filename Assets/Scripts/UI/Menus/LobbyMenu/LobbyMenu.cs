@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class LobbyMenu : MenuPage
 {
-    static LevelList netList;
-    Toggle readyButton;
+    private static LevelList netList;
+    private Toggle readyButton;
+
     public override void Awake()
     {
         base.Awake();
@@ -19,16 +16,18 @@ public class LobbyMenu : MenuPage
 
         readyButton.onValueChanged.AddListener(delegate { CallReady(); });
     }
+
     public static void UpdateDisplay()
     {
-
         PlayerView.playerView.UpdatePlayerView();
     }
+
     public static void SetSelectedLevel(long ulid)
     {
         netList.SetSelected(ulid);
     }
-    void CallReady()
+
+    private void CallReady()
     {
         //NetworkManager.instance.CallReady(readyButton.isOn);
     }

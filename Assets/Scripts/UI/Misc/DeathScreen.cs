@@ -1,37 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using TMPro;
-using System;
-using System.Diagnostics;
+using UnityEngine.UI;
 
 public class DeathScreen : Openable
 {
-    UIAnimation animationScreen;
-    UIAnimation animationInfoText;
+    public static DeathScreen instance;
+
     //transform of the info text
     public Transform content;
     public TextMeshProUGUI infoTextField;
-    public static DeathScreen instance;
     public UnityEvent openEvent;
-    //Helps with blocking UI
-    GraphicRaycaster rc;
- 
+    private UIAnimation animationInfoText;
 
-    void Start()
+    private UIAnimation animationScreen;
+
+    //Helps with blocking UI
+    private GraphicRaycaster rc;
+
+
+    private void Start()
     {
         if (instance != null) Destroy(this);
         instance = this;
-        content = this.transform.Find("Screen").Find("Content");
+        content = transform.Find("Screen").Find("Content");
         rc = transform.GetComponent<GraphicRaycaster>();
 
-        UnityEvent screenOpenedEvent = new UnityEvent();
-        UnityEvent screenClosedEvent = new UnityEvent();
-        UnityEvent contentOpenedEvent = new UnityEvent();
-        UnityEvent contentClosedEvent = new UnityEvent();
+        var screenOpenedEvent = new UnityEvent();
+        var screenClosedEvent = new UnityEvent();
+        var contentOpenedEvent = new UnityEvent();
+        var contentClosedEvent = new UnityEvent();
 
 
         screenOpenedEvent.AddListener(OpenContent);
@@ -40,41 +38,43 @@ public class DeathScreen : Openable
         screenClosedEvent.AddListener(FinishClose);
 
         animationScreen = new Fade();
-        animationScreen.target = this.transform;
+        animationScreen.target = transform;
         animationInfoText = new Fade();
         animationInfoText.target = content;
         animationScreen.InEndedEvent = screenOpenedEvent;
         animationScreen.OutEndedEvent = screenClosedEvent;
         animationInfoText.InEndedEvent = contentOpenedEvent;
         animationInfoText.OutEndedEvent = contentClosedEvent;
-
-
     }
-    void OpenContent()
+
+    private void OpenContent()
     {
     }
-    void CloseScreen()
+
+    private void CloseScreen()
     {
         animationScreen.Play();
     }
-    void FinishOpen()
+
+    private void FinishOpen()
     {
         openEvent.Invoke();
 
         Finished = true;
     }
-    void FinishClose()
+
+    private void FinishClose()
     {
         Finished = true;
     }
+
     public override void OnOpen()
     {
         animationScreen.Play();
     }
+
     public override void OnClose()
     {
         animationInfoText.Play();
     }
-
-
 }

@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
+using TMPro;
 using UnityEngine;
-using com.mineorbit.dungeonsanddungeonscommon;
 
 public class PlayerElement : MonoBehaviour
 {
-    TMPro.TextMeshProUGUI nameField;
-    void Awake()
+    private TextMeshProUGUI nameField;
+
+    private void Awake()
     {
-        nameField = transform.Find("UserName").GetComponent<TMPro.TextMeshProUGUI>();
+        nameField = transform.Find("UserName").GetComponent<TextMeshProUGUI>();
     }
+
     public void UpdateElement(Player playerData)
     {
-        if(playerData == null)
+        if (playerData == null)
         {
             nameField.text = "";
             return;

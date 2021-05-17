@@ -1,20 +1,17 @@
-﻿using com.mineorbit.dungeonsanddungeonscommon;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+
 public class UIAnimation
 {
-    public Transform target;
-    public RectTransform targetTransform;
+    public bool animationPlaying;
     public CanvasGroup canvasGroup;
     public UnityEvent InEndedEvent = new UnityEvent();
+    public bool open;
     public UnityEvent OutEndedEvent = new UnityEvent();
-    public bool animationPlaying = false;
-    public bool open = false;
-    public bool setup = false;
+    public bool setup;
+    public Transform target;
+    public RectTransform targetTransform;
+
     public void Setup()
     {
         if (setup) return;
@@ -22,6 +19,7 @@ public class UIAnimation
         if (canvasGroup == null) canvasGroup = target.GetComponent<CanvasGroup>();
         setup = true;
     }
+
     public virtual bool Play()
     {
         Setup();
@@ -32,8 +30,9 @@ public class UIAnimation
 
     public bool isOpen()
     {
-        return open&&!animationPlaying;
+        return open && !animationPlaying;
     }
+
     public virtual void Open()
     {
         Setup();
@@ -42,6 +41,7 @@ public class UIAnimation
         open = true;
         InEnded();
     }
+
     public virtual void Close()
     {
         Setup();
@@ -49,27 +49,20 @@ public class UIAnimation
         canvasGroup.blocksRaycasts = false;
         open = false;
         OutEnded();
-
     }
 
     public void InEnded()
     {
-        UnityEngine.Debug.Log("In Ended");
+        Debug.Log("In Ended");
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
-        if (InEndedEvent != null)
-        {
-              InEndedEvent.Invoke();
-        }
+        if (InEndedEvent != null) InEndedEvent.Invoke();
     }
+
     public void OutEnded()
     {
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-        if (OutEndedEvent != null)
-        {
-            OutEndedEvent.Invoke();
-        }
+        if (OutEndedEvent != null) OutEndedEvent.Invoke();
     }
-
 }

@@ -1,22 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 using UnityEngine.UI;
-using com.mineorbit.dungeonsanddungeonscommon;
 
-    public class MainMenuAudioController : AudioController
+public class MainMenuAudioController : AudioController
+{
+    private void Start()
     {
-        void Start()
-        {
-            Button[] components = Resources.FindObjectsOfTypeAll<Button>();
-            foreach (Button b in components)
-            {
-                b.onClick.AddListener(Select);
-            }
-            Blend(0, 0);
-        }
-        void Select()
-        {
-            Play(0);
-        }
+        var components = Resources.FindObjectsOfTypeAll<Button>();
+        foreach (var b in components) b.onClick.AddListener(Select);
+        Blend(0, 0);
     }
+
+    private void Select()
+    {
+        Play(0);
+    }
+}
