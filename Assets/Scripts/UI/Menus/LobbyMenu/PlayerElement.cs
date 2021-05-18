@@ -24,6 +24,6 @@ public class PlayerElement : MonoBehaviour
 
     public void SetReady(bool r)
     {
-        readyMarker.SetActive(r);
+        MainCaller.Do( () => readyMarker.SetActive(r));
     }
 }
