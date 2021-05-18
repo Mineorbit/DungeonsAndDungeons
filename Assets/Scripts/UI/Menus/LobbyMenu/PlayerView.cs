@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerView : MonoBehaviour
 {
     public static PlayerView playerView;
-    private PlayerElement[] playerElements;
+    public PlayerElement[] playerElements;
 
     private void Start()
     {

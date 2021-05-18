@@ -1,3 +1,4 @@
+using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine.UI;
 
 public class LobbyMenu : MenuPage
@@ -15,8 +16,15 @@ public class LobbyMenu : MenuPage
         readyButton = transform.Find("Actions").Find("Ready").GetComponent<Toggle>();
 
         readyButton.onValueChanged.AddListener(delegate { CallReady(); });
+        NetworkManager.readyEvent.AddListener((x)=>ChangeReadyDisplay(x.Item2,x.Item1));
+        
     }
 
+    public void ChangeReadyDisplay(bool r, int localId)
+    {
+        PlayerView.playerView.playerElements[localId].SetReady(r);
+    }
+        
     public static void UpdateDisplay()
     {
         PlayerView.playerView.UpdatePlayerView();
@@ -29,6 +37,6 @@ public class LobbyMenu : MenuPage
 
     private void CallReady()
     {
-        //NetworkManager.instance.CallReady(readyButton.isOn);
+        NetworkManager.instance.CallReady(readyButton.isOn);
     }
 }

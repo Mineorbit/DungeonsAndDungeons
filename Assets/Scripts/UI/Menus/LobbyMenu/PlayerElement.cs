@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerElement : MonoBehaviour
 {
     private TextMeshProUGUI nameField;
-
+    public GameObject readyMarker; 
     private void Awake()
     {
         nameField = transform.Find("UserName").GetComponent<TextMeshProUGUI>();
@@ -20,5 +20,10 @@ public class PlayerElement : MonoBehaviour
         }
 
         nameField.text = playerData.name;
+    }
+
+    public void SetReady(bool r)
+    {
+        readyMarker.SetActive(r);
     }
 }
