@@ -12,8 +12,15 @@ public class LobbyLogic : Logic
 
         if (lobbyLogic == null)
             lobbyLogic = this;
+        
+        
+        NetworkManager.readyEvent.AddListener( (x) => ReadyPlayer(x.Item1,x.Item2));
     }
 
+    public void ReadyPlayer(int localId, bool ready)
+    {
+        
+    }
     public void OpenImmediate(string name)
     {
         LevelDataManager.instance.networkLevels = new LevelMetaData[0];
