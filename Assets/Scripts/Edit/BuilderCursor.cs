@@ -56,7 +56,7 @@ public class BuilderCursor : MonoBehaviour
     public void SetLocation(Vector3 target, Vector3 normal)
     {
         float g = 1;
-        var position = LevelManager.GetGridPosition(target + normal, currentSelection);
+        var position = LevelManager.GetGridPosition(target + currentSelection.granularity*normal, currentSelection);
         normalVec = normal;
 
         UpdateCursor(position);

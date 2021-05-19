@@ -13,7 +13,7 @@ public class BuilderController : MonoBehaviour
 
     private LevelObjectData selectedObjectType;
     private InteractiveLevelObject sender;
-    private readonly float speed = 4;
+    private readonly float speed = 8;
     private Wire w;
 
     private void Start()
