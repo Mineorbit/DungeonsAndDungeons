@@ -7,24 +7,24 @@ public class MainMenuManager : MonoBehaviour
 {
     public static MainMenuManager instance;
 
-    public static Page None = new Page(-1);
-    public static Page Main = new Page(0);
-    public static Page Play = new Page(1);
-    public static Page Lobby = new Page(2);
-    public static Page Edit = new Page(3);
-    public static Page Create = new Page(4);
-    public static Page Upload = new Page(5);
-    public static Page Win = new Page(6);
+    public static Page None = new Page("None",-1);
+    public static Page Main = new Page("Main",0);
+    public static Page Play = new Page("Play",1);
+    public static Page Lobby = new Page("Lobby",2);
+    public static Page Edit = new Page("Edit",3);
+    public static Page Create = new Page("Create",4);
+    public static Page Upload = new Page("Upload",5);
+    public static Page Win = new Page("Win",6);
 
-    public static Transaction FromNoneToMain = new Transaction(0);
-    public static Transaction FromMainToPlay = new Transaction(1);
-    public static Transaction GoBack = new Transaction(2);
-    public static Transaction FromMainToEdit = new Transaction(3);
-    public static Transaction FromPlayToLobby = new Transaction(4);
-    public static Transaction FromEditToCreateMenu = new Transaction(5);
-    public static Transaction FromEditToUploadMenu = new Transaction(6);
-    public static Transaction FromNoneToLobby = new Transaction(7);
-    public static Transaction FromNoneToWin = new Transaction(8);
+    public static Transaction FromNoneToMain = new Transaction("NoneToMain",0);
+    public static Transaction FromMainToPlay = new Transaction("MainToPlay",1);
+    public static Transaction GoBack = new Transaction("GoBack",2);
+    public static Transaction FromMainToEdit = new Transaction("MainToEdit",3);
+    public static Transaction FromPlayToLobby = new Transaction("PlayToLobby",4);
+    public static Transaction FromEditToCreateMenu = new Transaction("EditToCreate",5);
+    public static Transaction FromEditToUploadMenu = new Transaction("EditToUpload",6);
+    public static Transaction FromNoneToLobby = new Transaction("NoneToLobby",7);
+    public static Transaction FromNoneToWin = new Transaction("NoneToWin",8);
     public MenuPage[] pages;
     public int currentPage = -1;
 
@@ -34,14 +34,14 @@ public class MainMenuManager : MonoBehaviour
     {
         if (instance != null) Destroy(this);
         instance = this;
+        SetupMainMenuFSM();
     }
 
     public static Transaction startingAction = FromNoneToMain;
     private void Start()
     {
         MouseStateController.UnlockBlocking();
-        SetupMainMenuFSM();
-
+        Debug.Log("Doing "+startingAction.cardinal);
         instance.OpenPage(startingAction);
 
         // May only add once !
@@ -75,24 +75,6 @@ public class MainMenuManager : MonoBehaviour
     public void SetupMainMenuFSM()
     {
         Debug.Log("MainMenu FSM Setup");
-
-        None = new Page(-1);
-        Main = new Page(0);
-        Play = new Page(1);
-        Lobby = new Page(2);
-        Edit = new Page(3);
-        Create = new Page(4);
-        Upload = new Page(4);
-
-        FromNoneToMain = new Transaction(0);
-        FromMainToPlay = new Transaction(1);
-        GoBack = new Transaction(2);
-        FromMainToEdit = new Transaction(3);
-        FromPlayToLobby = new Transaction(4);
-        FromEditToCreateMenu = new Transaction(5);
-        FromEditToUploadMenu = new Transaction(6);
-        FromNoneToLobby = new Transaction(7);
-        FromNoneToWin = new Transaction(8);
 
 
         pages = FindObjectsOfType<MenuPage>();
@@ -177,21 +159,33 @@ public class MainMenuManager : MonoBehaviour
             new Tuple<Action<Transaction>, Page>(act, Upload));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Upload, GoBack),
             new Tuple<Action<Transaction>, Page>(act, Edit));
+        Debug.Log("SIZE : "+mainMenuFSM.transitions.Count);
     }
 
     public class Page : CustomEnum
     {
-        public Page(int card) : base(card)
+        public Page(string val, int card) : base(val,card)
         {
+            Value = val;
             cardinal = card;
+        }
+
+        public override string ToString()
+        {
+            return cardinal.ToString()+" "+Value;
         }
     }
 
     public class Transaction : CustomEnum
     {
-        public Transaction(int card) : base(card)
+        public Transaction(string val, int card) : base(val, card)
         {
+            Value = val;
             cardinal = card;
+        }
+        public override string ToString()
+        {
+            return cardinal.ToString()+" "+Value;
         }
     }
 }

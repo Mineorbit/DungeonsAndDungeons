@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
             Level.instantiateType = Level.InstantiateType.Default;
 
             var menuLoadFinishedEvent = new UnityEvent();
-            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
+           // MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
             menuLoadFinishedEvent.AddListener(() => { MainCaller.Do(() => { LoadingScreen.instance.Close(); }); });
             initEvent.AddListener(() =>
             {
@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
             var initEvent = new UnityEvent();
 
             Level.instantiateType = Level.InstantiateType.Default;
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
 
             var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
@@ -197,6 +198,7 @@ public class GameManager : MonoBehaviour
 
             wonLastGame = false;
             var initEvent = new UnityEvent();
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
 
             var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
