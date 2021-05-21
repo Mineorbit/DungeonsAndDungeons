@@ -34,15 +34,13 @@ public class MainMenuManager : MonoBehaviour
         instance = this;
     }
 
+    public static Transaction startingAction = FromNoneToMain;
     private void Start()
     {
         MouseStateController.UnlockBlocking();
         SetupMainMenuFSM();
 
-        if (!GameManager.instance.wonLastGame)
-            instance.OpenPage(FromNoneToMain);
-        else
-            instance.OpenPage(FromNoneToLobby);
+        instance.OpenPage(startingAction);
 
         // May only add once !
     }

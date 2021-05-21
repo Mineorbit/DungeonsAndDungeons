@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
             Level.instantiateType = Level.InstantiateType.Default;
 
             var menuLoadFinishedEvent = new UnityEvent();
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
             menuLoadFinishedEvent.AddListener(() => { MainCaller.Do(() => { LoadingScreen.instance.Close(); }); });
             initEvent.AddListener(() =>
             {
@@ -174,6 +175,7 @@ public class GameManager : MonoBehaviour
 
             var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
             initEvent.AddListener(() =>
             {
                 SceneLoadManager.instance.unloadCurrentScenes();
@@ -198,6 +200,7 @@ public class GameManager : MonoBehaviour
 
             var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
             initEvent.AddListener(() =>
             {
                 SceneLoadManager.instance.unloadCurrentScenes();
@@ -243,44 +246,6 @@ public class GameManager : MonoBehaviour
             LoadingScreen.instance.Open();
         };
 
-        Action<GameAction> actLevelClear = x =>
-        {
-            wonLastGame = false;
-            var initEvent = new UnityEvent();
-            LevelManager.Clear();
-            LoadingScreen.instance.openEvent = initEvent;
-            LoadingScreen.instance.Open();
-        };
-
-
-        Action<GameAction> actClearAfterGame = x =>
-        {
-            wonLastGame = false;
-            var initEvent = new UnityEvent();
-
-
-            var menuLoadFinishedEvent = new UnityEvent();
-            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            initEvent.AddListener(() =>
-            {
-                SceneLoadManager.instance.unloadCurrentScenes();
-                LevelManager.Clear();
-                PlayerManager.playerManager.Reset();
-                NetworkManager.instance.Disconnect();
-
-                SetLogic();
-                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
-            });
-
-            LoadingScreen.instance.openEvent = initEvent;
-
-
-            MainCaller.Do(() =>
-            {
-                Debug.Log("Mario");
-                LoadingScreen.instance.Open();
-            });
-        };
 
         Action<GameAction> actPrepareGame = x =>
         {
@@ -306,17 +271,92 @@ public class GameManager : MonoBehaviour
 
             LoadingScreen.instance.Close();
         };
+        
+        
+        Action<GameAction> actDropGame = x =>
+        {
+            wonLastGame = false;
+            var initEvent = new UnityEvent();
 
-        Action<GameAction> actWin = x =>
+
+            var menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToMain;
+            initEvent.AddListener(() =>
+            {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+                PlayerManager.playerManager.Reset();
+                NetworkManager.instance.Disconnect();
+
+                SetLogic();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+
+
+            MainCaller.Do(() =>
+            {
+                LoadingScreen.instance.Open();
+            });
+        };
+
+        Action<GameAction> actCloseGame = x =>
+        {
+            wonLastGame = false;
+            var initEvent = new UnityEvent();
+
+
+            var menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToLobby;
+            initEvent.AddListener(() =>
+            {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+                PlayerManager.playerManager.Reset();
+                NetworkManager.instance.Disconnect();
+
+                SetLogic();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+
+
+            MainCaller.Do(() =>
+            {
+                LoadingScreen.instance.Open();
+            });
+        };
+
+        Action<GameAction> actWinGame = x =>
         {
             wonLastGame = true;
-            LevelManager.Clear();
-
-            var onWinEvent = new UnityEvent();
+            var initEvent = new UnityEvent();
 
 
-            LoadingScreen.instance.openEvent = onWinEvent;
-            LoadingScreen.instance.Open();
+            var menuLoadFinishedEvent = new UnityEvent();
+            menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToLobby;
+            
+            initEvent.AddListener(() =>
+            {
+                SceneLoadManager.instance.unloadCurrentScenes();
+                LevelManager.Clear();
+
+                SetLogic();
+                SceneLoadManager.instance.load(SceneLoadManager.SceneIndex.menu, menuLoadFinishedEvent);
+            });
+
+            LoadingScreen.instance.openEvent = initEvent;
+
+
+            MainCaller.Do(() =>
+            {
+                LoadingScreen.instance.Open();
+            });
         };
 
         Action<GameAction> nop = x => { };
@@ -343,9 +383,9 @@ public class GameManager : MonoBehaviour
 
         //Hier evtl mod
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, EnterMainMenu),
-            new Tuple<Action<GameAction>, State>(actClearAfterGame, MainMenu));
+            new Tuple<Action<GameAction>, State>(actDropGame, MainMenu));
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Play, BackToLobbyAfterWin),
-            new Tuple<Action<GameAction>, State>(actWin, MainMenu));
+            new Tuple<Action<GameAction>, State>(actWinGame, MainMenu));
 
 
         //Reset Level
