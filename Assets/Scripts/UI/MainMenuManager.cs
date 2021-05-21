@@ -13,7 +13,8 @@ public class MainMenuManager : MonoBehaviour
     public static Page Lobby = new Page(2);
     public static Page Edit = new Page(3);
     public static Page Create = new Page(4);
-    public static Page Upload = new Page(4);
+    public static Page Upload = new Page(5);
+    public static Page Win = new Page(6);
 
     public static Transaction FromNoneToMain = new Transaction(0);
     public static Transaction FromMainToPlay = new Transaction(1);
@@ -23,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
     public static Transaction FromEditToCreateMenu = new Transaction(5);
     public static Transaction FromEditToUploadMenu = new Transaction(6);
     public static Transaction FromNoneToLobby = new Transaction(7);
+    public static Transaction FromNoneToWin = new Transaction(8);
     public MenuPage[] pages;
     public int currentPage = -1;
 
@@ -90,6 +92,7 @@ public class MainMenuManager : MonoBehaviour
         FromEditToCreateMenu = new Transaction(5);
         FromEditToUploadMenu = new Transaction(6);
         FromNoneToLobby = new Transaction(7);
+        FromNoneToWin = new Transaction(8);
 
 
         pages = FindObjectsOfType<MenuPage>();
@@ -116,6 +119,7 @@ public class MainMenuManager : MonoBehaviour
             pages[mainMenuFSM.state.Cardinal()].Open();
             currentPage = mainMenuFSM.state.Cardinal();
         };
+        
         Action<Transaction> actWin = x =>
         {
             if (currentPage >= 0)
@@ -150,7 +154,9 @@ public class MainMenuManager : MonoBehaviour
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(None, FromNoneToMain),
             new Tuple<Action<Transaction>, Page>(act, Main));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(None, FromNoneToLobby),
-            new Tuple<Action<Transaction>, Page>(actWin, Lobby));
+            new Tuple<Action<Transaction>, Page>(actLobbyOpen, Lobby));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(None, FromNoneToWin),
+            new Tuple<Action<Transaction>, Page>(actWin, Win));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Main, FromMainToPlay),
             new Tuple<Action<Transaction>, Page>(act, Play));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Play, GoBack),

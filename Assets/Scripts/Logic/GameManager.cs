@@ -339,7 +339,7 @@ public class GameManager : MonoBehaviour
 
             var menuLoadFinishedEvent = new UnityEvent();
             menuLoadFinishedEvent.AddListener(LoadingScreen.instance.Close);
-            MainMenuManager.startingAction = MainMenuManager.FromNoneToLobby;
+            MainMenuManager.startingAction = MainMenuManager.FromNoneToWin;
             
             initEvent.AddListener(() =>
             {
