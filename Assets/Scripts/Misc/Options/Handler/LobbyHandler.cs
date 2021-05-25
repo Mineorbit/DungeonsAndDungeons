@@ -1,4 +1,7 @@
-﻿public class LobbyHandler : OptionHandler
+﻿using com.mineorbit.dungeonsanddungeonscommon;
+
+
+public class LobbyHandler : OptionHandler
 {
     public override void OnValueChanged(object val)
     {

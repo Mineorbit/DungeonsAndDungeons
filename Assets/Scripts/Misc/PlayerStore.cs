@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class PlayerStore : MonoBehaviour
 {

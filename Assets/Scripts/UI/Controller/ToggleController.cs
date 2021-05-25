@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using com.mineorbit.dungeonsanddungeonscommon;
 
 public class ToggleController : MonoBehaviour
 {
