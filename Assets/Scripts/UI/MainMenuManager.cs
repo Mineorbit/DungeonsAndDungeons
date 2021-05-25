@@ -84,6 +84,7 @@ public class MainMenuManager : MonoBehaviour
         {
             if (currentPage >= 0)
                 pages[currentPage].Close();
+            Debug.Log("Opening Page: "+mainMenuFSM.state.Cardinal());
             pages[mainMenuFSM.state.Cardinal()].Open();
             currentPage = mainMenuFSM.state.Cardinal();
         };
