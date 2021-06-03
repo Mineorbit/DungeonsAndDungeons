@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 
@@ -18,7 +19,6 @@ public class LevelList : MonoBehaviour
     public InstantionTarget levelElementPrefab;
     public ListType listType;
 
-    private NetLevel.LevelMetaData[] currentList;
 
     private GameObject[] elements;
     private Vector2 lastObjectPosition;
@@ -36,13 +36,18 @@ public class LevelList : MonoBehaviour
     {
         levelLists.Add(this);
 
-        RefreshList();
+       // RefreshList();
+    }
+
+    private void OnDestroy()
+    {
+        levelLists.Remove(this);
     }
 
     private void Update()
     {
-        if (GameManager.GetState() == GameManager.MainMenu)
-            RefreshList();
+       // if (GameManager.GetState() == GameManager.MainMenu)
+       //     RefreshList();
     }
 
     public void SetSelectedLevel(NetLevel.LevelMetaData levelMetaData)
@@ -75,27 +80,9 @@ public class LevelList : MonoBehaviour
     {
         if (levelLists != null)
             foreach (var l in levelLists)
-                l.UpdateList(l.currentList);
+                l.UpdateList(l.listType==ListType.Local?LevelDataManager.instance.localLevels:LevelDataManager.instance.networkLevels);
     }
 
-    private void RefreshList()
-    {
-        switch (listType)
-        {
-            case ListType.Net:
-                if (LevelDataManager.instance.networkLevels != currentList)
-                    UpdateList(LevelDataManager.instance.networkLevels);
-                break;
-            case ListType.Local:
-                if (LevelDataManager.instance.localLevels != currentList)
-                {
-                    Debug.Log("List changed");
-                    UpdateList(LevelDataManager.instance.localLevels);
-                }
-
-                break;
-        }
-    }
 
     public void UpdateList(NetLevel.LevelMetaData[] localLevels)
     {
@@ -110,8 +97,6 @@ public class LevelList : MonoBehaviour
             levelElements[i] = elements[i].GetComponent<LevelElement>();
             levelElements[i].UpdateElement(localLevels[i]);
         }
-
-        currentList = localLevels;
     }
 
     private int GetClosestDiv(int N)

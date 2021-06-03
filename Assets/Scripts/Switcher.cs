@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class Switcher : MonoBehaviour
 {
-    public GameObject A;
-    public GameObject B;
+    public UnityEngine.Object A;
+    public UnityEngine.Object B;
 
     public Slider slider;
 
 
-    public GameObject selected;
+    public UnityEngine.Object selected;
     
     public bool value;
 
@@ -35,15 +35,31 @@ public class Switcher : MonoBehaviour
         {
             value = true;
             selected = B;
-            A.SetActive(false);
-            B.SetActive(true);
+            if(A.GetType().IsSubclassOf(typeof(GameObject)))
+            {
+                ((GameObject)A).SetActive(false);
+                ((GameObject)B).SetActive(true);
+            }
+            else
+            {
+                ((MonoBehaviour) A).enabled = false;
+                ((MonoBehaviour) B).enabled = true;
+            }
         }
         else
         {
             value = false;
             selected = A;
-            A.SetActive(true);
-            B.SetActive(false);
+            if (A.GetType().IsSubclassOf(typeof(GameObject)))
+            {
+                ((GameObject)A).SetActive(true);
+                ((GameObject)B).SetActive(false);
+            }
+            else
+            {
+                ((MonoBehaviour) A).enabled = true;
+                ((MonoBehaviour) B).enabled = false;
+            }
         }
         valueChanged.Invoke(value);
     }

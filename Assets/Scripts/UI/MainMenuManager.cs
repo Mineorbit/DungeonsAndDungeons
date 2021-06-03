@@ -82,6 +82,15 @@ public class MainMenuManager : MonoBehaviour
 
         Action<Transaction> act = x =>
         {
+            UnityEvent e = new UnityEvent();
+            e.AddListener(() =>
+            {
+                LevelDataManager.instance.networkLevels = HttpManager.instance.levelMetaDatas;
+                Debug.Log(LevelDataManager.instance.networkLevels.Length);
+                LevelList.UpdateDisplay();
+            });
+            HttpManager.FetchLevelList(e);
+            
             if (currentPage >= 0)
                 pages[currentPage].Close();
             Debug.Log("Opening Page: "+mainMenuFSM.state.Cardinal());
