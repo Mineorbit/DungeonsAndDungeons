@@ -13,7 +13,7 @@ public class LevelElement : MonoBehaviour
     public TextMeshProUGUI nameTextField;
     public TextMeshProUGUI infoTextField;
 
-    public LevelMetaData d;
+    public NetLevel.LevelMetaData selectedLevelMetaData;
     private float bot = 86;
 
     private GameObject[] colorBars;
@@ -66,19 +66,19 @@ public class LevelElement : MonoBehaviour
 
     public void Open()
     {
-        list.SetSelectedLevel(d);
+        list.SetSelectedLevel(selectedLevelMetaData);
         tasks.Enqueue(Task.Open);
     }
 
     public void Close()
     {
-        if (list.GetSelectedLevel() == d) list.SetSelectedLevel(null);
+        if (list.GetSelectedLevel() == selectedLevelMetaData) list.SetSelectedLevel(null);
         tasks.Enqueue(Task.Close);
     }
 
-    public void UpdateElement(LevelMetaData data)
+    public void UpdateElement(NetLevel.LevelMetaData data)
     {
-        d = data;
+        selectedLevelMetaData = data;
         nameTextField.SetText(data.FullName);
         UpdateScreen();
         UpdateAvailColors();
@@ -86,10 +86,10 @@ public class LevelElement : MonoBehaviour
 
     private void UpdateAvailColors()
     {
-        colorBars[0].SetActive(d.availBlue);
-        colorBars[1].SetActive(d.availYellow);
-        colorBars[2].SetActive(d.availRed);
-        colorBars[3].SetActive(d.availGreen);
+        colorBars[0].SetActive(selectedLevelMetaData.AvailBlue);
+        colorBars[1].SetActive(selectedLevelMetaData.AvailYellow);
+        colorBars[2].SetActive(selectedLevelMetaData.AvailRed);
+        colorBars[3].SetActive(selectedLevelMetaData.AvailGreen);
     }
 
     private IEnumerator OpenAnim()

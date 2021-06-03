@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
     public bool wonLastGame;
 
 
-    public LevelMetaData levelMetaDataForNewLevel;
+    public NetLevel.LevelMetaData levelMetaDataForNewLevel;
 
-    public LevelMetaData levelMetaDataForEditLevel;
+    public NetLevel.LevelMetaData levelMetaDataForEditLevel;
 
     private UnityEvent[] asyncEvent;
     public Logic currentLogic;
@@ -408,13 +408,13 @@ public class GameManager : MonoBehaviour
         gameStateFSM.Move(action);
     }
 
-    public void createLevel(LevelMetaData newLevelData)
+    public void createLevel(NetLevel.LevelMetaData newLevelData)
     {
         levelMetaDataForNewLevel = newLevelData;
         performAction(EnterEditFromMainMenuNewLevel);
     }
 
-    public void editLevel(LevelMetaData data)
+    public void editLevel(NetLevel.LevelMetaData data)
     {
         levelMetaDataForEditLevel = data;
         performAction(EnterEditFromMainMenu);

@@ -23,13 +23,13 @@ public class LobbyLogic : Logic
     }
     public void OpenImmediate(string name)
     {
-        LevelDataManager.instance.networkLevels = new LevelMetaData[0];
+        LevelDataManager.instance.networkLevels = new NetLevel.LevelMetaData[0];
         NetworkManager.instance.Connect("127.0.0.1", name, OpenLobbyMenu);
     }
 
     public void Open(string ip, string name)
     {
-        LevelDataManager.instance.networkLevels = new LevelMetaData[0];
+        LevelDataManager.instance.networkLevels = new NetLevel.LevelMetaData[0];
 
         NetworkManager.instance.Connect(ip, name, OpenLobbyMenu);
     }
@@ -56,7 +56,7 @@ public class LobbyLogic : Logic
     public void RemovePlayer(int localId)
     {
         PlayerManager.playerManager.Remove(localId);
-        LevelDataManager.instance.networkLevels = new LevelMetaData[0];
+        LevelDataManager.instance.networkLevels = new NetLevel.LevelMetaData[0];
         LobbyMenu.UpdateDisplay();
     }
 

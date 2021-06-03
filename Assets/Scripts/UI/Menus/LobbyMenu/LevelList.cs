@@ -18,13 +18,13 @@ public class LevelList : MonoBehaviour
     public InstantionTarget levelElementPrefab;
     public ListType listType;
 
-    private LevelMetaData[] currentList;
+    private NetLevel.LevelMetaData[] currentList;
 
     private GameObject[] elements;
     private Vector2 lastObjectPosition;
     private Vector2 lastPosition;
 
-    private LevelMetaData selected;
+    private NetLevel.LevelMetaData selected;
     private Vector3 targetPosition;
 
     private void Awake()
@@ -45,12 +45,12 @@ public class LevelList : MonoBehaviour
             RefreshList();
     }
 
-    public void SetSelectedLevel(LevelMetaData levelMetaData)
+    public void SetSelectedLevel(NetLevel.LevelMetaData levelMetaData)
     {
         selected = levelMetaData;
     }
 
-    public LevelMetaData GetSelectedLevel()
+    public NetLevel.LevelMetaData GetSelectedLevel()
     {
         return selected;
     }
@@ -59,7 +59,7 @@ public class LevelList : MonoBehaviour
     {
         LevelElement element = null;
         foreach (var e in levelElements)
-            if (e.d.uniqueLevelId == ulid)
+            if (e.selectedLevelMetaData.UniqueLevelId == ulid)
                 element = e;
         if (element != null) element.Open();
     }
@@ -97,7 +97,7 @@ public class LevelList : MonoBehaviour
         }
     }
 
-    public void UpdateList(LevelMetaData[] localLevels)
+    public void UpdateList(NetLevel.LevelMetaData[] localLevels)
     {
         if (elements != null)
             foreach (var g in elements)

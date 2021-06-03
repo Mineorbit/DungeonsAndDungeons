@@ -3,9 +3,10 @@ using UnityEngine.UI;
 
 public class EditMenu : MenuPage
 {
+    public Switcher switcher;
     private Button deleteButton;
     private Button editButton;
-    private LevelList levelList;
+    private LevelList currentLevelList;
     private Button newLevelButton;
     private Button uploadButton;
 
@@ -14,6 +15,7 @@ public class EditMenu : MenuPage
         base.Awake();
         index = 3;
         setupUI();
+        switcher.valueChanged.AddListener((x) => { currentLevelList = switcher.selected.GetComponent<LevelList>();});
     }
 
 
@@ -25,7 +27,6 @@ public class EditMenu : MenuPage
     private void setupUI()
     {
         var Interface = transform.Find("Interface");
-        levelList = transform.Find("LevelList").GetComponent<LevelList>();
         editButton = Interface.Find("Edit").GetComponent<Button>();
         newLevelButton = Interface.Find("New").GetComponent<Button>();
         deleteButton = Interface.Find("Delete").GetComponent<Button>();
@@ -38,14 +39,14 @@ public class EditMenu : MenuPage
 
     private void RemoveLevel()
     {
-        var metaData = levelList.GetSelectedLevel();
+        var metaData = currentLevelList.GetSelectedLevel();
         if (metaData == null) return;
         LevelDataManager.Delete(metaData);
     }
 
     private void OpenUploadMenu()
     {
-        var metaData = levelList.GetSelectedLevel();
+        var metaData = currentLevelList.GetSelectedLevel();
         if (metaData != null)
         {
             UploadMenu.levelToUpload = metaData;
@@ -60,7 +61,7 @@ public class EditMenu : MenuPage
 
     private void StartEdit()
     {
-        var metaData = levelList.GetSelectedLevel();
+        var metaData = currentLevelList.GetSelectedLevel();
         if (metaData == null) return;
         GameManager.instance.editLevel(metaData);
     }
