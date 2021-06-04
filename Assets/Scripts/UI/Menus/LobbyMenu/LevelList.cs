@@ -27,9 +27,14 @@ public class LevelList : MonoBehaviour
     private NetLevel.LevelMetaData selected;
     private Vector3 targetPosition;
 
+    private CanvasGroup canvasGroup;
+    
     private void Awake()
     {
         if (levelLists == null) levelLists = new HashSet<LevelList>();
+
+        canvasGroup = GetComponent<CanvasGroup>();
+
     }
 
     private void Start()
@@ -42,6 +47,20 @@ public class LevelList : MonoBehaviour
     private void OnDestroy()
     {
         levelLists.Remove(this);
+    }
+
+    public void OnEnable()
+    {
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnDisable()
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     private void Update()

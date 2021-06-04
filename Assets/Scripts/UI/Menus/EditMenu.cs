@@ -1,4 +1,5 @@
 ﻿using com.mineorbit.dungeonsanddungeonscommon;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class EditMenu : MenuPage
@@ -15,7 +16,9 @@ public class EditMenu : MenuPage
         base.Awake();
         index = 3;
         setupUI();
-        switcher.valueChanged.AddListener((x) => { currentLevelList = switcher.selected.GetComponent<LevelList>();});
+        switcher.A = transform.Find("LocalLevelList").GetComponent<LevelList>();
+        switcher.B = transform.Find("NetLevelList").GetComponent<LevelList>();
+        switcher.valueChanged.AddListener((x) => { currentLevelList = (LevelList) switcher.selected;});
     }
 
 

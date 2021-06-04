@@ -35,31 +35,15 @@ public class Switcher : MonoBehaviour
         {
             value = true;
             selected = B;
-            if(A.GetType().IsSubclassOf(typeof(GameObject)))
-            {
-                ((GameObject)A).SetActive(false);
-                ((GameObject)B).SetActive(true);
-            }
-            else
-            {
                 ((MonoBehaviour) A).enabled = false;
                 ((MonoBehaviour) B).enabled = true;
-            }
         }
         else
         {
             value = false;
             selected = A;
-            if (A.GetType().IsSubclassOf(typeof(GameObject)))
-            {
-                ((GameObject)A).SetActive(true);
-                ((GameObject)B).SetActive(false);
-            }
-            else
-            {
                 ((MonoBehaviour) A).enabled = true;
                 ((MonoBehaviour) B).enabled = false;
-            }
         }
         valueChanged.Invoke(value);
     }
