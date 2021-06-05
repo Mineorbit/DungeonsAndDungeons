@@ -27,7 +27,7 @@ public class LevelList : MonoBehaviour
     private NetLevel.LevelMetaData selected;
     private Vector3 targetPosition;
 
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     
     private void Awake()
     {
@@ -105,6 +105,11 @@ public class LevelList : MonoBehaviour
 
     public void UpdateList(NetLevel.LevelMetaData[] localLevels)
     {
+        if (localLevels == null)
+        {
+            Debug.Log("Local Level List empty, not updating Level List");
+            return;
+        }
         if (elements != null)
             foreach (var g in elements)
                 Destroy(g);

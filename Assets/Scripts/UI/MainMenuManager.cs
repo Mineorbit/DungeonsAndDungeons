@@ -86,10 +86,13 @@ public class MainMenuManager : MonoBehaviour
             e.AddListener(() =>
             {
                 LevelDataManager.instance.networkLevels = HttpManager.instance.levelMetaDatas;
-                Debug.Log(LevelDataManager.instance.networkLevels.Length);
                 LevelList.UpdateDisplay();
             });
             HttpManager.FetchLevelList(e);
+            MainCaller.Do(() =>
+            {
+                LevelList.UpdateDisplay();
+            });
             
             if (currentPage >= 0)
                 pages[currentPage].Close();
