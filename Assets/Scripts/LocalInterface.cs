@@ -49,6 +49,7 @@ public class LocalInterface : MonoBehaviour
     {
         var metaData = EditMenu.currentLevelList.GetSelectedLevel();
         if (metaData == null) return;
+        Debug.Log("Deleting "+metaData);
         LevelDataManager.Delete(metaData);
     }
 

@@ -22,9 +22,9 @@ public class NetInterface : MonoBehaviour
     private void DownloadLevel()
     {
         var metaData = EditMenu.currentLevelList.GetSelectedLevel();
-        LevelDataManager.New(metaData,saveImmediately:true,instantiateImmediately: false);
+        
         HttpManager.DownloadLevel(metaData);
-        LevelDataManager.Save(metaData: false, levelData:false, extraSaveMetaData: metaData);
+        //LevelDataManager.Save(metaData: false, levelData:false, extraSaveMetaData: metaData);
     }
         
     public void OnEnable()
