@@ -31,6 +31,8 @@ public class LevelElement : MonoBehaviour
     private bool target;
     private Vector3 targetPosition;
     private Queue<Task> tasks;
+    
+    
 
     private void Awake()
     {
@@ -80,6 +82,7 @@ public class LevelElement : MonoBehaviour
     {
         selectedLevelMetaData = data;
         nameTextField.SetText(data.FullName);
+        infoTextField.SetText(data.Description);
         UpdateScreen();
         UpdateAvailColors();
     }

@@ -80,6 +80,8 @@ public class MainMenuManager : MonoBehaviour
         pages = FindObjectsOfType<MenuPage>();
         sortPages();
 
+        LevelDataManager.levelListUpdatedEvent.AddListener(LevelList.UpdateDisplay);
+        
         Action<Transaction> act = x =>
         {
             UnityEvent e = new UnityEvent();
@@ -89,10 +91,9 @@ public class MainMenuManager : MonoBehaviour
                 LevelList.UpdateDisplay();
             });
             HttpManager.FetchLevelList(e);
-            MainCaller.Do(() =>
-            {
-                LevelList.UpdateDisplay();
-            });
+            
+            
+            LevelList.UpdateDisplay();
             
             if (currentPage >= 0)
                 pages[currentPage].Close();

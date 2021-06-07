@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using com.mineorbit.dungeonsanddungeonscommon;
+using NetLevel;
 using UnityEngine;
 
 public class LevelList : MonoBehaviour
@@ -99,16 +100,19 @@ public class LevelList : MonoBehaviour
     {
         if (levelLists != null)
             foreach (var l in levelLists)
+            {
+                Debug.Log("Updating list "+l);
                 l.UpdateList(l.listType==ListType.Local?LevelDataManager.instance.localLevels:LevelDataManager.instance.networkLevels);
+            }
     }
 
 
-    public void UpdateList(NetLevel.LevelMetaData[] localLevels)
+    public void UpdateList(LevelMetaData[] localLevels)
     {
         if (localLevels == null)
         {
-            Debug.Log("Local Level List empty, not updating Level List");
-            return;
+            localLevels = new LevelMetaData[0];
+            Debug.Log("Local Level List null updating Level List");
         }
         if (elements != null)
             foreach (var g in elements)
