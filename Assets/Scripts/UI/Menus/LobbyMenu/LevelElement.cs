@@ -80,11 +80,14 @@ public class LevelElement : MonoBehaviour
 
     public void UpdateElement(NetLevel.LevelMetaData data)
     {
+        if (data != null)
+        {
         selectedLevelMetaData = data;
         nameTextField.SetText(data.FullName);
         infoTextField.SetText(data.Description);
         UpdateScreen();
         UpdateAvailColors();
+        }
     }
 
     private void UpdateAvailColors()

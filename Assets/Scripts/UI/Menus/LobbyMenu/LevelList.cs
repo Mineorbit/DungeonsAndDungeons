@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using com.mineorbit.dungeonsanddungeonscommon;
 using NetLevel;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelList : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class LevelList : MonoBehaviour
     private NetLevel.LevelMetaData selected;
     private Vector3 targetPosition;
 
+    public UnityEvent<LevelMetaData> levelSelectedEvent = new UnityEvent<LevelMetaData>();
+    
     public CanvasGroup canvasGroup;
     
     private void Awake()
@@ -73,6 +76,7 @@ public class LevelList : MonoBehaviour
     public void SetSelectedLevel(NetLevel.LevelMetaData levelMetaData)
     {
         selected = levelMetaData;
+        levelSelectedEvent.Invoke(selected);
     }
 
     public NetLevel.LevelMetaData GetSelectedLevel()
