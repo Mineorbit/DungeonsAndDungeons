@@ -75,9 +75,10 @@ public class LevelList : MonoBehaviour
 
     public void SetSelectedLevel(LevelMetaData levelMetaData, bool fireEvent = true)
     {
-        if(fireEvent && selected != levelMetaData)
-        levelSelectedEvent.Invoke(selected);
         selected = levelMetaData;
+        
+        if(fireEvent)
+        levelSelectedEvent.Invoke(selected);
     }
 
     public LevelMetaData GetSelectedLevel()

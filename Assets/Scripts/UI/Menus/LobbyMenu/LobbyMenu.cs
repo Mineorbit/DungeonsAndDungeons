@@ -14,7 +14,10 @@ public class LobbyMenu : MenuPage
         index = 2;
 
         netList = transform.Find("LevelList").GetComponent<LevelList>();
-        netList.levelSelectedEvent.AddListener(CallSelected);
+        netList.levelSelectedEvent.AddListener((x) =>
+        {
+            CallSelected(x);
+        });
         readyButton = transform.Find("Actions").Find("Ready").GetComponent<Toggle>();
 
         readyButton.onValueChanged.AddListener(delegate { CallReady(); });
