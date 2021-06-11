@@ -73,25 +73,18 @@ public class LevelList : MonoBehaviour
        //     RefreshList();
     }
 
-    public void SetSelectedLevel(NetLevel.LevelMetaData levelMetaData)
+    public void SetSelectedLevel(LevelMetaData levelMetaData, bool fireEvent = true)
     {
-        selected = levelMetaData;
+        if(fireEvent && selected != levelMetaData)
         levelSelectedEvent.Invoke(selected);
+        selected = levelMetaData;
     }
 
-    public NetLevel.LevelMetaData GetSelectedLevel()
+    public LevelMetaData GetSelectedLevel()
     {
         return selected;
     }
 
-    public void SetSelected(long ulid)
-    {
-        LevelElement element = null;
-        foreach (var e in levelElements)
-            if (e.selectedLevelMetaData.UniqueLevelId == ulid)
-                element = e;
-        if (element != null) element.Open();
-    }
 
     public void CloseOthersFrom(LevelElement e)
     {

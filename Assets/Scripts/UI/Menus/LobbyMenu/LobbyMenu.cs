@@ -15,15 +15,14 @@ public class LobbyMenu : MenuPage
 
         netList = transform.Find("LevelList").GetComponent<LevelList>();
         netList.levelSelectedEvent.AddListener(CallSelected);
-        netList.levelSelectedEvent.AddListener((x) => { });
         readyButton = transform.Find("Actions").Find("Ready").GetComponent<Toggle>();
 
         readyButton.onValueChanged.AddListener(delegate { CallReady(); });
         NetworkManager.readyEvent.AddListener((x)=>ChangeReadyDisplay(x.Item2,x.Item1));
         NetworkManager.lobbyRequestEvent.AddListener((x) =>
         {
-            netList.SetSelectedLevel(x.SelectedLevel);
-            Debug.Log("Level "+x.SelectedLevel+" was selcted");
+            netList.SetSelectedLevel(x.SelectedLevel, false);
+            Debug.Log("Level "+x.SelectedLevel+" was selected");
         });
         
     }
@@ -44,10 +43,7 @@ public class LobbyMenu : MenuPage
         PlayerView.playerView.UpdatePlayerView();
     }
 
-    public static void SetSelectedLevel(long ulid)
-    {
-        netList.SetSelected(ulid);
-    }
+  
 
     private void CallReady()
     {
