@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerWinView : MonoBehaviour
 {
     public static PlayerWinView playerWinView;
-    public PlayerElement[] playerElements;
+    public PlayerWinElement[] playerElements;
 
     private void Start()
     {
@@ -12,9 +12,9 @@ public class PlayerWinView : MonoBehaviour
         playerWinView = this;
 
 
-        playerElements = new PlayerElement[4];
+        playerElements = new PlayerWinElement[4];
         for (var i = 0; i < playerElements.Length; i++)
-            playerElements[i] = transform.Find(i.ToString()).GetComponent<PlayerElement>();
+            playerElements[i] = transform.Find(i.ToString()).GetComponent<PlayerWinElement>();
         UpdatePlayerView();
     }
 
