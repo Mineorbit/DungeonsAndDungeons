@@ -51,5 +51,6 @@ public class LobbyMenu : MenuPage
     private void CallReady()
     {
         NetworkManager.instance.CallReady(readyButton.isOn);
+        Debug.Log("Sent Call for Ready");
     }
 }

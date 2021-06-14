@@ -25,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
     public static Transaction FromEditToUploadMenu = new Transaction("EditToUpload",6);
     public static Transaction FromNoneToLobby = new Transaction("NoneToLobby",7);
     public static Transaction FromNoneToWin = new Transaction("NoneToWin",8);
+    public static Transaction FromWinToLobby = new Transaction("WinToLobby",9);
     public MenuPage[] pages;
     public int currentPage = -1;
 
@@ -173,6 +174,9 @@ public class MainMenuManager : MonoBehaviour
             new Tuple<Action<Transaction>, Page>(act, Upload));
         mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Upload, GoBack),
             new Tuple<Action<Transaction>, Page>(act, Edit));
+        mainMenuFSM.transitions.Add(new Tuple<Page, Transaction>(Win, FromWinToLobby),
+            new Tuple<Action<Transaction>, Page>(act, Lobby));
+        
         Debug.Log("SIZE : "+mainMenuFSM.transitions.Count);
     }
 
