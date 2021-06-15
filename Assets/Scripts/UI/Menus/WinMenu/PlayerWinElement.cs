@@ -1,3 +1,4 @@
+using System.Linq;
 using com.mineorbit.dungeonsanddungeonscommon;
 using TMPro;
 using UnityEngine;
@@ -21,8 +22,15 @@ public class PlayerWinElement : MonoBehaviour
             return;
         }
 
-        nameField.text = playerData.name;
-        
+        nameField.text = playerData.name +$" ({playerData.points})";
+        int maxPoints = PlayerManager.playerManager.players.Select((x) => x.points).Max();
+        Debug.Log("Max Points: "+maxPoints);
+        float score = 0;
+        if (maxPoints != 0)
+        {
+            score = (float) playerData.points / (float)maxPoints;
+        }
+        SetScore(score);
     }
 
     public void SetScore(float t)
