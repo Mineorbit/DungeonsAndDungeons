@@ -18,10 +18,6 @@ public class PlayerWinView : MonoBehaviour
         UpdatePlayerView();
     }
 
-    public void Update()
-    {
-        UpdatePlayerView();
-    }
 
 
     public void UpdatePlayerView()

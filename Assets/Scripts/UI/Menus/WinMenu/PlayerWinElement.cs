@@ -23,7 +23,7 @@ public class PlayerWinElement : MonoBehaviour
         }
 
         nameField.text = playerData.name +$" ({playerData.points})";
-        int maxPoints = PlayerManager.playerManager.players.Select((x) => x.points).Max();
+        int maxPoints = PlayerManager.playerManager.players.Select((x) => x != null ? x.points : 0).Max();
         Debug.Log("Max Points: "+maxPoints);
         float score = 0;
         if (maxPoints != 0)
