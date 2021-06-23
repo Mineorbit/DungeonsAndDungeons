@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using com.mineorbit.dungeonsanddungeonscommon;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -150,7 +151,7 @@ public class SceneLoadManager : MonoBehaviour
             var x = currentScenes[0];
             if (x > 0)
             {
-                Debug.LogError("Unloading " + x);
+                GameConsole.Log("Unloading " + x);
                 SceneManager.UnloadScene(x);
                 currentScenes.RemoveAt(0);
             }

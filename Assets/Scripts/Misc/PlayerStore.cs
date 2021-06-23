@@ -41,6 +41,5 @@ public class PlayerStore : MonoBehaviour
     {
         if (q == null) q = new Queue<bool>();
         q.Enqueue(active);
-        Debug.Log(q);
     }
 }

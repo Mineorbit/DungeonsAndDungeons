@@ -55,7 +55,7 @@ public class BuilderController : MonoBehaviour
             sender = pickAtCursor();
             if (sender != null)
             {
-                Debug.Log("Wire started");
+                GameConsole.Log("Wire started");
                 w = Wire.CreateDynamic(sender.transform.position, sender.transform.position, Color.black);
             }
         }

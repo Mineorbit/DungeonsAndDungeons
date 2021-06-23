@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void SetupGameStateFSM()
     {
-        Debug.Log(Init);
+        //GameConsole.Log(Init.ToString());
         gameStateFSM = new FSM<State, GameAction>();
         gameStateFSM.state = Init;
         gameStateFSM.name = "GameState";

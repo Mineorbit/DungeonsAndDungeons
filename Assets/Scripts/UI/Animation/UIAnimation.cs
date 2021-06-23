@@ -53,7 +53,6 @@ public class UIAnimation
 
     public void InEnded()
     {
-        Debug.Log("In Ended");
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
         if (InEndedEvent != null) InEndedEvent.Invoke();

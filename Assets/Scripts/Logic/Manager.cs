@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using com.mineorbit.dungeonsanddungeonscommon;
+using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
@@ -23,6 +24,6 @@ public class Manager : MonoBehaviour
 
     public virtual void performAction(GameManager.GameAction g)
     {
-        Debug.Log($"[Manager] Performing {g}");
+        GameConsole.Log($"[Manager] Performing {g}");
     }
 }

@@ -45,7 +45,6 @@ public abstract class Openable : MonoBehaviour
 
     private void Process()
     {
-        Debug.Log(Finished);
         if (Finished)
             if (actions.Count > 0)
             {
