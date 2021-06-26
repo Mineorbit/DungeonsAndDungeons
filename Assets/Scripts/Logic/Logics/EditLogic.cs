@@ -16,7 +16,7 @@ public class EditLogic : Logic
         base.Start();
         Debug.Log("Starting Edit");
 
-        PlayerController.doSim = false;
+        PlayerManager.DeactivateAllPlayers();
     }
 
     public override void Stop()

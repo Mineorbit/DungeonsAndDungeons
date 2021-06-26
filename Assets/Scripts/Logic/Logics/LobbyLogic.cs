@@ -15,6 +15,7 @@ public class LobbyLogic : Logic
         
         
         NetworkManager.readyEvent.AddListener( (x) => ReadyPlayer(x.Item1,x.Item2));
+        PlayerManager.DeactivateAllPlayers();
     }
 
     public void ReadyPlayer(int localId, bool ready)

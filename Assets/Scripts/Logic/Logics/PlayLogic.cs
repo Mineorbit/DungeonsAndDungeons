@@ -45,7 +45,6 @@ public class PlayLogic : Logic
         base.Start();
         LoadingScreen.instance.Close();
         PlayerManager.playerManager.SetCurrentPlayer(NetworkManager.instance.localId);
-
-        PlayerController.doSim = true;
+        PlayerManager.ActivateAllPlayers();
     }
 }
