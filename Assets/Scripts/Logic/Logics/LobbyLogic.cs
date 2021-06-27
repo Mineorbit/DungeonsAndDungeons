@@ -41,9 +41,12 @@ public class LobbyLogic : Logic
         
         Vector3 target = new Vector3(8*NetworkManager.instance.localId,6,0);
         
+        player.transform.position = target;
+        player.transform.rotation = Quaternion.identity;
         while ((player.transform.position - target).magnitude > 0.05f)
         {
             player.transform.position = target;
+            player.transform.rotation = Quaternion.identity;
             yield return new WaitForEndOfFrame();
         }
     }
