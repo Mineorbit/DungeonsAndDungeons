@@ -363,6 +363,7 @@ public class GameManager : MonoBehaviour
 
         Action<GameAction> nop = x => { };
 
+        
 
         gameStateFSM.transitions.Add(new Tuple<State, GameAction>(Init, LoadGameFromBoot),
             new Tuple<Action<GameAction>, State>(fromInitToMainMenu, MainMenu));

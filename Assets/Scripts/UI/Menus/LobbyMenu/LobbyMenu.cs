@@ -25,7 +25,7 @@ public class LobbyMenu : MenuPage
         NetworkManager.lobbyRequestEvent.AddListener((x) =>
         {
             netList.SetSelectedLevel(x.SelectedLevel, false);
-            Debug.Log("Level "+x.SelectedLevel+" was selected");
+            GameConsole.Log("Level "+x.SelectedLevel+" was selected");
         });
         
     }

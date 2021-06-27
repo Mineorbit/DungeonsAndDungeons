@@ -1,4 +1,6 @@
+using System.Collections;
 using com.mineorbit.dungeonsanddungeonscommon;
+using UnityEngine;
 
 public class LobbyLogic : Logic
 {
@@ -16,18 +18,36 @@ public class LobbyLogic : Logic
         
         NetworkManager.readyEvent.AddListener( (x) => ReadyPlayer(x.Item1,x.Item2));
         PlayerManager.DeactivateAllPlayers();
+        MainCaller.startCoroutine(SetLobbyPosition());
     }
 
     public void ReadyPlayer(int localId, bool ready)
     {
         
     }
-    public void OpenImmediate(string name)
-    {
-        LevelDataManager.instance.networkLevels = new NetLevel.LevelMetaData[0];
-        NetworkManager.instance.Connect("127.0.0.1", name, OpenLobbyMenu);
-    }
 
+    IEnumerator SetLobbyPosition()
+    {
+        while (!NetworkManager.isConnected)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        GameObject player = PlayerManager.playerManager.GetPlayer(NetworkManager.instance.localId);
+        while (player == null)
+        {
+            player = PlayerManager.playerManager.GetPlayer(NetworkManager.instance.localId);
+            yield return new WaitForEndOfFrame();
+        }
+        
+        Vector3 target = new Vector3(8*NetworkManager.instance.localId,6,0);
+        
+        while ((player.transform.position - target).magnitude > 0.05f)
+        {
+            player.transform.position = target;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+    
     public void Open(string ip, string name)
     {
         LevelDataManager.instance.networkLevels = new NetLevel.LevelMetaData[0];
@@ -35,41 +55,16 @@ public class LobbyLogic : Logic
         NetworkManager.instance.Connect(ip, name, OpenLobbyMenu);
     }
 
-    public void AddLocalPlayer(int localId, string name)
-    {
-        localPlayer = localId;
-        AddPlayer(localId, name);
-    }
 
-    public void RemoveLocalPlayer()
-    {
-        RemovePlayer(localPlayer);
-    }
-
-    public void AddPlayer(int localId, string name)
-    {
-        PlayerManager.playerManager.Add(localId, name, false);
-
-        LobbyMenu.UpdateDisplay();
-    }
+    
 
 
-    public void RemovePlayer(int localId)
-    {
-        PlayerManager.playerManager.Remove(localId);
-        LevelDataManager.instance.networkLevels = new NetLevel.LevelMetaData[0];
-        LobbyMenu.UpdateDisplay();
-    }
+
+ 
 
     private void OpenLobbyMenu()
     {
         MainMenuManager.instance.OpenPage(MainMenuManager.FromPlayToLobby);
-        LobbyMenu.UpdateDisplay();
-    }
-
-    private void OpenLobbyMenuImmediate()
-    {
-        MainMenuManager.instance.OpenPage(MainMenuManager.FromNoneToLobby);
         LobbyMenu.UpdateDisplay();
     }
 }
