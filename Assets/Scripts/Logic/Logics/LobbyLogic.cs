@@ -38,6 +38,7 @@ public class LobbyLogic : Logic
 
     public void OnLobbyOpen()
     {
+        GameConsole.Log("Call Lobby Ready");
         NetworkManager.instance.CallLobbyReady();
     }
 

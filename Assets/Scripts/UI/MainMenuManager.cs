@@ -124,11 +124,16 @@ public class MainMenuManager : MonoBehaviour
             pages[mainMenuFSM.state.Cardinal()].Open();
             currentPage = mainMenuFSM.state.Cardinal();
 
+            MainCaller.Do(() =>
+            {
+                ((LobbyLogic) GameManager.instance.currentLogic).OnLobbyOpen(); 
+            });
+            
             NetworkManager.instance.client.onDisconnectEvent.AddListener(() =>
             {
                 OpenPage(GoBack);
-                ((LobbyLogic) GameManager.instance.currentLogic).OnLobbyOpen();
             });
+            
             LobbyMenu.UpdateDisplay();
         };
 
@@ -138,13 +143,16 @@ public class MainMenuManager : MonoBehaviour
             if (currentPage >= 0)
                 pages[currentPage].Close();
 
+            MainCaller.Do(() =>
+            {
+                ((LobbyLogic) GameManager.instance.currentLogic).OnLobbyOpen(); 
+            });
+            
             NetworkManager.instance.client.onDisconnectEvent.AddListener(() =>
             {
                 MainCaller.Do(() =>
                 {
                     OpenPage(GoBack); 
-                    
-                    ((LobbyLogic) GameManager.instance.currentLogic).OnLobbyOpen();
                 });
             });
 
