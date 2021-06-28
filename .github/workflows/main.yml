@@ -19,6 +19,9 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+        
+      - name: Checkout submodules
+        uses: textbook/git-checkout-submodule-action@master
       - uses: actions/cache@v2
         with:
           path: Library
