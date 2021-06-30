@@ -163,6 +163,7 @@ public class LevelObjectDataSelectorBox : MonoBehaviour
             }
             catch (Exception e)
             {
+                GameConsole.Log($"Error: {e}");
             }
         }
     }

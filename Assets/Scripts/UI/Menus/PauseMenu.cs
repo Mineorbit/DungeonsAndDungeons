@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public Button backToMainMenuButton;
     public Button optionsButton;
-    public UIAnimation animation;
+    public UIAnimation uiAnimation;
 
     private void Start()
     {
@@ -22,16 +22,16 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!open && !animation.isOpen() && !BlurScreen.blurScreen.isOpen())
+            if (!open && !uiAnimation.isOpen() && !BlurScreen.blurScreen.isOpen())
                 Open();
-            else if (open && animation.isOpen() && BlurScreen.blurScreen.isOpen()) Close();
+            else if (open && uiAnimation.isOpen() && BlurScreen.blurScreen.isOpen()) Close();
         }
     }
 
     private void Setup()
     {
-        animation = new FadeAndGrow();
-        animation.target = transform;
+        uiAnimation = new FadeAndGrow();
+        uiAnimation.target = transform;
         backToMainMenuButton = transform.Find("Main").GetComponent<Button>();
         optionsButton = transform.Find("Opt").GetComponent<Button>();
         optionsButton.onClick.AddListener(GotoOptions);
@@ -71,7 +71,7 @@ public class PauseMenu : MonoBehaviour
             if (freezePlayer)
                 PlayerManager.acceptInput = false;
         BlurScreen.blurScreen.Open();
-        animation.Play();
+        uiAnimation.Play();
         MouseStateController.UnlockBlocking();
     }
 
@@ -83,7 +83,7 @@ public class PauseMenu : MonoBehaviour
             //Inform GameManager of Attempt to (unfreeze Sim)
             PlayerManager.acceptInput = true;
         BlurScreen.blurScreen.Close();
-        animation.Play();
+        uiAnimation.Play();
         open = false;
         MouseStateController.LockUnblocking();
     }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BuilderCursor : MonoBehaviour
 {
-    private static float degree;
     public static BuilderCursor builderCursor;
 
     private static LevelObjectData currentSelection;
@@ -44,8 +43,6 @@ public class BuilderCursor : MonoBehaviour
         cursorModel = transform.Find("model");
         cursorMesh = cursorModel.GetComponent<MeshFilter>();
         cursorRender = cursorModel.GetComponent<MeshRenderer>();
-
-        degree = 1f;
     }
 
     public void OnDisable()
@@ -55,7 +52,6 @@ public class BuilderCursor : MonoBehaviour
 
     public void SetLocation(Vector3 target, Vector3 normal)
     {
-        float g = 1;
         var position = LevelManager.GetGridPosition(target + currentSelection.granularity*normal, currentSelection);
         normalVec = normal;
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AlertScreen : MonoBehaviour
 {
     public static AlertScreen alert;
-    private UIAnimation animation;
+    private UIAnimation uiAnimation;
     private Button closeButton;
     private bool open;
 
@@ -27,8 +27,8 @@ public class AlertScreen : MonoBehaviour
 
     private void SetupUI()
     {
-        animation = new Fade();
-        animation.target = transform;
+        uiAnimation = new Fade();
+        uiAnimation.target = transform;
         closeButton = transform.Find("Sub").Find("Button").GetComponent<Button>();
         text = transform.Find("Sub").Find("Cover").Find("Text").GetComponent<TextMeshProUGUI>();
     }
@@ -40,7 +40,7 @@ public class AlertScreen : MonoBehaviour
 
         Reset();
         BlurScreen.blurScreen.Open();
-        animation.Open();
+        uiAnimation.Open();
     }
 
     public void Open(bool closeManual)
@@ -73,6 +73,6 @@ public class AlertScreen : MonoBehaviour
         if (!open) return;
         open = false;
         BlurScreen.blurScreen.Close();
-        animation.Close();
+        uiAnimation.Close();
     }
 }

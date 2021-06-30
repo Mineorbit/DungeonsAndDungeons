@@ -2,7 +2,7 @@ using UnityEngine.UI;
 
 public class PlayMenu : MenuPage
 {
-    public void Awake()
+    public override void Awake()
     {
         base.Awake();
         index = 1;

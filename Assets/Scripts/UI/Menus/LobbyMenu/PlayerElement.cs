@@ -19,7 +19,7 @@ public class PlayerElement : MonoBehaviour
             return;
         }
 
-        nameField.text = playerData.name;
+        nameField.text = playerData.playerName;
     }
 
     public void SetReady(bool r)

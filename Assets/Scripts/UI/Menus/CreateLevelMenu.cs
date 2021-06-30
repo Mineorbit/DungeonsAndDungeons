@@ -7,7 +7,7 @@ public class CreateLevelMenu : MenuPage
     private InputField inputDescriptionField;
     private Button startCreateButton;
 
-    public void Awake()
+    public override void Awake()
     {
         base.Awake();
         index = 4;

@@ -5,8 +5,6 @@ public class Manager : MonoBehaviour
 {
     public static Manager instance;
 
-    public string name;
-
     public virtual void Reset()
     {
     }
