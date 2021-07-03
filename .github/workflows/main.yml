@@ -24,6 +24,7 @@ jobs:
         with:
           repository: Mineorbit/DungeonsAndDungeonsCommon
           path: ./Packages
+      - run: ls ./Packages
       - uses: actions/cache@v2
         with:
           path: Library
