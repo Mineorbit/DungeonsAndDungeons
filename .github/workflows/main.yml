@@ -20,8 +20,10 @@ jobs:
           fetch-depth: 0
           lfs: true
         
-      - name: Checkout submodules
-        uses: textbook/git-checkout-submodule-action@master
+      - uses: actions/checkout@master
+        with:
+          repository: Mineorbit/DungeonsAndDungeonsCommon
+          path: ./Packages
       - uses: actions/cache@v2
         with:
           path: Library
