@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+
+package NetLevel;
+
+
+message LevelMetaData{
+	int32 localLevelId = 1;
+	int64 uniqueLevelId = 2;
+	string FullName = 3;
+	string Description = 4;
+	bool availBlue = 5;
+	bool availYellow = 6;
+	bool availRed = 7;
+	bool availGreen = 8;
+}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0448393b204c14c9680b03c1e457bf, type: 3}
+  m_Name: sword_hit
+  m_EditorClassIdentifier: 
+  audioType: 0
+  overloading: 0
+  onAwake: 0
+  relativePosition: {x: 0, y: 0, z: 0}
+  minVolume: 0.5
+  maxVolume: 1
+  spatialFactor: 1
+  loop: 0
+  audioClip:
+  - {fileID: 8300000, guid: 146a20625ab9e744ca87da31c6b664f3, type: 3}

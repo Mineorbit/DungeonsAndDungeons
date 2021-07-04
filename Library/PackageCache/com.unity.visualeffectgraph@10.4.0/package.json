@@ -1,0 +1,39 @@
+{
+  "name": "com.unity.visualeffectgraph",
+  "displayName": "Visual Effect Graph",
+  "version": "10.4.0",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "description": "The Visual Effect Graph is a node based visual effect editor. It allows you to author next generation visual effects that Unity simulates directly on the GPU. The Visual Effect Graph is production-ready for the High Definition Render Pipeline and runs on all platforms supported by it. Full support for the Universal Render Pipeline and compatible mobile devices is still in development.",
+  "keywords": [
+    "vfx",
+    "visualeffect",
+    "graph",
+    "effect",
+    "particles"
+  ],
+  "dependencies": {
+    "com.unity.shadergraph": "10.4.0",
+    "com.unity.render-pipelines.core": "10.4.0"
+  },
+  "samples": [
+    {
+      "displayName": "VisualEffectGraph Additions",
+      "description": "Additional Assets for use with Visual Effect Graph",
+      "path": "Samples~/VFXGraphAdditions"
+    },
+    {
+      "displayName": "OutputEvent Helpers",
+      "description": "Additional Helper Scripts that intercept Output Events and interact with Game Objects",
+      "path": "Samples~/VFXOutputEventHandlers"
+    }
+  ],
+  "upmCi": {
+    "footprint": "92fb0a845f7e1af008c17d33d1e6856fb8f95ce6"
+  },
+  "repository": {
+    "url": "https://github.com/Unity-Technologies/Graphics.git",
+    "type": "git",
+    "revision": "e11ddbccf86bcd7ceaae2c0b8646420d2e53cf80"
+  }
+}
