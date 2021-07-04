@@ -19,11 +19,6 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-        
-      - uses: actions/checkout@master
-        with:
-          repository: Mineorbit/DungeonsAndDungeonsCommon
-          path: ./Packages
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
