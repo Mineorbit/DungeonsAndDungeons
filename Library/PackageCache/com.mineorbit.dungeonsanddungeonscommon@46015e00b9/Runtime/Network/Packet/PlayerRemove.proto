@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package Game;
+
+
+message PlayerRemove {
+  int32 localId = 1;
+}

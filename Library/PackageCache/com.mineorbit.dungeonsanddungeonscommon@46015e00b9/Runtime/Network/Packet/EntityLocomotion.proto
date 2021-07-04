@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package Game;
+
+
+message EntityLocomotion {  
+  float X = 1;
+  float Y = 2;
+  float Z = 3;
+  float QX = 4;
+  float QY = 5;
+  float QZ = 6;
+  float QW = 7;
+  
+}

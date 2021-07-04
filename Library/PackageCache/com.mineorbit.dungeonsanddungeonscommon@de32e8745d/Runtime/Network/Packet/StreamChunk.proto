@@ -1,9 +1,0 @@
-syntax = "proto3";
-package game;
-
-import "ChunkData.proto";
-
-message StreamChunk {
-	NetLevel.ChunkData chunkData = 1;
-	bool immediate = 2;
-}

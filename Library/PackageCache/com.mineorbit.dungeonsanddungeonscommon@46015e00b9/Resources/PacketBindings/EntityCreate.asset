@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd29e75a1a24aa24e9a5fc00afab5a94, type: 3}
+  m_Name: EntityCreate
+  m_EditorClassIdentifier: 
+  possiblePacketTypes:
+  - General.Packet
+  - State.MeConnect
+  - State.MeDisconnect
+  - State.PrepareRound
+  - State.StartRound
+  - State.Welcome
+  - Game.ConnectLevelObject
+  - Game.ConnectLevelObjectFail
+  - Game.ConnectLevelObjectRequest
+  - Game.EntityCreate
+  - Game.EntityLocomotion
+  - Game.EntityTeleport
+  - Game.Parameter
+  - Game.LevelObjectAction
+  - Game.PlayerCreate
+  - Game.PlayerRemove
+  - Game.PlayerState
+  - Game.StreamChunk
+  - NetLevel.ChunkData
+  - NetLevel.LevelMetaData
+  - Google.Protobuf.IBufferMessage
+  - Google.Protobuf.ICustomDiagnosticMessage
+  - Google.Protobuf.IExtendableMessage`1
+  - Google.Protobuf.IMessage
+  - Google.Protobuf.IMessage`1
+  - Google.Protobuf.WellKnownTypes.Any
+  - Google.Protobuf.WellKnownTypes.Api
+  - Google.Protobuf.WellKnownTypes.Method
+  - Google.Protobuf.WellKnownTypes.Mixin
+  - Google.Protobuf.WellKnownTypes.Duration
+  - Google.Protobuf.WellKnownTypes.Empty
+  - Google.Protobuf.WellKnownTypes.FieldMask
+  - Google.Protobuf.WellKnownTypes.SourceContext
+  - Google.Protobuf.WellKnownTypes.Struct
+  - Google.Protobuf.WellKnownTypes.Value
+  - Google.Protobuf.WellKnownTypes.ListValue
+  - Google.Protobuf.WellKnownTypes.Timestamp
+  - Google.Protobuf.WellKnownTypes.Type
+  - Google.Protobuf.WellKnownTypes.Field
+  - Google.Protobuf.WellKnownTypes.Enum
+  - Google.Protobuf.WellKnownTypes.EnumValue
+  - Google.Protobuf.WellKnownTypes.Option
+  - Google.Protobuf.WellKnownTypes.DoubleValue
+  - Google.Protobuf.WellKnownTypes.FloatValue
+  - Google.Protobuf.WellKnownTypes.Int64Value
+  - Google.Protobuf.WellKnownTypes.UInt64Value
+  - Google.Protobuf.WellKnownTypes.Int32Value
+  - Google.Protobuf.WellKnownTypes.UInt32Value
+  - Google.Protobuf.WellKnownTypes.BoolValue
+  - Google.Protobuf.WellKnownTypes.StringValue
+  - Google.Protobuf.WellKnownTypes.BytesValue
+  - Google.Protobuf.Reflection.FileDescriptorSet
+  - Google.Protobuf.Reflection.FileDescriptorProto
+  - Google.Protobuf.Reflection.DescriptorProto
+  - Google.Protobuf.Reflection.ExtensionRangeOptions
+  - Google.Protobuf.Reflection.FieldDescriptorProto
+  - Google.Protobuf.Reflection.OneofDescriptorProto
+  - Google.Protobuf.Reflection.EnumDescriptorProto
+  - Google.Protobuf.Reflection.EnumValueDescriptorProto
+  - Google.Protobuf.Reflection.ServiceDescriptorProto
+  - Google.Protobuf.Reflection.MethodDescriptorProto
+  - Google.Protobuf.Reflection.FileOptions
+  - Google.Protobuf.Reflection.MessageOptions
+  - Google.Protobuf.Reflection.FieldOptions
+  - Google.Protobuf.Reflection.OneofOptions
+  - Google.Protobuf.Reflection.EnumOptions
+  - Google.Protobuf.Reflection.EnumValueOptions
+  - Google.Protobuf.Reflection.ServiceOptions
+  - Google.Protobuf.Reflection.MethodOptions
+  - Google.Protobuf.Reflection.UninterpretedOption
+  - Google.Protobuf.Reflection.SourceCodeInfo
+  - Google.Protobuf.Reflection.GeneratedCodeInfo
+  - Google.Protobuf.Reflection.DescriptorProto+Types+ExtensionRange
+  - Google.Protobuf.Reflection.DescriptorProto+Types+ReservedRange
+  - Google.Protobuf.Reflection.EnumDescriptorProto+Types+EnumReservedRange
+  - Google.Protobuf.Reflection.UninterpretedOption+Types+NamePart
+  - Google.Protobuf.Reflection.SourceCodeInfo+Types+Location
+  - Google.Protobuf.Reflection.GeneratedCodeInfo+Types+Annotation
+  possibleHandlerTypes:
+  - com.mineorbit.dungeonsanddungeonscommon.EntityNetworkHandler
+  - com.mineorbit.dungeonsanddungeonscommon.LevelLoadTargetNetworkHandler
+  - com.mineorbit.dungeonsanddungeonscommon.LevelObjectNetworkHandler
+  - com.mineorbit.dungeonsanddungeonscommon.NetworkHandler
+  - com.mineorbit.dungeonsanddungeonscommon.NetworkManagerHandler
+  - com.mineorbit.dungeonsanddungeonscommon.PlayerNetworkHandler
+  possibleMethods:
+  - HandleCreatePacket
+  - OnEntityLocomotion
+  - ProcessAction
+  PacketType: Game.EntityCreate
+  HandlerType: com.mineorbit.dungeonsanddungeonscommon.EntityNetworkHandler
+  BindedMethods:
+  - HandleCreatePacket
+  withIdentity: 0

@@ -1,0 +1,6 @@
+syntax = "proto3";
+package state;
+
+message WinRound {
+  string message = 1;
+}

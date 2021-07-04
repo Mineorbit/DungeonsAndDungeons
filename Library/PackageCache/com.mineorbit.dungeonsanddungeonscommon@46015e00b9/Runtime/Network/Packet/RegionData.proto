@@ -1,0 +1,15 @@
+syntax = "proto3";
+package NetLevel;
+
+import "ChunkData.proto";
+
+message CoordinateChunkPair{
+	int32 x = 1;
+	int32 y = 2;
+	NetLevel.ChunkData chunk = 3;
+	}
+
+message RegionData {
+	int32 id =  1;
+	repeated CoordinateChunkPair chunkDatas = 2;
+}

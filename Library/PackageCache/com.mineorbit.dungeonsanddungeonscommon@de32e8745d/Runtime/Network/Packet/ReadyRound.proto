@@ -1,7 +1,0 @@
-syntax = "proto3";
-package state;
-
-message ReadyRound {
-int32 local_id = 1;
-bool ready = 2;
-}

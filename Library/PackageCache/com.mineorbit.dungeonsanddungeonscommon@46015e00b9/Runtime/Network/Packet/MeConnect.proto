@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package State;
+
+
+message MeConnect {
+  string name = 1;
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+
+package NetLevel;
+
+import "LevelMetaData.proto";
+
+
+message LobbyRequest{
+	NetLevel.LevelMetaData selectedLevel = 1;
+}
