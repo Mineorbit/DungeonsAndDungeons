@@ -1,9 +1,0 @@
-syntax = "proto3";
-package state;
-
-import "LevelMetaData.proto";
-
-message PrepareRound {
-  string message = 1;
-  NetLevel.LevelMetaData levelMetaData = 2;
-}

@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-import "Packet.proto";
-
-package General;
-
-message PacketCarrier {
-	repeated General.Packet packets = 1;
-}

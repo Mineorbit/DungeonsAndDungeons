@@ -1,8 +1,0 @@
-syntax = "proto3";
-package game;
-
-message EntityTeleport {
-  float X = 1;
-  float Y = 2;
-  float Z = 3;
-}
