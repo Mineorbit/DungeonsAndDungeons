@@ -1,11 +1,10 @@
 {
   "dependencies": {
     "com.mineorbit.dungeonsanddungeonscommon": {
-      "version": "https://github.com/Mineorbit/DungeonsAndDungeonsCommon.git",
+      "version": "file:DungeonsAndDungeonsCommon",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ae4804881ccb1e0b0c1bbbafc2b1ecab3a69e616"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.cinemachine": {
       "version": "2.6.5",
