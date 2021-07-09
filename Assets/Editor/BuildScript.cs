@@ -14,7 +14,8 @@ public class BuildScript : MonoBehaviour
                 "Assets/Scenes/test.unity","Assets/Scenes/edit.unity","Assets/Scenes/play.unity",};
     
             // Build player.
-            BuildPipeline.BuildPlayer(levels, path + "/BuiltGame.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
+            BuildPipeline.BuildPlayer(levels, path + "/Windows/BuiltGame.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
+            BuildPipeline.BuildPlayer(levels, path + "/Linux/BuiltGame", BuildTarget.StandaloneLinux64, BuildOptions.None);
     
             // Copy a file from the project folder to the build folder, alongside the built game.
             //FileUtil.CopyFileOrDirectory("Assets/Templates/Readme.txt", path + "Readme.txt");
