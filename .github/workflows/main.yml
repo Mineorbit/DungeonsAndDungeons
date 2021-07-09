@@ -25,7 +25,8 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          allowDirtyBuild: false
+          allowDirtyBuild: true
+          buildTarget: Win64
           targetPlatform: ${{ matrix.targetPlatform }}
           customParameters: -importPackage com.mineorbit.dungeonsanddungeonscommon
       - run: tree
