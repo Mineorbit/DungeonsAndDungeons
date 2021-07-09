@@ -8,7 +8,7 @@ public class BuildScript : MonoBehaviour
     private static string buildName = "DungeonsAndDungeons";
     public static void Build()
     {
-        string path = "./Build";
+        string path = "./Build/";
         string[] levels = new string[] {"Assets/Scenes/main.unity", "Assets/Scenes/menu.unity",
             "Assets/Scenes/test.unity", "Assets/Scenes/edit.unity", "Assets/Scenes/play.unity"};
 
