@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BuildScript : MonoBehaviour
 {
+    private static string buildName = "DungeonsAndDungeons";
     public static void Build()
     {
         string path = "./Build";
@@ -12,8 +13,8 @@ public class BuildScript : MonoBehaviour
             "Assets/Scenes/test.unity", "Assets/Scenes/edit.unity", "Assets/Scenes/play.unity"};
 
         // Build player.
-        BuildPipeline.BuildPlayer(levels, path + "Linux64/BuiltGame.exe", BuildTarget.StandaloneLinux64, BuildOptions.None);
+        BuildPipeline.BuildPlayer(levels, path + $"Linux64/{buildName}", BuildTarget.StandaloneLinux64, BuildOptions.None);
         EditorApplication.Exit(0);
-        BuildPipeline.BuildPlayer(levels, path + "Win64/BuiltGame.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+        BuildPipeline.BuildPlayer(levels, path + $"Win64/{buildName}.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 }
