@@ -5,20 +5,15 @@ using UnityEngine;
 
 public class BuildScript : MonoBehaviour
 {
-        [UnityEditor.MenuItem("Quick/Deploy")]
-        public static void BuildGame ()
-        {
-            // Get filename.
-            string path = EditorUtility.SaveFolderPanel("Choose Location of Built Game", "", "");
-            string[] levels = new string[] {"Assets/Scenes/main.unity", "Assets/Scenes/menu.unity",
-                "Assets/Scenes/test.unity","Assets/Scenes/edit.unity","Assets/Scenes/play.unity",};
-    
-            // Build player.
-            BuildPipeline.BuildPlayer(levels, path + "/Windows/BuiltGame.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
-            BuildPipeline.BuildPlayer(levels, path + "/Linux/BuiltGame", BuildTarget.StandaloneLinux64, BuildOptions.None);
-    
-            // Copy a file from the project folder to the build folder, alongside the built game.
-            //FileUtil.CopyFileOrDirectory("Assets/Templates/Readme.txt", path + "Readme.txt");
-    
-        }
+    public static void Build()
+    {
+        string path = "./Build";
+        string[] levels = new string[] {"Assets/Scenes/main.unity", "Assets/Scenes/menu.unity",
+            "Assets/Scenes/test.unity", "Assets/Scenes/edit.unity", "Assets/Scenes/play.unity"};
+
+        // Build player.
+        BuildPipeline.BuildPlayer(levels, path + "Linux64/BuiltGame.exe", BuildTarget.StandaloneLinux64, BuildOptions.None);
+        EditorApplication.Exit(0);
+        BuildPipeline.BuildPlayer(levels, path + "Win64/BuiltGame.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+    }
 }
