@@ -14,7 +14,7 @@ public class BuildScript : MonoBehaviour
 
         // Build player.
         BuildPipeline.BuildPlayer(levels, path + $"Linux64/{buildName}", BuildTarget.StandaloneLinux64, BuildOptions.None);
-        EditorApplication.Exit(0);
         BuildPipeline.BuildPlayer(levels, path + $"Win64/{buildName}.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+        EditorApplication.Exit(0);
     }
 }
