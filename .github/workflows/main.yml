@@ -16,8 +16,7 @@ jobs:
           - StandaloneLinux64 # Build a Linux 64-bit standalone.
     steps:
       - uses: actions/checkout@v2
-        with: 
-          submodules: true
+        with:
           fetch-depth: 0
           lfs: true
       - run: tree
