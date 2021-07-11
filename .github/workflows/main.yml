@@ -10,10 +10,10 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          #- StandaloneWindows # Build a Windows standalone.
+          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          - StandaloneWindows # Build a Windows standalone.
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          #- StandaloneLinux64 # Build a Linux 64-bit standalone.
+          - StandaloneLinux64 # Build a Linux 64-bit standalone.
     steps:
       - uses: actions/checkout@v2
         with: 
@@ -26,7 +26,6 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           allowDirtyBuild: true
-          buildMethod: BuildScript.Build
           targetPlatform: ${{ matrix.targetPlatform }}
           customParameters: -importPackage com.mineorbit.dungeonsanddungeonscommon
       - run: tree
