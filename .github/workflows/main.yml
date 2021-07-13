@@ -41,6 +41,6 @@ jobs:
         with:
           src: Build-${{ matrix.targetPlatform }}.zip
           host: 46.232.248.108
-          remote: /var/www/game
+          remote: /var/www/html/game
           user: max
           key: ${{secrets.KEY}}
