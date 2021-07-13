@@ -39,7 +39,7 @@ jobs:
       - name: Deploy
         uses: nogsantos/scp-deploy@master
         with:
-          src: Build-${{ matrix.targetPlatform }}
+          src: Build-${{ matrix.targetPlatform }}.zip
           host: 46.232.248.108
           remote: /var/www/game
           user: max
