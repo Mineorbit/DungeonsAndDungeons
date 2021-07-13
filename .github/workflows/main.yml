@@ -32,11 +32,15 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+      - uses: papeloto/action-zip@v1
+        with:
+          files: ./build/
+          dest: Build-${{ matrix.targetPlatform }}.zip
       - name: Deploy
         uses: nogsantos/scp-deploy@master
         with:
-          src: ./build/*
+          src: Build-${{ matrix.targetPlatform }}
           host: 46.232.248.108
-          remote: /home/max/DungeonsAndDungeonsGameServer
+          remote: /var/www/game
           user: max
           key: ${{secrets.KEY}}
