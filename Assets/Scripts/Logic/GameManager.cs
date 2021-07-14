@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
                 currentLogic.Start();
     }
 
+    public LevelObjectData floorData;
 
     public void SetupGameStateFSM()
     {
@@ -152,7 +153,10 @@ public class GameManager : MonoBehaviour
             {
                 SceneLoadManager.instance.unloadCurrentScenes();
                 LevelDataManager.New(levelMetaDataForNewLevel);
-
+                
+                for(int i = -32;i<32;i+=2)
+                    for(int j = -32;j<32;j+=2)
+                        LevelManager.currentLevel.Add(floorData, new Vector3(i, -4, j),Quaternion.identity);
 
                 SceneLoadManager.instance.load(
                     new[] {SceneLoadManager.SceneIndex.edit, SceneLoadManager.SceneIndex.test}, editLoadFinishedEvent);
