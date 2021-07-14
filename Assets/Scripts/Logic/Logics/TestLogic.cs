@@ -66,7 +66,6 @@ public class TestLogic : Logic
 
         LevelManager.EndRound(false);
 
-        foreach (Transform t in LevelManager.currentLevel.dynamicObjects) Debug.Log("Test " + t.gameObject.name);
     }
 
     public override void DeInit()
