@@ -6,11 +6,15 @@ extends KinematicBody
 # var b = "text"
 
 
+var level: Spatial = null
+onready var cursor = $CursorArm/Cursor
+
 
 export var mouse_sensitivity := 0.05
 
 export var move_speed = 4
 func _ready() -> void:
+		level = $"../Level"
 		set_as_toplevel(true)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -38,6 +42,10 @@ func _physics_process(delta: float) -> void:
 	move_direction *= move_speed
 	move_and_slide(move_direction,Vector3.UP)
 
+func _process(delta) -> void:
+	if Input.is_action_just_pressed("Place"):
+		level.add(cursor.global_transform.origin)
+	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 
