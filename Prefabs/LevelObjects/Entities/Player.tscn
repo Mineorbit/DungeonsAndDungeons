@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Prefabs/Models/PlayerModel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/CameraController.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 0.75
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 3 )
+kickbackTime = 0.125
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
+shape = SubResource( 1 )
+
+[node name="SpringArm" type="SpringArm" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38648, 0 )
+spring_length = 5.0
+margin = 0.2
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="SpringArm"]
+current = true
+
+[node name="PlayerCharacter" type="Spatial" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+
+[node name="PlayerModel" parent="PlayerCharacter" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0 )
+
+[node name="CameraAnchor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0 )

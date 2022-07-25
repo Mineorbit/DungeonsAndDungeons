@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Prefabs/Builder.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Resources/grid.tres" type="MeshLibrary" id=4]
+
+[sub_resource type="Environment" id=3]
+background_mode = 1
+ambient_light_color = Color( 0.247059, 0.215686, 0.0431373, 1 )
+ambient_light_energy = 2.0
+auto_exposure_enabled = true
+ss_reflections_enabled = true
+ssao_enabled = true
+ssao_intensity = 4.0
+ssao_radius2 = 1.0
+ssao_quality = 2
+dof_blur_far_enabled = true
+glow_enabled = true
+glow_intensity = 0.2
+adjustment_enabled = true
+
+[sub_resource type="PlaneShape" id=4]
+
+[sub_resource type="PlaneMesh" id=5]
+
+[node name="Spatial" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.416297, 0 )
+
+[node name="Node2D" type="Node2D" parent="."]
+__meta__ = {
+"_editor_description_": "testsetset"
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
+margin_right = 696.0
+margin_bottom = 408.0
+text = "test
+"
+__meta__ = {
+"_editor_description_": "text"
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.897551, -0.3159, 0.307586, 0, 0.697615, 0.716472, -0.440911, -0.643071, 0.626145, 0, 2.04512, 2.17127 )
+light_color = Color( 0.972549, 1, 0.803922, 1 )
+shadow_enabled = true
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 4 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -0.515418, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+visible = false
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="Builder" parent="." instance=ExtResource( 1 )]
