@@ -12,6 +12,17 @@ func _ready():
 	pass # Replace with function body.
 
 
+func setup_new():
+	for i in range(-8,8,2):
+		for j in range(-8,8,2):
+			add(Vector3(i,0,j))
+
+func save():
+	pass
+
+func load(path):
+	pass
+
 func add(position):
 	var pos = gridMap.world_to_map(position)
 	print(pos)

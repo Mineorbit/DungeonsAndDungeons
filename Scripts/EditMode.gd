@@ -7,13 +7,26 @@ extends Spatial
 
 onready var player = $Player
 onready var builder = $Builder
+var level
 var playerpref
 var builderpref
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 	builderpref = load("res://Prefabs/Builder.tscn")
+
+	player = playerpref.instance()
+	builder = builderpref.instance()
+	
+	builder.global_transform.origin = Vector3(0,5,0)
+	create_new_level()
 	enter_edit_mode()
+
+func create_new_level():
+	level = load("res://Prefabs/Level.tscn").instance()
+	add_child(level)
+	level.setup_new()
+
 
 var mode = -1 # 0 = edit 1 = test
 
@@ -31,9 +44,7 @@ func enter_edit_mode():
 		return
 	mode = 0
 	remove_child(player)
-	builder = builderpref.instance()
 	add_child(builder)
-	builder.global_transform.origin = Vector3(0,5,0)
 	
 
 func enter_test_mode():
@@ -41,7 +52,6 @@ func enter_test_mode():
 		return
 	mode = 1
 	remove_child(builder)
-	player = playerpref.instance()
 	add_child(player)
 	player.global_transform.origin = Vector3(0,5,0)
 	
