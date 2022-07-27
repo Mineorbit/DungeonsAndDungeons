@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "ElementType",
+"language": "GDScript",
+"path": "res://Scripts/ElementType.gd"
+}, {
+"base": "Resource",
+"class": "LevelObjectData",
+"language": "GDScript",
+"path": "res://Scripts/LevelObjectData.gd"
+} ]
+_global_script_class_icons={
+"ElementType": "",
+"LevelObjectData": ""
+}
+
 [application]
 
 config/name="DungeonsAndDungeons"
