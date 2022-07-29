@@ -23,7 +23,8 @@ func load(path):
 	pass
 
 func get_chunk(position):
-	pass
+	var chunkPosition = Vector3(position.x*floor(position.x/8),position.y*floor(position.y/8),position.z*floor(position.z/8))
+	# here need to read from some dictionary
 	
 
 func add_chunk(position):
