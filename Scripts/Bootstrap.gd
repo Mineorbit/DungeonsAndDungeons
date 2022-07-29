@@ -5,16 +5,25 @@ extends Node
 # var a = 2
 # var b = "text"
 
-
+var current_scene = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if OS.has_feature("Server") or "--server" in OS.get_cmdline_args():
 		print("Starting Server")
 	else:
 		print("Starting Dungeons And Dungeons")
-		get_tree().change_scene("res://Scenes/menu.tscn")
-		
+		remove_child(current_scene)
+		current_scene = load("res://Scenes/menu.tscn").instance()
+		add_child(current_scene)
 
+func start_play():
+		remove_child(current_scene)
+		current_scene = load("res://Scenes/test.tscn").instance()
+		add_child(current_scene)
+func start_edit():
+		remove_child(current_scene)
+		current_scene = load("res://Scenes/edit.tscn").instance()
+		add_child(current_scene)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

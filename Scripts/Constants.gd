@@ -1,15 +1,11 @@
-extends Resource
-class_name LevelObjectData
+extends Node
+
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
-export var name = "Default Level Object"
-export var tiled = false
-export var gridScale = 2
-export var tileIndex = 0
-
+onready var Default_Floor: LevelObjectData = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

@@ -44,7 +44,8 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Place"):
-		level.add(cursor.global_transform.origin)
+		print("Adding Block")
+		level.add(Constants.Default_Floor,cursor.global_transform.origin)
 	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
