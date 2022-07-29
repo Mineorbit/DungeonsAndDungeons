@@ -8,7 +8,7 @@ extends KinematicBody
 
 var level: Spatial = null
 onready var cursor = $CursorArm/Cursor
-
+onready var removalArea = $CursorArm/Cursor/RemovalArea
 
 export var mouse_sensitivity := 0.05
 
