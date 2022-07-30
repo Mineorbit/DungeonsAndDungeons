@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/BuilderController.gd" type="Script" id=1]
 
@@ -6,10 +6,9 @@
 
 [sub_resource type="SphereMesh" id=2]
 
-[sub_resource type="SphereShape" id=3]
-
 [node name="Builder" type="KinematicBody"]
 script = ExtResource( 1 )
+removalRays = [ NodePath("CursorArm/Cursor/RayCast"), NodePath("CursorArm/Cursor/RayCast2"), NodePath("CursorArm/Cursor/RayCast3"), NodePath("CursorArm/Cursor/RayCast4"), NodePath("CursorArm/Cursor/RayCast5"), NodePath("CursorArm/Cursor/RayCast6") ]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -29,7 +28,25 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="RemovalArea" type="Area" parent="CursorArm/Cursor"]
+[node name="RayCast" type="RayCast" parent="CursorArm/Cursor"]
+enabled = true
 
-[node name="CollisionShape" type="CollisionShape" parent="CursorArm/Cursor/RemovalArea"]
-shape = SubResource( 3 )
+[node name="RayCast2" type="RayCast" parent="CursorArm/Cursor"]
+enabled = true
+cast_to = Vector3( 0, 1, 0 )
+
+[node name="RayCast3" type="RayCast" parent="CursorArm/Cursor"]
+enabled = true
+cast_to = Vector3( 0, 0, 1 )
+
+[node name="RayCast4" type="RayCast" parent="CursorArm/Cursor"]
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+
+[node name="RayCast5" type="RayCast" parent="CursorArm/Cursor"]
+enabled = true
+cast_to = Vector3( 1, 0, 0 )
+
+[node name="RayCast6" type="RayCast" parent="CursorArm/Cursor"]
+enabled = true
+cast_to = Vector3( -2, 0, 0 )

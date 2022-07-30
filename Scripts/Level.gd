@@ -45,6 +45,10 @@ func add(levelObjectData,position):
 		gridMap.set_cell_item(pos.x,pos.y,pos.z,levelObjectData.tileIndex)
 	else:
 		print("Other")
+		
+		
+func remove(position):
+	print(position)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

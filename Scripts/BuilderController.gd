@@ -8,15 +8,19 @@ extends KinematicBody
 
 var level: Spatial = null
 onready var cursor = $CursorArm/Cursor
-onready var removalArea = $CursorArm/Cursor/RemovalArea
-
+export var removalRays = []
+var removalRayObjects = []
 export var mouse_sensitivity := 0.05
 
 export var move_speed = 4
+
+var closestIndex = 0
 func _ready() -> void:
 		level = $"../Level"
 		set_as_toplevel(true)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		for ray in removalRays:
+			removalRayObjects.append(get_node(ray))
 
 
 
@@ -29,7 +33,7 @@ func move_camera(vec: Vector2) -> void:
 		rotation_degrees.y = wrapf(rotation_degrees.y, 0, 360)
 		
 
-
+var smallest_dist = 1
 func _physics_process(delta: float) -> void:
 	var aim = get_global_transform().basis
 	var forward = -aim.z
@@ -40,12 +44,30 @@ func _physics_process(delta: float) -> void:
 	move_direction += -forward*(Input.get_action_strength("back") - Input.get_action_strength("forward"))
 	move_direction += up*(Input.get_action_strength("up") - Input.get_action_strength("down"))
 	move_direction *= move_speed
+	smallest_dist = 200
 	move_and_slide(move_direction,Vector3.UP)
+	var i = 0	
+	for ray in removalRayObjects:
+		if not ray.is_colliding():
+			continue
+			
+		print(ray.get_collision_point())
+		var distance = (cursor.global_transform.origin - ray.get_collision_point()).length()
+		if(distance < smallest_dist):
+			smallest_dist = distance
+			closestIndex = i
+		i = i+1
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Place"):
 		print("Adding Block")
 		level.add(Constants.Default_Floor,cursor.global_transform.origin)
+	if Input.is_action_just_pressed("Displace"):
+		print("Trying to Remove Block")
+		var direction = removalRayObjects[closestIndex].cast_to
+		print(direction)
+		var position_to_remove = cursor.global_transform.origin + direction
+		level.remove(position_to_remove)
 	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
