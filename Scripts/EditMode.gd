@@ -25,7 +25,7 @@ func _ready():
 func create_new_level():
 	level = load("res://Prefabs/Level.tscn").instance()
 	add_child(level)
-	#level.setup_new()
+	level.setup_new()
 
 
 var mode = -1 # 0 = edit 1 = test

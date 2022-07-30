@@ -11,11 +11,12 @@ onready var gridMap: GridMap = $levelobject_grid
 func _ready():
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	
+	
 
 func setup_new():
-	for i in range(-8,8,2):
-		for j in range(-8,8,2):
-			add(Constants.Default_Floor,Vector3(i,0,j))
+	for i in range(-8,8):
+		for j in range(-8,8):
+			add(Constants.Default_Floor,Vector3(i*2,0,j*2))
 
 func save(path):
 	pass
@@ -47,23 +48,13 @@ func add(levelObjectData,position):
 	else:
 		print("Other")
 		
-var new = true
-var tiles_to_remove = []
-func _process(delta):
-	
-	if(tiles_to_remove.size() > 0):
-		var value = tiles_to_remove[0] 
-		print("Removing "+str(value))
-		tiles_to_remove.remove(0)
-		var pos = value
-		gridMap.set_cell_item(int(pos.x),int(pos.y),int(pos.z),-1)
-		
-func remove(position):
-	var pos = gridMap.world_to_map(position)
-	tiles_to_remove.append(pos)
 
-func remove_from_grid(pos):
-	gridMap.set_cell_item(pos.x,pos.y,pos.z,-1)
+
+func remove(pos):
+	var position = gridMap.world_to_map(pos)
+	gridMap.set_cell_item(position.x,position.y,position.z,-1)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
