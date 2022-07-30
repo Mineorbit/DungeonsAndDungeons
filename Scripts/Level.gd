@@ -49,6 +49,8 @@ func add(levelObjectData,position):
 		
 func remove(position):
 	print(position)
+	var pos = gridMap.world_to_map(position)
+	gridMap.set_cell_item(pos.x,pos.y,pos.z,-1)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
