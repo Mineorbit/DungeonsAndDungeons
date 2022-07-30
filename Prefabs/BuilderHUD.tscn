@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Rotation.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Viewport")
+
+[node name="BuilderHUD" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+margin_left = 881.0
+margin_right = 1024.0
+margin_bottom = 126.0
+text = "TEST (T)"
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1024, 1024 )
+transparent_bg = true
+keep_3d_linear = true
+
+[node name="Spatial" type="Spatial" parent="Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -128, 0 )
+
+[node name="Camera" type="Camera" parent="Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.969761, -0.244055, 0, 0.244055, 0.969761, 0, 0, 0 )
+keep_aspect = 0
+projection = 1
+size = 4.0
+frustum_offset = Vector2( 10, 10 )
+
+[node name="Spatial" type="Spatial" parent="Viewport/Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="Viewport/Spatial/Spatial"]
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, -0.456161 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Viewport/Spatial/Spatial"]
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 1, 0, -0.456161 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Viewport/Spatial/Spatial"]
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0.5, 0, -0.456161 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Viewport/Spatial/Spatial"]
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, -0.5, 0, -0.456161 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 512, 550 )
+texture = SubResource( 2 )

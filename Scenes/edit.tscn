@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://Prefabs/BuilderHUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EditMode.gd" type="Script" id=3]
 
 [sub_resource type="Environment" id=3]
@@ -21,26 +22,6 @@ adjustment_enabled = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.416297, 0 )
 script = ExtResource( 3 )
 
-[node name="Node2D" type="Node2D" parent="."]
-__meta__ = {
-"_editor_description_": "testsetset"
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
-margin_right = 696.0
-margin_bottom = 408.0
-text = "test
-"
-__meta__ = {
-"_editor_description_": "text"
-}
-
-[node name="Button" type="Button" parent="Node2D"]
-margin_left = 881.0
-margin_right = 1024.0
-margin_bottom = 126.0
-text = "TEST (T)"
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
@@ -49,3 +30,5 @@ transform = Transform( 0.897551, -0.3159, 0.307586, 0, 0.697615, 0.716472, -0.44
 light_color = Color( 0.972549, 1, 0.803922, 1 )
 light_energy = 0.8
 shadow_enabled = true
+
+[node name="Node2D" parent="." instance=ExtResource( 1 )]
