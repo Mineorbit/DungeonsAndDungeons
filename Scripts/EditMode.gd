@@ -25,13 +25,14 @@ func _ready():
 func create_new_level():
 	level = load("res://Prefabs/Level.tscn").instance()
 	add_child(level)
-	level.setup_new()
+	#level.setup_new()
 
 
 var mode = -1 # 0 = edit 1 = test
 
 
 func _process(delta) -> void:
+		
 	if Input.is_action_just_pressed("Test"):
 		enter_test_mode()
 	if Input.is_action_just_pressed("Edit"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/BuilderController.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Cursor.gd" type="Script" id=2]
@@ -7,13 +7,10 @@
 
 [sub_resource type="SphereMesh" id=2]
 
-[sub_resource type="CubeMesh" id=3]
-
 [node name="Builder" type="KinematicBody"]
 collision_layer = 2
 input_ray_pickable = false
 script = ExtResource( 1 )
-removalRays = [ NodePath("CursorArm/Cursor/RayCollection/RayCast"), NodePath("CursorArm/Cursor/RayCollection/RayCast2"), NodePath("CursorArm/Cursor/RayCollection/RayCast3"), NodePath("CursorArm/Cursor/RayCollection/RayCast4"), NodePath("CursorArm/Cursor/RayCollection/RayCast5"), NodePath("CursorArm/Cursor/RayCollection/RayCast6") ]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -34,44 +31,6 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="RayCollection" type="Spatial" parent="CursorArm/Cursor"]
-
-[node name="RayCast" type="RayCast" parent="CursorArm/Cursor/RayCollection"]
-enabled = true
-
-[node name="RayCast2" type="RayCast" parent="CursorArm/Cursor/RayCollection"]
-enabled = true
-cast_to = Vector3( 0, 1, 0 )
-
-[node name="RayCast3" type="RayCast" parent="CursorArm/Cursor/RayCollection"]
+[node name="RayCast" type="RayCast" parent="CursorArm/Cursor"]
 enabled = true
 cast_to = Vector3( 0, 0, 1 )
-
-[node name="RayCast4" type="RayCast" parent="CursorArm/Cursor/RayCollection"]
-enabled = true
-cast_to = Vector3( 0, 0, -1 )
-
-[node name="RayCast5" type="RayCast" parent="CursorArm/Cursor/RayCollection"]
-enabled = true
-cast_to = Vector3( 1, 0, 0 )
-
-[node name="RayCast6" type="RayCast" parent="CursorArm/Cursor/RayCollection"]
-enabled = true
-cast_to = Vector3( -2, 0, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
-mesh = SubResource( 3 )
-skeleton = NodePath("../MeshInstance2")
-material/0 = null
-
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-mesh = SubResource( 3 )
-skeleton = NodePath("../MeshInstance")
-material/0 = null
