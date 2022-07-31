@@ -32,7 +32,10 @@ var mode = -1 # 0 = edit 1 = test
 
 
 func _process(delta) -> void:
-		
+	if Input.is_action_just_pressed("Save"):
+		level.save("Test")
+	if Input.is_action_just_pressed("Load"):
+		level.load("Test")
 	if Input.is_action_just_pressed("Test"):
 		enter_test_mode()
 	if Input.is_action_just_pressed("Edit"):
@@ -54,6 +57,6 @@ func enter_test_mode():
 	mode = 1
 	remove_child(builder)
 	add_child(player)
-	player.global_transform.origin = Vector3(0,5,0)
+	player.global_transform.origin = Vector3(0.5,5,0.5)
 	
 	

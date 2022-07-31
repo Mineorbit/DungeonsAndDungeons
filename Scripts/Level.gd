@@ -14,32 +14,46 @@ func _ready():
 	
 
 func setup_new():
-	for i in range(-8,8):
-		for j in range(-8,8):
-			add(Constants.Default_Floor,Vector3(i*2,0,j*2))
+	for i in range(-8,0):
+		for j in range(-8,0):
+			add(Constants.Default_Floor,Vector3(i,0,j))
 
 func save(path):
-	pass
+	print("Saving Level "+path)
+	var dir = Directory.new()
+	dir.make_dir("user://"+path)
+	var save_game = File.new()
+	save_game.open("user://"+path+"/index.json", File.WRITE)
+	print("There are "+str(chunks.size())+" Chunks")
+	for c in chunks.values():
+		var levelObjects = c.get_level_objects()
+		print(levelObjects.size())
 
 func load(path):
 	pass
 
+var chunks = {}
+
 func get_chunk(position):
-	var chunkPosition = Vector3(position.x*floor(position.x/8),position.y*floor(position.y/8),position.z*floor(position.z/8))
-	# here need to read from some dictionary
+	var chunkPosition = get_chunk_position(position)
+
+func get_chunk_position(position):
+	return Vector3(int(floor(position.x/8)),int(floor(position.y/8)),int(floor(position.z/8)))
 	
 
 func add_chunk(position):
-	var chunkPosition = Vector3(position.x*floor(position.x/8),position.y*floor(position.y/8),position.z*floor(position.z/8))
+	var chunkPosition = get_chunk_position(position)
 	var chunk = chunkPrefab.instance()
-	chunk.global_transform.origin = chunkPosition
+	chunk.level = self
+	chunk.global_transform.origin = 8*chunkPosition
+	chunks[chunkPosition] = chunk
 	add_child(chunk)
 	return chunk
 	
 
 func add(levelObjectData,position):
 	var chunk = get_chunk(position)
-	if(chunk != null):
+	if(chunk == null):
 		chunk = add_chunk(position)
 	
 	if(levelObjectData.tiled):

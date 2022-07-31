@@ -38,11 +38,13 @@ func _physics_process(delta: float) -> void:
 		if stun_done:
 			_velocity = Vector3.ZERO
 			stunned = false
+			stun_done = false
 	
 	if fresh_kickback:
 		fresh_kickback = false
 		_snap_vector = Vector3.ZERO
 		_velocity = kickback_direction
+		
 	_velocity = move_and_slide_with_snap(_velocity,_snap_vector,Vector3.UP,true)
 	
 	if not stunned and _velocity.length() > 0.2 and move_direction.length() > 0.4:

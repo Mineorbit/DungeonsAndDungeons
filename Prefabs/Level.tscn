@@ -10,6 +10,7 @@ script = ExtResource( 1 )
 
 [node name="levelobject_grid" type="GridMap" parent="."]
 mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 1, 1 )
 data = {
 "cells": PoolIntArray(  )
 }

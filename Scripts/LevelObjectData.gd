@@ -14,7 +14,11 @@ export var tileIndex = 0
 func _ready():
 	pass # Replace with function body.
 
+func to_cell():
+	return tileIndex
 
+static func from_cell(tileIndex,tileOrientation):
+	return Constants.Default_Floor
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
