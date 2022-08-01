@@ -40,7 +40,6 @@ func save():
 		for object in levelObjects:
 			chunk_file.store_line(str(object.levelObjectData.levelObjectId)+"|"+str(object.x)+"|"+str(object.y)+"|"+str(object.z))
 		chunk_file.close()
-		print(levelObjects.size())
 
 func clear():
 	gridMap.clear()
@@ -63,7 +62,6 @@ func load(level_name):
 				var chunkplace = file_name.substr(1,-1)
 				chunkplace = chunkplace.trim_suffix(")")
 				var coords = chunkplace.split(", ")
-				print("Found Chunk: " + str(coords))
 				var x = int(coords[0])*8
 				var y = int(coords[1])*8
 				var z = int(coords[2])*8
@@ -72,17 +70,10 @@ func load(level_name):
 				file.open(path+"/chunks/"+file_name, File.READ)
 				var line = file.get_line()
 				while line != "":
-					var lineData = line.split("|")
-					print(line)
-					var id = int(lineData[0])
-					var i = int(lineData[1])
-					var j = int(lineData[2])
-					var k = int(lineData[3])
-					var levelObjectData = Constants.LevelObjectData[id]
-					var pos = Vector3(i,j,k)
-					print(pos)
-					print(base_position)
-					add(levelObjectData, base_position+pos)
+					if immediate:
+						add_from_string(base_position,line)
+					else:
+						toAdd.append([base_position,line])
 					line = file.get_line()
 				file.close()
 			file_name = dir.get_next()
@@ -90,6 +81,26 @@ func load(level_name):
 	else:
 		print("An error occurred when trying to access the path.")
 
+var immediate = false
+
+func add_from_string(base_position,line):
+	var lineData = line.split("|")
+	var id = int(lineData[0])
+	var i = int(lineData[1])
+	var j = int(lineData[2])
+	var k = int(lineData[3])
+	var levelObjectData = Constants.LevelObjectData[id]
+	var pos = Vector3(i,j,k)
+	add(levelObjectData, base_position+pos)
+
+var toAdd = []
+
+func _process(delta):
+	if toAdd.size() > 0:
+		var result = toAdd[0]
+		toAdd.remove(0)
+		add_from_string(result[0],result[1])
+	
 var chunks = {}
 
 func get_chunk(position):
