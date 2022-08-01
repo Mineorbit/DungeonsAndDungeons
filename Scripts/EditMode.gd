@@ -33,7 +33,7 @@ var mode = -1 # 0 = edit 1 = test
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Save"):
-		level.save("Test")
+		level.save()
 	if Input.is_action_just_pressed("Load"):
 		level.load("Test")
 	if Input.is_action_just_pressed("Test"):
