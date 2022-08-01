@@ -26,6 +26,7 @@ func _ready():
 		new_res.levelObjectId = unique_id
 		new_res.name = name
 		new_res.tiled = is_tiled
+		Constants.LevelObjectData[unique_id] = new_res
 		unique_id = unique_id + 1
 		ResourceSaver.save(path, new_res)
 		if is_tiled:

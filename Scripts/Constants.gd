@@ -5,6 +5,8 @@ extends Node
 # var a = 2
 # var b = "text"
 
+var LevelObjectData = {}
+
 onready var Default_Floor: LevelObjectData = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
