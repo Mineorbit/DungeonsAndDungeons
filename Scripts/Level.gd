@@ -107,6 +107,8 @@ var chunks = {}
 
 func get_chunk(position):
 	var chunkPosition = get_chunk_position(position)
+	if chunks.has(chunkPosition):
+		return chunks[chunkPosition]
 
 func get_chunk_position(position):
 	return Vector3(int(floor(position.x/8)),int(floor(position.y/8)),int(floor(position.z/8)))
@@ -132,7 +134,6 @@ func add(levelObjectData,position):
 		gridMap.set_cell_item(pos.x,pos.y,pos.z,levelObjectData.tileIndex)
 	else:
 		var new_level_object = levelObjectPrefab.instance()
-		print(pos)
 		chunk.add_child(new_level_object)
 		new_level_object.global_transform.origin = pos
 		var level_object_dupe: Spatial = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
@@ -144,6 +145,11 @@ func add(levelObjectData,position):
 func remove(pos):
 	var position = gridMap.world_to_map(pos)
 	gridMap.set_cell_item(position.x,position.y,position.z,-1)
+	var chunk = get_chunk(position)
+	for levelObject in chunk.get_children():
+		if (position - levelObject.global_transform.origin).length() < 0.5:
+			levelObject.queue_free()
+			return
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

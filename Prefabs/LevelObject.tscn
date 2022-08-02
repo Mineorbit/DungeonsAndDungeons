@@ -2,11 +2,12 @@
 
 [ext_resource path="res://Scripts/LevelObject.gd" type="Script" id=1]
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="BoxShape" id=1]
 
 [node name="LevelObject" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
-material/0 = null
+[node name="ConstructionCollision" type="StaticBody" parent="."]
+
+[node name="Shape" type="CollisionShape" parent="ConstructionCollision"]
+shape = SubResource( 1 )

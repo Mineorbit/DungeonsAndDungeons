@@ -28,7 +28,6 @@ func create_new_level():
 	level.setup_new()
 
 
-var mode = -1 # 0 = edit 1 = test
 
 
 func _process(delta) -> void:
@@ -44,17 +43,17 @@ func _process(delta) -> void:
 #func _process(delta):
 #	pass
 func enter_edit_mode():
-	if(mode == 0):
+	if(Constants.currentMode == 1):
 		return
-	mode = 0
+	Constants.set_mode(1)
 	remove_child(player)
 	add_child(builder)
 	
 
 func enter_test_mode():
-	if(mode == 1):
+	if(Constants.currentMode == 2):
 		return
-	mode = 1
+	Constants.set_mode(2)
 	remove_child(builder)
 	add_child(player)
 	player.global_transform.origin = Vector3(0.5,5,0.5)
