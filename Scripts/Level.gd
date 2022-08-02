@@ -11,7 +11,7 @@ onready var gridMap: GridMap = $levelobject_grid
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
-	levelObjectPrefab = load("res://Prfabs/LevelObject.tscn")
+	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	
 
 export var level_name = "Test"
@@ -44,9 +44,10 @@ func save():
 
 func clear():
 	gridMap.clear()
-	for chunk in chunks.values():
-		remove_child(chunk)
-		chunk.queue_free()
+	for chunk in chunks.keys():
+		for child in chunks[chunk].get_children():
+			child.queue_free()
+		chunks[chunk].queue_free()
 	chunks.clear()
 
 func load(level_name):
@@ -126,12 +127,18 @@ func add(levelObjectData,position):
 	if(chunk == null):
 		chunk = add_chunk(position)
 	
+	var pos = gridMap.world_to_map(position)
 	if(levelObjectData.tiled):
-		var pos = gridMap.world_to_map(position)
 		gridMap.set_cell_item(pos.x,pos.y,pos.z,levelObjectData.tileIndex)
 	else:
-		print("Other")
-		
+		var new_level_object = levelObjectPrefab.instance()
+		print(pos)
+		chunk.add_child(new_level_object)
+		new_level_object.global_transform.origin = pos
+		var level_object_dupe: Spatial = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
+		new_level_object.add_child(level_object_dupe)
+		new_level_object.levelObjectData = levelObjectData
+		level_object_dupe.translation = Vector3.ZERO
 
 
 func remove(pos):

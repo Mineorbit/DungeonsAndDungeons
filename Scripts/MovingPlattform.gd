@@ -4,7 +4,7 @@ extends Spatial
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export(float) var strength = 0.125
+export(float) var strength = 0.0125
 
 onready var plattformBody: KinematicBody = $PlattformBody
 

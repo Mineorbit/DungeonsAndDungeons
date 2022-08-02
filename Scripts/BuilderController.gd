@@ -46,11 +46,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide(move_direction,Vector3.UP)
 	#colliding = removalRay.is_colliding()
 
+var selection = 0
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Place"):
 		print("Adding Block "+str(cursor.global_transform.origin))
-		level.add(Constants.Default_Floor,cursor.global_transform.origin)
+		level.add(Constants.LevelObjectData[selection],cursor.global_transform.origin)
 	if Input.is_action_just_pressed("Displace"):
 		print("Trying to Remove Block")
 		if colliding:
@@ -58,6 +59,12 @@ func _process(delta) -> void:
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
 			level.remove(position_to_remove)
+			
+	if Input.is_action_just_pressed("SelectLeft"):
+		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
+	if Input.is_action_just_pressed("SelectRight"):
+		selection = (selection + 1) %(Constants.LevelObjectData.size())
+	
 	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:

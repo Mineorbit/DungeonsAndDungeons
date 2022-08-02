@@ -42,4 +42,5 @@ func _ready():
 				meshlibrary.set_item_shapes(meshlibrary_id,[child.get_child(0).shape,child.get_child(0).transform])
 				meshlibrary_id = meshlibrary_id + 1
 	ResourceSaver.save("res://Resources/grid.tres",meshlibrary)
-	queue_free()
+	get_parent().remove_child(self)
+	hide()
