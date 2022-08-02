@@ -8,6 +8,9 @@ extends Spatial
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if Constants.levelObjects_initialized:
+		return
+	Constants.levelObjects_initialized = true
 	var meshlibrary = MeshLibrary.new()
 	var unique_id = 0
 	var meshlibrary_id = 0

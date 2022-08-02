@@ -6,11 +6,12 @@ extends Spatial
 # var b = "text"
 
 var chunkPrefab
+var levelObjectPrefab
 onready var gridMap: GridMap = $levelobject_grid
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
-	
+	levelObjectPrefab = load("res://Prfabs/LevelObject.tscn")
 	
 
 export var level_name = "Test"

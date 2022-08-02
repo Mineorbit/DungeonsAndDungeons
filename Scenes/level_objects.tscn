@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Materials/Floor.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/level_objects.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/LevelObjects/Interactive/MovingPlattform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/LevelObjects/Goal.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 1 )
@@ -40,4 +41,7 @@ transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 0.025, 0, -0.5, -1.09278e-09,
 shape = SubResource( 14 )
 
 [node name="MovingPlattform" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03722, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="Goal" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
