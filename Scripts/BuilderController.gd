@@ -9,6 +9,7 @@ extends KinematicBody
 var level: Spatial = null
 onready var cursor = $CursorArm/Cursor
 onready var removalRay = $CursorArm/Cursor/RayCast
+onready var gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
 export var mouse_sensitivity := 0.05
 
 export var move_speed = 4
@@ -58,8 +59,13 @@ func _process(delta) -> void:
 			var aim = cursor.get_global_transform().basis
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
-			level.remove(position_to_remove)
-			
+			level.remove_by_position(position_to_remove)
+			if removalRay.is_colliding():
+				var result = removalRay.get_collider()
+				if result.name == "ConstructionCollision":
+					var level_object = result.get_parent()
+					level.remove_by_object(level_object)
+	gridCursorMesh.global_transform.origin = Vector3(0.5,0,0.5) + level.gridMap.world_to_map(cursor.global_transform.origin)		
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
 	if Input.is_action_just_pressed("SelectRight"):

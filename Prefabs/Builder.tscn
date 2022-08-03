@@ -34,3 +34,8 @@ material/0 = null
 [node name="RayCast" type="RayCast" parent="CursorArm/Cursor"]
 enabled = true
 cast_to = Vector3( 0, 0, 1 )
+
+[node name="GridCursorMesh" type="MeshInstance" parent="CursorArm/Cursor"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null

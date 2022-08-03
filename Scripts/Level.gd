@@ -142,15 +142,26 @@ func add(levelObjectData,position):
 		level_object_dupe.translation = Vector3.ZERO
 
 
-func remove(pos):
+func remove_by_object(objectToRemove):
+	remove_level_object(objectToRemove)
+
+func remove_by_position(pos: Vector3):
 	var position = gridMap.world_to_map(pos)
 	gridMap.set_cell_item(position.x,position.y,position.z,-1)
 	var chunk = get_chunk(position)
-	for levelObject in chunk.get_children():
-		if (position - levelObject.global_transform.origin).length() < 0.5:
-			levelObject.queue_free()
-			return
+	if chunk != null:
+		for levelObject in chunk.get_children():
+			if (position - levelObject.global_transform.origin).length() < 0.5:
+				levelObject.queue_free()
+				return
 
+func remove_level_object(object):
+	var chunk = get_chunk(object.global_transform.origin)
+	if chunk != null:
+		for levelObject in chunk.get_children():
+			if levelObject == object:
+				levelObject.queue_free()
+				return
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
