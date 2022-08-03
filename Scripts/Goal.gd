@@ -6,11 +6,24 @@ extends Spatial
 # var b = "text"
 
 
-# Called when the node enters the scene tree for the first time.
+var numberOfPlayersNeeded = 1
+
+var numberOfPlayersInside = 0
+onready var enterArea: Area = $Area
+
+signal game_won
 func _ready():
-	pass # Replace with function body.
+	enterArea.connect("body_entered",self,"playerEntered")
 
+func playerEntered(player):
+	if player.name == "Player":
+		numberOfPlayersInside = numberOfPlayersInside + 1
+	if numberOfPlayersInside == numberOfPlayersNeeded:
+		print("Game won!")
 
+func playerleft(player):
+	if player.name == "Player":
+		numberOfPlayersInside = numberOfPlayersInside - 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
