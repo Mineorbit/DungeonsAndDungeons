@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/ElementType.gd"
 }, {
+"base": "Spatial",
+"class": "LevelObject",
+"language": "GDScript",
+"path": "res://Scripts/LevelObject.gd"
+}, {
 "base": "Resource",
 "class": "LevelObjectData",
 "language": "GDScript",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ElementType": "",
+"LevelObject": "",
 "LevelObjectData": ""
 }
 

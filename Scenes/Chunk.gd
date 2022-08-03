@@ -37,11 +37,7 @@ func get_level_objects():
 					levelObjectInstances.append(instance)
 	for n in get_children():
 		var instance = LevelObjectInstance.new()
-		instance.x = n.translation.x
-		instance.y = n.translation.y
-		instance.z = n.translation.z
-		instance.levelObjectData = n.levelObjectData
-		levelObjectInstances.append(instance)
+		levelObjectInstances.append(n.to_instance(instance))
 	return levelObjectInstances
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

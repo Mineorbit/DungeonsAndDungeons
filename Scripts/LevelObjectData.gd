@@ -7,6 +7,7 @@ class_name LevelObjectData
 
 export var name = "Default Level Object"
 export var tiled = false
+export var interactive = false
 export var gridScale = 2
 export var tileIndex = 0
 export var levelObjectId = -1

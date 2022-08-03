@@ -1,5 +1,5 @@
 extends Spatial
-
+class_name LevelObject
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -19,6 +19,13 @@ func on_mode_change():
 		add_child(construction_collision)
 	else:
 		remove_child(construction_collision)
+
+func to_instance(instance):
+		instance.x = translation.x
+		instance.y = translation.y
+		instance.z = translation.z
+		instance.levelObjectData = levelObjectData
+		return instance
 
 func _process(delta):
 	pass
