@@ -59,8 +59,8 @@ func _process(delta) -> void:
 			var aim = cursor.get_global_transform().basis
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
-			level.remove_by_position(position_to_remove)
-			if removalRay.is_colliding():
+			var isRemoved = level.remove_by_position(position_to_remove)
+			if not isRemoved and removalRay.is_colliding():
 				var result = removalRay.get_collider()
 				if result.name == "ConstructionCollision":
 					var level_object = result.get_parent()

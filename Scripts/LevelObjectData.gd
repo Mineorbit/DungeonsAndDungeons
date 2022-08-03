@@ -11,6 +11,7 @@ export var interactive = false
 export var gridScale = 2
 export var tileIndex = 0
 export var levelObjectId = -1
+export var maximumNumber = -1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

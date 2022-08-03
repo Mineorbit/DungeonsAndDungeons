@@ -48,6 +48,9 @@ func clear():
 		for child in chunks[chunk].get_children():
 			child.queue_free()
 		chunks[chunk].queue_free()
+	
+	for key in Constants.numberOfPlacedLevelObjects.keys():
+		Constants.numberOfPlacedLevelObjects[key] = 0
 	chunks.clear()
 
 func load(level_name):
@@ -125,6 +128,11 @@ func add_chunk(position):
 	
 
 func add(levelObjectData,position):
+	if(levelObjectData.maximumNumber != -1):
+		if(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
+			return
+	Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] = Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] + 1
+	print(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] )
 	var chunk = get_chunk(position)
 	if(chunk == null):
 		chunk = add_chunk(position)
@@ -142,26 +150,27 @@ func add(levelObjectData,position):
 		level_object_dupe.translation = Vector3.ZERO
 
 
-func remove_by_object(objectToRemove):
+func remove_by_object(objectToRemove: LevelObject):
 	remove_level_object(objectToRemove)
 
 func remove_by_position(pos: Vector3):
+	var isRemoved = false
 	var position = gridMap.world_to_map(pos)
 	gridMap.set_cell_item(position.x,position.y,position.z,-1)
 	var chunk = get_chunk(position)
 	if chunk != null:
 		for levelObject in chunk.get_children():
 			if (position - levelObject.global_transform.origin).length() < 0.5:
-				levelObject.queue_free()
-				return
+				remove_level_object(levelObject)
+				isRemoved = true
+				return isRemoved
+	return isRemoved
 
 func remove_level_object(object):
 	var chunk = get_chunk(object.global_transform.origin)
-	if chunk != null:
-		for levelObject in chunk.get_children():
-			if levelObject == object:
-				levelObject.queue_free()
-				return
+	chunk.remove_child(object)
+	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
+	print(Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

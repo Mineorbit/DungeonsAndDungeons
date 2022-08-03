@@ -32,6 +32,7 @@ func _ready():
 		Constants.LevelObjectData[unique_id] = new_res
 		unique_id = unique_id + 1
 		ResourceSaver.save(path, new_res)
+		Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
 		if is_tiled:
 			for child in levelobject.get_children():
 				meshlibrary.create_item(meshlibrary_id)
