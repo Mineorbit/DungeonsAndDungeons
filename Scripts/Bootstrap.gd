@@ -13,16 +13,16 @@ func _ready():
 	else:
 		print("Starting Dungeons And Dungeons")
 		remove_child(current_scene)
-		current_scene = load("res://Scenes/menu.tscn").instance()
+		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
 
 func start_play():
 		remove_child(current_scene)
-		current_scene = load("res://Scenes/test.tscn").instance()
+		current_scene = load("res://Scenes/test.tscn").instantiate()
 		add_child(current_scene)
 func start_edit():
 		remove_child(current_scene)
-		current_scene = load("res://Scenes/edit.tscn").instance()
+		current_scene = load("res://Scenes/edit.tscn").instantiate()
 		add_child(current_scene)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

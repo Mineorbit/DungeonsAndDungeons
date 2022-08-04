@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
@@ -7,14 +7,15 @@ extends Spatial
 
 var chunkPrefab
 var levelObjectPrefab
-onready var gridMap: GridMap = $levelobject_grid
+var gridMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	gridMap = $grid
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	
 
-export var level_name = "Test"
+var level_name = "Test"
 
 func setup_new():
 	for i in range(-8,8):
@@ -119,7 +120,7 @@ func get_chunk_position(position):
 
 func add_chunk(position):
 	var chunkPosition = get_chunk_position(position)
-	var chunk = chunkPrefab.instance()
+	var chunk = chunkPrefab.instantiate()
 	chunk.level = self
 	chunk.global_transform.origin = 8*chunkPosition
 	chunks[chunkPosition] = chunk
@@ -128,6 +129,9 @@ func add_chunk(position):
 	
 
 func add(levelObjectData,position):
+	if gridMap == null:
+		gridMap = $grid
+	print("Adding "+str(levelObjectData))
 	if(levelObjectData.maximumNumber != -1):
 		if(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
 			return
@@ -136,27 +140,28 @@ func add(levelObjectData,position):
 	var chunk = get_chunk(position)
 	if(chunk == null):
 		chunk = add_chunk(position)
-	
+	print("TEST")
 	var pos = gridMap.world_to_map(position)
+	print(pos)
 	if(levelObjectData.tiled):
-		gridMap.set_cell_item(pos.x,pos.y,pos.z,levelObjectData.tileIndex)
+		gridMap.set_cell_item(pos,levelObjectData.tileIndex)
 	else:
 		var new_level_object = levelObjectPrefab.instance()
 		chunk.add_child(new_level_object)
 		new_level_object.global_transform.origin = pos
-		var level_object_dupe: Spatial = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
+		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
 		new_level_object.levelObjectData = levelObjectData
 		level_object_dupe.translation = Vector3.ZERO
 
 
-func remove_by_object(objectToRemove: LevelObject):
+func remove_by_object(objectToRemove):
 	remove_level_object(objectToRemove)
 
 func remove_by_position(pos: Vector3):
 	var isRemoved = false
 	var position = gridMap.world_to_map(pos)
-	gridMap.set_cell_item(position.x,position.y,position.z,-1)
+	gridMap.set_cell_item(position,-1)
 	var chunk = get_chunk(position)
 	if chunk != null:
 		for levelObject in chunk.get_children():

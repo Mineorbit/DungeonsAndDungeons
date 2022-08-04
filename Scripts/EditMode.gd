@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
-onready var player = $Player
-onready var builder = $Builder
+var player = $Player
+var builder = $Builder
 var level
 var playerpref
 var builderpref

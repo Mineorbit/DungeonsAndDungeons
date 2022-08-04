@@ -5,13 +5,13 @@ class_name LevelObjectData
 # var a = 2
 # var b = "text"
 
-export var name = "Default Level Object"
-export var tiled = false
-export var interactive = false
-export var gridScale = 2
-export var tileIndex = 0
-export var levelObjectId = -1
-export var maximumNumber = -1
+var name = "Default Level Object"
+var tiled = false
+var interactive = false
+var gridScale = 2
+var tileIndex = 0
+var levelObjectId = -1
+var maximumNumber = -1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

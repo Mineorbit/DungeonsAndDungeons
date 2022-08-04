@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export(float) var strength = 0.0125
+var strength = 0.0125
 
-onready var plattformBody: KinematicBody = $PlattformBody
+var plattformBody = $PlattformBody
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 var time = 0
 func _physics_process(delta) -> void:
 	time += delta
-	plattformBody.move_and_collide(Vector3.FORWARD*strength*sin(wrapf(time + 0.1, -PI, PI)))
+#	plattformBody.move_and_collide(Vector3.FORWARD*strength*sin(wrapf(time + 0.1, -PI, PI)))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

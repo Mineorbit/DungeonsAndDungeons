@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
@@ -16,7 +16,7 @@ func _ready():
 	var meshlibrary_id = 0
 	for levelobject in get_children():
 		var is_tiled = false
-		var name = levelobject.name
+		var name = str(levelobject.name)
 		if "Tiled" in name:
 			name.trim_prefix("Tiled")
 			is_tiled = true
@@ -40,8 +40,9 @@ func _ready():
 				var new_transform = child.transform
 				new_transform.origin = Vector3.ZERO
 				meshlibrary.set_item_mesh_transform(meshlibrary_id,new_transform)
-				meshlibrary.set_item_shapes(meshlibrary_id,[child.get_child(0).shape,child.get_child(0).transform])
+			#	meshlibrary.set_item_shapes(meshlibrary_id,[child.get_child(0).shape,child.get_child(0).transform])
 				meshlibrary_id = meshlibrary_id + 1
-	ResourceSaver.save("res://Resources/grid.tres",meshlibrary)
+	
+	#ResourceSaver.save("res://Resources/grid.tres",meshlibrary)
 	get_parent().remove_child(self)
 	hide()

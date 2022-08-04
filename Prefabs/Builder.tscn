@@ -1,41 +1,37 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://cr2k2qxej14sw"]
 
-[ext_resource path="res://Scripts/BuilderController.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Cursor.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://Scripts/BuilderController.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Cursor.gd" id="2"]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereShape3D" id="1"]
 
-[sub_resource type="SphereMesh" id=2]
+[sub_resource type="SphereMesh" id="2"]
 
-[node name="Builder" type="KinematicBody"]
+[node name="Builder" type="CharacterBody3D"]
 collision_layer = 2
 input_ray_pickable = false
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-shape = SubResource( 1 )
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("1")
 
-[node name="ClippedCamera" type="ClippedCamera" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 
-[node name="CursorArm" type="SpringArm" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.75 )
+[node name="CursorArm" type="SpringArm3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.75)
 spring_length = 15.0
 margin = 0.75
 
-[node name="Cursor" type="Spatial" parent="CursorArm"]
-script = ExtResource( 2 )
+[node name="Cursor" type="Node3D" parent="CursorArm"]
+script = ExtResource("2")
 
-[node name="MeshInstance" type="MeshInstance" parent="CursorArm/Cursor"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="MeshInstance" type="MeshInstance3D" parent="CursorArm/Cursor"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("2")
 
-[node name="RayCast" type="RayCast" parent="CursorArm/Cursor"]
-enabled = true
-cast_to = Vector3( 0, 0, 1 )
+[node name="RayCast" type="RayCast3D" parent="CursorArm/Cursor"]
 
-[node name="GridCursorMesh" type="MeshInstance" parent="CursorArm/Cursor"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="GridCursorMesh" type="MeshInstance3D" parent="CursorArm/Cursor"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("2")

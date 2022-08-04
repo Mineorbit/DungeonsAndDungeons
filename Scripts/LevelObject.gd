@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 class_name LevelObject
 
 # Declare member variables here. Examples:
@@ -8,10 +8,10 @@ class_name LevelObject
 var levelObjectData: LevelObjectData
 var uniqueLevelObjectId
 
-onready var construction_collision = $ConstructionCollision
+var construction_collision = $ConstructionCollision
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Constants.connect("mode_changed",self,"on_mode_change")
+	#Constants.connect("mode_changed",self,"on_mode_change")
 	pass # Replace with function body.
 
 func on_mode_change():
@@ -21,9 +21,9 @@ func on_mode_change():
 		remove_child(construction_collision)
 
 func to_instance(instance):
-		instance.x = translation.x
-		instance.y = translation.y
-		instance.z = translation.z
+		instance.x = transform.origin.x
+		instance.y = transform.origin.y
+		instance.z = transform.origin.z
 		instance.levelObjectData = levelObjectData
 		return instance
 

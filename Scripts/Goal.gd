@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
@@ -9,11 +9,12 @@ extends Spatial
 var numberOfPlayersNeeded = 1
 
 var numberOfPlayersInside = 0
-onready var enterArea: Area = $Area
+var enterArea = $Area
 
 signal game_won
 func _ready():
-	enterArea.connect("body_entered",self,"playerEntered")
+	pass
+	#enterArea.connect("body_entered",self,"playerEntered")
 
 func playerEntered(player):
 	if player.name == "Player":

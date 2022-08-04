@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 
 # Declare member variables here. Examples:
@@ -6,30 +6,35 @@ extends KinematicBody
 # var b = "text"
 
 
-var level: Spatial = null
-onready var cursor = $CursorArm/Cursor
-onready var removalRay = $CursorArm/Cursor/RayCast
-onready var gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
-export var mouse_sensitivity := 0.05
+var level = null
+var cursor = $CursorArm/Cursor
+var removalRay = $CursorArm/Cursor/RayCast
+var gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
+var mouse_sensitivity := 0.005
 
-export var move_speed = 4
+var move_speed = 4
 
 var closestIndex = 0
 func _ready() -> void:
-		level = $"../Level"
-		set_as_toplevel(true)
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	cursor = $CursorArm/Cursor
+	removalRay = $CursorArm/Cursor/RayCast
+	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
+	level = $"../Level"
+	top_level = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-
+var rot_x = 0
+var rot_y = 0
 
 func move_camera(vec: Vector2) -> void:
-		rotation_degrees.x -= vec.y * mouse_sensitivity
-		rotation_degrees.x	 = clamp(rotation_degrees.x, -90, 30)
-		
-		rotation_degrees.y -= vec.x * mouse_sensitivity
-		rotation_degrees.y = wrapf(rotation_degrees.y, 0, 360)
-		
+	rot_x += -vec.x * mouse_sensitivity
+	rot_y += -vec.y * mouse_sensitivity
+	rot_y = clamp(rot_y, -1.5,1.5)
+	transform.basis = Basis() # reset rotation
+	rotate_object_local(Vector3(0, 1, 0), rot_x) # first rotate in Y
+	rotate_object_local(Vector3(1, 0, 0), rot_y)
+
 
 var colliding = true
 var smallest_dist = 1
@@ -44,15 +49,16 @@ func _physics_process(delta: float) -> void:
 	move_direction += up*(Input.get_action_strength("up") - Input.get_action_strength("down"))
 	move_direction *= move_speed
 	smallest_dist = 200
-	move_and_slide(move_direction,Vector3.UP)
+	velocity = move_direction
+	move_and_slide()
 	#colliding = removalRay.is_colliding()
 
 var selection = 0
 
 func _process(delta) -> void:
+	print(cursor.get_global_transform().origin)
 	if Input.is_action_just_pressed("Place"):
-		print("Adding Block "+str(cursor.global_transform.origin))
-		level.add(Constants.LevelObjectData[selection],cursor.global_transform.origin)
+		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin)
 	if Input.is_action_just_pressed("Displace"):
 		print("Trying to Remove Block")
 		if colliding:
@@ -65,7 +71,7 @@ func _process(delta) -> void:
 				if result.name == "ConstructionCollision":
 					var level_object = result.get_parent()
 					level.remove_by_object(level_object)
-	gridCursorMesh.global_transform.origin = Vector3(0.5,0,0.5) + level.gridMap.world_to_map(cursor.global_transform.origin)		
+	#gridCursorMesh.global_transform.origin = Vector3(0.5,0,0.5) + level.gridMap.world_to_map(cursor.global_transform.origin)		
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
 	if Input.is_action_just_pressed("SelectRight"):

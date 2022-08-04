@@ -1,19 +1,25 @@
-extends KinematicBody
+extends CharacterBody3D
 
 
-export var speed := 5
-export(float) var turnAngle := 0.2
-export(float) var kickbackTime = 2
-export var jump_strength = 10.0
-export var gravity := 25
+var speed := 5
+var turnAngle := 0.2
+var kickbackTime = 2
+var jump_strength = 10.0
+var gravity := 25
 
 var _velocity := Vector3.ZERO
 var _snap_vector := Vector3.DOWN
 
 var stunned = false
-onready var _spring_arm: SpringArm = $SpringArm
-onready var _camera_anchor: Spatial = $CameraAnchor
-onready var _character: Spatial = $PlayerCharacter
+var _spring_arm: SpringArm3D
+var _camera_anchor: Node3D
+var _character: Node3D
+
+func _ready():
+	_spring_arm= $SpringArm
+	_camera_anchor = $CameraAnchor
+	_character = $PlayerModel
+	
 
 func _physics_process(delta: float) -> void:
 	var move_direction := Vector3.ZERO
@@ -44,14 +50,14 @@ func _physics_process(delta: float) -> void:
 		fresh_kickback = false
 		_snap_vector = Vector3.ZERO
 		_velocity = kickback_direction
-		
-	_velocity = move_and_slide_with_snap(_velocity,_snap_vector,Vector3.UP,true)
+	velocity = _velocity
+	move_and_slide()
 	
-	if not stunned and _velocity.length() > 0.2 and move_direction.length() > 0.4:
-		look_direction = Vector2(_velocity.x,_velocity.z)
+	if not stunned and velocity.length() > 0.2 and move_direction.length() > 0.4:
+		look_direction = Vector2(velocity.x,_velocity.z)
 		look_direction = look_direction.normalized()
-		var current_rot = Quat(transform.basis)
-		var target_rot = Quat(Vector3(0,1,0), -look_direction.angle())
+		var current_rot = Quaternion(transform.basis)
+		var target_rot = Quaternion(Vector3(0,1,0), -look_direction.angle())
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
 
@@ -67,7 +73,7 @@ func kickback(direction) -> void:
 	stun_done = false
 	fresh_kickback = true
 	kickback_direction = direction*speed
-	yield(get_tree().create_timer(kickbackTime),"timeout")
+	#await get_tree().create_timer(kickbackTime),"timeout"
 	stun_done = true
 	# starts kickback process:
 	# character moves backwards in ballistic arch until
@@ -76,4 +82,4 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("test_kickback"):
 		kickback(Vector3.UP+Vector3.BACK)
 		#kickback(Vector3.UP)
-	_spring_arm.translation = translation + _camera_anchor.translation
+	_spring_arm.transform.origin = transform.origin
