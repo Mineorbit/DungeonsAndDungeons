@@ -82,4 +82,4 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("test_kickback"):
 		kickback(Vector3.UP+Vector3.BACK)
 		#kickback(Vector3.UP)
-	_spring_arm.transform.origin = transform.origin
+	_spring_arm.transform.origin = transform.origin + Vector3.UP*0.75

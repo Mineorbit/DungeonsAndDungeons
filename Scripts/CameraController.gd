@@ -1,7 +1,7 @@
 extends Node3D
 
 
-var mouse_sensitivity := 0.05
+var mouse_sensitivity := 0.005
 
 func _ready() -> void:
 	top_level = true
@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 func move_camera(vec: Vector2) -> void:
 		rotation.x -= vec.y * mouse_sensitivity
-		rotation.x	 = clamp(rotation.x, -90, 30)
+		rotation.x	 = clamp(rotation.x, -0.9, 0.3)
 		
 		rotation.y -= vec.x * mouse_sensitivity
 		rotation.y = rotation.y

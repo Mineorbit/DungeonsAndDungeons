@@ -16,14 +16,24 @@ transform = Transform3D(0.995636, 0, -0.0933264, 0, 1, 0, 0.0933264, 0, 0.995636
 [node name="Start" type="Node2D" parent="."]
 
 [node name="Play" type="Button" parent="Start"]
-anchor_left = 0.899
-anchor_right = 0.899
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 277.0
+offset_top = 295.0
+offset_right = 318.0
+offset_bottom = 326.0
 theme = SubResource("1")
 text = "Play"
 
 [node name="Edit" type="Button" parent="Start"]
 anchor_left = 0.899
 anchor_right = 0.899
+offset_left = 669.0
+offset_top = 296.0
+offset_right = 707.0
+offset_bottom = 327.0
 text = "Edit"
 
 [connection signal="pressed" from="Start/Play" to="." method="open_play_menu"]

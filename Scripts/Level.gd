@@ -131,28 +131,24 @@ func add_chunk(position):
 func add(levelObjectData,position):
 	if gridMap == null:
 		gridMap = $grid
-	print("Adding "+str(levelObjectData))
 	if(levelObjectData.maximumNumber != -1):
 		if(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
 			return
 	Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] = Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] + 1
-	print(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] )
 	var chunk = get_chunk(position)
 	if(chunk == null):
 		chunk = add_chunk(position)
-	print("TEST")
 	var pos = gridMap.world_to_map(position)
-	print(pos)
 	if(levelObjectData.tiled):
 		gridMap.set_cell_item(pos,levelObjectData.tileIndex)
 	else:
-		var new_level_object = levelObjectPrefab.instance()
+		var new_level_object = levelObjectPrefab.instantiate()
 		chunk.add_child(new_level_object)
-		new_level_object.global_transform.origin = pos
+		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
 		new_level_object.levelObjectData = levelObjectData
-		level_object_dupe.translation = Vector3.ZERO
+		level_object_dupe.transform.origin = Vector3.ZERO
 
 
 func remove_by_object(objectToRemove):
