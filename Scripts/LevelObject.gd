@@ -8,10 +8,11 @@ class_name LevelObject
 var levelObjectData: LevelObjectData
 var uniqueLevelObjectId
 
-var construction_collision = $ConstructionCollision
+var construction_collision
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#Constants.connect("mode_changed",self,"on_mode_change")
+	construction_collision = $ConstructionCollision
+	Constants.mode_changed.connect(on_mode_change)
 	pass # Replace with function body.
 
 func on_mode_change():

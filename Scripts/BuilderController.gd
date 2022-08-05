@@ -7,9 +7,9 @@ extends CharacterBody3D
 
 
 var level = null
-var cursor = $CursorArm/Cursor
-var removalRay = $CursorArm/Cursor/RayCast
-var gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
+var cursor
+var removalRay
+var gridCursorMesh
 var mouse_sensitivity := 0.005
 
 var move_speed = 4
@@ -56,7 +56,6 @@ func _physics_process(delta: float) -> void:
 var selection = 0
 
 func _process(delta) -> void:
-	print(cursor.get_global_transform().origin)
 	if Input.is_action_just_pressed("Place"):
 		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin)
 	if Input.is_action_just_pressed("Displace"):
@@ -66,6 +65,8 @@ func _process(delta) -> void:
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
 			var isRemoved = level.remove_by_position(position_to_remove)
+			print(removalRay.is_colliding())
+			print(removalRay.get_collider())
 			if not isRemoved and removalRay.is_colliding():
 				var result = removalRay.get_collider()
 				if result.name == "ConstructionCollision":

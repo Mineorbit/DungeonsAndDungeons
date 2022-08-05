@@ -157,11 +157,12 @@ func remove_by_object(objectToRemove):
 func remove_by_position(pos: Vector3):
 	var isRemoved = false
 	var position = gridMap.world_to_map(pos)
+	var floatPosition = Vector3(position.x,position.y,position.z)
 	gridMap.set_cell_item(position,-1)
 	var chunk = get_chunk(position)
 	if chunk != null:
 		for levelObject in chunk.get_children():
-			if (position - levelObject.global_transform.origin).length() < 0.5:
+			if (floatPosition - levelObject.global_transform.origin).length() < 0.5:
 				remove_level_object(levelObject)
 				isRemoved = true
 				return isRemoved
