@@ -68,9 +68,11 @@ func load(level_name):
 				var chunkplace = file_name.substr(1,-1)
 				chunkplace = chunkplace.trim_suffix(")")
 				var coords = chunkplace.split(", ")
-				var x = int(coords[0])*8
-				var y = int(coords[1])*8
-				var z = int(coords[2])*8
+				print(coords[0])
+				
+				var x = coords[0].to_int()*8
+				var y = coords[1].to_int()*8
+				var z = coords[2].to_int()*8
 				var base_position = Vector3(x,y,z)
 				var file = File.new()
 				file.open(path+"/chunks/"+file_name, File.READ)
@@ -91,10 +93,10 @@ var immediate = false
 
 func add_from_string(base_position,line):
 	var lineData = line.split("|")
-	var id = int(lineData[0])
-	var i = int(lineData[1])
-	var j = int(lineData[2])
-	var k = int(lineData[3])
+	var id = lineData[0].to_int()
+	var i = lineData[1].to_int()
+	var j = lineData[2].to_int()
+	var k = lineData[3].to_int()
 	var levelObjectData = Constants.LevelObjectData[id]
 	var pos = Vector3(i,j,k)
 	add(levelObjectData, base_position+pos)
@@ -104,7 +106,7 @@ var toAdd = []
 func _process(delta):
 	if toAdd.size() > 0:
 		var result = toAdd[0]
-		toAdd.remove(0)
+		toAdd.remove_at(0)
 		add_from_string(result[0],result[1])
 	
 var chunks = {}

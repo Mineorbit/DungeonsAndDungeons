@@ -9,13 +9,12 @@ extends Node3D
 var numberOfPlayersNeeded = 1
 
 var numberOfPlayersInside = 0
-var enterArea = $Area
+var enterArea: Area3D
 
 signal game_won
 func _ready():
-	pass
-	#enterArea.connect("body_entered",self,"playerEntered")
-
+	enterArea = $Area
+	enterArea.body_entered.connect(playerEntered)
 func playerEntered(player):
 	if player.name == "Player":
 		numberOfPlayersInside = numberOfPlayersInside + 1
