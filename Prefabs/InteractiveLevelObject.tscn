@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7q3viqkg616t"]
+
+[ext_resource type="Script" path="res://Scripts/InteractiveLevelObject.gd" id="1_wpeio"]
+
+[sub_resource type="BoxShape3D" id="1"]
+
+[node name="InteractiveLevelObject" type="Node3D"]
+script = ExtResource("1_wpeio")
+
+[node name="ConstructionCollision" type="StaticBody3D" parent="."]
+
+[node name="Shape" type="CollisionShape3D" parent="ConstructionCollision"]
+shape = SubResource("1")

@@ -7,13 +7,14 @@ extends Node3D
 
 var chunkPrefab
 var levelObjectPrefab
+var interactiveLevelObjectPrefab
 var gridMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gridMap = $grid
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
-	
+	interactiveLevelObjectPrefab = load("res://Prefabs/InteractiveLevelObject.tscn")
 
 var level_name = "Test"
 
@@ -131,7 +132,7 @@ func add_chunk(position):
 	return chunk
 	
 
-func add(levelObjectData,position):
+func add(levelObjectData: LevelObjectData,position):
 	if gridMap == null:
 		gridMap = $grid
 	if(levelObjectData.maximumNumber != -1):
@@ -145,9 +146,15 @@ func add(levelObjectData,position):
 	if(levelObjectData.tiled):
 		gridMap.set_cell_item(pos,levelObjectData.tileIndex)
 	else:
-		var new_level_object = levelObjectPrefab.instantiate()
+		var new_level_object
+		if levelObjectData.interactive:
+			new_level_object = interactiveLevelObjectPrefab.instantiate()	
+		else:
+			new_level_object = levelObjectPrefab.instantiate()
+		
 		chunk.add_child(new_level_object)
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
+		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
 		new_level_object.levelObjectData = levelObjectData
