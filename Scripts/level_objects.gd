@@ -18,7 +18,7 @@ func _ready():
 		var is_tiled = false
 		var name = str(levelobject.name)
 		if "Tiled" in name:
-			name.trim_prefix("Tiled")
+			name = name.trim_prefix("Tiled")
 			is_tiled = true
 		var path = "res://Resources/LevelObjectData/"+name+".tres"
 		var new_res: LevelObjectData
@@ -31,6 +31,7 @@ func _ready():
 		new_res.tiled = is_tiled
 		Constants.LevelObjectData[unique_id] = new_res
 		unique_id = unique_id + 1
+		print(unique_id)
 		ResourceSaver.save(new_res, path)
 		Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
 		if is_tiled:

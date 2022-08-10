@@ -98,6 +98,7 @@ func add_from_string(base_position,line):
 	var j = lineData[2].to_int()
 	var k = lineData[3].to_int()
 	var levelObjectData = Constants.LevelObjectData[id]
+	print(levelObjectData.name)
 	var pos = Vector3(i,j,k)
 	add(levelObjectData, base_position+pos)
 

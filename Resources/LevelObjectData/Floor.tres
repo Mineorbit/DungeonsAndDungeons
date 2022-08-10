@@ -1,11 +1,12 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://fw6sy3j4ho4j"]
 
-[ext_resource path="res://Scripts/LevelObjectData.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Scripts/LevelObjectData.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 name = "Floor"
 tiled = true
-gridScale = 2
+interactive = false
 tileIndex = 0
 levelObjectId = 0
+maximumNumber = -1

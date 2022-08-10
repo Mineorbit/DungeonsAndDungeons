@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5mbowd5w7nf4"]
+[gd_scene load_steps=7 format=3 uid="uid://c5mbowd5w7nf4"]
 
-[ext_resource type="Material" path="res://Assets/Materials/Floor.tres" id="1"]
+[ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1"]
 [ext_resource type="Script" path="res://Scripts/level_objects.gd" id="2"]
 [ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Interactive/MovingPlattform.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://exqb33vyfg5w" path="res://Prefabs/LevelObjects/Goal.tscn" id="4"]
@@ -10,12 +10,6 @@ material = ExtResource("1")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8l3b"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="QuadMesh" id="13"]
-material = ExtResource("1")
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8vl7q"]
-data = PackedVector3Array(-0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0)
 
 [node name="level_objects" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
@@ -32,18 +26,20 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TiledFloor/FloorBase/CollisionShape"]
 shape = SubResource("ConcavePolygonShape3D_s8l3b")
 
-[node name="FloorTop" type="MeshInstance3D" parent="TiledFloor"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0, 0)
-mesh = SubResource("13")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape" type="StaticBody3D" parent="TiledFloor/FloorTop"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledFloor/FloorTop/CollisionShape"]
-shape = SubResource("ConcavePolygonShape3D_8vl7q")
-
 [node name="MovingPlattform" parent="." instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="Goal" parent="." instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="TiledStone" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="StoneBase" type="MeshInstance3D" parent="TiledStone"]
+mesh = SubResource("1")
+skeleton = NodePath("../../TiledFloor")
+
+[node name="CollisionShape" type="StaticBody3D" parent="TiledStone/StoneBase"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledStone/StoneBase/CollisionShape"]
+shape = SubResource("ConcavePolygonShape3D_s8l3b")
