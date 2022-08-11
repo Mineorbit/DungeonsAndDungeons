@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5mbowd5w7nf4"]
+[gd_scene load_steps=9 format=3 uid="uid://c6gexh2e8nofi"]
 
 [ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1"]
 [ext_resource type="Script" path="res://Scripts/level_objects.gd" id="2"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Interactive/MovingPlattform.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://exqb33vyfg5w" path="res://Prefabs/LevelObjects/Goal.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://b7k2iytluwed5" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="5_ypbmy"]
+[ext_resource type="PackedScene" uid="uid://bq2yphhd7sr5n" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="6_23v6o"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1")
@@ -27,9 +28,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TiledFloor/FloorBase/CollisionShape"]
 shape = SubResource("ConcavePolygonShape3D_s8l3b")
 
-[node name="MovingPlattform" parent="." instance=ExtResource("3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
 [node name="Goal" parent="." instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
@@ -47,3 +45,9 @@ shape = SubResource("ConcavePolygonShape3D_s8l3b")
 
 [node name="Lever" parent="." instance=ExtResource("5_ypbmy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="MovingPlattform" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Gate" parent="." instance=ExtResource("6_23v6o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)

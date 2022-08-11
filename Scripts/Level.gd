@@ -99,7 +99,6 @@ func add_from_string(base_position,line):
 	var j = lineData[2].to_int()
 	var k = lineData[3].to_int()
 	var levelObjectData = Constants.LevelObjectData[id]
-	print(levelObjectData.name)
 	var pos = Vector3(i,j,k)
 	add(levelObjectData, base_position+pos)
 
@@ -182,7 +181,6 @@ func remove_level_object(object):
 	var chunk = get_chunk(object.global_transform.origin)
 	chunk.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
-	print(Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
