@@ -18,16 +18,23 @@ func reset():
 func _ready():
 	enterArea = $Area
 	enterArea.body_entered.connect(playerEntered)
+	enterArea.body_exited.connect(playerLeft)
+	
 func playerEntered(player):
+	print("ENTERED")
+	print(numberOfPlayersInside)
 	if player.name == "Player":
 		numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
 		print("Game won!")
 		Constants.game_won.emit()
 
-func playerleft(player):
+func playerLeft(player):
+	print("LEFT")
+	print(numberOfPlayersInside)
 	if player.name == "Player":
-		numberOfPlayersInside = numberOfPlayersInside - 1
+		numberOfPlayersInside = max(0,numberOfPlayersInside - 1)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

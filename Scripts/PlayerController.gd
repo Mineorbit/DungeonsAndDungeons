@@ -16,6 +16,7 @@ var _camera_anchor: Node3D
 var _character: Node3D
 
 func _ready():
+	_velocity = Vector3.ZERO
 	_spring_arm= $SpringArm
 	_camera_anchor = $CameraAnchor
 	_character = $PlayerModel

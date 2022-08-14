@@ -126,6 +126,7 @@ func reset():
 		for levelobject in chunk.get_children():
 			levelobject.reset()
 
+
 func add_chunk(position):
 	var chunkPosition = get_chunk_position(position)
 	var chunk = chunkPrefab.instantiate()

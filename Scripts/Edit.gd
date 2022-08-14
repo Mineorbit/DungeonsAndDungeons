@@ -19,6 +19,7 @@ func _ready():
 	builder.global_transform.origin = Vector3(0,5,0)
 	create_new_level()
 	enter_edit_mode()
+	Constants.game_won.connect(despawn_players)
 	Constants.game_won.connect(enter_edit_mode)
 
 func create_new_level():
@@ -42,21 +43,36 @@ func _process(delta) -> void:
 #func _process(delta):
 #	pass
 func enter_edit_mode():
+	print("Entered EditMode")
 	if(Constants.currentMode == 1):
 		return
 	Constants.set_mode(1)
 	if player in get_children():
-		remove_child(player)
+		despawn_players()
+	
+	level.reset()
 	add_child(builder)
 	
 
 func enter_test_mode():
+	print("Entered TestMode")
 	if(Constants.currentMode == 2):
 		return
 	Constants.set_mode(2)
 	remove_child(builder)
-	add_child(player)
-	level.reset()
+	spawn_players()
+	
+func despawn_players():
+	player.global_transform.origin = Vector3(0.5,-5,0.5)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	remove_child(player)
+	
+func spawn_players():
 	player.global_transform.origin = Vector3(0.5,5,0.5)
-	
-	
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	player._velocity = Vector3.ZERO
+	add_child(player)
