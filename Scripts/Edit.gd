@@ -19,6 +19,7 @@ func _ready():
 	builder.global_transform.origin = Vector3(0,5,0)
 	create_new_level()
 	enter_edit_mode()
+	Constants.game_won.connect(enter_edit_mode)
 
 func create_new_level():
 	level = load("res://Prefabs/Level.tscn").instantiate()
@@ -55,6 +56,7 @@ func enter_test_mode():
 	Constants.set_mode(2)
 	remove_child(builder)
 	add_child(player)
+	level.reset()
 	player.global_transform.origin = Vector3(0.5,5,0.5)
 	
 	

@@ -12,6 +12,8 @@ var numberOfPlacedLevelObjects = {}
 
 var levelObjects_initialized = false
 
+signal game_won
+
 var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():

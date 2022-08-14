@@ -4,6 +4,7 @@ class_name LevelObject
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var contained_level_object
 
 var levelObjectData: LevelObjectData
 var uniqueLevelObjectId
@@ -14,6 +15,10 @@ func _ready():
 	construction_collision = $ConstructionCollision
 	Constants.mode_changed.connect(on_mode_change)
 	pass # Replace with function body.
+
+func reset():
+	if contained_level_object.has_method("reset"):
+		contained_level_object.reset()
 
 func on_mode_change():
 	if Constants.currentMode == 1:

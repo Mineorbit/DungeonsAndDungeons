@@ -121,6 +121,11 @@ func get_chunk_position(position):
 	return Vector3(int(floor(position.x/8)),int(floor(position.y/8)),int(floor(position.z/8)))
 	
 
+func reset():
+	for chunk in chunks.values():
+		for levelobject in chunk.get_children():
+			levelobject.reset()
+
 func add_chunk(position):
 	var chunkPosition = get_chunk_position(position)
 	var chunk = chunkPrefab.instantiate()
@@ -156,6 +161,7 @@ func add(levelObjectData: LevelObjectData,position):
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
+		new_level_object.contained_level_object = level_object_dupe
 		new_level_object.levelObjectData = levelObjectData
 		level_object_dupe.transform.origin = Vector3.ZERO
 

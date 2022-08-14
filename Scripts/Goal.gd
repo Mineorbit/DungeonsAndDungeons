@@ -10,8 +10,11 @@ var numberOfPlayersNeeded = 1
 
 var numberOfPlayersInside = 0
 var enterArea: Area3D
-
 signal game_won
+
+func reset():
+	numberOfPlayersInside = 0
+	
 func _ready():
 	enterArea = $Area
 	enterArea.body_entered.connect(playerEntered)
@@ -20,6 +23,7 @@ func playerEntered(player):
 		numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
 		print("Game won!")
+		Constants.game_won.emit()
 
 func playerleft(player):
 	if player.name == "Player":
