@@ -31,7 +31,6 @@ func _ready():
 		new_res.tiled = is_tiled
 		Constants.LevelObjectData[unique_id] = new_res
 		unique_id = unique_id + 1
-		print(unique_id)
 		ResourceSaver.save(new_res, path)
 		Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
 		if is_tiled:

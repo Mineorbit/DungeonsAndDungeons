@@ -23,6 +23,19 @@ func setup_new():
 		for j in range(-8,8):
 			add(Constants.Default_Floor,Vector3(i,0,j))
 
+
+#this is a start routine for a level
+func start():
+	print("===Starting Level===")
+	reset()
+	for object in get_interactive_objects():
+		object.attachSignals()
+
+func get_interactive_objects():
+	return Constants.interactiveLevelObjects.values()
+
+
+
 func save():
 	print("Saving Level "+level_name)
 	var dir = Directory.new()
@@ -69,7 +82,6 @@ func load(level_name):
 				var chunkplace = file_name.substr(1,-1)
 				chunkplace = chunkplace.trim_suffix(")")
 				var coords = chunkplace.split(", ")
-				print(coords[0])
 				
 				var x = coords[0].to_int()*8
 				var y = coords[1].to_int()*8

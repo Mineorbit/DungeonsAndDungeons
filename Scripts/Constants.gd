@@ -7,8 +7,12 @@ extends Node
 
 var currentMode = 0
 
+var currentInteractive = 0
+
 var LevelObjectData = {}
 var numberOfPlacedLevelObjects = {}
+
+var interactiveLevelObjects = {}
 
 var levelObjects_initialized = false
 

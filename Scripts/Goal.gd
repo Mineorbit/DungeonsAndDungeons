@@ -16,13 +16,12 @@ func reset():
 	numberOfPlayersInside = 0
 	
 func _ready():
+	
 	enterArea = $Area
 	enterArea.body_entered.connect(playerEntered)
 	enterArea.body_exited.connect(playerLeft)
 	
 func playerEntered(player):
-	print("ENTERED")
-	print(numberOfPlayersInside)
 	if player.name == "Player":
 		numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
@@ -30,8 +29,6 @@ func playerEntered(player):
 		Constants.game_won.emit()
 
 func playerLeft(player):
-	print("LEFT")
-	print(numberOfPlayersInside)
 	if player.name == "Player":
 		numberOfPlayersInside = max(0,numberOfPlayersInside - 1)
 

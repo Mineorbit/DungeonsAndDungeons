@@ -50,7 +50,6 @@ func enter_edit_mode():
 	if player in get_children():
 		despawn_players()
 	
-	level.reset()
 	add_child(builder)
 	
 
@@ -60,6 +59,7 @@ func enter_test_mode():
 		return
 	Constants.set_mode(2)
 	remove_child(builder)
+	level.start()
 	spawn_players()
 	
 func despawn_players():

@@ -6,19 +6,44 @@ extends LevelObject
 # var b = "text"
 var unique_instance_id = 0
 
+signal activationSignal(state)
+var connectedObjects = []
+
+
+func attachSignals():
+	print("Attaching to Signals of incoming to "+str(self.unique_instance_id))
+	for object in connectedObjects:
+		print("Attaching to "+str(object)+" "+str(Constants.interactiveLevelObjects[object].get_children()[1]))
+		Constants.interactiveLevelObjects[object].activationSignal.connect(process)
+
+func clearSignals():
+	var connections = activationSignal.get_connections().duplicate()
+	for conn in connections:
+		activationSignal.disconnect(conn)
+		
+func process(activation):
+	if activation:
+		activate()
+	else:
+		deactivate()
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	unique_instance_id = Constants.currentInteractive
+	Constants.currentInteractive += 1
+	Constants.interactiveLevelObjects[unique_instance_id] = self
 	pass # Replace with function body.
 
 
 func activate():
 	if contained_level_object.has_method("activate"):
 		contained_level_object.activate()
+	activationSignal.emit(true)
 
 
 func deactivate():
 	if contained_level_object.has_method("deactivate"):
 		contained_level_object.deactivate()
+	activationSignal.emit(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
