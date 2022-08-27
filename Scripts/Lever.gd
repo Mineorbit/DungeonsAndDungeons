@@ -7,12 +7,23 @@ func _ready():
 	activationArea.body_entered.connect(process_entered)
 	pass # Replace with function body.
 
+
+var is_active = false
+
+
 func process_entered(x):
-	get_parent().activate()
+	if is_active:
+		get_parent().deactivate()
+	else:
+		get_parent().activate()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	
+
+func deactivate():
+	is_active = false
+	
 func activate():
-	pass
+	is_active = true

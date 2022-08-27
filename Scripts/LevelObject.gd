@@ -12,18 +12,23 @@ var uniqueLevelObjectId
 var construction_collision
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	preparing_Collision()
+
+func preparing_Collision():
 	construction_collision = $ConstructionCollision
 	Constants.mode_changed.connect(on_mode_change)
-	pass # Replace with function body.
+	
 
 func reset():
 	if contained_level_object.has_method("reset"):
 		contained_level_object.reset()
 
 func on_mode_change():
+	print("Mode changed to "+str(Constants.currentMode))
 	if Constants.currentMode == 1:
 		add_child(construction_collision)
 	else:
+		print("Disabling "+str(construction_collision))
 		remove_child(construction_collision)
 
 func to_instance(instance):

@@ -49,7 +49,7 @@ func enter_edit_mode():
 	Constants.set_mode(1)
 	if player in get_children():
 		despawn_players()
-	
+	level.reset()
 	add_child(builder)
 	
 

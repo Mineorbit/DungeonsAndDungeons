@@ -11,13 +11,10 @@ var connectedObjects = []
 
 
 func attachSignals():
-	print("Attaching to Signals of incoming to "+str(self.unique_instance_id)+" "+str(self.get_children()[1]))
 	for object in connectedObjects:
-		print("Attaching to "+str(object)+" "+str(Constants.interactiveLevelObjects[object].get_children()[1]))
 		Constants.interactiveLevelObjects[object].activationSignal.connect(process)
 
 func clearSignals():
-	print("Clearing Signal of "+str(self.get_children()[1]))
 	var connections = activationSignal.get_connections().duplicate()
 	for conn in connections:
 		activationSignal.disconnect(conn.callable)
@@ -34,16 +31,23 @@ func process(activation):
 		deactivate()
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	preparing_Collision()
 	unique_instance_id = Constants.currentInteractive
 	Constants.currentInteractive += 1
 	Constants.interactiveLevelObjects[unique_instance_id] = self
+
+
+#this should be extracted into another prefab
+func preparing_Collision():
+	construction_collision = $ConstructionCollision
+	Constants.mode_changed.connect(on_mode_change)
+	
 
 
 func activate():
 	if contained_level_object.has_method("activate"):
 		contained_level_object.activate()
 	list_connections()
-	print("Activated "+str(self.get_children()[1]))
 	activationSignal.emit(true)
 
 

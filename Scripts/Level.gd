@@ -30,6 +30,8 @@ func reset():
 			levelobject.reset()
 			if levelobject.has_method("clearSignals"):
 				levelobject.clearSignals()
+			if levelobject.has_method("deactivate"):
+				levelobject.deactivate()
 
 #this is a start routine for a level
 func start():

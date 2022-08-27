@@ -6,11 +6,9 @@ extends Node3D
 func _ready():
 	pass # Replace with function body.
 
-
-
-
 func activate():
-	print("Activated")
 	remove_child(gateModel)
+	
 func deactivate():
+	print("Deactivated")
 	add_child(gateModel)

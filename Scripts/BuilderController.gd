@@ -69,7 +69,7 @@ func connect_interactive_objects(a, b):
 	if a == null or b == null or a == b:
 		return
 	print(str(a)+" connected to "+str(b))
-	a.connectedObjects.append(b.unique_instance_id)
+	b.connectedObjects.append(a.unique_instance_id)
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Place"):
