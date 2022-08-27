@@ -15,4 +15,4 @@ func _process(delta):
 	pass
 	
 func activate():
-	print("Activated Lever")
+	pass

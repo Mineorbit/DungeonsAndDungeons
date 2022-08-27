@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 var level = null
 var cursor
-var removalRay
+var collisionRay
 var gridCursorMesh
 var mouse_sensitivity := 0.005
 
@@ -17,7 +17,7 @@ var move_speed = 4
 var closestIndex = 0
 func _ready() -> void:
 	cursor = $CursorArm/Cursor
-	removalRay = $CursorArm/Cursor/RayCast
+	collisionRay = $CursorArm/Cursor/RayCast
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
 	level = $"../Level"
 	top_level = true
@@ -55,6 +55,22 @@ func _physics_process(delta: float) -> void:
 
 var selection = 0
 
+func get_collided_level_object():
+	if collisionRay.is_colliding():
+		var result = collisionRay.get_collider()
+		if result.name == "ConstructionCollision":
+			var level_object = result.get_parent()
+			return level_object
+
+var start_object
+
+
+func connect_interactive_objects(a, b):
+	if a == null or b == null or a == b:
+		return
+	print(str(a)+" connected to "+str(b))
+	a.connectedObjects.append(b.unique_instance_id)
+
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Place"):
 		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin)
@@ -65,13 +81,15 @@ func _process(delta) -> void:
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
 			var isRemoved = level.remove_by_position(position_to_remove)
-			print(removalRay.is_colliding())
-			print(removalRay.get_collider())
-			if not isRemoved and removalRay.is_colliding():
-				var result = removalRay.get_collider()
-				if result.name == "ConstructionCollision":
-					var level_object = result.get_parent()
-					level.remove_by_object(level_object)
+			print(collisionRay.is_colliding())
+			print(collisionRay.get_collider())
+			if not isRemoved:
+				level.remove_by_object(get_collided_level_object())
+	if Input.is_action_just_pressed("Connect"):
+		start_object = get_collided_level_object()
+	if Input.is_action_just_released("Connect"):
+		connect_interactive_objects(start_object,get_collided_level_object())
+		start_object = null
 	#gridCursorMesh.global_transform.origin = Vector3(0.5,0,0.5) + level.gridMap.world_to_map(cursor.global_transform.origin)		
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())

@@ -24,6 +24,13 @@ func setup_new():
 			add(Constants.Default_Floor,Vector3(i,0,j))
 
 
+func reset():
+	for chunk in chunks.values():
+		for levelobject in chunk.get_children():
+			levelobject.reset()
+			if levelobject.has_method("clearSignals"):
+				levelobject.clearSignals()
+
 #this is a start routine for a level
 func start():
 	print("===Starting Level===")
@@ -56,6 +63,8 @@ func save():
 		for object in levelObjects:
 			chunk_file.store_line(str(object.levelObjectData.levelObjectId)+"|"+str(object.x)+"|"+str(object.y)+"|"+str(object.z))
 		chunk_file.close()
+
+
 
 func clear():
 	gridMap.clear()
@@ -132,12 +141,6 @@ func get_chunk(position):
 func get_chunk_position(position):
 	return Vector3(int(floor(position.x/8)),int(floor(position.y/8)),int(floor(position.z/8)))
 	
-
-func reset():
-	for chunk in chunks.values():
-		for levelobject in chunk.get_children():
-			levelobject.reset()
-
 
 func add_chunk(position):
 	var chunkPosition = get_chunk_position(position)
