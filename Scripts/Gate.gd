@@ -1,6 +1,7 @@
 extends Node3D
 
 
+@onready var gateModel = $GateModel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -10,6 +11,6 @@ func _ready():
 
 func activate():
 	print("Activated")
-
+	remove_child(gateModel)
 func deactivate():
-	pass
+	add_child(gateModel)
