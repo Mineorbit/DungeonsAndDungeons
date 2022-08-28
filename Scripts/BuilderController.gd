@@ -68,21 +68,17 @@ var start_object
 func connect_interactive_objects(a, b):
 	if a == null or b == null or a == b:
 		return
-	print(str(a)+" connected to "+str(b))
 	b.connectedObjects.append(a.unique_instance_id)
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Place"):
 		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin)
 	if Input.is_action_just_pressed("Displace"):
-		print("Trying to Remove Block")
 		if colliding:
 			var aim = cursor.get_global_transform().basis
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
 			var isRemoved = level.remove_by_position(position_to_remove)
-			print(collisionRay.is_colliding())
-			print(collisionRay.get_collider())
 			if not isRemoved:
 				level.remove_by_object(get_collided_level_object())
 	if Input.is_action_just_pressed("Connect"):

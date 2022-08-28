@@ -1,57 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2ea3rs0cq3rm"]
+[gd_scene load_steps=3 format=3 uid="uid://b2ea3rs0cq3rm"]
 
-[ext_resource type="Script" path="res://Scripts/Rotation.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Rotation.gd" id="1_v2hqe"]
 
-[sub_resource type="BoxMesh" id="1"]
-
-[sub_resource type="ViewportTexture" id="2"]
-viewport_path = NodePath("Viewport")
+[sub_resource type="BoxMesh" id="BoxMesh_1rlto"]
 
 [node name="BuilderHUD" type="Node2D"]
 
 [node name="Button" type="Button" parent="."]
 text = "TEST (T)"
 
-[node name="Viewport" type="SubViewport" parent="."]
+[node name="Control" type="Control" parent="."]
+offset_right = 705.0
+offset_bottom = 598.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+offset_left = 3.0
+offset_top = 344.0
+offset_right = 1024.0
+offset_bottom = 600.0
+focus_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+own_world_3d = true
 transparent_bg = true
-size = Vector2i(1024, 1024)
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
 
-[node name="Spatial" type="Node3D" parent="Viewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -128, 0)
+[node name="Node3D" type="Node3D" parent="Control/SubViewportContainer/SubViewport"]
 
-[node name="Camera" type="Camera3D" parent="Viewport/Spatial"]
-transform = Transform3D(1, 0, 0, 0, 0.969761, -0.244055, 0, 0.244055, 0.969761, 0, 0, 0)
-keep_aspect = 0
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(0.18477, 0.403933, 0.229561, -0.253271, 0.294683, -0.314668, -0.389505, 0, 0.313506, 0, 0, -0.892521)
+mesh = SubResource("BoxMesh_1rlto")
+skeleton = NodePath("../../Camera3D")
+script = ExtResource("1_v2hqe")
+
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport"]
 projection = 1
-size = 4.0
-frustum_offset = Vector2(10, 10)
+current = true
+size = 5.0
 
-[node name="Spatial" type="Node3D" parent="Viewport/Spatial"]
-
-[node name="MeshInstance" type="MeshInstance3D" parent="Viewport/Spatial/Spatial"]
-transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, -0.456161)
-mesh = SubResource("1")
-skeleton = NodePath("../../..")
-script = ExtResource("1")
-
-[node name="MeshInstance2" type="MeshInstance3D" parent="Viewport/Spatial/Spatial"]
-transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 1, 0, -0.456161)
-mesh = SubResource("1")
-skeleton = NodePath("../../..")
-script = ExtResource("1")
-
-[node name="MeshInstance3" type="MeshInstance3D" parent="Viewport/Spatial/Spatial"]
-transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0.5, 0, -0.456161)
-mesh = SubResource("1")
-skeleton = NodePath("../../..")
-script = ExtResource("1")
-
-[node name="MeshInstance4" type="MeshInstance3D" parent="Viewport/Spatial/Spatial"]
-transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, -0.5, 0, -0.456161)
-mesh = SubResource("1")
-skeleton = NodePath("../../..")
-script = ExtResource("1")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(512, 550)
-texture = SubResource("2")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/SubViewportContainer/SubViewport"]

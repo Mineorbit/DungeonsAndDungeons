@@ -55,7 +55,6 @@ func save():
 	save_game.open("user://level/"+level_name+"/index.json", File.WRITE)
 	save_game.store_line(level_name)
 	save_game.close()
-	print("There are "+str(chunks.size())+" Chunks")
 	for c in chunks.keys():
 		var chunk = chunks[c]
 		var chunk_file = File.new()

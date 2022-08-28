@@ -25,11 +25,10 @@ func reset():
 		contained_level_object.reset()
 
 func on_mode_change():
-	print("Mode changed to "+str(Constants.currentMode))
+	#print("Mode changed to "+str(Constants.currentMode))
 	if Constants.currentMode == 1:
 		add_child(construction_collision)
 	else:
-		print("Disabling "+str(construction_collision))
 		remove_child(construction_collision)
 
 func to_instance(instance):

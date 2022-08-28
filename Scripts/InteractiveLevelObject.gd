@@ -48,9 +48,7 @@ func _ready():
 
 
 func sign_up():
-	print("Signing object up with ID "+str(self.unique_instance_id))
 	Constants.interactiveLevelObjects[unique_instance_id] = self
-	
 
 #this should be extracted into another prefab
 func preparing_Collision():
