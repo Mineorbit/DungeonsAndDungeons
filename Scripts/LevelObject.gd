@@ -19,6 +19,7 @@ func preparing_Collision():
 	Constants.mode_changed.connect(on_mode_change)
 	
 
+
 func reset():
 	if contained_level_object.has_method("reset"):
 		contained_level_object.reset()
@@ -32,9 +33,9 @@ func on_mode_change():
 		remove_child(construction_collision)
 
 func to_instance(instance):
-		instance.x = transform.origin.x
-		instance.y = transform.origin.y
-		instance.z = transform.origin.z
+		instance.x = floor(transform.origin.x)
+		instance.y = floor(transform.origin.y)
+		instance.z = floor(transform.origin.z)
 		instance.levelObjectData = levelObjectData
 		return instance
 

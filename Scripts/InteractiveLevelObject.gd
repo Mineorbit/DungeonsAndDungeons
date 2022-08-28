@@ -10,6 +10,16 @@ signal activationSignal(state)
 var connectedObjects = []
 
 
+
+func to_instance(instance):
+		instance.x = floor(transform.origin.x)
+		instance.y = floor(transform.origin.y)
+		instance.z = floor(transform.origin.z)
+		instance.levelObjectData = levelObjectData
+		instance.unique_instance_id = unique_instance_id
+		instance.connectedObjects = connectedObjects
+		return instance
+
 func attachSignals():
 	for object in connectedObjects:
 		Constants.interactiveLevelObjects[object].activationSignal.connect(process)

@@ -63,8 +63,11 @@ func save():
 		chunk_file.open("user://level/"+level_name+"/chunks/"+str(c), File.WRITE)
 		var levelObjects = chunk.get_level_objects()
 		for object in levelObjects:
-			chunk_file.store_line(str(object.levelObjectData.levelObjectId)+"|"+str(object.x)+"|"+str(object.y)+"|"+str(object.z))
+			chunk_file.store_line(object.serialize())
 		chunk_file.close()
+
+
+
 
 
 
