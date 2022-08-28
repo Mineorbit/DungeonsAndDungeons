@@ -74,7 +74,7 @@ func clear():
 		for child in chunks[chunk].get_children():
 			child.queue_free()
 		chunks[chunk].queue_free()
-	
+	Constants.interactiveLevelObjects.clear()
 	for key in Constants.numberOfPlacedLevelObjects.keys():
 		Constants.numberOfPlacedLevelObjects[key] = 0
 	chunks.clear()
@@ -202,6 +202,8 @@ func remove_by_position(pos: Vector3):
 	return isRemoved
 
 func remove_level_object(object):
+	if object == null:
+		return
 	var chunk = get_chunk(object.global_transform.origin)
 	chunk.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
