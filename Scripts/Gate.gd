@@ -10,5 +10,4 @@ func activate():
 	remove_child(gateModel)
 	
 func deactivate():
-	print("Deactivated")
 	add_child(gateModel)

@@ -124,9 +124,19 @@ func add_from_string(base_position,line):
 	var i = lineData[1].to_int()
 	var j = lineData[2].to_int()
 	var k = lineData[3].to_int()
+	var instance_id = null
+	var connectedInteractiveObjects = null
+	if lineData.size() > 4:
+		instance_id = lineData[4].to_int()
+		connectedInteractiveObjects = []
+		var commalist = lineData[5].split("[")[1].split("]")[0].split(",")
+		for instanceid in commalist:
+			if instanceid == "":
+				continue
+			connectedInteractiveObjects.append(instanceid.to_int())
 	var levelObjectData = Constants.LevelObjectData[id]
 	var pos = Vector3(i,j,k)
-	add(levelObjectData, base_position+pos)
+	add(levelObjectData, base_position+pos,instance_id,connectedInteractiveObjects)
 
 var toAdd = []
 
@@ -155,9 +165,10 @@ func add_chunk(position):
 	chunks[chunkPosition] = chunk
 	add_child(chunk)
 	return chunk
+
 	
 
-func add(levelObjectData: LevelObjectData,position):
+func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, connectedObjects = []):
 	if gridMap == null:
 		gridMap = $grid
 	if(levelObjectData.maximumNumber != -1):
@@ -182,6 +193,11 @@ func add(levelObjectData: LevelObjectData,position):
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
+		if(unique_instance_id != null):
+			new_level_object.unique_instance_id = unique_instance_id
+			new_level_object.connectedObjects = connectedObjects
+		if (new_level_object.has_method("sign_up")):
+			new_level_object.sign_up()
 		new_level_object.contained_level_object = level_object_dupe
 		new_level_object.levelObjectData = levelObjectData
 		level_object_dupe.transform.origin = Vector3.ZERO

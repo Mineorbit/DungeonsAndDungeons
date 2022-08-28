@@ -44,8 +44,13 @@ func _ready():
 	preparing_Collision()
 	unique_instance_id = Constants.currentInteractive
 	Constants.currentInteractive += 1
-	Constants.interactiveLevelObjects[unique_instance_id] = self
 
+
+
+func sign_up():
+	print("Signing object up with ID "+str(self.unique_instance_id))
+	Constants.interactiveLevelObjects[unique_instance_id] = self
+	
 
 #this should be extracted into another prefab
 func preparing_Collision():
@@ -57,7 +62,6 @@ func preparing_Collision():
 func activate():
 	if contained_level_object.has_method("activate"):
 		contained_level_object.activate()
-	list_connections()
 	activationSignal.emit(true)
 
 

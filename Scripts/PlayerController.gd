@@ -31,7 +31,8 @@ func _physics_process(delta: float) -> void:
 		_velocity.x = move_direction.x * speed
 		_velocity.z = move_direction.z * speed
 	
-	_velocity.y -= gravity * delta
+	if not is_on_floor():
+		_velocity.y -= gravity * delta
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
 	
 	var is_jumping := false
