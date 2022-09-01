@@ -17,6 +17,9 @@ res://Scripts/MainMenu.gd
 res://Scripts/MovingPlattform.gd
 res://Scripts/PlayerController.gd
 res://Scripts/Rotation.gd
+res://Scripts/Spawner.gd
+res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn
+res://Resources/LevelObjectData/BlogSpawner.tres
 res://Scenes/Main.tscn
 res://Scenes/menu.tscn
 res://Scenes/edit.tscn
@@ -24,7 +27,7 @@ res://Prefabs/Models/valley.tscn
 res://Prefabs/Builder.tscn
 res://Prefabs/LevelObjects/Entities/Player.tscn
 res://Prefabs/Level.tscn
-res://Scenes/level_objects.tscn
+res://Prefabs/LevelObjects/LevelObjectList.tscn
 res://Prefabs/grid.tscn
 res://Prefabs/LevelObjects/Goal.tscn
 res://Prefabs/LevelObjects/Interactive/Lever.tscn
@@ -33,3 +36,4 @@ res://Prefabs/LevelObjects/Interactive/Gate.tscn
 res://Prefabs/BuilderHUD.tscn
 res://Prefabs/Chunk.tscn
 res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn
+res://Scenes/level_objects.tscn

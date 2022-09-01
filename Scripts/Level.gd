@@ -190,7 +190,7 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 		chunk.add_child(new_level_object)
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
-		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/"+levelObjectData.name).duplicate()
+		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
 		if(unique_instance_id != null):
 			new_level_object.unique_instance_id = unique_instance_id

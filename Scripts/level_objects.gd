@@ -5,6 +5,7 @@ extends Node3D
 # var a = 2
 # var b = "text"
 
+@onready var LevelObjectList = $LevelObjectList
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +15,7 @@ func _ready():
 	var meshlibrary = MeshLibrary.new()
 	var unique_id = 0
 	var meshlibrary_id = 0
-	for levelobject in get_children():
+	for levelobject in LevelObjectList.get_children():
 		var is_tiled = false
 		var name = str(levelobject.name)
 		if "Tiled" in name:

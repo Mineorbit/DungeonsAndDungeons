@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://ccf0isbs1rdyc"]
+
+[ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
+[ext_resource type="PackedScene" uid="uid://exqb33vyfg5w" path="res://Prefabs/LevelObjects/Goal.tscn" id="2_6tpvq"]
+[ext_resource type="PackedScene" uid="uid://b7k2iytluwed5" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
+[ext_resource type="Material" uid="uid://c7yejiw7fpevg" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
+[ext_resource type="PackedScene" uid="uid://bq2yphhd7sr5n" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
+[ext_resource type="PackedScene" uid="uid://sv0orhygctyj" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
+
+[sub_resource type="BoxMesh" id="1"]
+material = ExtResource("1_gj2pu")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8l3b"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
+material = ExtResource("3_mypbp")
+
+[node name="LevelObjectList" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
+
+[node name="TiledFloor" type="Node3D" parent="."]
+
+[node name="FloorBase" type="MeshInstance3D" parent="TiledFloor"]
+mesh = SubResource("1")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape" type="StaticBody3D" parent="TiledFloor/FloorBase"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledFloor/FloorBase/CollisionShape"]
+shape = SubResource("ConcavePolygonShape3D_s8l3b")
+
+[node name="Goal" parent="." instance=ExtResource("2_6tpvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="TiledStone" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="StoneBase" type="MeshInstance3D" parent="TiledStone"]
+mesh = SubResource("BoxMesh_wv3na")
+skeleton = NodePath("../../TiledFloor")
+
+[node name="CollisionShape" type="StaticBody3D" parent="TiledStone/StoneBase"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledStone/StoneBase/CollisionShape"]
+shape = SubResource("ConcavePolygonShape3D_s8l3b")
+
+[node name="Lever" parent="." instance=ExtResource("3_kq8kr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="MovingPlattform" parent="." instance=ExtResource("4_8hky4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Gate" parent="." instance=ExtResource("5_hgr8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="BlogSpawner" parent="." instance=ExtResource("7_v0a86")]
