@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c63th4dh7e1we"]
+
+[ext_resource type="PackedScene" uid="uid://dlo2jiixb0w4h" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.blend" id="1_ysng1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
+
+[node name="Blog" type="CharacterBody3D"]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xuwxo")
+
+[node name="Blog" parent="." instance=ExtResource("1_ysng1")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="NavigationAgent3d" type="NavigationAgent3D" parent="."]
