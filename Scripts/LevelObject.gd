@@ -24,6 +24,11 @@ func reset():
 	if contained_level_object.has_method("reset"):
 		contained_level_object.reset()
 
+func start():
+	if contained_level_object.has_method("start"):
+		contained_level_object.start()
+	
+
 func on_mode_change():
 	#print("Mode changed to "+str(Constants.currentMode))
 	if Constants.currentMode == 1:

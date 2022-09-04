@@ -1,5 +1,5 @@
 extends LevelObject
-
+class_name InteractiveLevelObject
 
 # Declare member variables here. Examples:
 # var a = 2

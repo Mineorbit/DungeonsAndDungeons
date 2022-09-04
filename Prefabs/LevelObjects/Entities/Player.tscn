@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bfu66iq0knixq"]
 
+[ext_resource type="Script" path="res://Player.gd" id="1_50d3o"]
 [ext_resource type="Script" path="res://Scripts/CameraController.gd" id="2"]
-[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="3"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -13,7 +13,7 @@ radius = 0.25
 height = 0.75
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("3")
+script = ExtResource("1_50d3o")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

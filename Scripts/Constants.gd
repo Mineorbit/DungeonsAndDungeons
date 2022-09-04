@@ -7,6 +7,8 @@ extends Node
 
 var currentMode = 0
 
+var currentLevel
+
 var currentInteractive = 0
 
 var LevelObjectData = {}

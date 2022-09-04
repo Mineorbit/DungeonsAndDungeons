@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Entity
 
 var speed := 5
 var turnAngle := 0.2
@@ -17,16 +17,12 @@ var _character: Node3D
 
 func _ready():
 	_velocity = Vector3.ZERO
-	_spring_arm= $SpringArm
-	_camera_anchor = $CameraAnchor
-	_character = $PlayerModel
 	
+
+var should_jump = false
 
 func _physics_process(delta: float) -> void:
 	var move_direction := Vector3.ZERO
-	move_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	move_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
-	move_direction = move_direction.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
 	if not stunned:
 		_velocity.x = move_direction.x * speed
 		_velocity.z = move_direction.z * speed
@@ -37,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	
 	var is_jumping := false
 	if not stunned:
-		is_jumping = is_on_floor() and Input.is_action_just_pressed("jump")
+		is_jumping = is_on_floor() and should_jump
 	if is_jumping:
 		_velocity.y = jump_strength
 		_snap_vector = Vector3.ZERO
@@ -84,4 +80,3 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("test_kickback"):
 		kickback(Vector3.UP+Vector3.BACK)
 		#kickback(Vector3.UP)
-	_spring_arm.transform.origin = transform.origin + Vector3.UP*0.75

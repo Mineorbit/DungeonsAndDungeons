@@ -9,9 +9,12 @@ var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
 var gridMap
+var entities
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	gridMap = $grid
+	entities = $Entities
+	Constants.currentLevel = self
+	gridMap = $Grid
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	interactiveLevelObjectPrefab = load("res://Prefabs/InteractiveLevelObject.tscn")
@@ -25,6 +28,7 @@ func setup_new():
 
 
 func reset():
+	clear_entities()
 	for chunk in chunks.values():
 		for levelobject in chunk.get_children():
 			levelobject.reset()
@@ -37,8 +41,13 @@ func reset():
 func start():
 	print("===Starting Level===")
 	reset()
-	for object in get_interactive_objects():
-		object.attachSignals()
+	
+	for chunk in chunks.values():
+		print("Chunk "+str(chunk))
+		for object in chunk.get_children():
+			if object.has_method("attachSignals"):
+				object.attachSignals()
+			object.start()
 
 func get_interactive_objects():
 	return Constants.interactiveLevelObjects.values()
@@ -66,11 +75,14 @@ func save():
 		chunk_file.close()
 
 
-
+func clear_entities():
+	for object in entities.get_children():
+		object.queue_free()
 
 
 
 func clear():
+	clear_entities()
 	gridMap.clear()
 	for chunk in chunks.keys():
 		for child in chunks[chunk].get_children():

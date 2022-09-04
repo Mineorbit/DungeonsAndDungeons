@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c63th4dh7e1we"]
+[gd_scene load_steps=4 format=3 uid="uid://d0fu6iv1is7gl"]
 
-[ext_resource type="PackedScene" uid="uid://bqqu6cr0xpwxh" path="res://Assets/Models/LevelObjects/Entities/Blog/BlogModel.tscn" id="1_a42eg"]
+[ext_resource type="PackedScene" uid="uid://b4stbslbc6plr" path="res://Assets/Models/LevelObjects/Entities/Blog/BlogModel.tscn" id="1_a42eg"]
+[ext_resource type="Script" path="res://Scripts/Blog.gd" id="1_rre65"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 
 [node name="Blog" type="CharacterBody3D"]
+script = ExtResource("1_rre65")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
@@ -12,3 +14,4 @@ shape = SubResource("SphereShape3D_xuwxo")
 [node name="NavigationAgent3d" type="NavigationAgent3D" parent="."]
 
 [node name="BlogModel" parent="." instance=ExtResource("1_a42eg")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.2, 0)
