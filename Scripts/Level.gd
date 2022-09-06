@@ -12,7 +12,6 @@ var gridMap
 var entities
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	entities = $Entities
 	Constants.currentLevel = self
 	gridMap = $Grid
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
@@ -46,7 +45,7 @@ func start():
 	Constants.buffer()
 	Constants.buffer()
 	
-	bake_navigation_mesh(true)
+	bake_navigation_mesh(false)
 	
 	for chunk in chunks.values():
 		for object in chunk.get_children():
@@ -83,7 +82,7 @@ func save():
 
 func clear_entities():
 	print("Clearing Entities")
-	for object in entities.get_children():
+	for object in Constants.currentEntities.get_children():
 		print("Removing "+str(object))
 		object.queue_free()
 

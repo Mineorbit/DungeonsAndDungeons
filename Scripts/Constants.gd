@@ -9,6 +9,8 @@ var currentMode = 0
 
 var currentLevel
 
+var currentEntities
+
 var currentInteractive = 0
 
 var players = []
@@ -25,7 +27,8 @@ signal game_won
 var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	currentEntities = load("res://Prefabs/Entities.tscn").instantiate()
+	add_child(currentEntities)
 
 
 func buffer():
