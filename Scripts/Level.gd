@@ -45,7 +45,7 @@ func start():
 	Constants.buffer()
 	Constants.buffer()
 	
-	bake_navigation_mesh(false)
+	bake_navigation_mesh(true)
 	
 	for chunk in chunks.values():
 		for object in chunk.get_children():
