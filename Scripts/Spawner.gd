@@ -8,7 +8,7 @@ var currentSpawned
 func _ready():
 	print("Starting Spawner")
 	prefab = load("res://Prefabs/LevelObjects/Entities/"+spawnedEntity+".tscn")
-	#spawnEntity()
+	spawnEntity()
 	
 func start():
 	spawnEntity()
