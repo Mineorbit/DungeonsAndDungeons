@@ -13,12 +13,26 @@ func _ready():
 func start():
 	spawnEntity()
 
-func spawnEntity():
-	print("Spawning Entity")
-	currentSpawned = prefab.instantiate()
-	Constants.currentEntities.add_child(currentSpawned)
+func reset():
+	if currentSpawned != null:
+		set_spawn_pos()
+	else:
+		spawnEntity()
+
+func set_spawn_pos():
 	currentSpawned.global_transform.origin = self.global_transform.origin + Vector3.UP
 
+func spawnEntity():
+	print("Spawning Entity at "+str(self.global_transform.origin))
+	if currentSpawned != null:
+		currentSpawned.remove()
+	currentSpawned = prefab.instantiate()
+	Constants.currentEntities.add_child(currentSpawned)
+	set_spawn_pos()
+	currentSpawned.on_entity_remove.connect(clear_after_remove)
+
+func clear_after_remove():
+	currentSpawned = null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

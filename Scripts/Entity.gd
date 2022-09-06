@@ -15,9 +15,26 @@ var _spring_arm: SpringArm3D
 var _camera_anchor: Node3D
 var _character: Node3D
 
+var started = false
+signal on_entity_remove
+
 func _ready():
 	_velocity = Vector3.ZERO
 	
+func start():
+	started = true
+	
+func reset():
+	started = false
+
+
+
+
+func remove():
+	print("Removing Entity "+str(self))
+	on_entity_remove.emit()
+	queue_free()
+
 
 var should_jump = false
 
@@ -81,3 +98,4 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("test_kickback"):
 		kickback(Vector3.UP+Vector3.BACK)
 		#kickback(Vector3.UP)
+

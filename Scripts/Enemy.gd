@@ -7,7 +7,7 @@ class_name Enemy
 
 
 func _physics_process(delta):
-	if not is_inside_tree():
+	if not started:
 		return
 	super._physics_process(delta)
 	if len(Constants.players) > 0 and Constants.players[0] != null:

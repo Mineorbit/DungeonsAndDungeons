@@ -9,7 +9,6 @@ var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
 var gridMap
-var entities
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Constants.currentLevel = self
@@ -36,6 +35,19 @@ func reset():
 				levelobject.clearSignals()
 			if levelobject.has_method("deactivate"):
 				levelobject.deactivate()
+				
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	
+	for entity in Constants.currentEntities.get_children():
+		if entity.has_method("reset"):
+			entity.reset()
+		
 
 #this is a start routine for a level
 func start():
@@ -45,7 +57,8 @@ func start():
 	Constants.buffer()
 	Constants.buffer()
 	
-	bake_navigation_mesh(true)
+	
+	bake_navigation_mesh(false)
 	
 	for chunk in chunks.values():
 		for object in chunk.get_children():
@@ -53,6 +66,10 @@ func start():
 				object.attachSignals()
 			if object.has_method("start"):
 				object.start()
+				
+	for entity in Constants.currentEntities.get_children():
+		if entity.has_method("start"):
+			entity.start()
 
 func get_interactive_objects():
 	return Constants.interactiveLevelObjects.values()
@@ -82,9 +99,9 @@ func save():
 
 func clear_entities():
 	print("Clearing Entities")
-	for object in Constants.currentEntities.get_children():
-		print("Removing "+str(object))
-		object.queue_free()
+	for entity in Constants.currentEntities.get_children():
+		print("Removing "+str(entity))
+		entity.remove()
 
 
 
