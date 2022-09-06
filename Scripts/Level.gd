@@ -1,4 +1,4 @@
-extends Node3D
+extends NavigationRegion3D
 
 
 # Declare member variables here. Examples:
@@ -31,7 +31,8 @@ func reset():
 	clear_entities()
 	for chunk in chunks.values():
 		for levelobject in chunk.get_children():
-			levelobject.reset()
+			if levelobject.has_method("reset"):
+				levelobject.reset()
 			if levelobject.has_method("clearSignals"):
 				levelobject.clearSignals()
 			if levelobject.has_method("deactivate"):
@@ -41,13 +42,18 @@ func reset():
 func start():
 	print("===Starting Level===")
 	reset()
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	
+	bake_navigation_mesh(true)
 	
 	for chunk in chunks.values():
-		print("Chunk "+str(chunk))
 		for object in chunk.get_children():
 			if object.has_method("attachSignals"):
 				object.attachSignals()
-			object.start()
+			if object.has_method("start"):
+				object.start()
 
 func get_interactive_objects():
 	return Constants.interactiveLevelObjects.values()
@@ -76,7 +82,9 @@ func save():
 
 
 func clear_entities():
+	print("Clearing Entities")
 	for object in entities.get_children():
+		print("Removing "+str(object))
 		object.queue_free()
 
 

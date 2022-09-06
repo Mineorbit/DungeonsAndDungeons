@@ -11,6 +11,8 @@ var currentLevel
 
 var currentInteractive = 0
 
+var players = []
+
 var LevelObjectData = {}
 var numberOfPlacedLevelObjects = {}
 
@@ -25,6 +27,11 @@ var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 func _ready():
 	pass # Replace with function body.
 
+
+func buffer():
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 
 signal mode_changed
 func set_mode(new_mode):

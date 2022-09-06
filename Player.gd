@@ -2,6 +2,7 @@ extends Entity
 
 
 func _ready():
+	Constants.players = [self]
 	_velocity = Vector3.ZERO
 	_spring_arm= $SpringArm
 	_camera_anchor = $CameraAnchor

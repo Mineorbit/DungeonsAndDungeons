@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://sv0orhygctyj"]
+[gd_scene load_steps=2 format=3 uid="uid://sv0orhygctyj"]
 
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_jqahe"]
 
-[sub_resource type="TextMesh" id="TextMesh_78hm5"]
-text = "Spawner"
-
 [node name="BlogSpawner" type="Node3D"]
 script = ExtResource("1_jqahe")
-
-[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
-mesh = SubResource("TextMesh_78hm5")

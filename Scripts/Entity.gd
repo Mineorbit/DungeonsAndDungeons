@@ -21,8 +21,9 @@ func _ready():
 
 var should_jump = false
 
+var move_direction := Vector3.ZERO
+
 func _physics_process(delta: float) -> void:
-	var move_direction := Vector3.ZERO
 	if not stunned:
 		_velocity.x = move_direction.x * speed
 		_velocity.z = move_direction.z * speed

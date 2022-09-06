@@ -64,15 +64,11 @@ func enter_test_mode():
 	
 func despawn_players():
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	Constants.buffer()
 	remove_child(player)
 	
 func spawn_players():
 	player.global_transform.origin = Vector3(0.5,5,0.5)
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	Constants.buffer()
 	player._velocity = Vector3.ZERO
 	add_child(player)
