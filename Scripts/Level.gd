@@ -53,12 +53,10 @@ func reset():
 func start():
 	print("===Starting Level===")
 	reset()
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
 	
+	bake_navigation_mesh()
 	
-	bake_navigation_mesh(false)
+	await bake_finished
 	
 	for chunk in chunks.values():
 		for object in chunk.get_children():
@@ -89,7 +87,6 @@ func save():
 	for c in chunks.keys():
 		var chunk = chunks[c]
 		var chunk_file = File.new()
-		#var chunkstring = str(c.x) + "|"+str(c.y)+"|"+str(c.z)
 		chunk_file.open("user://level/"+level_name+"/chunks/"+str(c), File.WRITE)
 		var levelObjects = chunk.get_level_objects()
 		for object in levelObjects:
