@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dano27pbcqgc2"]
+[gd_scene load_steps=2 format=3 uid="uid://dano27pbcqgc2"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="2"]
-
-[sub_resource type="Theme" id="1"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("2")
@@ -13,32 +11,52 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.356574)
 [node name="Camera" type="Camera3D" parent="Spatial"]
 transform = Transform3D(0.995636, 0, -0.0933264, 0, 1, 0, 0.0933264, 0, 0.995636, -0.0892577, -0.408911, 1.23844)
 
-[node name="Start" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Play" type="Button" parent="Start"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 277.0
-offset_top = 295.0
-offset_right = 318.0
-offset_bottom = 326.0
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("1")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/CenterContainer"]
+layout_mode = 2
+offset_left = 534.0
+offset_top = 308.0
+offset_right = 617.0
+offset_bottom = 339.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/CenterContainer/HBoxContainer"]
+layout_mode = 2
+offset_right = 41.0
+offset_bottom = 31.0
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+offset_right = 41.0
+offset_bottom = 31.0
 text = "Play"
 
-[node name="Edit" type="Button" parent="Start"]
-anchors_preset = -1
-anchor_left = 0.899
-anchor_right = 0.899
-offset_left = 669.0
-offset_top = 296.0
-offset_right = 707.0
-offset_bottom = 327.0
-text = "Edit"
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/Control/CenterContainer/HBoxContainer"]
+layout_mode = 2
+offset_left = 45.0
+offset_right = 83.0
+offset_bottom = 31.0
 
-[connection signal="pressed" from="Start/Play" to="." method="open_play_menu"]
-[connection signal="pressed" from="Start/Edit" to="." method="_open_edit_menu"]
+[node name="Button" type="Button" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer2"]
+layout_mode = 2
+offset_right = 38.0
+offset_bottom = 31.0
+text = "Edit"

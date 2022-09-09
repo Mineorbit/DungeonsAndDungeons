@@ -54,7 +54,10 @@ func start():
 	print("===Starting Level===")
 	reset()
 	
+	
 	bake_navigation_mesh()
+	#for chunk in chunks.values():
+	#	chunk.update_navigation()
 	
 	await bake_finished
 	
@@ -210,6 +213,7 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 	var chunk = get_chunk(position)
 	if(chunk == null):
 		chunk = add_chunk(position)
+	chunk.change_in_chunk = true
 	var pos = gridMap.world_to_map(position)
 	if(levelObjectData.tiled):
 		gridMap.set_cell_item(pos,levelObjectData.tileIndex)
@@ -256,6 +260,7 @@ func remove_level_object(object):
 	if object == null:
 		return
 	var chunk = get_chunk(object.global_transform.origin)
+	chunk.change_in_chunk = true
 	chunk.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
 

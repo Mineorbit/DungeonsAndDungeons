@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc20ijd1ox2fn"]
+[gd_scene load_steps=3 format=3 uid="uid://cc20ijd1ox2fn"]
 
 [ext_resource type="Script" path="res://Scenes/Chunk.gd" id="1"]
+[ext_resource type="NavigationMesh" uid="uid://h4yquj243fw7" path="res://Resources/Nav.tres" id="1_mvuxm"]
 
-[node name="Chunk" type="Node3D"]
+[node name="Chunk" type="NavigationRegion3D"]
+navmesh = ExtResource("1_mvuxm")
 script = ExtResource("1")

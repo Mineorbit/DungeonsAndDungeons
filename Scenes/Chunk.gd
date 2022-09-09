@@ -1,5 +1,4 @@
-extends Node3D
-
+extends NavigationRegion3D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -28,6 +27,17 @@ func _ready():
 static func load_chunk():
 	pass
 	
+var change_in_chunk = false
+
+func update_navigation():	
+	if change_in_chunk:
+		bake_navigation_mesh()
+		print("Baking Nav Mesh of "+str(self))
+		await bake_finished
+		print("Finished")
+		change_in_chunk = false
+
+
 func get_level_objects():
 	var levelObjectInstances = []
 	for i in range(8):
