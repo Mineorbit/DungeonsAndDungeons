@@ -21,7 +21,7 @@ func _ready() -> void:
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
 	level = $"../Level"
 	top_level = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 var rot_x = 0

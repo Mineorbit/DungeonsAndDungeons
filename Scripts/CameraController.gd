@@ -5,7 +5,6 @@ var mouse_sensitivity := 0.005
 
 func _ready() -> void:
 	top_level = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 

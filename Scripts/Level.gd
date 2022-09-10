@@ -49,17 +49,18 @@ func reset():
 			entity.reset()
 		
 
+var changes = true
 #this is a start routine for a level
 func start():
 	print("===Starting Level===")
 	reset()
 	
-	
-	bake_navigation_mesh()
+	if changes:
+		changes = false
+		bake_navigation_mesh()
 	#for chunk in chunks.values():
 	#	chunk.update_navigation()
-	
-	await bake_finished
+		await bake_finished
 	
 	for chunk in chunks.values():
 		for object in chunk.get_children():
@@ -214,6 +215,7 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 	if(chunk == null):
 		chunk = add_chunk(position)
 	chunk.change_in_chunk = true
+	changes = true
 	var pos = gridMap.world_to_map(position)
 	if(levelObjectData.tiled):
 		gridMap.set_cell_item(pos,levelObjectData.tileIndex)
@@ -261,6 +263,7 @@ func remove_level_object(object):
 		return
 	var chunk = get_chunk(object.global_transform.origin)
 	chunk.change_in_chunk = true
+	changes = true
 	chunk.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
 

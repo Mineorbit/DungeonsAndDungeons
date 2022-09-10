@@ -6,40 +6,50 @@
 
 [node name="BuilderHUD" type="Node2D"]
 
-[node name="Button" type="Button" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/Control2"]
+offset_right = 68.0
+offset_bottom = 31.0
 text = "TEST (T)"
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 705.0
-offset_bottom = 598.0
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
-offset_left = 3.0
-offset_top = 344.0
-offset_right = 1024.0
-offset_bottom = 600.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Control2"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+grow_horizontal = 2
+grow_vertical = 0
 focus_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Control2/SubViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="Control/SubViewportContainer/SubViewport"]
+[node name="Node3D" type="Node3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport/Node3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(0.18477, 0.403933, 0.229561, -0.253271, 0.294683, -0.314668, -0.389505, 0, 0.313506, 0, 0, -0.892521)
 mesh = SubResource("BoxMesh_1rlto")
 skeleton = NodePath("../../Camera3D")
 script = ExtResource("1_v2hqe")
 
-[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport"]
 projection = 1
 current = true
 size = 5.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/SubViewportContainer/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport"]

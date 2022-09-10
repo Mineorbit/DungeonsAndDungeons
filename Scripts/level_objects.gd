@@ -34,16 +34,18 @@ func _ready():
 		unique_id = unique_id + 1
 		ResourceSaver.save(new_res, path)
 		Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
+		print(levelobject)
 		if is_tiled:
 			for child in levelobject.get_children():
+				print(child)
 				meshlibrary.create_item(meshlibrary_id)
-				meshlibrary.set_item_mesh(meshlibrary_id,child.mesh)
+				meshlibrary.set_item_mesh(meshlibrary_id,child.get_mesh())
 				var new_transform = child.transform
 				new_transform.origin = Vector3.ZERO
 				meshlibrary.set_item_mesh_transform(meshlibrary_id,new_transform)
-			#	meshlibrary.set_item_shapes(meshlibrary_id,[child.get_child(0).shape,child.get_child(0).transform])
+				meshlibrary.set_item_shapes(meshlibrary_id,[child.get_child(0).get_child(0).shape,child.get_child(0).get_child(0).transform])
 				meshlibrary_id = meshlibrary_id + 1
 	
-	#ResourceSaver.save("res://Resources/grid.tres",meshlibrary)
+	ResourceSaver.save(meshlibrary,"res://Resources/grid.tres")
 	get_parent().remove_child(self)
 	hide()
