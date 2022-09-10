@@ -205,6 +205,7 @@ func add_chunk(position):
 	
 
 func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, connectedObjects = []):
+	print("Adding LevelObject at "+str(position))
 	if gridMap == null:
 		gridMap = $grid
 	if(levelObjectData.maximumNumber != -1):
@@ -227,10 +228,12 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 			new_level_object = levelObjectPrefab.instantiate()
 		
 		chunk.add_child(new_level_object)
+		print(pos)
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
+		level_object_dupe.transform.origin = Vector3.ZERO
 		if(unique_instance_id != null):
 			new_level_object.unique_instance_id = unique_instance_id
 			new_level_object.connectedObjects = connectedObjects
@@ -238,7 +241,9 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 			new_level_object.sign_up()
 		new_level_object.contained_level_object = level_object_dupe
 		new_level_object.levelObjectData = levelObjectData
-		level_object_dupe.transform.origin = Vector3.ZERO
+		print("OLLA: "+str(level_object_dupe.global_transform.origin))
+		if level_object_dupe.has_method("setup"):
+			level_object_dupe.setup()
 
 
 func remove_by_object(objectToRemove):
@@ -264,6 +269,8 @@ func remove_level_object(object):
 	var chunk = get_chunk(object.global_transform.origin)
 	chunk.change_in_chunk = true
 	changes = true
+	if object.has_method("on_remove"):
+		object.on_remove()
 	chunk.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
 
