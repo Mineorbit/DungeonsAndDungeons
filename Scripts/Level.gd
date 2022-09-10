@@ -8,11 +8,9 @@ extends NavigationRegion3D
 var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
-var gridMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Constants.currentLevel = self
-	gridMap = $Grid
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	interactiveLevelObjectPrefab = load("res://Prefabs/InteractiveLevelObject.tscn")
@@ -40,10 +38,6 @@ func reset():
 	Constants.buffer()
 	Constants.buffer()
 	
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
-	
 	for entity in Constants.currentEntities.get_children():
 		if entity.has_method("reset"):
 			entity.reset()
@@ -57,10 +51,10 @@ func start():
 	
 	if changes:
 		changes = false
-		bake_navigation_mesh()
-	#for chunk in chunks.values():
-	#	chunk.update_navigation()
-		await bake_finished
+		#bake_navigation_mesh()
+		#await bake_finished
+		for chunk in chunks.values():
+			await chunk.update_navigation()
 	
 	for chunk in chunks.values():
 		for object in chunk.get_children():
@@ -108,7 +102,6 @@ func clear_entities():
 
 func clear():
 	clear_entities()
-	gridMap.clear()
 	for chunk in chunks.keys():
 		for child in chunks[chunk].get_children():
 			child.queue_free()
@@ -137,6 +130,7 @@ func load(level_name):
 				var y = coords[1].to_int()*8
 				var z = coords[2].to_int()*8
 				var base_position = Vector3(x,y,z)
+				print("Loading Chunk at Position "+str(base_position))
 				var file = File.new()
 				file.open(path+"/chunks/"+file_name, File.READ)
 				var line = file.get_line()
@@ -189,12 +183,11 @@ func get_chunk(position):
 	if chunks.has(chunkPosition):
 		return chunks[chunkPosition]
 
-func get_chunk_position(position):
-	return Vector3(int(floor(position.x/8)),int(floor(position.y/8)),int(floor(position.z/8)))
-	
 
 func add_chunk(position):
+	print("Adding chunk at "+str(position))
 	var chunkPosition = get_chunk_position(position)
+	print("Got "+str(chunkPosition))
 	var chunk = chunkPrefab.instantiate()
 	chunk.level = self
 	chunk.global_transform.origin = 8*chunkPosition
@@ -204,10 +197,7 @@ func add_chunk(position):
 
 	
 
-func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, connectedObjects = []):
-	print("Adding LevelObject at "+str(position))
-	if gridMap == null:
-		gridMap = $grid
+func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, connectedObjects = []):
 	if(levelObjectData.maximumNumber != -1):
 		if(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
 			return
@@ -217,9 +207,10 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 		chunk = add_chunk(position)
 	chunk.change_in_chunk = true
 	changes = true
-	var pos = gridMap.world_to_map(position)
+	
+	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
-		gridMap.set_cell_item(pos,levelObjectData.tileIndex)
+		chunk.set_tile_level_object(pos,levelObjectData.tileIndex)
 	else:
 		var new_level_object
 		if levelObjectData.interactive:
@@ -228,7 +219,6 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 			new_level_object = levelObjectPrefab.instantiate()
 		
 		chunk.add_child(new_level_object)
-		print(pos)
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
@@ -241,19 +231,26 @@ func add(levelObjectData: LevelObjectData,position, unique_instance_id = null, c
 			new_level_object.sign_up()
 		new_level_object.contained_level_object = level_object_dupe
 		new_level_object.levelObjectData = levelObjectData
-		print("OLLA: "+str(level_object_dupe.global_transform.origin))
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
 
+
+func get_chunk_position(startpos):
+	var gridposition = get_grid_position(startpos)
+	var chunkposition = Vector3(int(floor(float(gridposition.x)/8)),int(floor(float(gridposition.y)/8)),int(floor(float(gridposition.z)/8)))
+	return chunkposition
+
+
+func get_grid_position(pos):
+	return Vector3(round(pos.x),round(pos.y),round(pos.z))
 
 func remove_by_object(objectToRemove):
 	remove_level_object(objectToRemove)
 
 func remove_by_position(pos: Vector3):
 	var isRemoved = false
-	var position = gridMap.world_to_map(pos)
+	var position = get_grid_position(pos)
 	var floatPosition = Vector3(position.x,position.y,position.z)
-	gridMap.set_cell_item(position,-1)
 	var chunk = get_chunk(position)
 	if chunk != null:
 		for levelObject in chunk.get_children():

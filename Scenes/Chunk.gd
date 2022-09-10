@@ -20,6 +20,8 @@ class LevelObjectInstance:
 
 
 var level
+@onready var gridMap = $GridMap
+@onready var levelObjects = $LevelObjects
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -28,6 +30,27 @@ static func load_chunk():
 	pass
 	
 var change_in_chunk = false
+
+func set_tile_level_object(pos,index):
+	var x = floor(pos.x - global_transform.origin.x)
+	var y = floor(pos.y - global_transform.origin.y)
+	var z = floor(pos.z - global_transform.origin.z)
+	var localPos = Vector3(x,y,z)
+	gridMap.set_cell_item(localPos,index)
+
+func get_tile_level_object(pos):
+	var x = floor(pos.x - global_transform.origin.x)
+	var y = floor(pos.y - global_transform.origin.y)
+	var z = floor(pos.z - global_transform.origin.z)
+	var localPos = Vector3(x,y,z)
+	return gridMap.get_cell_item(localPos)
+
+func get_tile_level_object_orient(pos):
+	var x = floor(pos.x - global_transform.origin.x)
+	var y = floor(pos.y - global_transform.origin.y)
+	var z = floor(pos.z - global_transform.origin.z)
+	var localPos = Vector3(x,y,z)
+	return gridMap.get_cell_item_orientation(localPos)
 
 func update_navigation():	
 	if change_in_chunk:
@@ -45,15 +68,15 @@ func get_level_objects():
 			for k in range(8):
 				var instance = LevelObjectInstance.new()
 				var offset = Vector3(i,j,k)
-				var grid_position = level.gridMap.world_to_map(global_transform.origin+offset)
-				if not level.gridMap.get_cell_item(grid_position) == -1:
-					var levelObjectData = LevelObjectData.from_cell(level.gridMap.get_cell_item(grid_position),level.gridMap.get_cell_item_orientation(grid_position))
+				var grid_position = level.get_grid_position(global_transform.origin+offset)
+				if not get_tile_level_object(grid_position) == -1:
+					var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position),get_tile_level_object_orient(grid_position))
 					instance.x = floor(grid_position.x - global_transform.origin.x)
 					instance.y = floor(grid_position.y - global_transform.origin.y)
 					instance.z = floor(grid_position.z - global_transform.origin.z)
 					instance.levelObjectData = levelObjectData
 					levelObjectInstances.append(instance)
-	for n in get_children():
+	for n in levelObjects.get_children():
 		var instance = LevelObjectInstance.new()
 		levelObjectInstances.append(n.to_instance(instance))
 	return levelObjectInstances
