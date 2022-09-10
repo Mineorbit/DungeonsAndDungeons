@@ -9,13 +9,22 @@ var builder = $Builder
 var level
 var playerpref
 var builderpref
+var playerhudpref
+var builderhudpref
+
+var builderhud
+var playerhud
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 	builderpref = load("res://Prefabs/Builder.tscn")
-
+	playerhudpref = load("res://Prefabs/PlayerHUD.tscn")
+	builderhudpref = load("res://Prefabs/BuilderHUD.tscn")
 	player = playerpref.instantiate()
 	builder = builderpref.instantiate()
+	playerhud = playerhudpref.instantiate()
+	builderhud = builderhudpref.instantiate()
 	builder.global_transform.origin = Vector3(0,5,0)
 	create_new_level()
 	enter_edit_mode()
@@ -52,6 +61,9 @@ func enter_edit_mode():
 		despawn_players()
 	level.reset()
 	add_child(builder)
+	if playerhud in get_children():
+		remove_child(playerhud)
+	add_child(builderhud)
 	
 
 func enter_test_mode():
@@ -62,6 +74,9 @@ func enter_test_mode():
 	remove_child(builder)
 	await level.start()
 	spawn_players()
+	if builderhud in get_children():
+		remove_child(builderhud)
+	add_child(playerhud)
 	
 func despawn_players():
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
