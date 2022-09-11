@@ -51,8 +51,6 @@ func start():
 	
 	if changes:
 		changes = false
-		#bake_navigation_mesh()
-		#await bake_finished
 		for chunk in chunks.values():
 			await chunk.update_navigation()
 	
@@ -242,7 +240,7 @@ func get_chunk_position(startpos):
 
 
 func get_grid_position(pos):
-	return Vector3(round(pos.x),round(pos.y),round(pos.z))
+	return Vector3(floor(pos.x),floor(pos.y),floor(pos.z))
 
 func remove_by_object(objectToRemove):
 	remove_level_object(objectToRemove)
