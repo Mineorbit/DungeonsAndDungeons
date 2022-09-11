@@ -57,7 +57,7 @@ func start():
 			await chunk.update_navigation()
 	
 	for chunk in chunks.values():
-		for object in chunk.get_children():
+		for object in chunk.levelObjects.get_children():
 			if object.has_method("attachSignals"):
 				object.attachSignals()
 			if object.has_method("start"):
