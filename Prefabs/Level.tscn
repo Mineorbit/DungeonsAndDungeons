@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://beigyoki0nkcc"]
+[gd_scene load_steps=2 format=3 uid="uid://beigyoki0nkcc"]
 
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1"]
-[ext_resource type="NavigationMesh" uid="uid://h4yquj243fw7" path="res://Resources/Nav.tres" id="1_uyk0b"]
 
-[node name="Level" type="NavigationRegion3D"]
-navmesh = ExtResource("1_uyk0b")
+[node name="Level" type="Node3D"]
 script = ExtResource("1")

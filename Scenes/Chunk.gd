@@ -38,6 +38,12 @@ func set_tile_level_object(pos,index):
 	var localPos = Vector3(x,y,z)
 	gridMap.set_cell_item(localPos,index)
 
+func remove_tile_level_object(pos):
+	if get_tile_level_object(pos) != -1:
+		set_tile_level_object(pos,-1)
+		return true
+	return false
+
 func get_tile_level_object(pos):
 	var x = floor(pos.x - global_transform.origin.x)
 	var y = floor(pos.y - global_transform.origin.y)
@@ -52,7 +58,11 @@ func get_tile_level_object_orient(pos):
 	var localPos = Vector3(x,y,z)
 	return gridMap.get_cell_item_orientation(localPos)
 
-func update_navigation():	
+func update_navigation():
+	navmesh = NavigationMesh.new()
+	navmesh.agent_radius = 0
+	navmesh.agent_height = 1
+	navmesh.agent_max_climb = 0
 	if change_in_chunk:
 		bake_navigation_mesh()
 		print("Baking Nav Mesh of "+str(self))
@@ -60,8 +70,10 @@ func update_navigation():
 		print("Finished")
 		change_in_chunk = false
 
-
 func get_level_objects():
+	return levelObjects.get_children()
+
+func get_level_object_instances():
 	var levelObjectInstances = []
 	for i in range(8):
 		for j in range(8):
@@ -76,7 +88,8 @@ func get_level_objects():
 					instance.z = floor(grid_position.z - global_transform.origin.z)
 					instance.levelObjectData = levelObjectData
 					levelObjectInstances.append(instance)
-	for n in levelObjects.get_children():
+	for n in get_level_objects():
+		print("TEST: "+str(n))
 		var instance = LevelObjectInstance.new()
 		levelObjectInstances.append(n.to_instance(instance))
 	return levelObjectInstances

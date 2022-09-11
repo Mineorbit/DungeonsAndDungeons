@@ -15,6 +15,9 @@ script = ExtResource("1_rre65")
 shape = SubResource("SphereShape3D_xuwxo")
 
 [node name="Navigation" type="NavigationAgent3D" parent="."]
+path_desired_distance = 2.5
+path_max_distance = 12.9
+avoidance_enabled = true
 max_speed = 5.0
 
 [node name="BlogModel" parent="." instance=ExtResource("1_a42eg")]

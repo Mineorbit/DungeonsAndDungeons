@@ -1,4 +1,4 @@
-extends NavigationRegion3D
+extends Node3D
 
 
 # Declare member variables here. Examples:
@@ -86,7 +86,7 @@ func save():
 		var chunk = chunks[c]
 		var chunk_file = File.new()
 		chunk_file.open("user://level/"+level_name+"/chunks/"+str(c), File.WRITE)
-		var levelObjects = chunk.get_level_objects()
+		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
 			chunk_file.store_line(object.serialize())
 		chunk_file.close()
@@ -218,7 +218,7 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 		else:
 			new_level_object = levelObjectPrefab.instantiate()
 		
-		chunk.add_child(new_level_object)
+		chunk.levelObjects.add_child(new_level_object)
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
@@ -249,26 +249,28 @@ func remove_by_object(objectToRemove):
 
 func remove_by_position(pos: Vector3):
 	var isRemoved = false
-	var position = get_grid_position(pos)
-	var floatPosition = Vector3(position.x,position.y,position.z)
-	var chunk = get_chunk(position)
+	var gridposition = get_grid_position(pos)
+	var floatPosition = Vector3(gridposition.x,gridposition.y,gridposition.z)
+	var chunk = get_chunk(gridposition)
 	if chunk != null:
-		for levelObject in chunk.get_children():
+		for levelObject in chunk.get_level_objects():
 			if (floatPosition - levelObject.global_transform.origin).length() < 0.5:
 				remove_level_object(levelObject)
 				isRemoved = true
 				return isRemoved
+		isRemoved = chunk.remove_tile_level_object(gridposition)
 	return isRemoved
 
 func remove_level_object(object):
 	if object == null:
 		return
+	print(object)
 	var chunk = get_chunk(object.global_transform.origin)
 	chunk.change_in_chunk = true
 	changes = true
 	if object.has_method("on_remove"):
 		object.on_remove()
-	chunk.remove_child(object)
+	chunk.levelObjects.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
