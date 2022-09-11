@@ -24,7 +24,6 @@ func setup_new():
 
 
 func reset():
-	clear_entities()
 	for chunk in chunks.values():
 		for levelobject in chunk.get_children():
 			if levelobject.has_method("reset"):
@@ -34,6 +33,7 @@ func reset():
 			if levelobject.has_method("deactivate"):
 				levelobject.deactivate()
 				
+	clear_entities()
 	Constants.buffer()
 	Constants.buffer()
 	Constants.buffer()
@@ -94,7 +94,8 @@ func clear_entities():
 	print("Clearing Entities")
 	for entity in Constants.currentEntities.get_children():
 		print("Removing "+str(entity))
-		entity.remove()
+		if entity.has_method("remove"):
+			entity.remove()
 
 
 

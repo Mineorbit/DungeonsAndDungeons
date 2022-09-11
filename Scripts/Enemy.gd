@@ -6,7 +6,10 @@ class_name Enemy
 @onready var navAgent = $Navigation
 @onready var target = $Target
 
-
+func _ready():
+	super._ready()
+	remove_child(target)
+	get_parent().add_child(target)
 
 func _physics_process(delta):
 	super._physics_process(delta)
@@ -22,3 +25,8 @@ func _physics_process(delta):
 	if navAgent.is_target_reachable() and not navAgent.is_target_reached():
 		move_direction = ( navAgent.get_next_location() - global_transform.origin).normalized() *0.5
 		print(move_direction)
+
+
+func remove():
+	target.queue_free()
+	super.remove()

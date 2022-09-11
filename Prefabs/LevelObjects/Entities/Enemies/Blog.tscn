@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0fu6iv1is7gl"]
+[gd_scene load_steps=6 format=3 uid="uid://d0fu6iv1is7gl"]
 
 [ext_resource type="PackedScene" uid="uid://b4stbslbc6plr" path="res://Assets/Models/LevelObjects/Entities/Blog/BlogModel.tscn" id="1_a42eg"]
 [ext_resource type="Script" path="res://Scripts/Blog.gd" id="1_rre65"]
@@ -9,6 +9,8 @@ radius = 0.4
 [sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
 size = Vector3(2, 1, 4)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_q63ex"]
+
 [node name="Blog" type="CharacterBody3D"]
 script = ExtResource("1_rre65")
 
@@ -16,7 +18,7 @@ script = ExtResource("1_rre65")
 shape = SubResource("SphereShape3D_xuwxo")
 
 [node name="Navigation" type="NavigationAgent3D" parent="."]
-path_desired_distance = 2.5
+path_desired_distance = 0.84
 path_max_distance = 12.9
 avoidance_enabled = true
 max_speed = 5.0
@@ -30,3 +32,6 @@ shape = SubResource("BoxShape3D_do8j2")
 target_position = Vector3(0, 0, 2)
 
 [node name="Target" type="Node3D" parent="."]
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="Target"]
+mesh = SubResource("CylinderMesh_q63ex")

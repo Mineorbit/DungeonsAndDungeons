@@ -28,8 +28,6 @@ func reset():
 	started = false
 
 
-
-
 func remove():
 	print("Removing Entity "+str(self))
 	on_entity_remove.emit()
