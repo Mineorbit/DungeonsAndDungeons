@@ -30,7 +30,8 @@ func _ready():
 	enter_edit_mode()
 	Constants.game_won.connect(despawn_players)
 	Constants.game_won.connect(enter_edit_mode)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func create_new_level():
 	level = load("res://Prefabs/Level.tscn").instantiate()
