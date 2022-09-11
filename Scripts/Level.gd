@@ -60,11 +60,9 @@ func start():
 	
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
-	
-	if changes:
-		changes = false
-		for chunk in chunks.values():
-			await chunk.update_navigation()
+
+	for chunk in chunks.values():
+		await chunk.update_navigation()
 	
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
