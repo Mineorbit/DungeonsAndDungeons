@@ -34,4 +34,5 @@ target_position = Vector3(0, 0, 2)
 [node name="Target" type="Node3D" parent="."]
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="Target"]
+visible = false
 mesh = SubResource("CylinderMesh_q63ex")

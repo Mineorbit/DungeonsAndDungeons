@@ -22,6 +22,7 @@ class LevelObjectInstance:
 var level
 @onready var gridMap = $GridMap
 @onready var levelObjects = $LevelObjects
+@onready var mesh: MeshInstance3D = $mesh
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -59,16 +60,18 @@ func get_tile_level_object_orient(pos):
 	return gridMap.get_cell_item_orientation(localPos)
 
 func update_navigation():
-	navmesh = NavigationMesh.new()
-	navmesh.agent_radius = 0
-	navmesh.agent_height = 1
-	navmesh.agent_max_climb = 0
-	if change_in_chunk:
+	#mesh.mesh = navmesh
+	if true:
+		navmesh = NavigationMesh.new()
+		navmesh.agent_radius = 0
+		navmesh.agent_height = 1
+		navmesh.agent_max_climb = 0
 		bake_navigation_mesh()
 		print("Baking Nav Mesh of "+str(self))
 		await bake_finished
 		print("Finished")
 		change_in_chunk = false
+		
 
 func get_level_objects():
 	return levelObjects.get_children()
