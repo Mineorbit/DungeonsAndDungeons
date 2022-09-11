@@ -49,6 +49,15 @@ func start():
 	print("===Starting Level===")
 	reset()
 	
+	
+	# This is to prevent instant level restart in edit mode, because player position does not get updated correctly
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	Constants.buffer()
+	
 	if changes:
 		changes = false
 		for chunk in chunks.values():
@@ -189,10 +198,13 @@ func add_chunk(position):
 	var chunkPosition = get_chunk_position(position)
 	print("Got "+str(chunkPosition))
 	var chunk = chunkPrefab.instantiate()
+	
+	print(chunk.global_transform.origin)
 	chunk.level = self
-	chunk.global_transform.origin = 8*chunkPosition
 	chunks[chunkPosition] = chunk
 	add_child(chunk)
+	chunk.global_transform.origin = 8*chunkPosition
+	print(chunk.global_transform.origin)
 	return chunk
 
 	
@@ -207,7 +219,6 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 		chunk = add_chunk(position)
 	chunk.change_in_chunk = true
 	changes = true
-	
 	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
 		chunk.set_tile_level_object(pos,levelObjectData.tileIndex)
@@ -222,8 +233,9 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
+		print(new_level_object.global_transform.origin)
 		new_level_object.add_child(level_object_dupe)
-		level_object_dupe.transform.origin = Vector3.ZERO
+		level_object_dupe.transform.origin = levelObjectData.offset
 		if(unique_instance_id != null):
 			new_level_object.unique_instance_id = unique_instance_id
 			new_level_object.connectedObjects = connectedObjects

@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7q3viqkg616t"]
+[gd_scene load_steps=5 format=3 uid="uid://b7q3viqkg616t"]
 
 [ext_resource type="Script" path="res://Scripts/InteractiveLevelObject.gd" id="1_wpeio"]
+[ext_resource type="Material" uid="uid://5084q5og715l" path="res://Assets/Materials/LevelObjectCollision.tres" id="2_7igx7"]
 
 [sub_resource type="BoxShape3D" id="1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_niy7r"]
+material = ExtResource("2_7igx7")
 
 [node name="InteractiveLevelObject" type="Node3D"]
 script = ExtResource("1_wpeio")
 
 [node name="ConstructionCollision" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
 
 [node name="Shape" type="CollisionShape3D" parent="ConstructionCollision"]
 shape = SubResource("1")
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="ConstructionCollision"]
+mesh = SubResource("BoxMesh_niy7r")
+skeleton = NodePath("../..")

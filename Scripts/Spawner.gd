@@ -22,7 +22,7 @@ func reset():
 		spawnEntity()
 
 func set_spawn_pos():
-	currentSpawned.global_transform.origin = self.global_transform.origin
+	currentSpawned.global_transform.origin = self.global_transform.origin + Vector3(0,1,0)
 	print("Setting position to "+str(currentSpawned.global_transform.origin))
 
 func spawnEntity():

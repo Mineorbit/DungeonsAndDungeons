@@ -80,11 +80,11 @@ func enter_test_mode():
 	
 func despawn_players():
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
-	Constants.buffer()
+	await Constants.buffer()
 	remove_child(player)
 	
 func spawn_players():
 	player.global_transform.origin = Vector3(0.5,5,0.5)
-	Constants.buffer()
+	await Constants.buffer()
 	player._velocity = Vector3.ZERO
 	add_child(player)

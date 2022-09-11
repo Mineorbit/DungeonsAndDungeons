@@ -34,10 +34,10 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_s8l3b")
 
 [node name="Goal" parent="." instance=ExtResource("2_6tpvq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="TiledStone" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="StoneBase" type="MeshInstance3D" parent="TiledStone"]
 mesh = SubResource("BoxMesh_wv3na")
@@ -52,10 +52,10 @@ shape = SubResource("ConcavePolygonShape3D_s8l3b")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 
 [node name="MovingPlattform" parent="." instance=ExtResource("4_8hky4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
 
 [node name="Gate" parent="." instance=ExtResource("5_hgr8h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
 [node name="BlogSpawner" parent="." instance=ExtResource("7_v0a86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
