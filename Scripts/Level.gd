@@ -8,6 +8,10 @@ extends NavigationRegion3D
 var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
+
+
+var changedChunks = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Constants.currentLevel = self
@@ -61,8 +65,14 @@ func start():
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
 
+
 	for chunk in chunks.values():
-		await chunk.update_navigation()
+		if chunk.change_in_chunk:
+			changedChunks = changedChunks + 1
+	if changedChunks > 0:
+		for chunk in chunks.values():
+			chunk.update_navigation()
+		await changedChunks == 0
 	
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)

@@ -61,7 +61,7 @@ func get_tile_level_object_orient(pos):
 
 func update_navigation():
 	#mesh.mesh = navmesh
-	if true:
+	if change_in_chunk:
 		navmesh = NavigationMesh.new()
 		navmesh.agent_radius = Constants.navmargin
 		navmesh.agent_height = 1
@@ -71,6 +71,7 @@ func update_navigation():
 		await bake_finished
 		print("Finished")
 		change_in_chunk = false
+		get_parent().changedChunks = get_parent().changedChunks - 1
 		
 
 func get_level_objects():
