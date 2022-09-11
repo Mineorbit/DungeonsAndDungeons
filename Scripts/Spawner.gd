@@ -6,7 +6,7 @@ var prefab
 var currentSpawned
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Starting Spawner at"+str(global_transform.origin))
+	print("Starting Spawner at "+str(global_transform.origin))
 	prefab = load("res://Prefabs/LevelObjects/Entities/"+spawnedEntity+".tscn")
 
 func setup():
