@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccf0isbs1rdyc"]
+[gd_scene load_steps=12 format=3 uid="uid://ccf0isbs1rdyc"]
 
 [ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
+[ext_resource type="Script" path="res://Scripts/LevelObjectList.gd" id="1_srj5y"]
 [ext_resource type="PackedScene" uid="uid://exqb33vyfg5w" path="res://Prefabs/LevelObjects/Goal.tscn" id="2_6tpvq"]
 [ext_resource type="PackedScene" uid="uid://b7k2iytluwed5" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
 [ext_resource type="Material" uid="uid://c7yejiw7fpevg" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
@@ -19,6 +20,7 @@ material = ExtResource("3_mypbp")
 
 [node name="LevelObjectList" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
+script = ExtResource("1_srj5y")
 
 [node name="TiledFloor" type="Node3D" parent="."]
 

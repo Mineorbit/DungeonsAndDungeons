@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2ea3rs0cq3rm"]
 
-[ext_resource type="Script" path="res://Scripts/Rotation.gd" id="1_v2hqe"]
+[ext_resource type="PackedScene" uid="uid://ccf0isbs1rdyc" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1rlto"]
+[sub_resource type="World3D" id="World3D_q87b1"]
 
 [node name="BuilderHUD" type="Node2D"]
 
@@ -18,11 +18,13 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="CanvasLayer/Control2"]
+layout_mode = 0
 offset_right = 68.0
 offset_bottom = 31.0
 text = "TEST (T)"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Control2"]
+layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -34,18 +36,11 @@ focus_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/Control2/SubViewportContainer"]
 own_world_3d = true
+world_3d = SubResource("World3D_q87b1")
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
-
-[node name="Node3D" type="Node3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(0.18477, 0.403933, 0.229561, -0.253271, 0.294683, -0.314668, -0.389505, 0, 0.313506, 0, 0, -0.892521)
-mesh = SubResource("BoxMesh_1rlto")
-skeleton = NodePath("../../Camera3D")
-script = ExtResource("1_v2hqe")
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport"]
 projection = 1
@@ -53,3 +48,6 @@ current = true
 size = 5.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport"]
+
+[node name="LevelObjectList" parent="CanvasLayer/Control2/SubViewportContainer/SubViewport" instance=ExtResource("1_okj36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.875)
