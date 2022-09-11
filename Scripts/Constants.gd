@@ -7,6 +7,8 @@ extends Node
 
 var currentMode = 0
 
+var navmargin = 0.5
+
 var currentLevel
 
 var currentEntities

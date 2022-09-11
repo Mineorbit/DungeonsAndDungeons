@@ -20,8 +20,10 @@ shape = SubResource("SphereShape3D_xuwxo")
 [node name="Navigation" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.84
 path_max_distance = 12.9
+navigation_layers = 3
 avoidance_enabled = true
 max_speed = 5.0
+ignore_y = false
 
 [node name="BlogModel" parent="." instance=ExtResource("1_a42eg")]
 transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.2, 0)

@@ -25,7 +25,6 @@ script = ExtResource("1_srj5y")
 [node name="TiledFloor" type="Node3D" parent="."]
 
 [node name="FloorBase" type="MeshInstance3D" parent="TiledFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("1")
 skeleton = NodePath("../..")
 

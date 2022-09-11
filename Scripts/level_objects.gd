@@ -34,7 +34,6 @@ func _ready():
 		unique_id = unique_id + 1
 		ResourceSaver.save(new_res, path)
 		Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
-		print(levelobject)
 		if is_tiled:
 			for child in levelobject.get_children():
 				print(child)

@@ -1,4 +1,4 @@
-extends Node3D
+extends NavigationRegion3D
 
 
 # Declare member variables here. Examples:
@@ -58,11 +58,16 @@ func start():
 	Constants.buffer()
 	Constants.buffer()
 	
+	for map in NavigationServer3D.get_maps():
+		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
+	
 	if changes:
 		changes = false
 		for chunk in chunks.values():
 			await chunk.update_navigation()
 	
+	for map in NavigationServer3D.get_maps():
+		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
 	
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():

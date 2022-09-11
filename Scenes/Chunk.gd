@@ -63,7 +63,7 @@ func update_navigation():
 	#mesh.mesh = navmesh
 	if true:
 		navmesh = NavigationMesh.new()
-		navmesh.agent_radius = 0
+		navmesh.agent_radius = Constants.navmargin
 		navmesh.agent_height = 1
 		navmesh.agent_max_climb = 0
 		bake_navigation_mesh()

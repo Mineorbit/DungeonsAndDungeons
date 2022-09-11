@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://beigyoki0nkcc"]
+[gd_scene load_steps=3 format=3 uid="uid://beigyoki0nkcc"]
 
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1"]
 
-[node name="Level" type="Node3D"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_knahc"]
+geometry_parsed_geometry_type = 1
+
+[node name="Level" type="NavigationRegion3D"]
+navmesh = SubResource("NavigationMesh_knahc")
 script = ExtResource("1")

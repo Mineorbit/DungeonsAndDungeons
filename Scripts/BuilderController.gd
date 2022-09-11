@@ -86,7 +86,6 @@ func _process(delta) -> void:
 	if Input.is_action_just_released("Connect"):
 		connect_interactive_objects(start_object,get_collided_level_object())
 		start_object = null
-	#gridCursorMesh.global_transform.origin = Vector3(0.5,0,0.5) + level.gridMap.world_to_map(cursor.global_transform.origin)		
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
 	if Input.is_action_just_pressed("SelectRight"):
