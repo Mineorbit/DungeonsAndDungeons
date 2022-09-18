@@ -20,3 +20,5 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GateModel/StaticBody3D"]
 shape = SubResource("BoxShape3D_vkx4j")
+
+[node name="NavigationObstacle3d" type="NavigationObstacle3D" parent="GateModel/StaticBody3D"]

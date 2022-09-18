@@ -63,6 +63,12 @@ func start():
 	Constants.buffer()
 	Constants.buffer()
 	
+	for chunk in chunks.values():
+		for object in chunk.levelObjects.get_children():
+			if object.has_method("prepare_for_navmesh_build"):
+				object.prepare_for_navmesh_build()
+				
+	
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,2)
 
@@ -79,6 +85,13 @@ func start():
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,2)
 	
+
+	for chunk in chunks.values():
+		for object in chunk.levelObjects.get_children():
+			if object.has_method("restore_after_navmesh_build"):
+				object.restore_after_navmesh_build()
+	
+	
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():
 			if object.has_method("attachSignals"):
@@ -94,10 +107,28 @@ func get_interactive_objects():
 	return Constants.interactiveLevelObjects.values()
 
 
+func delete_level(level_name):
+	
+	var chunkdirectory = Directory.new()
+	var chunkpath = "user://level/"+level_name+"/chunks/"
+	if chunkdirectory.open(chunkpath) == OK:
+		chunkdirectory.list_dir_begin()
+		var file_name = chunkdirectory.get_next()
+		while file_name != "":
+			if chunkdirectory.current_is_dir():
+				print("Found directory?")
+			else:
+				chunkdirectory.remove(file_name)
+			file_name = chunkdirectory.get_next()
+	
+	chunkdirectory.remove("user://level/"+level_name+"/chunks/")
+	
 
 func save():
 	print("Saving Level "+level_name)
 	var dir = Directory.new()
+	
+	delete_level(level_name)
 	dir.make_dir("user://level")
 	dir.make_dir("user://level/"+level_name)
 	dir.make_dir("user://level/"+level_name+"/chunks")
