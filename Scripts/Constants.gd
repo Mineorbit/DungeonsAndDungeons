@@ -7,7 +7,7 @@ extends Node
 
 var currentMode = 0
 
-var navmargin = 0.5
+var navmargin = 0.6
 
 var currentLevel
 
