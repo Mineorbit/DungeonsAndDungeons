@@ -28,8 +28,9 @@ func setup_new():
 
 
 func reset():
+	print("=== Reseting Level ===")
 	for chunk in chunks.values():
-		for levelobject in chunk.get_children():
+		for levelobject in chunk.get_level_objects():
 			if levelobject.has_method("reset"):
 				levelobject.reset()
 			if levelobject.has_method("clearSignals"):

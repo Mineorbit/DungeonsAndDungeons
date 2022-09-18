@@ -11,5 +11,5 @@ text = "Spawner"
 [node name="BlogSpawner" type="Node3D"]
 script = ExtResource("1_jqahe")
 
-[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
+[node name="Text" type="MeshInstance3D" parent="."]
 mesh = SubResource("TextMesh_kbi3g")

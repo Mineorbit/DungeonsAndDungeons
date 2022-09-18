@@ -4,6 +4,7 @@ extends Node3D
 
 var prefab
 var currentSpawned
+@onready var text = $Text
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Starting Spawner at "+str(global_transform.origin))
@@ -14,8 +15,11 @@ func setup():
 	
 func start():
 	spawnEntity()
+	remove_child(text)
 
 func reset():
+	print("Resetting Spawner")
+	add_child(text)
 	if currentSpawned != null:
 		set_spawn_pos()
 	else:
