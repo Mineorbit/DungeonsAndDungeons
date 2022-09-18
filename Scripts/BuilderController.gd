@@ -88,9 +88,10 @@ func _process(delta) -> void:
 		start_object = null
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
+		Constants.selected_level_object_changed.emit(selection)
 	if Input.is_action_just_pressed("SelectRight"):
 		selection = (selection + 1) %(Constants.LevelObjectData.size())
-	
+		Constants.selected_level_object_changed.emit(selection)
 	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:

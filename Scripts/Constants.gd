@@ -26,6 +26,8 @@ var levelObjects_initialized = false
 
 signal game_won
 
+signal selected_level_object_changed(int)
+
 var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
