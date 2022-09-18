@@ -207,17 +207,12 @@ func get_chunk(position):
 
 
 func add_chunk(position):
-	print("Adding chunk at "+str(position))
 	var chunkPosition = get_chunk_position(position)
-	print("Got "+str(chunkPosition))
 	var chunk = chunkPrefab.instantiate()
-	
-	print(chunk.global_transform.origin)
 	chunk.level = self
 	chunks[chunkPosition] = chunk
 	add_child(chunk)
 	chunk.global_transform.origin = 8*chunkPosition
-	print(chunk.global_transform.origin)
 	return chunk
 
 	
@@ -246,7 +241,6 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
-		print(new_level_object.global_transform.origin)
 		new_level_object.add_child(level_object_dupe)
 		level_object_dupe.transform.origin = levelObjectData.offset
 		if(unique_instance_id != null):
@@ -289,7 +283,6 @@ func remove_by_position(pos: Vector3):
 func remove_level_object(object):
 	if object == null:
 		return
-	print(object)
 	var chunk = get_chunk(object.global_transform.origin)
 	chunk.change_in_chunk = true
 	changes = true
