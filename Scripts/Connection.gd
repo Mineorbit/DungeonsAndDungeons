@@ -20,7 +20,7 @@ func _process(delta):
 	var targetpoint = Plane(dirAB,0).project(Constants.builderPosition)+wirecenter
 	wire.global_transform.origin = wirecenter
 	
-	dir = Constants.builderPosition-wire.global_transform.origin
+	dir = Constants.builderPosition-wirecenter
 	dir = dir.normalized()
 	scaling = (point_a.global_transform.origin - point_b.global_transform.origin).length()
 	dirAB = dirAB.normalized()
