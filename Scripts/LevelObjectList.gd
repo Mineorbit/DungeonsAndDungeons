@@ -19,7 +19,7 @@ var num_of_elems_on_screen = 6
 func set_positions_cyclic(selection):
 	var i = 0
 	for levelObject in get_children():
-		levelObject.transform.origin = Vector3( ((i - selection + num_of_elems_on_screen/2 + num_of_elems_on_screen)%num_of_elems_on_screen)*2 - num_of_elems_on_screen+1,0,0)
+		levelObject.transform.origin = Vector3( ((i - selection + num_of_elems_on_screen/2 + num_of_elems_on_screen +1)%(num_of_elems_on_screen + 1))*2 - num_of_elems_on_screen+1,0,0)
 		i = i+1
 
 
