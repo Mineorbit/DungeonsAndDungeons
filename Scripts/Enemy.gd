@@ -24,7 +24,6 @@ func _physics_process(delta):
 	navAgent.set_target_location(target.global_transform.origin)
 	if navAgent.is_target_reachable() and not navAgent.is_target_reached():
 		move_direction = ( navAgent.get_next_location() - global_transform.origin).normalized() *0.5
-		print(move_direction)
 	navAgent.set_velocity(_velocity)
 
 
