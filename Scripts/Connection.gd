@@ -22,8 +22,8 @@ func _process(delta):
 	
 	dir = Constants.builderPosition-wire.global_transform.origin
 	dir = dir.normalized()
-	scaling = dirAB.length()
+	scaling = (point_a.global_transform.origin - point_b.global_transform.origin).length()
 	dirAB = dirAB.normalized()
 	dir = dir.cross(dirAB)
 	wire.look_at(targetpoint,dir)
-	wiremodel.scale = Vector3(scaling*0.9,0.03,0.03)
+	wire.scale = Vector3(scaling/2,0.03,0.03)

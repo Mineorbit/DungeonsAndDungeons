@@ -31,7 +31,7 @@ alpha_cut = 1
 texture = ExtResource("2_rof7s")
 
 [node name="B" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29991, 1.06672, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Gear" type="Sprite3D" parent="B"]
 modulate = Color(0.227451, 0.819608, 0, 1)
@@ -48,8 +48,9 @@ alpha_cut = 1
 texture = ExtResource("2_rof7s")
 
 [node name="Wire" type="Node3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 1.5, 0)
 
 [node name="WireModel" type="MeshInstance3D" parent="Wire"]
-transform = Transform3D(0.5, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("PlaneMesh_b3f6e")
 skeleton = NodePath("../..")
