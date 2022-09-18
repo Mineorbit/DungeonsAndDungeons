@@ -17,7 +17,6 @@ script = ExtResource("1_oyfyw")
 [node name="A" type="Node3D" parent="."]
 
 [node name="Gear" type="Sprite3D" parent="A"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 modulate = Color(0.227451, 0.819608, 0, 1)
 pixel_size = 0.0005
 billboard = 1
@@ -25,7 +24,6 @@ alpha_cut = 1
 texture = ExtResource("1_bi5sk")
 
 [node name="Circle" type="Sprite3D" parent="A"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 modulate = Color(0.227451, 0.819608, 0, 1)
 pixel_size = 0.0003
 billboard = 1
@@ -33,7 +31,7 @@ alpha_cut = 1
 texture = ExtResource("2_rof7s")
 
 [node name="B" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29991, 1.06672, 0)
 
 [node name="Gear" type="Sprite3D" parent="B"]
 modulate = Color(0.227451, 0.819608, 0, 1)
