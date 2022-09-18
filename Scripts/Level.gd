@@ -64,19 +64,20 @@ func start():
 	Constants.buffer()
 	
 	for map in NavigationServer3D.get_maps():
-		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
+		NavigationServer3D.map_set_edge_connection_margin(map,2)
 
 
 	for chunk in chunks.values():
 		if chunk.change_in_chunk:
 			changedChunks = changedChunks + 1
+			
 	if changedChunks > 0:
 		for chunk in chunks.values():
 			chunk.update_navigation()
 		await changedChunks == 0
-	
+	changedChunks = 0
 	for map in NavigationServer3D.get_maps():
-		NavigationServer3D.map_set_edge_connection_margin(map,Constants.navmargin*2)
+		NavigationServer3D.map_set_edge_connection_margin(map,2)
 	
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():

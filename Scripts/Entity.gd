@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 		look_direction = Vector2(velocity.x,_velocity.z)
 		look_direction = look_direction.normalized()
 		var current_rot = Quaternion(transform.basis)
-		var target_rot = Quaternion(Vector3(0,1,0), -look_direction.angle())
+		var target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
 
