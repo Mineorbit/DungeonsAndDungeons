@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmlin7oyc76xy"]
+[gd_scene load_steps=3 format=3 uid="uid://dmlin7oyc76xy"]
 
 [ext_resource type="Script" path="res://Scripts/Edit.gd" id="1_qljhf"]
-[ext_resource type="PackedScene" uid="uid://pw6ighknnjj2" path="res://Prefabs/Connection.tscn" id="2_hg1jp"]
 
 [sub_resource type="Environment" id="3"]
 background_mode = 1
@@ -31,5 +30,3 @@ light_energy = 0.8
 shadow_enabled = true
 
 [node name="Connections" type="Node3D" parent="."]
-
-[node name="Connection" parent="Connections" instance=ExtResource("2_hg1jp")]
