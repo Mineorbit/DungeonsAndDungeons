@@ -49,6 +49,9 @@ billboard = 1
 alpha_cut = 1
 texture = ExtResource("2_rof7s")
 
-[node name="Wire" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0.5, 0, 0)
+[node name="Wire" type="Node3D" parent="."]
+
+[node name="WireModel" type="MeshInstance3D" parent="Wire"]
+transform = Transform3D(0.5, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0, 0, 0)
 mesh = SubResource("PlaneMesh_b3f6e")
+skeleton = NodePath("../..")

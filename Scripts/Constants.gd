@@ -24,6 +24,9 @@ var interactiveLevelObjects = {}
 
 var levelObjects_initialized = false
 
+
+var builderPosition = Vector3.ZERO
+
 signal game_won
 
 signal selected_level_object_changed(int)

@@ -71,6 +71,7 @@ func connect_interactive_objects(a, b):
 	b.connectedObjects.append(a.unique_instance_id)
 
 func _process(delta) -> void:
+	Constants.builderPosition = global_transform.origin
 	if Input.is_action_just_pressed("Place"):
 		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin)
 	if Input.is_action_just_pressed("Displace"):
