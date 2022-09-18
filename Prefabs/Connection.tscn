@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://pw6ighknnjj2"]
+
+[ext_resource type="Texture2D" uid="uid://qsagb1hct4dh" path="res://Assets/Textures/gearwheel.png" id="1_bi5sk"]
+[ext_resource type="Script" path="res://Scripts/Connection.gd" id="1_oyfyw"]
+[ext_resource type="Texture2D" uid="uid://dqpw0lb8m01x1" path="res://Assets/Textures/circle.png" id="2_rof7s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h55pg"]
+shading_mode = 0
+albedo_color = Color(0.227451, 0.819608, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b3f6e"]
+material = SubResource("StandardMaterial3D_h55pg")
+
+[node name="Connection" type="Node3D"]
+script = ExtResource("1_oyfyw")
+
+[node name="A" type="Node3D" parent="."]
+
+[node name="Gear" type="Sprite3D" parent="A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+modulate = Color(0.227451, 0.819608, 0, 1)
+pixel_size = 0.0005
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("1_bi5sk")
+
+[node name="Circle" type="Sprite3D" parent="A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+modulate = Color(0.227451, 0.819608, 0, 1)
+pixel_size = 0.0003
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("2_rof7s")
+
+[node name="B" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Gear" type="Sprite3D" parent="B"]
+modulate = Color(0.227451, 0.819608, 0, 1)
+pixel_size = 0.0005
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("1_bi5sk")
+
+[node name="Circle" type="Sprite3D" parent="B"]
+modulate = Color(0.227451, 0.819608, 0, 1)
+pixel_size = 0.0003
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("2_rof7s")
+
+[node name="Wire" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0.5, 0, 0)
+mesh = SubResource("PlaneMesh_b3f6e")
