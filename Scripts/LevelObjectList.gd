@@ -14,13 +14,10 @@ func _ready():
 		set_positions_cyclic(0)
 
 
-var num_of_elems_on_screen = 6
-
-func set_positions_cyclic(selection):
-	var i = 0
-	for levelObject in get_children():
-		levelObject.transform.origin = Vector3( ((i - selection + num_of_elems_on_screen/2 + num_of_elems_on_screen +1)%(num_of_elems_on_screen + 1))*2 - num_of_elems_on_screen,0,0)
-		i = i+1
+var num_of_elems_on_screen = 12
+var selection = 0
+func set_positions_cyclic(sel):
+	selection = sel
 
 
 func selection_changed(value):
@@ -31,5 +28,9 @@ func _process(delta):
 	if display:
 		for child in get_children():
 			child.rotate(Vector3.UP,delta)
-			
+		var i = 0
+		for levelObject in get_children():
+			var new_pos = Vector3( ((i - selection + num_of_elems_on_screen/2 + num_of_elems_on_screen +1)%(num_of_elems_on_screen + 1))*2 - num_of_elems_on_screen,0,0)
+			levelObject.transform.origin = (new_pos + levelObject.transform.origin)/2
+			i = i+1
 
