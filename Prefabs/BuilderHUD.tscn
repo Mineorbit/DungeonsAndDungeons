@@ -20,6 +20,23 @@ offset_right = 68.0
 offset_bottom = 31.0
 text = "TEST (T)"
 
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/Control2"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -162.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control2/CenterContainer2"]
+custom_minimum_size = Vector2i(128, 128)
+offset_left = 512.0
+offset_top = 17.0
+offset_right = 640.0
+offset_bottom = 145.0
+color = Color(0.894118, 0.811765, 0, 1)
+
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control2"]
 anchors_preset = 12
 anchor_top = 1.0
@@ -64,3 +81,9 @@ transform = Transform3D(-0.896439, -0.434133, 0.0890233, 0.402214, -0.712673, 0.
 [node name="LevelObjectList" parent="CanvasLayer/Control2/CenterContainer/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_okj36")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, -0.875)
 display = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control2/CenterContainer"]
+offset_left = 1024.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 64.0
