@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmlin7oyc76xy"]
+[gd_scene load_steps=4 format=3 uid="uid://dmlin7oyc76xy"]
 
 [ext_resource type="Script" path="res://Scripts/Edit.gd" id="1_qljhf"]
+[ext_resource type="Script" path="res://Scripts/Connections.gd" id="2_7s4nr"]
 
 [sub_resource type="Environment" id="3"]
 background_mode = 1
@@ -30,3 +31,4 @@ light_energy = 0.8
 shadow_enabled = true
 
 [node name="Connections" type="Node3D" parent="."]
+script = ExtResource("2_7s4nr")

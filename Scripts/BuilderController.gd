@@ -12,17 +12,21 @@ var collisionRay
 var gridCursorMesh
 var mouse_sensitivity := 0.005
 
+var edit
 var move_speed = 4
 
 var closestIndex = 0
+
+
 func _ready() -> void:
 	cursor = $CursorArm/Cursor
 	collisionRay = $CursorArm/Cursor/RayCast
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
 	level = $"../Level"
 	top_level = true
+	edit = get_parent()
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	
 
 var rot_x = 0
 var rot_y = 0
@@ -69,6 +73,9 @@ func connect_interactive_objects(a, b):
 	if a == null or b == null or a == b:
 		return
 	b.connectedObjects.append(a.unique_instance_id)
+	Constants.connection_added.emit(b.unique_instance_id,[a.unique_instance_id])	
+
+
 
 func _process(delta) -> void:
 	Constants.builderPosition = global_transform.origin
@@ -84,16 +91,25 @@ func _process(delta) -> void:
 				level.remove_by_object(get_collided_level_object())
 	if Input.is_action_just_pressed("Connect"):
 		start_object = get_collided_level_object()
+		if start_object != null:
+			is_connecting = true
+			edit.connections.add_child(edit.connections.constructconnection)
+			edit.connections.constructconnection.point_a.global_transform.origin = start_object.global_transform.origin + Vector3(0.5,0.5,0.5)
+	
+	if is_connecting:
+		edit.connections.constructconnection.point_b.global_transform.origin = cursor.global_transform.origin
 	if Input.is_action_just_released("Connect"):
 		connect_interactive_objects(start_object,get_collided_level_object())
 		start_object = null
+		edit.connections.remove_child(edit.connections.constructconnection)
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
 		Constants.selected_level_object_changed.emit(selection)
 	if Input.is_action_just_pressed("SelectRight"):
 		selection = (selection + 1) %(Constants.LevelObjectData.size())
 		Constants.selected_level_object_changed.emit(selection)
-	
+
+var is_connecting = false	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		move_camera(event.relative)

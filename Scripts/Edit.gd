@@ -11,6 +11,7 @@ var playerpref
 var builderpref
 var playerhudpref
 var builderhudpref
+@onready var connections = $Connections
 
 var builderhud
 var playerhud
@@ -64,6 +65,7 @@ func enter_edit_mode():
 	if playerhud in get_children():
 		remove_child(playerhud)
 	add_child(builderhud)
+	connections.show()
 	
 
 func enter_test_mode():
@@ -77,6 +79,7 @@ func enter_test_mode():
 	if builderhud in get_children():
 		remove_child(builderhud)
 	add_child(playerhud)
+	connections.hide()
 	
 func despawn_players():
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
