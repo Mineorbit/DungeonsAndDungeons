@@ -3,7 +3,8 @@ extends Node
 var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# this needs to be generalized
+	player = Constants.players[0]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

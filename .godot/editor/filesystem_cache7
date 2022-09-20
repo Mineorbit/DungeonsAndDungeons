@@ -1,5 +1,5 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1663685597
+::res://::1663712892
 default_env.tres::Environment::-1::1662647890::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1663548955::0::1::::<><>::
 icon.png::CompressedTexture2D::7176785515112518573::1662647890::1662647890::1::::<><>::
@@ -324,7 +324,7 @@ jump1.mp3::AudioStreamMP3::4952591970408971462::1662647890::1662647890::1::::<><
 ::res://Assets/Textures/::1663522364
 circle.png::CompressedTexture2D::8314630215105277048::1663522344::1663522364::1::::<><>::
 gearwheel.png::CompressedTexture2D::1160191105554789497::1663521201::1663521202::1::::<><>::
-::res://Prefabs/::1663685597
+::res://Prefabs/::1663685613
 Builder.tscn::PackedScene::6022446171054392078::1662647890::0::1::::<><>::res://Scripts/BuilderController.gd<>res://Scripts/Cursor.gd
 BuilderHUD.tscn::PackedScene::4289827897008203646::1663609857::0::1::::<><>::uid://ccf0isbs1rdyc
 Chunk.tscn::PackedScene::5602948899503005893::1663609857::0::1::::<><>::res://Scripts/Chunk.gd<>uid://mta1u0srfgv3
@@ -335,15 +335,14 @@ InteractiveLevelObject.tscn::PackedScene::4667231747011851185::1663609857::0::1:
 Level.tscn::PackedScene::2684098992460385638::1663609857::0::1::::<><>::res://Scripts/Level.gd
 LevelObject.tscn::PackedScene::140044290676842169::1663609857::0::1::::<><>::res://Scripts/LevelObject.gd<>uid://5084q5og715l
 MainMenu.tscn::PackedScene::2202627624107213274::1662917478::0::1::::<><>::
-Player.gd::GDScript::-1::1662939734::0::1::::<>Entity<>::
 PlayerHUD.tscn::PackedScene::942583418192018610::1663609858::0::1::::<><>::
 Valley.tscn::PackedScene::5680923352883634424::1663609858::0::1::::<><>::uid://bkixalro7lnny
 ::res://Prefabs/LevelObjects/::1663609857
 Goal.tscn::PackedScene::329210835468420850::1662917478::0::1::::<><>::res://Scripts/Goal.gd
 LevelObjectList.tscn::PackedScene::4925074102421328358::1663609857::0::1::::<><>::uid://ofvf7cke35np<>res://Scripts/LevelObjectList.gd<>uid://exqb33vyfg5w<>uid://b7k2iytluwed5<>uid://c7yejiw7fpevg<>uid://tbfe4vd7yovn<>uid://bq2yphhd7sr5n<>uid://sv0orhygctyj
 MovingPlattform.tscn::PackedScene::1335964690814203119::1662917478::0::1::::<><>::res://Scripts/MovingPlattform.gd
-::res://Prefabs/LevelObjects/Entities/::1663685597
-Player.tscn::PackedScene::3771875377412460105::1663685613::0::1::::<><>::res://Prefabs/Player.gd<>res://Scripts/CameraController.gd
+::res://Prefabs/LevelObjects/Entities/::1663686031
+Player.tscn::PackedScene::1165896882103184517::1663686031::0::1::::<><>::res://Scripts/Player.gd<>res://Scripts/CameraController.gd
 ::res://Prefabs/LevelObjects/Entities/Enemies/::1663609857
 Blog.tscn::PackedScene::8925575184087242983::1663609857::0::1::::<><>::uid://b4stbslbc6plr<>res://Scripts/Blog.gd
 ::res://Prefabs/LevelObjects/Interactive/::1663609858
@@ -371,7 +370,7 @@ level_objects.tscn::PackedScene::2764599625015915040::1663609857::0::1::::<><>::
 Main.tscn::PackedScene::7426846659629028418::1663609858::0::1::::<><>::
 menu.tscn::PackedScene::7186998920184257783::1663609857::0::1::::<><>::res://Scripts/MainMenu.gd<>uid://b83mmybechxom
 test.tscn::PackedScene::-1::1663549584::0::1::::<><>::uid://mta1u0srfgv3<>res://Scripts/test.gd<>uid://d0fu6iv1is7gl
-::res://Scripts/::1663556342
+::res://Scripts/::1663686031
 Blog.gd::GDScript::-1::1662939733::0::1::::<>Enemy<>::
 Bootstrap.gd::GDScript::-1::1662939733::0::1::::<>Node<>::
 BuilderController.gd::GDScript::-1::1663556027::0::1::::<>CharacterBody3D<>::
@@ -397,6 +396,8 @@ level_objects.gd::GDScript::-1::1662939734::0::1::::<>Node3D<>::
 Lever.gd::GDScript::-1::1662939734::0::1::::<>Node3D<>::
 MainMenu.gd::GDScript::-1::1662939734::0::1::::<>Node2D<>::
 MovingPlattform.gd::GDScript::-1::1662939734::0::1::::<>Node3D<>::
+Player.gd::GDScript::-1::1663685689::0::1::::<>Entity<>::
+PlayerController.gd::GDScript::-1::1663686031::0::1::::<>Node<>::
 Rotation.gd::GDScript::-1::1662939734::0::1::::<>MeshInstance3D<>::
 Spawner.gd::GDScript::-1::1663536994::0::1::::<>Node3D<>::
 test.gd::GDScript::-1::1662939734::0::1::::<>NavigationRegion3D<>::
