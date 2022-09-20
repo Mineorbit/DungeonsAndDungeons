@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Edit.gd" id="1_qljhf"]
 [ext_resource type="Script" path="res://Scripts/Connections.gd" id="2_7s4nr"]
-[ext_resource type="PackedScene" uid="uid://dhclg7fimof2o" path="res://Prefabs/PlayerControllers.tscn" id="3_yulay"]
+[ext_resource type="PackedScene" uid="uid://dc1n0bufe2f6y" path="res://Prefabs/Players.tscn" id="3_qllmf"]
 
 [sub_resource type="Environment" id="3"]
 background_mode = 1
@@ -28,4 +28,4 @@ shadow_enabled = true
 [node name="Connections" type="Node3D" parent="."]
 script = ExtResource("2_7s4nr")
 
-[node name="PlayerControllers" parent="." instance=ExtResource("3_yulay")]
+[node name="Players" parent="." instance=ExtResource("3_qllmf")]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://qu1fe6bdgard"]
+[gd_scene load_steps=5 format=3 uid="uid://qu1fe6bdgard"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
-[ext_resource type="Script" path="res://Scripts/CameraController.gd" id="2"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -18,15 +17,6 @@ script = ExtResource("1_50d3o")
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("1")
-
-[node name="SpringArm" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38648, 0)
-spring_length = 5.0
-margin = 0.2
-script = ExtResource("2")
-
-[node name="Camera" type="Camera3D" parent="SpringArm"]
-current = true
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
