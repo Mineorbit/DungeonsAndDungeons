@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://q2400hug4xn6" path="res://Assets/Graphiken/environment/floor.png" id="1_1j7c6"]
 
 [resource]
-diffuse_mode = 1
+specular_mode = 1
 albedo_color = Color(0.858824, 0.858824, 0.858824, 1)
 albedo_texture = ExtResource("1_1j7c6")
+metallic_specular = 0.0
 uv1_scale = Vector3(3, 2, 2)
