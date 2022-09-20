@@ -22,7 +22,14 @@ func despawn():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if player != null and spawned:
-		player.move_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-		player.move_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
-		player.move_direction = player.move_direction.rotated(Vector3.UP, camera.rotation.y).normalized()
+		
+		var input_direction = Vector3.ZERO
+		input_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
+		input_direction = input_direction.rotated(Vector3.UP, camera.rotation.y).normalized()
+		
+		
 		player.should_jump = Input.is_action_just_pressed("jump")
+		
+		player.move_direction.x = input_direction.x
+		player.move_direction.z = input_direction.z
