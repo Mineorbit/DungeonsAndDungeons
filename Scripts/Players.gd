@@ -21,12 +21,16 @@ func despawn_players():
 	print("Despawning Players")
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
 	await Constants.buffer()
+	Constants.players.erase(player)
 	playerEntities.remove_child(player)
 	playerControllers.of(player).despawn()
-	
+
+
 func spawn_players():
 	player.global_transform.origin = Vector3(0.5,5,0.5)
 	await Constants.buffer()
+	Constants.players.append(player)
 	player._velocity = Vector3.ZERO
+	player.start()
 	playerEntities.add_child(player)
 	playerControllers.of(player).spawn()

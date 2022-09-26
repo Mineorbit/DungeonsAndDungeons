@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Entity
 
+var health := 50
+
 var speed := 5
 var turnAngle := 0.2
 var kickbackTime = 2
