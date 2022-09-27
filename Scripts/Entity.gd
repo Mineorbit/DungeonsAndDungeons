@@ -96,6 +96,12 @@ func kickback(direction) -> void:
 	# starts kickback process:
 	# character moves backwards in ballistic arch until
 
+
+func Hit(damage, hitting_entity):
+	print(str(hitting_entity)+" hit "+str(self)+" and did "+str(damage)+" Damage")
+	kickback((global_transform.origin - hitting_entity.global_transform.origin+ Vector3.UP)*log(damage)*0.5)
+	health = health - damage
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("test_kickback"):
 		kickback(Vector3.UP+Vector3.BACK)
