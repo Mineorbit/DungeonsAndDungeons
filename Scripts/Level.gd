@@ -279,7 +279,7 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 		if(unique_instance_id != null):
 			new_level_object.unique_instance_id = unique_instance_id
 			new_level_object.connectedObjects = connectedObjects
-			Constants.connection_added.emit(unique_instance_id,connectedObjects)	
+			Signals.connection_added.emit(unique_instance_id,connectedObjects)	
 		if (new_level_object.has_method("sign_up")):
 			new_level_object.sign_up()
 		new_level_object.contained_level_object = level_object_dupe

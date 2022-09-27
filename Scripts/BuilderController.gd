@@ -73,7 +73,7 @@ func connect_interactive_objects(a, b):
 	if a == null or b == null or a == b:
 		return
 	b.connectedObjects.append(a.unique_instance_id)
-	Constants.connection_added.emit(b.unique_instance_id,[a.unique_instance_id])	
+	Signals.connection_added.emit(b.unique_instance_id,[a.unique_instance_id])	
 
 
 
@@ -104,10 +104,10 @@ func _process(delta) -> void:
 		edit.connections.remove_child(edit.connections.constructconnection)
 	if Input.is_action_just_pressed("SelectLeft"):
 		selection = (selection - 1 + Constants.LevelObjectData.size()) %(Constants.LevelObjectData.size())
-		Constants.selected_level_object_changed.emit(selection)
+		Signals.selected_level_object_changed.emit(selection)
 	if Input.is_action_just_pressed("SelectRight"):
 		selection = (selection + 1) %(Constants.LevelObjectData.size())
-		Constants.selected_level_object_changed.emit(selection)
+		Signals.selected_level_object_changed.emit(selection)
 
 var is_connecting = false	
 func _input(event):

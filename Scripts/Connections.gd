@@ -9,8 +9,8 @@ var connections = {}
 func _ready():
 	constructionprefab = load("res://Prefabs/Connection.tscn")
 	constructconnection = constructionprefab.instantiate()
-	Constants.connection_added.connect(new_connections)
-	Constants.connection_removed.connect(remove_connections)
+	Signals.connection_added.connect(new_connections)
+	Signals.connection_removed.connect(remove_connections)
 
 func new_connections(b,list):
 	for a in list:

@@ -26,8 +26,8 @@ func _ready():
 	builder.global_transform.origin = Vector3(0,5,0)
 	create_new_level()
 	enter_edit_mode()
-	Constants.game_won.connect(Players.despawn_players)
-	Constants.game_won.connect(enter_edit_mode)
+	Signals.game_won.connect(Players.despawn_players)
+	Signals.game_won.connect(enter_edit_mode)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func create_new_level():

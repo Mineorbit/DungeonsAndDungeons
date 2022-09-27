@@ -10,7 +10,7 @@ func _ready():
 		levelObject.transform.origin = Vector3(2*i + 1,0,0)
 		i = i+1
 	if display:
-		Constants.selected_level_object_changed.connect(selection_changed)
+		Signals.selected_level_object_changed.connect(selection_changed)
 		set_positions_cyclic(0)
 
 
