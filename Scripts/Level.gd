@@ -314,6 +314,8 @@ func remove_by_position(pos: Vector3):
 		isRemoved = chunk.remove_tile_level_object(gridposition)
 	return isRemoved
 
+
+
 func remove_level_object(object):
 	if object == null:
 		return
@@ -322,27 +324,6 @@ func remove_level_object(object):
 	changes = true
 	if object.has_method("on_remove"):
 		object.on_remove()
-	
-	var removal_outgoing = []
-	var removal_ingoing = []
-	for second_object in get_interactive_objects():
-		print("Checking "+str(second_object))
-		if object.unique_instance_id in second_object.connectedObjects:
-			removal_outgoing.append(second_object.unique_instance_id)
-			second_object.connectedObjects.erase(object.unique_instance_id)
-			
-	removal_ingoing = object.connectedObjects
-	
-	
-	print(removal_ingoing)
-	print(removal_outgoing)
-	for i in removal_ingoing:
-		Constants.connection_removed.emit(i,[object.unique_instance_id])
-		
-	Constants.connection_removed.emit(object.unique_instance_id,removal_outgoing)
-	
-	
-	Constants.interactiveLevelObjects.erase(object.unique_instance_id)
 	chunk.levelObjects.remove_child(object)
 	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
 

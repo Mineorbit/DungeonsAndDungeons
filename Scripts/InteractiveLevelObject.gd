@@ -11,6 +11,8 @@ var connectedObjects = []
 
 
 
+
+
 func to_instance(instance):
 		instance.x = floor(transform.origin.x)
 		instance.y = floor(transform.origin.y)
@@ -45,7 +47,20 @@ func _ready():
 	unique_instance_id = Constants.currentInteractive
 	Constants.currentInteractive += 1
 
-
+func on_remove():
+	super.on_remove()
+	var removal_outgoing = []
+	var removal_ingoing = []
+	for second_object in Constants.currentLevel.get_interactive_objects():
+		print("Checking "+str(second_object))
+		if unique_instance_id in second_object.connectedObjects:
+			removal_outgoing.append(second_object.unique_instance_id)
+			second_object.connectedObjects.erase(unique_instance_id)
+	removal_ingoing = connectedObjects
+	for i in removal_ingoing:
+		Constants.connection_removed.emit(i,[unique_instance_id])	
+	Constants.connection_removed.emit(unique_instance_id,removal_outgoing)
+	Constants.interactiveLevelObjects.erase(unique_instance_id)
 
 func sign_up():
 	Constants.interactiveLevelObjects[unique_instance_id] = self

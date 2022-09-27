@@ -32,6 +32,8 @@ func on_remove():
 	if contained_level_object.has_method("on_remove"):
 		contained_level_object.on_remove()
 
+
+
 func on_mode_change():
 	#print("Mode changed to "+str(Constants.currentMode))
 	if Constants.currentMode == 1:

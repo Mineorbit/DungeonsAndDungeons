@@ -1,7 +1,8 @@
 extends CharacterBody3D
 class_name Entity
 
-var health := 50
+var health := 100
+var max_health := 100
 
 var speed := 5
 var turnAngle := 0.2
@@ -24,6 +25,7 @@ func _ready():
 	_velocity = Vector3.ZERO
 	
 func start():
+	health = max_health
 	started = true
 	
 func reset():

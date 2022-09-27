@@ -1,7 +1,6 @@
-res://Prefabs/PlayerHUD.tscn
+res://Scenes/menu.tscn
 res://Assets/Materials/LevelObjectCollision.tres
 res://Resources/grid.tres
-res://Scenes/menu.tscn
 res://Prefabs/LevelObject.tscn
 res://Prefabs/InteractiveLevelObject.tscn
 res://Prefabs/BuilderHUD.tscn
@@ -14,6 +13,7 @@ res://Prefabs/Connection.tscn
 res://Scenes/edit.tscn
 res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn
 res://Prefabs/LevelObjects/Interactive/Gate.tscn
+res://Prefabs/PlayerHUD.tscn
 res://Scenes/Main.tscn
 res://Prefabs/Valley.tscn
 res://Prefabs/LevelObjects/Entities/Player.tscn
@@ -22,6 +22,7 @@ res://Prefabs/PlayerControllers.tscn
 res://Prefabs/PlayerController.tscn
 res://Prefabs/Players.tscn
 res://Prefabs/PlayerCamera.tscn
-res://Scripts/PlayerHUD.gd
-res://Scripts/Players.gd
+res://Scripts/Level.gd
+res://Scripts/InteractiveLevelObject.gd
+res://Scripts/LevelObject.gd
 res://Scripts/Entity.gd
