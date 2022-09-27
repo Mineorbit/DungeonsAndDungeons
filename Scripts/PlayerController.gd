@@ -13,6 +13,10 @@ func spawn():
 	add_child(camera)
 	camera.player = player
 	
+var is_active = false
+func set_active(active):
+	print("Setting "+str(active))
+	is_active = active
 
 func despawn():
 	spawned = false
@@ -21,7 +25,7 @@ func despawn():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if player != null and spawned:
+	if player != null and spawned and is_active:
 		
 		var input_direction = Vector3.ZERO
 		input_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")

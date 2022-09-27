@@ -15,6 +15,8 @@ var currentEntities
 
 var currentInteractive = 0
 
+var currentPlayer = 0
+
 var players = []
 
 var LevelObjectData = {}
