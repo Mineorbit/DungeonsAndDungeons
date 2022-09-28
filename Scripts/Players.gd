@@ -40,6 +40,7 @@ func spawn_players():
 		var player
 		if players[i] == null:
 			player = playerpref.instantiate()
+			player.id = i
 			players[i] = player
 		else:
 			player = players[i]
