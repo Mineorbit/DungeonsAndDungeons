@@ -29,6 +29,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Scripts/InteractiveLevelObject.gd"
 }, {
+"base": "Entity",
+"class": &"ItemEntity",
+"language": &"GDScript",
+"path": "res://Scripts/ItemEntity.gd"
+}, {
 "base": "Node3D",
 "class": &"LevelObject",
 "language": &"GDScript",
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "Enemy": "",
 "Entity": "",
 "InteractiveLevelObject": "",
+"ItemEntity": "",
 "LevelObject": "",
 "LevelObjectData": ""
 }
