@@ -109,9 +109,11 @@ func get_interactive_objects():
 
 func delete_level(level_name):
 	
-	var chunkdirectory = Directory.new()
 	var chunkpath = "user://level/"+level_name+"/chunks/"
-	if chunkdirectory.open(chunkpath) == OK:
+	
+	var chunkdirectory = DirAccess.new()
+	chunkdirectory.open(chunkpath)
+	if true:
 		chunkdirectory.list_dir_begin()
 		var file_name = chunkdirectory.get_next()
 		while file_name != "":
@@ -126,20 +128,20 @@ func delete_level(level_name):
 
 func save():
 	print("Saving Level "+level_name)
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	
 	delete_level(level_name)
 	dir.make_dir("user://level")
 	dir.make_dir("user://level/"+level_name)
 	dir.make_dir("user://level/"+level_name+"/chunks")
-	var save_game = File.new()
-	save_game.open("user://level/"+level_name+"/index.json", File.WRITE)
+	var save_game = FileAccess.new()
+	save_game.open("user://level/"+level_name+"/index.json", FileAccess.WRITE)
 	save_game.store_line(level_name)
 	save_game.close()
 	for c in chunks.keys():
 		var chunk = chunks[c]
-		var chunk_file = File.new()
-		chunk_file.open("user://level/"+level_name+"/chunks/"+str(c), File.WRITE)
+		var chunk_file = FileAccess.new()
+		chunk_file.open("user://level/"+level_name+"/chunks/"+str(c), FileAccess.WRITE)
 		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
 			chunk_file.store_line(object.serialize())
@@ -169,8 +171,9 @@ func clear():
 func load(level_name):
 	clear()
 	var path = "user://level/"+level_name
-	var dir = Directory.new()
-	if dir.open(path+"/chunks") == OK:
+	var dir = DirAccess.open(path+"/chunks")
+	# eventuell probleme
+	if  true:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
@@ -186,8 +189,10 @@ func load(level_name):
 				var z = coords[2].to_int()*8
 				var base_position = Vector3(x,y,z)
 				print("Loading Chunk at Position "+str(base_position))
-				var file = File.new()
-				file.open(path+"/chunks/"+file_name, File.READ)
+				var chunkpath = path+"/chunks/"+file_name
+				if not FileAccess.file_exists(chunkpath):
+					continue
+				var file = FileAccess.open(chunkpath, FileAccess.READ)
 				var line = file.get_line()
 				while line != "":
 					if immediate:

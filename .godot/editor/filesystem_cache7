@@ -1,5 +1,5 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1664488490
+::res://::1664548714
 default_env.tres::Environment::-1::1662647890::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1663548955::0::1::::<><>::
 icon.png::CompressedTexture2D::7176785515112518573::1662647890::1662647890::1::::<><>::
@@ -356,8 +356,8 @@ Blog.tscn::PackedScene::8925575184087242983::1664488152::0::1::::<><>::uid://b4s
 ::res://Prefabs/LevelObjects/Interactive/::1664488152
 Gate.tscn::PackedScene::3566664754653080829::1664488152::0::1::::<><>::res://Scripts/Gate.gd
 Lever.tscn::PackedScene::4654762393245741988::1662917478::0::1::::<><>::res://Scripts/Lever.gd
-::res://Prefabs/LevelObjects/Items/::1664488598
-Sword.tscn::PackedScene::2326968098374866923::1664488780::0::1::::<><>::
+::res://Prefabs/LevelObjects/Items/::1664490814
+Sword.tscn::PackedScene::2326968098374866923::1664490814::0::1::::<><>::res://Scripts/Sword.gd
 ::res://Prefabs/LevelObjects/Spawners/::1664488152
 BlogSpawner.tscn::PackedScene::1308294949062821301::1664488152::0::1::::<><>::res://Scripts/Spawner.gd
 ::res://Prefabs/Models/::1662917478
@@ -366,13 +366,13 @@ bridge.tscn::PackedScene::8804809288707607588::1662917478::0::1::::<><>::
 grid.tres::MeshLibrary::881536821552924470::1664488171::0::1::::<><>::uid://ofvf7cke35np<>uid://c7yejiw7fpevg
 Nav.tres::NavigationMesh::552675706499693552::1662898772::0::1::::<><>::
 ::res://Resources/LevelObjectData/::1662927839
-BlogSpawner.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
-Floor.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
-Gate.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
-Goal.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
-Lever.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
-MovingPlattform.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
-Stone.tres::Resource::-1::1664381678::0::1::::<><>::res://Scripts/LevelObjectData.gd
+BlogSpawner.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
+Floor.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
+Gate.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
+Goal.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
+Lever.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
+MovingPlattform.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
+Stone.tres::Resource::-1::1664488154::0::1::::<><>::res://Scripts/LevelObjectData.gd
 ::res://Scenes/::1664488152
 Bootstrap.tscn::PackedScene::-1::1662647890::0::1::::<><>::res://Scripts/Bootstrap.gd<>res://Scripts/Constants.gd
 edit.tscn::PackedScene::8024746984762128322::1664488152::0::1::::<><>::res://Scripts/Edit.gd<>res://Scripts/Connections.gd<>uid://dc1n0bufe2f6y
@@ -380,7 +380,7 @@ level_objects.tscn::PackedScene::2764599625015915040::1664488151::0::1::::<><>::
 Main.tscn::PackedScene::7426846659629028418::1664488152::0::1::::<><>::
 menu.tscn::PackedScene::7186998920184257783::1664488151::0::1::::<><>::res://Scripts/MainMenu.gd<>uid://b83mmybechxom
 test.tscn::PackedScene::1230627200588859225::1664488152::0::1::::<><>::uid://mta1u0srfgv3<>res://Scripts/test.gd<>uid://d0fu6iv1is7gl
-::res://Scripts/::1664488598
+::res://Scripts/::1664488780
 Blog.gd::GDScript::-1::1664299170::0::1::::<>Enemy<>::
 Bootstrap.gd::GDScript::-1::1662939733::0::1::::<>Node<>::
 BuilderController.gd::GDScript::-1::1664316161::0::1::::<>CharacterBody3D<>::
@@ -399,6 +399,7 @@ Gate.gd::GDScript::-1::1663543666::0::1::::<>Node3D<>::
 Goal.gd::GDScript::-1::1662939734::0::1::::<>Node3D<>::
 HitArea.gd::GDScript::-1::1664300014::0::1::::<>ShapeCast3D<>::
 InteractiveLevelObject.gd::GDScript::-1::1664298652::0::1::::InteractiveLevelObject<>LevelObject<>::
+ItemEntity.gd::GDScript::-1::1664488739::0::1::::ItemEntity<>Entity<>::
 Level.gd::GDScript::-1::1664316141::0::1::::<>NavigationRegion3D<>::
 LevelObject.gd::GDScript::-1::1664298618::0::1::::LevelObject<>Node3D<>::
 LevelObjectData.gd::GDScript::-1::1662939734::0::1::::LevelObjectData<>Resource<>::
@@ -412,9 +413,8 @@ PlayerController.gd::GDScript::-1::1664318383::0::1::::<>Node<>::
 PlayerControllers.gd::GDScript::-1::1664318693::0::1::::<>Node<>::
 PlayerHUD.gd::GDScript::-1::1664317337::0::1::::<>Node2D<>::
 Players.gd::GDScript::-1::1664381261::0::1::::<>Node3D<>::
-Item.gd::GDScript::-1::1664488739::0::1::::ItemEntity<>Entity<>::
-Sword.gd::GDScript::-1::1664488749::0::1::::<>ItemEntity<>::
 Rotation.gd::GDScript::-1::1662939734::0::1::::<>MeshInstance3D<>::
 Signals.gd::GDScript::-1::1664317112::0::1::::<>Node<>::
 Spawner.gd::GDScript::-1::1663536994::0::1::::<>Node3D<>::
+Sword.gd::GDScript::-1::1664488749::0::1::::<>ItemEntity<>::
 test.gd::GDScript::-1::1662939734::0::1::::<>NavigationRegion3D<>::
