@@ -168,8 +168,12 @@ func clear():
 		Constants.numberOfPlacedLevelObjects[key] = 0
 	chunks.clear()
 
+var started_loading = false
+
 func load(level_name):
+	
 	clear()
+	started_loading = true
 	var path = "user://level/"+level_name
 	var dir = DirAccess.open(path+"/chunks")
 	# eventuell probleme
@@ -200,9 +204,11 @@ func load(level_name):
 					else:
 						toAdd.append([base_position,line])
 					line = file.get_line()
-				file.close()
+				#close file access is automatically done
 			file_name = dir.get_next()
-		print("Loaded level")
+		if immediate:	
+			print("Loaded level")
+			Signals.level_loaded.emit()
 	else:
 		print("An error occurred when trying to access the path.")
 
@@ -235,6 +241,10 @@ func _process(delta):
 		var result = toAdd[0]
 		toAdd.remove_at(0)
 		add_from_string(result[0],result[1])
+	if toAdd.size() == 0 and started_loading:
+		started_loading = false
+		print("Level loaded")
+		Signals.level_loaded.emit()
 	
 var chunks = {}
 
