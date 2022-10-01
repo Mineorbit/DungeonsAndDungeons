@@ -111,8 +111,7 @@ func delete_level(level_name):
 	
 	var chunkpath = "user://level/"+level_name+"/chunks/"
 	
-	var chunkdirectory = DirAccess.new()
-	chunkdirectory.open(chunkpath)
+	var chunkdirectory = DirAccess.open(chunkpath)
 	if true:
 		chunkdirectory.list_dir_begin()
 		var file_name = chunkdirectory.get_next()
@@ -128,24 +127,20 @@ func delete_level(level_name):
 
 func save():
 	print("Saving Level "+level_name)
+	delete_level(level_name)
 	var dir = DirAccess.new()
 	
-	delete_level(level_name)
-	dir.make_dir("user://level")
-	dir.make_dir("user://level/"+level_name)
-	dir.make_dir("user://level/"+level_name+"/chunks")
-	var save_game = FileAccess.new()
-	save_game.open("user://level/"+level_name+"/index.json", FileAccess.WRITE)
+	DirAccess.make_dir_absolute("user://level")
+	DirAccess.make_dir_absolute("user://level/"+level_name)
+	DirAccess.make_dir_absolute("user://level/"+level_name+"/chunks")
+	var save_game = FileAccess.open("user://level/"+level_name+"/index.json", FileAccess.WRITE)
 	save_game.store_line(level_name)
-	save_game.close()
 	for c in chunks.keys():
 		var chunk = chunks[c]
-		var chunk_file = FileAccess.new()
-		chunk_file.open("user://level/"+level_name+"/chunks/"+str(c), FileAccess.WRITE)
+		var chunk_file = FileAccess.open("user://level/"+level_name+"/chunks/"+str(c), FileAccess.WRITE)
 		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
 			chunk_file.store_line(object.serialize())
-		chunk_file.close()
 
 
 func clear_entities():

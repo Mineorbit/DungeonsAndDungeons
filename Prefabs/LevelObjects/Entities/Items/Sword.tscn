@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://8fg3bikury88"]
 
-[ext_resource type="Script" path="res://Scripts/Sword.gd" id="1_vk6n7"]
+[ext_resource type="Script" path="res://Scripts/Sword.gd" id="1_cfox3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgxee"]
 albedo_color = Color(0.984314, 0.984314, 0, 1)
@@ -16,7 +16,7 @@ size = Vector3(0.75, 0.25, 0.125)
 size = Vector3(0.25, 2, 0.125)
 
 [node name="Sword" type="CharacterBody3D"]
-script = ExtResource("1_vk6n7")
+script = ExtResource("1_cfox3")
 
 [node name="Mesh" type="Node3D" parent="."]
 
