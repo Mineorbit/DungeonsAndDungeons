@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://8fg3bikury88"]
+
+[ext_resource type="Script" path="res://Scripts/Sword.gd" id="1_vk6n7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgxee"]
+albedo_color = Color(0.984314, 0.984314, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5fx3s"]
+material = SubResource("StandardMaterial3D_vgxee")
+size = Vector3(0.25, 2, 0.125)
+
+[sub_resource type="BoxMesh" id="BoxMesh_semoa"]
+size = Vector3(0.75, 0.25, 0.125)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ruhvi"]
+size = Vector3(0.25, 2, 0.125)
+
+[node name="Sword" type="CharacterBody3D"]
+script = ExtResource("1_vk6n7")
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_5fx3s")
+skeleton = NodePath("../..")
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh/Mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.613199, 0)
+mesh = SubResource("BoxMesh_semoa")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ruhvi")

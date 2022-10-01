@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfeuqlm71gsh"]
+
+[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_w5px8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
+
+[sub_resource type="TextMesh" id="TextMesh_kbi3g"]
+material = SubResource("StandardMaterial3D_dibhe")
+text = "Spawner"
+
+[node name="SwordSpawner" type="Node3D"]
+script = ExtResource("1_w5px8")
+spawnedEntity = "Items/Sword"
+
+[node name="Text" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_kbi3g")
