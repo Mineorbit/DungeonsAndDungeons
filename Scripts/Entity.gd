@@ -112,7 +112,7 @@ func _process(_delta: float) -> void:
 		#kickback(Vector3.UP)
 
 
-func OnAttach():
+func OnAttach(owner):
 	pass
 	
 
@@ -121,7 +121,7 @@ func OnDettach():
 	
 func Attach(item):
 	add_child(item)
-	item.OnAttach()
+	item.OnAttach(self)
 	
 func Dettach(item):
 	remove_child(item)

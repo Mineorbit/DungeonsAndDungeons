@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccf0isbs1rdyc"]
+[gd_scene load_steps=13 format=3 uid="uid://ccf0isbs1rdyc"]
 
 [ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/LevelObjectList.gd" id="1_srj5y"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://tbfe4vd7yovn" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
 [ext_resource type="PackedScene" uid="uid://bq2yphhd7sr5n" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
 [ext_resource type="PackedScene" uid="uid://sv0orhygctyj" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
+[ext_resource type="PackedScene" uid="uid://dfeuqlm71gsh" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")
@@ -59,3 +60,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
 [node name="BlogSpawner" parent="." instance=ExtResource("7_v0a86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+
+[node name="SwordSpawner" parent="." instance=ExtResource("9_s5hm6")]
