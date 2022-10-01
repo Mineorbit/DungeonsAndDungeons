@@ -96,7 +96,6 @@ func kickback(direction) -> void:
 	# starts kickback process:
 	# character moves backwards in ballistic arch until
 
-
 func Kill():
 	remove()
 
@@ -112,3 +111,18 @@ func _process(_delta: float) -> void:
 		kickback(Vector3.UP+Vector3.BACK)
 		#kickback(Vector3.UP)
 
+
+func OnAttach():
+	pass
+	
+
+func OnDettach():
+	pass
+	
+func Attach(item):
+	add_child(item)
+	item.OnAttach()
+	
+func Dettach(item):
+	remove_child(item)
+	item.OnDettach()
