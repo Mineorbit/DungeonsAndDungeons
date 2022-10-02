@@ -5,7 +5,7 @@ class_name Enemy
 
 @onready var navAgent = $Navigation
 @onready var target = $Target
-@onready var hitArea = $HitArea
+
 func _ready():
 	super._ready()
 	remove_child(target)
@@ -16,8 +16,6 @@ func _physics_process(delta):
 	super._physics_process(delta)
 	if not started:
 		return
-		
-	
 	if len(Constants.players) > 0 and Constants.players[0] != null:
 		target.global_transform.origin	=	Constants.players[0].global_transform.origin
 	move_direction = Vector3.ZERO
@@ -25,7 +23,7 @@ func _physics_process(delta):
 	if navAgent.is_target_reachable() and not navAgent.is_target_reached():
 		move_direction = ( navAgent.get_next_location() - global_transform.origin).normalized() *0.5
 	navAgent.set_velocity(_velocity)
-	hitArea.Strike(15,self)
+	on_entity_melee_strike.emit(15)
 
 
 func remove():

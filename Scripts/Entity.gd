@@ -19,9 +19,18 @@ var _camera_anchor: Node3D
 var _character: Node3D
 
 var started = false
+
+@onready var meleehitarea = $MeleeHitArea
+
 signal on_entity_remove
 
+signal on_entity_melee_strike(damage)
+
+func MeleeStrike(damage):
+	meleehitarea.Strike(damage,self)
+
 func _ready():
+	on_entity_melee_strike.connect(MeleeStrike)
 	_velocity = Vector3.ZERO
 	
 func start():
