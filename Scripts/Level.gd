@@ -79,8 +79,7 @@ func start():
 			
 	if changedChunks > 0:
 		for chunk in chunks.values():
-			chunk.update_navigation()
-		await changedChunks == 0
+			await chunk.update_navigation()
 	changedChunks = 0
 	for map in NavigationServer3D.get_maps():
 		NavigationServer3D.map_set_edge_connection_margin(map,2)

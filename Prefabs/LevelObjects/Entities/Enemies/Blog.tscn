@@ -22,7 +22,6 @@ shape = SubResource("SphereShape3D_xuwxo")
 path_desired_distance = 0.84
 path_max_distance = 12.9
 navigation_layers = 3
-avoidance_enabled = true
 max_speed = 5.0
 ignore_y = false
 
@@ -42,3 +41,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941375, 0, 0)
 [node name="MeshInstance3d" type="MeshInstance3D" parent="Target"]
 visible = false
 mesh = SubResource("CylinderMesh_q63ex")
+
+[node name="MeleeHitArea" parent="." instance=ExtResource("3_5otfc")]

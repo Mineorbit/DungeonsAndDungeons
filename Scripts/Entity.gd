@@ -115,10 +115,6 @@ func Hit(damage, hitting_entity):
 	if health < 0:
 		Kill()
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("test_kickback"):
-		kickback(Vector3.UP+Vector3.BACK)
-		#kickback(Vector3.UP)
 
 
 func OnAttach(owner):

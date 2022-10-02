@@ -63,6 +63,7 @@ func update_navigation():
 	#mesh.mesh = navmesh
 	if change_in_chunk:
 		navmesh = NavigationMesh.new()
+		navmesh.sample_partition_type = NavigationMesh.SAMPLE_PARTITION_MONOTONE
 		navmesh.agent_radius = Constants.navmargin
 		navmesh.agent_height = 1
 		navmesh.agent_max_climb = 0
