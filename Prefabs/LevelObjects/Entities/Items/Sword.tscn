@@ -17,6 +17,7 @@ size = Vector3(0.75, 0.25, 0.125)
 size = Vector3(0.25, 2, 0.125)
 
 [node name="Sword" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_cfox3")
 
 [node name="Mesh" type="Node3D" parent="."]

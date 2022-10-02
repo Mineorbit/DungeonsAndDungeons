@@ -134,5 +134,8 @@ func Attach(item):
 	item.OnAttach(self)
 	
 func Dettach(item):
+	var position = item.global_transform.origin
 	remove_child(item)
+	Constants.currentEntities.add_child(item)
+	item.global_transform.origin = position
 	item.OnDettach()

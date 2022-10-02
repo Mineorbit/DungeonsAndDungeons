@@ -23,6 +23,9 @@ shape = SubResource("1")
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
 
+[node name="CameraOffset" type="Node3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
+
 [node name="PlayerModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_5yls5")
