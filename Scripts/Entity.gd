@@ -20,6 +20,15 @@ var _character: Node3D
 
 var started = false
 
+
+
+var look_direction = Vector2.ZERO
+var fresh_kickback = false
+var kickback_direction = Vector3.ZERO
+var stun_done = false
+
+
+
 @onready var meleehitarea = $MeleeHitArea
 
 signal on_entity_remove
@@ -54,6 +63,9 @@ var should_jump = false
 var move_direction := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
+	if not started:
+		return
+	
 	if not stunned:
 		_velocity.x = move_direction.x * speed
 		_velocity.z = move_direction.z * speed
@@ -91,12 +103,6 @@ func _physics_process(delta: float) -> void:
 		transform.basis = Basis(smoothrot)
 
 
-
-var look_direction = Vector2.ZERO
-var fresh_kickback = false
-var kickback_direction = Vector3.ZERO
-var stun_done = false
-
 func kickback(direction) -> void:
 	stunned = true
 	stun_done = false
@@ -119,14 +125,11 @@ func Hit(damage, hitting_entity):
 
 
 
-func OnAttach(owner):
-	pass
-	
 
-func OnDettach():
-	pass
 	
 func Attach(item):
+	print("Attaching "+str(item))
+	item.get_parent().remove_child(item)
 	add_child(item)
 	item.OnAttach(self)
 	

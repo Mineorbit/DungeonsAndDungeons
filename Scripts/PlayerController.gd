@@ -33,6 +33,9 @@ func _physics_process(delta):
 		input_direction = input_direction.rotated(Vector3.UP, camera.rotation.y).normalized()
 		
 		
+		if Input.is_action_just_pressed("LeftUse"):
+			player.UseLeft()
+		
 		player.should_jump = Input.is_action_just_pressed("jump")
 		
 		if Input.is_action_just_pressed("Pickup"):
