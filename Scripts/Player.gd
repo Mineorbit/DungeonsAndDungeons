@@ -3,6 +3,8 @@ extends Entity
 
 var id = 0
 
+
+
 func start():
 	super.start()
 	Signals.playerHealthChanged.emit(id,health)

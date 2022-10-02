@@ -24,6 +24,8 @@ var started = false
 
 signal on_entity_remove
 
+signal on_entity_pickup
+
 signal on_entity_melee_strike(damage)
 
 func MeleeStrike(damage):

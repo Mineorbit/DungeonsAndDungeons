@@ -35,5 +35,9 @@ func _physics_process(delta):
 		
 		player.should_jump = Input.is_action_just_pressed("jump")
 		
+		if Input.is_action_just_pressed("Pickup"):
+			player.on_entity_pickup.emit()
+		
+		
 		player.move_direction.x = input_direction.x
 		player.move_direction.z = input_direction.z
