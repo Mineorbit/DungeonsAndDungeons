@@ -7,4 +7,5 @@
 [node name="HitArea" type="ShapeCast3D"]
 shape = SubResource("SphereShape3D_f2n2g")
 target_position = Vector3(0, 0, 0)
+collision_mask = 2
 script = ExtResource("1_c47sg")

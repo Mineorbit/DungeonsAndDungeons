@@ -7,5 +7,5 @@ radius = 1.0
 
 [node name="ItemPickupArea" type="ShapeCast3D"]
 shape = SubResource("SphereShape3D_btc0r")
-collision_mask = 2
+collision_mask = 4
 script = ExtResource("1_elaus")

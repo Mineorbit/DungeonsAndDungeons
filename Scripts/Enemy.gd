@@ -11,15 +11,20 @@ func _ready():
 	remove_child(target)
 	navAgent.ignore_y = false
 	get_parent().add_child(target)
-	#setup_calculation_routine()
+	setup_calculation_routine()
 
 func setup_calculation_routine():
 	_timer = Timer.new()
 	add_child(_timer)
-	_timer.timeout.connect(auto_navigate)
+	_timer.timeout.connect(try_strike)
 	_timer.set_wait_time(1.0)
 	_timer.set_one_shot(false) # Make sure it loops
 	_timer.start()
+
+func try_strike():
+	print("Trying to Strike")
+	on_entity_melee_strike.emit(15)
+	
 
 func _physics_process(delta):
 	super._physics_process(delta)
@@ -29,7 +34,6 @@ func _physics_process(delta):
 		target.global_transform.origin	=	Constants.players[0].global_transform.origin
 	move_direction = Vector3.ZERO
 	auto_navigate()
-	on_entity_melee_strike.emit(15)
 
 
 
