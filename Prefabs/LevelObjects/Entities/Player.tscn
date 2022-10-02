@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://qu1fe6bdgard"]
+[gd_scene load_steps=7 format=3 uid="uid://qu1fe6bdgard"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://dp6gsieqenq5w" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
+[ext_resource type="PackedScene" uid="uid://0pq06vchkhju" path="res://Prefabs/ItemPickupArea.tscn" id="3_7kqva"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -32,3 +33,6 @@ mesh = SubResource("CapsuleMesh_1tpy7")
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_4q7mt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[node name="ItemPickupArea" parent="." instance=ExtResource("3_7kqva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
