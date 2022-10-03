@@ -48,6 +48,39 @@ func reset():
 			entity.reset()
 		
 
+func build_navigation():
+	for chunk in chunks.values():
+		for object in chunk.levelObjects.get_children():
+			if object.has_method("prepare_for_navmesh_build"):
+				object.prepare_for_navmesh_build()
+		
+	for map in NavigationServer3D.get_maps():
+		NavigationServer3D.map_set_edge_connection_margin(map,2)
+	for chunk in chunks.values():
+		if chunk.change_in_chunk:
+			changedChunks = changedChunks + 1
+	
+	print("Building Nav Mesh")
+	# in base method
+	#await build_navigation_per_chunk()
+	await bake_navigation_mesh(false)
+	
+	print("Finished Building Nav Mesh")
+	for map in NavigationServer3D.get_maps():
+		NavigationServer3D.map_set_edge_connection_margin(map,2)
+	for chunk in chunks.values():
+		for object in chunk.levelObjects.get_children():
+			if object.has_method("restore_after_navmesh_build"):
+				object.restore_after_navmesh_build()				
+	
+	
+func build_navigation_per_chunk():
+	if changedChunks > 0:
+		for chunk in chunks.values():
+			await chunk.update_navigation()
+	changedChunks = 0
+
+
 var changes = true
 #this is a start routine for a level
 func start():
@@ -63,33 +96,7 @@ func start():
 	Constants.buffer()
 	Constants.buffer()
 	
-	for chunk in chunks.values():
-		for object in chunk.levelObjects.get_children():
-			if object.has_method("prepare_for_navmesh_build"):
-				object.prepare_for_navmesh_build()
-				
-	
-	for map in NavigationServer3D.get_maps():
-		NavigationServer3D.map_set_edge_connection_margin(map,2)
-
-
-	for chunk in chunks.values():
-		if chunk.change_in_chunk:
-			changedChunks = changedChunks + 1
-			
-	if changedChunks > 0:
-		for chunk in chunks.values():
-			await chunk.update_navigation()
-	changedChunks = 0
-	for map in NavigationServer3D.get_maps():
-		NavigationServer3D.map_set_edge_connection_margin(map,2)
-	
-
-	for chunk in chunks.values():
-		for object in chunk.levelObjects.get_children():
-			if object.has_method("restore_after_navmesh_build"):
-				object.restore_after_navmesh_build()
-	
+	await build_navigation()
 	
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():

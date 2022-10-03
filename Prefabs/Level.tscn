@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_knahc"]
+sample_partition_type = 2
 geometry_parsed_geometry_type = 1
 
 [node name="Level" type="NavigationRegion3D"]
