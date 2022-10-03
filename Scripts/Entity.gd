@@ -33,6 +33,8 @@ var stun_done = false
 
 signal on_entity_remove
 
+signal on_entity_despawn
+
 signal on_entity_pickup
 
 signal on_entity_melee_strike(damage)
@@ -134,6 +136,8 @@ func Attach(item):
 	item.OnAttach(self)
 	
 func Dettach(item):
+	if item == null:
+		return
 	var position = item.global_transform.origin
 	remove_child(item)
 	Constants.currentEntities.add_child(item)

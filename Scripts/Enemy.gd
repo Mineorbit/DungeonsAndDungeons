@@ -27,23 +27,26 @@ func try_strike():
 	
 
 func _physics_process(delta):
-	super._physics_process(delta)
-	if not started:
-		return
+	track_target()
+	plan_route()
+	auto_navigate(delta)
+
+
+func track_target():
 	if len(Constants.players) > 0 and Constants.players[0] != null:
 		target.global_transform.origin	=	Constants.players[0].global_transform.origin
-	move_direction = Vector3.ZERO
-	auto_navigate()
 
-
-
-
-func auto_navigate():
+func plan_route():
 	navAgent.set_target_location(target.global_transform.origin)
-	#var canreach = navAgent.is_target_reachable() and not navAgent.is_target_reached()
-	var canreach = true
+
+
+func auto_navigate(delta):
+	var canreach = navAgent.is_target_reachable() and not navAgent.is_target_reached()
 	if canreach:
 		move_direction = ( navAgent.get_next_location() - global_transform.origin).normalized() *0.5
+	else:
+		move_direction = Vector3.ZERO
+	super._physics_process(delta)
 	navAgent.set_velocity(_velocity)
 
 func remove():

@@ -29,6 +29,7 @@ func despawn_players():
 		if player == null:
 			continue
 		player.global_transform.origin = Vector3(0.5,-5,0.5)
+		player.on_entity_despawn.emit()
 		await Constants.buffer()
 		playerEntities.remove_child(player)
 		playerControllers.of(i).despawn()

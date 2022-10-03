@@ -11,6 +11,17 @@ func UseLeft():
 func UseRight():
 	pass
 
+func _ready():
+	super._ready()
+	on_entity_despawn.connect(DettachAllItems)
+	on_entity_remove.connect(DettachAllItems)
+
+func DettachAllItems():
+	print("Dettaching all Items")
+	if itemLeft != null:
+		Dettach(itemLeft)
+	if itemRight != null:
+		Dettach(itemRight)
 
 func start():
 	super.start()
@@ -22,6 +33,7 @@ func Hit(damage,hitting_entity):
 
 var itemLeft
 var itemRight
+
 
 func Attach(item):
 	super.Attach(item)
