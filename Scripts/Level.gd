@@ -62,8 +62,8 @@ func build_navigation():
 	
 	print("Building Nav Mesh")
 	# in base method
-	#await build_navigation_per_chunk()
-	await bake_navigation_mesh(false)
+	await build_navigation_per_chunk()
+	#await bake_navigation_mesh(false)
 	
 	print("Finished Building Nav Mesh")
 	for map in NavigationServer3D.get_maps():
