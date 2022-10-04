@@ -4,3 +4,10 @@
 
 [node name="ServerNetworkManagement" type="Node3D"]
 script = ExtResource("1_1twme")
+
+[node name="Node2d" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2d"]
+offset_right = 98.0
+offset_bottom = 40.0
+text = "Server"
