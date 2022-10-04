@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://vmjl3nr0u2qg"]
 
-[ext_resource path="res://Scripts/Bootstrap.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Constants.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://Scripts/Bootstrap.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Constants.gd" id="2"]
 
 [node name="Bootstrap" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
+is_server = true
 
 [node name="Constants" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")

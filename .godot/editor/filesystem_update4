@@ -1,6 +1,11 @@
-res://Scenes/menu.tscn
+res://Prefabs/LevelObjects/Interactive/Lever.tscn
 res://Assets/Materials/LevelObjectCollision.tres
 res://Resources/grid.tres
+res://Scripts/Bootstrap.gd
+res://Scenes/ServerNetworkManagement.tscn
+res://Scripts/ServerNetworkManagement.gd
+res://Scripts/Play.gd
+res://Scenes/menu.tscn
 res://Prefabs/LevelObject.tscn
 res://Prefabs/InteractiveLevelObject.tscn
 res://Prefabs/BuilderHUD.tscn
@@ -10,7 +15,7 @@ res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn
 res://Prefabs/Chunk.tscn
 res://Prefabs/Level.tscn
 res://Prefabs/Connection.tscn
-res://Scenes/edit.tscn
+res://Scenes/play.tscn
 res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn
 res://Prefabs/LevelObjects/Interactive/Gate.tscn
 res://Prefabs/PlayerHUD.tscn
@@ -26,5 +31,4 @@ res://Prefabs/HitArea.tscn
 res://Prefabs/Signals.tscn
 res://Prefabs/LevelObjects/Entities/Items/Sword.tscn
 res://Prefabs/ItemPickupArea.tscn
-res://Prefabs/LevelObjects/Interactive/Lever.tscn
-res://Scenes/play.tscn
+res://Scenes/Bootstrap.tscn
