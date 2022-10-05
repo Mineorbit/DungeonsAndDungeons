@@ -5,6 +5,7 @@ extends Node3D
 func _ready():
 	var serverCamera = load("res://Prefabs/Camera.tscn").instantiate()
 	add_child(serverCamera)
+	serverCamera.global_transform.origin = Vector3(0,2,12)
 	var peer = ENetMultiplayerPeer.new()
 	#multiplayer.peer_connected.connect(self.create_player)
 	
