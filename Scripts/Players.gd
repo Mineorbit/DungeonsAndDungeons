@@ -35,7 +35,8 @@ func despawn_players():
 
 func despawn_player_controllers():
 	for i in range(4):
-		playerControllers.of(i).despawn()
+		if players[i] != null:
+			playerControllers.of(i).despawn()
 		
 
 func spawn_player_controllers():
