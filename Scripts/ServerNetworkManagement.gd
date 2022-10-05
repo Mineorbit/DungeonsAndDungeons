@@ -3,6 +3,8 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var serverCamera = load("res://Prefabs/Camera.tscn").instantiate()
+	add_child(serverCamera)
 	var peer = ENetMultiplayerPeer.new()
 	#multiplayer.peer_connected.connect(self.create_player)
 	

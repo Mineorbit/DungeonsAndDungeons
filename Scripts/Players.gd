@@ -7,6 +7,7 @@ var playerpref
 var players = [null,null,null,null]
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 
 
@@ -35,8 +36,7 @@ func despawn_players():
 
 func despawn_player_controllers():
 	for i in range(4):
-		if players[i] != null:
-			playerControllers.of(i).despawn()
+		playerControllers.of(i).despawn()
 		
 
 func spawn_player_controllers():

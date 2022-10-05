@@ -26,7 +26,7 @@ func start_server():
 
 func start_play():
 		remove_child(current_scene)
-		current_scene = load("res://Scenes/test.tscn").instantiate()
+		current_scene = load("res://Scenes/play.tscn").instantiate()
 		add_child(current_scene)
 func start_edit():
 		remove_child(current_scene)
