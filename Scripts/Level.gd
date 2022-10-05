@@ -170,6 +170,7 @@ func clear():
 	chunks.clear()
 
 var started_loading = false
+var immediate = false
 
 func load(level_name):
 	
@@ -213,7 +214,6 @@ func load(level_name):
 	else:
 		print("An error occurred when trying to access the path.")
 
-var immediate = false
 
 func add_from_string(base_position,line):
 	var lineData = line.split("|")

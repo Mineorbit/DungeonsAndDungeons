@@ -56,6 +56,7 @@ func enter_edit_mode():
 		return
 	Constants.set_mode(1)
 	Players.despawn_players()
+	Players.despawn_player_controllers()
 	level.reset()
 	add_child(builder)
 	if playerhud in get_children():
@@ -72,6 +73,7 @@ func enter_test_mode():
 	remove_child(builder)
 	await level.start()
 	Players.spawn_players()
+	Players.spawn_player_controllers()
 	if builderhud in get_children():
 		remove_child(builderhud)
 	add_child(playerhud)
