@@ -12,9 +12,12 @@ func _ready():
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
 	peer.create_server(13565)
 	multiplayer.set_multiplayer_peer(peer)
+	multiplayer.peer_connected.connect(new_player)
 
 
 
+func new_player(id):
+	print("New Connection "+str(id))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

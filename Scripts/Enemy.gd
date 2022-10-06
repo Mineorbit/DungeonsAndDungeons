@@ -22,7 +22,6 @@ func setup_calculation_routine():
 	_timer.start()
 
 func try_strike():
-	print("Trying to Strike")
 	on_entity_melee_strike.emit(15)
 	
 
@@ -37,7 +36,8 @@ func track_target():
 		target.global_transform.origin	=	Constants.players[0].global_transform.origin
 
 func plan_route():
-	navAgent.set_target_location(target.global_transform.origin)
+	if (is_inside_tree() and target.is_inside_tree()):
+		navAgent.set_target_location(target.global_transform.origin)
 
 
 func auto_navigate(delta):
