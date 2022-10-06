@@ -28,6 +28,8 @@ func start_play():
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/test.tscn").instantiate()
 		add_child(current_scene)
+		var client_management = load("res://Scenes/ClientNetworkManagement.tscn").instantiate()
+		current_scene.add_child(client_management)
 func start_edit():
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/edit.tscn").instantiate()
