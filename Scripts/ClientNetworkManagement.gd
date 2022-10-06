@@ -7,7 +7,7 @@ func _ready():
 	#multiplayer.peer_connected.connect(self.create_player)
 	
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
-	peer.create_server(13565)
+	peer.create_client("127.0.0.1",13565)
 	multiplayer.set_multiplayer_peer(peer)
 
 

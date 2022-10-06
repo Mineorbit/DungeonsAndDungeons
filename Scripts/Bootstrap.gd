@@ -8,21 +8,7 @@ extends Node
 var current_scene = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-var started = false
-func _process(delta):
-	if not started:
-		if Input.is_action_just_pressed("Server"):
-			started = true
-			start(true)
-		elif Input.is_action_just_pressed("Client"):
-			started = true
-			start(false)
-		
-	
-
-func start(server_check):	
-	var server = server_check or is_server or OS.has_feature("Server") or "--server" in OS.get_cmdline_args()
+	var server = is_server or OS.has_feature("Server") or "--server" in OS.get_cmdline_args()
 	if server:
 		print("===Starting Server===")
 		start_server()
@@ -32,8 +18,6 @@ func start(server_check):
 		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
 
-	
-
 func start_server():
 	current_scene = load("res://Scenes/play.tscn").instantiate()
 	add_child(current_scene)
@@ -42,7 +26,7 @@ func start_server():
 
 func start_play():
 		remove_child(current_scene)
-		current_scene = load("res://Scenes/play.tscn").instantiate()
+		current_scene = load("res://Scenes/test.tscn").instantiate()
 		add_child(current_scene)
 func start_edit():
 		remove_child(current_scene)
