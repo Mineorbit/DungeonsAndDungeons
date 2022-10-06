@@ -58,9 +58,9 @@ func on_remove():
 			second_object.connectedObjects.erase(unique_instance_id)
 	removal_ingoing = connectedObjects
 	for i in removal_ingoing:
-		Constants.connection_removed.emit(i,[unique_instance_id])	
-	Constants.connection_removed.emit(unique_instance_id,removal_outgoing)
-	Constants.interactiveLevelObjects.erase(unique_instance_id)
+		Signals.connection_removed.emit(i,[unique_instance_id])	
+	Signals.connection_removed.emit(unique_instance_id,removal_outgoing)
+	Signals.interactiveLevelObjects.erase(unique_instance_id)
 
 func sign_up():
 	Constants.interactiveLevelObjects[unique_instance_id] = self
