@@ -22,7 +22,7 @@ func _ready() -> void:
 	cursor = $CursorArm/Cursor
 	collisionRay = $CursorArm/Cursor/RayCast
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
-	level = $"../Level"
+	level = $"../World/Level"
 	top_level = true
 	edit = get_parent()
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

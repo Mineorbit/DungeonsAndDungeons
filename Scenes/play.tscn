@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dssle2mfa1ti8"]
 
 [ext_resource type="Script" path="res://Scripts/Play.gd" id="1_nrxjr"]
-[ext_resource type="PackedScene" uid="uid://dc1n0bufe2f6y" path="res://Prefabs/Players.tscn" id="3_a1hob"]
+[ext_resource type="PackedScene" uid="uid://cvg3inbhv8cu7" path="res://Prefabs/World.tscn" id="2_ou7wa"]
 
 [sub_resource type="Environment" id="3"]
 background_mode = 1
@@ -12,7 +12,6 @@ sdfgi_use_occlusion = true
 glow_intensity = 0.2
 
 [node name="Play" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.416297, 0)
 script = ExtResource("1_nrxjr")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -24,4 +23,4 @@ light_color = Color(0.972549, 1, 0.803922, 1)
 light_energy = 0.8
 shadow_enabled = true
 
-[node name="Players" parent="." instance=ExtResource("3_a1hob")]
+[node name="World" parent="." instance=ExtResource("2_ou7wa")]

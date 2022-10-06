@@ -9,9 +9,9 @@ var level
 var builderpref
 var playerhudpref
 var builderhudpref
-@onready var Players = $Players
+@onready var Players = $World/Players
 @onready var connections = $Connections
-
+@onready var world = $World
 var builderhud
 var playerhud
 
@@ -30,10 +30,6 @@ func _ready():
 	Signals.game_won.connect(enter_edit_mode)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func create_new_level():
-	level = load("res://Prefabs/Level.tscn").instantiate()
-	add_child(level)
-	level.setup_new()
 
 
 

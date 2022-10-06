@@ -47,9 +47,7 @@ func spawn_player_controllers():
 	set_current_player(0)
 
 
-func spawn_players():
-	print("Spawning Players")
-	for i in range(4):
+func spawn_player(i):
 		var player
 		if players[i] == null:
 			player = playerpref.instantiate()
@@ -62,5 +60,11 @@ func spawn_players():
 		await Constants.buffer()
 		player._velocity = Vector3.ZERO
 		player.start()
+	
+
+func spawn_players():
+	print("Spawning Players")
+	for i in range(4):
+		spawn_player(i)
 
 	# this is shit but it works

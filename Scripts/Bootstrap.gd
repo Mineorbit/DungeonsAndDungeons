@@ -39,7 +39,6 @@ func start_server():
 	add_child(current_scene)
 	var server_management = load("res://Scenes/ServerNetworkManagement.tscn").instantiate()
 	current_scene.add_child(server_management)
-	current_scene.start()
 
 func start_play():
 		remove_child(current_scene)
