@@ -32,6 +32,7 @@ func despawn_players():
 		player.on_entity_despawn.emit()
 		await Constants.buffer()
 		playerEntities.remove_child(player)
+	Constants.players = players
 
 func despawn_player_controllers():
 	for i in range(4):
@@ -41,10 +42,13 @@ func despawn_player_controllers():
 
 func spawn_player_controllers():
 	for i in range(4):
-		playerControllers.add(players[i],i)	
-	Constants.players = players
+		spawn_player_controller(i)
 	playerControllers.of(0).spawn()
 	set_current_player(0)
+
+
+func spawn_player_controller(i):
+	playerControllers.add(players[i],i)	
 
 
 func spawn_player(i):
@@ -60,7 +64,7 @@ func spawn_player(i):
 		await Constants.buffer()
 		player._velocity = Vector3.ZERO
 		player.start()
-	
+		Constants.players = players
 
 func spawn_players():
 	print("Spawning Players")

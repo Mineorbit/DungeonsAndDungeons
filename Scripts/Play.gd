@@ -7,8 +7,12 @@ func _ready():
 	
 
 func add_player(id):
-	world.players.spawn_player(0)
+	world.players.spawn_player(id)
+	var new_controller = world.players.spawn_player_controller(id)
+	world.players.playerControllers.of(id).set_active(true)
+	print(world.players.playerControllers.get_children())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("Connect"):
+		print(world.players.playerControllers.get_children())
