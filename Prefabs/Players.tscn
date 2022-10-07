@@ -10,6 +10,10 @@ script = ExtResource("1_7rsru")
 
 [node name="PlayerControllers" parent="." instance=ExtResource("2_33e1n")]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerMPSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/LevelObjects/Entities/Player.tscn")
 spawn_path = NodePath("../PlayerEntities")
+
+[node name="PlayerControllerMPSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Prefabs/PlayerController.tscn")
+spawn_path = NodePath("../PlayerControllers")
