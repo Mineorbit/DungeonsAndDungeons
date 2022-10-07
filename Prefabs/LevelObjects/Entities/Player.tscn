@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qu1fe6bdgard"]
+[gd_scene load_steps=8 format=3 uid="uid://qu1fe6bdgard"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://dp6gsieqenq5w" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
@@ -12,6 +12,14 @@ radius = 0.375
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1tpy7"]
 radius = 0.25
 height = 0.75
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -41,3 +49,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 
 [node name="ItemPickupArea" parent="." instance=ExtResource("3_7kqva")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_bnrka")
