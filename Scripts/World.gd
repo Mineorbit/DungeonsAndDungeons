@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var players = $Players
 var level
+
 # Called when the node enters the scene tree for the first time.
 func start():
 	create_new_level()

@@ -24,3 +24,6 @@ light_energy = 0.8
 shadow_enabled = true
 
 [node name="World" parent="." instance=ExtResource("2_ou7wa")]
+
+[node name="Camera3d" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8)

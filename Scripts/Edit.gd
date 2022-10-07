@@ -24,7 +24,7 @@ func _ready():
 	playerhud = playerhudpref.instantiate()
 	builderhud = builderhudpref.instantiate()
 	builder.global_transform.origin = Vector3(0,5,0)
-	create_new_level()
+	world.create_new_level()
 	enter_edit_mode()
 	Signals.game_won.connect(Players.despawn_players)
 	Signals.game_won.connect(enter_edit_mode)
@@ -53,7 +53,7 @@ func enter_edit_mode():
 	Constants.set_mode(1)
 	Players.despawn_players()
 	Players.despawn_player_controllers()
-	level.reset()
+	world.level.reset()
 	add_child(builder)
 	if playerhud in get_children():
 		remove_child(playerhud)
@@ -67,7 +67,7 @@ func enter_test_mode():
 		return
 	Constants.set_mode(2)
 	remove_child(builder)
-	await level.start()
+	await world.level.start()
 	Players.spawn_players()
 	Players.spawn_player_controllers()
 	if builderhud in get_children():

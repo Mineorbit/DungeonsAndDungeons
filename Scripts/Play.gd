@@ -6,6 +6,9 @@ func _ready():
 	pass
 	
 
+func add_player(id):
+	world.players.spawn_player(0)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
