@@ -27,6 +27,8 @@ func _ready():
 			new_res = load(path)
 		else:
 			new_res = LevelObjectData.new()
+		if new_res == null:
+			return
 		new_res.levelObjectId = unique_id
 		new_res.name = name
 		new_res.tiled = is_tiled

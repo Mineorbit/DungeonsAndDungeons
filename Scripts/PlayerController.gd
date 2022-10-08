@@ -26,7 +26,8 @@ func Jump():
 	print("Me: "+str(Constants.id))
 	print("RPC called by: ", multiplayer.get_remote_sender_id())
 	print("Authority: "+str(get_multiplayer_authority()))
-	player.jump()
+	if player != null:
+		player.jump()
 
 func JumpAction():
 	if player != null:
@@ -39,7 +40,8 @@ func JumpAction():
 
 @rpc
 func UseLeft():
-	player.UseLeft()
+	if player != null:
+		player.UseLeft()
 
 
 func UseLeftAction():

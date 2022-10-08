@@ -16,8 +16,9 @@ func connected(id):
 	Constants.id = peer.get_unique_id()
 
 
+
 func _process(delta):
 	#this is terrible and needs to be adjusted
-	if Constants.playerCamera.player != get_parent().world.players.get_player(0):
-		Constants.playerCamera.player = get_parent().world.players.get_player(0)
+	if MultiplayerConstants.local_id != -1 and Constants.playerCamera.player != get_parent().world.players.get_player(MultiplayerConstants.local_id):
+		Constants.playerCamera.player = get_parent().world.players.get_player(MultiplayerConstants.local_id)
 
