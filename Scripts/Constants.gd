@@ -37,6 +37,8 @@ func _ready():
 	add_child(currentEntities)
 
 
+
+
 func buffer():
 	await get_tree().physics_frame
 	await get_tree().physics_frame

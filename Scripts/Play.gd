@@ -19,3 +19,5 @@ func add_player_controller(id = 0):
 func _process(delta):
 	if Input.is_action_just_pressed("Connect"):
 		print(world.players.playerControllers.get_children())
+
+
