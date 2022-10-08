@@ -28,7 +28,6 @@ func _ready():
 	enter_edit_mode()
 	Signals.game_won.connect(Players.despawn_players)
 	Signals.game_won.connect(enter_edit_mode)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 

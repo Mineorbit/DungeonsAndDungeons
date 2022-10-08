@@ -10,8 +10,8 @@ var mouse_sensitivity := 0.005
 		if value == null:
 			remove_child(Camera)
 		else:
-			print("LOL"+str(value))
 			add_child(Camera)	
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Camera.current = true	
 		player = value
 
