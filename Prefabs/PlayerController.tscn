@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_hko7f"]
 [ext_resource type="Script" path="res://Scripts/PlayerControllerSynchronizer.gd" id="2_20dnh"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hg313"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8fvqn"]
 properties/0/path = NodePath(".:input_direction")
 properties/0/spawn = true
 properties/0/sync = true
@@ -13,5 +13,5 @@ script = ExtResource("1_hko7f")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath(".")
-replication_config = SubResource("SceneReplicationConfig_hg313")
+replication_config = SubResource("SceneReplicationConfig_8fvqn")
 script = ExtResource("2_20dnh")

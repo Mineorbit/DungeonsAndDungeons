@@ -23,10 +23,7 @@ func new_player(id):
 	
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
-	var playercontroller = get_parent().add_player_controller(i)
-	playercontroller.get_child(0).set_multiplayer_authority(id)
-	print("Set authority to: "+str(id))
-	#playercontroller.set_active(false)
+	get_parent().add_player_controller(i,id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

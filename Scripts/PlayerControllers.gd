@@ -8,13 +8,12 @@ func _ready():
 	playercontroller_prefab = load("res://Prefabs/PlayerController.tscn")
 
 
-func add(playerEntity,id):
+func add(playerEntity,id, owner_id = 0):
 	var playercontroller = playercontroller_prefab.instantiate()
-	
-	playercontroller.name = str(id)
-	add_child(playercontroller)
 	playercontroller.player = playerEntity
 	playerControllers[id] = playercontroller
+	playercontroller.name = str(owner_id)
+	add_child(playercontroller)
 
 func of(playerid):
 	for node in get_children():

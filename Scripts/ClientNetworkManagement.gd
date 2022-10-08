@@ -1,10 +1,9 @@
 extends Node3D
 
-
+var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Constants.is_client = true
-	var peer = ENetMultiplayerPeer.new()
+	peer = ENetMultiplayerPeer.new()
 	#multiplayer.peer_connected.connect(self.create_player)
 	
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
@@ -13,8 +12,8 @@ func _ready():
 	multiplayer.set_multiplayer_peer(peer)
 
 func connected(id):
-	print("Connected with "+str(id))
-	Constants.id = id
+	print("Connected with "+str(peer.get_unique_id()))
+	Constants.id = peer.get_unique_id()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

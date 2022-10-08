@@ -47,9 +47,10 @@ func spawn_player_controllers():
 	set_current_player(0)
 
 
-func spawn_player_controller(i):
-	playerControllers.add(players[i],i)	
+func spawn_player_controller(i,owner_id = 0):
+	playerControllers.add(players[i],i,owner_id)	
 	players[i].playercontroller = playerControllers.of(i)
+	return players[i].playercontroller
 
 
 func spawn_player(i):
