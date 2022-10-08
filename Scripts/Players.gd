@@ -8,6 +8,7 @@ var players = [null,null,null,null]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,6 +59,7 @@ func spawn_player(i):
 		var player
 		if players[i] == null:
 			player = playerpref.instantiate()
+			player.name = str(i)
 			player.id = i
 			players[i] = player
 		else:

@@ -11,10 +11,3 @@ func add_player(id):
 
 func add_player_controller(id = 0,peer_id = 0):
 	var playercontroller = world.players.spawn_player_controller(id,peer_id)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("Connect"):
-		print(world.players.playerControllers.get_children())
-
-

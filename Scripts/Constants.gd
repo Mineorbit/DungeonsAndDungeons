@@ -29,6 +29,8 @@ var levelObjects_initialized = false
 
 var builderPosition = Vector3.ZERO
 
+var playerCamera
+
 
 var id = 0
 

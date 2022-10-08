@@ -1,7 +1,6 @@
 extends Node
 
 var player
-var camera
 var is_active = false
 var spawned = false
 
@@ -11,23 +10,16 @@ var spawned = false
 func _ready():
 	synchronizer.set_multiplayer_authority(str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
-	camera = load("res://Prefabs/PlayerCamera.tscn").instantiate()
 
 
-@rpc
 func spawn():
 	spawned = true
-	add_child(camera)
-	camera.player = player
 	
 func set_active(active):
-	print("Setting "+str(active))
 	is_active = active
 
 func despawn():
 	spawned = false
-	remove_child(camera)
-	camera.player = player
 
 @rpc
 func Jump():
@@ -45,9 +37,17 @@ func JumpAction():
 	
 
 
-
+@rpc
 func UseLeft():
 	player.UseLeft()
+
+
+func UseLeftAction():
+	if player != null:
+		UseLeft()
+	else:
+		rpc("UseLeft") 
+	
 
 func UseRight():
 	pass
@@ -63,11 +63,11 @@ func _physics_process(delta):
 		input_direction = Vector3.ZERO
 		input_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
-		input_direction = input_direction.rotated(Vector3.UP, camera.rotation.y).normalized()
+		input_direction = input_direction.rotated(Vector3.UP, Constants.playerCamera.rotation.y).normalized()
 		synchronizer.input_direction = input_direction
 	#print(str(self)+" "+str(input_direction))
 		if Input.is_action_just_pressed("LeftUse"):
-			UseLeft()
+			UseLeftAction()
 		if Input.is_action_just_pressed("jump"):
 			JumpAction()
 		if Input.is_action_just_pressed("Pickup"):

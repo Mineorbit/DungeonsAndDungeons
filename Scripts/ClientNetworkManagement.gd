@@ -14,7 +14,7 @@ func _ready():
 func connected(id):
 	print("Connected with "+str(peer.get_unique_id()))
 	Constants.id = peer.get_unique_id()
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

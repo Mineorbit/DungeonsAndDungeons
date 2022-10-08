@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc1n0bufe2f6y"]
+[gd_scene load_steps=4 format=3 uid="uid://dc1n0bufe2f6y"]
 
 [ext_resource type="Script" path="res://Scripts/Players.gd" id="1_7rsru"]
 [ext_resource type="PackedScene" uid="uid://dhclg7fimof2o" path="res://Prefabs/PlayerControllers.tscn" id="2_33e1n"]
+[ext_resource type="PackedScene" uid="uid://df2k2dllamw27" path="res://Prefabs/PlayerCamera.tscn" id="3_6yl06"]
 
 [node name="Players" type="Node3D"]
 script = ExtResource("1_7rsru")
@@ -17,3 +18,5 @@ spawn_path = NodePath("../PlayerEntities")
 [node name="PlayerControllerMPSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/PlayerController.tscn")
 spawn_path = NodePath("../PlayerControllers")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("3_6yl06")]

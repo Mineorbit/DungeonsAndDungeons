@@ -7,7 +7,9 @@ var id_to_local_id = [null,null,null,null]
 func _ready():
 	var peer = ENetMultiplayerPeer.new()
 	#multiplayer.peer_connected.connect(self.create_player)
-	
+	var servercamera = load("res://Prefabs/ServerCamera.tscn").instantiate()
+	add_child(servercamera)
+	servercamera.global_transform.origin = Vector3(0,2,12)
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
 	peer.create_server(13565)
 	Constants.id = peer.get_unique_id()
