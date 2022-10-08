@@ -8,9 +8,12 @@ func _ready():
 
 func add_player(id):
 	world.players.spawn_player(id)
-	var new_controller = world.players.spawn_player_controller(id)
+
+func add_player_controller(id = 0):
+	world.players.spawn_player_controller(id)
 	world.players.playerControllers.of(id).set_active(true)
-	print(world.players.playerControllers.get_children())
+	print("New Controller "+str(world.players.playerControllers.get_children()))
+	return world.players.playerControllers.of(id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -49,6 +49,7 @@ func spawn_player_controllers():
 
 func spawn_player_controller(i):
 	playerControllers.add(players[i],i)	
+	players[i].playercontroller = playerControllers.of(i)
 
 
 func spawn_player(i):

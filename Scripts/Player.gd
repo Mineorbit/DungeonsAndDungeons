@@ -2,6 +2,10 @@ extends Entity
 
 
 var id = 0
+var itemLeft
+var itemRight
+
+var playercontroller
 @onready var camera_offset = $CameraAnchor/CameraOffset
 	
 func UseLeft():
@@ -31,9 +35,12 @@ func Hit(damage,hitting_entity):
 	super.Hit(damage,hitting_entity)
 	Signals.playerHealthChanged.emit(id,health)
 
-var itemLeft
-var itemRight
 
+func _physics_process(delta):
+	if playercontroller != null:
+		move_direction.x = playercontroller.input_direction.x
+		move_direction.z = playercontroller.input_direction.z
+	super._physics_process(delta)
 
 func Attach(item):
 	super.Attach(item)
