@@ -24,7 +24,7 @@ func new_player(id):
 	while(id_to_local_id[i] != null):
 		i = i + 1
 	id_to_local_id[i] = id
-	MultiplayerConstants.rpc("set_local_id",i)
+	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
 	get_parent().add_player_controller(i,id)
