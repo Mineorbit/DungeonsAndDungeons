@@ -74,6 +74,6 @@ func enter_test_mode():
 	if builderhud in get_children():
 		remove_child(builderhud)
 	add_child(playerhud)
-	Constants.playerCamera.player = Players.players[0]
+	Constants.playerCamera.player = Players.get_player(0)
 	connections.hide()
 	
