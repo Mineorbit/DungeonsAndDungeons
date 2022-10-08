@@ -63,6 +63,14 @@ func remove():
 var should_jump = false
 
 var move_direction := Vector3.ZERO
+var is_jumping = false
+
+func jump():
+	if not stunned:
+		is_jumping = is_on_floor()
+		print(is_jumping)
+
+
 
 func _physics_process(delta: float) -> void:
 	if not started:
@@ -75,13 +83,12 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		_velocity.y -= gravity * delta
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
-	
-	var is_jumping := false
-	if not stunned:
-		is_jumping = is_on_floor() and should_jump
+	if just_landed:
+		is_jumping = false
 	if is_jumping:
 		_velocity.y = jump_strength
 		_snap_vector = Vector3.ZERO
+		is_jumping = false
 	elif just_landed:
 		_snap_vector = Vector3.DOWN
 		if stun_done:
