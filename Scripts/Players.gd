@@ -50,6 +50,7 @@ func spawn_player_controllers():
 func spawn_player_controller(i,owner_id = 0):
 	playerControllers.add(players[i],i,owner_id)	
 	players[i].playercontroller = playerControllers.of(i)
+	players[i].playercontroller.player = players[i]
 	return players[i].playercontroller
 
 

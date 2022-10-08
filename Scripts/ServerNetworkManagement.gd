@@ -10,6 +10,8 @@ func _ready():
 	
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
 	peer.create_server(13565)
+	Constants.id = peer.get_unique_id()
+	print("Server has Unique ID "+str(Constants.id))
 	multiplayer.set_multiplayer_peer(peer)
 	multiplayer.peer_connected.connect(new_player)
 	get_parent().world.start()
