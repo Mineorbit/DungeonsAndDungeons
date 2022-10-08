@@ -33,7 +33,8 @@ func JumpAction():
 	if player != null:
 		Jump()
 	else:
-		rpc("Jump") 
+		#only to server
+		rpc_id(1,"Jump") 
 		
 	
 
@@ -48,7 +49,7 @@ func UseLeftAction():
 	if player != null:
 		UseLeft()
 	else:
-		rpc("UseLeft") 
+		rpc_id(1,"UseLeft") 
 	
 
 func UseRight():
