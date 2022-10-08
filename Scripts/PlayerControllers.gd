@@ -10,9 +10,14 @@ func _ready():
 
 func add(playerEntity,id):
 	var playercontroller = playercontroller_prefab.instantiate()
+	
+	playercontroller.name = str(id)
 	add_child(playercontroller)
 	playercontroller.player = playerEntity
 	playerControllers[id] = playercontroller
 
 func of(playerid):
+	for node in get_children():
+		if node.name == str(playerid):
+			return node
 	return playerControllers[playerid]

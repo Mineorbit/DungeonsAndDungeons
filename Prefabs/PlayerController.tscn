@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bucs4exg5byvq"]
+[gd_scene load_steps=4 format=3 uid="uid://bucs4exg5byvq"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_hko7f"]
+[ext_resource type="Script" path="res://Scripts/PlayerControllerSynchronizer.gd" id="2_20dnh"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hg313"]
+properties/0/path = NodePath(".:input_direction")
+properties/0/spawn = true
+properties/0/sync = true
 
 [node name="PlayerController" type="Node"]
 script = ExtResource("1_hko7f")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_hg313")
+script = ExtResource("2_20dnh")

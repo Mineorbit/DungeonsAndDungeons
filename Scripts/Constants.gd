@@ -30,6 +30,12 @@ var levelObjects_initialized = false
 var builderPosition = Vector3.ZERO
 
 
+var id = 0
+
+#terrible work around
+var is_client = false
+
+
 var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
