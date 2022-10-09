@@ -35,9 +35,9 @@ func _ready():
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Save"):
-		level.save()
+		world.level.save()
 	if Input.is_action_just_pressed("Load"):
-		level.load("Test")
+		world.level.load("Test")
 	if Input.is_action_just_pressed("Test"):
 		enter_test_mode()
 	if Input.is_action_just_pressed("Edit"):
