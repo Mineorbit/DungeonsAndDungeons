@@ -11,7 +11,6 @@ var navmargin = 0.6
 
 var currentLevel
 
-var currentEntities
 
 var currentInteractive = 0
 
@@ -36,10 +35,6 @@ var id = 0
 
 var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	currentEntities = load("res://Prefabs/Entities.tscn").instantiate()
-	add_child(currentEntities)
-
 
 
 

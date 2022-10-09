@@ -6,10 +6,11 @@ var level
 # Called when the node enters the scene tree for the first time.
 func start(levelpath = null,immediate = false):
 	create_new_level()
-	Constants.set_mode(2)
 	if levelpath != null:
 		await level.load(levelpath,immediate)
-	level.start()
+		
+	Constants.set_mode(2)
+	await level.start()
 	
 
 func create_new_level():

@@ -8,6 +8,7 @@ extends NavigationRegion3D
 var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
+@onready var Entities = $Entities
 
 
 var changedChunks = 0
@@ -43,7 +44,7 @@ func reset():
 	Constants.buffer()
 	Constants.buffer()
 	
-	for entity in Constants.currentEntities.get_children():
+	for entity in Entities.get_children():
 		if entity.has_method("reset"):
 			entity.reset()
 		
@@ -105,7 +106,7 @@ func start():
 			if object.has_method("start"):
 				object.start()
 				
-	for entity in Constants.currentEntities.get_children():
+	for entity in Entities.get_children():
 		if entity.has_method("start"):
 			entity.start()
 
@@ -151,7 +152,7 @@ func save():
 
 func clear_entities():
 	print("Clearing Entities")
-	for entity in Constants.currentEntities.get_children():
+	for entity in Entities.get_children():
 		print("Removing "+str(entity))
 		if entity.has_method("remove"):
 			entity.remove()
