@@ -170,9 +170,7 @@ func clear():
 	chunks.clear()
 
 var started_loading = false
-var immediate = false
-
-func load(level_name):
+func load(level_name, immediate = false):
 	
 	clear()
 	started_loading = true

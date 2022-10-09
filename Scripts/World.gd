@@ -4,11 +4,11 @@ extends Node3D
 var level
 
 # Called when the node enters the scene tree for the first time.
-func start(levelpath = null):
+func start(levelpath = null,immediate = false):
 	create_new_level()
 	Constants.set_mode(2)
 	if levelpath != null:
-		level.load(levelpath)
+		await level.load(levelpath,immediate)
 	level.start()
 	
 
