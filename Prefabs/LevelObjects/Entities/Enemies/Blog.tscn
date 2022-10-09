@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0fu6iv1is7gl"]
+[gd_scene load_steps=8 format=3 uid="uid://d0fu6iv1is7gl"]
 
 [ext_resource type="PackedScene" uid="uid://b4stbslbc6plr" path="res://Assets/Models/LevelObjects/Entities/Blog/BlogModel.tscn" id="1_a42eg"]
 [ext_resource type="Script" path="res://Scripts/Blog.gd" id="1_rre65"]
@@ -11,6 +11,11 @@ radius = 0.45
 size = Vector3(2, 1, 4)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_q63ex"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta4rm"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
 
 [node name="Blog" type="CharacterBody3D"]
 collision_layer = 2
@@ -45,3 +50,6 @@ visible = false
 mesh = SubResource("CylinderMesh_q63ex")
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("3_5otfc")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ta4rm")

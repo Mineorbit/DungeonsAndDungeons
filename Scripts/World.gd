@@ -11,6 +11,8 @@ func start(levelpath = null,immediate = false):
 		
 	Constants.set_mode(2)
 	await level.start()
+	print(level.get_children())
+	print(level.Entities.get_children())
 	
 
 func create_new_level():

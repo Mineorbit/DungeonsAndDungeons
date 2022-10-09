@@ -10,6 +10,8 @@ func _ready():
 	peer.create_client("127.0.0.1",13565)
 	multiplayer.peer_connected.connect(connected)
 	multiplayer.set_multiplayer_peer(peer)
+	#start an empty world
+	get_parent().world.start()
 
 func connected(id):
 	print("Connected with "+str(peer.get_unique_id()))
