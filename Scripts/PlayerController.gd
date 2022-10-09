@@ -54,11 +54,16 @@ func UseLeftAction():
 
 func UseRight():
 	pass
-	
+
+@rpc
 func Pickup():
 	player.on_entity_pickup.emit()
 	
-	
+func PickupAction():
+	if player != null:
+		Pickup()
+	else:
+		rpc_id(1,"Pickup") 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -74,4 +79,4 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("jump"):
 			JumpAction()
 		if Input.is_action_just_pressed("Pickup"):
-			Pickup()
+			PickupAction()

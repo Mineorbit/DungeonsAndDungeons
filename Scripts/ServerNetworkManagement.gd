@@ -16,7 +16,7 @@ func _ready():
 	print("Server has Unique ID "+str(Constants.id))
 	multiplayer.set_multiplayer_peer(peer)
 	multiplayer.peer_connected.connect(new_player)
-	get_parent().world.start()
+	get_parent().world.start("Test")
 
 
 func new_player(id):

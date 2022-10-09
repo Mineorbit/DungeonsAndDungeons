@@ -9,6 +9,7 @@ var mouse_sensitivity := 0.005
 	set(value):
 		if value == null:
 			remove_child(Camera)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			add_child(Camera)	
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
