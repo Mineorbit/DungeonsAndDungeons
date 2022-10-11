@@ -42,10 +42,12 @@ func _physics_process(delta):
 		move_direction.z = playercontroller.input_direction.z
 	super._physics_process(delta)
 
+@rpc(any_peer, call_local)
 func Attach(item):
 	super.Attach(item)
 	itemLeft = item
 
+@rpc(any_peer, call_local)
 func Dettach(item):
 	super.Dettach(item)
 	itemLeft = null
