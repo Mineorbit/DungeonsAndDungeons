@@ -22,33 +22,35 @@ func Use():
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	print(str(global_transform.origin))
 	UpdateRelativePosition()
 
 func _process(delta):
 	UpdateRelativePosition()
 
-func UpdateRelativePosition():
+@export var errorDist = 2
+
+func UpdateRelativePosition(passive = false):
 	if itemOwner != null and collision_layer == 0:
+		var new_position = itemOwner.to_global(offset)
 		transform.basis = itemOwner.global_transform.basis
-		#global_transform.origin =	itemOwner.global_transform.origin
-		transform.origin =	itemOwner.to_global(offset)
-		print(str(itemOwner.global_transform.origin))
-		print(str(global_transform.origin)+" "+str(Constants.id))
+		transform.origin =	new_position
+
+# gravity should be set by global constant
 
 func OnAttach(new_owner):
 	collision_layer = 0
 	collision_mask = 0
 	_velocity = Vector3.ZERO
 	started = false
+	gravity = 0
 	isEquipped = true
 	itemOwner = new_owner
-	motion_mode = 1
 
 func OnDettach():
 	collision_layer = collisionlayer
 	collision_mask = collisionmask
 	_velocity = itemOwner._velocity
 	started = true
+	gravity = 25
 	isEquipped = true
 	itemOwner = null

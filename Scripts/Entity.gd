@@ -123,6 +123,7 @@ func kickback(direction) -> void:
 	# starts kickback process:
 	# character moves backwards in ballistic arch until
 
+
 func Kill():
 	remove()
 
@@ -146,6 +147,4 @@ func Attach(item):
 func Dettach(item):
 	if item == null:
 		return
-	var position = item.global_transform.origin
 	item.OnDettach()
-	item.global_transform.origin = position
