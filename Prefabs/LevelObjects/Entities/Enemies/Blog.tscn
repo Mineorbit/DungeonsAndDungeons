@@ -16,6 +16,9 @@ size = Vector3(2, 1, 4)
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="Blog" type="CharacterBody3D"]
 collision_layer = 2
@@ -40,9 +43,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("BoxShape3D_do8j2")
 target_position = Vector3(0, 0, 2)
 
-[node name="HitArea" parent="." instance=ExtResource("3_5otfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941375, 0, 0)
-
 [node name="Target" type="Node3D" parent="."]
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="Target"]
@@ -50,6 +50,7 @@ visible = false
 mesh = SubResource("CylinderMesh_q63ex")
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("3_5otfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ta4rm")

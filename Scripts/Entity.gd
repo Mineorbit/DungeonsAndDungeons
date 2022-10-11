@@ -40,6 +40,7 @@ signal on_entity_pickup
 signal on_entity_melee_strike(damage)
 
 func MeleeStrike(damage):
+	print("Melee Striking "+str(self))
 	meleehitarea.Strike(damage,self)
 
 func _ready():
@@ -138,15 +139,13 @@ func Hit(damage, hitting_entity):
 	
 func Attach(item):
 	print("Attaching "+str(item))
-	item.get_parent().remove_child(item)
-	add_child(item)
+	#item.get_parent().remove_child(item)
+	#add_child(item)
 	item.OnAttach(self)
 	
 func Dettach(item):
 	if item == null:
 		return
 	var position = item.global_transform.origin
-	remove_child(item)
-	Constants.currentEntities.add_child(item)
-	item.global_transform.origin = position
 	item.OnDettach()
+	item.global_transform.origin = position

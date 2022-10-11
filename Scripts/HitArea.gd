@@ -8,6 +8,7 @@ func _ready():
 
 func Strike(damage,striking_object = null):
 	if is_colliding():
+		print("Colliding")
 		var collided_object = get_collider(0)
 		print(collided_object)
 		# check if collided has method hit/ is entity
