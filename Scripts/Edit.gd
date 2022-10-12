@@ -50,6 +50,7 @@ func enter_edit_mode():
 	if(Constants.currentMode == 1):
 		return
 	Constants.set_mode(1)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Players.despawn_players()
 	Players.despawn_player_controllers()
 	world.level.reset()

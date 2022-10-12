@@ -17,13 +17,6 @@ var move_speed = 4
 
 var closestIndex = 0
 
-func _enter_tree():
-	print("AHOI")
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _exit_tree():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
 
 func _ready() -> void:
 	cursor = $CursorArm/Cursor

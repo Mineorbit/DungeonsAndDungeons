@@ -38,7 +38,6 @@ func _ready():
 		Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
 		if is_tiled:
 			for child in levelobject.get_children():
-				print(child)
 				meshlibrary.create_item(meshlibrary_id)
 				meshlibrary.set_item_mesh(meshlibrary_id,child.get_mesh())
 				var new_transform = child.transform

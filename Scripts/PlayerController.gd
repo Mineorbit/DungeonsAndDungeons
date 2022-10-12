@@ -21,11 +21,13 @@ func set_active(active):
 func despawn():
 	spawned = false
 
-@rpc
-func Jump():
+func report_network():
 	print("Me: "+str(Constants.id))
 	print("RPC called by: ", multiplayer.get_remote_sender_id())
 	print("Authority: "+str(get_multiplayer_authority()))
+
+@rpc
+func Jump():
 	if player != null:
 		player.jump()
 

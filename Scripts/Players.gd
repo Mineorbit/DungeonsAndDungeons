@@ -16,7 +16,6 @@ func _process(delta):
 
 
 func set_current_player(number):
-	print(number)
 	Constants.currentPlayer = number
 	for i in range(4):
 		if get_player(i) != null:

@@ -40,7 +40,6 @@ signal on_entity_pickup
 signal on_entity_melee_strike(damage)
 
 func MeleeStrike(damage):
-	print("Melee Striking "+str(self))
 	meleehitarea.Strike(damage,self)
 
 func _ready():
@@ -69,8 +68,6 @@ var is_jumping = false
 func jump():
 	if not stunned:
 		is_jumping = is_on_floor()
-		print(is_jumping)
-
 
 
 func _physics_process(delta: float) -> void:

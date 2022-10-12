@@ -52,7 +52,6 @@ func on_remove():
 	var removal_outgoing = []
 	var removal_ingoing = []
 	for second_object in Constants.currentLevel.get_interactive_objects():
-		print("Checking "+str(second_object))
 		if unique_instance_id in second_object.connectedObjects:
 			removal_outgoing.append(second_object.unique_instance_id)
 			second_object.connectedObjects.erase(unique_instance_id)
