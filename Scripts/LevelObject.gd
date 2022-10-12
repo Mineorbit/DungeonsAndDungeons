@@ -9,16 +9,17 @@ var contained_level_object
 var levelObjectData: LevelObjectData
 var uniqueLevelObjectId
 
-var construction_collision
+@onready var construction_collision: StaticBody3D = $ConstructionCollision
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	preparing_Collision()
 
 func preparing_Collision():
-	construction_collision = $ConstructionCollision
 	Constants.mode_changed.connect(on_mode_change)
 	
-
+func apply_construction_data():
+	construction_collision.global_translate(levelObjectData.construction_collision_offset)
+	construction_collision.global_scale(levelObjectData.construction_collision_scale)
 
 func reset():
 	if contained_level_object.has_method("reset"):

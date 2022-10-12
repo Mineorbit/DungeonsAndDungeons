@@ -13,7 +13,6 @@ sdfgi_use_occlusion = true
 glow_intensity = 0.2
 
 [node name="Edit" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.416297, 0)
 script = ExtResource("1_qljhf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -13,6 +13,8 @@ var gridScale = 2
 @export var levelObjectId = -1
 @export var maximumNumber = -1
 @export var offset = Vector3.ZERO
+@export var construction_collision_offset = Vector3.ZERO
+@export var construction_collision_scale = Vector3(1,1,1)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

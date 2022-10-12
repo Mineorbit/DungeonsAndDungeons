@@ -17,7 +17,7 @@ agent_radius = 0.05
 script = ExtResource("1_4byjn")
 
 [node name="GateModel" type="Node3D" parent="."]
-transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0.6, 0)
+transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GateModel"]
 mesh = SubResource("BoxMesh_qpsws")

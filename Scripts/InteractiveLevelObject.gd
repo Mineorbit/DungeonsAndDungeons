@@ -43,6 +43,7 @@ func process(activation):
 		deactivate()
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super._ready()
 	preparing_Collision()
 	unique_instance_id = Constants.currentInteractive
 	Constants.currentInteractive += 1

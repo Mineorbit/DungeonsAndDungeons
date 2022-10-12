@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://o4eyc88npbih"]
 
 [ext_resource type="Script" path="res://Scripts/LevelObjectData.gd" id="1_kw2t6"]
 
@@ -11,3 +11,5 @@ tileIndex = 1
 levelObjectId = 2
 maximumNumber = -1
 offset = Vector3(0, 0, 0)
+construction_collision_offset = Vector3(0, 0, 0)
+construction_collision_scale = Vector3(1, 1, 1)

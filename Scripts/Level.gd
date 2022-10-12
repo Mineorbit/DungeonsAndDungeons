@@ -299,6 +299,8 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 			new_level_object.sign_up()
 		new_level_object.contained_level_object = level_object_dupe
 		new_level_object.levelObjectData = levelObjectData
+		# in future this should only be done in edit mode
+		new_level_object.apply_construction_data()
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
 
