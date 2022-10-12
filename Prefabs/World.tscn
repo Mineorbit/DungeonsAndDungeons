@@ -7,3 +7,7 @@
 script = ExtResource("1_dx6rb")
 
 [node name="Players" parent="." instance=ExtResource("1_2p4o4")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Level.tscn")
+spawn_path = NodePath("..")

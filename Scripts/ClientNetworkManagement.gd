@@ -11,7 +11,7 @@ func _ready():
 	multiplayer.peer_connected.connect(connected)
 	multiplayer.set_multiplayer_peer(peer)
 	#start an empty world
-	get_parent().world.start()
+	#get_parent().world.start()
 
 func connected(id):
 	print("Connected with "+str(peer.get_unique_id()))
