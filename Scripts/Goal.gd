@@ -9,24 +9,21 @@ extends Node3D
 var numberOfPlayersNeeded = 1
 
 var numberOfPlayersInside = 0
-var enterArea: Area3D
-signal game_won
+@onready var enterArea: Area3D = $Area
 
 func reset():
 	numberOfPlayersInside = 0
 	
 func _ready():
-	
-	enterArea = $Area
 	enterArea.body_entered.connect(playerEntered)
 	enterArea.body_exited.connect(playerLeft)
 	
 func playerEntered(player):
-	if player.name == "Player":
-		numberOfPlayersInside = numberOfPlayersInside + 1
+	print("Entered")
+	numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
 		print("Game won!")
-		Constants.game_won.emit()
+		Signals.game_won.emit()
 
 func playerLeft(player):
 	if player.name == "Player":

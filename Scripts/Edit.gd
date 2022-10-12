@@ -50,15 +50,15 @@ func enter_edit_mode():
 	if(Constants.currentMode == 1):
 		return
 	Constants.set_mode(1)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Players.despawn_players()
 	Players.despawn_player_controllers()
 	world.level.reset()
 	add_child(builder)
+	Constants.playerCamera.player = null
+	builder.start()
 	if playerhud in get_children():
 		remove_child(playerhud)
 	add_child(builderhud)
-	Constants.playerCamera.player = null
 	connections.show()
 	
 

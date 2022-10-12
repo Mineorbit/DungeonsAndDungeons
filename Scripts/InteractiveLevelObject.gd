@@ -59,7 +59,7 @@ func on_remove():
 	for i in removal_ingoing:
 		Signals.connection_removed.emit(i,[unique_instance_id])	
 	Signals.connection_removed.emit(unique_instance_id,removal_outgoing)
-	Signals.interactiveLevelObjects.erase(unique_instance_id)
+	Constants.interactiveLevelObjects.erase(unique_instance_id)
 
 func sign_up():
 	Constants.interactiveLevelObjects[unique_instance_id] = self

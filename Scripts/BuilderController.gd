@@ -17,6 +17,8 @@ var move_speed = 4
 
 var closestIndex = 0
 
+func start():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _ready() -> void:
 	cursor = $CursorArm/Cursor
@@ -25,7 +27,6 @@ func _ready() -> void:
 	level = $"../World/Level"
 	top_level = true
 	edit = get_parent()
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 
 var rot_x = 0
