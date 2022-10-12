@@ -30,11 +30,12 @@ func _physics_process(delta):
 	plan_route()
 	auto_navigate(delta)
 
+var target_entity = null
 
 func track_target():
 	pass
-	#if len(Constants.players) > 0 and Constants.players[0] != null:
-	#	target.global_transform.origin	=	Constants.players[0].global_transform.origin
+	if target_entity != null:
+		target.global_transform.origin	=	target_entity.global_transform.origin
 
 func plan_route():
 	if (is_inside_tree() and target.is_inside_tree()):
