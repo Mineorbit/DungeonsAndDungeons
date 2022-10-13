@@ -9,7 +9,7 @@ var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
 @onready var Entities = $Entities
-
+@onready var ChunkStreamers = $ChunkStreamers
 
 var changedChunks = 0
 

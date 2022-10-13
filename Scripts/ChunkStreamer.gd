@@ -3,14 +3,16 @@ extends Node3D
 
 @export var target_player_network_id = 0
 @export var target = null
+var loadedChunks = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	loadedChunks = []
 
 
 @rpc
 func stream_chunk(data):
 	var base_position = data[0]
+	print("Loading new Chunk "+str(base_position)+" for "+str(target_player_network_id))
 	data.erase(base_position)
 	base_position *= 8
 	print(base_position)
@@ -18,10 +20,8 @@ func stream_chunk(data):
 		Constants.currentLevel.add_from_string(base_position,object)
 	
 
-var loadedChunks = []
 
 func load_chunk(location):
-	print("Loading new Chunk "+str(location)+" for "+str(target_player_network_id))
 	loadedChunks.append(location)
 	var chunk = Constants.currentLevel.get_chunk_by_chunk_position(location)
 	if chunk == null:
