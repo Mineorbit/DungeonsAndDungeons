@@ -293,7 +293,6 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
-		print(rotation*90)
 		new_level_object.add_child(level_object_dupe)
 		level_object_dupe.transform.origin = levelObjectData.offset
 		if(unique_instance_id != null):
