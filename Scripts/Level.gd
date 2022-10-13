@@ -115,9 +115,7 @@ func get_interactive_objects():
 
 
 func delete_level(level_name):
-	
 	var chunkpath = "user://level/"+level_name+"/chunks/"
-	
 	var chunkdirectory = DirAccess.open(chunkpath)
 	if true:
 		chunkdirectory.list_dir_begin()
@@ -270,7 +268,7 @@ func add_chunk(position):
 
 	
 
-func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, connectedObjects = []):
+func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
 	if(levelObjectData.maximumNumber != -1):
 		if(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
 			return
@@ -306,6 +304,8 @@ func add(levelObjectData: LevelObjectData, position, unique_instance_id = null, 
 		new_level_object.levelObjectData = levelObjectData
 		# in future this should only be done in edit mode
 		new_level_object.apply_construction_data()
+		print(rotation*90)
+		new_level_object.rotate(Vector3.UP,rotation*PI/2)
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
 

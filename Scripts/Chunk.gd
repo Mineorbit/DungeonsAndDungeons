@@ -8,6 +8,7 @@ class LevelObjectInstance:
 	var x = 0
 	var y = 0
 	var z = 0
+	var rotation = 0
 	var levelObjectData: LevelObjectData
 	var unique_instance_id = null
 	var connectedObjects = []
@@ -93,10 +94,10 @@ func get_level_object_instances():
 					instance.x = floor(grid_position.x - global_transform.origin.x)
 					instance.y = floor(grid_position.y - global_transform.origin.y)
 					instance.z = floor(grid_position.z - global_transform.origin.z)
+					#does instance.rotation need to be set here?
 					instance.levelObjectData = levelObjectData
 					levelObjectInstances.append(instance)
 	for n in get_level_objects():
-		print("TEST: "+str(n))
 		var instance = LevelObjectInstance.new()
 		levelObjectInstances.append(n.to_instance(instance))
 	return levelObjectInstances

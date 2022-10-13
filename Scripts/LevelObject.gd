@@ -49,6 +49,7 @@ func to_instance(instance):
 		instance.x = floor(transform.origin.x)
 		instance.y = floor(transform.origin.y)
 		instance.z = floor(transform.origin.z)
+		instance.rotation = int(transform.basis.get_euler().y / 90)
 		instance.levelObjectData = levelObjectData
 		return instance
 

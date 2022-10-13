@@ -77,11 +77,14 @@ func connect_interactive_objects(a, b):
 	Signals.connection_added.emit(b.unique_instance_id,[a.unique_instance_id])	
 
 
+var selected_rotation = 0
 
 func _process(delta) -> void:
 	Constants.builderPosition = global_transform.origin
+	if Input.is_action_just_pressed("RotateRight"):
+		selected_rotation = (selected_rotation + 1)%4
 	if Input.is_action_just_pressed("Place"):
-		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin)
+		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation)
 	if Input.is_action_just_pressed("Displace"):
 		if colliding:
 			var aim = cursor.get_global_transform().basis
