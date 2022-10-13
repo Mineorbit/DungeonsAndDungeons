@@ -250,13 +250,18 @@ var chunks = {}
 
 func get_chunk(position):
 	var chunkPosition = get_chunk_position(position)
+	return get_chunk_by_chunk_position(chunkPosition)
+
+func get_chunk_by_chunk_position(chunkPosition):
 	if chunks.has(chunkPosition):
 		return chunks[chunkPosition]
+	return null
 
 
 func add_chunk(position):
 	var chunkPosition = get_chunk_position(position)
 	var chunk = chunkPrefab.instantiate()
+	chunk.name = str(chunkPosition)
 	chunk.level = self
 	chunks[chunkPosition] = chunk
 	add_child(chunk)

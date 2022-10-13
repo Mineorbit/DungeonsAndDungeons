@@ -4,8 +4,6 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpsws"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
-
 [sub_resource type="NavigationMesh" id="NavigationMesh_ecxq7"]
 vertices = PackedVector3Array(-0.15, 0.45, -1.4, -0.15, 0.45, 1.4, 0.15, 0.45, 1.4, 0.15, 0.45, -1.4)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
@@ -13,21 +11,25 @@ cell_size = 0.1
 agent_height = 0.5
 agent_radius = 0.05
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
+
 [node name="Gate" type="Node3D"]
 script = ExtResource("1_4byjn")
 
 [node name="GateModel" type="Node3D" parent="."]
-transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GateModel"]
+transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_qpsws")
 skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="GateModel"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GateModel/StaticBody3D"]
-shape = SubResource("BoxShape3D_vkx4j")
 
 [node name="Navigation" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.11977, 0, 0, 0, 1, 0, 0, 0)
 navmesh = SubResource("NavigationMesh_ecxq7")
+
+[node name="Collision" type="StaticBody3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision"]
+shape = SubResource("BoxShape3D_vkx4j")

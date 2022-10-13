@@ -75,12 +75,16 @@ func preparing_Collision():
 func activate():
 	if contained_level_object.has_method("activate"):
 		contained_level_object.activate()
+		#this does not work if changed before loading
+		contained_level_object.rpc("activate")
 	activationSignal.emit(true)
 
 
 func deactivate():
 	if contained_level_object.has_method("deactivate"):
 		contained_level_object.deactivate()
+		#this does not work if changed before loading
+		contained_level_object.rpc("deactivate")
 	activationSignal.emit(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -10,17 +10,44 @@ func _ready():
 
 @rpc
 func stream_chunk(data):
-	pass
+	var base_position = data[0]
+	data.erase(base_position)
+	base_position *= 8
+	print(base_position)
+	for object in data:
+		Constants.currentLevel.add_from_string(base_position,object)
+	
 
 var loadedChunks = []
 
-func _physics_process(delta):
+func load_chunk(location):
+	print("Loading new Chunk "+str(location)+" for "+str(target_player_network_id))
+	loadedChunks.append(location)
+	var chunk = Constants.currentLevel.get_chunk_by_chunk_position(location)
+	if chunk == null:
+		print("There was no Chunk at "+str(location))
+		return
+	var chunk_instances = chunk.get_level_object_instances()
+	var chunk_data = [location]
+	for chunk_instance in chunk_instances:
+		chunk_data.append(chunk_instance.serialize())
+	rpc_id(target_player_network_id,"stream_chunk",chunk_data)
+
+
+
+func test(position):
 	if target_player_network_id == 0:
 		return
+	var currentChunk = Constants.currentLevel.get_chunk_position(position)
+	if not loadedChunks.has(currentChunk):
+		load_chunk(currentChunk)
+	
+
+func _physics_process(delta):
 	if target != null:
 		global_transform.origin = target.global_transform.origin
-	var currentChunk = Constants.currentLevel.get_chunk_position(global_transform.origin)
-	if not loadedChunks.has(currentChunk):
-		print("Loading new Chunk "+str(currentChunk)+" for "+str(target_player_network_id))
-		loadedChunks.append(currentChunk)
-		rpc_id(target_player_network_id,"stream_chunk",null)
+	
+	for i in range(-1,1):
+		for j in range(-1,1):
+			for k in range(-1,1):
+				test(global_transform.origin+(8*Vector3(i,j,k)))

@@ -1,26 +1,41 @@
 extends Node3D
 
 
-@onready var gateModel = $GateModel
+@onready var gateModel: Node3D = $GateModel
 @onready var nav = $Navigation
+@onready var collision = $Collision
+@export var is_open = false:	
+	set(val):
+		if val:
+			remove_child(gateModel)
+		else:
+			add_child(gateModel)
+		is_open = val
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	close()
 
+@rpc
 func activate():
 	open()
 	
+@rpc
 func deactivate():
 	close()
 
 func open():
 	add_child(nav)
-	remove_child(gateModel)
+	remove_child(collision)
+	is_open = true
+	
 
 func close():
 	remove_child(nav)
-	add_child(gateModel)
+	add_child(collision)
+	is_open = false
 	
+
 
 func prepare_for_navmesh_build():
 	print("Disabled before baking Nav Mesh")

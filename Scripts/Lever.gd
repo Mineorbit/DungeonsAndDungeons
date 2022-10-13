@@ -23,8 +23,10 @@ func _process(delta):
 	pass
 	
 
+@rpc
 func deactivate():
 	is_active = false
-	
+
+@rpc
 func activate():
 	is_active = true
