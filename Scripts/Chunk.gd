@@ -12,8 +12,9 @@ class LevelObjectInstance:
 	var levelObjectData: LevelObjectData
 	var unique_instance_id = null
 	var connectedObjects = []
+	
 	func serialize():
-		var data = str(levelObjectData.levelObjectId)+"|"+str(x)+"|"+str(y)+"|"+str(z)
+		var data = str(levelObjectData.levelObjectId)+"|"+str(x)+"|"+str(y)+"|"+str(z)+"|"+str(rotation)
 		if unique_instance_id != null:
 			data = data+"|"+str(unique_instance_id)+"|"+str(connectedObjects)
 		return data

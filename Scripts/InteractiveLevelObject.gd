@@ -17,6 +17,9 @@ func to_instance(instance):
 		instance.x = floor(transform.origin.x)
 		instance.y = floor(transform.origin.y)
 		instance.z = floor(transform.origin.z)
+		var rot = int( round(global_transform.basis.get_euler().y /PI * 2) )
+		rot = ( rot + 4) % 4
+		instance.rotation = rot
 		instance.levelObjectData = levelObjectData
 		instance.unique_instance_id = unique_instance_id
 		instance.connectedObjects = connectedObjects

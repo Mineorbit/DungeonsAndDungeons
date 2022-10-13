@@ -218,19 +218,20 @@ func add_from_string(base_position,line):
 	var i = lineData[1].to_int()
 	var j = lineData[2].to_int()
 	var k = lineData[3].to_int()
+	var r = lineData[4].to_int()
 	var instance_id = null
 	var connectedInteractiveObjects = null
-	if lineData.size() > 4:
-		instance_id = lineData[4].to_int()
+	if lineData.size() > 5:
+		instance_id = lineData[5].to_int()
 		connectedInteractiveObjects = []
-		var commalist = lineData[5].split("[")[1].split("]")[0].split(",")
+		var commalist = lineData[6].split("[")[1].split("]")[0].split(",")
 		for instanceid in commalist:
 			if instanceid == "":
 				continue
 			connectedInteractiveObjects.append(instanceid.to_int())
 	var levelObjectData = Constants.LevelObjectData[id]
 	var pos = Vector3(i,j,k)
-	add(levelObjectData, base_position+pos,instance_id,connectedInteractiveObjects)
+	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects)
 
 var toAdd = []
 
@@ -292,6 +293,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
+		print(rotation*90)
 		new_level_object.add_child(level_object_dupe)
 		level_object_dupe.transform.origin = levelObjectData.offset
 		if(unique_instance_id != null):
@@ -303,9 +305,25 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		new_level_object.contained_level_object = level_object_dupe
 		new_level_object.levelObjectData = levelObjectData
 		# in future this should only be done in edit mode
-		new_level_object.apply_construction_data()
-		print(rotation*90)
+		
+		
+		var translation = Vector3.ZERO
+		if rotation == 1:
+			translation = Vector3(-1,0,0)
+		if rotation == 2:
+			translation = Vector3(-1,0,-1)
+		if rotation == 3:
+			translation = Vector3(0,0,-1)
+		
+		
 		new_level_object.rotate(Vector3.UP,rotation*PI/2)
+		level_object_dupe.transform = level_object_dupe.transform.translated_local(translation)
+		new_level_object.construction_collision.transform = new_level_object.construction_collision.transform.translated_local(translation)
+		
+		
+		new_level_object.apply_construction_data()
+		new_level_object.construction_collision.rotate(Vector3.UP,rotation*PI/2)
+		# correct internal positions:
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
 
