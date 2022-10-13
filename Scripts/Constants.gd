@@ -11,6 +11,7 @@ var navmargin = 0.6
 
 var currentLevel
 
+@export var deathplane = -8
 
 var currentInteractive = 0
 

@@ -2,6 +2,7 @@ extends Node3D
 
 
 var id_to_local_id = [null,null,null,null]
+var chunk_streamer_prefab = load("res://Prefabs/ChunkStreamer.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,7 +29,10 @@ func new_player(id):
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
 	get_parent().add_player_controller(i,id)
-
+	var new_chunk_streamer = chunk_streamer_prefab.instantiate()
+	Constants.currentLevel.get_child(1).add_child(new_chunk_streamer)
+	new_chunk_streamer.target_player_network_id = id
+	new_chunk_streamer.target = get_parent().world.players.get_player(i)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

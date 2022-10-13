@@ -74,6 +74,9 @@ func _physics_process(delta: float) -> void:
 	if not started:
 		return
 	
+	if global_transform.origin.y < Constants.deathplane:
+		Kill()
+	
 	if not stunned:
 		_velocity.x = move_direction.x * speed
 		_velocity.z = move_direction.z * speed
