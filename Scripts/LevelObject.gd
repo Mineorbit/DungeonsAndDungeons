@@ -13,7 +13,6 @@ var uniqueLevelObjectId
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	preparing_Collision()
-	on_mode_change()
 
 func preparing_Collision():
 	Constants.mode_changed.connect(on_mode_change)

@@ -14,6 +14,7 @@ func _ready():
 var started = false
 
 func start(should_be_server):
+	started = true
 	var server = should_be_server or is_server or OS.has_feature("Server") or "--server" in OS.get_cmdline_args()
 	if server:
 		print("===Starting Server===")
@@ -27,11 +28,11 @@ func start(should_be_server):
 
 func _process(delta):
 	if not started:
+		if not OS.is_debug_build():
+			start(false)
 		if Input.is_action_just_pressed("Client"):
-			started = true
 			start(false)
 		if Input.is_action_just_pressed("Server"):
-			started = true
 			start(true)
 
 func start_server():

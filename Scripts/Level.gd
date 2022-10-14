@@ -291,6 +291,8 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		
 		chunk.levelObjects.add_child(new_level_object)
 		new_level_object.global_transform.origin = Vector3(pos.x,pos.y,pos.z)
+		var construction_collision = new_level_object.get_child(0)
+		print("TEST "+str(construction_collision))
 		# assign new inner levelobject
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
@@ -317,11 +319,10 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		
 		new_level_object.rotate(Vector3.UP,rotation*PI/2)
 		level_object_dupe.transform = level_object_dupe.transform.translated_local(translation)
-		var construction_collision = new_level_object.get_child(0)
 		construction_collision.transform = construction_collision.transform.translated_local(translation)
 		
-		
 		new_level_object.apply_construction_data()
+		new_level_object.on_mode_change()
 		construction_collision.rotate(Vector3.UP,rotation*PI/2)
 		# correct internal positions:
 		if level_object_dupe.has_method("setup"):
