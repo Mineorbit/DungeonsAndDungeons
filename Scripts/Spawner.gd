@@ -40,7 +40,6 @@ func show_text():
 	
 
 func spawnEntity():
-	print("HALLO "+str(Constants.currentMode))
 	if Constants.currentMode > 2:
 		return
 	print("Spawning Entity at "+str(self.global_transform.origin))

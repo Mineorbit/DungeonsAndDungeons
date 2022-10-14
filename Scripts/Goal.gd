@@ -19,7 +19,7 @@ func _ready():
 	enterArea.body_exited.connect(playerLeft)
 	
 func playerEntered(player):
-	if Constants.currentMode == 2:
+	if Constants.currentMode != 2:
 		return
 	print("Entered")
 	numberOfPlayersInside = numberOfPlayersInside + 1
