@@ -317,11 +317,12 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		
 		new_level_object.rotate(Vector3.UP,rotation*PI/2)
 		level_object_dupe.transform = level_object_dupe.transform.translated_local(translation)
-		new_level_object.construction_collision.transform = new_level_object.construction_collision.transform.translated_local(translation)
+		var construction_collision = new_level_object.get_child(0)
+		construction_collision.transform = construction_collision.transform.translated_local(translation)
 		
 		
 		new_level_object.apply_construction_data()
-		new_level_object.construction_collision.rotate(Vector3.UP,rotation*PI/2)
+		construction_collision.rotate(Vector3.UP,rotation*PI/2)
 		# correct internal positions:
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
