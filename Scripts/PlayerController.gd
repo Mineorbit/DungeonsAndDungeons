@@ -71,10 +71,14 @@ func PickupAction():
 		Pickup()
 	else:
 		rpc_id(1,"Pickup") 	
+
+func check():
+	if Constants.id != 0:
+		return (synchronizer.is_multiplayer_authority())
+	return false
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if is_active or (synchronizer.is_multiplayer_authority()):
+	if is_active or check():
 		input_direction = Vector3.ZERO
 		input_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")

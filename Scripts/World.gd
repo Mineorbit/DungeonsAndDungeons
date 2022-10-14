@@ -8,8 +8,6 @@ func start(levelpath = null,immediate = false):
 	prepare_level()
 	if levelpath != null:
 		await level.load(levelpath,immediate)
-		
-	Constants.set_mode(2)
 	await level.start()
 	
 

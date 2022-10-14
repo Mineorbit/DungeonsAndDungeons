@@ -6,6 +6,7 @@ var chunk_streamer_prefab = load("res://Prefabs/ChunkStreamer.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Constants.set_mode(2)
 	var peer = ENetMultiplayerPeer.new()
 	#multiplayer.peer_connected.connect(self.create_player)
 	var servercamera = load("res://Prefabs/ServerCamera.tscn").instantiate()

@@ -7,19 +7,21 @@ var currentSpawned
 @onready var text = $Text
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	show_text()
 	print("Starting Spawner at "+str(global_transform.origin))
 	prefab = load("res://Prefabs/LevelObjects/Entities/"+spawnedEntity+".tscn")
 
 func setup():
+	show_text()
 	spawnEntity()
 	
 func start():
+	show_text()
 	spawnEntity()
-	remove_child(text)
 
 func reset():
 	print("Resetting Spawner")
-	add_child(text)
+	show_text()
 	if currentSpawned != null:
 		set_spawn_pos()
 	else:
@@ -29,7 +31,18 @@ func set_spawn_pos():
 	currentSpawned.global_transform.origin = self.global_transform.origin + Vector3(0,1,0)
 	print("Setting position to "+str(currentSpawned.global_transform.origin))
 
+func show_text():
+	print("Text showing?")
+	if Constants.currentMode > 1:
+		remove_child(text)
+	else:
+		add_child(text)
+	
+
 func spawnEntity():
+	print("HALLO "+str(Constants.currentMode))
+	if Constants.currentMode > 2:
+		return
 	print("Spawning Entity at "+str(self.global_transform.origin))
 	if currentSpawned != null:
 		currentSpawned.remove()

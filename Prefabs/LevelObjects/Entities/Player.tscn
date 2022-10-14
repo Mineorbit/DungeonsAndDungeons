@@ -7,6 +7,7 @@
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
+height = 1.75
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
@@ -22,7 +23,7 @@ collision_mask = 3
 script = ExtResource("1_50d3o")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("1")
 
 [node name="CameraAnchor" type="Node3D" parent="."]

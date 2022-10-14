@@ -19,6 +19,8 @@ func _ready():
 	enterArea.body_exited.connect(playerLeft)
 	
 func playerEntered(player):
+	if Constants.currentMode == 2:
+		return
 	print("Entered")
 	numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
@@ -26,6 +28,8 @@ func playerEntered(player):
 		Signals.game_won.emit()
 
 func playerLeft(player):
+	if Constants.currentMode == 2:
+		return
 	if player.name == "Player":
 		numberOfPlayersInside = max(0,numberOfPlayersInside - 1)
 

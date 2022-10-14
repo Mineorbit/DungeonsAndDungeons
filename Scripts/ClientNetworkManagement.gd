@@ -14,6 +14,7 @@ func _ready():
 	#get_parent().world.start()
 
 func connected(id):
+	Constants.set_mode(3)
 	print("Connected with "+str(peer.get_unique_id()))
 	Constants.id = peer.get_unique_id()
 
