@@ -25,6 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,31 +33,51 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/CenterContainer"]
-offset_left = 534.0
-offset_top = 308.0
-offset_right = 617.0
-offset_bottom = 339.0
+layout_mode = 2
+offset_left = 455.0
+offset_top = 290.0
+offset_right = 697.0
+offset_bottom = 357.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/CenterContainer/HBoxContainer"]
-offset_right = 41.0
-offset_bottom = 31.0
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 67.0
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer"]
-offset_right = 41.0
-offset_bottom = 31.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 67.0
+
+[node name="IP" type="TextEdit" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(200, 32)
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 32.0
+text = "127.0.0.1
+"
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 36.0
+offset_right = 200.0
+offset_bottom = 67.0
 text = "Play"
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/Control/CenterContainer/HBoxContainer"]
-offset_left = 45.0
-offset_right = 83.0
-offset_bottom = 31.0
+layout_mode = 2
+offset_left = 204.0
+offset_right = 242.0
+offset_bottom = 67.0
 
 [node name="EditButton" type="Button" parent="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer2"]
+layout_mode = 2
+offset_top = 18.0
 offset_right = 38.0
-offset_bottom = 31.0
+offset_bottom = 49.0
 text = "Edit"
 
-[connection signal="pressed" from="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer/PlayButton" to="." method="open_play_menu"]
+[connection signal="pressed" from="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/PlayButton" to="." method="open_play_menu"]
 [connection signal="pressed" from="CanvasLayer/Control/CenterContainer/HBoxContainer/CenterContainer2/EditButton" to="." method="_open_edit_menu"]
