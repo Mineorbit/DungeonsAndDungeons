@@ -8,9 +8,14 @@ var spawned = false
 @onready var synchronizer = $MultiplayerSynchronizer
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	setup_playercontroller_networking()
+
+func setup_playercontroller_networking():
+	if Constants.id == 0:
+		return
 	synchronizer.set_multiplayer_authority(str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
-
+	
 
 func spawn():
 	spawned = true

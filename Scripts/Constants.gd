@@ -29,7 +29,6 @@ var builderPosition = Vector3.ZERO
 
 var playerCamera
 
-
 var remoteAddress = "127.0.0.1"
 
 var id = 0

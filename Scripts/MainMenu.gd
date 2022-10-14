@@ -13,6 +13,7 @@ func _ready():
 
 func open_play_menu():
 	Constants.remoteAddress = ipText.text
+	print("'"+str(Constants.remoteAddress)+"'")
 	Bootstrap.start_play()
 
 

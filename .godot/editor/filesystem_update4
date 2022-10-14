@@ -1,7 +1,6 @@
-res://Prefabs/ChunkStreamer.tscn
+res://Prefabs/LevelObjects/Entities/Player.tscn
 res://Assets/Materials/LevelObjectCollision.tres
 res://Resources/grid.tres
-res://Scripts/Bootstrap.gd
 res://Scenes/menu.tscn
 res://Prefabs/LevelObject.tscn
 res://Prefabs/InteractiveLevelObject.tscn
@@ -18,7 +17,6 @@ res://Prefabs/LevelObjects/Interactive/Gate.tscn
 res://Prefabs/PlayerHUD.tscn
 res://Scenes/Main.tscn
 res://Prefabs/Valley.tscn
-res://Prefabs/LevelObjects/Entities/Player.tscn
 res://Scenes/test.tscn
 res://Prefabs/PlayerControllers.tscn
 res://Prefabs/PlayerController.tscn
@@ -38,6 +36,9 @@ res://Prefabs/ServerCamera.tscn
 res://Prefabs/MultiplayerConstants.tscn
 res://Prefabs/Entities.tscn
 res://Prefabs/LevelObjects/Goal.tscn
-res://Scripts/Level.gd
-res://Scripts/LevelObject.gd
+res://Prefabs/ChunkStreamer.tscn
+res://Scripts/Constants.gd
 res://Scripts/MainMenu.gd
+res://Prefabs/MainMenu.tscn
+res://Prefabs/Builder.tscn
+res://Scripts/PlayerController.gd
