@@ -18,6 +18,7 @@ var currentInteractive = 0
 var currentPlayer = 0
 
 var LevelObjectData = {}
+
 var numberOfPlacedLevelObjects = {}
 
 var interactiveLevelObjects = {}
