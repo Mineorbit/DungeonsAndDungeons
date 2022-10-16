@@ -6,6 +6,15 @@ var url = "https://mstillger.de/api/"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fetch_api_data()
+	compress_level("test")
+
+# only for windows now
+func compress_level(name):
+	var path = ProjectSettings.globalize_path("user://level/"+str(name))
+	var result = ProjectSettings.globalize_path("user://"+str(name)+".zip")
+	print(path)
+	OS.execute("powershell.exe",["Compress-Archive",path,result])
+	
 
 
 func download_level(ulid):
@@ -43,7 +52,6 @@ func data_http_request_completed(result, response_code, headers, body):
 	var json_object = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
-	print(headers)
 	print(json_object.data["message"])
 
 
