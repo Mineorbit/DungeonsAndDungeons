@@ -6,14 +6,18 @@ var url = "https://mstillger.de/api/"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fetch_api_data()
-	compress_level("test")
 
 # only for windows now
 func compress_level(name):
 	var path = ProjectSettings.globalize_path("user://level/"+str(name))
-	var result = ProjectSettings.globalize_path("user://"+str(name)+".zip")
-	print(path)
+	var result = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
 	OS.execute("powershell.exe",["Compress-Archive",path,result])
+	
+# only for windows now
+func decompress_level(name):
+	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
+	var result = ProjectSettings.globalize_path("user://level/")
+	OS.execute("powershell.exe",["Expand-Archive",path,result])
 	
 
 
