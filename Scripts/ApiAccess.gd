@@ -2,10 +2,12 @@ extends Node
 
 
 var url = "https://mstillger.de/api/"
+var auth_token = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fetch_api_data()
+	login("test","test")
 
 # only for windows now
 func compress_level(name):
@@ -20,7 +22,28 @@ func decompress_level(name):
 	OS.execute("powershell.exe",["Expand-Archive",path,result])
 	
 
+func login(username,password):
+	# Create an HTTP request node and connect its completion signal.
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	
+	http_request.request_completed.connect(login_http_request_completed)
+	var body = "grant_type=&username="+str(username)+"&password="+str(password)+"&scope=&client_id=&client_secret="
+	# Perform the HTTP request. The URL below returns a PNG image as of writing.
+	var error = http_request.request(str(url)+"auth/token", ["Content-Type: application/x-www-form-urlencoded"], true, HTTPClient.METHOD_POST, body)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
 
+
+func get_auth_header():
+	return ["Authorization: Bearer "+str(auth_token)]
+
+func login_http_request_completed(result, response_code, headers, body):
+	var json_object: JSON = JSON.new()
+	json_object.parse(body.get_string_from_utf8())
+	auth_token = json_object.data["access_token"]
+	print("Login Success: "+str(auth_token))
+	
 func download_level(ulid):
 	pass
 
