@@ -8,19 +8,78 @@ var auth_token = ""
 func _ready():
 	fetch_api_data()
 	login("test","test")
+	
+
+#func _process(delta):
+#	if Input.is_action_just_pressed("Connect"):
+#		upload_level("test")
+
 
 # only for windows now
 func compress_level(name):
 	var path = ProjectSettings.globalize_path("user://level/"+str(name))
 	var result = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
-	OS.execute("powershell.exe",["Compress-Archive",path,result])
+	await OS.execute("powershell.exe",["Compress-Archive",path,result])
 	
 # only for windows now
 func decompress_level(name):
 	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
 	var result = ProjectSettings.globalize_path("user://level/")
-	OS.execute("powershell.exe",["Expand-Archive",path,result])
+	await OS.execute("powershell.exe",["Expand-Archive",path,result])
+
+
+func level_zip_file_path(name):
+	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
+	return path
+
+func upload_level(name):
+	await compress_level(name)
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
 	
+	http_request.request_completed.connect(upload_http_request_completed)
+	
+	
+	var file = FileAccess.open(level_zip_file_path(name), FileAccess.READ)
+	var file_content = file.get_buffer(file.get_length())
+	
+	var tn_file_name = "icon.png"
+	var tnfile = FileAccess.open('res://%s' % tn_file_name, FileAccess.READ)
+	var thumbnail_content = tnfile.get_buffer(tnfile.get_length())
+
+	var body = PackedByteArray()
+	body.append_array("\r\n--BodyBoundaryHere\r\n".to_utf8_buffer())
+	body.append_array(("Content-Disposition: form-data; name=\"levelFiles\"; filename=\"%s\"\r\n" % name).to_utf8_buffer())
+	body.append_array("Content-Type: application/zip\r\n\r\n".to_utf8_buffer())
+	body.append_array(file_content)
+	
+	body.append_array("\r\n--BodyBoundaryHere\r\n".to_utf8_buffer())
+	body.append_array(("Content-Disposition: form-data; name=\"thumbnail\"; filename=\"%s\"\r\n" % tn_file_name).to_utf8_buffer())
+	body.append_array("Content-Type: image/png\r\n\r\n".to_utf8_buffer())
+	body.append_array(thumbnail_content)
+	
+	body.append_array("\r\n--BodyBoundaryHere--\r\n".to_utf8_buffer())
+
+	var headers =  [
+		"Authorization: Bearer "+str(auth_token),
+	"Content-Length: " + str(body.size()),
+	"Content-Type: multipart/form-data; boundary=\"BodyBoundaryHere\""
+	]
+
+	
+	var description = "This is a level".uri_encode()
+
+	# Perform the HTTP request. The URL below returns a PNG image as of writing.
+	var error = http_request.request_raw(str(url)+"level/?proto_resp=false&name="+str(name)+"&description="+str(description)+"&r=t&g=t&b=t&y=t", headers, true, HTTPClient.METHOD_POST, body)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+
+
+func upload_http_request_completed(result, response_code, headers, body):
+	var json_object: JSON = JSON.new()
+	json_object.parse(body.get_string_from_utf8())
+	print(json_object.data)
 
 func login(username,password):
 	# Create an HTTP request node and connect its completion signal.
