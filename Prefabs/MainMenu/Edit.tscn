@@ -49,29 +49,36 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer2"]
+[node name="SubMenu" type="ScrollContainer" parent="AspectRatioContainer2"]
 custom_minimum_size = Vector2i(512, 256)
 layout_mode = 2
-offset_left = 264.0
-offset_right = 888.0
-offset_bottom = 624.0
+offset_left = 268.2
+offset_right = 883.8
+offset_bottom = 615.6
 horizontal_scroll_mode = 3
-vertical_scroll_mode = 0
+vertical_scroll_mode = 3
 
-[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/SubMenu"]
 layout_mode = 2
-offset_right = 1252.0
-offset_bottom = 624.0
+offset_right = 1244.0
+offset_bottom = 616.0
 columns = 2
 
-[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer2/ScrollContainer/GridContainer"]
+[node name="LevelList" parent="AspectRatioContainer2/SubMenu/GridContainer" instance=ExtResource("2_mb7u1")]
+custom_minimum_size = Vector2i(616, 616)
+layout_mode = 2
+offset_right = 616.0
+offset_bottom = 616.0
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer2/SubMenu/GridContainer"]
 custom_minimum_size = Vector2i(624, 512)
 layout_mode = 2
-offset_right = 624.0
-offset_bottom = 624.0
+offset_left = 620.0
+offset_right = 1244.0
+offset_bottom = 616.0
 color = Color(0.517647, 0.517647, 0.517647, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer2/ScrollContainer/GridContainer/ColorRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +88,7 @@ grow_vertical = 2
 text = "New Level
 "
 
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer2/ScrollContainer/GridContainer/ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -91,17 +98,24 @@ anchor_bottom = 0.2
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextEdit" type="TextEdit" parent="AspectRatioContainer2/ScrollContainer/GridContainer/ColorRect/MarginContainer"]
+[node name="TextEdit" type="TextEdit" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect/MarginContainer"]
 layout_mode = 2
 offset_right = 561.0
-offset_bottom = 62.0
+offset_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "Name"
 
-[node name="LevelList" parent="AspectRatioContainer2/ScrollContainer/GridContainer" instance=ExtResource("2_mb7u1")]
-layout_mode = 2
-offset_left = 628.0
-offset_right = 1252.0
+[node name="Start" type="Button" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.975
+anchor_right = 1.0
+anchor_bottom = 0.975
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start"
 
+[connection signal="pressed" from="AspectRatioContainer/HBoxContainer/Edit" to="." method="_on_edit_level"]
 [connection signal="pressed" from="AspectRatioContainer/HBoxContainer/New" to="." method="_on_new_level"]
+[connection signal="pressed" from="AspectRatioContainer2/SubMenu/GridContainer/ColorRect/Start" to="." method="start_new_level"]

@@ -1,25 +1,25 @@
 [gd_resource type="MeshLibrary" load_steps=6 format=3 uid="uid://124v0xgiyp4a"]
 
-[ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1_bmuyu"]
-[ext_resource type="Material" uid="uid://c7yejiw7fpevg" path="res://Assets/Materials/Stone.tres" id="2_g3a63"]
+[ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1_oya18"]
+[ext_resource type="Material" uid="uid://c7yejiw7fpevg" path="res://Assets/Materials/Stone.tres" id="2_memop"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1bis5"]
-material = ExtResource("1_bmuyu")
+[sub_resource type="BoxMesh" id="BoxMesh_kb64t"]
+material = ExtResource("1_oya18")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6m0eb"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jom7p"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_dgkx7"]
-material = ExtResource("2_g3a63")
+[sub_resource type="BoxMesh" id="BoxMesh_wfpby"]
+material = ExtResource("2_memop")
 
 [resource]
 item/0/name = ""
-item/0/mesh = SubResource("BoxMesh_1bis5")
+item/0/mesh = SubResource("BoxMesh_kb64t")
 item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/shapes = [SubResource("ConcavePolygonShape3D_6m0eb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/shapes = [SubResource("ConcavePolygonShape3D_jom7p"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/0/navmesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/name = ""
-item/1/mesh = SubResource("BoxMesh_dgkx7")
+item/1/mesh = SubResource("BoxMesh_wfpby")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/1/shapes = [SubResource("ConcavePolygonShape3D_6m0eb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/shapes = [SubResource("ConcavePolygonShape3D_jom7p"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/1/navmesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
