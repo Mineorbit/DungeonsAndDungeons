@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cqfm3l65110yn"]
+
+[node name="EditMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+offset_left = 533.5
+offset_right = 618.5
+offset_bottom = 31.0
+
+[node name="Edit" type="Button" parent="AspectRatioContainer/HBoxContainer"]
+layout_mode = 2
+offset_right = 38.0
+offset_bottom = 31.0
+text = "Edit"
+
+[node name="New" type="Button" parent="AspectRatioContainer/HBoxContainer"]
+layout_mode = 2
+offset_left = 42.0
+offset_right = 85.0
+offset_bottom = 31.0
+text = "New"
