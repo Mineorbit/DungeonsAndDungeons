@@ -32,6 +32,9 @@ func _ready():
 
 
 
+func edit(name):
+	world.level.load(name)
+
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Save"):
@@ -60,7 +63,6 @@ func enter_edit_mode():
 		remove_child(playerhud)
 	add_child(builderhud)
 	connections.show()
-	
 
 func enter_test_mode():
 	print("Entered TestMode")

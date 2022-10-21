@@ -47,10 +47,14 @@ func start_play():
 		add_child(current_scene)
 		var client_management = load("res://Scenes/ClientNetworkManagement.tscn").instantiate()
 		current_scene.add_child(client_management)
-func start_edit():
+
+func start_edit(levelname = null):
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/edit.tscn").instantiate()
 		add_child(current_scene)
+		if levelname != null:
+			current_scene.call_deferred("edit",levelname)
+			#current_scene.edit(levelname)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

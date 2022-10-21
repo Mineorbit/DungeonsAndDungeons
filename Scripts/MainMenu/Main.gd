@@ -12,5 +12,8 @@ func open_play_menu():
 	Bootstrap.start_play()
 
 
+
+
+
 func _open_edit_menu():
-	Bootstrap.start_edit()
+	Bootstrap.start_edit("test")
