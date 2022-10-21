@@ -25,8 +25,9 @@ mesh = SubResource("BoxMesh_qpsws")
 skeleton = NodePath("../..")
 
 [node name="Navigation" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.11977, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 navmesh = SubResource("NavigationMesh_ecxq7")
+navigation_layers = 3
 
 [node name="Collision" type="StaticBody3D" parent="."]
 transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0.5, 0)
