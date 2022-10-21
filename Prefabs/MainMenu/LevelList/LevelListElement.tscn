@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cftq5iyp2t0v5"]
+
+[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="1_o21qy"]
+
+[node name="LevelListElement" type="ColorRect"]
+custom_minimum_size = Vector2i(256, 256)
+offset_right = 256.0
+offset_bottom = 256.0
+color = Color(0.415686, 0.415686, 0.415686, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_o21qy")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Test"

@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqfm3l65110yn"]
+[gd_scene load_steps=3 format=3 uid="uid://cqfm3l65110yn"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Edit.gd" id="1_6w7v4"]
+[ext_resource type="PackedScene" uid="uid://barcffdh4nt23" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="2_mb7u1"]
 
 [node name="Edit" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_6w7v4")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
@@ -37,5 +40,68 @@ offset_left = 42.0
 offset_right = 85.0
 offset_bottom = 31.0
 text = "New"
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer2"]
+custom_minimum_size = Vector2i(512, 256)
+layout_mode = 2
+offset_left = 264.0
+offset_right = 888.0
+offset_bottom = 624.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/ScrollContainer"]
+layout_mode = 2
+offset_right = 1252.0
+offset_bottom = 624.0
+columns = 2
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer2/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2i(624, 512)
+layout_mode = 2
+offset_right = 624.0
+offset_bottom = 624.0
+color = Color(0.517647, 0.517647, 0.517647, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer2/ScrollContainer/GridContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Level
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer2/ScrollContainer/GridContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.2
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextEdit" type="TextEdit" parent="AspectRatioContainer2/ScrollContainer/GridContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_right = 561.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Name"
+
+[node name="LevelList" parent="AspectRatioContainer2/ScrollContainer/GridContainer" instance=ExtResource("2_mb7u1")]
+layout_mode = 2
+offset_left = 628.0
+offset_right = 1252.0
 
 [connection signal="pressed" from="AspectRatioContainer/HBoxContainer/New" to="." method="_on_new_level"]
