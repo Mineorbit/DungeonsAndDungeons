@@ -115,6 +115,9 @@ func get_interactive_objects():
 
 
 func delete_level(level_name):
+	var level_folder = DirAccess.open("user://level/")
+	if not level_folder.dir_exists(level_name):
+		return
 	var chunkpath = "user://level/"+level_name+"/chunks/"
 	var chunkdirectory = DirAccess.open(chunkpath)
 	if true:
