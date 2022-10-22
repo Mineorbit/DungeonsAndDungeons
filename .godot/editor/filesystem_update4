@@ -1,6 +1,7 @@
-res://Prefabs/MainMenu/LevelList/LevelList.tscn
+res://Prefabs/Lobby.tscn
 res://Assets/Materials/LevelObjectCollision.tres
 res://Resources/grid.tres
+res://Scenes/play.tscn
 res://Scenes/menu.tscn
 res://Prefabs/LevelObject.tscn
 res://Prefabs/InteractiveLevelObject.tscn
@@ -11,7 +12,6 @@ res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn
 res://Prefabs/Chunk.tscn
 res://Prefabs/Level.tscn
 res://Prefabs/Connection.tscn
-res://Scenes/play.tscn
 res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn
 res://Prefabs/LevelObjects/Interactive/Gate.tscn
 res://Prefabs/PlayerHUD.tscn
@@ -45,8 +45,4 @@ res://Prefabs/MainMenu/Main.tscn
 res://Prefabs/MainMenu/Edit.tscn
 res://Start.tscn
 res://Prefabs/MainMenu/LevelList/LevelListElement.tscn
-res://Scripts/ServerNetworkManagement.gd
-res://Prefabs/Lobby.tscn
-res://Scripts/ChunkStreamer.gd
-res://Scripts/MainMenu.gd
-res://Scripts/Bootstrap.gd
+res://Prefabs/MainMenu/LevelList/LevelList.tscn

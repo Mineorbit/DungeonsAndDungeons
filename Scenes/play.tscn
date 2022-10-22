@@ -24,3 +24,7 @@ light_energy = 0.8
 shadow_enabled = true
 
 [node name="World" parent="." instance=ExtResource("2_ou7wa")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Lobby.tscn")
+spawn_path = NodePath("..")
