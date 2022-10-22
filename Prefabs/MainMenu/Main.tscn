@@ -57,4 +57,5 @@ offset_right = 38.0
 offset_bottom = 49.0
 text = "Edit"
 
+[connection signal="pressed" from="CenterContainer/HBoxContainer/CenterContainer/VBoxContainer/PlayButton" to="." method="open_play_menu"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/CenterContainer2/EditButton" to="." method="_open_edit_menu"]

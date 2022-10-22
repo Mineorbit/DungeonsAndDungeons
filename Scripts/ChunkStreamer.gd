@@ -46,7 +46,6 @@ func test(position):
 func _physics_process(delta):
 	if target != null:
 		global_transform.origin = target.global_transform.origin
-	
 	for i in range(-1,1):
 		for j in range(-1,1):
 			for k in range(-1,1):

@@ -1,8 +1,6 @@
-res://Prefabs/MainMenu/LevelList/LevelListElement.tscn
+res://Prefabs/MainMenu/LevelList/LevelList.tscn
 res://Assets/Materials/LevelObjectCollision.tres
 res://Resources/grid.tres
-res://Scripts/MainMenu/LevelListElement.gd
-res://Scripts/MainMenu/LevelList.gd
 res://Scenes/menu.tscn
 res://Prefabs/LevelObject.tscn
 res://Prefabs/InteractiveLevelObject.tscn
@@ -46,5 +44,7 @@ res://Prefabs/ApiAccess.tscn
 res://Prefabs/MainMenu/Main.tscn
 res://Prefabs/MainMenu/Edit.tscn
 res://Start.tscn
-res://Prefabs/MainMenu/LevelList/LevelList.tscn
-res://Scripts/MainMenu/Edit.gd
+res://Prefabs/MainMenu/LevelList/LevelListElement.tscn
+res://Scripts/ServerNetworkManagement.gd
+res://Prefabs/Lobby.tscn
+res://Scripts/ChunkStreamer.gd
