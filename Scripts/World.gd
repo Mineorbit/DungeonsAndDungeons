@@ -1,15 +1,26 @@
 extends Node3D
 
 @onready var players = $Players
+@onready var light = $DirectionalLight
 var level
+
+
+func _ready():
+	light.hide()
 
 # Called when the node enters the scene tree for the first time.
 func start(levelpath = null,immediate = false):
+	light.show()
 	prepare_level()
 	if levelpath != null:
 		await level.load(levelpath,immediate)
 	await level.start()
 	
+
+func end():
+	light.hide()
+	level.clear()
+
 
 func prepare_level():
 	level = load("res://Prefabs/Level.tscn").instantiate()

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhb2tgml0o7gg"]
+
+[ext_resource type="PackedScene" uid="uid://daeqmwkh7y0dx" path="res://Assets/Models/Tavern/Tavern.glb" id="1_1ntst"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vylxv"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1, -1, 1.2386, 1, 1, 1.2386, -1, -1, 1.2386, -1, -1, 1.2386, 1, 1, 1.2386, 1, 1, 1.2386, -1, 1, 0, -1, -1, 1.2386, -1, 1, 1.2386, -1, 1, 0, -1, -1, 0, -1, -1, 1.2386, -1, -1, 0, 1, 1, 1.2386, 1, -1, 1.2386, 1, -1, 0, 1, 1, 0, 1, 1, 1.2386, 1, 1, 0, 1, 1, 1.2386, -1, 1, 1.2386, 1, 1, 0, 1, 1, 0, -1, 1, 1.2386, -1, -1, 0, -1, -1, 1.2386, 1, -1, 1.2386, -1, -1, 0, -1, -1, 0, 1, -1, 1.2386, 1)
+
+[node name="Tavern" instance=ExtResource("1_1ntst")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_vylxv")
