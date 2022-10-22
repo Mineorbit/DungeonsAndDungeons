@@ -27,7 +27,5 @@ func open_menu(name):
 
 
 
-
-
 func start_edit(name = null):
 	Bootstrap.start_edit(name)
