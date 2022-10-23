@@ -1,7 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp52ho16ojn7g"]
+[gd_scene load_steps=8 format=3 uid="uid://cp52ho16ojn7g"]
 
+[ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_6rrya"]
 [ext_resource type="PackedScene" uid="uid://d3gx8hgfciy3c" path="res://Prefabs/Models/tavern.tscn" id="1_crgdp"]
+[ext_resource type="Texture2D" uid="uid://cvwjamyvvpc70" path="res://Prefabs/LobbyViewportTexture.tres" id="3_4togx"]
+[ext_resource type="PackedScene" uid="uid://barcffdh4nt23" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="4_dfs7m"]
+[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="5_bkylt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2k77"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("3_4togx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_klkol"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_g2k77")
 
 [node name="Lobby" type="Node3D"]
+script = ExtResource("1_6rrya")
 
 [node name="Tavern" parent="." instance=ExtResource("1_crgdp")]
+
+[node name="LevelSelectionScreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.43971, -1.50996e-07, 9.85166e-15, 0, -4.37114e-08, -1.49262, 3.68386e-07, -1, 6.52446e-08, 0, 3.28853, 5.16827)
+mesh = SubResource("PlaneMesh_klkol")
+
+[node name="SubViewport" type="SubViewport" parent="LevelSelectionScreen"]
+own_world_3d = true
+handle_input_locally = false
+gui_embed_subwindows = true
+size_2d_override = Vector2i(1280, 512)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447447, 0.896562)
+visible = false
+current = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelSelectionScreen/SubViewport"]
+visible = false
+texture = ExtResource("5_bkylt")
+
+[node name="LevelList" parent="LevelSelectionScreen/SubViewport" instance=ExtResource("4_dfs7m")]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 656.0
+offset_bottom = 656.0

@@ -11,6 +11,12 @@ func _ready():
 	pass
 
 
+var displaysize = 1
+
+func set_display_size(size):
+	displaysize = 2
+	scale =Vector2(displaysize,displaysize)
+
 func set_level_list(level_list):
 	grid.columns = int(floor(sqrt(level_list.size())))
 	for level_data in level_list:
@@ -26,7 +32,6 @@ func selected(data,selected):
 	if previous_selection != null:
 		previous_selection.selection.hide()
 	selected_level = data
-	print("TEST "+str(data))
 	selected.selection.show()
 	previous_selection = selected
 	on_selection.emit(selected)
