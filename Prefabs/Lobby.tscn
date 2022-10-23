@@ -1,16 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cp52ho16ojn7g"]
 
-[ext_resource type="PackedScene" uid="uid://dhb2tgml0o7gg" path="res://Prefabs/Models/tavern.tscn" id="1_crgdp"]
+[ext_resource type="PackedScene" uid="uid://d3gx8hgfciy3c" path="res://Prefabs/Models/tavern.tscn" id="1_crgdp"]
 
 [node name="Lobby" type="Node3D"]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.39832, 0)
-light_energy = 2.0
-light_indirect_energy = 3.0
-shadow_enabled = true
-spot_range = 9.6641
-spot_angle = 60.9919
-
 [node name="Tavern" parent="." instance=ExtResource("1_crgdp")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
