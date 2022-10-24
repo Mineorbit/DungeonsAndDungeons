@@ -13,6 +13,7 @@ var mouse_sensitivity := 0.005
 		else:
 			add_child(Camera)	
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			print("Capturing")
 			Camera.current = true	
 		player = value
 
@@ -31,7 +32,6 @@ func move_camera(vec: Vector2) -> void:
 	
 func _process(delta):
 	if(player != null):
-		Camera.current = true	
 		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75
 
 
