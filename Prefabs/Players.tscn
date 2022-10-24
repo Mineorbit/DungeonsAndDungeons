@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Players.gd" id="1_wnodv"]
 [ext_resource type="PackedScene" uid="uid://biisre6gougwf" path="res://Prefabs/PlayerControllers.tscn" id="2_33e1n"]
-[ext_resource type="PackedScene" path="res://Prefabs/PlayerCamera.tscn" id="3_6yl06"]
+[ext_resource type="PackedScene" uid="uid://c55j0acrsp5hp" path="res://Prefabs/PlayerCamera.tscn" id="3_6yl06"]
 
 [node name="Players" type="Node3D"]
 script = ExtResource("1_wnodv")

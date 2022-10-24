@@ -2,13 +2,13 @@
 
 [ext_resource type="Material" uid="uid://ofvf7cke35np" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/LevelObjectList.gd" id="1_srj5y"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Goal.tscn" id="2_6tpvq"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
+[ext_resource type="PackedScene" uid="uid://cdde83tsw38mj" path="res://Prefabs/LevelObjects/Goal.tscn" id="2_6tpvq"]
+[ext_resource type="PackedScene" uid="uid://c4ftiyin7vo0t" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
 [ext_resource type="Material" uid="uid://c7yejiw7fpevg" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
 [ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
+[ext_resource type="PackedScene" uid="uid://dgeg3oqko2dj8" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
 [ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
+[ext_resource type="PackedScene" uid="uid://brfdmgexloksh" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")

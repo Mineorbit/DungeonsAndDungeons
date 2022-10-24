@@ -1,11 +1,70 @@
 [gd_scene load_steps=2 format=3 uid="uid://c55j0acrsp5hp"]
 
-[ext_resource type="Script" path="res://Scripts/CameraController.gd" id="1_kjdw6"]
+[sub_resource type="GDScript" id="GDScript_xbvxk"]
+script/source = "extends Node3D
+
+
+@onready var Camera: Camera3D = $Camera
+@onready var TargetPoint:Node3D = $TargetPoint
+
+var mouse_sensitivity := 0.005
+@export var player: Node:
+	get:
+		return player
+	set(value):
+		if value == null:
+			remove_child(Camera)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			add_child(Camera)	
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			print(\"Capturing\")
+			Camera.current = true	
+		player = value
+
+
+
+func _ready() -> void:
+	player = null
+	top_level = true
+	Constants.playerCamera = self
+	
+	Camera.top_level = true
+
+func move_camera(vec: Vector2) -> void:
+		rotation.x -= vec.y * mouse_sensitivity
+		rotation.x	 = clamp(rotation.x, -0.9, 0.3)
+		
+		rotation.y -= vec.x * mouse_sensitivity
+		rotation.y = rotation.y
+		
+	
+func _process(delta):
+	Camera.global_transform.origin = ( TargetPoint.global_transform.origin + Camera.global_transform.origin)*0.5
+	
+	if(player != null):
+		Camera.look_at(player.global_transform.origin)
+		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75
+
+
+@export var controllerCameraSpeed = 6
+
+func _input(event):
+	if event is InputEventMouseMotion and event.relative:
+		move_camera(event.relative)
+	var dir = controllerCameraSpeed * Vector2(Input.get_action_strength(\"camera_left\") - Input.get_action_strength(\"camera_right\"),Input.get_action_strength(\"camera_up\") - Input.get_action_strength(\"camera_down\"))
+	print(dir)
+	move_camera(dir)
+
+
+"
 
 [node name="PlayerCamera" type="SpringArm3D"]
 spring_length = 5.0
 margin = 0.2
-script = ExtResource("1_kjdw6")
+script = SubResource("GDScript_xbvxk")
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
+
+[node name="TargetPoint" type="Node3D" parent="."]

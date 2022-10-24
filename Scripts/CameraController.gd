@@ -33,14 +33,21 @@ func move_camera(vec: Vector2) -> void:
 		
 	
 func _process(delta):
+	rot_vel = (rot_vel + target_rot_vel)*0.5
 	if(player != null):
 		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75
+		move_camera(rot_vel)
+		
 
+var target_rot_vel
+var rot_vel
+
+@export var cameraControllerStrength = 2
 
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
-		move_camera(event.relative)
-	move_camera(Vector2(Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"),Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down"))
-	
+		target_rot_vel = event.relative
+	target_rot_vel = cameraControllerStrength*Vector2(Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"),Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down"))
+
 
 

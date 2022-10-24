@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://j7hwrecvcp5m" path="res://Assets/Models/LevelObjects/Entities/Player/Player.glb" id="2_1o02s"]
-[ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
-[ext_resource type="PackedScene" path="res://Prefabs/ItemPickupArea.tscn" id="3_7kqva"]
+[ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
+[ext_resource type="PackedScene" uid="uid://cyftlbbtcobqv" path="res://Prefabs/ItemPickupArea.tscn" id="3_7kqva"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
