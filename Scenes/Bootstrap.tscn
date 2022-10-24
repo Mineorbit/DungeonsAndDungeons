@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://vmjl3nr0u2qg"]
 
-[ext_resource type="Script" path="res://Prefabs/Models/Scripts/Bootstrap.gd" id="1"]
-[ext_resource type="Script" path="res://Prefabs/Models/Scripts/Constants.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/Bootstrap.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Constants.gd" id="2"]
 
 [node name="Bootstrap" type="Node"]
 script = ExtResource("1")

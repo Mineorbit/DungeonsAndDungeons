@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dfeuqlm71gsh"]
 
-[ext_resource type="Script" path="res://Prefabs/Models/Scripts/Spawner.gd" id="1_d41a1"]
+[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_iw6sl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
 
@@ -9,7 +9,7 @@ material = SubResource("StandardMaterial3D_dibhe")
 text = "Spawner"
 
 [node name="SwordSpawner" type="Node3D"]
-script = ExtResource("1_d41a1")
+script = ExtResource("1_iw6sl")
 spawnedEntity = "Items/Sword"
 
 [node name="Text" type="MeshInstance3D" parent="."]

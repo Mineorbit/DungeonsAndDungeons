@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bq2yphhd7sr5n"]
 
-[ext_resource type="Script" path="res://Prefabs/Models/Scripts/Gate.gd" id="1_x57k6"]
+[ext_resource type="Script" path="res://Scripts/Gate.gd" id="1_huajc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpsws"]
 
@@ -14,7 +14,7 @@ agent_radius = 0.05
 [sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
 
 [node name="Gate" type="Node3D"]
-script = ExtResource("1_x57k6")
+script = ExtResource("1_huajc")
 
 [node name="GateModel" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
