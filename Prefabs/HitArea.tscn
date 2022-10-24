@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dp6gsieqenq5w"]
 
-[ext_resource type="Script" path="res://Scripts/HitArea.gd" id="1_c47sg"]
+[ext_resource type="Script" path="res://Prefabs/Models/Scripts/HitArea.gd" id="1_2t42j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f2n2g"]
 
@@ -8,4 +8,4 @@
 shape = SubResource("SphereShape3D_f2n2g")
 target_position = Vector3(0, 0, 0)
 collision_mask = 2
-script = ExtResource("1_c47sg")
+script = ExtResource("1_2t42j")

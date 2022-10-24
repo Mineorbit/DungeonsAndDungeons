@@ -17,6 +17,8 @@ var mouse_sensitivity := 0.005
 			Camera.current = true	
 		player = value
 
+
+
 func _ready() -> void:
 	player = null
 	top_level = true

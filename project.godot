@@ -12,37 +12,37 @@ _global_script_classes=[{
 "base": "Resource",
 "class": &"ElementType",
 "language": &"GDScript",
-"path": "res://Scripts/ElementType.gd"
+"path": "res://Prefabs/Models/Scripts/ElementType.gd"
 }, {
 "base": "Entity",
 "class": &"Enemy",
 "language": &"GDScript",
-"path": "res://Scripts/Enemy.gd"
+"path": "res://Prefabs/Models/Scripts/Enemy.gd"
 }, {
 "base": "CharacterBody3D",
 "class": &"Entity",
 "language": &"GDScript",
-"path": "res://Scripts/Entity.gd"
+"path": "res://Prefabs/Models/Scripts/Entity.gd"
 }, {
 "base": "LevelObject",
 "class": &"InteractiveLevelObject",
 "language": &"GDScript",
-"path": "res://Scripts/InteractiveLevelObject.gd"
+"path": "res://Prefabs/Models/Scripts/InteractiveLevelObject.gd"
 }, {
 "base": "Entity",
 "class": &"ItemEntity",
 "language": &"GDScript",
-"path": "res://Scripts/ItemEntity.gd"
+"path": "res://Prefabs/Models/Scripts/ItemEntity.gd"
 }, {
 "base": "Node3D",
 "class": &"LevelObject",
 "language": &"GDScript",
-"path": "res://Scripts/LevelObject.gd"
+"path": "res://Prefabs/Models/Scripts/LevelObject.gd"
 }, {
 "base": "Resource",
 "class": &"LevelObjectData",
 "language": &"GDScript",
-"path": "res://Scripts/LevelObjectData.gd"
+"path": "res://Prefabs/Models/Scripts/LevelObjectData.gd"
 }]
 _global_script_class_icons={
 "ElementType": "",
@@ -66,7 +66,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Signals="*res://Prefabs/Signals.tscn"
-Constants="*res://Scripts/Constants.gd"
+Constants="*res://Prefabs/Models/Scripts/Constants.gd"
 LevelObjects="*res://Scenes/level_objects.tscn"
 Bootstrap="*res://Scenes/Bootstrap.tscn"
 MultiplayerConstants="*res://Prefabs/MultiplayerConstants.tscn"
