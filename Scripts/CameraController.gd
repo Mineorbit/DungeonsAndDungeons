@@ -40,5 +40,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		move_camera(event.relative)
+	move_camera(Vector2(Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"),Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down"))
+	
 
 
