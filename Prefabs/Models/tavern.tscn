@@ -17,4 +17,6 @@ shape = SubResource("ConcavePolygonShape3D_xoqyx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768706, 0)
 light_energy = 4.0
 light_indirect_energy = 3.956
+light_bake_mode = 1
+shadow_enabled = true
 omni_range = 14.3171
