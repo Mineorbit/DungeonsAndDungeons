@@ -113,7 +113,7 @@ func _process(delta) -> void:
 		selection = (selection + 1) %(Constants.LevelObjectData.size())
 		Signals.selected_level_object_changed.emit(selection)
 
-var is_connecting = false	
+var is_connecting = false
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		move_camera(event.relative)

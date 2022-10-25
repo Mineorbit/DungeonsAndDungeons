@@ -36,7 +36,6 @@ func _process(delta):
 	if(player != null):
 		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75
 		move_camera(rot_vel)
-		
 
 var target_rot_vel
 var rot_vel

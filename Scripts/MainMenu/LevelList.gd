@@ -14,7 +14,7 @@ func _ready():
 var displaysize = 1
 
 
-func update_column_tiling():
+func update_column_tiling(test):
 	print("TEST")
 	grid.columns = int(floor(sqrt(grid.get_children().size())))
 
@@ -43,3 +43,10 @@ func selected(data,selected):
 	selected.selection.show()
 	previous_selection = selected
 	on_selection.emit(selected)
+	
+	
+func _input(event):
+	if event is InputEventMouseMotion:
+		if Input.is_action_pressed("Drag"):
+			scroll_horizontal += event.relative.x
+			scroll_vertical += event.relative.y
