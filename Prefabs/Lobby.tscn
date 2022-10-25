@@ -16,7 +16,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_g2k77")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uu5v3"]
-size = Vector3(1, 1.9374, 1)
+size = Vector3(6.31192, 2.60375, 2.3084)
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_6rrya")
@@ -44,10 +44,12 @@ visible = false
 texture = ExtResource("5_bkylt")
 
 [node name="LevelList" parent="LevelSelectionScreen/SubViewport" instance=ExtResource("4_dfs7m")]
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 656.0
-offset_bottom = 656.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Area3D" type="Area3D" parent="LevelSelectionScreen"]
 transform = Transform3D(1, 0, 4.23516e-21, -2.84217e-14, 1, 7.81597e-14, -7.6233e-21, 0, 1, -0.0254644, 3.5113, 1.07603)
@@ -55,10 +57,10 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectionScreen/Area3D"]
-transform = Transform3D(1, 0, 8.47033e-22, -5.68434e-14, 1, 0, 0, 0, 1, 0, 2.38419e-07, 0.640449)
+transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
 
 [node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen"]
-transform = Transform3D(0.409885, 2.96462e-21, -5.68434e-14, -5.68434e-14, -2.9285e-08, 1, 1.69407e-21, -0.669963, -1.96198e-08, -2.38427e-07, 3.85237, 0.0621431)
+transform = Transform3D(0.409885, 3.59989e-21, -1.42109e-14, -1.56319e-13, -2.9285e-08, 1, 4.65868e-21, -0.669963, -1.96198e-08, -3.91524e-07, 6.32602, 0.16087)
 
 [node name="Tavern" parent="." instance=ExtResource("6_6agm5")]

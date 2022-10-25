@@ -44,8 +44,14 @@ func selected(data,selected):
 	on_selection.emit(selected)
 	
 	
+var dragging = false
+
+func is_dragging():
+	return Input.is_action_pressed("Drag") or dragging
+	
 func _input(event):
 	if event is InputEventMouseMotion:
-		if Input.is_action_pressed("Drag"):
+		print(str(dragging)+" "+str(event.relative))
+		if is_dragging():
 			scroll_horizontal += event.relative.x
 			scroll_vertical += event.relative.y
