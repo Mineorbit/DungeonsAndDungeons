@@ -15,7 +15,6 @@ var displaysize = 1
 
 
 func update_column_tiling(test):
-	print("TEST")
 	grid.columns = int(floor(sqrt(grid.get_children().size())))
 
 func set_display_size(size):
