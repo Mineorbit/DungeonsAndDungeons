@@ -84,7 +84,6 @@ func _physics_process(delta):
 		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
 		input_direction = input_direction.rotated(Vector3.UP, Constants.playerCamera.rotation.y).normalized()
 		synchronizer.input_direction = input_direction
-	#print(str(self)+" "+str(input_direction))
 		if Input.is_action_just_pressed("LeftUse"):
 			UseLeftAction()
 		if Input.is_action_just_pressed("jump"):

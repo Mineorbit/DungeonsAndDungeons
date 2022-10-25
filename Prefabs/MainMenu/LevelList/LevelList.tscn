@@ -15,3 +15,7 @@ script = ExtResource("1_gmgvp")
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
 columns = 6
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListElement.tscn")
+spawn_path = NodePath("../Control/GridContainer")

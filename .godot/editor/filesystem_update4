@@ -1,6 +1,8 @@
 res://Prefabs/Lobby.tscn
 res://Assets/Materials/LevelObjectCollision.tres
 res://Resources/grid.tres
+res://Scripts/Lobby.gd
+res://Prefabs/MainMenu/LevelList/LevelList.tscn
 res://Scenes/menu.tscn
 res://Prefabs/LevelObject.tscn
 res://Prefabs/InteractiveLevelObject.tscn
@@ -44,8 +46,9 @@ res://Prefabs/MainMenu/Main.tscn
 res://Prefabs/MainMenu/Edit.tscn
 res://Start.tscn
 res://Prefabs/MainMenu/LevelList/LevelListElement.tscn
-res://Prefabs/MainMenu/LevelList/LevelList.tscn
 res://Prefabs/grid.tscn
 res://Prefabs/Models/tavern.tscn
+res://Scripts/MainMenu/LevelList.gd
 res://Scripts/CameraController.gd
-res://Scripts/Entity.gd
+res://Scripts/PlayerController.gd
+res://Scripts/HitArea.gd

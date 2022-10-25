@@ -8,19 +8,26 @@ var selected_level = null
 signal on_selection(selected)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
+	grid.child_entered_tree.connect(update_column_tiling)
+	grid.child_exiting_tree.connect(update_column_tiling)
 
 var displaysize = 1
+
+
+func update_column_tiling():
+	grid.columns = int(floor(sqrt(grid.get_children().size())))
 
 func set_display_size(size):
 	displaysize = 2
 	scale =Vector2(displaysize,displaysize)
 
 func set_level_list(level_list):
-	grid.columns = int(floor(sqrt(level_list.size())))
+	for child in grid.get_children():
+		child.queue_free()
 	for level_data in level_list:
 		var level_list_element = level_list_element_prefab.instantiate()
+		# this must be unique per level
+		level_list_element.name = str(level_data)
 		grid.add_child(level_list_element)
 		level_list_element.set_level_data(level_data)
 		level_list_element.on_select.connect(selected)
