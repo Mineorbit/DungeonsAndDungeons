@@ -22,7 +22,7 @@ size = Vector3(6.31192, 2.60375, 2.3084)
 script = ExtResource("1_6rrya")
 
 [node name="LevelSelectionScreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.43971, -1.50996e-07, 9.85166e-15, 0, -4.37114e-08, -1.49262, 3.68386e-07, -1, 6.52446e-08, 0, 3.28853, 8.46025)
+transform = Transform3D(-2.5, -1.50996e-07, 9.90035e-15, 0, -4.37114e-08, -1.5, 3.77489e-07, -1, 6.55671e-08, 0, 3.3874, 8.46025)
 mesh = SubResource("PlaneMesh_klkol")
 script = ExtResource("4_f00ib")
 
@@ -44,6 +44,7 @@ visible = false
 texture = ExtResource("5_bkylt")
 
 [node name="LevelList" parent="LevelSelectionScreen/SubViewport" instance=ExtResource("4_dfs7m")]
+custom_minimum_size = Vector2i(0, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -61,6 +62,17 @@ transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.3256
 shape = SubResource("BoxShape3D_uu5v3")
 
 [node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen"]
-transform = Transform3D(0.409885, 3.59989e-21, -1.42109e-14, -1.56319e-13, -2.9285e-08, 1, 4.65868e-21, -0.669963, -1.96198e-08, -3.91524e-07, 6.32602, 0.16087)
+transform = Transform3D(0.4, 2.64698e-22, 0, 0, -2.91409e-08, 1, 8.47033e-22, -0.666667, -1.94273e-08, -2.07009e-07, 3.37434, 0.160872)
+projection = 1
+size = 4.5
+
+[node name="SelectionArea" type="Area3D" parent="LevelSelectionScreen"]
+transform = Transform3D(-1.1, 1.869e-06, -6.21725e-15, -2.84217e-14, -2.5134e-08, -0.05, -3.57548e-06, -0.575, 2.18557e-09, -4.57766e-09, 0.144794, -0.00795746)
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectionScreen/SelectionArea"]
+transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
+shape = SubResource("BoxShape3D_uu5v3")
 
 [node name="Tavern" parent="." instance=ExtResource("6_6agm5")]

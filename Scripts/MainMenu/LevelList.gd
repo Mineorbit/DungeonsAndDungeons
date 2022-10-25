@@ -51,7 +51,7 @@ func is_dragging():
 	
 func _input(event):
 	if event is InputEventMouseMotion:
-		print(str(dragging)+" "+str(event.relative))
+		#print(str(dragging)+" "+str(event.relative))
 		if is_dragging():
-			scroll_horizontal += event.relative.x
-			scroll_vertical += event.relative.y
+			scroll_horizontal += -event.relative.x
+			scroll_vertical += -event.relative.y
