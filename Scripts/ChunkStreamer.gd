@@ -15,7 +15,6 @@ func stream_chunk(data):
 	print("Loading new Chunk "+str(base_position)+" for "+str(target_player_network_id))
 	data.erase(base_position)
 	base_position *= 8
-	print(base_position)
 	for object in data:
 		Constants.currentLevel.add_from_string(base_position,object)
 	

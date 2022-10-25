@@ -47,6 +47,3 @@ func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		target_rot_vel = event.relative
 	target_rot_vel = cameraControllerStrength*Vector2(Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"),Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down"))
-
-
-
