@@ -62,7 +62,5 @@ func is_dragging():
 func _input(event):
 	if event is InputEventMouseButton:
 		dragging = (event.button_index == 1 and event.pressed)
-		if Constants.id == 1:
-			pass
 	if event is InputEventMouseMotion:
 		move(event.relative)
