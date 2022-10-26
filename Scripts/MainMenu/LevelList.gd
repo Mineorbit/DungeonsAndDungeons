@@ -3,6 +3,7 @@ extends ScrollContainer
 @onready var level_list_element_prefab = load("res://Prefabs/MainMenu/LevelList/LevelListElement.tscn")
 @onready var grid: GridContainer = $Control/GridContainer
 @onready var control: Control = $Control
+@export var enabled = true
 var selected_level = null
 
 signal on_selection(selected)
@@ -36,22 +37,33 @@ func set_level_list(level_list):
 var previous_selection
 
 func selected(data,selected):
+	if not enabled:
+		return
 	if previous_selection != null:
 		previous_selection.selection.hide()
 	selected_level = data
 	selected.selection.show()
 	previous_selection = selected
 	on_selection.emit(selected)
-	
-	
+
+
+
+func move(dir):
+	if is_dragging():
+			scroll_horizontal += -dir.x
+			scroll_vertical += -dir.y
+
 var dragging = false
 
 func is_dragging():
-	return Input.is_action_pressed("Drag") or dragging
-	
+	return enabled and (dragging)
+
+
 func _input(event):
+	print(str(Constants.id)+" "+str(event))
+	if event is InputEventMouseButton:
+		dragging = (event.button_index == 1 and event.pressed)
+		if Constants.id == 1:
+			pass
 	if event is InputEventMouseMotion:
-		#print(str(dragging)+" "+str(event.relative))
-		if is_dragging():
-			scroll_horizontal += -event.relative.x
-			scroll_vertical += -event.relative.y
+		move(event.relative)

@@ -42,10 +42,13 @@ func player_left(player):
 
 
 func _input(event):
+	
+	print(str(Constants.id)+" "+str(event))
+	if Constants.id == 1:
+		subViewport.push_input(event, true)
 	if local_player_inside:
 		if event is InputEventMouseButton or event is InputEventMouseMotion:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
-			#print(relative_pos)
 			var from = camera.project_ray_origin(event.position)
 			var to = from + camera.project_ray_normal(event.position) * 100
 			var raydir = PhysicsRayQueryParameters3D.new()
@@ -62,8 +65,6 @@ func _input(event):
 				rel_pos = (rel_pos + Vector2(1,1))/2
 				rel_pos.x = clamp(1-rel_pos.x,0,1)
 				rel_pos.y = clamp(1-rel_pos.y,0,1)
-				
-				
 				event.position.x = rel_pos.x * subViewport.size.x
 				event.position.y = rel_pos.y * subViewport.size.y 
 				subViewport.push_input(event, false)

@@ -21,6 +21,12 @@ size = Vector3(6.31192, 2.60375, 2.3084)
 properties/0/path = NodePath("SubViewport/Sprite2D:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/1/path = NodePath("SubViewport/LevelList:scroll_horizontal")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("SubViewport/LevelList:scroll_vertical")
+properties/2/spawn = true
+properties/2/sync = true
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_6rrya")
@@ -53,6 +59,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
+mouse_filter = 2
+enabled = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Cursors" type="Node2D" parent="LevelSelectionScreen/SubViewport"]
