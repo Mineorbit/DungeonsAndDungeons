@@ -5,32 +5,44 @@ extends MeshInstance3D
 @onready var levellist = $SubViewport/LevelList
 @onready var subViewport: Viewport = $SubViewport
 @onready var selectionArea: Area3D = $SelectionArea
+@onready var cursors: Node2D = $SubViewport/Cursors
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enterArea.body_entered.connect(player_entered)
 	enterArea.body_exited.connect(player_left)
 
 #change to local player inside
-var players_inside = 0
 
+var localcursor = null
+var local_player_inside = false
 func player_entered(player):
-	print(str(Constants.id)+"Entered capture area "+str(player.get_parent()))
-	camera.current = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	players_inside = players_inside + 1
-func player_left(player):
-	print(str(Constants.id)+"Entered capture area "+str(player.get_parent()))
-	camera.current = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	players_inside = players_inside - 1
+	if Constants.playerCamera.player == player:
+		camera.current = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		local_player_inside = true
+	if 1 == Constants.id:	
+		camera.current = true
+		var cursorprefab = load("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
+		var cursor = cursorprefab.instantiate()
+		localcursor = cursor
+		cursor.name = str(player.playercontroller.name)
+		cursors.add_child(cursor)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	#needed for dragging
-	levellist.dragging = Input.is_action_pressed("Drag")
+func player_left(player):
+	if Constants.playerCamera.player == player:
+		camera.current = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		local_player_inside = false
+	if 1 == Constants.id:
+		camera.current = false
+		localcursor = null
+		local_player_inside = false
+
+
+
 
 func _input(event):
-	if players_inside > 0:
+	if local_player_inside:
 		if event is InputEventMouseButton or event is InputEventMouseMotion:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
 			#print(relative_pos)
@@ -54,21 +66,7 @@ func _input(event):
 				
 				event.position.x = rel_pos.x * subViewport.size.x
 				event.position.y = rel_pos.y * subViewport.size.y 
-				#print(event.position)
-				if event is InputEventMouseButton:
-					rpc("button_event",JSON.stringify(event))
-				else:
-					rpc("motion_event",JSON.stringify(event))
+				subViewport.push_input(event, false)
 
 
-@rpc(any_peer)
-func button_event(data):
-	var event = InputEventMouseButton.new()
-	subViewport.push_input(event, false)
-
-
-@rpc(any_peer)
-func motion_event(data):
-	var event = InputEventMouseMotion.new()
-	subViewport.push_input(event, false)
 

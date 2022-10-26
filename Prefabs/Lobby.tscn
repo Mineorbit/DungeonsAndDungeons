@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://baqd3o2lrl4ar"]
+[gd_scene load_steps=10 format=3 uid="uid://baqd3o2lrl4ar"]
 
 [ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_6rrya"]
 [ext_resource type="Texture2D" uid="uid://cvwjamyvvpc70" path="res://Prefabs/LobbyViewportTexture.tres" id="3_4togx"]
-[ext_resource type="Script" path="res://Scripts/SubViewport.gd" id="4_3l1i0"]
 [ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="4_dfs7m"]
 [ext_resource type="Script" path="res://Scripts/LevelSelectionScreen.gd" id="4_f00ib"]
-[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="5_bkylt"]
 [ext_resource type="PackedScene" uid="uid://4ce2fpaaxv1q" path="res://Prefabs/Models/tavern.tscn" id="6_6agm5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2k77"]
@@ -19,6 +17,11 @@ material = SubResource("StandardMaterial3D_g2k77")
 [sub_resource type="BoxShape3D" id="BoxShape3D_uu5v3"]
 size = Vector3(6.31192, 2.60375, 2.3084)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y8fgt"]
+properties/0/path = NodePath("SubViewport/Sprite2D:position")
+properties/0/spawn = true
+properties/0/sync = true
+
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_6rrya")
 
@@ -27,6 +30,10 @@ transform = Transform3D(-2.5, -1.50996e-07, 9.90035e-15, 0, -4.37114e-08, -1.5, 
 mesh = SubResource("PlaneMesh_klkol")
 script = ExtResource("4_f00ib")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="LevelSelectionScreen"]
+_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
+spawn_path = NodePath("../SubViewport/Cursors")
+
 [node name="SubViewport" type="SubViewport" parent="LevelSelectionScreen"]
 own_world_3d = true
 handle_input_locally = false
@@ -34,11 +41,9 @@ gui_embed_subwindows = true
 size_2d_override = Vector2i(1280, 512)
 size_2d_override_stretch = true
 render_target_update_mode = 4
-script = ExtResource("4_3l1i0")
 
 [node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447447, 0.896562)
-visible = false
 current = true
 
 [node name="LevelList" parent="LevelSelectionScreen/SubViewport" instance=ExtResource("4_dfs7m")]
@@ -50,8 +55,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelSelectionScreen/SubViewport"]
-texture = ExtResource("5_bkylt")
+[node name="Cursors" type="Node2D" parent="LevelSelectionScreen/SubViewport"]
 
 [node name="Area3D" type="Area3D" parent="LevelSelectionScreen"]
 transform = Transform3D(1, 2.84217e-14, 2.5411e-21, 0, 1, 1.06581e-13, -5.0822e-21, 0, 1, -0.0254645, 4.97677, 1.07603)
@@ -80,3 +84,4 @@ shape = SubResource("BoxShape3D_uu5v3")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath("../LevelSelectionScreen")
+replication_config = SubResource("SceneReplicationConfig_y8fgt")
