@@ -13,6 +13,9 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_xoqyx")
 
+[node name="LevelBoard" parent="." index="1"]
+transform = Transform3D(0.439692, 0, 0, 0, 0.439692, 0, 0, 0, 0.0883408, 0, 0.436, 1.482)
+
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768706, 0)
 light_energy = 4.0

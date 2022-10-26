@@ -31,26 +31,44 @@ func _process(delta):
 
 func _input(event):
 	if players_inside > 0:
-		#print(event)
-		if event is InputEventMouseButton:
-			pass
-			var mouse_pos = get_viewport().get_mouse_position()
-			var ray_length = 100
-			var from = camera.project_ray_origin(mouse_pos)
-			var to = from + camera.project_ray_normal(mouse_pos) * ray_length
-			var space = get_world_3d().direct_space_state
-			var ray_query = PhysicsRayQueryParameters3D.new()
-			ray_query.from = from
-			ray_query.to = to
-			ray_query.collide_with_areas = true
-			var raycast_result = space.intersect_ray(ray_query)
-			#print(raycast_result)
-			var pos = raycast_result.position
-			pos.z = 0
-			pos = selectionArea.to_local(pos)
-			pos.z = 0
-			pos.x *= selectionArea.scale.x
-			pos.y *= selectionArea.scale.y
-			print(pos)
-			event.position.x = event.position.x - get_viewport().size.x*0.25
-		subViewport.push_input(event, false)
+		if event is InputEventMouseButton or event is InputEventMouseMotion:
+			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
+			#print(relative_pos)
+			var from = camera.project_ray_origin(event.position)
+			var to = from + camera.project_ray_normal(event.position) * 100
+			var raydir = PhysicsRayQueryParameters3D.new()
+			raydir.from = from
+			raydir.to = to
+			raydir.collide_with_areas = true
+			raydir.collide_with_bodies = false
+			raydir.collision_mask = selectionArea.collision_mask
+			
+			var result = get_world_3d().direct_space_state.intersect_ray(raydir)
+			if result.size() > 0:
+				var pos = selectionArea.to_local(result.position)
+				var rel_pos = Vector2(pos.x/0.9, pos.y/1.7)
+				rel_pos = (rel_pos + Vector2(1,1))/2
+				rel_pos.x = clamp(1-rel_pos.x,0,1)
+				rel_pos.y = clamp(1-rel_pos.y,0,1)
+				
+				
+				event.position.x = rel_pos.x * subViewport.size.x
+				event.position.y = rel_pos.y * subViewport.size.y 
+				#print(event.position)
+				if event is InputEventMouseButton:
+					rpc("button_event",JSON.stringify(event))
+				else:
+					rpc("motion_event",JSON.stringify(event))
+
+
+@rpc(any_peer)
+func button_event(data):
+	var event = InputEventMouseButton.new()
+	subViewport.push_input(event, false)
+
+
+@rpc(any_peer)
+func motion_event(data):
+	var event = InputEventMouseMotion.new()
+	subViewport.push_input(event, false)
+
