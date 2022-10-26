@@ -25,19 +25,15 @@ func click(code,pressed):
 	event.button_index = code
 	event.pressed = pressed
 	event.position = position
-	
-	#print(inputevent)
 	Input.parse_input_event(event)
 
 
-@rpc(any_peer)
+@rpc(any_peer,unreliable_ordered)
 func move(direction):
 	var event = InputEventMouseMotion.new()
 	event.relative = direction
-	#print(inputevent)
 	
 	Input.parse_input_event(event)
-	#levellist._input(inputevent)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
