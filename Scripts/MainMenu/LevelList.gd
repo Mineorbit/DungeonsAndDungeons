@@ -23,18 +23,23 @@ func set_display_size(size):
 	scale =Vector2(displaysize,displaysize)
 
 func set_level_list(level_list):
-	for child in grid.get_children():
-		child.queue_free()
+	clear()
+	var num = 0
 	for level_data in level_list:
 		var level_list_element = level_list_element_prefab.instantiate()
 		# this must be unique per level
-		level_list_element.name = str(level_data)
+		level_list_element.name = str(num)
 		grid.add_child(level_list_element)
 		level_list_element.set_level_data(level_data)
 		level_list_element.on_select.connect(selected)
+		num = num + 1
 	#control.size = grid.size
 
 var previous_selection
+
+func clear():
+	for child in grid.get_children():
+		child.queue_free()
 
 func selected(data,selected):
 	if not enabled:

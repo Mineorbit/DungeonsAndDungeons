@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://baqd3o2lrl4ar"]
+[gd_scene load_steps=9 format=3 uid="uid://baqd3o2lrl4ar"]
 
 [ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_6rrya"]
 [ext_resource type="Texture2D" uid="uid://cvwjamyvvpc70" path="res://Prefabs/LobbyViewportTexture.tres" id="3_4togx"]
@@ -16,17 +16,6 @@ material = SubResource("StandardMaterial3D_g2k77")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uu5v3"]
 size = Vector3(6.31192, 2.60375, 2.3084)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y8fgt"]
-properties/0/path = NodePath("SubViewport/Sprite2D:position")
-properties/0/spawn = true
-properties/0/sync = true
-properties/1/path = NodePath("SubViewport/LevelList:scroll_horizontal")
-properties/1/spawn = true
-properties/1/sync = true
-properties/2/path = NodePath("SubViewport/LevelList:scroll_vertical")
-properties/2/spawn = true
-properties/2/sync = true
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_6rrya")
@@ -65,18 +54,26 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Cursors" type="Node2D" parent="LevelSelectionScreen/SubViewport"]
 
+[node name="Refresh" type="Button" parent="LevelSelectionScreen/SubViewport"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Refresh"
+
 [node name="EnterArea" type="Area3D" parent="LevelSelectionScreen"]
 transform = Transform3D(1, 2.84217e-14, 2.5411e-21, 0, 1, 1.06581e-13, -5.0822e-21, 0, 1, -0.0254645, 4.97677, 1.07603)
 collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectionScreen/EnterArea"]
-transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
+transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 1.15484e-07, -1.90842, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
 
 [node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen"]
-transform = Transform3D(0.4, 3.91753e-21, -1.56319e-13, 1.42109e-14, -2.91409e-08, 1, 1.27055e-21, -0.666667, -1.94273e-08, -1.62329e-07, 2.63458, 0.160872)
-projection = 1
+transform = Transform3D(0.4, 5.02926e-21, -1.84741e-13, 8.52651e-14, -2.91409e-08, 1, 1.69407e-21, -0.666667, -1.94273e-08, -3.88641e-07, 6.38157, 0.160872)
 size = 4.5
 
 [node name="SelectionArea" type="Area3D" parent="LevelSelectionScreen"]
@@ -89,7 +86,3 @@ transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.3256
 shape = SubResource("BoxShape3D_uu5v3")
 
 [node name="Tavern" parent="." instance=ExtResource("6_6agm5")]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-root_path = NodePath("../LevelSelectionScreen")
-replication_config = SubResource("SceneReplicationConfig_y8fgt")

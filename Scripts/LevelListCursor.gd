@@ -32,7 +32,6 @@ func click(code,pressed):
 func move(direction):
 	var event = InputEventMouseMotion.new()
 	event.relative = direction
-	
 	Input.parse_input_event(event)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

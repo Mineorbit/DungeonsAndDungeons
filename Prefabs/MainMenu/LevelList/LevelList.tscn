@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://ct78tplyjahgt"]
+[gd_scene load_steps=3 format=3 uid="uid://ct78tplyjahgt"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/LevelList.gd" id="1_gmgvp"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nk8ml"]
+properties/0/path = NodePath(".:scroll_horizontal")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:scroll_vertical")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="LevelList" type="ScrollContainer"]
 custom_minimum_size = Vector2i(624, 624)
@@ -14,8 +22,10 @@ script = ExtResource("1_gmgvp")
 [node name="Control" type="PanelContainer" parent="."]
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
-columns = 6
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListElement.tscn")
 spawn_path = NodePath("../Control/GridContainer")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nk8ml")

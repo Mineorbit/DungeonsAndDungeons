@@ -13,6 +13,8 @@ func _ready():
 
 #change to local player inside
 
+var player_cursors = {}
+
 var localcursor = null
 var local_player_inside = false
 func player_entered(player):
@@ -20,13 +22,14 @@ func player_entered(player):
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		local_player_inside = true
-	if 1 == Constants.id:	
+	if 1 == Constants.id:
 		camera.current = true
 		var cursorprefab = load("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
 		var cursor = cursorprefab.instantiate()
 		localcursor = cursor
 		cursor.name = str(player.playercontroller.name)
 		cursors.add_child(cursor)
+		player_cursors[player.name] = cursor
 
 func player_left(player):
 	if Constants.playerCamera.player == player:
@@ -37,13 +40,14 @@ func player_left(player):
 		camera.current = false
 		localcursor = null
 		local_player_inside = false
+		var cursor = player_cursors[player.name]
+		cursor.queue_free()
+		player_cursors[player.name] = null
 
 
 
 
 func _input(event):
-	
-	print(str(Constants.id)+" "+str(event))
 	if Constants.id == 1:
 		subViewport.push_input(event, true)
 	if local_player_inside:
