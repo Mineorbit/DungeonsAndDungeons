@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 @onready var camera: Camera3D = $Camera3D
-@onready var enterArea: Area3D = $Area3D
+@onready var enterArea: Area3D = $EnterArea
 @onready var levellist = $SubViewport/LevelList
 @onready var subViewport: Viewport = $SubViewport
 @onready var selectionArea: Area3D = $SelectionArea

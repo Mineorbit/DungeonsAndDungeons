@@ -65,12 +65,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Cursors" type="Node2D" parent="LevelSelectionScreen/SubViewport"]
 
-[node name="Area3D" type="Area3D" parent="LevelSelectionScreen"]
+[node name="EnterArea" type="Area3D" parent="LevelSelectionScreen"]
 transform = Transform3D(1, 2.84217e-14, 2.5411e-21, 0, 1, 1.06581e-13, -5.0822e-21, 0, 1, -0.0254645, 4.97677, 1.07603)
 collision_layer = 16
 collision_mask = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectionScreen/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectionScreen/EnterArea"]
 transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
 
