@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfrgl1ei4r6c0"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5pggu"]
+properties/0/path = NodePath(".:button_pressed")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="ReadyCall" type="CheckBox"]
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(4, 4)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5pggu")

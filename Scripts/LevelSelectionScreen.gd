@@ -45,7 +45,11 @@ func player_left(player):
 		player_cursors[player.name] = null
 
 
-
+@rpc
+func end():
+	camera.current = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	local_player_inside = false
 
 func _input(event):
 	if Constants.id == 1:

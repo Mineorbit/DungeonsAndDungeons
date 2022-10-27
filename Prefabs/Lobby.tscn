@@ -63,6 +63,15 @@ offset_bottom = 8.0
 grow_horizontal = 0
 text = "Refresh"
 
+[node name="ReadyCalls" type="HBoxContainer" parent="LevelSelectionScreen/SubViewport"]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.1
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
 [node name="EnterArea" type="Area3D" parent="LevelSelectionScreen"]
 transform = Transform3D(1, 2.84217e-14, 2.5411e-21, 0, 1, 1.06581e-13, -5.0822e-21, 0, 1, -0.0254645, 4.97677, 1.07603)
 collision_layer = 16
@@ -84,5 +93,9 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectionScreen/SelectionArea"]
 transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
+
+[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="LevelSelectionScreen"]
+_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/ReadyCall.tscn")
+spawn_path = NodePath("../SubViewport/ReadyCalls")
 
 [node name="Tavern" parent="." instance=ExtResource("6_6agm5")]

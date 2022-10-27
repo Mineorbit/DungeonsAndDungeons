@@ -19,7 +19,9 @@ func start(levelpath = null,immediate = false):
 
 func end():
 	light.hide()
-	level.clear()
+	if level != null:
+		level.clear()
+		level.queue_free()
 
 
 func prepare_level():

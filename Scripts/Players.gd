@@ -15,6 +15,11 @@ func _process(delta):
 	pass
 
 
+func spawn():
+	for i in range(4):
+		if get_player(i) != null:
+			get_player(i).global_transform.origin = Vector3(2*i,2,0)
+
 func set_current_player(number):
 	Constants.currentPlayer = number
 	for i in range(4):
@@ -52,6 +57,7 @@ func spawn_player_controller(i,owner_id = 0):
 	p.playercontroller.player = p
 	return p.playercontroller
 
+signal player_spawned(local_id)
 
 func spawn_player(i):
 		var player
@@ -65,6 +71,7 @@ func spawn_player(i):
 		player.global_transform.origin = Vector3(0.5 + i * 2,5,0.5)
 		await Constants.buffer()
 		player._velocity = Vector3.ZERO
+		player_spawned.emit(i)
 		player.start()
 
 func get_player(i):
