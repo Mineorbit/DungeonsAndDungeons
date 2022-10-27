@@ -159,6 +159,7 @@ func clear_entities():
 			entity.remove()
 
 
+var numberOfPlacedLevelObjects = {}
 
 func clear():
 	clear_entities()
@@ -167,8 +168,8 @@ func clear():
 			child.queue_free()
 		chunks[chunk].queue_free()
 	Constants.interactiveLevelObjects.clear()
-	for key in Constants.numberOfPlacedLevelObjects.keys():
-		Constants.numberOfPlacedLevelObjects[key] = 0
+	for key in numberOfPlacedLevelObjects.keys():
+		numberOfPlacedLevelObjects[key] = 0
 	chunks.clear()
 
 var started_loading = false
@@ -273,10 +274,15 @@ func add_chunk(position):
 	
 
 func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
+	
+	# this sets the table of maximum numbers at the start
+	if not numberOfPlacedLevelObjects.has(levelObjectData.levelObjectId):
+		numberOfPlacedLevelObjects[levelObjectData.levelObjectId] = 0
+		
 	if(levelObjectData.maximumNumber != -1):
-		if(Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
+		if(numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
 			return
-	Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] = Constants.numberOfPlacedLevelObjects[levelObjectData.levelObjectId] + 1
+	numberOfPlacedLevelObjects[levelObjectData.levelObjectId] = numberOfPlacedLevelObjects[levelObjectData.levelObjectId] + 1
 	var chunk = get_chunk(position)
 	if(chunk == null):
 		chunk = add_chunk(position)
@@ -368,7 +374,7 @@ func remove_level_object(object):
 	if object.has_method("on_remove"):
 		object.on_remove()
 	chunk.levelObjects.remove_child(object)
-	Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,Constants.numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
+	numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] = max(0,numberOfPlacedLevelObjects[object.levelObjectData.levelObjectId] - 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

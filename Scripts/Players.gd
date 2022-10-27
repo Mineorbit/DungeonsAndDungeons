@@ -15,10 +15,13 @@ func _process(delta):
 	pass
 
 
+signal player_spawned(local_id)
+
 func spawn():
 	for i in range(4):
 		if get_player(i) != null:
 			get_player(i).global_transform.origin = Vector3(2*i,2,0)
+			player_spawned.emit(i)
 
 func set_current_player(number):
 	Constants.currentPlayer = number
@@ -57,7 +60,6 @@ func spawn_player_controller(i,owner_id = 0):
 	p.playercontroller.player = p
 	return p.playercontroller
 
-signal player_spawned(local_id)
 
 func spawn_player(i):
 		var player

@@ -1,11 +1,11 @@
 extends Node3D
 
-
-@export var target_player_network_id = 0
+var target_player_network_id = 0
 @export var target = null
 var loadedChunks = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	target_player_network_id = str(name).to_int()
 	loadedChunks = []
 
 
