@@ -11,6 +11,9 @@ var interactiveLevelObjectPrefab
 @onready var Entities = $Entities
 @onready var ChunkStreamers = $ChunkStreamers
 
+
+var player_spawns = [null,null,null,null]
+
 var changedChunks = 0
 
 # Called when the node enters the scene tree for the first time.

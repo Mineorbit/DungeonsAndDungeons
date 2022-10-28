@@ -6,7 +6,7 @@ extends ColorRect
 @onready var selection = $selection
 
 # this needs to be a long int
-var id: int:
+var id:
 	get:
 		return id
 	set(value):

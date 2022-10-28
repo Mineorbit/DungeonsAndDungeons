@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtxtw55scu3n0"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerSpawn.gd" id="1_74iir"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_c237y"]
+
+[node name="PlayerSpawn" type="Node3D"]
+script = ExtResource("1_74iir")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_c237y")

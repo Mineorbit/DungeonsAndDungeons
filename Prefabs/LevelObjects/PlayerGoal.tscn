@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdde83tsw38mj"]
 
-[ext_resource type="Script" path="res://Scripts/Goal.gd" id="1_s0l3t"]
+[ext_resource type="Script" path="res://Scripts/Goal.gd" id="1_nokji"]
 
 [sub_resource type="SphereShape3D" id="1"]
 
@@ -14,8 +14,8 @@ roughness = 0.0
 [sub_resource type="SphereMesh" id="3"]
 material = SubResource("2")
 
-[node name="Goal" type="Node3D"]
-script = ExtResource("1_s0l3t")
+[node name="PlayerGoal" type="Node3D"]
+script = ExtResource("1_nokji")
 
 [node name="Area" type="Area3D" parent="."]
 collision_layer = 16
