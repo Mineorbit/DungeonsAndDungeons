@@ -13,9 +13,9 @@ signal on_select(data)
 
 
 func set_level_data(level_data):
-	levellistelement.text = level_data
 	data = level_data
+	levellistelement.text = level_data["name"]
 
 
 func on_selected():
-	on_select.emit(data,self)
+	on_select.emit(data["id"],self)

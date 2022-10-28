@@ -73,8 +73,16 @@ var start_object
 func connect_interactive_objects(a, b):
 	if a == null or b == null or a == b:
 		return
-	b.connectedObjects.append(a.unique_instance_id)
-	Signals.connection_added.emit(b.unique_instance_id,[a.unique_instance_id])	
+		
+	# check or cycle
+	if a is InteractiveLevelObject and b is InteractiveLevelObject:
+		if not a.unique_instance_id in b.connectedObjects:
+			b.connectedObjects.append(a.unique_instance_id)
+			Signals.connection_added.emit(b.unique_instance_id,[a.unique_instance_id])
+		else:
+			print("These Objects are allready connected")
+	else:
+		print("Cannot connect these objects as they are not Interactive")
 
 
 var selected_rotation = 0

@@ -41,12 +41,12 @@ func clear():
 	for child in grid.get_children():
 		child.queue_free()
 
-func selected(data,selected):
+func selected(identifier,selected):
 	if not enabled:
 		return
 	if previous_selection != null:
 		previous_selection.selection.hide()
-	selected_level = data
+	selected_level = identifier
 	selected.selection.show()
 	previous_selection = selected
 	on_selection.emit(selected)

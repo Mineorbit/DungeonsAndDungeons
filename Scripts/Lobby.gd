@@ -38,7 +38,8 @@ func load_level_list():
 		if Constants.id == 1:
 			levellist.clear()
 			levellist.enabled = true
-			levellist.set_level_list(["1", "Test2","Test2","Test3","Test2","Test3","Test2","Test3","Test2","Test3"])
+			# fetch levellist
+			levellist.set_level_list([])
 	
 
 func _process(delta):

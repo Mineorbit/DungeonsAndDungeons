@@ -6,11 +6,16 @@ extends Control
 @onready var start_edit_button: Button = $AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/Edit
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var local_levels = DirAccess.open("user://level/").get_directories()
-	level_list.set_level_list(local_levels)
+	level_list.set_level_list(load_level_list())
 	level_list.on_selection.connect(func (x): start_edit_button.modulate = Color.WHITE)
 
 
+func load_level_list():
+	var local_levels = DirAccess.open("user://level/").get_directories()
+	var levels = []
+	for l in local_levels:
+		levels.append({"name":l,"id":l})
+	return levels
 
 @export var selectedSubmenu = 0
 
