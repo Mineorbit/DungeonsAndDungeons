@@ -13,6 +13,7 @@ var numberOfPlayersInside = 0
 
 func reset():
 	numberOfPlayersInside = 0
+	numberOfPlayersNeeded = Constants.players.number_of_players
 	
 func _ready():
 	enterArea.body_entered.connect(playerEntered)
@@ -22,6 +23,7 @@ func playerEntered(player):
 	if Constants.currentMode != 2:
 		return
 	print("Entered")
+	print("Needed: "+str(numberOfPlayersNeeded))
 	numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
 		print("Game won!")

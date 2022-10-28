@@ -31,6 +31,8 @@ var playerCamera
 
 var remoteAddress = "127.0.0.1"
 
+var players
+
 var id = 0
 
 

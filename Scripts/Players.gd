@@ -7,6 +7,7 @@ var playerpref
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
+	Constants.players = self
 	
 
 
@@ -16,6 +17,8 @@ func _process(delta):
 
 
 signal player_spawned(local_id)
+
+var number_of_players = 0
 
 func spawn():
 	for i in range(4):
@@ -38,6 +41,7 @@ func despawn_players():
 		player.global_transform.origin = Vector3(0.5,-5,0.5)
 		player.on_entity_despawn.emit()
 		await Constants.buffer()
+		number_of_players = number_of_players - 1
 		playerEntities.remove_child(player)
 
 func despawn_player_controllers():
@@ -74,6 +78,7 @@ func spawn_player(i):
 		await Constants.buffer()
 		player._velocity = Vector3.ZERO
 		player_spawned.emit(i)
+		number_of_players = number_of_players + 1
 		player.start()
 
 func get_player(i):

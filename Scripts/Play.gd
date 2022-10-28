@@ -29,8 +29,8 @@ func complete_start_round():
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	#lobby.end()
-	world.players.spawn()
 	remove_child(lobby)
+	world.players.spawn()
 	get_tree().paused = false
 
 func start_round():

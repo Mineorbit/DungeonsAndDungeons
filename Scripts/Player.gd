@@ -14,6 +14,7 @@ func UseLeft():
 	
 func UseRight():
 	pass
+	
 
 func _ready():
 	super._ready()
