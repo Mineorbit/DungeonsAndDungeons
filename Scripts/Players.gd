@@ -25,8 +25,10 @@ func spawn():
 		if get_player(i) != null:
 			var base = Vector3.ZERO
 			if Constants.currentLevel.player_spawns[i] != null:
+				print("Spawn")
 				base = Constants.currentLevel.player_spawns[i].global_transform.origin
 			else:
+				print("No Spawn")
 				base = Vector3(2*i,2,0)
 			get_player(i).global_transform.origin = base
 			print("Spawning at "+str(base))
