@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh02t7n0xkbs8"]
+
+[ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="1_vlxht"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vlxht")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+offset_top = 73.0
+offset_right = 368.0
+offset_bottom = 136.0
+theme_override_constants/margin_bottom = 32
+
+[node name="Close" type="Button" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+offset_right = 368.0
+offset_bottom = 31.0
+text = "Close"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+offset_top = 140.0
+offset_right = 368.0
+offset_bottom = 203.0
+theme_override_constants/margin_bottom = 32
+
+[node name="Options" type="Button" parent="Panel/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+offset_right = 368.0
+offset_bottom = 31.0
+text = "Options"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+offset_top = 207.0
+offset_right = 368.0
+offset_bottom = 238.0
+
+[node name="MainMenu" type="Button" parent="Panel/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+offset_right = 368.0
+offset_bottom = 31.0
+text = "Back to Main Menu"

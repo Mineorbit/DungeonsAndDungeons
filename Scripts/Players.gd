@@ -32,11 +32,13 @@ func spawn():
 			print("Spawning at "+str(base))
 			player_spawned.emit(i)
 
+
 func set_current_player(number):
 	Constants.currentPlayer = number
 	for i in range(4):
 		if get_player(i) != null:
 			playerControllers.of(i).set_active(i == number)
+
 
 func despawn_players():
 	print("Despawning Players")
@@ -50,11 +52,12 @@ func despawn_players():
 		number_of_players = number_of_players - 1
 		playerEntities.remove_child(player)
 
+
 func despawn_player_controllers():
 	for i in range(4):
 		if get_player(i) != null:
 			playerControllers.of(i).despawn()
-		
+
 
 func spawn_player_controllers():
 	for i in range(4):
@@ -87,15 +90,15 @@ func spawn_player(i):
 		number_of_players = number_of_players + 1
 		player.start()
 
+
 func get_player(i):
 	for child in playerEntities.get_children():
 		if child.name == str(i):
 			return child
 	return null
 
+
 func spawn_players():
 	print("Spawning Players")
 	for i in range(4):
 		spawn_player(i)
-
-	# this is shit but it works
