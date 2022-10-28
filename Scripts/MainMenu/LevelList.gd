@@ -25,12 +25,12 @@ func set_display_size(size):
 func set_level_list(level_list):
 	clear()
 	var num = 0
-	for level_data in level_list:
+	for level in level_list:
 		var level_list_element = level_list_element_prefab.instantiate()
 		# this must be unique per level
 		level_list_element.name = str(num)
 		grid.add_child(level_list_element)
-		level_list_element.set_level_data(level_data)
+		level_list_element.set_level_data(level)
 		level_list_element.on_select.connect(selected)
 		num = num + 1
 	#control.size = grid.size

@@ -4,16 +4,45 @@ extends Node
 var url = "https://mstillger.de/api/"
 var auth_token = ""
 
+
+var level_list
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fetch_api_data()
 	login("test","test")
 	download_level(6)
-	
+	fetch_level_list()
 
 #func _process(delta):
 #	if Input.is_action_just_pressed("Connect"):
 #		upload_level("test")
+
+
+func fetch_level_list():
+	# Create an HTTP request node and connect its completion signal.
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(level_list_http_request_completed)
+	# Perform a GET request. The URL below returns JSON as of writing.
+	var error = http_request.request(str(url)+"level/all?proto_resp=f")
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+	# Perform a POST request. The URL below returns JSON as of writing.
+	# Note: Don't make simultaneous requests using a single HTTPRequest node.
+	# The snippet below is provided for reference only.
+
+
+# Called when the HTTP request is completed.
+func level_list_http_request_completed(result, response_code, headers, body):
+	print(result)
+	var json_object = JSON.new()
+	json_object.parse(body.get_string_from_utf8())
+	level_list = json_object.data["levels"]
+	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
+	print(json_object.data)
+
+
 
 
 # only for windows now
@@ -26,6 +55,7 @@ func compress_level(name):
 func decompress_level(name):
 	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
 	var result = ProjectSettings.globalize_path("user://level/")
+	print("Decompressing "+str(path))
 	await OS.execute("powershell.exe",["Expand-Archive",path,result])
 
 
@@ -126,7 +156,7 @@ func download_level(ulid):
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.request_completed.connect(level_download_http_request_completed)
-	http_request.download_file = level_zip_file_path("test2")
+	http_request.download_file = level_zip_file_path("download")
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
 	var error = http_request.request(str(url)+"level/download?proto_resp=false&ulid="+str(ulid))
 	if error != OK:
@@ -138,7 +168,7 @@ func download_level(ulid):
 func level_download_http_request_completed(result, _response_code, _headers, _body):
 	if result != OK:
 		push_error("Download Failed")
-	decompress_level("test2")
+	decompress_level("download")
 
 func fetch_api_data():
 	# Create an HTTP request node and connect its completion signal.

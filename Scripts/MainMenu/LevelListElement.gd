@@ -4,7 +4,9 @@ extends ColorRect
 @onready var levellistelement: RichTextLabel = $Name
 @onready var button: BaseButton = $Button
 @onready var selection = $selection
-var data
+
+
+var id
 
 func _ready():
 	selection.hide()
@@ -12,10 +14,11 @@ func _ready():
 signal on_select(data)
 
 
-func set_level_data(level_data):
-	data = level_data
-	levellistelement.text = level_data["name"]
+func set_level_data(ldata):
+	print("Set LevelData "+str(ldata))
+	levellistelement.text = ldata["name"]
+	id = ldata["ulid"]
 
 
 func on_selected():
-	on_select.emit(data["id"],self)
+	on_select.emit(id,self)

@@ -14,7 +14,7 @@ func load_level_list():
 	var local_levels = DirAccess.open("user://level/").get_directories()
 	var levels = []
 	for l in local_levels:
-		levels.append({"name":l,"id":l})
+		levels.append({"name":l,"ulid":l})
 	return levels
 
 @export var selectedSubmenu = 0

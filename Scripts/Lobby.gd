@@ -39,7 +39,7 @@ func load_level_list():
 			levellist.clear()
 			levellist.enabled = true
 			# fetch levellist
-			levellist.set_level_list([])
+			levellist.set_level_list(ApiAccess.level_list)
 	
 
 func _process(delta):
