@@ -39,8 +39,6 @@ func edit(name):
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Save"):
 		world.level.save()
-	if Input.is_action_just_pressed("Load"):
-		world.level.load("Test")
 	if Input.is_action_just_pressed("Test"):
 		enter_test_mode()
 	if Input.is_action_just_pressed("Edit"):
@@ -77,5 +75,6 @@ func enter_test_mode():
 		remove_child(builderhud)
 	add_child(playerhud)
 	Constants.playerCamera.player = Players.get_player(0)
+	Players.spawn()
 	connections.hide()
 	

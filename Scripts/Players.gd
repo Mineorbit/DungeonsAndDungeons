@@ -23,7 +23,13 @@ var number_of_players = 0
 func spawn():
 	for i in range(4):
 		if get_player(i) != null:
-			get_player(i).global_transform.origin = Vector3(2*i,2,0)
+			var base = Vector3.ZERO
+			if Constants.currentLevel.player_spawns[i] != null:
+				base = Constants.currentLevel.player_spawns[i].global_transform.origin
+			else:
+				base = Vector3(2*i,2,0)
+			get_player(i).global_transform.origin = base
+			print("Spawning at "+str(base))
 			player_spawned.emit(i)
 
 func set_current_player(number):

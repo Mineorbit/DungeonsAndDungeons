@@ -179,6 +179,7 @@ var started_loading = false
 func load(level_name, immediate = false):
 	
 	clear()
+	self.level_name = level_name
 	started_loading = true
 	var path = "user://level/"+level_name
 	var dir = DirAccess.open(path+"/chunks")

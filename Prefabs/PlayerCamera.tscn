@@ -12,17 +12,22 @@ var mouse_sensitivity := 0.005
 	get:
 		return player
 	set(value):
+		player = value
 		if value == null:
 			remove_child(Camera)
+			player_to_follow_exists = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			add_child(Camera)	
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			print(\"Capturing\")
-			Camera.current = true	
-		player = value
+			Camera.current = true
+			player_to_follow_exists = true
+			player.on_entity_remove.connect(func():player_to_follow_exists = false)
+			player.on_entity_despawn.connect(func():player_to_follow_exists = false)
 
 
+var player_to_follow_exists = false
 
 func _ready() -> void:
 	player = null
@@ -42,7 +47,7 @@ func move_camera(vec: Vector2) -> void:
 func _process(delta):
 	#Camera.global_transform.origin = ( TargetPoint.global_transform.origin + Camera.global_transform.origin)*0.5
 	#move_camera(dir)
-	if(player != null):
+	if player_to_follow_exists and (player != null):
 		#Camera.look_at(player.global_transform.origin)
 		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75
 
