@@ -12,7 +12,6 @@ func _ready():
 	fetch_api_data()
 	login("test","test")
 	download_level(6)
-	fetch_level_list()
 
 #func _process(delta):
 #	if Input.is_action_just_pressed("Connect"):
@@ -32,6 +31,7 @@ func fetch_level_list():
 	# Note: Don't make simultaneous requests using a single HTTPRequest node.
 	# The snippet below is provided for reference only.
 
+signal levels_fetched
 
 # Called when the HTTP request is completed.
 func level_list_http_request_completed(result, response_code, headers, body):
@@ -41,6 +41,7 @@ func level_list_http_request_completed(result, response_code, headers, body):
 	level_list = json_object.data["levels"]
 	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
 	print(json_object.data)
+	levels_fetched.emit()
 
 
 

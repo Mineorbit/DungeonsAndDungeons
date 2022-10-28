@@ -6,11 +6,11 @@ extends Node3D
 @onready var checkboxes = $LevelSelectionScreen/SubViewport/ReadyCalls
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
 	if Constants.id == 1:
-		refreshlist.pressed.connect(load_level_list)
-	get_parent().world.players.player_spawned.connect(add_checkbox)
-	#levellist.set_level_list(["Test"])
+		refreshlist.pressed.connect(refresh_level_list)
+		ApiAccess.fetch_level_list()
+		ApiAccess.levels_fetched.connect(load_level_list)
+		get_parent().world.players.player_spawned.connect(add_checkbox)
 
 func add_checkbox(local_id):
 	print("Added Checkbox")
@@ -34,11 +34,15 @@ func check_ready():
 			return false
 	return true
 
+func refresh_level_list():
+	if Constants.id == 1:
+		levellist.clear()
+		ApiAccess.fetch_level_list()
+
 func load_level_list():
 		if Constants.id == 1:
 			levellist.clear()
 			levellist.enabled = true
-			# fetch levellist
 			levellist.set_level_list(ApiAccess.level_list)
 	
 
