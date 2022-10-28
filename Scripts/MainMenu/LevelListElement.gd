@@ -5,8 +5,18 @@ extends ColorRect
 @onready var button: BaseButton = $Button
 @onready var selection = $selection
 
-
-var id
+# this needs to be a long int
+var id: int:
+	get:
+		return id
+	set(value):
+		id = value
+var level_name: String:
+	get:
+		return level_name
+	set(value):
+		levellistelement.text = value
+		level_name = value
 
 func _ready():
 	selection.hide()
@@ -15,8 +25,10 @@ signal on_select(data)
 
 
 func set_level_data(ldata):
+	# this is necessary ater return to lobby because else it is null while the set_level_data method is called
+	levellistelement = $Name
 	print("Set LevelData "+str(ldata))
-	levellistelement.text = ldata["name"]
+	level_name = ldata["name"]
 	id = ldata["ulid"]
 
 

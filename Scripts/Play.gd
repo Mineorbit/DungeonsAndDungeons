@@ -8,6 +8,7 @@ var lobby
 func _ready():
 	pass
 	Signals.game_won.connect(start_lobby)
+	ApiAccess.level_download_finished.connect(complete_start_round)
 	# only if is on server change this in local mode
 	# start_lobby()
 	
@@ -21,10 +22,10 @@ func start_lobby():
 	get_tree().paused = false
 
 
-
-func start_round():
+func complete_start_round():
 	get_tree().paused = true
-	world.start("Test",true)
+	print("Starting Level '"+lobby.levellist.selected_level_name+"'")
+	world.start(lobby.levellist.selected_level_name,true)
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	#lobby.end()
@@ -32,6 +33,9 @@ func start_round():
 	remove_child(lobby)
 	get_tree().paused = false
 
+func start_round():
+	print("===Starting Round===")
+	ApiAccess.download_level(lobby.levellist.selected_level)
 
 func remove_chunk_streamers():
 	if Constants.currentLevel == null:

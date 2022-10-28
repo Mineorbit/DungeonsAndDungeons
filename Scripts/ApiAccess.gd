@@ -7,15 +7,45 @@ var auth_token = ""
 
 var level_list
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fetch_api_data()
 	login("test","test")
-	download_level(6)
+	#download_level(6)
 
 #func _process(delta):
 #	if Input.is_action_just_pressed("Connect"):
 #		upload_level("test")
+
+
+
+
+signal level_download_finished
+
+func download_level(ulid):
+	print("Downloading Level with ULID: "+str(ulid))
+	# Create an HTTP request node and connect its completion signal.
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(level_download_http_request_completed)
+	http_request.download_file = level_zip_file_path("download")
+	# Perform the HTTP request. The URL below returns a PNG image as of writing.
+	var error = http_request.request(str(url)+"level/download?proto_resp=false&ulid="+str(ulid))
+	print("Link: "+str(str(url)+"level/download?proto_resp=false&ulid="+str(ulid)))
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+
+
+# Called when the HTTP request is completed.
+func level_download_http_request_completed(result, _response_code, _headers, _body):
+	if result != OK:
+		push_error("Download Failed")
+	print("Finished Downloading Level")
+	decompress_level("download")
+	level_download_finished.emit()
+
 
 
 func fetch_level_list():
@@ -31,7 +61,7 @@ func fetch_level_list():
 	# Note: Don't make simultaneous requests using a single HTTPRequest node.
 	# The snippet below is provided for reference only.
 
-signal levels_fetched
+signal levels_fetched(list)
 
 # Called when the HTTP request is completed.
 func level_list_http_request_completed(result, response_code, headers, body):
@@ -40,8 +70,7 @@ func level_list_http_request_completed(result, response_code, headers, body):
 	json_object.parse(body.get_string_from_utf8())
 	level_list = json_object.data["levels"]
 	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
-	print(json_object.data)
-	levels_fetched.emit()
+	levels_fetched.emit(level_list)
 
 
 
@@ -57,7 +86,7 @@ func decompress_level(name):
 	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
 	var result = ProjectSettings.globalize_path("user://level/")
 	print("Decompressing "+str(path))
-	await OS.execute("powershell.exe",["Expand-Archive",path,result])
+	await OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 
 
 	
@@ -150,26 +179,6 @@ func download_thumbnail(ulid):
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
-
-
-func download_level(ulid):
-	# Create an HTTP request node and connect its completion signal.
-	var http_request = HTTPRequest.new()
-	add_child(http_request)
-	http_request.request_completed.connect(level_download_http_request_completed)
-	http_request.download_file = level_zip_file_path("download")
-	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request(str(url)+"level/download?proto_resp=false&ulid="+str(ulid))
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
-
-
-
-# Called when the HTTP request is completed.
-func level_download_http_request_completed(result, _response_code, _headers, _body):
-	if result != OK:
-		push_error("Download Failed")
-	decompress_level("download")
 
 func fetch_api_data():
 	# Create an HTTP request node and connect its completion signal.

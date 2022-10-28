@@ -5,6 +5,7 @@ extends ScrollContainer
 @onready var control: Control = $Control
 @export var enabled = true
 var selected_level = null
+var selected_level_name = null
 
 signal on_selection(selected)
 # Called when the node enters the scene tree for the first time.
@@ -30,8 +31,8 @@ func set_level_list(level_list):
 		# this must be unique per level
 		level_list_element.name = str(num)
 		grid.add_child(level_list_element)
-		level_list_element.set_level_data(level)
 		level_list_element.on_select.connect(selected)
+		level_list_element.set_level_data(level)
 		num = num + 1
 	#control.size = grid.size
 
@@ -41,15 +42,16 @@ func clear():
 	for child in grid.get_children():
 		child.queue_free()
 
-func selected(identifier,selected):
+func selected(identifier,sel):
 	if not enabled:
 		return
 	if previous_selection != null:
 		previous_selection.selection.hide()
 	selected_level = identifier
-	selected.selection.show()
-	previous_selection = selected
-	on_selection.emit(selected)
+	selected_level_name = sel.level_name
+	sel.selection.show()
+	previous_selection = sel
+	on_selection.emit(sel)
 
 
 
