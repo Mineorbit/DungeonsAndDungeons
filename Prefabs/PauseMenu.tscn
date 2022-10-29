@@ -19,7 +19,6 @@ grow_vertical = 2
 theme = ExtResource("1_vlxht")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
@@ -30,39 +29,33 @@ grow_vertical = 2
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
-layout_mode = 2
 offset_top = 73.0
 offset_right = 368.0
 offset_bottom = 136.0
 theme_override_constants/margin_bottom = 32
 
 [node name="Close" type="Button" parent="Menu/VBoxContainer/MarginContainer"]
-layout_mode = 2
 offset_right = 368.0
 offset_bottom = 31.0
 text = "Close"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Menu/VBoxContainer"]
-layout_mode = 2
 offset_top = 140.0
 offset_right = 368.0
 offset_bottom = 203.0
 theme_override_constants/margin_bottom = 32
 
 [node name="Options" type="Button" parent="Menu/VBoxContainer/MarginContainer2"]
-layout_mode = 2
 offset_right = 368.0
 offset_bottom = 31.0
 text = "Options"
 
 [node name="MarginContainer3" type="MarginContainer" parent="Menu/VBoxContainer"]
-layout_mode = 2
 offset_top = 207.0
 offset_right = 368.0
 offset_bottom = 238.0
 
 [node name="MainMenu" type="Button" parent="Menu/VBoxContainer/MarginContainer3"]
-layout_mode = 2
 offset_right = 368.0
 offset_bottom = 31.0
 text = "Back to Main Menu"
