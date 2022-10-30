@@ -31,3 +31,8 @@ func unpause():
 	open = false
 	
 	
+
+
+func exit_to_main_menu():
+	unpause()
+	Bootstrap.start_main_menu()

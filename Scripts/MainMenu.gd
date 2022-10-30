@@ -8,6 +8,8 @@ extends Node2D
 var currentMenu = null
 @onready var canvasLayer = $CanvasLayer
 func _ready():
+	Constants.set_mode(0)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	open_menu("Main")
 
 func start_play(ip):

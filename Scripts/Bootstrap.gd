@@ -21,10 +21,13 @@ func start(should_be_server):
 		start_server()
 	else:
 		print("===Starting Dungeons And Dungeons===")
+		start_main_menu()
+	
+
+func start_main_menu():
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
-	
 
 func _process(delta):
 	if not started:

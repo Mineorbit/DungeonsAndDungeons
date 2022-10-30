@@ -61,3 +61,4 @@ offset_bottom = 31.0
 text = "Back to Main Menu"
 
 [connection signal="pressed" from="Menu/VBoxContainer/MarginContainer/Close" to="." method="unpause"]
+[connection signal="pressed" from="Menu/VBoxContainer/MarginContainer3/MainMenu" to="." method="exit_to_main_menu"]

@@ -49,6 +49,7 @@ func _process(delta) -> void:
 func enter_edit_mode():
 	print("Entered EditMode")
 	if(Constants.currentMode == 1):
+		print("Allready in EditMode")
 		return
 	Constants.set_mode(1)
 	Players.despawn_players()
@@ -65,6 +66,7 @@ func enter_edit_mode():
 func enter_test_mode():
 	print("Entered TestMode")
 	if(Constants.currentMode == 2):
+		print("Allready in TestMode")
 		return
 	Constants.set_mode(2)
 	remove_child(builder)
