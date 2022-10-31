@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cxrwn47lflupj"]
 
-[ext_resource type="Script" path="res://Scripts/Bow.gd" id="1_8bhd3"]
+[ext_resource type="Script" path="res://Scripts/Sword.gd" id="1_2x1ta"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_aimnf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgxee"]
@@ -27,8 +27,7 @@ properties/1/sync = true
 [node name="Sword" type="CharacterBody3D"]
 collision_layer = 6
 collision_mask = 3
-script = ExtResource("1_8bhd3")
-offset = Vector3(0.25, 1, 0.5)
+script = ExtResource("1_2x1ta")
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
