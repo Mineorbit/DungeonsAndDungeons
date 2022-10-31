@@ -14,6 +14,9 @@ func _ready():
 var started = false
 
 func start(should_be_server):
+	var dir_access = DirAccess.new()
+	dir_access.open("user://")
+	dir_access.make_dir("level")
 	started = true
 	var server = should_be_server or is_server or OS.has_feature("Server") or "--server" in OS.get_cmdline_args()
 	if server:
