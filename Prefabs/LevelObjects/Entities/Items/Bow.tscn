@@ -7,11 +7,13 @@
 size = Vector3(0.2, 2.5, 0.6)
 
 [node name="Bow" type="CharacterBody3D"]
+collision_layer = 6
+collision_mask = 3
 script = ExtResource("1_c716e")
 
 [node name="Mesh" parent="." instance=ExtResource("1_44l0g")]
-transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
+transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0.2)
 shape = SubResource("BoxShape3D_o3cla")
