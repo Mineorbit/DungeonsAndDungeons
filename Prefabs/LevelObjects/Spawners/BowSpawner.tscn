@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2i5wm48oywkb"]
+
+[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_jkqae"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
+
+[sub_resource type="TextMesh" id="TextMesh_kbi3g"]
+material = SubResource("StandardMaterial3D_dibhe")
+text = "Spawner"
+
+[node name="BowSpawner" type="Node3D"]
+script = ExtResource("1_jkqae")
+spawnedEntity = "Items/Bow"
+
+[node name="Text" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_kbi3g")

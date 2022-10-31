@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cappm4jw3g3vs"]
+
+[ext_resource type="PackedScene" uid="uid://5qjssq37vgam" path="res://Prefabs/Models/Items/Bow.tscn" id="1_44l0g"]
+[ext_resource type="Script" path="res://Scripts/Bow.gd" id="1_c716e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3cla"]
+size = Vector3(0.2, 2.5, 0.6)
+
+[node name="Bow" type="CharacterBody3D"]
+script = ExtResource("1_c716e")
+
+[node name="Mesh" parent="." instance=ExtResource("1_44l0g")]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+shape = SubResource("BoxShape3D_o3cla")
