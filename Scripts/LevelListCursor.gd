@@ -14,13 +14,15 @@ func _input(event):
 		return
 	if event is InputEventMouseMotion:
 		transform.origin = event.position
-		rpc("move",event.relative)
+		rpc_id(1,"move",event.relative)
 	elif event is InputEventMouseButton:
-		rpc("click",event.button_index,event.pressed)
+		rpc_id(1,"click",event.button_index,event.pressed)
 
 
 @rpc(any_peer)
 func click(code,pressed):
+	if Constants.id != 1:
+		return
 	var event = InputEventMouseButton.new()
 	event.button_index = code
 	event.pressed = pressed
@@ -30,6 +32,8 @@ func click(code,pressed):
 
 @rpc(any_peer,unreliable_ordered)
 func move(direction):
+	if Constants.id != 1:
+		return
 	var event = InputEventMouseMotion.new()
 	event.relative = direction
 	Input.parse_input_event(event)
