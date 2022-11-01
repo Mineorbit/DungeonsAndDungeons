@@ -28,6 +28,7 @@ properties/1/sync = true
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_2x1ta")
+offset = Vector3(0.25, 0.5, 0.5)
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -14,7 +14,7 @@ func _input(event):
 		return
 	if event is InputEventMouseMotion:
 		transform.origin = event.position
-		rpc_id(1,"move",event.relative,event.pos)
+		rpc_id(1,"move",event.relative,event.position)
 	elif event is InputEventMouseButton:
 		rpc_id(1,"click",event.button_index,event.pressed)
 
@@ -27,8 +27,8 @@ func click(code,pressed):
 	event.button_index = code
 	event.pressed = pressed
 	event.position = position
-	#Input.parse_input_event(event)
-	get_parent().get_parent().get_parent()._input(event)
+	Input.parse_input_event(event)
+	#get_parent().get_parent().get_parent()._input(event)
 
 
 @rpc(any_peer,unreliable_ordered)
@@ -38,9 +38,8 @@ func move(direction,pos):
 	var event = InputEventMouseMotion.new()
 	event.relative = direction
 	event.position = pos
-	get_parent().get_parent().get_parent()._input(event)
-	#Input.parse_input_event(event)
-	#get_parent().get_parent().push_input(event,true)
+	Input.parse_input_event(event)
+	#get_parent().get_parent().get_parent()._input(event)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

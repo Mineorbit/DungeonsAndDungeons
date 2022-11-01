@@ -10,5 +10,5 @@ func _ready():
 func _process(delta):
 	pass
 
-#func _input(event):
-#	print("TEST2 "+str(event))
+func _input(event):
+	print("TEST2 "+str(event))

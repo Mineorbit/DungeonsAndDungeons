@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://baqd3o2lrl4ar"]
+[gd_scene load_steps=8 format=3 uid="uid://baqd3o2lrl4ar"]
 
 [ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_6rrya"]
 [ext_resource type="Texture2D" uid="uid://cvwjamyvvpc70" path="res://Prefabs/LobbyViewportTexture.tres" id="3_4togx"]
-[ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="4_dfs7m"]
 [ext_resource type="Script" path="res://Scripts/LevelSelectionScreen.gd" id="4_f00ib"]
 [ext_resource type="PackedScene" uid="uid://4ce2fpaaxv1q" path="res://Prefabs/Models/tavern.tscn" id="6_6agm5"]
 
@@ -25,53 +24,6 @@ transform = Transform3D(-2.5, -1.50996e-07, 9.90035e-15, 0, -4.37114e-08, -1.5, 
 mesh = SubResource("PlaneMesh_klkol")
 script = ExtResource("4_f00ib")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="LevelSelectionScreen"]
-_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
-spawn_path = NodePath("../SubViewport/Cursors")
-
-[node name="SubViewport" type="SubViewport" parent="LevelSelectionScreen"]
-own_world_3d = true
-handle_input_locally = false
-gui_embed_subwindows = true
-size_2d_override = Vector2i(1280, 512)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447447, 0.896562)
-current = true
-
-[node name="LevelList" parent="LevelSelectionScreen/SubViewport" instance=ExtResource("4_dfs7m")]
-custom_minimum_size = Vector2(0, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-mouse_filter = 2
-enabled = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Cursors" type="Node2D" parent="LevelSelectionScreen/SubViewport"]
-
-[node name="Refresh" type="Button" parent="LevelSelectionScreen/SubViewport"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -8.0
-offset_bottom = 8.0
-grow_horizontal = 0
-text = "Refresh"
-
-[node name="ReadyCalls" type="HBoxContainer" parent="LevelSelectionScreen/SubViewport"]
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.9
-anchor_right = 0.1
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-
 [node name="EnterArea" type="Area3D" parent="LevelSelectionScreen"]
 transform = Transform3D(1, 2.84217e-14, 2.5411e-21, 0, 1, 1.06581e-13, -5.0822e-21, 0, 1, -0.0254645, 4.97677, 1.07603)
 collision_layer = 16
@@ -81,7 +33,7 @@ collision_mask = 16
 transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 1.15484e-07, -1.90842, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
 
-[node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen"]
+[node name="LevelListCamera" type="Camera3D" parent="LevelSelectionScreen"]
 transform = Transform3D(0.4, 5.02926e-21, -1.84741e-13, 8.52651e-14, -2.91409e-08, 1, 1.69407e-21, -0.666667, -1.94273e-08, -3.88641e-07, 6.38157, 0.160872)
 size = 4.5
 
@@ -94,8 +46,8 @@ collision_mask = 4
 transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
 
-[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="LevelSelectionScreen"]
-_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/ReadyCall.tscn")
-spawn_path = NodePath("../SubViewport/ReadyCalls")
-
 [node name="Tavern" parent="." instance=ExtResource("6_6agm5")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Prefabs/LevelInterface.tscn")
+spawn_path = NodePath("../LevelSelectionScreen")
