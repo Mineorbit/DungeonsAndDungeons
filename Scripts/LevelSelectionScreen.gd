@@ -10,6 +10,7 @@ extends MeshInstance3D
 func _ready():
 	enterArea.body_entered.connect(player_entered)
 	enterArea.body_exited.connect(player_left)
+	set_process_input(true)
 
 #change to local player inside
 
@@ -17,6 +18,7 @@ var player_cursors = {}
 
 var localcursor = null
 var local_player_inside = false
+
 func player_entered(player):
 	if Constants.playerCamera.player == player:
 		camera.current = true
@@ -53,6 +55,7 @@ func end():
 
 func _input(event):
 	if Constants.id == 1:
+		print("TEST1 "+str(event))
 		subViewport.push_input(event, true)
 	if local_player_inside:
 		if event is InputEventMouseButton or event is InputEventMouseMotion:

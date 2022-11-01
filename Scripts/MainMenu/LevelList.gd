@@ -10,6 +10,7 @@ var selected_level_name = null
 signal on_selection(selected)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(size)
 	grid.child_entered_tree.connect(update_column_tiling)
 	grid.child_exiting_tree.connect(update_column_tiling)
 

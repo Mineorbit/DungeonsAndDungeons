@@ -44,7 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SubMenu" type="ScrollContainer" parent="AspectRatioContainer2"]
-custom_minimum_size = Vector2i(512, 256)
+custom_minimum_size = Vector2(512, 256)
 offset_left = 268.0
 offset_right = 884.0
 offset_bottom = 616.0
@@ -57,13 +57,13 @@ offset_bottom = 616.0
 columns = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="AspectRatioContainer2/SubMenu/GridContainer"]
-custom_minimum_size = Vector2i(616, 616)
+custom_minimum_size = Vector2(616, 616)
 offset_right = 616.0
 offset_bottom = 616.0
 dragger_visibility = 2
 
 [node name="LevelList" parent="AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer" instance=ExtResource("2_mb7u1")]
-custom_minimum_size = Vector2i(512, 584)
+custom_minimum_size = Vector2(512, 584)
 offset_right = 616.0
 offset_bottom = 584.0
 
@@ -83,7 +83,7 @@ offset_bottom = 31.0
 text = "Edit"
 
 [node name="ColorRect" type="ColorRect" parent="AspectRatioContainer2/SubMenu/GridContainer"]
-custom_minimum_size = Vector2i(616, 616)
+custom_minimum_size = Vector2(616, 616)
 offset_left = 620.0
 offset_right = 1236.0
 offset_bottom = 616.0
