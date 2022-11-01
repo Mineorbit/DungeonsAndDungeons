@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://baqd3o2lrl4ar"]
+[gd_scene load_steps=9 format=3 uid="uid://baqd3o2lrl4ar"]
 
 [ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_6rrya"]
 [ext_resource type="Texture2D" uid="uid://cvwjamyvvpc70" path="res://Prefabs/LobbyViewportTexture.tres" id="3_4togx"]
 [ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="4_dfs7m"]
 [ext_resource type="Script" path="res://Scripts/LevelSelectionScreen.gd" id="4_f00ib"]
-[ext_resource type="Script" path="res://Scripts/TestSubViewport.gd" id="4_llowd"]
 [ext_resource type="PackedScene" uid="uid://4ce2fpaaxv1q" path="res://Prefabs/Models/tavern.tscn" id="6_6agm5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2k77"]
@@ -37,7 +36,6 @@ gui_embed_subwindows = true
 size_2d_override = Vector2i(1280, 512)
 size_2d_override_stretch = true
 render_target_update_mode = 4
-script = ExtResource("4_llowd")
 
 [node name="Camera3D" type="Camera3D" parent="LevelSelectionScreen/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447447, 0.896562)
