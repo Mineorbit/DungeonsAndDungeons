@@ -17,18 +17,29 @@ var has_sent = false
 func _ready():
 	enterArea.body_entered.connect(player_entered)
 	enterArea.body_exited.connect(player_left)
-	multiplayer.peer_connected.connect(update_interface_owner)
+	multiplayer.peer_connected.connect(update_interface_owner_connect)
+	multiplayer.peer_disconnected.connect(update_interface_owner_disconnect)
 	#if Constants.id == 1:
 	#	get_parent().get_parent().world.players.player_spawned.connect(add_checkbox)
 
-func update_interface_owner(id):
+func update_interface_owner_connect(id):
 	if Constants.id == 1:
 		if not has_sent:
 			has_sent = true
 			owner_id = id
-		rpc("set_interface_owner",owner_id)
-		interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
+		update_interface_owner()
 
+func update_interface_owner_disconnect(id):
+	if Constants.id == 1:
+		if owner_id == id:
+			owner_id = MultiplayerConstants.get_first_connected()
+		update_interface_owner()
+
+
+func update_interface_owner():
+	rpc("set_interface_owner",owner_id)
+	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
+	
 #only called by server
 
 @rpc

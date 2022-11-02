@@ -1,7 +1,6 @@
 extends Node3D
 
 
-var id_to_local_id = [null,null,null,null]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,19 +15,25 @@ func _ready():
 	Constants.id = peer.get_unique_id()
 	print("Server has Unique ID "+str(Constants.id))
 	multiplayer.set_multiplayer_peer(peer)
-	multiplayer.peer_connected.connect(new_player)
+	multiplayer.peer_connected.connect(player_connected)
+	multiplayer.peer_disconnected.connect(player_disconnected)
 	get_parent().start_lobby()
 
 
 
 
-
-
-func new_player(id):
+func player_disconnected(id):
 	var i = 0
-	while(id_to_local_id[i] != null):
+	while MultiplayerConstants.local_id_to_id[i] != id:
 		i = i + 1
-	id_to_local_id[i] = id
+	MultiplayerConstants.local_id_to_id[i] = null
+	#get_parent().remove_player(i)
+
+func player_connected(id):
+	var i = 0
+	while(MultiplayerConstants.local_id_to_id[i] != null):
+		i = i + 1
+	MultiplayerConstants.local_id_to_id[i] = id
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
