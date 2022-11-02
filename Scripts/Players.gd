@@ -45,14 +45,13 @@ func set_current_player(number):
 func despawn_players():
 	print("Despawning Players")
 	for i in range(4):
-		var player = get_player(i)
-		if player == null:
-			continue
-		player.global_transform.origin = Vector3(0.5,-5,0.5)
-		player.on_entity_despawn.emit()
-		await Constants.buffer()
-		number_of_players = number_of_players - 1
-		playerEntities.remove_child(player)
+		despawn_player(i)
+
+
+func spawn_players():
+	print("Spawning Players")
+	for i in range(4):
+		spawn_player(i)
 
 
 func despawn_player_controllers():
@@ -92,6 +91,16 @@ func spawn_player(i):
 		number_of_players = number_of_players + 1
 		player.start()
 
+func despawn_player(i):
+	var player = get_player(i)
+	if player == null:
+		return
+	player.global_transform.origin = Vector3(0.5,-5,0.5)
+	player.on_entity_despawn.emit()
+	await Constants.buffer()
+	number_of_players = number_of_players - 1
+	playerEntities.remove_child(player)
+
 
 func get_player(i):
 	for child in playerEntities.get_children():
@@ -100,7 +109,3 @@ func get_player(i):
 	return null
 
 
-func spawn_players():
-	print("Spawning Players")
-	for i in range(4):
-		spawn_player(i)

@@ -56,6 +56,10 @@ func add_chunk_streamer_for_player(i):
 
 func add_player(id):
 	world.players.spawn_player(id)
+	
+
+func remove_player(id):
+	world.players.despawn_player(id)
 
 func add_player_controller(id = 0,peer_id = 0):
 	var playercontroller = world.players.spawn_player_controller(id,peer_id)

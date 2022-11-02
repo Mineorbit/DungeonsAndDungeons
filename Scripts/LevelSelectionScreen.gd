@@ -32,6 +32,7 @@ func update_interface_owner_connect(id):
 func update_interface_owner_disconnect(id):
 	if Constants.id == 1:
 		if owner_id == id:
+			print(MultiplayerConstants.local_id_to_id)
 			owner_id = MultiplayerConstants.get_first_connected()
 		update_interface_owner()
 

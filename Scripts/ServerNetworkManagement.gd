@@ -27,7 +27,7 @@ func player_disconnected(id):
 	while MultiplayerConstants.local_id_to_id[i] != id:
 		i = i + 1
 	MultiplayerConstants.local_id_to_id[i] = null
-	#get_parent().remove_player(i)
+	get_parent().remove_player(i)
 
 func player_connected(id):
 	var i = 0
