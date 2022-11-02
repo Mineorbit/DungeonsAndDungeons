@@ -20,14 +20,12 @@ color = Color(0.415686, 0.415686, 0.415686, 1)
 script = ExtResource("1_fh31g")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.6
 texture = ExtResource("1_o21qy")
 
 [node name="Name" type="RichTextLabel" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.156
@@ -55,7 +53,7 @@ use_parent_material = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 0)
 layout_direction = 0
-layout_mode = 1
+layout_mode = 3
 anchors_preset = -1
 anchor_left = 0.0
 anchor_top = 0.0
@@ -99,7 +97,6 @@ button_group = null
 script = null
 
 [node name="selection" type="NinePatchRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

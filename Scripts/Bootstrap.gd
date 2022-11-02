@@ -18,7 +18,6 @@ func start(should_be_server):
 	dir_access.make_dir("level")
 	started = true
 	var server = should_be_server or is_server or OS.has_feature("Server") or "--server" in OS.get_cmdline_args()
-	print("Test")
 	if server:
 		print("===Starting Server===")
 		start_server()

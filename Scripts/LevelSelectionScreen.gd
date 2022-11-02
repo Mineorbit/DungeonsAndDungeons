@@ -7,6 +7,7 @@ extends MeshInstance3D
 @onready var checkboxes = $Interface/CheckBoxes
 @onready var levellist = $Interface/LevelList
 @onready var refreshButton: Button = $Interface/Refresh
+@onready var cursors = $Interface/Cursors
 
 var owner_id = 0
 #change to local player inside
@@ -40,18 +41,6 @@ func set_spawner_owner(id):
 		refreshButton.pressed.connect(refresh_level_list)
 
 
-func spawnLevelInterface(id):
-	pass
-		#
-		#refresh_level_list()
-		
-		
-		#this should not be hardcoded
-		#refreshlist.pressed.connect(refresh_level_list)
-
-
-
-
 
 
 func player_entered(player):
@@ -59,19 +48,16 @@ func player_entered(player):
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		local_player_inside = true
-		#create_cursor()
 	if 1 == Constants.id:
 		camera.current = true
+		create_cursor(player)
 
 
-var cursor
-
-func create_cursor():
+func create_cursor(player):
 	var cursorprefab = load("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
-	cursor = cursorprefab.instantiate()
-	cursor.name = str(Constants.id)
-	#cursors.add_child(cursor)
-	#player_cursors[player.name] = cursor
+	var cursor = cursorprefab.instantiate()
+	cursor.name = str(player.playercontroller.name)
+	cursors.add_child(cursor)
 
 
 func player_left(player):
@@ -79,7 +65,6 @@ func player_left(player):
 		camera.current = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		local_player_inside = false
-		#cursor.queue_free()
 
 
 	if 1 == Constants.id:
@@ -144,6 +129,9 @@ func end():
 func _input(event):
 	var local_coord = true
 	if local_player_inside:
+		if interface != null:
+			if event is InputEventMouseButton:
+				interface.push_input(event, local_coord)
 		if event is InputEventMouseButton or event is InputEventMouseMotion:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
 			var from = camera.project_ray_origin(event.position)
@@ -165,10 +153,8 @@ func _input(event):
 				event.position.x = rel_pos.x * interface.size.x
 				event.position.y = rel_pos.y * interface.size.y 
 				local_coord = false
+				interface.push_input(event, local_coord)
 
-	if owner_id == Constants.id:
-		if interface != null:
-			interface.push_input(event, local_coord)
 
 
 
