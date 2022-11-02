@@ -40,7 +40,8 @@ func update_interface_owner_disconnect(id):
 func update_interface_owner():
 	rpc("set_interface_owner",owner_id)
 	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
-	
+
+
 #only called by server
 
 @rpc
@@ -48,9 +49,9 @@ func set_interface_owner(id):
 	owner_id = id
 	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 	if owner_id == Constants.id:
-		pass
 		ApiAccess.levels_fetched.connect(load_level_list)
 		refreshButton.pressed.connect(refresh_level_list)
+		refresh_level_list()
 
 
 
@@ -63,6 +64,8 @@ func player_entered(player):
 	if 1 == Constants.id:
 		camera.current = true
 		create_cursor(player)
+	if Constants.id == owner_id:
+		add_checkbox(player.name)
 
 
 func create_cursor(player):
@@ -77,8 +80,6 @@ func player_left(player):
 		camera.current = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		local_player_inside = false
-
-
 	if 1 == Constants.id:
 		camera.current = false
 		localcursor = null
@@ -110,18 +111,18 @@ func start_round():
 	var can_start = check_ready()
 	print("Can start: "+str(can_start))
 	if can_start:
-		get_parent().get_parent().start_round()
+		get_parent().get_parent().rpc_id(1,"start_round",levellist.selected_level,levellist.selected_level_name)
 
 
 
 func refresh_level_list():
-		levellist.clear()
-		ApiAccess.fetch_level_list()
+	levellist.clear()
+	ApiAccess.fetch_level_list()
 
 func load_level_list(list):
-			levellist.clear()
-			levellist.enabled = true
-			levellist.set_level_list(list)
+	levellist.clear()
+	levellist.enabled = true
+	levellist.set_level_list(list)
 
 
 
