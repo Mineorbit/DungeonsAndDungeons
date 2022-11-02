@@ -1,13 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://baqd3o2lrl4ar"]
+[gd_scene load_steps=9 format=3 uid="uid://baqd3o2lrl4ar"]
 
 [ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_6rrya"]
-[ext_resource type="Texture2D" uid="uid://cvwjamyvvpc70" path="res://Prefabs/LobbyViewportTexture.tres" id="3_4togx"]
 [ext_resource type="Script" path="res://Scripts/LevelSelectionScreen.gd" id="4_f00ib"]
+[ext_resource type="PackedScene" uid="uid://1s6mp1oqc2v6" path="res://Prefabs/LevelInterface.tscn" id="4_sg4lm"]
 [ext_resource type="PackedScene" uid="uid://4ce2fpaaxv1q" path="res://Prefabs/Models/tavern.tscn" id="6_6agm5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qhbot"]
+viewport_path = NodePath(".")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2k77"]
 resource_local_to_scene = true
-albedo_texture = ExtResource("3_4togx")
+albedo_texture = SubResource("ViewportTexture_qhbot")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_klkol"]
 resource_local_to_scene = true
@@ -46,8 +49,6 @@ collision_mask = 4
 transform = Transform3D(0.285127, -1.71395e-06, -5.04455e-06, 2.1942e-06, 1.32567, -1.03314e-07, 3.58646e-06, 5.73537e-08, 1.07145, 0, 0, 0.640449)
 shape = SubResource("BoxShape3D_uu5v3")
 
-[node name="Tavern" parent="." instance=ExtResource("6_6agm5")]
+[node name="Interface" parent="LevelSelectionScreen" instance=ExtResource("4_sg4lm")]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Prefabs/LevelInterface.tscn")
-spawn_path = NodePath("../LevelSelectionScreen")
+[node name="Tavern" parent="." instance=ExtResource("6_6agm5")]

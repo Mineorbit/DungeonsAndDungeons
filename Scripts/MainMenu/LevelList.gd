@@ -10,7 +10,6 @@ var selected_level_name = null
 signal on_selection(selected)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(size)
 	grid.child_entered_tree.connect(update_column_tiling)
 	grid.child_exiting_tree.connect(update_column_tiling)
 
@@ -24,6 +23,8 @@ func set_display_size(size):
 	displaysize = 2
 	scale =Vector2(displaysize,displaysize)
 
+signal added_element(element)
+
 func set_level_list(level_list):
 	clear()
 	var num = 0
@@ -34,6 +35,7 @@ func set_level_list(level_list):
 		grid.add_child(level_list_element)
 		level_list_element.on_select.connect(selected)
 		level_list_element.set_level_data(level)
+		added_element.emit(level_list_element)
 		num = num + 1
 	#control.size = grid.size
 

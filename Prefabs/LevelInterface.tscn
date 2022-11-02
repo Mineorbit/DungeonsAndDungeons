@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://1s6mp1oqc2v6"]
+[gd_scene load_steps=3 format=3 uid="uid://1s6mp1oqc2v6"]
 
+[ext_resource type="Script" path="res://Scripts/LevelInterface.gd" id="1_6ebat"]
 [ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
 
 [node name="Interface" type="SubViewport"]
@@ -9,6 +10,7 @@ gui_embed_subwindows = true
 size_2d_override = Vector2i(1280, 512)
 size_2d_override_stretch = true
 render_target_update_mode = 4
+script = ExtResource("1_6ebat")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447447, 0.896562)
@@ -36,7 +38,7 @@ offset_bottom = 8.0
 grow_horizontal = 0
 text = "Refresh"
 
-[node name="ReadyCalls" type="HBoxContainer" parent="."]
+[node name="CheckBoxes" type="HBoxContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.9
@@ -45,10 +47,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="CursorSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
 spawn_path = NodePath("../Cursors")
 
-[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="."]
+[node name="CheckboxSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/ReadyCall.tscn")
-spawn_path = NodePath("../ReadyCalls")
+spawn_path = NodePath("../CheckBoxes")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct78tplyjahgt"]
+[gd_scene load_steps=4 format=3 uid="uid://ct78tplyjahgt"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/LevelList.gd" id="1_gmgvp"]
+[ext_resource type="Script" path="res://Scripts/LevelListNetworking.gd" id="2_ov2dl"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nk8ml"]
 properties/0/path = NodePath(".:scroll_horizontal")
@@ -23,9 +24,13 @@ script = ExtResource("1_gmgvp")
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListElement.tscn")
-spawn_path = NodePath("../Control/GridContainer")
+[node name="LevelListNetworking" type="Node" parent="."]
+script = ExtResource("2_ov2dl")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="LevelListNetworking"]
+_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListElement.tscn")
+spawn_path = NodePath("../../Control/GridContainer")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="LevelListNetworking"]
+root_path = NodePath("../..")
 replication_config = SubResource("SceneReplicationConfig_nk8ml")

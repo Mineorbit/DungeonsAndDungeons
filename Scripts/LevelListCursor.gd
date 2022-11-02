@@ -1,22 +1,23 @@
 extends Sprite2D
 
 
-@onready var synchronizer = $MultiplayerSynchronizer
 var levellist
-func _ready():
-	synchronizer.set_multiplayer_authority(str(name).to_int())
-	set_multiplayer_authority(str(name).to_int())
-	levellist = get_parent().get_parent().get_parent().levellist
 
 
 func _input(event):
-	if name != str(Constants.id):
+	if event is InputEventMouseMotion:
+		if name == str(Constants.id):
+			transform.origin = event.position
+
+	if not should_send():
 		return
 	if event is InputEventMouseMotion:
-		transform.origin = event.position
 		rpc_id(1,"move",event.relative,event.position)
 	elif event is InputEventMouseButton:
 		rpc_id(1,"click",event.button_index,event.pressed)
+
+func should_send():
+	return name != str(Constants.id)
 
 
 @rpc(any_peer)
