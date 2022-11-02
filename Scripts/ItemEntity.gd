@@ -8,6 +8,7 @@ var isEquipped = false
 
 # this later needs to be replaced by itemhandle system
 @export var offset = Vector3.ZERO
+@export var hold_rot = Vector3.ZERO
 
 var collisionlayer
 var collisionmask
@@ -32,7 +33,7 @@ func _process(delta):
 func UpdateRelativePosition(passive = false):
 	if itemOwner != null and collision_layer == 0:
 		var new_position = itemOwner.to_global(offset)
-		transform.basis = itemOwner.global_transform.basis
+		transform.basis = Basis(Vector3.UP,hold_rot.x) * itemOwner.global_transform.basis
 		transform.origin =	new_position
 
 # gravity should be set by global constant
