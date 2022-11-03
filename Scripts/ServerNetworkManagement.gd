@@ -38,6 +38,7 @@ func player_connected(id):
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
 	get_parent().add_player_controller(i,id)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

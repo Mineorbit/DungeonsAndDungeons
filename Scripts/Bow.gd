@@ -11,6 +11,9 @@ func OnAttach(new_owner):
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 func Use():
 	super.Use()
+
+func StopUse():
+	super.StopUse()
 	var arrow: RigidBody3D = arrowprefab.instantiate()
 	Constants.currentLevel.Entities.add_child(arrow)
 	arrow.global_transform.origin = global_transform.origin + -0.5*transform.basis.z

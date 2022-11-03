@@ -52,12 +52,24 @@ func UseLeft():
 		player.UseLeft()
 
 
+@rpc
+func StopUseLeft():
+	if player != null:
+		player.StopUseLeft()	
+
+
 func UseLeftAction():
 	if player != null:
 		UseLeft()
 	else:
 		rpc_id(1,"UseLeft") 
-	
+
+
+func StopUseLeftAction():
+	if player != null:
+		StopUseLeft()
+	else:
+		rpc_id(1,"StopUseLeft") 
 
 func UseRight():
 	pass
@@ -76,7 +88,13 @@ func check():
 	if Constants.id != 0:
 		return (synchronizer.is_multiplayer_authority())
 	return false
-	
+
+func get_player_camera():
+	if Constants.id == 1:
+		return MultiplayerConstants.player_cameras[str(name).to_int()]
+	else:
+		return Constants.playerCamera
+
 func _physics_process(delta):
 	if is_active or check():
 		input_direction = Vector3.ZERO

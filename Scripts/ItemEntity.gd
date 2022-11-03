@@ -20,6 +20,9 @@ func _ready():
 
 func Use():
 	pass
+	
+func StopUse():
+	pass
 
 func _physics_process(delta):
 	super._physics_process(delta)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bylk73c3080u"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerCameraPosition.gd" id="1_pli16"]
+
+[node name="PlayerCameraPosition" type="Node3D"]
+script = ExtResource("1_pli16")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

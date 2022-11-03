@@ -12,6 +12,11 @@ func UseLeft():
 	if itemLeft != null:
 		itemLeft.Use()
 	
+func StopUseLeft():
+	if itemLeft != null:
+		itemLeft.StopUse()
+
+
 func UseRight():
 	pass
 	
