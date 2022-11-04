@@ -17,21 +17,26 @@ var has_sent = false
 func _ready():
 	enterArea.body_entered.connect(player_entered)
 	enterArea.body_exited.connect(player_left)
-	multiplayer.peer_connected.connect(update_interface_owner_connect)
-	multiplayer.peer_disconnected.connect(update_interface_owner_disconnect)
+	multiplayer.peer_connected.connect(update_interface_player_connect)
+	multiplayer.peer_disconnected.connect(update_interface_player_disconnect)
 	#if Constants.id == 1:
 	#	get_parent().get_parent().world.players.player_spawned.connect(add_checkbox)
 
-func update_interface_owner_connect(id):
+func update_interface_player_connect(id):
+	if Constants.id == owner_id:
+		add_checkbox(MultiplayerConstants.get_local_id(id))
+	
+	# interface has to be owned by one player because else Input.parse_action does not work.
 	if Constants.id == 1:
 		if not has_sent:
 			has_sent = true
 			owner_id = id
 		update_interface_owner()
 
-func update_interface_owner_disconnect(id):
+func update_interface_player_disconnect(id):
 	if Constants.id == 1:
 		if owner_id == id:
+			# current owner of board disconnected
 			print(MultiplayerConstants.local_id_to_id)
 			owner_id = MultiplayerConstants.get_first_connected()
 		update_interface_owner()
@@ -64,8 +69,6 @@ func player_entered(player):
 	if 1 == Constants.id:
 		camera.current = true
 		create_cursor(player)
-	if Constants.id == owner_id:
-		add_checkbox(player.name)
 
 
 func create_cursor(player):
@@ -91,7 +94,7 @@ func add_checkbox(local_id):
 	print("Added Checkbox")
 	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
 	var checkbox: Button = checkbox_pref.instantiate()
-	checkbox.name = str(local_id)
+	checkbox.name = local_id
 	checkbox.scale = Vector2(4,4)
 	checkbox.pressed.connect(start_round)
 	checkboxes.add_child(checkbox)

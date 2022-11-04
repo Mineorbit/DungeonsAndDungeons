@@ -18,3 +18,10 @@ func get_first_connected():
 		# in this case we need to give the server the role
 		return 1
 	return local_id_to_id[i]
+
+
+func get_local_id(id):
+	var i = 0
+	while (i < local_id_to_id.size() and local_id_to_id[i] != id):
+		i = i + 1
+	return i
