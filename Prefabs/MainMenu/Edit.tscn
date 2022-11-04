@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvguibn21nvmq"]
+[gd_scene load_steps=4 format=3 uid="uid://bvguibn21nvmq"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Edit.gd" id="1_6w7v4"]
+[ext_resource type="Script" path="res://Scripts/MainMenu/SubMenuScaler.gd" id="2_hpiiy"]
 [ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="2_mb7u1"]
 
 [node name="Edit" type="Control"]
@@ -13,83 +14,87 @@ grow_vertical = 2
 script = ExtResource("1_6w7v4")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer"]
+layout_mode = 2
 offset_left = 533.5
 offset_right = 618.5
 offset_bottom = 31.0
 
 [node name="Edit" type="Button" parent="AspectRatioContainer/HBoxContainer"]
+layout_mode = 2
 offset_right = 38.0
 offset_bottom = 31.0
 text = "Edit"
 
 [node name="New" type="Button" parent="AspectRatioContainer/HBoxContainer"]
+layout_mode = 2
 offset_left = 42.0
 offset_right = 85.0
 offset_bottom = 31.0
 text = "New"
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
+[node name="SubMenu" type="ScrollContainer" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.400002
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SubMenu" type="ScrollContainer" parent="AspectRatioContainer2"]
-custom_minimum_size = Vector2(512, 256)
-offset_left = 268.0
-offset_right = 884.0
-offset_bottom = 616.0
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/SubMenu"]
-offset_right = 1236.0
-offset_bottom = 616.0
+[node name="GridContainer" type="GridContainer" parent="SubMenu"]
+layout_mode = 2
+offset_right = 516.0
+offset_bottom = 615.0
 columns = 2
+script = ExtResource("2_hpiiy")
 
-[node name="VSplitContainer" type="VSplitContainer" parent="AspectRatioContainer2/SubMenu/GridContainer"]
-custom_minimum_size = Vector2(616, 616)
-offset_right = 616.0
-offset_bottom = 616.0
+[node name="VSplitContainer" type="VSplitContainer" parent="SubMenu/GridContainer"]
+layout_mode = 2
+offset_right = 512.0
+offset_bottom = 615.0
 dragger_visibility = 2
 
-[node name="LevelList" parent="AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer" instance=ExtResource("2_mb7u1")]
+[node name="LevelList" parent="SubMenu/GridContainer/VSplitContainer" instance=ExtResource("2_mb7u1")]
 custom_minimum_size = Vector2(512, 584)
-offset_right = 616.0
+layout_mode = 2
+offset_right = 512.0
 offset_bottom = 584.0
 
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer"]
-offset_top = 585.0
-offset_right = 616.0
-offset_bottom = 616.0
+[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="SubMenu/GridContainer/VSplitContainer"]
+layout_mode = 2
+offset_top = 584.0
+offset_right = 512.0
+offset_bottom = 615.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 
-[node name="Edit" type="Button" parent="AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3"]
+[node name="Edit" type="Button" parent="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3"]
 modulate = Color(1, 1, 1, 0.501961)
-offset_left = 289.0
-offset_right = 327.0
+layout_mode = 2
+offset_left = 237.0
+offset_right = 275.0
 offset_bottom = 31.0
 text = "Edit"
 
-[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer2/SubMenu/GridContainer"]
-custom_minimum_size = Vector2(616, 616)
-offset_left = 620.0
-offset_right = 1236.0
-offset_bottom = 616.0
+[node name="ColorRect" type="ColorRect" parent="SubMenu/GridContainer"]
+layout_mode = 2
+offset_left = 516.0
+offset_right = 516.0
+offset_bottom = 615.0
 color = Color(0.517647, 0.517647, 0.517647, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="SubMenu/GridContainer/ColorRect"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -98,7 +103,8 @@ grow_vertical = 2
 text = "New Level
 "
 
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="SubMenu/GridContainer/ColorRect"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.1
@@ -107,14 +113,16 @@ anchor_bottom = 0.2
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextEdit" type="TextEdit" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect/MarginContainer"]
-offset_right = 554.0
+[node name="TextEdit" type="TextEdit" parent="SubMenu/GridContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_right = 8.0
 offset_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "Name"
 
-[node name="Start" type="Button" parent="AspectRatioContainer2/SubMenu/GridContainer/ColorRect"]
+[node name="Start" type="Button" parent="SubMenu/GridContainer/ColorRect"]
+layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.975
 anchor_right = 1.0
@@ -125,5 +133,5 @@ text = "Start"
 
 [connection signal="pressed" from="AspectRatioContainer/HBoxContainer/Edit" to="." method="_on_edit_level"]
 [connection signal="pressed" from="AspectRatioContainer/HBoxContainer/New" to="." method="_on_new_level"]
-[connection signal="pressed" from="AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/Edit" to="." method="start_edit_level"]
-[connection signal="pressed" from="AspectRatioContainer2/SubMenu/GridContainer/ColorRect/Start" to="." method="start_new_level"]
+[connection signal="pressed" from="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/Edit" to="." method="start_edit_level"]
+[connection signal="pressed" from="SubMenu/GridContainer/ColorRect/Start" to="." method="start_new_level"]

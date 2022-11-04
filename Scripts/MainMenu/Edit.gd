@@ -1,9 +1,9 @@
 extends Control
 
-@onready var subMenu: ScrollContainer = $AspectRatioContainer2/SubMenu
-@onready var nameText: TextEdit = $AspectRatioContainer2/SubMenu/GridContainer/ColorRect/MarginContainer/TextEdit
-@onready var level_list = $AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer/LevelList
-@onready var start_edit_button: Button = $AspectRatioContainer2/SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/Edit
+@onready var subMenu: ScrollContainer = $SubMenu
+@onready var nameText: TextEdit = $SubMenu/GridContainer/ColorRect/MarginContainer/TextEdit
+@onready var level_list = $SubMenu/GridContainer/VSplitContainer/LevelList
+@onready var start_edit_button: Button = $SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/Edit
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level_list.set_level_list(load_level_list())
@@ -20,7 +20,8 @@ func load_level_list():
 @export var selectedSubmenu = 0
 
 func _process(delta):
-	subMenu.scroll_horizontal = selectedSubmenu*(628) * 0.2 + subMenu.scroll_horizontal * 0.8
+	#the plus 32 is because of the scroll bar
+	subMenu.scroll_horizontal = selectedSubmenu*(size.x+32) * 0.2 + subMenu.scroll_horizontal * 0.8
 	#subMenu.scroll_horizontal = selectedSubmenu*(628)
 
 func _on_new_level():
