@@ -52,28 +52,28 @@ vertical_scroll_mode = 3
 
 [node name="GridContainer" type="GridContainer" parent="SubMenu"]
 layout_mode = 2
-offset_right = 516.0
-offset_bottom = 615.0
+offset_right = 204.0
+offset_bottom = 231.0
 columns = 2
 script = ExtResource("2_hpiiy")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="SubMenu/GridContainer"]
 layout_mode = 2
-offset_right = 512.0
-offset_bottom = 615.0
+offset_right = 200.0
+offset_bottom = 231.0
 dragger_visibility = 2
 
 [node name="LevelList" parent="SubMenu/GridContainer/VSplitContainer" instance=ExtResource("2_mb7u1")]
-custom_minimum_size = Vector2(512, 584)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-offset_right = 512.0
-offset_bottom = 584.0
+offset_right = 200.0
+offset_bottom = 200.0
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="SubMenu/GridContainer/VSplitContainer"]
 layout_mode = 2
-offset_top = 584.0
-offset_right = 512.0
-offset_bottom = 615.0
+offset_top = 200.0
+offset_right = 200.0
+offset_bottom = 231.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
@@ -81,16 +81,16 @@ size_flags_vertical = 8
 [node name="Edit" type="Button" parent="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
-offset_left = 237.0
-offset_right = 275.0
+offset_left = 81.0
+offset_right = 119.0
 offset_bottom = 31.0
 text = "Edit"
 
 [node name="ColorRect" type="ColorRect" parent="SubMenu/GridContainer"]
 layout_mode = 2
-offset_left = 516.0
-offset_right = 516.0
-offset_bottom = 615.0
+offset_left = 204.0
+offset_right = 204.0
+offset_bottom = 231.0
 color = Color(0.517647, 0.517647, 0.517647, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SubMenu/GridContainer/ColorRect"]
@@ -117,7 +117,7 @@ grow_vertical = 2
 [node name="TextEdit" type="TextEdit" parent="SubMenu/GridContainer/ColorRect/MarginContainer"]
 layout_mode = 2
 offset_right = 8.0
-offset_bottom = 61.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "Name"

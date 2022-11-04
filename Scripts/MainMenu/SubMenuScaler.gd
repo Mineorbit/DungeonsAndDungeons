@@ -8,6 +8,10 @@ func _ready():
 	#custom_minimum_size = get_parent().size
 		#child.size = size
 
+@onready var levellist = $VSplitContainer/LevelList
+
 func rescale():
 	for child in get_children():
 		child.custom_minimum_size = get_parent().size
+	print("AHOI: "+str(get_parent().size.y * 0.5))
+	levellist.custom_minimum_size.y = get_parent().size.y * 0.95
