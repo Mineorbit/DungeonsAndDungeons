@@ -38,6 +38,11 @@ func player_connected(id):
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
 	get_parent().add_player_controller(i,id)
+	var campos = load("res://Prefabs/PlayerCameraPosition.tscn").instantiate()
+	campos.name = str(id)
+	get_parent().add_child(campos)
+	MultiplayerConstants.player_cameras[i] = campos
+	# spawn player camera position
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

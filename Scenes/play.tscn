@@ -9,5 +9,5 @@ script = ExtResource("1_nrxjr")
 [node name="World" parent="." instance=ExtResource("2_ou7wa")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Lobby.tscn")
+_spawnable_scenes = PackedStringArray("res://Prefabs/Lobby.tscn", "res://Prefabs/PlayerCameraPosition.tscn")
 spawn_path = NodePath("..")
