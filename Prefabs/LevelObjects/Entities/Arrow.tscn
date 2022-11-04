@@ -16,13 +16,14 @@ height = 0.964447
 
 [node name="Arrow" type="RigidBody3D"]
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.5, 0)
+center_of_mass = Vector3(0, -0.5, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wjp0c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_xvgbw")
 
 [node name="Model" parent="." instance=ExtResource("1_hu7ph")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)

@@ -104,6 +104,8 @@ func _physics_process(delta):
 		synchronizer.input_direction = input_direction
 		if Input.is_action_just_pressed("LeftUse"):
 			UseLeftAction()
+		if Input.is_action_just_released("LeftUse"):
+			StopUseLeftAction()
 		if Input.is_action_just_pressed("jump"):
 			JumpAction()
 		if Input.is_action_just_pressed("Pickup"):
