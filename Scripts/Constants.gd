@@ -13,12 +13,9 @@ var currentLevel
 
 @export var deathplane = -8
 
-var currentInteractive = 0
-
 var currentPlayer = 0
 
 var LevelObjectData = {}
-
 
 var interactiveLevelObjects = {}
 
