@@ -14,33 +14,28 @@ grow_vertical = 2
 script = ExtResource("1_6w7v4")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
-layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer"]
-layout_mode = 2
 offset_left = 533.5
 offset_right = 618.5
 offset_bottom = 31.0
 
 [node name="Edit" type="Button" parent="AspectRatioContainer/HBoxContainer"]
-layout_mode = 2
 offset_right = 38.0
 offset_bottom = 31.0
 text = "Edit"
 
 [node name="New" type="Button" parent="AspectRatioContainer/HBoxContainer"]
-layout_mode = 2
 offset_left = 42.0
 offset_right = 85.0
 offset_bottom = 31.0
 text = "New"
 
 [node name="SubMenu" type="ScrollContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.05
 anchor_right = 1.0
@@ -51,26 +46,22 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
 [node name="GridContainer" type="GridContainer" parent="SubMenu"]
-layout_mode = 2
 offset_right = 204.0
 offset_bottom = 231.0
 columns = 2
 script = ExtResource("2_hpiiy")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="SubMenu/GridContainer"]
-layout_mode = 2
 offset_right = 200.0
 offset_bottom = 231.0
 dragger_visibility = 2
 
 [node name="LevelList" parent="SubMenu/GridContainer/VSplitContainer" instance=ExtResource("2_mb7u1")]
 custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
 offset_right = 200.0
 offset_bottom = 200.0
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="SubMenu/GridContainer/VSplitContainer"]
-layout_mode = 2
 offset_top = 200.0
 offset_right = 200.0
 offset_bottom = 231.0
@@ -80,21 +71,18 @@ size_flags_vertical = 8
 
 [node name="Edit" type="Button" parent="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3"]
 modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 2
 offset_left = 81.0
 offset_right = 119.0
 offset_bottom = 31.0
 text = "Edit"
 
 [node name="ColorRect" type="ColorRect" parent="SubMenu/GridContainer"]
-layout_mode = 2
 offset_left = 204.0
 offset_right = 204.0
 offset_bottom = 231.0
 color = Color(0.517647, 0.517647, 0.517647, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SubMenu/GridContainer/ColorRect"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
 anchor_right = 0.025
@@ -105,7 +93,6 @@ text = "New Level
 "
 
 [node name="MarginContainer" type="MarginContainer" parent="SubMenu/GridContainer/ColorRect"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.1
@@ -115,7 +102,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextEdit" type="TextEdit" parent="SubMenu/GridContainer/ColorRect/MarginContainer"]
-layout_mode = 2
 offset_right = 8.0
 offset_bottom = 23.0
 grow_horizontal = 2
@@ -123,7 +109,6 @@ grow_vertical = 2
 placeholder_text = "Name"
 
 [node name="Start" type="Button" parent="SubMenu/GridContainer/ColorRect"]
-layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.975
 anchor_right = 1.0

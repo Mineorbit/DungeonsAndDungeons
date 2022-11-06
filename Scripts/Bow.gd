@@ -10,15 +10,25 @@ func OnAttach(new_owner):
 
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 var in_use = false
+
 func Use():
 	in_use = true
 	super.Use()
 
-func _process(delta):
+func rot_player():
 	if in_use:
 		var new_rot = itemOwner.playercontroller.get_player_camera().rotation
 		new_rot.x = 0
 		itemOwner.rotation = new_rot
+
+func _process(delta):
+	super._process(delta)
+	rot_player()
+
+
+func _physics_process(delta):
+	super._physics_process(delta)
+	rot_player()
 
 func StopUse():
 	super.StopUse()

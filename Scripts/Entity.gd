@@ -147,8 +147,6 @@ func Hit(damage, hitting_entity):
 	
 func Attach(item):
 	print("Attaching "+str(item))
-	#item.get_parent().remove_child(item)
-	#add_child(item)
 	item.OnAttach(self)
 	
 func Dettach(item):
