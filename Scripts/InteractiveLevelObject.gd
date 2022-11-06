@@ -48,8 +48,6 @@ func process(activation):
 func _ready():
 	super._ready()
 	preparing_Collision()
-	unique_instance_id = Constants.currentInteractive
-	Constants.currentInteractive += 1
 
 func on_remove():
 	super.on_remove()

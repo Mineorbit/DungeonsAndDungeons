@@ -275,14 +275,14 @@ func add_chunk(position):
 	chunk.global_transform.origin = 8*chunkPosition
 	return chunk
 
-	
+var free_unique_instance_id = 0
 
 func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
 	
 	# this sets the table of maximum numbers at the start
 	if not numberOfPlacedLevelObjects.has(levelObjectData.levelObjectId):
 		numberOfPlacedLevelObjects[levelObjectData.levelObjectId] = 0
-		
+	var is_interactive = false
 	if(levelObjectData.maximumNumber != -1):
 		if(numberOfPlacedLevelObjects[levelObjectData.levelObjectId] == levelObjectData.maximumNumber):
 			return
@@ -299,6 +299,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		var new_level_object
 		if levelObjectData.interactive:
 			new_level_object = interactiveLevelObjectPrefab.instantiate()	
+			is_interactive = true
 		else:
 			new_level_object = levelObjectPrefab.instantiate()
 		
@@ -309,10 +310,15 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		var level_object_dupe: Node3D = get_tree().root.get_node("LevelObjects/LevelObjectList/"+levelObjectData.name).duplicate()
 		new_level_object.add_child(level_object_dupe)
 		level_object_dupe.transform.origin = levelObjectData.offset
+		# has actual instance id already?
 		if(unique_instance_id != null):
 			new_level_object.unique_instance_id = unique_instance_id
+			free_unique_instance_id = max(free_unique_instance_id, unique_instance_id + 1)
 			new_level_object.connectedObjects = connectedObjects
-			Signals.connection_added.emit(unique_instance_id,connectedObjects)	
+			Signals.connection_added.emit(unique_instance_id,connectedObjects)
+		elif is_interactive:
+			new_level_object.unique_instance_id = free_unique_instance_id
+			free_unique_instance_id = free_unique_instance_id + 1
 		if (new_level_object.has_method("sign_up")):
 			new_level_object.sign_up()
 		new_level_object.contained_level_object = level_object_dupe

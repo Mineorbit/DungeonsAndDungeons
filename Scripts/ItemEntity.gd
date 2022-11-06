@@ -34,8 +34,6 @@ func _process(delta):
 @export var errorDist = 2
 
 func UpdateRelativePosition(passive = false):
-	#print(itemOwner)
-	#print(collisionlayer)
 	if itemOwner != null and collision_layer == 0:
 		var new_position = itemOwner.to_global(offset)
 		transform.basis = Basis(Vector3.UP,hold_rot.x) * itemOwner.global_transform.basis
