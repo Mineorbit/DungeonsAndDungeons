@@ -58,6 +58,14 @@ func StopUseLeft():
 		player.StopUseLeft()	
 
 
+
+func StartAimingCamera():
+	pass
+
+func StopAimingCamera():
+	pass
+
+
 func UseLeftAction():
 	if player != null:
 		UseLeft()
@@ -89,6 +97,9 @@ func StopUseRight():
 
 func UseRightAction():
 	if player != null:
+		#if right item is bow:
+		StartAimingCamera()
+		
 		UseRight()
 	else:
 		rpc_id(1,"UseRight") 
@@ -96,6 +107,7 @@ func UseRightAction():
 
 func StopUseRightAction():
 	if player != null:
+		StopAimingCamera()
 		StopUseRight()
 	else:
 		rpc_id(1,"StopUseRight") 
