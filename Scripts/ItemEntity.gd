@@ -10,19 +10,25 @@ var isEquipped = false
 @export var offset = Vector3.ZERO
 @export var hold_rot = Vector3.ZERO
 
+
 var collisionlayer
 var collisionmask
+
+var in_use = false
+
 
 func _ready():
 	super._ready()
 	collisionlayer = collision_layer
 	collisionmask = collision_mask
 
+
+
 func Use():
-	pass
+	in_use = true
 	
 func StopUse():
-	pass
+	in_use = false
 
 func _physics_process(delta):
 	super._physics_process(delta)

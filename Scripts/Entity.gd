@@ -137,12 +137,16 @@ func Kill():
 	remove()
 
 
-func Hit(damage, hitting_entity):
+func Hit(damage, hitting_entity,direction = null):
 	on_entity_hit.emit()
 	print(str(hitting_entity)+" hit "+str(self)+" and did "+str(damage)+" Damage")
 	var offset_dir: Vector3 =global_transform.origin - hitting_entity.global_transform.origin
+	if direction != null:
+		offset_dir = direction
+	
 	offset_dir = offset_dir.normalized()
 	offset_dir.y = 0
+	
 	kickback((offset_dir + Vector3.UP)*log(damage)*0.5)
 	health = health - damage
 	if health < 0:

@@ -37,8 +37,8 @@ func start():
 	super.start()
 	Signals.playerHealthChanged.emit(id,health)
 
-func Hit(damage,hitting_entity):
-	super.Hit(damage,hitting_entity)
+func Hit(damage,hitting_entity,direction = null):
+	super.Hit(damage,hitting_entity,direction)
 	Signals.playerHealthChanged.emit(id,health)
 
 

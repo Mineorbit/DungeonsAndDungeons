@@ -8,11 +8,15 @@ func _ready():
 func OnAttach(new_owner):
 	super.OnAttach(new_owner)
 
+
+func OnDettach():
+	super.OnDettach()
+
+
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
-var in_use = false
+
 
 func Use():
-	in_use = true
 	super.Use()
 
 func rot_player():
@@ -30,9 +34,9 @@ func _physics_process(delta):
 	super._physics_process(delta)
 	rot_player()
 
-func StopUse():
-	super.StopUse()
-	in_use = false
+func Shoot():
+	if not in_use:
+		return
 	var arrow: RigidBody3D = arrowprefab.instantiate()
 	Constants.currentLevel.Entities.add_child(arrow)
 	arrow.global_transform.origin = global_transform.origin + -0.5*transform.basis.z
@@ -42,4 +46,8 @@ func StopUse():
 	var new_rot = itemOwner.playercontroller.get_player_camera().rotation
 	arrow.rotation = new_rot
 	arrow.apply_impulse(strength*(-1*itemOwner.playercontroller.get_player_camera().transform.basis.z+Vector3.UP*0.25))
+
+func StopUse():
+	super.StopUse()
+	in_use = false
 
