@@ -71,8 +71,36 @@ func StopUseLeftAction():
 	else:
 		rpc_id(1,"StopUseLeft") 
 
+
+
+
+
+@rpc
 func UseRight():
-	pass
+	if player != null:
+		player.UseLeft()
+
+
+@rpc
+func StopUseRight():
+	if player != null:
+		player.StopUseLeft()	
+
+
+func UseRightAction():
+	if player != null:
+		UseRight()
+	else:
+		rpc_id(1,"UseRight") 
+
+
+func StopUseRightAction():
+	if player != null:
+		StopUseRight()
+	else:
+		rpc_id(1,"StopUseRight") 
+
+
 
 @rpc
 func Pickup():
@@ -95,6 +123,7 @@ func get_player_camera():
 	else:
 		return Constants.playerCamera
 
+
 func _physics_process(delta):
 	if is_active or check():
 		input_direction = Vector3.ZERO
@@ -106,6 +135,10 @@ func _physics_process(delta):
 			UseLeftAction()
 		if Input.is_action_just_released("LeftUse"):
 			StopUseLeftAction()
+		if Input.is_action_just_pressed("RightUse"):
+			UseRightAction()
+		if Input.is_action_just_released("RightUse"):
+			StopUseRightAction()
 		if Input.is_action_just_pressed("jump"):
 			JumpAction()
 		if Input.is_action_just_pressed("Pickup"):

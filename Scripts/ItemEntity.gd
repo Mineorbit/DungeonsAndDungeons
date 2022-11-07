@@ -5,6 +5,9 @@ var itemOwner
 
 var isEquipped = false
 
+# which hand? false = left
+@export var hand = false
+
 
 # this later needs to be replaced by itemhandle system
 @export var offset = Vector3.ZERO
