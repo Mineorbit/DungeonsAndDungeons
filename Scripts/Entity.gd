@@ -37,6 +37,8 @@ signal on_entity_despawn
 
 signal on_entity_pickup
 
+signal on_entity_hit
+
 signal on_entity_melee_strike(damage)
 
 func MeleeStrike(damage):
@@ -134,9 +136,14 @@ func kickback(direction) -> void:
 func Kill():
 	remove()
 
+
 func Hit(damage, hitting_entity):
+	on_entity_hit.emit()
 	print(str(hitting_entity)+" hit "+str(self)+" and did "+str(damage)+" Damage")
-	kickback((global_transform.origin - hitting_entity.global_transform.origin+ Vector3.UP)*log(damage)*0.5)
+	var offset_dir: Vector3 =global_transform.origin - hitting_entity.global_transform.origin
+	offset_dir = offset_dir.normalized()
+	offset_dir.y = 0
+	kickback((offset_dir + Vector3.UP)*log(damage)*0.5)
 	health = health - damage
 	if health < 0:
 		Kill()

@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://pqfxj3361ma7"]
+[gd_scene load_steps=7 format=3 uid="uid://pqfxj3361ma7"]
 
+[ext_resource type="Script" path="res://Scripts/Arrow.gd" id="1_bcyha"]
 [ext_resource type="PackedScene" uid="uid://cll0wk8rol18u" path="res://Prefabs/Models/Arrow.tscn" id="1_hu7ph"]
+[ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_vv3pc"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wjp0c"]
 properties/0/path = NodePath(".:position")
@@ -14,9 +16,16 @@ properties/1/sync = true
 radius = 0.0744676
 height = 0.964447
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_afna4"]
+radius = 0.25
+height = 1.75
+
 [node name="Arrow" type="RigidBody3D"]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.5, 0)
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("1_bcyha")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wjp0c")
@@ -27,3 +36,13 @@ shape = SubResource("CapsuleShape3D_xvgbw")
 
 [node name="Model" parent="." instance=ExtResource("1_hu7ph")]
 transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)
+
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_vv3pc")]
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("CapsuleShape3D_afna4")
