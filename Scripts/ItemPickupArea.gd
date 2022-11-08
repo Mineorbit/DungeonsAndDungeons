@@ -18,8 +18,6 @@ func Pickup():
 			right_avail.append(item)
 		else:
 			left_avail.append(item)
-	print(left_avail)
-	print(right_avail)
 	var any_items = items_inside_range.size() > 0
 	change_left_hand(left_avail,any_items)
 	change_right_hand(right_avail,any_items)
