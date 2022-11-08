@@ -7,19 +7,26 @@ var itemRight
 
 var playercontroller
 @onready var camera_offset = $CameraAnchor/CameraOffset
-	
+
+
 func UseLeft():
 	if itemLeft != null:
 		itemLeft.Use()
-	
+
+
 func StopUseLeft():
 	if itemLeft != null:
 		itemLeft.StopUse()
 
-
 func UseRight():
-	pass
-	
+	if itemRight != null:
+		itemRight.Use()
+
+
+func StopUseRight():
+	if itemRight != null:
+		itemRight.StopUse()
+
 
 func _ready():
 	super._ready()
@@ -48,12 +55,20 @@ func _physics_process(delta):
 		move_direction.z = playercontroller.input_direction.z
 	super._physics_process(delta)
 
+
 @rpc(any_peer, call_local)
 func Attach(item):
 	super.Attach(item)
-	itemLeft = item
+	if item.hand:
+		itemRight = item
+	else:
+		itemLeft = item
+
 
 @rpc(any_peer, call_local)
 func Dettach(item):
 	super.Dettach(item)
-	itemLeft = null
+	if item.hand:
+		itemRight = null
+	else:
+		itemLeft = null

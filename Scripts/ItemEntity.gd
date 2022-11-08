@@ -67,3 +67,4 @@ func OnDettach():
 	gravity = 25
 	isEquipped = true
 	itemOwner = null
+	in_use = false

@@ -16,8 +16,17 @@ func OnDettach():
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 
 
+
 func Use():
 	super.Use()
+
+
+func StopUse():
+	super.StopUse()
+	in_use = false
+#	itemOwner.global_rotation = start_rot
+	itemOwner.rotate(Vector3.UP,PI/2)
+
 
 func rot_player():
 	if in_use:
@@ -47,7 +56,4 @@ func Shoot():
 	arrow.rotation = new_rot
 	arrow.apply_impulse(strength*(-1*itemOwner.playercontroller.get_player_camera().transform.basis.z+Vector3.UP*0.25))
 
-func StopUse():
-	super.StopUse()
-	in_use = false
 

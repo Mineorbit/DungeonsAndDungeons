@@ -153,13 +153,11 @@ func Hit(damage, hitting_entity,direction = null):
 		Kill()
 
 
-
-
-	
 func Attach(item):
 	print("Attaching "+str(item))
 	item.OnAttach(self)
-	
+
+
 func Dettach(item):
 	if item == null:
 		return

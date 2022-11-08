@@ -86,13 +86,13 @@ func StopUseLeftAction():
 @rpc
 func UseRight():
 	if player != null:
-		player.UseLeft()
+		player.UseRight()
 
 
 @rpc
 func StopUseRight():
 	if player != null:
-		player.StopUseLeft()	
+		player.StopUseRight()
 
 
 func UseRightAction():

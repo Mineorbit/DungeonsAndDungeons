@@ -6,20 +6,44 @@ func _ready():
 
 
 var collected = []
-# Called when the node enters the scene tree for the first time.
+
 func Pickup():
 	print("Picking Up")
-	var to_remove = []
-	if collected.size() > 0:
-		for object in collected:
-			to_remove.append(object)
-			get_parent().Dettach(object)
-			#get_parent().rpc("Dettach",object)
+	var items_inside_range = get_items_in_area()
+	#change left hand
+	var left_avail = []
+	var right_avail = []
+	for item in items_inside_range:
+		if item.hand:
+			right_avail.append(item)
+		else:
+			left_avail.append(item)
+	print(left_avail)
+	print(right_avail)
+	var any_items = items_inside_range.size() > 0
+	change_left_hand(left_avail,any_items)
+	change_right_hand(right_avail,any_items)
+
+func change_left_hand(avail,any_items):
+	if(get_parent().itemLeft != null and (avail.size()>0 or not any_items)):
+		get_parent().Dettach(get_parent().itemLeft)
+	if avail.size() > 0:
+		get_parent().Attach(avail[0])
+
+
+
+func change_right_hand(avail,any_items):
+	if(get_parent().itemRight != null and (avail.size()>0 or not any_items)):
+		get_parent().Dettach(get_parent().itemRight)
+	if avail.size() > 0:
+		get_parent().Attach(avail[0])
+
+
+func get_items_in_area():
+	var items_inside = []
 	if is_colliding():
-		var collided_object = get_collider(0)
-		if collided_object is ItemEntity and not (collided_object in collected):
-			collected.append(collided_object)
-			get_parent().Attach(collided_object)
-			#get_parent().rpc("Dettach",collided_object)
-	for object in to_remove:
-		collected.erase(object)
+		for i in range(get_collision_count()):
+			var collided_object = get_collider(i)
+			if collided_object is ItemEntity and not (collided_object in items_inside):
+				items_inside.append(collided_object)
+	return items_inside
