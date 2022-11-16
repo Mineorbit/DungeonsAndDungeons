@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://daqtdutyrekvj"]
+[gd_scene load_steps=9 format=3 uid="uid://daqtdutyrekvj"]
 
 [ext_resource type="Script" path="res://Scripts/Blog.gd" id="1_rre65"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
-[ext_resource type="PackedScene" uid="uid://cvs81xpofa50d" path="res://Prefabs/Models/Blog.tscn" id="3_ug7mr"]
+[ext_resource type="PackedScene" uid="uid://fceotdccl7o4" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.glb" id="3_eo7l5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 radius = 0.45
@@ -19,6 +19,8 @@ properties/0/sync = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_pywra"]
 
 [node name="Blog" type="CharacterBody3D"]
 collision_layer = 2
@@ -53,5 +55,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ta4rm")
 
-[node name="BlogModel" parent="." instance=ExtResource("3_ug7mr")]
+[node name="BackupModel" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_pywra")
+
+[node name="BlogModel" parent="." instance=ExtResource("3_eo7l5")]
 transform = Transform3D(-1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 0, 0, 0)
