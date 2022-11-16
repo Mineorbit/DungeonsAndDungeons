@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj7fmkk4elyw"]
+[gd_scene load_steps=2 format=3 uid="uid://cj7fmkk4elyw"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://b83mmybechxom" path="res://Assets/Models/Misc/valley.tscn" id="2_ypxbj"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("2")
@@ -12,6 +11,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.356574)
 [node name="Camera" type="Camera3D" parent="Spatial"]
 transform = Transform3D(0.995636, 0, -0.0933264, 0, 1, 0, 0.0933264, 0, 0.995636, -0.369202, -2.86346, 7.62307)
 
-[node name="valley" parent="Spatial" instance=ExtResource("2_ypxbj")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MainMenuLayer" type="CanvasLayer" parent="."]

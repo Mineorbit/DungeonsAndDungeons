@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://daqtdutyrekvj"]
 
-[ext_resource type="PackedScene" uid="uid://b4stbslbc6plr" path="res://Assets/Models/LevelObjects/Entities/Blog/BlogModel.tscn" id="1_a42eg"]
 [ext_resource type="Script" path="res://Scripts/Blog.gd" id="1_rre65"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
+[ext_resource type="PackedScene" uid="uid://cvs81xpofa50d" path="res://Prefabs/Models/Blog.tscn" id="3_ug7mr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 radius = 0.45
@@ -35,9 +35,6 @@ navigation_layers = 3
 max_speed = 5.0
 ignore_y = false
 
-[node name="BlogModel" parent="." instance=ExtResource("1_a42eg")]
-transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.2, 0)
-
 [node name="VisionCheck" type="ShapeCast3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_do8j2")
@@ -55,3 +52,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ta4rm")
+
+[node name="BlogModel" parent="." instance=ExtResource("3_ug7mr")]
+transform = Transform3D(-1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 0, 0, 0)

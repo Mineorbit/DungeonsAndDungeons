@@ -6,7 +6,8 @@ extends Node2D
 # var b = "text"
 
 var currentMenu = null
-@onready var canvasLayer = $CanvasLayer
+@onready var canvasLayer = $MainMenuLayer
+
 func _ready():
 	Constants.set_mode(0)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

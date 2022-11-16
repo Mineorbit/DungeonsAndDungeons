@@ -40,7 +40,7 @@ func show_text():
 func spawnEntity():
 	if Constants.currentMode > 2:
 		return
-	print("Spawning Entity at "+str(self.global_transform.origin))
+	print("Spawning Entity "+str(spawnedEntity)+" at "+str(self.global_transform.origin))
 	if currentSpawned != null:
 		currentSpawned.remove()
 	currentSpawned = prefab.instantiate()
