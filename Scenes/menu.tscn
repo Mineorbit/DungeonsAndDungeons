@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj7fmkk4elyw"]
+[gd_scene load_steps=3 format=3 uid="uid://cj7fmkk4elyw"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://vf6t1xcfodjo" path="res://Prefabs/Models/MainScene.tscn" id="2_edb4s"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("2")
@@ -9,6 +10,12 @@ script = ExtResource("2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.356574)
 
 [node name="Camera" type="Camera3D" parent="Spatial"]
-transform = Transform3D(0.995636, 0, -0.0933264, 0, 1, 0, 0.0933264, 0, 0.995636, -0.369202, -2.86346, 7.62307)
+transform = Transform3D(0.53261, 0, 0.846361, 0, 1, 0, -0.846361, 0, 0.53261, 2.82012, 1.40779, 1.59961)
+
+[node name="MainScene" parent="Spatial" instance=ExtResource("2_edb4s")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Spatial"]
+transform = Transform3D(0.819006, 0.0112321, 0.573675, -0.377735, 0.763148, 0.52433, -0.431909, -0.646127, 0.629265, 2.2488, 1.57865, 1.93453)
+shadow_enabled = true
 
 [node name="MainMenuLayer" type="CanvasLayer" parent="."]
