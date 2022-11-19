@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://b088frp8gi5t"]
+[gd_scene load_steps=7 format=3 uid="uid://b088frp8gi5t"]
 
-[ext_resource type="PackedScene" uid="uid://c2cqq4kfn8mln" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.glb" id="1_0cgyp"]
-[ext_resource type="Animation" uid="uid://cmhvxqiruxqtu" path="res://Assets/Animations/Blog/Idle.res" id="2_cs4wm"]
-[ext_resource type="Animation" uid="uid://d0pyu3xajfdin" path="res://Assets/Animations/Blog/default.res" id="3_3ce7h"]
+[ext_resource type="PackedScene" uid="uid://dm3tfckewoxgd" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.glb" id="1_0cgyp"]
+[ext_resource type="Animation" uid="uid://bsnku0tlfd04c" path="res://Assets/Animations/Blog/Idle.res" id="1_68hjo"]
+[ext_resource type="Animation" uid="uid://dmsoo3wutycna" path="res://Assets/Animations/Blog/Walk.res" id="3_6wkc7"]
+[ext_resource type="Animation" uid="uid://dph1utcatq64" path="res://Assets/Animations/Blog/Stunned.res" id="4_jv4j4"]
+[ext_resource type="Animation" uid="uid://cpjncqkub61vv" path="res://Assets/Animations/Blog/Strike.res" id="5_xkp5y"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_parsa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wk4bg"]
 _data = {
-"Idle": ExtResource("2_cs4wm"),
-"default": ExtResource("3_3ce7h")
+"Idle": ExtResource("1_68hjo"),
+"Strike": ExtResource("5_xkp5y"),
+"Stunned": ExtResource("4_jv4j4"),
+"Walk": ExtResource("3_6wkc7")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l3oi7"]
-animation = &"Blog/Idle"
 
 [node name="BlogModel" type="Node3D"]
 
@@ -20,10 +21,5 @@ animation = &"Blog/Idle"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Blog")
 libraries = {
-"Blog": SubResource("AnimationLibrary_parsa")
+"BlogAnimationLibrary": SubResource("AnimationLibrary_wk4bg")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeAnimation_l3oi7")
-anim_player = NodePath("../AnimationPlayer")
-active = true
