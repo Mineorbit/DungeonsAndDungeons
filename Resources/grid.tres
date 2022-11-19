@@ -1,16 +1,16 @@
 [gd_resource type="MeshLibrary" load_steps=6 format=3]
 
-[ext_resource type="Material" path="res://Assets/Materials/Floor.tres" id="1_dkit3"]
-[ext_resource type="Material" path="res://Assets/Materials/Stone.tres" id="2_mb38n"]
+[ext_resource type="Material" path="res://Assets/Materials/Floor.tres" id="1_2pjma"]
+[ext_resource type="Material" path="res://Assets/Materials/Stone.tres" id="2_tilxu"]
 
 [sub_resource type="BoxMesh" id="1"]
-material = ExtResource("1_dkit3")
+material = ExtResource("1_2pjma")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8l3b"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
-material = ExtResource("2_mb38n")
+material = ExtResource("2_tilxu")
 
 [resource]
 item/0/name = ""
