@@ -12,7 +12,9 @@ func OnAttach(new_owner):
 
 
 func OnDettach():
+	itemOwner.on_entity_aiming.emit(false)
 	super.OnDettach()
+	in_use = false
 
 
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern

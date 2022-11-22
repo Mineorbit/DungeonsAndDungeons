@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b088frp8gi5t"]
+[gd_scene load_steps=8 format=3 uid="uid://b088frp8gi5t"]
 
 [ext_resource type="PackedScene" uid="uid://dm3tfckewoxgd" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.glb" id="1_0cgyp"]
 [ext_resource type="Animation" uid="uid://bsnku0tlfd04c" path="res://Assets/Animations/Blog/Idle.res" id="1_68hjo"]
@@ -14,6 +14,9 @@ _data = {
 "Walk": ExtResource("3_6wkc7")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e482k"]
+animation = &"BlogAnimationLibrary/Idle"
+
 [node name="BlogModel" type="Node3D"]
 
 [node name="Blog" parent="." instance=ExtResource("1_0cgyp")]
@@ -24,3 +27,8 @@ root_node = NodePath("../Blog")
 libraries = {
 "BlogAnimationLibrary": SubResource("AnimationLibrary_wk4bg")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeAnimation_e482k")
+anim_player = NodePath("../AnimationPlayer")
+active = true

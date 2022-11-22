@@ -1,7 +1,7 @@
 extends Node3D
 
-
-@onready var Camera: Camera3D = $Camera
+@onready var CameraHoldingPoint = $CameraHoldingPoint
+@onready var Camera: Camera3D = $CameraHoldingPoint/Camera
 @onready var TargetPoint:Node3D = $TargetPoint
 
 
@@ -11,17 +11,18 @@ extends Node3D
 	set(value):
 		player = value
 		if value == null:
-			remove_child(Camera)
+			CameraHoldingPoint.remove_child(Camera)
 			player_to_follow_exists = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
-			add_child(Camera)	
+			CameraHoldingPoint.add_child(Camera)	
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			print("Capturing")
+			print("Camera now follows "+str(player))
 			Camera.current = true
 			player_to_follow_exists = true
 			player.on_entity_remove.connect(func():player_to_follow_exists = false)
 			player.on_entity_despawn.connect(func():player_to_follow_exists = false)
+			player.on_entity_aiming.connect(ChangeMovementState)
 
 var player_to_follow_exists = false
 var mouse_sensitivity := 0.005
@@ -31,7 +32,16 @@ func _ready() -> void:
 	top_level = true
 	Constants.playerCamera = self
 
+var offset = 0
 
+func ChangeMovementState(aiming):
+	
+	print(aiming)
+	if aiming:
+		offset = 1
+	else:
+		offset = 0
+	# this changes the relative position of the camera, instead need to change relative position of PlayerCamera, i.e., self
 	#Camera.top_level = true
 
 func move_camera(vec: Vector2) -> void:
@@ -47,7 +57,7 @@ func _process(delta):
 	#move_camera(dir)
 	if player_to_follow_exists and (player != null):
 		#Camera.look_at(player.global_transform.origin)
-		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75
+		global_transform.origin = player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
 
 
 @export var controllerCameraSpeed = 6
