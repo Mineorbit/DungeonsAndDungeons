@@ -38,6 +38,10 @@ func _ready():
 	super._ready()
 	on_entity_despawn.connect(DettachAllItems)
 	on_entity_remove.connect(DettachAllItems)
+	on_entity_aiming.connect(ChangeMovementState)
+
+func ChangeMovementState(aiming):
+	allowed_to_move = not aiming
 
 func DettachAllItems():
 	print("Dettaching all Items")

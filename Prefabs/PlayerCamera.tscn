@@ -23,6 +23,7 @@ script/source = "extends Node3D
 			print(\"Capturing\")
 			Camera.current = true
 			player_to_follow_exists = true
+			player.on_entity_aiming.connect(adjust_aiming_camera)
 			player.on_entity_remove.connect(func():player_to_follow_exists = false)
 			player.on_entity_despawn.connect(func():player_to_follow_exists = false)
 
@@ -35,6 +36,9 @@ func _ready() -> void:
 	Constants.playerCamera = self
 
 
+func adjust_aiming_camera(aiming):
+	print(\"Changed aiming mode to \"+str(aiming))
+
 	#Camera.top_level = true
 
 func move_camera(vec: Vector2) -> void:
@@ -43,8 +47,9 @@ func move_camera(vec: Vector2) -> void:
 		
 		rotation.y -= vec.x * mouse_sensitivity
 		rotation.y = rotation.y
-		
-	
+
+
+
 func _process(delta):
 	#Camera.global_transform.origin = ( TargetPoint.global_transform.origin + Camera.global_transform.origin)*0.5
 	#move_camera(dir)

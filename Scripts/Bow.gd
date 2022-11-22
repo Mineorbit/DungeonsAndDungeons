@@ -21,6 +21,7 @@ func OnDettach():
 
 func Use():
 	super.Use()
+	itemOwner.on_entity_aiming.emit(true)
 
 
 func StopUse():
@@ -28,6 +29,7 @@ func StopUse():
 	in_use = false
 #	itemOwner.global_rotation = start_rot
 	itemOwner.rotate(Vector3.UP,PI/2)
+	itemOwner.on_entity_aiming.emit(false)
 
 
 func rot_player():

@@ -41,6 +41,9 @@ signal on_entity_hit
 
 signal on_entity_melee_strike(damage)
 
+signal on_entity_aiming(aiming)
+
+
 func MeleeStrike(damage):
 	meleehitarea.Strike(damage,self)
 
@@ -79,6 +82,9 @@ func _process(delta):
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
 
+
+var allowed_to_move = true
+
 func _physics_process(delta: float) -> void:
 	if not started:
 		return
@@ -87,8 +93,12 @@ func _physics_process(delta: float) -> void:
 		Kill()
 	
 	if not stunned:
-		_velocity.x = move_direction.x * speed
-		_velocity.z = move_direction.z * speed
+		if allowed_to_move:
+			_velocity.x = move_direction.x * speed
+			_velocity.z = move_direction.z * speed
+		else:
+			_velocity.x = 0
+			_velocity.z = 0
 	
 	if not is_on_floor():
 		_velocity.y -= gravity * delta
