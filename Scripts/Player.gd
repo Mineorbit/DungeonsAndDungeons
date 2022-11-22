@@ -10,7 +10,13 @@ var playercontroller
 
 
 func UseLeft():
-	if itemLeft != null:
+	var shot = false
+	if itemRight != null:
+		#check if item in right is bow
+		if itemRight.has_method("Shoot"):
+			shot = true
+			itemRight.Shoot()
+	if itemLeft != null and not shot:
 		itemLeft.Use()
 
 

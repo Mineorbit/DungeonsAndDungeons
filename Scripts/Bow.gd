@@ -1,6 +1,8 @@
 extends ItemEntity
 
 var arrowprefab
+
+
 func _ready():
 	super._ready()
 	arrowprefab = load("res://Prefabs/LevelObjects/Entities/Arrow.tscn")
