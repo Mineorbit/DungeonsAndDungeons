@@ -9,48 +9,63 @@ extends MeshInstance3D
 @onready var refreshButton: Button = $Interface/Refresh
 @onready var cursors = $Interface/Cursors
 
-var owner_id = 0
+#original owner is server
+var owner_id = 1
 #change to local player inside
 var has_sent = false
 
+
+
+var player_cursors = {}
+
+var localcursor = null
+var local_player_inside = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	has_sent = false
 	enterArea.body_entered.connect(player_entered)
 	enterArea.body_exited.connect(player_left)
 	multiplayer.peer_connected.connect(update_interface_player_connect)
 	multiplayer.peer_disconnected.connect(update_interface_player_disconnect)
+	#update_interface_owner()
 	#if Constants.id == 1:
 	#	get_parent().get_parent().world.players.player_spawned.connect(add_checkbox)
 
 func update_interface_player_connect(id):
-	if Constants.id == owner_id:
-		add_checkbox(MultiplayerConstants.get_local_id(id))
-	
+	pass
+	#update_interface_owner()
 	# interface has to be owned by one player because else Input.parse_action does not work.
-	if Constants.id == 1:
-		if not has_sent:
-			has_sent = true
-			owner_id = id
-		update_interface_owner()
+	
 
 func update_interface_player_disconnect(id):
 	if Constants.id == 1:
 		if owner_id == id:
+			pass
 			# current owner of board disconnected
-			print(MultiplayerConstants.local_id_to_id)
-			owner_id = MultiplayerConstants.get_first_connected()
-		update_interface_owner()
+			#update_interface_owner()
 
 
 func update_interface_owner():
-	rpc("set_interface_owner",owner_id)
-	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
+	# only server assigns the owner
+	if Constants.id != 1:
+		return
+	var new_owner_id = MultiplayerConstants.get_first_connected()
+	if owner_id == new_owner_id:
+		return
+	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
+	if not has_sent:
+		has_sent = true
+		owner_id = new_owner_id
+		#trigger update on other clients
+		rpc("set_interface_owner",owner_id)
+		interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 
 
 #only called by server
 
-@rpc
+@rpc(any_peer)
 func set_interface_owner(id):
+	print("["+str(Constants.id)+"] Received Interface Owner to "+str(id))
 	owner_id = id
 	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 	if owner_id == Constants.id:
@@ -62,6 +77,7 @@ func set_interface_owner(id):
 
 
 func player_entered(player):
+	update_interface_owner()
 	if Constants.playerCamera.player == player:
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -69,6 +85,7 @@ func player_entered(player):
 	if 1 == Constants.id:
 		camera.current = true
 		create_cursor(player)
+	add_checkbox(player.name)
 
 
 func create_cursor(player):
@@ -91,10 +108,13 @@ func player_left(player):
 
 
 func add_checkbox(local_id):
-	print("Added Checkbox")
+	
+	if Constants.id != owner_id:
+		return
+	print("Adding Checkbox")
 	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
 	var checkbox: Button = checkbox_pref.instantiate()
-	checkbox.name = local_id
+	checkbox.name = str(local_id)
 	checkbox.scale = Vector2(4,4)
 	checkbox.pressed.connect(start_round)
 	checkboxes.add_child(checkbox)
@@ -128,19 +148,13 @@ func load_level_list(list):
 	levellist.set_level_list(list)
 
 
-
-var player_cursors = {}
-
-var localcursor = null
-var local_player_inside = false
-
-
-
 @rpc
 func end():
 	camera.current = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	local_player_inside = false
+
+
 
 func _input(event):
 	var local_coord = true

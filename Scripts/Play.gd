@@ -9,7 +9,7 @@ func _ready():
 	pass
 	Signals.game_won.connect(start_lobby)
 	ApiAccess.level_download_finished.connect(complete_start_round)
-	# only if is on server change this in local mode
+		# only if is on server change this in local mode
 	# start_lobby()
 	
 func start_lobby():
