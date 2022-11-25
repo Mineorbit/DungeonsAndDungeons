@@ -4,11 +4,8 @@ extends RigidBody3D
 @onready var hitbox:Area3D = $Hitbox
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	body_entered.connect(Ricochet)
 	hitbox.body_entered.connect(TryStrike)
 	
-func Ricochet(body):
-	print("Need to ricochet")
 
 func TryStrike(body):
 	print("Test "+str(body))
@@ -26,6 +23,20 @@ func TryStrike(body):
 		#queue_free()
 		despawn()
 
+var can_reflect = true
+
+var max_bounces = 4
+var bounces = 0
+
+func _physics_process(delta):
+	var result = move_and_collide(Vector3.ZERO)
+	if result != null and bounces < max_bounces:
+		bounces += 1
+		var reflect = result.get_remainder().bounce(result.get_normal())
+		linear_velocity = linear_velocity.bounce(result.get_normal())
+		move_and_collide(reflect*0.5)
+		look_at(position + linear_velocity)
+	
 func despawn():
 	queue_free()
 
