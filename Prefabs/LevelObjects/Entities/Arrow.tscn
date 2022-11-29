@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://pqfxj3361ma7"]
 
 [ext_resource type="Script" path="res://Scripts/Arrow.gd" id="1_bcyha"]
-[ext_resource type="PackedScene" uid="uid://cll0wk8rol18u" path="res://Prefabs/Models/Arrow.tscn" id="1_hu7ph"]
+[ext_resource type="PackedScene" uid="uid://ba0346gtf005y" path="res://Assets/Models/LevelObjects/Entities/Arrow.glb" id="2_wafa0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wjp0c"]
 properties/0/path = NodePath(".:position")
@@ -32,9 +32,6 @@ replication_config = SubResource("SceneReplicationConfig_wjp0c")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_xvgbw")
 
-[node name="Model" parent="." instance=ExtResource("1_hu7ph")]
-transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)
-
 [node name="Hitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 collision_layer = 2
@@ -47,5 +44,8 @@ shape = SubResource("CapsuleShape3D_afna4")
 wait_time = 16.0
 one_shot = true
 autostart = true
+
+[node name="Arrow" parent="." instance=ExtResource("2_wafa0")]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0)
 
 [connection signal="timeout" from="Timer" to="." method="despawn"]
