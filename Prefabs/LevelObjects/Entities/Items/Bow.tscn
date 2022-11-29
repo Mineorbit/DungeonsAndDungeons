@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cappm4jw3g3vs"]
+[gd_scene load_steps=5 format=3 uid="uid://cappm4jw3g3vs"]
 
 [ext_resource type="PackedScene" uid="uid://5qjssq37vgam" path="res://Prefabs/Models/Items/Bow.tscn" id="1_44l0g"]
 [ext_resource type="Script" path="res://Scripts/Bow.gd" id="1_c716e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3cla"]
 size = Vector3(0.2, 2.5, 0.6)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u6sld"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="Bow" type="CharacterBody3D"]
 collision_layer = 6
@@ -20,3 +28,6 @@ transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0.2)
 shape = SubResource("BoxShape3D_o3cla")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_u6sld")
