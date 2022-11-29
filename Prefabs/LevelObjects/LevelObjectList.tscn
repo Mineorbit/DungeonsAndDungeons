@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpllvelpgsund"]
+[gd_scene load_steps=16 format=3 uid="uid://dpllvelpgsund"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/LevelObjectList.gd" id="1_srj5y"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c2i5wm48oywkb" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_cp1tb"]
 [ext_resource type="PackedScene" uid="uid://brfdmgexloksh" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
 [ext_resource type="PackedScene" uid="uid://dtxtw55scu3n0" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="10_3e6xb"]
+[ext_resource type="PackedScene" uid="uid://b4y5uir6eiemq" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="11_60hu6"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")
@@ -66,6 +67,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
 [node name="SwordSpawner" parent="." instance=ExtResource("9_s5hm6")]
 
 [node name="BowSpawner" parent="." instance=ExtResource("9_cp1tb")]
+
+[node name="BombGloveSpawner" parent="." instance=ExtResource("11_60hu6")]
 
 [node name="PlayerSpawnBlue" parent="." instance=ExtResource("10_3e6xb")]
 

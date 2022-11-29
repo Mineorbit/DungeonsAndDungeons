@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4y5uir6eiemq"]
+
+[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_7vt2i"]
+[ext_resource type="PackedScene" uid="uid://vemxfi6slcsu" path="res://Assets/Models/LevelObjects/Entities/Items/BombGlove/bomb_glove.glb" id="2_2b6dv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
+
+[sub_resource type="TextMesh" id="TextMesh_kbi3g"]
+material = SubResource("StandardMaterial3D_dibhe")
+text = "Spawner"
+
+[node name="BombGloveSpawner" type="Node3D"]
+script = ExtResource("1_7vt2i")
+spawnedEntity = "Items/BombGlove"
+
+[node name="Text" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_kbi3g")
+
+[node name="bomb_glove" parent="Text" instance=ExtResource("2_2b6dv")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.2, 0)

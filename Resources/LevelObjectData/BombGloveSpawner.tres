@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/LevelObjectData.gd" id="1_5khqr"]
+[ext_resource type="Script" path="res://Scripts/LevelObjectData.gd" id="1_owvbu"]
 
 [resource]
-script = ExtResource("1_5khqr")
-name = "PlayerSpawnBlue"
+script = ExtResource("1_owvbu")
+name = "BombGloveSpawner"
 tiled = false
 interactive = false
 tileIndex = 0
-levelObjectId = 10
-maximumNumber = 1
-offset = Vector3(0.5, 0.5, 0.5)
+levelObjectId = 9
+maximumNumber = -1
+offset = Vector3(0, 0, 0)
 construction_collision_offset = Vector3(0, 0, 0)
 construction_collision_scale = Vector3(1, 1, 1)

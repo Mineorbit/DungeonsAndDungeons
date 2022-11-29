@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2ea3rs0cq3rm"]
 
-[ext_resource type="PackedScene" uid="uid://cy3ve40eu7pm1" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
+[ext_resource type="PackedScene" uid="uid://dpllvelpgsund" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
 
 [node name="BuilderHUD" type="Node2D"]
 
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control2/CenterContainer2"]
-custom_minimum_size = Vector2i(128, 128)
+custom_minimum_size = Vector2(128, 128)
 offset_left = 512.0
 offset_top = 17.0
 offset_right = 640.0
