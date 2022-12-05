@@ -45,7 +45,8 @@ func _process(delta):
 func UpdateRelativePosition(passive = false):
 	if itemOwner != null and collision_layer == 0:
 		var new_position = itemOwner.to_global(offset)
-		transform.basis = Basis(Vector3.UP,hold_rot.x) * itemOwner.global_transform.basis
+		transform.basis = Basis(Vector3.FORWARD,deg_to_rad(hold_rot.x)) * itemOwner.global_transform.basis
+		rotate_object_local(Vector3(1, 0, 0), 0.1)
 		transform.origin =	new_position
 
 # gravity should be set by global constant

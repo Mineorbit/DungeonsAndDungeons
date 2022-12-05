@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr1g6unwuxhdm"]
+
+[ext_resource type="Script" path="res://Scripts/Bomb.gd" id="1_kdhad"]
+[ext_resource type="PackedScene" uid="uid://i42s26hsik4p" path="res://Assets/Models/LevelObjects/Entities/Bomb/Bomb.glb" id="2_83gc7"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wjp0c"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ynyql"]
+
+[node name="Bomb" type="RigidBody3D"]
+center_of_mass_mode = 1
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("1_kdhad")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wjp0c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_ynyql")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 16.0
+one_shot = true
+autostart = true
+
+[node name="Bomb" parent="." instance=ExtResource("2_83gc7")]
+transform = Transform3D(0.475, 0, 0, 0, 0.475, 0, 0, 0, 0.475, 0, 0, 0)
+
+[connection signal="timeout" from="Timer" to="." method="despawn"]

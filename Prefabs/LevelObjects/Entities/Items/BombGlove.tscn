@@ -18,13 +18,15 @@ properties/1/sync = true
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_uiijk")
+offset = Vector3(0.25, 0.5, -0.5)
+hold_rot = Vector3(90, 90, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.185332, 0)
 shape = SubResource("BoxShape3D_o3cla")
 
 [node name="bomb_glove" parent="." instance=ExtResource("2_ev3uk")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5r36x")
