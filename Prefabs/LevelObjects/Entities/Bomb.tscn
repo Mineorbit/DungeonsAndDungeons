@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dr1g6unwuxhdm"]
+[gd_scene load_steps=6 format=3 uid="uid://dr1g6unwuxhdm"]
 
 [ext_resource type="Script" path="res://Scripts/Bomb.gd" id="1_kdhad"]
 [ext_resource type="PackedScene" uid="uid://i42s26hsik4p" path="res://Assets/Models/LevelObjects/Entities/Bomb/Bomb.glb" id="2_83gc7"]
@@ -12,6 +12,9 @@ properties/1/spawn = true
 properties/1/sync = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ynyql"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q1ppb"]
+radius = 3.0
 
 [node name="Bomb" type="RigidBody3D"]
 center_of_mass_mode = 1
@@ -27,11 +30,18 @@ transform = Transform3D(0.875, 0, 0, 0, -3.82475e-08, 0.875, 0, -0.875, -3.82475
 shape = SubResource("SphereShape3D_ynyql")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 16.0
+wait_time = 2.0
 one_shot = true
 autostart = true
 
 [node name="Bomb" parent="." instance=ExtResource("2_83gc7")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
-[connection signal="timeout" from="Timer" to="." method="despawn"]
+[node name="BombArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BombArea"]
+shape = SubResource("SphereShape3D_q1ppb")
+
+[connection signal="timeout" from="Timer" to="." method="explode"]
