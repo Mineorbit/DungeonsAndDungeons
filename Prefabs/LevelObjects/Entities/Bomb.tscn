@@ -23,7 +23,7 @@ script = ExtResource("1_kdhad")
 replication_config = SubResource("SceneReplicationConfig_wjp0c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.875, 0, 0, 0, -3.82475e-08, 0.875, 0, -0.875, -3.82475e-08, 0, 0, 0)
 shape = SubResource("SphereShape3D_ynyql")
 
 [node name="Timer" type="Timer" parent="."]
@@ -32,6 +32,6 @@ one_shot = true
 autostart = true
 
 [node name="Bomb" parent="." instance=ExtResource("2_83gc7")]
-transform = Transform3D(0.475, 0, 0, 0, 0.475, 0, 0, 0, 0.475, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [connection signal="timeout" from="Timer" to="." method="despawn"]

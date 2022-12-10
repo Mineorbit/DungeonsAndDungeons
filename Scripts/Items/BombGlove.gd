@@ -8,6 +8,7 @@ func _ready():
 	super._ready()
 	bombprefab = load("res://Prefabs/LevelObjects/Entities/Bomb.tscn")
 
+
 func OnAttach(new_owner):
 	super.OnAttach(new_owner)
 
@@ -23,11 +24,6 @@ func Use():
 	Throw()
 
 
-
-
-
-
-
 func Throw():
 	if not in_use:
 		return
@@ -40,5 +36,3 @@ func Throw():
 	var new_rot = itemOwner.playercontroller.get_player_camera().rotation
 	bomb.rotation = new_rot
 	bomb.apply_impulse(strength*(-1*itemOwner.playercontroller.get_player_camera().transform.basis.z+Vector3.UP*0.25))
-
-
