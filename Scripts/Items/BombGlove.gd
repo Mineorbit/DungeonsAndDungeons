@@ -29,8 +29,8 @@ func Throw():
 		return
 	var bomb: RigidBody3D = bombprefab.instantiate()
 	Constants.currentLevel.Entities.add_child(bomb)
-	bomb.global_transform.origin = global_transform.origin + -0.5*transform.basis.z
-	var strength = 15
+	bomb.global_transform.origin = global_transform.origin + 1*transform.basis.z
+	var strength = 10
 	#arrow.gravity_scale = 0
 	# this needs to be generalized for item carrying enemies
 	var new_rot = itemOwner.playercontroller.get_player_camera().rotation

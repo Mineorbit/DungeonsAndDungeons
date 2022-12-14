@@ -17,6 +17,7 @@ properties/1/sync = true
 radius = 3.0
 
 [node name="Bomb" type="RigidBody3D"]
+mass = 0.13
 center_of_mass_mode = 1
 max_contacts_reported = 4
 contact_monitor = true
