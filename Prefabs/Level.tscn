@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccaa1tk0ai85a"]
+[gd_scene load_steps=3 format=3 uid="uid://ccaa1tk0ai85a"]
 
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pxvv1tt5f4w" path="res://Prefabs/Entities.tscn" id="2_fl8ir"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_knahc"]
-sample_partition_type = 2
-geometry_parsed_geometry_type = 1
-
 [node name="Level" type="NavigationRegion3D"]
-navmesh = SubResource("NavigationMesh_knahc")
 script = ExtResource("1")
 
 [node name="Entities" parent="." instance=ExtResource("2_fl8ir")]

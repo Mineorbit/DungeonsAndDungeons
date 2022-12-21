@@ -64,7 +64,7 @@ func get_tile_level_object_orient(pos):
 func update_navigation():
 	#mesh.mesh = navmesh
 	if change_in_chunk:
-		navmesh = NavigationMesh.new()
+		var navmesh = NavigationMesh.new()
 		#navmesh.sample_partition_type = NavigationMesh.SAMPLE_PARTITION_MONOTONE
 		navmesh.sample_partition_type = NavigationMesh.SAMPLE_PARTITION_WATERSHED
 		navmesh.agent_radius = Constants.navmargin
