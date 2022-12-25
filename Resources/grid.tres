@@ -1,16 +1,16 @@
 [gd_resource type="MeshLibrary" load_steps=6 format=3]
 
-[ext_resource type="Material" path="res://Assets/Materials/Floor.tres" id="1_dwns3"]
-[ext_resource type="Material" path="res://Assets/Materials/Stone.tres" id="2_6o13v"]
+[ext_resource type="Material" path="res://Assets/Materials/Floor.tres" id="1_j5mji"]
+[ext_resource type="Material" path="res://Assets/Materials/Stone.tres" id="2_5h3sg"]
 
 [sub_resource type="BoxMesh" id="1"]
-material = ExtResource("1_dwns3")
+material = ExtResource("1_j5mji")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8l3b"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
-material = ExtResource("2_6o13v")
+material = ExtResource("2_5h3sg")
 
 [resource]
 item/0/name = ""
@@ -18,8 +18,10 @@ item/0/mesh = SubResource("1")
 item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/shapes = [SubResource("ConcavePolygonShape3D_s8l3b"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
 item/1/name = ""
 item/1/mesh = SubResource("BoxMesh_wv3na")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/shapes = [SubResource("ConcavePolygonShape3D_s8l3b"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
