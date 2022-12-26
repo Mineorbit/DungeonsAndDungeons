@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmjy1nc3tycl7"]
+[gd_scene load_steps=15 format=3 uid="uid://cmjy1nc3tycl7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
+[ext_resource type="Script" path="res://Scripts/PlayerModel.gd" id="2_ch2g2"]
 [ext_resource type="PackedScene" uid="uid://cyftlbbtcobqv" path="res://Prefabs/ItemPickupArea.tscn" id="3_7kqva"]
 [ext_resource type="Animation" uid="uid://knupjnhqksm8" path="res://Assets/Animations/Player/Idle.res" id="3_d5waa"]
+[ext_resource type="Animation" uid="uid://dfj6un8cbftu6" path="res://Assets/Animations/Player/Run.res" id="3_xp2ob"]
 [ext_resource type="PackedScene" uid="uid://ctelqpslyhno8" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_ixgl3"]
-[ext_resource type="Animation" uid="uid://fxgor6v54kqr" path="res://Assets/Animations/Player/Walk.res" id="4_lj7cp"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -14,11 +15,27 @@ height = 1.75
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_csi2g"]
 _data = {
 "Idle": ExtResource("3_d5waa"),
-"Walk": ExtResource("4_lj7cp")
+"Run": ExtResource("3_xp2ob")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6k43r"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3nh3f"]
 animation = &"Player/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xuqhv"]
+animation = &"Player/Run"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gvjwd"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_76q5w"]
+graph_offset = Vector2(-299.028, 82.4444)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_3nh3f")
+nodes/Idle/position = Vector2(240, 80)
+nodes/Run/node = SubResource("AnimationNodeAnimation_xuqhv")
+nodes/Run/position = Vector2(140, 220)
+nodes/output/position = Vector2(660, 140)
+nodes/speed/node = SubResource("AnimationNodeBlend2_gvjwd")
+nodes/speed/position = Vector2(407.556, 157.086)
+node_connections = [&"output", 0, &"speed", &"speed", 0, &"Idle", &"speed", 1, &"Run"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
@@ -46,6 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
 [node name="PlayerModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 layers = 32769
+script = ExtResource("2_ch2g2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerModel"]
 root_node = NodePath("../PlayerModelAttachment/PlayerModel")
@@ -54,9 +72,10 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="PlayerModel"]
-tree_root = SubResource("AnimationNodeAnimation_6k43r")
+tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/speed/blend_amount = 0.0
 
 [node name="PlayerModelAttachment" type="Node3D" parent="PlayerModel"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -1, 0)

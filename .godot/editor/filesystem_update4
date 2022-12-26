@@ -1,6 +1,9 @@
-res://Prefabs/Models/Entities/PlayerModel.tscn
+res://Assets/Animations/Player/Idle.res
+res://Assets/Animations/Player/Run.res
+res://Prefabs/LevelObjects/Entities/Player.tscn
 res://Assets/Materials/Entities/Player/Mouth.tres
 res://Assets/Materials/Entities/Player/Eye.tres
+res://Scripts/PlayerModel.gd
 res://Start.tscn
 res://Prefabs/MainMenu.tscn
 res://Prefabs/MainMenu/Main.tscn
@@ -15,7 +18,6 @@ res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn
 res://Scenes/Bootstrap.tscn
 res://Prefabs/Models/MainScene.tscn
 res://Prefabs/Models/Entities/BlogModel.tscn
-res://Prefabs/LevelObjects/Entities/Player.tscn
 res://Prefabs/MainMenu/ReadyCall.tscn
 res://Prefabs/Lobby.tscn
 res://Prefabs/LevelObjects/Entities/Bomb.tscn
@@ -29,3 +31,5 @@ res://Prefabs/LevelInterface.tscn
 res://Prefabs/BuilderHUD.tscn
 res://Prefabs/PlayerCameraPosition.tscn
 res://Prefabs/PlayerController.tscn
+res://Prefabs/Models/Entities/PlayerModel.tscn
+res://Prefabs/LevelObjects/PlayerSpawn.tscn
