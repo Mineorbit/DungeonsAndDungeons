@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://shxjde8tp3nv"
+uid="uid://ddllrw5n4lvh2"
 path="res://.godot/imported/Player.glb-32099e33cb04cb291a0e1c697e0c87dd.scn"
 
 [deps]
@@ -3626,6 +3626,16 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": null
+}
+},
+"materials": {
+"Eye": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Entities/Player/Eye.tres"
+},
+"Mouh": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Entities/Player/Mouth.tres"
 }
 }
 }
