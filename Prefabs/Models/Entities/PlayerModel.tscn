@@ -64,12 +64,12 @@ bones/34/rotation = Quaternion(-1.13929e-07, 0.163918, -5.15278e-08, 0.986474)
 script = ExtResource("1_wbk7d")
 
 [node name="Physical Bone band_attachr" type="PhysicalBone3D" parent="root/Skeleton3D" index="6"]
-transform = Transform3D(0.86012, -0.024739, 0.509501, -0.150389, 0.942178, 0.299616, -0.487439, -0.334349, 0.806573, -0.0247983, 1.32019, -0.0697458)
+transform = Transform3D(0.86012, -0.024739, 0.509508, -0.150389, 0.942178, 0.299618, -0.487439, -0.334349, 0.806579, -0.024803, 1.3202, -0.0697479)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20669e-05, 3.76711e-06, 0.0486256)
-body_offset = Transform3D(1.00001, 4.88758e-06, 1.62721e-05, -1.63913e-06, -6.04987e-06, -0.999961, -1.69873e-06, 1.00005, 3.42727e-06, -2.28584e-05, 0.0486237, -3.93391e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55963e-05, -6.40525e-07, 0.0486281)
+body_offset = Transform3D(1.00001, 4.85778e-06, 1.90735e-05, -1.63913e-06, -6.04987e-06, -0.99997, -1.66893e-06, 1.00005, 3.36766e-06, -2.65241e-05, 0.0486266, 4.76837e-07)
 gravity_scale = 0.0
 angular_damp = 15.0
 bone_name = "band_attach.r"
@@ -82,12 +82,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_6h7ro")
 
 [node name="Physical Bone band_topr" type="PhysicalBone3D" parent="root/Skeleton3D" index="7"]
-transform = Transform3D(0.848584, -0.00357253, 0.528952, -0.0619006, 0.992458, 0.105849, -0.525465, -0.122774, 0.841897, -0.0808115, 1.29936, -0.158722)
+transform = Transform3D(0.848584, -0.00357252, 0.528952, -0.0619006, 0.992458, 0.105849, -0.525465, -0.122774, 0.841897, -0.0808115, 1.29936, -0.158722)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91574e-06, 1.54862e-05, 0.0591129)
-body_offset = Transform3D(1.00002, 4.74751e-05, -6.72638e-05, 1.13547e-05, -2.9549e-05, -0.999893, 7.22706e-07, 1.00003, -0.000231735, 5.96046e-08, 0.0591066, -1.78814e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.92496e-06, 1.54871e-05, 0.0591129)
+body_offset = Transform3D(1.00002, 4.74975e-05, -6.72936e-05, 1.13547e-05, -2.95341e-05, -0.999893, 7.22706e-07, 1.00003, -0.00023175, 5.21541e-08, 0.0591066, -1.78814e-06)
 angular_damp = 15.0
 bone_name = "band_top.r"
 joint_constraints/bias = 0.3
@@ -99,12 +99,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_hrb1g")
 
 [node name="Physical Bone band_attachl" type="PhysicalBone3D" parent="root/Skeleton3D" index="8"]
-transform = Transform3D(0.860123, -0.0247313, -0.509502, 0.204299, 0.931936, 0.299625, 0.467408, -0.361808, 0.806617, 0.0176888, 1.3202, -0.0697524)
+transform = Transform3D(0.860123, -0.0247313, -0.509502, 0.204299, 0.931936, 0.299625, 0.467409, -0.361808, 0.806617, 0.0176897, 1.3202, -0.0697524)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34561e-07, -6.21951e-06, 0.0486134)
-body_offset = Transform3D(1.00001, 1.16378e-05, -1.75834e-06, 3.8743e-07, 6.67572e-06, -0.999999, -1.69873e-06, 1.00001, -2.02656e-06, -1.49012e-07, 0.0486133, 6.31809e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.50807e-07, -6.21951e-06, 0.0486138)
+body_offset = Transform3D(1.00001, 1.16378e-05, -1.93715e-06, 5.96046e-08, 6.67572e-06, -0.999999, -2.17557e-06, 1.00001, -2.02656e-06, 7.45058e-07, 0.0486137, 6.31809e-06)
 gravity_scale = 0.0
 angular_damp = 15.0
 bone_name = "band_attach.l"
@@ -117,12 +117,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_8pl1t")
 
 [node name="Physical Bone band_topl" type="PhysicalBone3D" parent="root/Skeleton3D" index="9"]
-transform = Transform3D(0.848579, -0.00327472, -0.529064, 0.0703823, 0.992013, 0.106092, 0.524366, -0.127278, 0.841947, 0.0737255, 1.29931, -0.158705)
+transform = Transform3D(0.848579, -0.00327813, -0.529064, 0.0703823, 0.992013, 0.106092, 0.524366, -0.127277, 0.841947, 0.0737255, 1.29931, -0.158705)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2659e-06, 4.89171e-05, 0.0590953)
-body_offset = Transform3D(1, 0.000300616, 5.90086e-06, 3.01003e-06, 0.000186779, -1.00002, 5.58794e-07, 1.00015, 3.2112e-06, 4.90248e-06, 0.0590965, -4.91142e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26577e-06, 4.89176e-05, 0.0590953)
+body_offset = Transform3D(1, 0.000297859, 5.90086e-06, 3.01003e-06, 0.000184745, -1.00002, 5.58794e-07, 1.00015, 3.20375e-06, 4.90248e-06, 0.0590965, -4.91142e-05)
 angular_damp = 15.0
 bone_name = "band_top.l"
 joint_constraints/bias = 0.3

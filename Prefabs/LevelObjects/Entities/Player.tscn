@@ -27,7 +27,7 @@ animation = &"Player/Run"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gvjwd"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_76q5w"]
-graph_offset = Vector2(-299.028, 82.4444)
+graph_offset = Vector2(-5, 156)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_3nh3f")
 nodes/Idle/position = Vector2(240, 80)
 nodes/Run/node = SubResource("AnimationNodeAnimation_xuqhv")
@@ -75,7 +75,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/speed/blend_amount = 0.0
+parameters/speed/blend_amount = 1.0
 
 [node name="PlayerModelAttachment" type="Node3D" parent="PlayerModel"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -1, 0)
