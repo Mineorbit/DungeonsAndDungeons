@@ -86,7 +86,7 @@ func _process(delta):
 
 
 var allowed_to_move = true
-
+var last_floor = false
 func _physics_process(delta: float) -> void:
 	if not started:
 		return
@@ -102,6 +102,9 @@ func _physics_process(delta: float) -> void:
 			_velocity.x = 0
 			_velocity.z = 0
 	
+	if not last_floor and is_on_floor():
+		on_entity_landed.emit(_velocity.y)
+	last_floor = is_on_floor()
 	if not is_on_floor():
 		_velocity.y -= gravity * delta
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
@@ -112,7 +115,6 @@ func _physics_process(delta: float) -> void:
 		_snap_vector = Vector3.ZERO
 		is_jumping = false
 	elif just_landed:
-		on_entity_landed.emit(_velocity.y)
 		_snap_vector = Vector3.DOWN
 		if stun_done:
 			_velocity = Vector3.ZERO

@@ -87,7 +87,7 @@ nodes/landidle/position = Vector2(1720, 240)
 nodes/output/position = Vector2(1980, 240)
 nodes/speed/node = SubResource("AnimationNodeBlend2_gvjwd")
 nodes/speed/position = Vector2(680, -180)
-node_connections = [&"output", 0, &"landidle", &"speed", 0, &"Idle", &"speed", 1, &"Run", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation"]
+node_connections = [&"output", 0, &"landidle", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"speed", 0, &"Idle", &"speed", 1, &"Run"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
