@@ -22,6 +22,6 @@ func _physics_process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	anim_tree["parameters/speed/blend_amount"] = speed*8
-	print(max(0,-8*yspeed))
-	anim_tree["parameters/fall/blend_amount"] = max(0,-8*yspeed)
+	var fallblend = min(1,max(0,-8*yspeed))
+	anim_tree["parameters/fall/blend_amount"] = fallblend
 	
