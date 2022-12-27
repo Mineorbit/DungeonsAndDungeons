@@ -164,6 +164,8 @@ func get_auth_header():
 func login_http_request_completed(result, response_code, headers, body):
 	var json_object: JSON = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
+	if not json_object.data.has("access_token"):
+		return
 	auth_token = json_object.data["access_token"]
 	print("Login Success: "+str(auth_token))
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cmjy1nc3tycl7"]
+[gd_scene load_steps=29 format=3 uid="uid://cmjy1nc3tycl7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
@@ -10,6 +10,7 @@
 [ext_resource type="Animation" uid="uid://bo0oi2ilsvo5n" path="res://Assets/Animations/Player/Jump.res" id="5_kixdt"]
 [ext_resource type="Animation" uid="uid://cbuggk16nah02" path="res://Assets/Animations/Player/Fall.res" id="6_a6wxk"]
 [ext_resource type="Animation" uid="uid://ctswasad2ys6e" path="res://Assets/Animations/Player/Land.res" id="7_qvrqg"]
+[ext_resource type="Animation" uid="uid://chg6fmtlofdv0" path="res://Assets/Animations/Player/IdleOneShot.res" id="8_rpyr5"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -19,10 +20,14 @@ height = 1.75
 _data = {
 "Fall": ExtResource("6_a6wxk"),
 "Idle": ExtResource("3_d5waa"),
+"IdleOneShot": ExtResource("8_rpyr5"),
 "Jump": ExtResource("5_kixdt"),
 "Land": ExtResource("7_qvrqg"),
 "Run": ExtResource("3_xp2ob")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jbq46"]
+animation = &"Player/Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6jc38"]
 animation = &"Player/Fall"
@@ -41,14 +46,22 @@ animation = &"Player/Land"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xuqhv"]
 animation = &"Player/Run"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dck86"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xhe0e"]
+
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qtqc7"]
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_u5ynk"]
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_yolvj"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_7k3du"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gvjwd"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_76q5w"]
-graph_offset = Vector2(182.234, 88.989)
+graph_offset = Vector2(543.169, 421.752)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_jbq46")
+nodes/Animation/position = Vector2(1020, 420)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_6jc38")
 nodes/Fall/position = Vector2(620, 220)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_3nh3f")
@@ -56,19 +69,25 @@ nodes/Idle/position = Vector2(240, 80)
 nodes/Jump/node = SubResource("AnimationNodeAnimation_poyrq")
 nodes/Jump/position = Vector2(140.359, 403.028)
 nodes/Land/node = SubResource("AnimationNodeAnimation_jbalj")
-nodes/Land/position = Vector2(1240, 360)
+nodes/Land/position = Vector2(1020, 580)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_uae88")
 nodes/OneShot/position = Vector2(1080, 200)
 nodes/Run/node = SubResource("AnimationNodeAnimation_xuqhv")
 nodes/Run/position = Vector2(140, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_xhe0e")
+nodes/TimeScale/position = Vector2(1300, 580)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_dck86")
+"nodes/TimeScale 2/position" = Vector2(1280, 420)
 nodes/fall/node = SubResource("AnimationNodeBlend2_qtqc7")
 nodes/fall/position = Vector2(860, 60)
-nodes/land/node = SubResource("AnimationNodeOneShot_u5ynk")
-nodes/land/position = Vector2(1460, 160)
-nodes/output/position = Vector2(1680, 160)
+nodes/land/node = SubResource("AnimationNodeOneShot_yolvj")
+nodes/land/position = Vector2(1480, 380)
+nodes/landidle/node = SubResource("AnimationNodeBlend2_7k3du")
+nodes/landidle/position = Vector2(1720, 240)
+nodes/output/position = Vector2(1980, 240)
 nodes/speed/node = SubResource("AnimationNodeBlend2_gvjwd")
-nodes/speed/position = Vector2(400, 160)
-node_connections = [&"output", 0, &"land", &"speed", 0, &"Idle", &"speed", 1, &"Run", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"land", 0, &"OneShot", &"land", 1, &"Land"]
+nodes/speed/position = Vector2(680, -180)
+node_connections = [&"output", 0, &"landidle", &"speed", 0, &"Idle", &"speed", 1, &"Run", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
@@ -109,8 +128,11 @@ tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/OneShot/active = false
+parameters/TimeScale/scale = 1.2
+"parameters/TimeScale 2/scale" = 1.2
 parameters/fall/blend_amount = 0.0
 parameters/land/active = false
+parameters/landidle/blend_amount = 0.0
 parameters/speed/blend_amount = 0.0
 
 [node name="PlayerModelAttachment" type="Node3D" parent="PlayerModel"]

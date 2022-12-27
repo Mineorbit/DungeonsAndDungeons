@@ -39,6 +39,8 @@ signal on_entity_pickup
 
 signal on_entity_hit
 
+signal on_entity_landed
+
 signal on_entity_melee_strike(damage)
 
 signal on_entity_aiming(aiming)
@@ -110,6 +112,7 @@ func _physics_process(delta: float) -> void:
 		_snap_vector = Vector3.ZERO
 		is_jumping = false
 	elif just_landed:
+		on_entity_landed.emit(_velocity.y)
 		_snap_vector = Vector3.DOWN
 		if stun_done:
 			_velocity = Vector3.ZERO
