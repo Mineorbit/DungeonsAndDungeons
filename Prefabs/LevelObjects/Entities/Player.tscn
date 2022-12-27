@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cmjy1nc3tycl7"]
+[gd_scene load_steps=21 format=3 uid="uid://cmjy1nc3tycl7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Animation" uid="uid://knupjnhqksm8" path="res://Assets/Animations/Player/Idle.res" id="3_d5waa"]
 [ext_resource type="Animation" uid="uid://dfj6un8cbftu6" path="res://Assets/Animations/Player/Run.res" id="3_xp2ob"]
 [ext_resource type="PackedScene" uid="uid://ctelqpslyhno8" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_ixgl3"]
+[ext_resource type="Animation" uid="uid://bo0oi2ilsvo5n" path="res://Assets/Animations/Player/Jump.res" id="5_kixdt"]
+[ext_resource type="Animation" uid="uid://cbuggk16nah02" path="res://Assets/Animations/Player/Fall.res" id="6_a6wxk"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -14,28 +16,48 @@ height = 1.75
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_csi2g"]
 _data = {
+"Fall": ExtResource("6_a6wxk"),
 "Idle": ExtResource("3_d5waa"),
+"Jump": ExtResource("5_kixdt"),
 "Run": ExtResource("3_xp2ob")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6jc38"]
+animation = &"Player/Fall"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3nh3f"]
 animation = &"Player/Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_poyrq"]
+animation = &"Player/Jump"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_uae88"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xuqhv"]
 animation = &"Player/Run"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qtqc7"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gvjwd"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_76q5w"]
-graph_offset = Vector2(-16, 158)
+graph_offset = Vector2(-28.234, 5.14304)
+nodes/Fall/node = SubResource("AnimationNodeAnimation_6jc38")
+nodes/Fall/position = Vector2(620, 220)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_3nh3f")
 nodes/Idle/position = Vector2(240, 80)
+nodes/Jump/node = SubResource("AnimationNodeAnimation_poyrq")
+nodes/Jump/position = Vector2(140.359, 403.028)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_uae88")
+nodes/OneShot/position = Vector2(1080, 200)
 nodes/Run/node = SubResource("AnimationNodeAnimation_xuqhv")
 nodes/Run/position = Vector2(140, 220)
-nodes/output/position = Vector2(660, 140)
+nodes/fall/node = SubResource("AnimationNodeBlend2_qtqc7")
+nodes/fall/position = Vector2(860, 60)
+nodes/output/position = Vector2(1540, 100)
 nodes/speed/node = SubResource("AnimationNodeBlend2_gvjwd")
-nodes/speed/position = Vector2(407.556, 157.086)
-node_connections = [&"output", 0, &"speed", &"speed", 0, &"Idle", &"speed", 1, &"Run"]
+nodes/speed/position = Vector2(400, 160)
+node_connections = [&"output", 0, &"OneShot", &"speed", 0, &"Idle", &"speed", 1, &"Run", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"fall", 0, &"speed", &"fall", 1, &"Fall"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
@@ -75,6 +97,8 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/OneShot/active = false
+parameters/fall/blend_amount = 0.0
 parameters/speed/blend_amount = 0.0
 
 [node name="PlayerModelAttachment" type="Node3D" parent="PlayerModel"]
