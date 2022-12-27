@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg0x6ci2rec82"]
+[gd_scene load_steps=4 format=3 uid="uid://cg0x6ci2rec82"]
 
 [ext_resource type="Script" path="res://Scripts/Chunk.gd" id="1"]
-[ext_resource type="MeshLibrary" uid="uid://clrwqouqc1d5h" path="res://Resources/grid.tres" id="3_cc4lu"]
+[ext_resource type="MeshLibrary" uid="uid://blf21l2axdtfb" path="res://Resources/grid.tres" id="3_cc4lu"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
+agent_radius = 0.1
 
 [node name="Chunk" type="NavigationRegion3D"]
+navigation_mesh = SubResource("NavigationMesh_abs6g")
 script = ExtResource("1")
 
 [node name="GridMap" type="GridMap" parent="."]
