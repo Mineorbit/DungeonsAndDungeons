@@ -65,14 +65,18 @@ func _physics_process(delta):
 		move_direction.z = playercontroller.input_direction.z
 	super._physics_process(delta)
 
+@onready var leftHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/lefthand
+@onready var rightHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/righthand
 
 @rpc(any_peer, call_local)
 func Attach(item):
 	super.Attach(item)
 	if item.hand:
 		itemRight = item
+		item.itemAttachmentPoint = rightHandAttachment
 	else:
 		itemLeft = item
+		item.itemAttachmentPoint = leftHandAttachment
 
 
 @rpc(any_peer, call_local)

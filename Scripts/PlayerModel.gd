@@ -7,12 +7,16 @@ var lastpos
 func _ready():
 	lastpos = global_transform.origin
 	get_parent().on_entity_landed.connect(player_landed)
+	get_parent().on_entity_melee_strike.connect(player_striking)
 	pass # Replace with function body.
 
 var speed = 0
 var yspeed = 0
 var lastyspeed = 0
 var landblend = 0
+
+func player_striking(v):
+	anim_tree["parameters/strike/active"] = true
 
 func player_landed(blend):
 	landblend = min(1,-blend/35)
@@ -38,7 +42,5 @@ func _process(delta):
 	anim_tree["parameters/fall/blend_amount"] = fallblend
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
-	if landblend > 0:
-		print(landblend)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	

@@ -34,7 +34,7 @@ void fragment() {
 	SPECULAR = specular;
 	ALPHA *= albedo.a * albedo_tex.a;
 	// this does not work  entirely
-	DEPTH  = FRAGCOORD.z-(0.002/FRAGCOORD.z);
+	DEPTH  = FRAGCOORD.z-(0.001/FRAGCOORD.z);
 }
 
 

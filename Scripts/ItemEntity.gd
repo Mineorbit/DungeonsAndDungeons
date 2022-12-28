@@ -2,6 +2,7 @@ extends Entity
 class_name ItemEntity
 
 var itemOwner
+var itemAttachmentPoint
 
 var isEquipped = false
 
@@ -12,7 +13,6 @@ var isEquipped = false
 # this later needs to be replaced by itemhandle system
 @export var offset = Vector3.ZERO
 @export var hold_rot = Vector3.ZERO
-
 
 var collisionlayer
 var collisionmask
@@ -44,10 +44,11 @@ func _process(delta):
 
 func UpdateRelativePosition(passive = false):
 	if itemOwner != null and collision_layer == 0:
-		var new_position = itemOwner.to_global(offset)
-		transform.basis = itemOwner.global_transform.basis
+		var new_position = itemAttachmentPoint.to_global(offset)
+		transform.basis = itemAttachmentPoint.global_transform.basis
 		rotate_object_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
 		rotate_object_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
+		rotate_object_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
 		transform.origin =	new_position
 
 # gravity should be set by global constant
