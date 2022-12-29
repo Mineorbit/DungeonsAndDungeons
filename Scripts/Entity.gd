@@ -37,7 +37,8 @@ var input_blocked = false
 var allowed_to_move = true
 var last_floor = false
 
-
+var can_shoot = false
+ 
 @onready var meleehitarea = $MeleeHitArea
 
 signal on_entity_remove
@@ -52,13 +53,21 @@ signal on_entity_landed
 
 signal on_entity_melee_strike(damage)
 
+signal on_entity_shoot
+
+signal on_entity_can_shoot(can)
+
 signal on_entity_aiming(aiming)
 
 
 func MeleeStrike(damage):
 	meleehitarea.Strike(damage,self)
 
+func ent_can_shoot(v):
+	can_shoot = v
+
 func _ready():
+	on_entity_can_shoot.connect(ent_can_shoot)
 	on_entity_melee_strike.connect(MeleeStrike)
 	_velocity = Vector3.ZERO
 	

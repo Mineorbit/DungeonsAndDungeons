@@ -19,13 +19,13 @@ func StopUseLeft():
 		itemLeft.StopUse()
 
 func UseRight():
-	var shot = false
+	var tried_shot = false
 	if itemLeft != null:
 		#check if item in right is bow
 		if itemLeft.has_method("Shoot"):
-			shot = true
+			tried_shot = true
 			itemLeft.Shoot()
-	if itemRight != null and not shot:
+	if itemRight != null and not tried_shot:
 		itemRight.Use()
 
 
@@ -45,6 +45,7 @@ func LandedOnGround(v):
 	if input_blocked:
 		_velocity.x = 0
 		_velocity.z = 0
+
 
 func ChangeMovementState(aiming):
 	input_blocked = aiming

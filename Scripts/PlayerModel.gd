@@ -2,6 +2,7 @@ extends MeshInstance3D
 
 @onready var anim_tree = $AnimationTree
 
+var aimfsm
 var lastpos
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,18 +10,31 @@ func _ready():
 	get_parent().on_entity_landed.connect(player_landed)
 	get_parent().on_entity_melee_strike.connect(player_striking)
 	get_parent().on_entity_aiming.connect(player_aiming)
-	pass # Replace with function body.
+	get_parent().on_entity_shoot.connect(player_shot)
+	get_parent().on_entity_can_shoot.connect(can_shoot)
+	aimfsm = anim_tree["parameters/aimingstatemachine/playback"]
 
 var speed = 0
 var yspeed = 0
 var lastyspeed = 0
 var landblend = 0
+
 func player_aiming(is_aiming):
 	var v = 0
 	if is_aiming:
 		v = 1
+		aimfsm.travel("Aim")
+	else:
+		aimfsm.travel("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
-	
+
+func player_shot():
+	aimfsm.travel("Release")
+
+# this will be used once there is a shooting cool down
+func can_shoot():
+	aimfsm.travel("Aim")
+
 
 func player_striking(v):
 	anim_tree["parameters/strike/active"] = true

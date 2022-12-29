@@ -2,6 +2,7 @@ extends ItemEntity
 
 var arrowprefab
 
+@onready var timer = $ShootCooldownTimer
 
 func _ready():
 	super._ready()
@@ -19,11 +20,13 @@ func OnDettach():
 
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 
+@export var aimTime: float = 1
 
 
 func Use():
 	super.Use()
 	itemOwner.on_entity_aiming.emit(true)
+	timer.start(aimTime)
 
 
 func StopUse():
@@ -49,9 +52,14 @@ func _physics_process(delta):
 	super._physics_process(delta)
 	rot_player()
 
+
 func Shoot():
 	if not in_use:
 		return
+	if not itemOwner.can_shoot:
+		return
+	
+	itemOwner.on_entity_shoot.emit()
 	var arrow: RigidBody3D = arrowprefab.instantiate()
 	Constants.currentLevel.Entities.add_child(arrow)
 	arrow.global_transform.origin = global_transform.origin + -0.5*transform.basis.z
@@ -61,5 +69,13 @@ func Shoot():
 	var new_rot = itemOwner.playercontroller.get_player_camera().rotation
 	arrow.rotation = new_rot
 	arrow.apply_impulse(strength*(-1*itemOwner.playercontroller.get_player_camera().transform.basis.z+Vector3.UP*0.25))
+	
+	
+	itemOwner.on_entity_can_shoot.emit(false)
+	timer.start(aimTime)
 
 
+
+
+func on_shoot_timeout():
+	itemOwner.on_entity_can_shoot.emit(true)

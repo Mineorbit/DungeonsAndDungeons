@@ -29,3 +29,7 @@ shape = SubResource("BoxShape3D_o3cla")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u6sld")
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="on_shoot_timeout"]
