@@ -42,7 +42,6 @@ func _ready():
 	on_entity_landed.connect(LandedOnGround)
 
 func LandedOnGround(v):
-	print("Landed on ground")
 	if input_blocked:
 		_velocity.x = 0
 		_velocity.z = 0
