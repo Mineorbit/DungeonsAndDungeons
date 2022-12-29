@@ -10,13 +10,7 @@ var playercontroller
 
 
 func UseLeft():
-	var shot = false
-	if itemRight != null:
-		#check if item in right is bow
-		if itemRight.has_method("Shoot"):
-			shot = true
-			itemRight.Shoot()
-	if itemLeft != null and not shot:
+	if itemLeft != null:
 		itemLeft.Use()
 
 
@@ -25,7 +19,13 @@ func StopUseLeft():
 		itemLeft.StopUse()
 
 func UseRight():
-	if itemRight != null:
+	var shot = false
+	if itemLeft != null:
+		#check if item in right is bow
+		if itemLeft.has_method("Shoot"):
+			shot = true
+			itemLeft.Shoot()
+	if itemRight != null and not shot:
 		itemRight.Use()
 
 
@@ -39,9 +39,16 @@ func _ready():
 	on_entity_despawn.connect(DettachAllItems)
 	on_entity_remove.connect(DettachAllItems)
 	on_entity_aiming.connect(ChangeMovementState)
+	on_entity_landed.connect(LandedOnGround)
+
+func LandedOnGround(v):
+	print("Landed on ground")
+	if input_blocked:
+		_velocity.x = 0
+		_velocity.z = 0
 
 func ChangeMovementState(aiming):
-	allowed_to_move = not aiming
+	input_blocked = aiming
 
 func DettachAllItems():
 	print("Dettaching all Items")

@@ -13,7 +13,6 @@ var gravity := 25
 var _velocity := Vector3.ZERO
 var _snap_vector := Vector3.DOWN
 
-var stunned = false
 var _spring_arm: SpringArm3D
 var _camera_anchor: Node3D
 var _character: Node3D
@@ -27,6 +26,16 @@ var fresh_kickback = false
 var kickback_direction = Vector3.ZERO
 var stun_done = false
 
+var should_jump = false
+
+var move_direction := Vector3.ZERO
+var is_jumping = false
+
+var target_rot
+var stunned = false
+var input_blocked = false
+var allowed_to_move = true
+var last_floor = false
 
 
 @onready var meleehitarea = $MeleeHitArea
@@ -67,26 +76,19 @@ func remove():
 	queue_free()
 
 
-var should_jump = false
-
-var move_direction := Vector3.ZERO
-var is_jumping = false
 
 func jump():
-	if not stunned:
+	if not input_blocked and not stunned:
 		is_jumping = is_on_floor()
 
-var target_rot
-
 func _process(delta):
-	if not stunned and velocity.length() > 0.2 and move_direction.length() > 0.4:
+	if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
 
 
-var allowed_to_move = true
-var last_floor = false
+
 func _physics_process(delta: float) -> void:
 	if not started:
 		return
@@ -94,7 +96,7 @@ func _physics_process(delta: float) -> void:
 	if global_transform.origin.y < Constants.deathplane:
 		Kill()
 	
-	if not stunned:
+	if (not input_blocked) and (not stunned):
 		if allowed_to_move:
 			_velocity.x = move_direction.x * speed
 			_velocity.z = move_direction.z * speed
@@ -102,7 +104,7 @@ func _physics_process(delta: float) -> void:
 			_velocity.x = 0
 			_velocity.z = 0
 	
-	if not last_floor and is_on_floor():
+	if (not last_floor)  and is_on_floor():
 		on_entity_landed.emit(_velocity.y)
 	last_floor = is_on_floor()
 	if not is_on_floor():
@@ -118,6 +120,7 @@ func _physics_process(delta: float) -> void:
 		_snap_vector = Vector3.DOWN
 		if stun_done:
 			_velocity = Vector3.ZERO
+			input_blocked = false
 			stunned = false
 			stun_done = false
 	
@@ -128,7 +131,7 @@ func _physics_process(delta: float) -> void:
 	velocity = _velocity
 	move_and_slide()
 	
-	if not stunned and velocity.length() > 0.2 and move_direction.length() > 0.4:
+	if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
 		look_direction = Vector2(velocity.x,_velocity.z)
 		look_direction = look_direction.normalized()
 		target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
@@ -138,6 +141,7 @@ func _physics_process(delta: float) -> void:
 
 
 func kickback(direction) -> void:
+	input_blocked = true
 	stunned = true
 	stun_done = false
 	fresh_kickback = true

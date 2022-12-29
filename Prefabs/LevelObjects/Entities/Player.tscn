@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cmjy1nc3tycl7"]
+[gd_scene load_steps=39 format=3 uid="uid://cmjy1nc3tycl7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Animation" uid="uid://ctswasad2ys6e" path="res://Assets/Animations/Player/Land.res" id="7_qvrqg"]
 [ext_resource type="Animation" uid="uid://chg6fmtlofdv0" path="res://Assets/Animations/Player/IdleOneShot.res" id="8_rpyr5"]
 [ext_resource type="Animation" uid="uid://d0cx0k6pc568r" path="res://Assets/Animations/Player/Strike.res" id="9_t4fp7"]
+[ext_resource type="Animation" uid="uid://bpq3namqp3rp" path="res://Assets/Animations/Player/Aim.res" id="10_uy4eo"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -19,6 +20,7 @@ height = 1.75
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_csi2g"]
 _data = {
+"Aim": ExtResource("10_uy4eo"),
 "Fall": ExtResource("6_a6wxk"),
 "Idle": ExtResource("3_d5waa"),
 "IdleOneShot": ExtResource("8_rpyr5"),
@@ -48,12 +50,28 @@ animation = &"Player/Land"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xuqhv"]
 animation = &"Player/Run"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2tb67"]
+animation = &"Player/Aim"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mygof"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gbywh"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2s547"]
+states/PlayerAim/node = SubResource("AnimationNodeAnimation_2tb67")
+states/PlayerAim/position = Vector2(464, 100)
+states/Start/position = Vector2(222, 100)
+transitions = ["Start", "PlayerAim", SubResource("AnimationNodeStateMachineTransition_mygof"), "PlayerAim", "End", SubResource("AnimationNodeStateMachineTransition_gbywh")]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qajhi"]
 animation = &"Player/Strike"
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dck86"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xhe0e"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_emott"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qtqc7"]
 
@@ -66,7 +84,7 @@ animation = &"Player/Strike"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rccwr"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_76q5w"]
-graph_offset = Vector2(840.064, 282.975)
+graph_offset = Vector2(915.822, 395.173)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_jbq46")
 nodes/Animation/position = Vector2(1020, 420)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_6jc38")
@@ -81,24 +99,30 @@ nodes/OneShot/node = SubResource("AnimationNodeOneShot_uae88")
 nodes/OneShot/position = Vector2(1080, 200)
 nodes/Run/node = SubResource("AnimationNodeAnimation_xuqhv")
 nodes/Run/position = Vector2(140, 220)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_2s547")
+nodes/StateMachine/position = Vector2(2380, 480)
 nodes/Strike/node = SubResource("AnimationNodeAnimation_qajhi")
 nodes/Strike/position = Vector2(1860, 500)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_xhe0e")
 nodes/TimeScale/position = Vector2(1300, 580)
 "nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_dck86")
 "nodes/TimeScale 2/position" = Vector2(1280, 420)
+nodes/aim/node = SubResource("AnimationNodeBlend2_emott")
+nodes/aim/position = Vector2(2620, 360)
 nodes/fall/node = SubResource("AnimationNodeBlend2_qtqc7")
-nodes/fall/position = Vector2(860, 60)
+nodes/fall/position = Vector2(900, 60)
 nodes/land/node = SubResource("AnimationNodeOneShot_yolvj")
 nodes/land/position = Vector2(1480, 380)
 nodes/landidle/node = SubResource("AnimationNodeBlend2_7k3du")
 nodes/landidle/position = Vector2(1720, 240)
-nodes/output/position = Vector2(2320, 260)
+nodes/output/position = Vector2(2860, 320)
 nodes/speed/node = SubResource("AnimationNodeBlend2_gvjwd")
 nodes/speed/position = Vector2(680, -180)
 nodes/strike/node = SubResource("AnimationNodeOneShot_rccwr")
 nodes/strike/position = Vector2(2080, 340)
-node_connections = [&"output", 0, &"strike", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"speed", 0, &"Idle", &"speed", 1, &"Run", &"strike", 0, &"landidle", &"strike", 1, &"Strike"]
+node_connections = [&"output", 0, &"aim", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"speed", 0, &"Idle", &"speed", 1, &"Run", &"strike", 0, &"landidle", &"strike", 1, &"Strike", &"aim", 0, &"strike", &"aim", 1, &"StateMachine"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_lye1g"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
@@ -139,8 +163,10 @@ tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/OneShot/active = false
+parameters/StateMachine/playback = SubResource("AnimationNodeStateMachinePlayback_lye1g")
 parameters/TimeScale/scale = 1.2
 "parameters/TimeScale 2/scale" = 1.2
+parameters/aim/blend_amount = 0
 parameters/fall/blend_amount = 0.0
 parameters/land/active = false
 parameters/landidle/blend_amount = 0.0

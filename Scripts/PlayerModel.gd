@@ -8,12 +8,19 @@ func _ready():
 	lastpos = global_transform.origin
 	get_parent().on_entity_landed.connect(player_landed)
 	get_parent().on_entity_melee_strike.connect(player_striking)
+	get_parent().on_entity_aiming.connect(player_aiming)
 	pass # Replace with function body.
 
 var speed = 0
 var yspeed = 0
 var lastyspeed = 0
 var landblend = 0
+func player_aiming(is_aiming):
+	var v = 0
+	if is_aiming:
+		v = 1
+	anim_tree["parameters/aim/blend_amount"] = v
+	
 
 func player_striking(v):
 	anim_tree["parameters/strike/active"] = true
