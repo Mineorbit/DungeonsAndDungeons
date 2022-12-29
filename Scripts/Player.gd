@@ -48,6 +48,9 @@ func LandedOnGround(v):
 
 func ChangeMovementState(aiming):
 	input_blocked = aiming
+	if aiming and is_on_floor():
+		_velocity.x = 0
+		_velocity.z = 0
 
 func DettachAllItems():
 	print("Dettaching all Items")
