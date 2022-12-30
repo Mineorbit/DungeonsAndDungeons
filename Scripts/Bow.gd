@@ -46,7 +46,7 @@ func rot_player():
 
 func _process(delta):
 	super._process(delta)
-	rot_player()
+	#rot_player()
 
 
 func _physics_process(delta):
