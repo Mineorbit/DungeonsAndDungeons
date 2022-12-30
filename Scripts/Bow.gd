@@ -4,6 +4,7 @@ var arrowprefab
 
 @onready var timer = $ShootCooldownTimer
 
+@export var aimTime: float = 1
 func _ready():
 	super._ready()
 	arrowprefab = load("res://Prefabs/LevelObjects/Entities/Arrow.tscn")
@@ -20,11 +21,11 @@ func OnDettach():
 
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 
-@export var aimTime: float = 1
 
 
 func Use():
 	super.Use()
+	itemOwner.on_entity_can_shoot.emit(false)
 	itemOwner.on_entity_aiming.emit(true)
 	timer.start(aimTime)
 
@@ -78,4 +79,5 @@ func Shoot():
 
 
 func on_shoot_timeout():
-	itemOwner.on_entity_can_shoot.emit(true)
+	if itemOwner != null:
+		itemOwner.on_entity_can_shoot.emit(true)
