@@ -129,11 +129,12 @@ func check():
 		return (synchronizer.is_multiplayer_authority())
 	return false
 
+
 func get_player_camera():
 	if Constants.id == 1:
 		return MultiplayerConstants.player_cameras[str(name).to_int()]
 	else:
-		return Constants.playerCamera
+		return get_parent().camera
 
 
 func _physics_process(delta):
@@ -141,7 +142,7 @@ func _physics_process(delta):
 		input_direction = Vector3.ZERO
 		input_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
-		input_direction = input_direction.rotated(Vector3.UP, Constants.playerCamera.rotation.y).normalized()
+		input_direction = input_direction.rotated(Vector3.UP, get_player_camera().rotation.y).normalized()
 		synchronizer.input_direction = input_direction
 		if Input.is_action_just_pressed("LeftUse"):
 			UseLeftAction()

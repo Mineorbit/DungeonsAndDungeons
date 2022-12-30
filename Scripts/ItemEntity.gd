@@ -71,3 +71,4 @@ func OnDettach():
 	isEquipped = true
 	itemOwner = null
 	in_use = false
+	rotation = Vector3.ZERO

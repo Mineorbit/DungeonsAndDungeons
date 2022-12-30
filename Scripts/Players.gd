@@ -1,24 +1,23 @@
 extends Node3D
 
 
-var playerpref
 @onready var playerEntities = $PlayerEntities
 @onready var playerControllers = $PlayerControllers
+
+signal player_spawned(local_id)
+var number_of_players = 0
+var playerpref
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 	Constants.players = self
-	
+	child_entered_tree.connect(new_player_added)
 
+func new_player_added(node):
+	print(node)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-signal player_spawned(local_id)
-
-var number_of_players = 0
 
 func spawn():
 	for i in range(4):
@@ -33,13 +32,6 @@ func spawn():
 			get_player(i).global_transform.origin = base
 			print("Spawning at "+str(base))
 			player_spawned.emit(i)
-
-
-func set_current_player(number):
-	Constants.currentPlayer = number
-	for i in range(4):
-		if get_player(i) != null:
-			playerControllers.of(i).set_active(i == number)
 
 
 func despawn_players():
@@ -64,7 +56,6 @@ func spawn_player_controllers():
 	for i in range(4):
 		spawn_player_controller(i)
 	playerControllers.of(0).spawn()
-	set_current_player(0)
 
 
 func spawn_player_controller(i,owner_id = 0):
@@ -91,6 +82,7 @@ func spawn_player(i):
 		number_of_players = number_of_players + 1
 		player.start()
 
+
 func despawn_player(i):
 	var player = get_player(i)
 	if player == null:
@@ -107,5 +99,3 @@ func get_player(i):
 		if child.name == str(i):
 			return child
 	return null
-
-

@@ -56,7 +56,6 @@ func enter_edit_mode():
 	Players.despawn_player_controllers()
 	world.level.reset()
 	add_child(builder)
-	Constants.playerCamera.player = null
 	builder.start()
 	if playerhud in get_children():
 		remove_child(playerhud)
@@ -76,7 +75,7 @@ func enter_test_mode():
 	if builderhud in get_children():
 		remove_child(builderhud)
 	add_child(playerhud)
-	Constants.playerCamera.player = Players.get_player(0)
 	Players.spawn()
+	Players.playerControllers.set_current_player(0)
 	connections.hide()
 	

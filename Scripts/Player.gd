@@ -4,9 +4,11 @@ extends Entity
 var id = 0
 var itemLeft
 var itemRight
-
 var playercontroller
+
 @onready var camera_offset = $CameraAnchor/CameraOffset
+@onready var leftHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/lefthand
+@onready var rightHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/righthand
 
 
 func UseLeft():
@@ -75,8 +77,7 @@ func _physics_process(delta):
 		move_direction.z = playercontroller.input_direction.z
 	super._physics_process(delta)
 
-@onready var leftHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/lefthand
-@onready var rightHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/righthand
+
 
 @rpc(any_peer, call_local)
 func Attach(item):

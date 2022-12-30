@@ -30,13 +30,10 @@ func _ready() -> void:
 	player = null
 	Camera.set_as_top_level(true)
 	set_as_top_level(true)
-	Constants.playerCamera = self
 
 var offset = 0
 
 func ChangeMovementState(aiming):
-	
-	print(aiming)
 	if aiming:
 		offset = 1
 	else:
@@ -71,8 +68,8 @@ func get_camera_target_position():
 func _process(delta):
 	#Camera.global_transform.origin = ( TargetPoint.global_transform.origin + Camera.global_transform.origin)*0.5
 	#move_camera(dir)
-	move_camera()
 	if player_to_follow_exists and (player != null):
+		move_camera()
 		#Camera.look_at(player.global_transform.origin)
 		global_transform.origin = get_camera_target_position()
 		if last_input_time < tolerance:
