@@ -4,7 +4,7 @@ var arrowprefab
 
 @onready var timer = $ShootCooldownTimer
 
-@export var aimTime: float = 1
+@export var aimTime: float = 0.5
 func _ready():
 	super._ready()
 	arrowprefab = load("res://Prefabs/LevelObjects/Entities/Arrow.tscn")
@@ -34,7 +34,7 @@ func StopUse():
 	super.StopUse()
 	in_use = false
 #	itemOwner.global_rotation = start_rot
-	itemOwner.rotate(Vector3.UP,PI/2)
+	#itemOwner.target_rot = Quaternion(Vector3.UP,PI/2)
 	itemOwner.on_entity_aiming.emit(false)
 
 
@@ -42,7 +42,8 @@ func rot_player():
 	if in_use:
 		var new_rot = itemOwner.playercontroller.get_player_camera().rotation
 		new_rot.x = 0
-		itemOwner.rotation = new_rot
+		itemOwner.target_rot = Quaternion.from_euler(new_rot)
+
 
 func _process(delta):
 	super._process(delta)

@@ -88,7 +88,7 @@ func build_navigation_per_chunk():
 var changes = true
 #this is a start routine for a level
 func start():
-	print("===Starting Level===")
+	print("=== Starting Level ===")
 	reset()
 	
 	

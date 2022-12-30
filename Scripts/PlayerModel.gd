@@ -41,7 +41,6 @@ func player_striking(v):
 
 func player_landed(blend):
 	landblend = min(1,-blend/35)
-	print("===")
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	anim_tree["parameters/land/active"] = true
 

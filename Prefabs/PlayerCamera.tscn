@@ -9,6 +9,5 @@ script = ExtResource("1_pwnu2")
 
 [node name="CameraHoldingPoint" type="Node3D" parent="."]
 
-[node name="Camera" type="Camera3D" parent="CameraHoldingPoint"]
+[node name="Camera" type="Camera3D" parent="."]
 cull_mask = 1048573
-current = true

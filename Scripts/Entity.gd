@@ -31,7 +31,7 @@ var should_jump = false
 var move_direction := Vector3.ZERO
 var is_jumping = false
 
-var target_rot
+var target_rot = Quaternion.IDENTITY
 var stunned = false
 var input_blocked = false
 var allowed_to_move = true
@@ -91,7 +91,7 @@ func jump():
 		is_jumping = is_on_floor()
 
 func _process(delta):
-	if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
+	#if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
