@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d2800poex8uxy"
+uid="uid://bbxmglmgyl831"
 path="res://.godot/imported/Player.blend-6d48226acf32d65d2e4c9a7223191283.scn"
 
 [deps]
@@ -16225,6 +16225,11 @@ _subresources={
 "Eye": {
 "use_external/enabled": true,
 "use_external/path": "res://Assets/Materials/Entities/Player/Eye.tres"
+}
+},
+"nodes": {
+"PATH:AnimationPlayer": {
+"import/skip_import": true
 }
 }
 }

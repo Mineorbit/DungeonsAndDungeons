@@ -67,16 +67,22 @@ var target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
 	if player != null:
-		Camera.global_transform.origin = 0.5*(Camera.global_transform.origin+CameraHoldingPoint.global_transform.origin)
-		target_position = target_position*0.9+ 0.1*get_camera_target_position()
+		Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
+		target_position = get_camera_target_position()
 		Camera.look_at(target_position)
 
 func get_camera_target_position():
 	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
 
+func _physics_process(delta):
+	update_camera_rigging(delta)
+	
 func _process(delta):
 	#Camera.global_transform.origin = ( TargetPoint.global_transform.origin + Camera.global_transform.origin)*0.5
 	#move_camera(dir)
+	update_camera_rigging(0)
+
+func update_camera_rigging(delta):
 	if player_to_follow_exists and (player != null):
 		move_camera()
 		#Camera.look_at(player.global_transform.origin)
@@ -85,7 +91,7 @@ func _process(delta):
 			move_camera_rig(dir)
 	last_input_time += delta
 
-	
+
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		dir = event.relative

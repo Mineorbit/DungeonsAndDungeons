@@ -75,7 +75,7 @@ func enter_test_mode():
 	if builderhud in get_children():
 		remove_child(builderhud)
 	add_child(playerhud)
-	Players.spawn()
+	Players.set_start_positions()
 	Players.playerControllers.set_current_player(0)
 	connections.hide()
 	

@@ -47,4 +47,6 @@ func player_connected(id):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Connect"):
-		Constants.World.players.spawn()
+		var player0 = Constants.World.players.playerEntities.get_node("0")
+		player0.remove_child(player0.get_node("MultiplayerSynchronizer"))
+		Constants.World.players.set_start_positions()

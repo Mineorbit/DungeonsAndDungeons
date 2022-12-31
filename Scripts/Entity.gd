@@ -69,8 +69,6 @@ func ent_can_shoot(v):
 func _ready():
 	on_entity_can_shoot.connect(ent_can_shoot)
 	on_entity_melee_strike.connect(MeleeStrike)
-	set_multiplayer_authority(1)
-	$MultiplayerSynchronizer.set_multiplayer_authority(1)
 	_velocity = Vector3.ZERO
 	
 func start():
@@ -93,7 +91,6 @@ func jump():
 		is_jumping = is_on_floor()
 
 func _process(delta):
-	#if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)

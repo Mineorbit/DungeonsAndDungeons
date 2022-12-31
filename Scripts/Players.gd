@@ -21,19 +21,24 @@ func new_player_added(node):
 	player_added.emit(node)
 
 
-func spawn():
+func set_start_positions():
 	for i in range(4):
+		set_start_position(i)
+
+func set_start_position(i):
 		if get_player(i) != null:
 			var base = Vector3.ZERO
-			if Constants.World.level.player_spawns[i] != null:
+			#get_player(i).set_physics_process(false)
+			if Constants.World.level != null and Constants.World.level.player_spawns[i] != null:
 				base = Constants.World.level.player_spawns[i].global_transform.origin
 			else:
 				base = Vector3(2*i,2,0)
-			get_player(i).global_transform.origin = base
+			get_player(i).set_position(base)
 			get_player(i)._velocity = Vector3.ZERO
+			await Constants.buffer()
 			print("Spawning at "+str(base))
 			player_spawned.emit(i)
-
+	
 
 func despawn_players():
 	print("Despawning Players")

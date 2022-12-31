@@ -2,6 +2,9 @@ extends Node3D
 
 var lobby
 
+var selected_level
+var selected_level_name
+
 @onready var chunk_streamer_prefab = load("res://Prefabs/ChunkStreamer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,12 +19,10 @@ func start_lobby():
 	Constants.World.end()
 	lobby = load("res://Prefabs/Lobby.tscn").instantiate()
 	add_child(lobby)
-	Constants.World.players.spawn()
+	Constants.World.players.set_start_positions()
 	get_tree().paused = false
 
 
-var selected_level
-var selected_level_name
 
 #this is called once the level was downloaded
 func complete_start_round():
@@ -31,8 +32,8 @@ func complete_start_round():
 		add_chunk_streamer_for_player(i)
 	remove_child(lobby)
 	#Constants.World.players.spawn()
+	Constants.World.players.set_start_positions()
 	get_tree().paused = false
-	Constants.World.players.spawn()
 
 @rpc(any_peer)
 func start_round(sel_lev,sel_lev_name):
