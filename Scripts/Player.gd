@@ -1,7 +1,7 @@
 extends Entity
 
 
-var id = 0
+@export var id: int = 0
 var itemLeft
 var itemRight
 var playercontroller

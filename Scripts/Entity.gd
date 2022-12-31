@@ -69,6 +69,8 @@ func ent_can_shoot(v):
 func _ready():
 	on_entity_can_shoot.connect(ent_can_shoot)
 	on_entity_melee_strike.connect(MeleeStrike)
+	set_multiplayer_authority(1)
+	$MultiplayerSynchronizer.set_multiplayer_authority(1)
 	_velocity = Vector3.ZERO
 	
 func start():

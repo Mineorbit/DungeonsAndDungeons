@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var CameraHoldingPoint = $CameraHoldingPoint
-@onready var Camera: Camera3D = $Camera
+var Camera
 @onready var TargetPoint:Node3D = $TargetPoint
 
 
@@ -11,6 +11,9 @@ extends Node3D
 	set(value):
 		player = value
 		if value == null:
+			if Camera == null:
+				Camera = Camera3D.new()
+				get_tree().root.add_child(Camera)
 			Camera.current = false
 			player_to_follow_exists = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -28,7 +31,9 @@ var mouse_sensitivity := 0.005
 
 func _ready() -> void:
 	player = null
-	Camera.set_as_top_level(true)
+	if Camera == null:
+		Camera = Camera3D.new()
+		get_tree().root.add_child(Camera)
 	set_as_top_level(true)
 
 var offset = 0
@@ -63,7 +68,7 @@ var target_position = Vector3.ZERO
 func move_camera():
 	if player != null:
 		Camera.global_transform.origin = 0.5*(Camera.global_transform.origin+CameraHoldingPoint.global_transform.origin)
-		target_position = get_camera_target_position()
+		target_position = target_position*0.9+ 0.1*get_camera_target_position()
 		Camera.look_at(target_position)
 
 func get_camera_target_position():

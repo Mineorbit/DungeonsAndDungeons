@@ -167,6 +167,9 @@ properties/4/sync = true
 properties/5/path = NodePath("PlayerModel/AnimationTree:parameters/landidle/blend_amount")
 properties/5/spawn = true
 properties/5/sync = true
+properties/6/path = NodePath(".:id")
+properties/6/spawn = true
+properties/6/sync = true
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 18
@@ -224,4 +227,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.01
 replication_config = SubResource("SceneReplicationConfig_bnrka")

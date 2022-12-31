@@ -30,8 +30,9 @@ func complete_start_round():
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	remove_child(lobby)
-	Constants.World.players.spawn()
+	#Constants.World.players.spawn()
 	get_tree().paused = false
+	Constants.World.players.spawn()
 
 @rpc(any_peer)
 func start_round(sel_lev,sel_lev_name):
