@@ -25,12 +25,10 @@ var selected_level_name
 
 #this is called once the level was downloaded
 func complete_start_round():
-	print("Starting Level '"+selected_level_name+"'")
-	Constants.World.start(selected_level_name,true)
 	get_tree().paused = true
+	Constants.World.start(selected_level_name,true)
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
-	print("TEST: "+str(Constants.World.level))
 	remove_child(lobby)
 	Constants.World.players.spawn()
 	get_tree().paused = false

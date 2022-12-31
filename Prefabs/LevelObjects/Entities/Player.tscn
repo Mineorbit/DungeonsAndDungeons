@@ -185,7 +185,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="PlayerModel"]
 tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/OneShot/active = false
 parameters/TimeScale/scale = 1.2
 "parameters/TimeScale 2/scale" = 1.2

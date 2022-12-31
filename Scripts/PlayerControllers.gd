@@ -39,6 +39,8 @@ func of(playerid):
 
 
 func set_current_player(number):
+	
+	create_player_camera()
 	Constants.currentPlayer = number
 	for i in range(4):
 		if get_parent().get_player(i) != null:
