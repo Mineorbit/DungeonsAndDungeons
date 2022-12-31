@@ -17,11 +17,14 @@ func connected(id):
 	Constants.set_mode(3)
 	print("Connected with "+str(peer.get_unique_id()))
 	Constants.id = peer.get_unique_id()
+	Constants.World.players.player_added.connect(player_created)
 
 
 func player_created(player):
-	if MultiplayerConstants.local_id != -1 and Constants.playerCamera.player != get_parent().world.players.get_player(MultiplayerConstants.local_id):
-		get_parent().world.players.playerControllers.camera.player = get_parent().world.players.get_player(MultiplayerConstants.local_id)
+	Constants.World.players.playerControllers.create_player_camera()
+	
+	if MultiplayerConstants.local_id != -1 and player == Constants.World.players.get_player(MultiplayerConstants.local_id):
+		Constants.World.players.playerControllers.camera.player = player
 
 
 

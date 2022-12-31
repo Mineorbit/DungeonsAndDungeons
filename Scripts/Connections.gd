@@ -17,7 +17,7 @@ func _ready():
 func reset_connections():
 	print("Resetting Connections")
 	clear_all_connections()
-	for interactiveobject in Constants.currentLevel.get_interactive_objects():
+	for interactiveobject in Constants.World.level.get_interactive_objects():
 		print(interactiveobject.contained_level_object)
 		new_connections(interactiveobject.unique_instance_id,interactiveobject.connectedObjects)
 

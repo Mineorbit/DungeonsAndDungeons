@@ -4,7 +4,9 @@ extends Node3D
 @onready var playerEntities = $PlayerEntities
 @onready var playerControllers = $PlayerControllers
 
+signal player_added(player)
 signal player_spawned(local_id)
+
 var number_of_players = 0
 var playerpref
 
@@ -13,21 +15,19 @@ var playerpref
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 	Constants.players = self
-	child_entered_tree.connect(new_player_added)
+	playerEntities.child_entered_tree.connect(new_player_added)
 
 func new_player_added(node):
-	print(node)
+	player_added.emit(node)
 
 
 func spawn():
 	for i in range(4):
 		if get_player(i) != null:
 			var base = Vector3.ZERO
-			if Constants.currentLevel.player_spawns[i] != null:
-				print("Spawn")
-				base = Constants.currentLevel.player_spawns[i].global_transform.origin
+			if Constants.World.level.player_spawns[i] != null:
+				base = Constants.World.level.player_spawns[i].global_transform.origin
 			else:
-				print("No Spawn")
 				base = Vector3(2*i,2,0)
 			get_player(i).global_transform.origin = base
 			print("Spawning at "+str(base))

@@ -9,7 +9,7 @@ var currentMode = 0
 
 var navmargin = 0.6
 
-var currentLevel
+var World
 
 @export var deathplane = -8
 

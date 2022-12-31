@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cmjy1nc3tycl7"]
+[gd_scene load_steps=45 format=3 uid="uid://cmjy1nc3tycl7"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_50d3o"]
 [ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
@@ -144,14 +144,9 @@ nodes/speed/node = SubResource("AnimationNodeBlend2_gvjwd")
 nodes/speed/position = Vector2(680, -180)
 nodes/strike/node = SubResource("AnimationNodeOneShot_rccwr")
 nodes/strike/position = Vector2(2080, 340)
-node_connections = [&"output", 0, &"aim", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation", &"TimeScale 3", 0, &"Strike", &"aim", 0, &"strike", &"aim", 1, &"aimingstatemachine", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"speed", 0, &"Idle", &"speed", 1, &"TimeScale 4", &"strike", 0, &"landidle", &"strike", 1, &"TimeScale 3", &"TimeScale 4", 0, &"Run"]
+node_connections = [&"output", 0, &"aim", &"OneShot", 0, &"fall", &"OneShot", 1, &"Jump", &"TimeScale", 0, &"Land", &"TimeScale 2", 0, &"Animation", &"TimeScale 3", 0, &"Strike", &"TimeScale 4", 0, &"Run", &"aim", 0, &"strike", &"aim", 1, &"aimingstatemachine", &"fall", 0, &"speed", &"fall", 1, &"Fall", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale", &"landidle", 0, &"OneShot", &"landidle", 1, &"land", &"speed", 0, &"Idle", &"speed", 1, &"TimeScale 4", &"strike", 0, &"landidle", &"strike", 1, &"TimeScale 3"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_lye1g"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hte8n"]
-properties/0/path = NodePath(".:current_animation")
-properties/0/spawn = true
-properties/0/sync = true
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bnrka"]
 properties/0/path = NodePath(".:position")
@@ -209,10 +204,6 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -1, 0)
 
 [node name="PlayerModel" parent="PlayerModel/PlayerModelAttachment" instance=ExtResource("4_ixgl3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerModel"]
-root_path = NodePath("../AnimationPlayer")
-replication_config = SubResource("SceneReplicationConfig_hte8n")
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_4q7mt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)

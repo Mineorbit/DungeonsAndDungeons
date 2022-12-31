@@ -63,7 +63,7 @@ func Shoot():
 	
 	itemOwner.on_entity_shoot.emit()
 	var arrow: RigidBody3D = arrowprefab.instantiate()
-	Constants.currentLevel.Entities.add_child(arrow)
+	Constants.World.level.Entities.add_child(arrow)
 	arrow.global_transform.origin = global_transform.origin + -0.5*transform.basis.z
 	var strength = 25
 	#arrow.gravity_scale = 0

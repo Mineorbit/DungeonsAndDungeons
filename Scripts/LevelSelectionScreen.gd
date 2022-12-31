@@ -78,7 +78,10 @@ func set_interface_owner(id):
 
 func player_entered(player):
 	update_interface_owner()
-	if Constants.playerCamera.player == player:
+	# server does not have to continue
+	if Constants.id == 1:
+		return
+	if Constants.World.players.playerControllers.camera.player == player:
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		local_player_inside = true
@@ -96,15 +99,16 @@ func create_cursor(player):
 
 
 func player_left(player):
-	if Constants.playerCamera.player == player:
-		camera.current = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		local_player_inside = false
+	
 	if 1 == Constants.id:
 		camera.current = false
 		localcursor = null
 		local_player_inside = false
 		player_cursors[player.name] = null
+	elif Constants.World.players.playerControllers.camera.player == player:
+		camera.current = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		local_player_inside = false
 
 
 func add_checkbox(local_id):

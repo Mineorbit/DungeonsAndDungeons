@@ -44,7 +44,7 @@ func spawnEntity():
 	if currentSpawned != null:
 		currentSpawned.remove()
 	currentSpawned = prefab.instantiate()
-	Constants.currentLevel.Entities.add_child(currentSpawned)
+	Constants.World.level.Entities.add_child(currentSpawned)
 	Constants.buffer()
 	set_spawn_pos()
 	currentSpawned.on_entity_remove.connect(clear_after_remove)

@@ -11,18 +11,23 @@ func _ready():
 
 @rpc
 func stream_chunk(data):
+	add_from_function(data)
+
+func add_from_function(data):
 	var base_position = data[0]
 	print("Loading new Chunk "+str(base_position)+" for "+str(target_player_network_id))
 	data.erase(base_position)
 	base_position *= 8
 	for object in data:
-		Constants.currentLevel.add_from_string(base_position,object)
-	
+		# World does not call _ready on client so level needs to be assigned manually
+		Constants.World.level = Constants.World.get_node("Level")
+		Constants.World.level.add_from_string(base_position,object)
 
 
 func load_chunk(location):
 	loadedChunks.append(location)
-	var chunk = Constants.currentLevel.get_chunk_by_chunk_position(location)
+	var chunk = Constants.World.level.get_chunk_by_chunk_position(location)
+	print("Trying to load Chunk at "+str(location))
 	if chunk == null:
 		print("There was no Chunk at "+str(location))
 		return
@@ -37,7 +42,9 @@ func load_chunk(location):
 func test(position):
 	if target_player_network_id == 0:
 		return
-	var currentChunk = Constants.currentLevel.get_chunk_position(position)
+	if Constants.World.level == null:
+		return
+	var currentChunk = Constants.World.level.get_chunk_position(position)
 	if not loadedChunks.has(currentChunk):
 		load_chunk(currentChunk)
 	
