@@ -18,7 +18,8 @@ properties/1/sync = true
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_c716e")
-hold_rot = Vector3(0, 0, -55)
+offset = Vector3(-0.25, 0, 0)
+hold_rot = Vector3(90, 180, 90)
 
 [node name="Mesh" parent="." instance=ExtResource("1_44l0g")]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)

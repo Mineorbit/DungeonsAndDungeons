@@ -46,6 +46,10 @@ var last_input_time = 0
 #should be higher than inputrate framerate
 var tolerance = 0.04
 
+@export var controllerCameraSpeed = 6
+
+var dir = Vector2.ZERO
+
 func move_camera_rig(vec: Vector2) -> void:
 		rotation.x -= vec.y * mouse_sensitivity
 		rotation.x	 = clamp(rotation.x, -0.9, 0.3)
@@ -59,7 +63,7 @@ var target_position = Vector3.ZERO
 func move_camera():
 	if player != null:
 		Camera.global_transform.origin = 0.5*(Camera.global_transform.origin+CameraHoldingPoint.global_transform.origin)
-		target_position = 0.25*target_position+0.75*get_camera_target_position()
+		target_position = get_camera_target_position()
 		Camera.look_at(target_position)
 
 func get_camera_target_position():
@@ -76,11 +80,7 @@ func _process(delta):
 			move_camera_rig(dir)
 	last_input_time += delta
 
-
-@export var controllerCameraSpeed = 6
-
-var dir = Vector2.ZERO
-
+	
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		dir = event.relative
