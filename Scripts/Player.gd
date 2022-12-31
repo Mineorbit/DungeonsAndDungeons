@@ -66,16 +66,20 @@ func start():
 	super.start()
 	Signals.playerHealthChanged.emit(id,health)
 
+
 func Hit(damage,hitting_entity,direction = null):
 	super.Hit(damage,hitting_entity,direction)
 	Signals.playerHealthChanged.emit(id,health)
 
-
+func _process(delta):
+	if playercontroller != null:
+		super._process(delta)
+		
 func _physics_process(delta):
 	if playercontroller != null:
 		move_direction.x = playercontroller.input_direction.x
 		move_direction.z = playercontroller.input_direction.z
-	super._physics_process(delta)
+		super._physics_process(delta)
 
 
 

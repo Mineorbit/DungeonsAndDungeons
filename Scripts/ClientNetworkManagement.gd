@@ -22,7 +22,8 @@ func connected(id):
 
 func player_created(player):
 	Constants.World.players.playerControllers.create_player_camera()
-	
+	# temporary
+	player.playercontroller = null
 	if MultiplayerConstants.local_id != -1 and player == Constants.World.players.get_player(MultiplayerConstants.local_id):
 		Constants.World.players.playerControllers.camera.player = player
 

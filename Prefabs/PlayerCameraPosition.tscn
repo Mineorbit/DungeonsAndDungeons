@@ -18,6 +18,7 @@ script = ExtResource("1_pli16")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lst88")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Marker" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_r57vv")

@@ -46,6 +46,8 @@ func player_landed(blend):
 
 
 func _physics_process(delta):
+	if get_parent().playercontroller == null:
+		return
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
 	yspeed = speed_pos.y - last_speed_pos.y
@@ -56,6 +58,8 @@ func _physics_process(delta):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if get_parent().playercontroller == null:
+		return
 	anim_tree["parameters/speed/blend_amount"] = speed*8
 	var fallblend = min(1,max(0,-8*yspeed))
 	lastyspeed = yspeed

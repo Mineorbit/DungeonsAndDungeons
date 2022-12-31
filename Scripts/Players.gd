@@ -28,8 +28,10 @@ func spawn():
 			if Constants.World.level.player_spawns[i] != null:
 				base = Constants.World.level.player_spawns[i].global_transform.origin
 			else:
-				base = Vector3(2*i,2,0)
+				base = Vector3(2*i,8,0)
+			base = Vector3(2*i,8,0)
 			get_player(i).global_transform.origin = base
+			get_player(i)._velocity = Vector3.ZERO
 			print("Spawning at "+str(base))
 			player_spawned.emit(i)
 

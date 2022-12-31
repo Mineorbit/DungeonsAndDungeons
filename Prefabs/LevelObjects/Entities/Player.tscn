@@ -155,6 +155,18 @@ properties/0/sync = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/2/path = NodePath("PlayerModel/AnimationTree:parameters/speed/blend_amount")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("PlayerModel/AnimationTree:parameters/fall/blend_amount")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("PlayerModel/AnimationTree:parameters/land/active")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath("PlayerModel/AnimationTree:parameters/landidle/blend_amount")
+properties/5/spawn = true
+properties/5/sync = true
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 18
@@ -185,6 +197,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="PlayerModel"]
 tree_root = SubResource("AnimationNodeBlendTree_76q5w")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/OneShot/active = false
 parameters/TimeScale/scale = 1.2
 "parameters/TimeScale 2/scale" = 1.2
