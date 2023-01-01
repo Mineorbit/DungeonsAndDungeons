@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://t4aitd1xi30n"]
+[gd_scene load_steps=3 format=3 uid="uid://t4aitd1xi30n"]
 
 [ext_resource type="Script" path="res://Scripts/MultiplayerConstants.gd" id="1_mu5cy"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t1wgh"]
+properties/0/path = NodePath(".:local_id_to_id")
+properties/0/spawn = true
+properties/0/sync = true
+
 [node name="MultiplayerConstants" type="Node"]
 script = ExtResource("1_mu5cy")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_t1wgh")

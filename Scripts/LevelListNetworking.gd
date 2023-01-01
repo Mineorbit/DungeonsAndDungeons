@@ -18,7 +18,6 @@ func set_auth(id:int):
 		child.set_multiplayer_authority(id)
 	ownerid = id
 	for element in get_parent().get_node("Control/GridContainer").get_children():
-		print("Changing Element "+str(element))
 		element.get_node("MultiplayerSynchronizer").set_multiplayer_authority(ownerid)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

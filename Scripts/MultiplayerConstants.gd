@@ -2,7 +2,7 @@ extends Node
 
 
 var local_id = -1
-var local_id_to_id = [null,null,null,null]
+@export var local_id_to_id = [null,null,null,null]
 
 var player_cameras = [null,null,null,null]
 

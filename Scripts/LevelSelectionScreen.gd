@@ -40,8 +40,6 @@ func update_interface_player_connect(id):
 func update_interface_player_disconnect(id):
 	if Constants.id == 1:
 		if owner_id == id:
-			pass
-			# current owner of board disconnected
 			update_interface_owner()
 
 
@@ -52,12 +50,12 @@ func update_interface_owner():
 	var new_owner_id = MultiplayerConstants.get_first_connected()
 	if owner_id == new_owner_id:
 		return
-	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
 	if not has_sent:
 		has_sent = true
 		owner_id = new_owner_id
 		#trigger update on other clients
 		rpc("set_interface_owner",owner_id)
+		print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
 		interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 
 
@@ -68,6 +66,8 @@ func set_interface_owner(id):
 	print("["+str(Constants.id)+"] Received Interface Owner to "+str(id))
 	owner_id = id
 	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
+	interface.get_node("CursorSpawner").set_multiplayer_authority(id)
+	interface.get_node("CheckboxSpawner").set_multiplayer_authority(id)
 	if owner_id == Constants.id:
 		ApiAccess.levels_fetched.connect(load_level_list)
 		refreshButton.pressed.connect(refresh_level_list)
@@ -85,21 +85,26 @@ func player_entered(player):
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		local_player_inside = true
-	if 1 == Constants.id:
+	if Constants.id == owner_id:
+		add_checkbox(player.name)
 		camera.current = true
 		create_cursor(player)
-	add_checkbox(player.name)
 
 
 func create_cursor(player):
 	var cursorprefab = load("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
 	var cursor = cursorprefab.instantiate()
-	cursor.name = str(player.playercontroller.name)
+	cursor.name = str(MultiplayerConstants.local_id_to_id[player.id])
 	cursors.add_child(cursor)
 
+func remove_checkbox(player):
+	checkboxes.remove_child(checkboxes.get_child(0))
 
-func player_left(player):
-	
+func remove_cursor(player):
+	var cursor = cursors.get_node(str(MultiplayerConstants.local_id_to_id[player.id]))
+	cursors.remove_child(cursor)
+
+func player_left(player):	
 	if 1 == Constants.id:
 		camera.current = false
 		localcursor = null
@@ -109,10 +114,12 @@ func player_left(player):
 		camera.current = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		local_player_inside = false
+	if owner_id == Constants.id:
+		remove_cursor(player)
+		remove_checkbox(player)
 
 
 func add_checkbox(local_id):
-	
 	if Constants.id != owner_id:
 		return
 	print("Adding Checkbox")
