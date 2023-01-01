@@ -68,7 +68,7 @@ var target_position = Vector3.ZERO
 func move_camera():
 	if player != null:
 		Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
-		target_position = get_camera_target_position()
+		target_position = 0.9*target_position+0.1*get_camera_target_position()
 		Camera.look_at(target_position)
 
 func get_camera_target_position():

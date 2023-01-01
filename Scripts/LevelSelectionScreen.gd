@@ -25,7 +25,7 @@ func _ready():
 	has_sent = false
 	enterArea.body_entered.connect(player_entered)
 	enterArea.body_exited.connect(player_left)
-	#multiplayer.peer_connected.connect(update_interface_player_connect)
+	multiplayer.peer_connected.connect(update_interface_player_connect)
 	multiplayer.peer_disconnected.connect(update_interface_player_disconnect)
 	#update_interface_owner()
 	#if Constants.id == 1:
@@ -33,7 +33,7 @@ func _ready():
 
 func update_interface_player_connect(id):
 	pass
-	#update_interface_owner()
+	update_interface_owner()
 	# interface has to be owned by one player because else Input.parse_action does not work.
 	
 
