@@ -19,6 +19,9 @@ var collisionmask
 
 var in_use = false
 
+signal on_item_attached(item_owner)
+signal on_item_dettached(old_item_owner)
+
 
 func _ready():
 	super._ready()
@@ -61,6 +64,7 @@ func OnAttach(new_owner):
 	gravity = 0
 	isEquipped = true
 	itemOwner = new_owner
+	on_item_attached.emit(itemOwner)
 
 func OnDettach():
 	collision_layer = collisionlayer
@@ -69,6 +73,8 @@ func OnDettach():
 	started = true
 	gravity = 25
 	isEquipped = true
+	var olditemOwner = itemOwner
 	itemOwner = null
 	in_use = false
 	rotation = Vector3.ZERO
+	on_item_dettached.emit(olditemOwner)

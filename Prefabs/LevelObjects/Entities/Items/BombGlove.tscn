@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgh1d4thdc4n1"]
+[gd_scene load_steps=6 format=3 uid="uid://dgh1d4thdc4n1"]
 
 [ext_resource type="Script" path="res://Scripts/Items/BombGlove.gd" id="1_uiijk"]
 [ext_resource type="PackedScene" uid="uid://vemxfi6slcsu" path="res://Assets/Models/LevelObjects/Entities/Items/BombGlove/bomb_glove.glb" id="2_ev3uk"]
+[ext_resource type="Script" path="res://Scripts/ItemSynchronizer.gd" id="3_hyxhx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3cla"]
 size = Vector3(0.5, 1, 0.55)
@@ -30,3 +31,4 @@ transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5r36x")
+script = ExtResource("3_hyxhx")
