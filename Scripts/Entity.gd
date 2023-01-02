@@ -13,9 +13,6 @@ var gravity := 25
 var _velocity := Vector3.ZERO
 var _snap_vector := Vector3.DOWN
 
-var _spring_arm: SpringArm3D
-var _camera_anchor: Node3D
-var _character: Node3D
 
 var started = false
 
@@ -90,7 +87,7 @@ func jump():
 	if not input_blocked and not stunned:
 		is_jumping = is_on_floor()
 
-func _process(delta):
+func _process(_delta):
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)

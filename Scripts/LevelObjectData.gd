@@ -22,9 +22,9 @@ func _ready():
 func to_cell():
 	return tileIndex
 
-static func from_cell(tileIndex,tileOrientation):
+static func from_cell(cellTileIndex,_cellTileOrientation):
 	for levelObject in Constants.LevelObjectData.values():
-		if tileIndex == levelObject.tileIndex:
+		if cellTileIndex == levelObject.tileIndex:
 			return levelObject
 	return Constants.Default_Floor
 # Called every frame. 'delta' is the elapsed time since the previous frame.

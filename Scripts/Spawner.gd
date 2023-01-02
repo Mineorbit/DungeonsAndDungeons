@@ -32,9 +32,11 @@ func set_spawn_pos():
 
 func show_text():
 	if Constants.currentMode > 1:
-		remove_child(text)
+		if text.get_parent() != null:
+			remove_child(text)
 	else:
-		add_child(text)
+		if text.get_parent() == null:
+			add_child(text)
 	
 
 func spawnEntity():
@@ -58,6 +60,3 @@ func despawnEntity():
 
 func clear_after_remove():
 	currentSpawned = null
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

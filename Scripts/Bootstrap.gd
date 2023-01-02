@@ -31,7 +31,7 @@ func start_main_menu():
 		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
 
-func _process(delta):
+func _process(_delta):
 	if not started:
 		if not OS.is_debug_build():
 			start(false)

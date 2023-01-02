@@ -7,9 +7,11 @@ extends Node3D
 @export var is_open = false:	
 	set(val):
 		if val:
-			remove_child(gateModel)
+			if gateModel.get_parent() != null:
+				remove_child(gateModel)
 		else:
-			add_child(gateModel)
+			if gateModel.get_parent() == null:
+				add_child(gateModel)
 		is_open = val
 
 # Called when the node enters the scene tree for the first time.
@@ -26,13 +28,15 @@ func deactivate():
 
 func open():
 	add_child(nav)
-	remove_child(collision)
+	if collision.get_parent() != null:
+		remove_child(collision)
 	is_open = true
 	
 
 func close():
 	remove_child(nav)
-	add_child(collision)
+	if collision.get_parent() == null:
+		add_child(collision)
 	is_open = false
 	
 

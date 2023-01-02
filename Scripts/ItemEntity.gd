@@ -40,12 +40,12 @@ func _physics_process(delta):
 	super._physics_process(delta)
 	UpdateRelativePosition()
 
-func _process(delta):
+func _process(_delta):
 	UpdateRelativePosition()
 
 @export var errorDist = 2
 
-func UpdateRelativePosition(passive = false):
+func UpdateRelativePosition(_passive = false):
 	if itemOwner != null and collision_layer == 0:
 		var new_position = itemAttachmentPoint.to_global(offset)
 		transform.basis = itemAttachmentPoint.global_transform.basis

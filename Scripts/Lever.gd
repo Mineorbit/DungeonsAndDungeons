@@ -11,17 +11,13 @@ func _ready():
 var is_active = false
 
 
-func process_entered(x):
+func process_entered(_x):
 	if get_parent().has_method("activate"):
 		if is_active:
 			get_parent().deactivate()
 		else:
 			get_parent().activate()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 
 @rpc
 func deactivate():

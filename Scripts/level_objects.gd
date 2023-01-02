@@ -17,11 +17,11 @@ func _ready():
 	var meshlibrary_id = 0
 	for levelobject in LevelObjectList.get_children():
 		var is_tiled = false
-		var name = str(levelobject.name)
-		if "Tiled" in name:
-			name = name.trim_prefix("Tiled")
+		var levelobjectname = str(levelobject.name)
+		if "Tiled" in levelobjectname:
+			levelobjectname = levelobjectname.trim_prefix("Tiled")
 			is_tiled = true
-		var path = "res://Resources/LevelObjectData/"+name+".tres"
+		var path = "res://Resources/LevelObjectData/"+levelobjectname+".tres"
 		var new_res: LevelObjectData
 		if ResourceLoader.exists(path):
 			new_res = load(path)
@@ -30,7 +30,7 @@ func _ready():
 		if new_res == null:
 			return
 		new_res.levelObjectId = unique_id
-		new_res.name = name
+		new_res.name = levelobjectname
 		new_res.tiled = is_tiled
 		Constants.LevelObjectData[unique_id] = new_res
 		unique_id = unique_id + 1

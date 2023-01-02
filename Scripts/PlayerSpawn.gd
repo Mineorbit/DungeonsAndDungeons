@@ -18,7 +18,3 @@ func on_remove():
 	if Constants.World.level != null:
 		Constants.World.level.player_spawns[local_id] = null
 		print("Removing Spawn Entry of "+str(local_id))
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

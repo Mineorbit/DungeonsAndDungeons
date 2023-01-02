@@ -27,9 +27,6 @@ func _ready():
 	enterArea.body_exited.connect(player_left)
 	multiplayer.peer_connected.connect(update_interface_player_connect)
 	multiplayer.peer_disconnected.connect(update_interface_player_disconnect)
-	#update_interface_owner()
-	#if Constants.id == 1:
-	#	get_parent().get_parent().world.players.player_spawned.connect(add_checkbox)
 
 func update_interface_player_connect(id):
 	update_interface_owner()

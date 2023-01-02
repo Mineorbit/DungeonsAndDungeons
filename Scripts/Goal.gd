@@ -19,11 +19,9 @@ func _ready():
 	enterArea.body_entered.connect(playerEntered)
 	enterArea.body_exited.connect(playerLeft)
 	
-func playerEntered(player):
+func playerEntered(_player):
 	if Constants.currentMode != 2:
 		return
-	print("Entered")
-	print("Needed: "+str(numberOfPlayersNeeded))
 	numberOfPlayersInside = numberOfPlayersInside + 1
 	if numberOfPlayersInside == numberOfPlayersNeeded:
 		print("Game won!")

@@ -64,7 +64,7 @@ func fetch_level_list():
 signal levels_fetched(list)
 
 # Called when the HTTP request is completed.
-func level_list_http_request_completed(result, response_code, headers, body):
+func level_list_http_request_completed(_result, _response_code, _headers, body):
 	var json_object = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 	level_list = json_object.data["levels"]
@@ -75,71 +75,65 @@ func level_list_http_request_completed(result, response_code, headers, body):
 
 
 # only for windows now
-func compress_level(name):
-	var path = ProjectSettings.globalize_path("user://level/"+str(name))
-	var result = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
-	await OS.execute("powershell.exe",["Compress-Archive",path,result])
+func compress_level(levelname):
+	var path = ProjectSettings.globalize_path("user://level/"+str(levelname))
+	var result = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
+	OS.execute("powershell.exe",["Compress-Archive",path,result])
 	
 # only for windows now
-func decompress_level(name):
-	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
+func decompress_level(levelname):
+	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	var result = ProjectSettings.globalize_path("user://level/")
 	print("Decompressing "+str(path))
-	await OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
+	OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 
 
 	
 
-func level_zip_file_path(name):
-	var path = ProjectSettings.globalize_path("user://level/"+str(name)+".zip")
+func level_zip_file_path(levelname):
+	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	return path
 
-func upload_level(name):
-	await compress_level(name)
+func upload_level(levelname):
+	compress_level(levelname)
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	
 	http_request.request_completed.connect(upload_http_request_completed)
 	
 	
-	var file = FileAccess.open(level_zip_file_path(name), FileAccess.READ)
+	var file = FileAccess.open(level_zip_file_path(levelname), FileAccess.READ)
 	var file_content = file.get_buffer(file.get_length())
 	
 	var tn_file_name = "icon.png"
 	var tnfile = FileAccess.open('res://%s' % tn_file_name, FileAccess.READ)
 	var thumbnail_content = tnfile.get_buffer(tnfile.get_length())
-
 	var body = PackedByteArray()
 	body.append_array("\r\n--BodyBoundaryHere\r\n".to_utf8_buffer())
-	body.append_array(("Content-Disposition: form-data; name=\"levelFiles\"; filename=\"%s\"\r\n" % name).to_utf8_buffer())
+	body.append_array(("Content-Disposition: form-data; name=\"levelFiles\"; filename=\"%s\"\r\n" % levelname).to_utf8_buffer())
 	body.append_array("Content-Type: application/zip\r\n\r\n".to_utf8_buffer())
 	body.append_array(file_content)
-	
 	body.append_array("\r\n--BodyBoundaryHere\r\n".to_utf8_buffer())
 	body.append_array(("Content-Disposition: form-data; name=\"thumbnail\"; filename=\"%s\"\r\n" % tn_file_name).to_utf8_buffer())
 	body.append_array("Content-Type: image/png\r\n\r\n".to_utf8_buffer())
 	body.append_array(thumbnail_content)
-	
 	body.append_array("\r\n--BodyBoundaryHere--\r\n".to_utf8_buffer())
-
+	
 	var headers =  [
 		"Authorization: Bearer "+str(auth_token),
 	"Content-Length: " + str(body.size()),
 	"Content-Type: multipart/form-data; boundary=\"BodyBoundaryHere\""
 	]
-
-	
 	var description = "This is a level".uri_encode()
-
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request_raw(str(url)+"level/?proto_resp=false&name="+str(name)+"&description="+str(description)+"&r=t&g=t&b=t&y=t", headers, true, HTTPClient.METHOD_POST, body)
+	var error = http_request.request_raw(str(url)+"level/?proto_resp=false&name="+str(levelname)+"&description="+str(description)+"&r=t&g=t&b=t&y=t", headers, true, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
 
 
 
-func upload_http_request_completed(result, response_code, headers, body):
+func upload_http_request_completed(_result, _response_code, _headers, body):
 	var json_object: JSON = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 
@@ -159,7 +153,7 @@ func login(username,password):
 func get_auth_header():
 	return ["Authorization: Bearer "+str(auth_token)]
 
-func login_http_request_completed(result, response_code, headers, body):
+func login_http_request_completed(_result, _response_code, _headers, body):
 	var json_object: JSON = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 	if not json_object.data.has("access_token"):
@@ -195,7 +189,7 @@ func fetch_api_data():
 
 
 # Called when the HTTP request is completed.
-func data_http_request_completed(result, response_code, headers, body):
+func data_http_request_completed(_result, _response_code, _headers, body):
 	var json_object = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
@@ -204,13 +198,12 @@ func data_http_request_completed(result, response_code, headers, body):
 
 
 # Called when the HTTP request is completed.
-func thumbnail_http_request_completed(result, response_code, headers, body):
+func thumbnail_http_request_completed(_result, _response_code, _headers, body):
 	var image = Image.new()
 	var error = image.load_png_from_buffer(body)
 	if error != OK:
 		push_error("Couldn't load the image.")
-	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	var texture = ImageTexture.create_from_image(image)
 	# Display the image in a TextureRect node.
 	var texture_rect = TextureRect.new()
 	add_child(texture_rect)
