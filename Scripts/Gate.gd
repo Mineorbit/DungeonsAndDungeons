@@ -10,7 +10,7 @@ extends Node3D
 			if gateModel.get_parent() != null:
 				remove_child(gateModel)
 		else:
-			if gateModel.get_parent() == null:
+			if gateModel != null and gateModel.get_parent() == null:
 				add_child(gateModel)
 		is_open = val
 

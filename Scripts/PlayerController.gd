@@ -11,6 +11,7 @@ func _ready():
 	setup_playercontroller_networking()
 
 func setup_playercontroller_networking():
+	# if this is not in multiplayer, do not authority
 	if Constants.id == 0:
 		return
 	synchronizer.set_multiplayer_authority(str(name).to_int())

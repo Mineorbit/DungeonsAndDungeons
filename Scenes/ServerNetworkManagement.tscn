@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqlnvixwjww0u"]
+[gd_scene load_steps=3 format=3 uid="uid://bqlnvixwjww0u"]
 
 [ext_resource type="Script" path="res://Scripts/ServerNetworkManagement.gd" id="1_1twme"]
+[ext_resource type="PackedScene" uid="uid://dgu3gfhb0pqub" path="res://Prefabs/ServerCamera.tscn" id="2_m1qs3"]
 
 [node name="ServerNetworkManagement" type="Node3D"]
 script = ExtResource("1_1twme")
@@ -11,3 +12,6 @@ script = ExtResource("1_1twme")
 offset_right = 98.0
 offset_bottom = 40.0
 text = "Server"
+
+[node name="Camera" parent="." instance=ExtResource("2_m1qs3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.921966, 2.85011)

@@ -8,3 +8,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
 script = ExtResource("2")
 
 [node name="LevelObjectList" parent="." instance=ExtResource("2_qurpf")]
+visible = false
