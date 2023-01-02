@@ -30,7 +30,7 @@ var players
 var id = 0
 
 var player_colors = [Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW]
-
+var alt_player_colors = [Color.CORAL,Color.DARK_OLIVE_GREEN,Color.DARK_RED,Color.NAVY_BLUE]
 var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 

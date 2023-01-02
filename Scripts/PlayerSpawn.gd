@@ -10,13 +10,13 @@ func _ready():
 	mesh.set_surface_override_material(0,material)
 
 func start():
-	if Constants.currentLevel != null:
-		Constants.currentLevel.player_spawns[local_id] = self
+	if Constants.World.level != null:
+		Constants.World.level.player_spawns[local_id] = self
 
 
 func on_remove():
-	if Constants.currentLevel != null:
-		Constants.currentLevel.player_spawns[local_id] = null
+	if Constants.World.level != null:
+		Constants.World.level.player_spawns[local_id] = null
 		print("Removing Spawn Entry of "+str(local_id))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

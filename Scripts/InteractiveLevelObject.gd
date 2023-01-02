@@ -53,7 +53,7 @@ func on_remove():
 	super.on_remove()
 	var removal_outgoing = []
 	var removal_ingoing = []
-	for second_object in Constants.currentLevel.get_interactive_objects():
+	for second_object in Constants.World.level.get_interactive_objects():
 		if unique_instance_id in second_object.connectedObjects:
 			removal_outgoing.append(second_object.unique_instance_id)
 			second_object.connectedObjects.erase(unique_instance_id)

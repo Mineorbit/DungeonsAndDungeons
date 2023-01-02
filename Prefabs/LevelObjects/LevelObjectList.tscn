@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpllvelpgsund"]
+[gd_scene load_steps=17 format=3 uid="uid://dpllvelpgsund"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/LevelObjectList.gd" id="1_srj5y"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brfdmgexloksh" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
 [ext_resource type="PackedScene" uid="uid://dtxtw55scu3n0" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="10_3e6xb"]
 [ext_resource type="PackedScene" uid="uid://b4y5uir6eiemq" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="11_60hu6"]
+[ext_resource type="PackedScene" uid="uid://bgom4k0xbayum" path="res://Prefabs/LevelObjects/Interactive/Torch.tscn" id="13_4apm0"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")
@@ -80,3 +81,5 @@ local_id = 2
 
 [node name="PlayerSpawnYellow" parent="." instance=ExtResource("10_3e6xb")]
 local_id = 3
+
+[node name="Torch" parent="." instance=ExtResource("13_4apm0")]

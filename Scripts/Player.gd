@@ -1,7 +1,13 @@
 extends Entity
 
 
-@export var id: int = 0
+var id: int = 0:
+	get:
+		return id
+	set(value):
+		id = value
+		setColor()
+
 var itemLeft
 var itemRight
 var playercontroller
@@ -10,6 +16,41 @@ var playercontroller
 @onready var leftHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/lefthand
 @onready var rightHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/righthand
 
+# changing colors
+func setColor():
+	var mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Body
+	var material = mesh.get_active_material(0)
+	var c = Constants.player_colors[id]
+	material.albedo_color = c.lightened(0.6)
+	material = material.duplicate()
+	mesh.set_surface_override_material(0, material)
+	
+	
+	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Body
+	material = mesh.get_active_material(1)
+	material.albedo_color = Constants.alt_player_colors[id]
+	material = material.duplicate()
+	mesh.set_surface_override_material(1, material)
+	
+	
+	
+	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Coat
+	material = mesh.get_active_material(0)
+	material.albedo_color = Constants.player_colors[id]
+	material = material.duplicate()
+	mesh.set_surface_override_material(0, material)
+	
+	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/HeadBand
+	material = mesh.get_active_material(0)
+	material.albedo_color = Constants.player_colors[id].inverted()
+	material = material.duplicate()
+	mesh.set_surface_override_material(0, material)
+	
+	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Belt
+	material = mesh.get_active_material(1)
+	material.albedo_color = Constants.player_colors[id].inverted()
+	material = material.duplicate()
+	mesh.set_surface_override_material(1, material)
 
 func UseLeft():
 	if itemLeft != null:

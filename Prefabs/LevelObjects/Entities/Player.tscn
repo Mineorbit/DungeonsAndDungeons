@@ -102,7 +102,7 @@ transitions = ["Start", "Aim", SubResource("AnimationNodeStateMachineTransition_
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rccwr"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_76q5w"]
-graph_offset = Vector2(-352.903, -4.23903)
+graph_offset = Vector2(1495.5, 314.339)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_jbq46")
 nodes/Animation/position = Vector2(1020, 420)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_6jc38")
@@ -128,7 +128,7 @@ nodes/TimeScale/position = Vector2(1300, 580)
 "nodes/TimeScale 4/node" = SubResource("AnimationNodeTimeScale_d2bqd")
 "nodes/TimeScale 4/position" = Vector2(400, 200)
 nodes/aim/node = SubResource("AnimationNodeBlend2_emott")
-nodes/aim/position = Vector2(2620, 360)
+nodes/aim/position = Vector2(2600, 340)
 nodes/aimingstatemachine/node = SubResource("AnimationNodeStateMachine_2s547")
 nodes/aimingstatemachine/position = Vector2(2380, 480)
 nodes/fall/node = SubResource("AnimationNodeBlend2_qtqc7")

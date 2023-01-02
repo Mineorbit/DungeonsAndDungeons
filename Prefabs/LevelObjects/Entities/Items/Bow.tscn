@@ -34,5 +34,6 @@ replication_config = SubResource("SceneReplicationConfig_u6sld")
 script = ExtResource("3_oo5oj")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="on_shoot_timeout"]

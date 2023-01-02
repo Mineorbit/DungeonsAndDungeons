@@ -17,7 +17,3 @@ spawn_path = NodePath("../Entities")
 [node name="ChunkStreamersSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/ChunkStreamer.tscn")
 spawn_path = NodePath("../ChunkStreamers")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.54822, 0.836334, 0, -0.836334, 0.54822, 0, 0, 0)
-shadow_enabled = true

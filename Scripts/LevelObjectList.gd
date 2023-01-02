@@ -12,11 +12,16 @@ func _ready():
 	if display:
 		Signals.selected_level_object_changed.connect(selection_changed)
 		set_positions_cyclic(0)
-	num_of_elems_on_screen = len(get_children())
+	num_of_elems_on_screen = len(get_children()) + (len(get_children())%2)
+	print("NUM OF OBJECTS "+str(num_of_elems_on_screen))
 
 
-var num_of_elems_on_screen = 12
+
+
+var num_of_elems_on_screen
 var selection = 0
+
+
 func set_positions_cyclic(sel):
 	selection = sel
 

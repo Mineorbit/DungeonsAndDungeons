@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgom4k0xbayum"]
+
+[ext_resource type="PackedScene" uid="uid://ckg6tetujiolc" path="res://Assets/Models/LevelObjects/Torch.glb" id="1_vcjdm"]
+
+[node name="Torch" type="Node3D"]
+
+[node name="TorchModel" parent="." instance=ExtResource("1_vcjdm")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.587593, 0)
+light_color = Color(0.811765, 0.827451, 0.580392, 1)
+light_energy = 2.925
+light_indirect_energy = 2.323
+light_size = 1.0
+shadow_enabled = true
