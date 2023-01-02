@@ -64,7 +64,6 @@ func get_tile_level_object_orient(pos):
 func update_navigation():
 	#mesh.mesh = navmesh
 	if change_in_chunk:
-		
 		bake_navigation_mesh()
 		print("Baking Nav Mesh of "+str(self))
 		await bake_finished

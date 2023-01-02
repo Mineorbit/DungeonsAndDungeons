@@ -19,7 +19,6 @@ var Camera
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			print("Camera now follows "+str(player))
 			Camera.current = true
 			player_to_follow_exists = true
 			player.on_entity_remove.connect(func():player_to_follow_exists = false)

@@ -28,7 +28,6 @@ func clear_all_connections():
 
 func new_connections(b,list):
 	for a in list:
-		
 		print("Adding "+str(a)+" -> " +str(b))
 		var x = constructionprefab.instantiate() 
 		add_child(x)

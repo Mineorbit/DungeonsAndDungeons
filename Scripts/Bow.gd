@@ -81,5 +81,4 @@ func Shoot():
 
 func on_shoot_timeout():
 	if itemOwner != null:
-		print("LOL")
 		itemOwner.on_entity_can_shoot.emit(true)

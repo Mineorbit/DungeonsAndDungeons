@@ -8,9 +8,7 @@ func _ready():
 	
 
 func TryStrike(body):
-	print("Test "+str(body))
 	if body.has_method("Hit"):
-		print("Strike")
 		freeze = true
 		linear_velocity = Vector3.ZERO
 		collision_mask = 0

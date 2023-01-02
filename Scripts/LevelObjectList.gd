@@ -13,7 +13,7 @@ func _ready():
 		Signals.selected_level_object_changed.connect(selection_changed)
 		set_positions_cyclic(0)
 	num_of_elems_on_screen = len(get_children()) + (len(get_children())%2)
-	print("NUM OF OBJECTS "+str(num_of_elems_on_screen))
+	#print("NUM OF OBJECTS "+str(num_of_elems_on_screen))
 
 
 

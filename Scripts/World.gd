@@ -10,7 +10,6 @@ func _ready():
 
 # Called when the node enters the scene tree for the first time.
 func start(levelpath = null,immediate = false):
-	light.show()
 	prepare_level()
 	if levelpath != null:
 		await level.load(levelpath,immediate)

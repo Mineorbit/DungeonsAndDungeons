@@ -65,7 +65,6 @@ signal levels_fetched(list)
 
 # Called when the HTTP request is completed.
 func level_list_http_request_completed(result, response_code, headers, body):
-	print(result)
 	var json_object = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 	level_list = json_object.data["levels"]
@@ -143,7 +142,6 @@ func upload_level(name):
 func upload_http_request_completed(result, response_code, headers, body):
 	var json_object: JSON = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
-	print(json_object.data)
 
 func login(username,password):
 	# Create an HTTP request node and connect its completion signal.
@@ -198,11 +196,10 @@ func fetch_api_data():
 
 # Called when the HTTP request is completed.
 func data_http_request_completed(result, response_code, headers, body):
-	print(result)
 	var json_object = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
 	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
-	print(json_object.data["message"])
+	#print(json_object.data["message"])
 
 
 

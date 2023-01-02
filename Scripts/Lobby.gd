@@ -8,8 +8,6 @@ func _ready():
 	lobbyArea.body_exited.connect(updateOwner)
 
 func updateOwner(test):
-	LevelSelectionScreen.update_interface_owner()
-
-
-func _process(delta):
 	pass
+	#LevelSelectionScreen.update_interface_owner()
+

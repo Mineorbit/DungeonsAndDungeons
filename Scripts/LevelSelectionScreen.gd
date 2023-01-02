@@ -32,7 +32,6 @@ func _ready():
 	#	get_parent().get_parent().world.players.player_spawned.connect(add_checkbox)
 
 func update_interface_player_connect(id):
-	pass
 	update_interface_owner()
 	# interface has to be owned by one player because else Input.parse_action does not work.
 	
@@ -42,21 +41,18 @@ func update_interface_player_disconnect(id):
 		if owner_id == id:
 			update_interface_owner()
 
-
+# allways inform all clients who the owner is
 func update_interface_owner():
 	# only server assigns the owner
 	if Constants.id != 1:
 		return
 	var new_owner_id = MultiplayerConstants.get_first_connected()
-	if owner_id == new_owner_id:
-		return
-	if not has_sent:
-		has_sent = true
-		owner_id = new_owner_id
-		#trigger update on other clients
-		rpc("set_interface_owner",owner_id)
-		print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
-		interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
+	print("Update interface owner on all clients")
+	owner_id = new_owner_id
+	#trigger update on other clients
+	rpc("set_interface_owner",owner_id)
+	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
+	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 
 
 #only called by server
@@ -77,7 +73,6 @@ func set_interface_owner(id):
 
 
 func player_entered(player):
-	update_interface_owner()
 	# server does not have to continue
 	if Constants.id == 1:
 		return
@@ -122,7 +117,6 @@ func player_left(player):
 func add_checkbox(local_id):
 	if Constants.id != owner_id:
 		return
-	print("Adding Checkbox")
 	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
 	var checkbox: Button = checkbox_pref.instantiate()
 	checkbox.name = str(local_id)
@@ -143,7 +137,6 @@ func check_ready():
 
 func start_round():
 	var can_start = check_ready()
-	print("Can start: "+str(can_start))
 	if can_start:
 		get_parent().get_parent().rpc_id(1,"start_round",levellist.selected_level,levellist.selected_level_name)
 

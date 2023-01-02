@@ -16,7 +16,6 @@ func _ready():
 func create_player_camera():
 	if camera != null:
 		return
-	print("Creating Camera")
 	playercamera_prefab = load("res://Prefabs/PlayerCamera.tscn")
 	# if this is a client create a PlayerCamera
 	if Constants.id != 1:

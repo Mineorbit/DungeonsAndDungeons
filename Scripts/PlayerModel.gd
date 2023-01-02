@@ -33,7 +33,6 @@ func player_shot():
 
 # this will be used once there is a shooting cool down
 func can_shoot(can_shootnow):
-	print("Can Shoot: "+str(can_shootnow))
 	if can_shootnow:
 		aimfsm.travel("Aim")
 

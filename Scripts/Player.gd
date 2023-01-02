@@ -97,7 +97,6 @@ func ChangeMovementState(aiming):
 		_velocity.z = 0
 
 func DettachAllItems():
-	print("Dettaching all Items")
 	if itemLeft != null:
 		Dettach(itemLeft)
 	if itemRight != null:

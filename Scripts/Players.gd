@@ -36,18 +36,15 @@ func set_start_position(i):
 			get_player(i).set_position(base)
 			get_player(i)._velocity = Vector3.ZERO
 			await Constants.buffer()
-			print("Spawning at "+str(base))
 			player_spawned.emit(i)
 	
 
 func despawn_players():
-	print("Despawning Players")
 	for i in range(4):
 		despawn_player(i)
 
 
 func spawn_players():
-	print("Spawning Players")
 	for i in range(4):
 		spawn_player(i)
 
