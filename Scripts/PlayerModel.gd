@@ -1,8 +1,9 @@
-extends MeshInstance3D
+extends Node3D
 
 @onready var anim_tree = $AnimationTree
 
 var aimfsm
+var verticalfsm
 var lastpos
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +13,9 @@ func _ready():
 	get_parent().on_entity_aiming.connect(player_aiming)
 	get_parent().on_entity_shoot.connect(player_shot)
 	get_parent().on_entity_can_shoot.connect(can_shoot)
+	get_parent().on_entity_jump.connect(player_jump)
 	aimfsm = anim_tree["parameters/aimingstatemachine/playback"]
+	verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
 
 var speed = 0
 var yspeed = 0
@@ -28,6 +31,10 @@ func player_aiming(is_aiming):
 		aimfsm.travel("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
 
+func player_jump():
+	print("Now jump")
+	verticalfsm.travel("Jump")
+
 func player_shot():
 	aimfsm.travel("Release")
 
@@ -42,6 +49,8 @@ func player_striking(v):
 
 func player_landed(blend):
 	landblend = min(1,-blend/35)
+	verticalfsm.travel("Stop")
+	print("Now back at Stop")
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	anim_tree["parameters/land/active"] = true
 
@@ -54,14 +63,23 @@ func _physics_process(delta):
 	speed_pos.y = 0
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
-	
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	anim_tree["parameters/speed/blend_amount"] = speed*8
-	var fallblend = min(1,max(0,-8*yspeed))
-	lastyspeed = yspeed
-	anim_tree["parameters/fall/blend_amount"] = fallblend
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	
+	if yspeed<0:
+		print("Now fall")
+		verticalfsm.travel("Fall")
+		
+	var v = 0
+	if get_parent().is_on_floor():
+		v = 0
+	else:
+		v = 1
+	anim_tree["parameters/vertical/blend_amount"] = v
+

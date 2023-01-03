@@ -56,6 +56,8 @@ signal on_entity_can_shoot(can)
 
 signal on_entity_aiming(aiming)
 
+signal on_entity_jump
+
 
 func MeleeStrike(damage):
 	meleehitarea.Strike(damage,self)
@@ -86,6 +88,8 @@ func remove():
 func jump():
 	if not input_blocked and not stunned:
 		is_jumping = is_on_floor()
+		if is_jumping:
+			on_entity_jump.emit()
 
 func _process(_delta):
 		var current_rot = Quaternion(transform.basis)

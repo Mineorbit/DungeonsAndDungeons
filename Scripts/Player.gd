@@ -13,12 +13,12 @@ var itemRight
 var playercontroller
 
 @onready var camera_offset = $CameraAnchor/CameraOffset
-@onready var leftHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/lefthand
-@onready var rightHandAttachment = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/righthand
+@onready var leftHandAttachment = $PlayerModel/root/Skeleton3D/lefthand
+@onready var rightHandAttachment = $PlayerModel/root/Skeleton3D/righthand
 
 # changing colors
 func setColor():
-	var mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Body
+	var mesh = $PlayerModel/root/Skeleton3D/Body
 	var material = mesh.get_active_material(0)
 	var c = Constants.player_colors[id]
 	material.albedo_color = c.lightened(0.6)
@@ -26,7 +26,7 @@ func setColor():
 	mesh.set_surface_override_material(0, material)
 	
 	
-	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Body
+	mesh = $PlayerModel/root/Skeleton3D/Body
 	material = mesh.get_active_material(1)
 	material.albedo_color = Constants.alt_player_colors[id]
 	material = material.duplicate()
@@ -34,19 +34,19 @@ func setColor():
 	
 	
 	
-	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Coat
+	mesh = $PlayerModel/root/Skeleton3D/Coat
 	material = mesh.get_active_material(0)
 	material.albedo_color = Constants.player_colors[id]
 	material = material.duplicate()
 	mesh.set_surface_override_material(0, material)
 	
-	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/HeadBand
+	mesh = $PlayerModel/root/Skeleton3D/HeadBand
 	material = mesh.get_active_material(0)
 	material.albedo_color = Constants.player_colors[id].inverted()
 	material = material.duplicate()
 	mesh.set_surface_override_material(0, material)
 	
-	mesh = $PlayerModel/PlayerModelAttachment/PlayerModel/root/Skeleton3D/Belt
+	mesh = $PlayerModel/root/Skeleton3D/Belt
 	material = mesh.get_active_material(1)
 	material.albedo_color = Constants.player_colors[id].inverted()
 	material = material.duplicate()
