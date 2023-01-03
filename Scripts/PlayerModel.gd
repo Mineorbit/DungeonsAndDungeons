@@ -31,9 +31,6 @@ func player_aiming(is_aiming):
 		aimfsm.travel("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
 
-func player_jump():
-	print("Now jump")
-	verticalfsm.travel("Jump")
 
 func player_shot():
 	aimfsm.travel("Release")
@@ -47,10 +44,14 @@ func can_shoot(can_shootnow):
 func player_striking(v):
 	anim_tree["parameters/strike/active"] = true
 
+
+func player_jump():
+	verticalfsm.travel("Jump")
+
+
 func player_landed(blend):
 	landblend = min(1,-blend/35)
-	verticalfsm.travel("Stop")
-	print("Now back at Stop")
+	verticalfsm.travel("Start")
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	anim_tree["parameters/land/active"] = true
 
@@ -64,7 +65,7 @@ func _physics_process(delta):
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
 
-
+var i = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	anim_tree["parameters/speed/blend_amount"] = speed*8
@@ -72,8 +73,9 @@ func _process(delta):
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	
-	if yspeed<0 and lastyspeed >= 0:
-		print("Now fall")
+	# travel darf nur einmal aufgerufen werden, transitions werden quasi gebuffered
+	if yspeed<0:
+	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
 		verticalfsm.travel("Fall")
 	lastyspeed = yspeed
 	var v = 0
@@ -81,5 +83,6 @@ func _process(delta):
 		v = 0
 	else:
 		v = 1
+	i = i + 1
 	anim_tree["parameters/vertical/blend_amount"] = v
 
