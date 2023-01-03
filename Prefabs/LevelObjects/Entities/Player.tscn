@@ -16,24 +16,9 @@ properties/0/sync = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
-properties/2/path = NodePath("PlayerModel/AnimationTree:parameters/speed/blend_amount")
+properties/2/path = NodePath(".:id")
 properties/2/spawn = true
 properties/2/sync = true
-properties/3/path = NodePath("PlayerModel/AnimationTree:parameters/fall/blend_amount")
-properties/3/spawn = true
-properties/3/sync = true
-properties/4/path = NodePath("PlayerModel/AnimationTree:parameters/land/active")
-properties/4/spawn = true
-properties/4/sync = true
-properties/5/path = NodePath("PlayerModel/AnimationTree:parameters/landidle/blend_amount")
-properties/5/spawn = true
-properties/5/sync = true
-properties/6/path = NodePath(".:id")
-properties/6/spawn = true
-properties/6/sync = true
-properties/7/path = NodePath("PlayerModel/AnimationTree:parameters/strike/active")
-properties/7/spawn = true
-properties/7/sync = true
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 18
