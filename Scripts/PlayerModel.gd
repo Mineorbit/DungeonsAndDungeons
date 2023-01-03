@@ -72,10 +72,10 @@ func _process(delta):
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	
-	if yspeed<0:
+	if yspeed<0 and lastyspeed >= 0:
 		print("Now fall")
 		verticalfsm.travel("Fall")
-		
+	lastyspeed = yspeed
 	var v = 0
 	if get_parent().is_on_floor():
 		v = 0
