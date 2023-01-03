@@ -64,15 +64,12 @@ func _physics_process(delta):
 	speed_pos.y = 0
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
-
-var i = 0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+	
+	
 	anim_tree["parameters/speed/blend_amount"] = speed*8
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
-	
 	# travel darf nur einmal aufgerufen werden, transitions werden quasi gebuffered
 	if yspeed<0:
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
@@ -83,6 +80,8 @@ func _process(delta):
 		v = 0
 	else:
 		v = 1
-	i = i + 1
 	anim_tree["parameters/vertical/blend_amount"] = v
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass

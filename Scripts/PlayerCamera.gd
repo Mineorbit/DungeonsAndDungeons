@@ -65,10 +65,9 @@ func move_camera_rig(vec: Vector2) -> void:
 var target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
-	if player != null:
-		Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
-		target_position = 0.9*target_position+0.1*get_camera_target_position()
-		Camera.look_at(target_position)
+	Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
+	target_position = 0.9*target_position+0.1*get_camera_target_position()
+	Camera.look_at(target_position)
 
 func get_camera_target_position():
 	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
