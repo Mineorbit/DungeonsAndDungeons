@@ -25,8 +25,9 @@ func player_created(player):
 	# temporary
 	player.playercontroller = null
 	
-	player.set_physics_process(false)
 	var playermodel = player.get_node("PlayerModel")
+	playermodel.animate_local = false
+	player.set_physics_process(false)
 	#somehow this does not cancel the function
 	playermodel.set_physics_process(false)
 	playermodel.set_process(false)

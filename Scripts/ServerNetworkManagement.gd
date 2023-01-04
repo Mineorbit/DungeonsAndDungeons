@@ -34,7 +34,8 @@ func player_connected(id):
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
-	get_parent().add_player_controller(i,id)
+	var newplayercontroller = get_parent().add_player_controller(i,id)
+	newplayercontroller.is_active = false
 	var campos = load("res://Prefabs/PlayerCameraPosition.tscn").instantiate()
 	campos.name = str(id)
 	get_parent().add_child(campos)

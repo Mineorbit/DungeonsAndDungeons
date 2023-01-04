@@ -2,8 +2,8 @@ extends Node3D
 
 @onready var anim_tree = $AnimationTree
 
-var aimfsm
-var verticalfsm
+var aimfsm: AnimationNodeStateMachinePlayback
+var verticalfsm: AnimationNodeStateMachinePlayback
 var lastpos
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,19 +26,19 @@ func player_aiming(is_aiming):
 	var v = 0
 	if is_aiming:
 		v = 1
-		aimfsm.travel("Aim")
+		update_aim_state_machine("Aim")
 	else:
-		aimfsm.travel("Stop")
+		update_aim_state_machine("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
 
 
 func player_shot():
-	aimfsm.travel("Release")
+	update_aim_state_machine("Release")
 
 # this will be used once there is a shooting cool down
 func can_shoot(can_shootnow):
 	if can_shootnow:
-		aimfsm.travel("Aim")
+		update_aim_state_machine("Aim")
 
 
 func player_striking(v):
@@ -46,17 +46,56 @@ func player_striking(v):
 
 
 func player_jump():
-	verticalfsm.travel("Jump")
+	update_vertical_state_machine("Jump")
 
+var animate_local = true
 
 func player_landed(blend):
 	landblend = min(1,-blend/35)
-	verticalfsm.travel("Start")
+	update_vertical_state_machine("Fall")
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	anim_tree["parameters/land/active"] = true
 
 
+
+
+
+
+var aimtargetstate = ""
+var verticaltargetstate = ""
+
+func update_aim_state_machine(state):
+	print("Want to go to "+str(state))
+	if aimtargetstate != state:
+		aimfsm.travel(state)
+		aimtargetstate = state
+		rpc("update_aim_state_machine_remote",state)
+
+
+func update_vertical_state_machine(state):
+	#print(str(verticalfsm.get_current_node())+"->"+str(state))
+	if verticaltargetstate != state:
+		verticalfsm.travel(state)
+		#print("Result: "+str(verticalfsm.get_current_node()))
+		verticaltargetstate = state
+		rpc("update_vertical_state_machine_remote",state)
+
+
+@rpc
+func update_aim_state_machine_remote(state):
+	aimfsm.travel(state)
+
+@rpc
+func update_vertical_state_machine_remote(state):
+	verticalfsm.travel(state)
+
+
+
+
+
 func _physics_process(delta):
+	if not animate_local:
+		return
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
 	yspeed = speed_pos.y - last_speed_pos.y
@@ -73,7 +112,7 @@ func _physics_process(delta):
 	# travel darf nur einmal aufgerufen werden, transitions werden quasi gebuffered
 	if yspeed<0:
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
-		verticalfsm.travel("Fall")
+		update_vertical_state_machine("Fall")
 	lastyspeed = yspeed
 	var v = 0
 	if get_parent().is_on_floor():
@@ -81,7 +120,3 @@ func _physics_process(delta):
 	else:
 		v = 1
 	anim_tree["parameters/vertical/blend_amount"] = v
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

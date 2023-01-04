@@ -63,10 +63,12 @@ func spawn_player_controllers():
 
 func spawn_player_controller(i,owner_id = 0):
 	var p = get_player(i)
-	playerControllers.add(p,i,owner_id)	
-	p.playercontroller = playerControllers.of(i)
+	playerControllers.add(p,i,owner_id)
+	var newplayercontroller = playerControllers.of(i)
+	p.playercontroller = newplayercontroller
 	p.playercontroller.player = p
-	return p.playercontroller
+	print("Spawned playercontroller "+str(newplayercontroller))
+	return newplayercontroller
 
 
 func spawn_player(i):
