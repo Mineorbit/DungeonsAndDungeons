@@ -1,7 +1,16 @@
 extends Node
 
 
-var local_id = -1
+signal on_local_id_set(id)
+
+var local_id = -1:
+	get:
+		return local_id
+	set(value):
+		local_id = value
+		on_local_id_set.emit(local_id)
+
+
 @export var local_id_to_id = [null,null,null,null]
 
 var player_cameras = [null,null,null,null]

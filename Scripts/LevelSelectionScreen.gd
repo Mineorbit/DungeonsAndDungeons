@@ -73,13 +73,14 @@ func player_entered(player):
 	# server does not have to continue
 	if Constants.id == 1:
 		return
-	if Constants.World.players.playerControllers.camera.player == player:
+	#print(str(Constants.id)+" Local Player:"+str(Constants.World.players.get_player(MultiplayerConstants.local_id)))
+	#print(str(Constants.id)+" Entered Player: "+str(player))
+	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		local_player_inside = true
 	if Constants.id == owner_id:
 		add_checkbox(player.name)
-		camera.current = true
 		create_cursor(player)
 
 

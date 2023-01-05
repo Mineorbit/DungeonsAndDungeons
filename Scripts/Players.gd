@@ -103,4 +103,5 @@ func get_player(i):
 	for child in playerEntities.get_children():
 		if child.name == str(i):
 			return child
+	print("Player not found: "+str(i))
 	return null

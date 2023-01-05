@@ -32,7 +32,6 @@ func player_connected(id):
 		i = i + 1
 	MultiplayerConstants.local_id_to_id[i] = id
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
-	print("New CONNECTION: "+str(id)+ " LOCAL ID: "+str(i))
 	get_parent().add_player(i)
 	var newplayercontroller = get_parent().add_player_controller(i,id)
 	newplayercontroller.is_active = false

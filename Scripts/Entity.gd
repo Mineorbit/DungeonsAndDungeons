@@ -92,9 +92,9 @@ func jump():
 			on_entity_jump.emit()
 
 func _process(_delta):
-		var current_rot = Quaternion(transform.basis)
-		var smoothrot = current_rot.slerp(target_rot, turnAngle)
-		transform.basis = Basis(smoothrot)
+	var current_rot = Quaternion(transform.basis)
+	var smoothrot = current_rot.slerp(target_rot, turnAngle)
+	transform.basis = Basis(smoothrot)
 
 
 

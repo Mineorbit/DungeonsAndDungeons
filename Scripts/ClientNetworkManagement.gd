@@ -10,14 +10,20 @@ func _ready():
 	peer.create_client(Constants.remoteAddress,13565)
 	multiplayer.peer_connected.connect(connected)
 	multiplayer.set_multiplayer_peer(peer)
+	Constants.World.players.player_added.connect(player_created)
+	MultiplayerConstants.on_local_id_set.connect(func(id):id_set = true)
 	#start an empty world
 	#get_parent().world.start()
+
+var id_set = false
+var player_exists = false
+
 
 func connected(id):
 	Constants.set_mode(3)
 	print("Connected with "+str(peer.get_unique_id()))
 	Constants.id = peer.get_unique_id()
-	Constants.World.players.player_added.connect(player_created)
+
 
 
 func player_created(player):
@@ -38,11 +44,15 @@ func player_created(player):
 			playermodel.set_physics_process(false)
 			playermodel.set_process(false)
 	)
-	if MultiplayerConstants.local_id != -1 and player == Constants.World.players.get_player(MultiplayerConstants.local_id):
-		Constants.World.players.playerControllers.camera.player = player
+	player_exists = true
+	print(str(Constants.id)+" "+str(MultiplayerConstants.local_id))
+	print(str(player_exists)+" "+str(id_set))
+	set_camera()
 
-
+func set_camera():
+	if id_set and player_exists:
+		print(str(Constants.id)+" ID: "+str(MultiplayerConstants.local_id))
+		Constants.World.players.playerControllers.camera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
 
 func _process(delta):
-	#this is terrible and needs to be adjusted
 	pass

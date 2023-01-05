@@ -9,7 +9,6 @@ func _ready():
 var ownerid = 0
 
 func new_list_element(element):
-	print("Changing Element "+str(element))
 	element.get_node("MultiplayerSynchronizer").set_multiplayer_authority(ownerid)
 
 func set_auth(id:int):
