@@ -26,11 +26,18 @@ func player_created(player):
 	player.playercontroller = null
 	
 	var playermodel = player.get_node("PlayerModel")
-	playermodel.animate_local = false
-	player.set_physics_process(false)
-	#somehow this does not cancel the function
-	playermodel.set_physics_process(false)
-	playermodel.set_process(false)
+	
+	# need to cancel on ready
+	player.ready.connect(
+		func():
+			player.set_physics_process(false)
+			player.set_process(false)
+	)
+	playermodel.ready.connect(
+		func():
+			playermodel.set_physics_process(false)
+			playermodel.set_process(false)
+	)
 	if MultiplayerConstants.local_id != -1 and player == Constants.World.players.get_player(MultiplayerConstants.local_id):
 		Constants.World.players.playerControllers.camera.player = player
 

@@ -28,7 +28,7 @@ func Throw():
 	if not in_use:
 		return
 	var bomb: RigidBody3D = bombprefab.instantiate()
-	Constants.currentLevel.Entities.add_child(bomb)
+	Constants.World.level.Entities.add_child(bomb)
 	bomb.global_transform.origin = global_transform.origin + 1*transform.basis.z
 	var strength = 10
 	#arrow.gravity_scale = 0

@@ -92,10 +92,7 @@ func update_vertical_state_machine_remote(state):
 
 
 
-
 func _physics_process(delta):
-	if not animate_local:
-		return
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
 	yspeed = speed_pos.y - last_speed_pos.y
