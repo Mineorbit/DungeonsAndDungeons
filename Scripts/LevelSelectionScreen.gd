@@ -56,7 +56,9 @@ func update_interface_owner():
 
 @rpc(any_peer)
 func set_interface_owner(id):
-	print("["+str(Constants.id)+"] Received Interface Owner to "+str(id))
+	if owner_id == id:
+		return
+	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(id))
 	owner_id = id
 	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 	interface.get_node("CursorSpawner").set_multiplayer_authority(id)
@@ -103,7 +105,7 @@ func player_left(player):
 		localcursor = null
 		local_player_inside = false
 		player_cursors[player.name] = null
-	elif Constants.World.players.playerControllers.camera.player == player:
+	elif Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
 		camera.current = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		local_player_inside = false

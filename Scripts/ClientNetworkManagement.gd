@@ -45,14 +45,16 @@ func player_created(player):
 			playermodel.set_process(false)
 	)
 	player_exists = true
-	print(str(Constants.id)+" "+str(MultiplayerConstants.local_id))
-	print(str(player_exists)+" "+str(id_set))
 	set_camera()
+
+var camera_for_local_player_set = false
 
 func set_camera():
 	if id_set and player_exists:
-		print(str(Constants.id)+" ID: "+str(MultiplayerConstants.local_id))
-		Constants.World.players.playerControllers.camera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
+		if not camera_for_local_player_set:
+			camera_for_local_player_set = true
+			print(str(Constants.id)+" ID: "+str(MultiplayerConstants.local_id))
+			Constants.World.players.playerControllers.camera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
 
 func _process(delta):
 	pass
