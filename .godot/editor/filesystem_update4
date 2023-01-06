@@ -1,4 +1,4 @@
-res://Prefabs/MainMenu/Main.tscn
+res://Prefabs/PlayerHUD.tscn
 res://Assets/Materials/Entities/Player/Eye.tres
 res://Prefabs/Models/Entities/PlayerModel.tscn
 res://Prefabs/LevelObjects/Entities/Player.tscn
@@ -6,5 +6,8 @@ res://Prefabs/PlayerController.tscn
 res://Tests/node_3d.tscn
 res://Scenes/menu.tscn
 res://Scenes/Main.tscn
-res://Scripts/LevelSelectionScreen.gd
-res://Scripts/ClientNetworkManagement.gd
+res://Prefabs/MainMenu/Main.tscn
+res://Scripts/Player.gd
+res://Scripts/PlayerHUD.gd
+res://Scripts/Entity.gd
+res://Scripts/Constants.gd

@@ -2,12 +2,10 @@ extends Node2D
 
 
 @onready var playerhealthbar = $CanvasLayer/PlayerUI/Layout/MarginContainer/CanvasLayer/HealthBar
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	Signals.playerHealthChanged.connect(updateHealth)
+	Constants.player_hud = self
 
-
-func updateHealth(playerid,health):
+func updateHealth(health,playerid):
 	if(playerid == Constants.currentPlayer):
 		playerhealthbar.value = health
-	

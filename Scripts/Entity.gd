@@ -1,7 +1,11 @@
 extends CharacterBody3D
 class_name Entity
 
-var health := 100
+var health: int = 100:
+	set(value):
+		health = value
+		on_entity_health_changed.emit(health)
+
 var max_health := 100
 
 var speed := 5
@@ -15,6 +19,7 @@ var _snap_vector := Vector3.DOWN
 
 
 var started = false
+
 
 
 
@@ -57,6 +62,8 @@ signal on_entity_can_shoot(can)
 signal on_entity_aiming(aiming)
 
 signal on_entity_jump
+
+signal on_entity_health_changed(health)
 
 
 func MeleeStrike(damage):

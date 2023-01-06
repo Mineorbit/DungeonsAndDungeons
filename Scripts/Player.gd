@@ -1,4 +1,8 @@
 extends Entity
+class_name Player
+#need to copy health value to variable here so it can be synchronized
+@export var health_ui: int
+
 
 
 var id: int = 0:
@@ -83,6 +87,11 @@ func _ready():
 	on_entity_remove.connect(DettachAllItems)
 	on_entity_aiming.connect(ChangeMovementState)
 	on_entity_landed.connect(LandedOnGround)
+	on_entity_health_changed.connect(
+		func(health):
+			if Constants.player_hud != null:
+				Constants.player_hud.updateHealth(health,self.id)
+	)
 
 func LandedOnGround(v):
 	if input_blocked:
@@ -116,6 +125,7 @@ func _process(delta):
 		super._process(delta)
 		
 func _physics_process(delta):
+	health_ui = health
 	if playercontroller != null:
 		move_direction.x = playercontroller.input_direction.x
 		move_direction.z = playercontroller.input_direction.z

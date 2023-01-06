@@ -43,6 +43,11 @@ _global_script_classes=[{
 "class": &"LevelObjectData",
 "language": &"GDScript",
 "path": "res://Scripts/LevelObjectData.gd"
+}, {
+"base": "Entity",
+"class": &"Player",
+"language": &"GDScript",
+"path": "res://Scripts/Player.gd"
 }]
 _global_script_class_icons={
 "ElementType": "",
@@ -51,7 +56,8 @@ _global_script_class_icons={
 "InteractiveLevelObject": "",
 "ItemEntity": "",
 "LevelObject": "",
-"LevelObjectData": ""
+"LevelObjectData": "",
+"Player": ""
 }
 
 [application]

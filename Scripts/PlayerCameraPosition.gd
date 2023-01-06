@@ -10,5 +10,6 @@ func _ready():
 func _process(delta):
 	if Constants.id != 1:
 		#need to get location data of actual camera not just PlayerCamera Node
-		global_transform.origin = Constants.World.players.playerControllers.camera.Camera.global_transform.origin
-		global_rotation = Constants.World.players.playerControllers.camera.Camera.global_rotation
+		if Constants.World.players.playerControllers.camera != null:
+			global_transform.origin = Constants.World.players.playerControllers.camera.Camera.global_transform.origin
+			global_rotation = Constants.World.players.playerControllers.camera.Camera.global_rotation
