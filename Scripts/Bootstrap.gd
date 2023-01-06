@@ -28,7 +28,6 @@ func start(should_be_server):
 
 func start_main_menu():
 		remove_child(current_scene)
-		Constants.set_mode(0)
 		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
 

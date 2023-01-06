@@ -7,7 +7,6 @@ extends Node3D
 signal player_added(player)
 signal player_spawned(local_id)
 
-var number_of_players = 0
 var playerpref
 
 
@@ -84,7 +83,6 @@ func spawn_player(i):
 		await Constants.buffer()
 		player._velocity = Vector3.ZERO
 		player_spawned.emit(i)
-		number_of_players = number_of_players + 1
 		player.start()
 
 
@@ -95,9 +93,11 @@ func despawn_player(i):
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
 	player.on_entity_despawn.emit()
 	await Constants.buffer()
-	number_of_players = number_of_players - 1
 	playerEntities.remove_child(player)
 
+
+func number_of_players():
+	return playerEntities.get_child_count()
 
 func get_player(i):
 	for child in playerEntities.get_children():

@@ -30,8 +30,7 @@ func _ready():
 	builder.global_transform.origin = Vector3(0,5,0)
 	world.create_new_level()
 	enter_edit_mode()
-	Signals.game_won.connect(Players.despawn_players)
-	Signals.game_won.connect(enter_edit_mode)
+	world.game_won.connect(enter_edit_mode)
 
 
 

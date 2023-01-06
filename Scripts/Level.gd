@@ -14,6 +14,11 @@ var interactiveLevelObjectPrefab
 
 var player_spawns = [null,null,null,null]
 
+var player_goal = null
+
+var numberOfPlacedLevelObjects = {}
+
+
 var changedChunks = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -167,7 +172,6 @@ func clear_entities():
 			entity.remove()
 
 
-var numberOfPlacedLevelObjects = {}
 
 func clear():
 	clear_entities()

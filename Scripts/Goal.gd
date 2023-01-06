@@ -10,6 +10,8 @@ extends Node3D
 var numberOfPlayersInside = 0
 @onready var enterArea: Area3D = $Area
 
+
+
 func reset():
 	print("Resetting Goal")
 	numberOfPlayersInside = 0
@@ -18,9 +20,11 @@ func reset():
 var can_enter = true
 
 func number_of_players_needed():
-	return Constants.World.players.number_of_players
+	return Constants.World.players.number_of_players()
 
 func _ready():
+	if Constants.World != null:
+		Constants.World.level.player_goal = self
 	enterArea.body_entered.connect(playerEntered)
 	enterArea.body_exited.connect(playerLeft)
 	
@@ -32,7 +36,7 @@ func playerEntered(_player):
 	if numberOfPlayersInside == number_of_players_needed():
 		can_enter = false
 		print("Game won!")
-		Signals.game_won.emit()
+		Constants.World.game_won.emit()
 
 func playerLeft(player):
 	if not can_enter:

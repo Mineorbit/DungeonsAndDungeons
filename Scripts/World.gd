@@ -4,6 +4,7 @@ extends Node3D
 @onready var light = $DirectionalLight
 var level
 
+signal game_won
 
 func _ready():
 	Constants.World = self
