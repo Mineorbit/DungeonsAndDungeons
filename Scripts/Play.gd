@@ -8,7 +8,7 @@ var selected_level_name
 @onready var chunk_streamer_prefab = load("res://Prefabs/ChunkStreamer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Signals.game_won.connect(start_lobby)
+	Constants.World.game_won.connect(start_lobby)
 	ApiAccess.level_download_finished.connect(complete_start_round)
 		# only if is on server change this in local mode
 	# start_lobby()
