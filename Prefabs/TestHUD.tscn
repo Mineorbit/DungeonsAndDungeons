@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b0x3m67k24i0m"]
+
+[node name="TestHUD" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Button" type="Button" parent="CanvasLayer/Control2"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "EDIT (E)"

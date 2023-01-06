@@ -112,8 +112,14 @@ func start():
 		if entity.has_method("start"):
 			entity.start()
 
+var interactiveLevelObjects = {}
+
 func get_interactive_objects():
-	return Constants.interactiveLevelObjects.values()
+	return interactiveLevelObjects.values()
+
+
+func get_interactive_object(unique_id):
+	return null
 
 
 func delete_level(level_name):
@@ -169,7 +175,7 @@ func clear():
 		for child in chunks[chunk].get_children():
 			child.queue_free()
 		chunks[chunk].queue_free()
-	Constants.interactiveLevelObjects.clear()
+	interactiveLevelObjects.clear()
 	for key in numberOfPlacedLevelObjects.keys():
 		numberOfPlacedLevelObjects[key] = 0
 	chunks.clear()

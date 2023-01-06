@@ -27,7 +27,7 @@ func to_instance(instance):
 
 func attachSignals():
 	for object in connectedObjects:
-		Constants.interactiveLevelObjects[object].activationSignal.connect(process)
+		Constants.World.level.interactiveLevelObjects[object].activationSignal.connect(process)
 
 func clearSignals():
 	var connections = activationSignal.get_connections().duplicate()
@@ -61,10 +61,10 @@ func on_remove():
 	for i in removal_ingoing:
 		Signals.connection_removed.emit(i,[unique_instance_id])	
 	Signals.connection_removed.emit(unique_instance_id,removal_outgoing)
-	Constants.interactiveLevelObjects.erase(unique_instance_id)
+	Constants.World.level.interactiveLevelObjects.erase(unique_instance_id)
 
 func sign_up():
-	Constants.interactiveLevelObjects[unique_instance_id] = self
+	Constants.World.level.interactiveLevelObjects[unique_instance_id] = self
 
 #this should be extracted into another prefab
 func preparing_Collision():

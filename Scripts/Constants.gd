@@ -18,7 +18,6 @@ var currentPlayer = 0
 
 var LevelObjectData = {}
 
-var interactiveLevelObjects = {}
 
 var levelObjects_initialized = false
 

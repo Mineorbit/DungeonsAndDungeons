@@ -6,32 +6,38 @@ extends Node3D
 # var b = "text"
 
 
-var numberOfPlayersNeeded = 1
 
 var numberOfPlayersInside = 0
 @onready var enterArea: Area3D = $Area
 
 func reset():
+	print("Resetting Goal")
 	numberOfPlayersInside = 0
-	numberOfPlayersNeeded = Constants.players.number_of_players
-	
+	can_enter = true
+
+var can_enter = true
+
+func number_of_players_needed():
+	return Constants.World.players.number_of_players
+
 func _ready():
 	enterArea.body_entered.connect(playerEntered)
 	enterArea.body_exited.connect(playerLeft)
 	
 func playerEntered(_player):
-	if Constants.currentMode != 2:
+	if not can_enter:
 		return
 	numberOfPlayersInside = numberOfPlayersInside + 1
-	if numberOfPlayersInside == numberOfPlayersNeeded:
+	print(str(numberOfPlayersInside)+"/"+str(number_of_players_needed()))
+	if numberOfPlayersInside == number_of_players_needed():
+		can_enter = false
 		print("Game won!")
 		Signals.game_won.emit()
 
 func playerLeft(player):
-	if Constants.currentMode == 2:
+	if not can_enter:
 		return
-	if player.name == "Player":
-		numberOfPlayersInside = max(0,numberOfPlayersInside - 1)
+	numberOfPlayersInside = max(0,numberOfPlayersInside - 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

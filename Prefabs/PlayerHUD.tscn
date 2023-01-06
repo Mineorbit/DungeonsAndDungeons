@@ -9,23 +9,6 @@ script = ExtResource("1_0mkx8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control2" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="CanvasLayer/Control2"]
-anchors_preset = -1
-anchor_left = 0.925
-anchor_right = 1.0
-anchor_bottom = 0.05
-offset_bottom = -0.104
-text = "EDIT (E)"
-
 [node name="PlayerUI" type="VBoxContainer" parent="CanvasLayer"]
 offset_right = 512.0
 offset_bottom = 128.0

@@ -51,6 +51,10 @@ func remove_chunk_streamers():
 	for streamer in Constants.World.level.ChunkStreamers.get_children():
 		streamer.queue_free()
 
+func spawn_player_hud():
+	var playerhudpref = load("res://Prefabs/PlayerHUD.tscn")
+	add_child(playerhudpref.instantiate())
+
 func add_chunk_streamer_for_player(i):
 	var servernetworking = $ServerNetworkManagement
 	if MultiplayerConstants.local_id_to_id[i] == null:

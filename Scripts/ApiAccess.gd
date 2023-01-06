@@ -72,8 +72,6 @@ func level_list_http_request_completed(_result, _response_code, _headers, body):
 	levels_fetched.emit(level_list)
 
 
-
-
 # only for windows now
 func compress_level(levelname):
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname))

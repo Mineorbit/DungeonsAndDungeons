@@ -18,7 +18,6 @@ func reset_connections():
 	print("Resetting Connections")
 	clear_all_connections()
 	for interactiveobject in Constants.World.level.get_interactive_objects():
-		print(interactiveobject.contained_level_object)
 		new_connections(interactiveobject.unique_instance_id,interactiveobject.connectedObjects)
 
 func clear_all_connections():
@@ -30,18 +29,23 @@ func new_connections(b,list):
 	for a in list:
 		print("Adding "+str(a)+" -> " +str(b))
 		var x = constructionprefab.instantiate() 
+		x.ready.connect(func():
+			visualize_connection(x,a,b))
 		add_child(x)
-		if (not Constants.interactiveLevelObjects.has(a)) or (not Constants.interactiveLevelObjects.has(b)):
-			continue
-		var obja = Constants.interactiveLevelObjects[a]
-		var objb = Constants.interactiveLevelObjects[b]
 		
+		
+
+
+func visualize_connection(x,a,b):
+		if (not Constants.World.level.interactiveLevelObjects.has(a)) or (not Constants.World.level.interactiveLevelObjects.has(b)):
+			return
+		var obja = Constants.World.level.interactiveLevelObjects[a]
+		var objb = Constants.World.level.interactiveLevelObjects[b]
 		x.point_a.global_transform.origin = obja.global_transform.origin + Vector3(0.5,0.5,0.5)
 		x.point_b.global_transform.origin = objb.global_transform.origin + Vector3(0.5,0.5,0.5)
 		if not connections.has(a):
 			connections[a] = {}
 		(connections[a])[b] = x
-
 
 func remove_connections(a,list):
 	print("Removing: "+str(a)+" -> "+str(list))
