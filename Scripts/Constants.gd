@@ -13,6 +13,7 @@ var World
 
 @export var deathplane = -8
 
+#local id of the player currently controlled
 var currentPlayer = 0
 
 var LevelObjectData = {}

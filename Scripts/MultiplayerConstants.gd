@@ -8,6 +8,7 @@ var local_id = -1:
 		return local_id
 	set(value):
 		local_id = value
+		Constants.currentPlayer = local_id
 		on_local_id_set.emit(local_id)
 
 
