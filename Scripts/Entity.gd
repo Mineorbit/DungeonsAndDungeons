@@ -119,7 +119,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			_velocity.x = 0
 			_velocity.z = 0
-	
 	if (not last_floor)  and is_on_floor():
 		on_entity_landed.emit(_velocity.y)
 	last_floor = is_on_floor()
