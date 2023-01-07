@@ -2,6 +2,7 @@ extends Node3D
 
 var peer
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	peer = ENetMultiplayerPeer.new()
@@ -17,10 +18,11 @@ func _ready():
 	#get_parent().world.start()
 	print("Connected signal to "+str(Constants.World))
 	Constants.World.on_entity_spawned.connect(disable_local_computations)
-	Signals.on_new_world_created.connect(func():
+	
+	Constants.entity_control_function = func():
 		print("Connected signal to "+str(Constants.World))
 		Constants.World.on_entity_spawned.connect(disable_local_computations)
-	)
+	Signals.on_new_world_created.connect(Constants.entity_control_function)
 
 
 func disable_local_computations(entity):

@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cmysv6f00b833"
+uid="uid://bntaynrrk35ds"
 path="res://.godot/imported/Tavern_base.blend-c5c9640fb1d7ec67df3c9125d3bb8fab.scn"
 
 [deps]
@@ -27,7 +27,14 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"Water.002": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Water.tres"
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/punctual_lights=true
 blender/nodes/cameras=true

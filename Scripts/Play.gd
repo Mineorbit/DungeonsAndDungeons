@@ -31,7 +31,8 @@ func start_lobby():
 #this is called once the level was downloaded
 func complete_start_round():
 	get_tree().paused = true
-	Constants.World.start(selected_level_name,true)
+	# start world with level from downloads
+	Constants.World.start(selected_level_name,true,true)
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	remove_child(lobby)

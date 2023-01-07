@@ -17,6 +17,10 @@ var World:
 
 @export var deathplane = -8
 
+
+# this function is stored by a client to disable the processing of all entities processes
+var entity_control_function
+
 #local id of the player currently controlled
 var currentPlayer = 0
 

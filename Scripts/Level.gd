@@ -137,10 +137,10 @@ func spawn_entity(entity):
 
 
 func delete_level(level_name):
-	var level_folder = DirAccess.open("user://level/")
+	var level_folder = DirAccess.open("user://level/localLevels")
 	if not level_folder.dir_exists(level_name):
 		return
-	var chunkpath = "user://level/"+level_name+"/chunks/"
+	var chunkpath = "user://level/localLevels/"+level_name+"/chunks/"
 	var chunkdirectory = DirAccess.open(chunkpath)
 	if true:
 		chunkdirectory.list_dir_begin()
@@ -152,7 +152,7 @@ func delete_level(level_name):
 				chunkdirectory.remove(file_name)
 			file_name = chunkdirectory.get_next()
 	
-	chunkdirectory.remove("user://level/"+level_name+"/chunks/")
+	chunkdirectory.remove("user://level/localLevels/"+level_name+"/chunks/")
 	
 
 func save():
@@ -160,14 +160,14 @@ func save():
 	delete_level(level_name)
 	var dir = DirAccess.new()
 	
-	DirAccess.make_dir_absolute("user://level")
-	DirAccess.make_dir_absolute("user://level/"+level_name)
-	DirAccess.make_dir_absolute("user://level/"+level_name+"/chunks")
-	var save_game = FileAccess.open("user://level/"+level_name+"/index.json", FileAccess.WRITE)
+	DirAccess.make_dir_absolute("user://level/localLevels")
+	DirAccess.make_dir_absolute("user://level/localLevels/"+level_name)
+	DirAccess.make_dir_absolute("user://level/localLevels/"+level_name+"/chunks")
+	var save_game = FileAccess.open("user://level/localLevels/"+level_name+"/index.json", FileAccess.WRITE)
 	save_game.store_line(level_name)
 	for c in chunks.keys():
 		var chunk = chunks[c]
-		var chunk_file = FileAccess.open("user://level/"+level_name+"/chunks/"+str(c), FileAccess.WRITE)
+		var chunk_file = FileAccess.open("user://level/localLevels/"+level_name+"/chunks/"+str(c), FileAccess.WRITE)
 		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
 			chunk_file.store_line(object.serialize())
@@ -194,12 +194,15 @@ func clear():
 	chunks.clear()
 
 var started_loading = false
-func load(level_name, immediate = false):
+func load(level_name, immediate = false, download_level = false):
 	
 	clear()
 	self.level_name = level_name
 	started_loading = true
-	var path = "user://level/"+level_name
+	var leveltype = "localLevels"
+	if download_level:
+		leveltype = "downloadLevels"
+	var path = "user://level/"+str(leveltype)+"/"+level_name
 	var dir = DirAccess.open(path+"/chunks")
 	# eventuell probleme
 	if  true:

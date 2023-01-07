@@ -75,14 +75,14 @@ func level_list_http_request_completed(_result, _response_code, _headers, body):
 
 # only for windows now
 func compress_level(levelname):
-	var path = ProjectSettings.globalize_path("user://level/"+str(levelname))
+	var path = ProjectSettings.globalize_path("user://level/downloadLevels/"+str(levelname))
 	var result = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	OS.execute("powershell.exe",["Compress-Archive",path,result])
 	
 # only for windows now
 func decompress_level(levelname):
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
-	var result = ProjectSettings.globalize_path("user://level/")
+	var result = ProjectSettings.globalize_path("user://level/downloadLevels")
 	print("Decompressing "+str(path))
 	OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 

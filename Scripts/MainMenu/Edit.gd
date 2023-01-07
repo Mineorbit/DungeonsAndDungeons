@@ -11,7 +11,7 @@ func _ready():
 
 
 func load_level_list():
-	var local_levels = DirAccess.open("user://level/").get_directories()
+	var local_levels = DirAccess.open("user://level/localLevels/").get_directories()
 	var levels = []
 	for l in local_levels:
 		levels.append({"name":l,"ulid":l})

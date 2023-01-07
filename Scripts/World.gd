@@ -13,10 +13,10 @@ func _ready():
 	print(str(Constants.id)+" "+str(Constants.World))
 
 # Called when the node enters the scene tree for the first time.
-func start(levelpath = null,immediate = false):
+func start(levelpath = null,immediate = false,download_level = false):
 	prepare_level()
 	if levelpath != null:
-		await level.load(levelpath,immediate)
+		await level.load(levelpath,immediate,download_level)
 	await level.start()
 	
 
