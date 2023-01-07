@@ -26,6 +26,10 @@ func _ready():
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	interactiveLevelObjectPrefab = load("res://Prefabs/InteractiveLevelObject.tscn")
+	Entities.child_entered_tree.connect(
+		func(entity):
+			Constants.World.on_entity_spawned.emit(entity)
+	)
 
 var level_name = "Test"
 
@@ -125,6 +129,11 @@ func get_interactive_objects():
 
 func get_interactive_object(unique_id):
 	return null
+
+
+func spawn_entity(entity):
+	print("Spawning Entity "+str(entity)+" at "+str(entity.global_transform.origin)+" in World "+str(Constants.World))
+	Constants.World.level.Entities.add_child(entity)
 
 
 func delete_level(level_name):
@@ -354,8 +363,6 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		# correct internal positions:
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
-			#level_object_dupe.set_physics_process(false)
-			#level_object_dupe.set_process(false)
 
 
 func get_chunk_position(startpos):

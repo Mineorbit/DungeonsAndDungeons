@@ -22,7 +22,6 @@ func set_local_id(id):
 	
 func get_first_connected():
 	var i = 0
-	print("TEST: "+str(local_id_to_id))
 	while i < local_id_to_id.size() and local_id_to_id[i] == null:
 		i = i + 1
 	if local_id_to_id.size() == i:

@@ -11,3 +11,4 @@ signal playerHealthChanged(playerid,health)
 
 signal level_loaded
 
+signal on_new_world_created

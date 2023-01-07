@@ -15,9 +15,20 @@ func _ready():
 	MultiplayerConstants.on_local_id_set.connect(func(id):id_set = true)
 	#start an empty world
 	#get_parent().world.start()
-	Constants.World.set_physics_process(false)
-	Constants.World.set_physics_process_internal(false)
-	Constants.World.set_process(false)
+	print("Connected signal to "+str(Constants.World))
+	Constants.World.on_entity_spawned.connect(disable_local_computations)
+	Signals.on_new_world_created.connect(func():
+		print("Connected signal to "+str(Constants.World))
+		Constants.World.on_entity_spawned.connect(disable_local_computations)
+	)
+
+
+func disable_local_computations(entity):
+	print(str(Constants.id)+" Muting Entity "+str(entity))
+	entity.ready.connect(func():
+		entity.set_physics_process(false)
+		entity.set_process(false)
+		)
 
 var id_set = false
 var player_exists = false

@@ -6,8 +6,11 @@ var level
 
 signal game_won
 
+signal on_entity_spawned(entity)
+
 func _ready():
 	Constants.World = self
+	print(str(Constants.id)+" "+str(Constants.World))
 
 # Called when the node enters the scene tree for the first time.
 func start(levelpath = null,immediate = false):

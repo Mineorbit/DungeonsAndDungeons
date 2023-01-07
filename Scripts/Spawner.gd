@@ -42,11 +42,10 @@ func show_text():
 func spawnEntity():
 	if Constants.currentMode > 2:
 		return
-	print("Spawning Entity "+str(spawnedEntity)+" at "+str(self.global_transform.origin))
 	if currentSpawned != null:
 		currentSpawned.remove()
 	currentSpawned = prefab.instantiate()
-	Constants.World.level.Entities.add_child(currentSpawned)
+	Constants.World.level.spawn_entity(currentSpawned)
 	Constants.buffer()
 	set_spawn_pos()
 	currentSpawned.on_entity_remove.connect(clear_after_remove)

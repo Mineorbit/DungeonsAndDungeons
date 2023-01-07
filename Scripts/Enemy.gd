@@ -35,7 +35,7 @@ var target_entity = null
 func track_target():
 	pass
 	if target_entity != null:
-		target.global_transform.origin	=	target_entity.global_transform.origin
+		target.global_transform.origin = target_entity.global_transform.origin
 
 func plan_route():
 	if (is_inside_tree() and target.is_inside_tree()):

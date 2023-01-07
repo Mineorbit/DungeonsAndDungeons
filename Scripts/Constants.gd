@@ -9,7 +9,11 @@ var currentMode = 0
 
 var navmargin = 0.6
 
-var World
+var World:
+	set(value):
+		World = value
+		print("Changed World")
+		Signals.on_new_world_created.emit()
 
 @export var deathplane = -8
 
