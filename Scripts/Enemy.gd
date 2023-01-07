@@ -33,7 +33,6 @@ func _physics_process(delta):
 var target_entity = null
 
 func track_target():
-	pass
 	if target_entity != null:
 		target.global_transform.origin = target_entity.global_transform.origin
 
