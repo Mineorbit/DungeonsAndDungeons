@@ -52,7 +52,7 @@ func UpdateRelativePosition(_passive = false):
 		rotate_object_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
 		rotate_object_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
 		rotate_object_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
-		transform.origin =	new_position
+		transform.origin = new_position
 
 # gravity should be set by global constant
 

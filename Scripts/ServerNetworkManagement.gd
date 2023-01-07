@@ -29,7 +29,6 @@ func player_connected(id):
 	while(MultiplayerConstants.local_id_to_id[i] != null):
 		i = i + 1
 	MultiplayerConstants.local_id_to_id[i] = id
-	print("LOL2 "+str(MultiplayerConstants.local_id_to_id))
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	get_parent().add_player(i)
 	var newplayercontroller = get_parent().add_player_controller(i,id)
