@@ -55,6 +55,7 @@ shape = SubResource("BoxShape3D_uu5v3")
 [node name="Interface" parent="LevelSelectionScreen" instance=ExtResource("4_sg4lm")]
 
 [node name="Tavern" parent="." instance=ExtResource("6_6agm5")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0.0735179, -0.0195224)
 
 [node name="LobbyArea" type="Area3D" parent="."]
 collision_layer = 2
@@ -63,3 +64,19 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LobbyArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32844, 0)
 shape = SubResource("BoxShape3D_rsius")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.12732, 5.6464)
+light_color = Color(1, 1, 0.764706, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 12.0463
+spot_angle = 50.8701
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.12732, -2.28157)
+light_color = Color(1, 1, 0.764706, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 12.0463
+spot_angle = 50.8701

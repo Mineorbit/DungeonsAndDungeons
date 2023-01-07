@@ -12,7 +12,6 @@ grow_vertical = 2
 script = ExtResource("1_brb28")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,46 +19,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
-layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
-layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/HBoxContainer/CenterContainer"]
-layout_mode = 2
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_top = 128
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 128
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer"]
-layout_mode = 2
 
 [node name="IP" type="TextEdit" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 32)
-layout_mode = 2
 text = "127.0.0.1"
 
 [node name="PlayButton" type="Button" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
 text = "Play"
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/HBoxContainer"]
-layout_mode = 2
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_top = 128
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 128
 
 [node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
 
 [node name="EditButton" type="Button" parent="CenterContainer/HBoxContainer/MarginContainer/CenterContainer2"]
-layout_mode = 2
 text = "Edit"
 
 [node name="RichTextLabel" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0
