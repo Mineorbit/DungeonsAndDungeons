@@ -7,9 +7,11 @@ extends Node2D
 
 var currentMenu = null
 @onready var canvasLayer = $MainMenuLayer
+@onready var mainmenucamera = $Spatial/Camera
 
 func _ready():
 	Constants.set_mode(0)
+	mainmenucamera.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	open_menu("Main")
 
