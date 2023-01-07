@@ -354,6 +354,8 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		# correct internal positions:
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
+			#level_object_dupe.set_physics_process(false)
+			#level_object_dupe.set_process(false)
 
 
 func get_chunk_position(startpos):

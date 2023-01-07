@@ -6,8 +6,6 @@ extends Node3D
 func _ready():
 	Constants.set_mode(2)
 	var peer = ENetMultiplayerPeer.new()
-	#multiplayer.peer_connected.connect(self.create_player)
-	#multiplayer.peer_disconnected.connect(self.destroy_player)
 	peer.create_server(13565)
 	Constants.id = peer.get_unique_id()
 	print("Server has Unique ID "+str(Constants.id))
@@ -31,6 +29,7 @@ func player_connected(id):
 	while(MultiplayerConstants.local_id_to_id[i] != null):
 		i = i + 1
 	MultiplayerConstants.local_id_to_id[i] = id
+	print("LOL2 "+str(MultiplayerConstants.local_id_to_id))
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	get_parent().add_player(i)
 	var newplayercontroller = get_parent().add_player_controller(i,id)

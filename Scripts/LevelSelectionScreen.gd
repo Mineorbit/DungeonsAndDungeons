@@ -75,7 +75,7 @@ func set_interface_owner(id):
 func player_entered(player):
 	# server does not have to continue
 	if Constants.id == 1:
-		return
+		update_interface_owner()
 	#print(str(Constants.id)+" Local Player:"+str(Constants.World.players.get_player(MultiplayerConstants.local_id)))
 	#print(str(Constants.id)+" Entered Player: "+str(player))
 	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:

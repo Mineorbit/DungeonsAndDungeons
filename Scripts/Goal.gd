@@ -29,6 +29,8 @@ func _ready():
 	enterArea.body_exited.connect(playerLeft)
 	
 func playerEntered(_player):
+	if Constants.currentMode == 3:
+		return
 	if not can_enter:
 		return
 	numberOfPlayersInside = numberOfPlayersInside + 1
@@ -39,6 +41,8 @@ func playerEntered(_player):
 		Constants.World.game_won.emit()
 
 func playerLeft(player):
+	if Constants.currentMode == 3:
+		return
 	if not can_enter:
 		return
 	numberOfPlayersInside = max(0,numberOfPlayersInside - 1)

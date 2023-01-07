@@ -8,15 +8,19 @@ var selected_level_name
 @onready var chunk_streamer_prefab = load("res://Prefabs/ChunkStreamer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# only client should send back
 	Constants.World.game_won.connect(start_lobby)
 	ApiAccess.level_download_finished.connect(complete_start_round)
-		# only if is on server change this in local mode
+
+	# only if is on server change this in local mode
 	# start_lobby()
 	
 func start_lobby():
+	print(str(Constants.id)+" Starting Lobby")
 	get_tree().paused = true
 	remove_chunk_streamers()
 	Constants.World.end()
+	# have to instantiate new for multiplayer to work, else server crashes on new lobby start
 	lobby = load("res://Prefabs/Lobby.tscn").instantiate()
 	add_child(lobby)
 	Constants.World.players.set_start_positions()
@@ -31,6 +35,7 @@ func complete_start_round():
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	remove_child(lobby)
+	lobby = null
 	#Constants.World.players.spawn()
 	Constants.World.players.set_start_positions()
 	get_tree().paused = false

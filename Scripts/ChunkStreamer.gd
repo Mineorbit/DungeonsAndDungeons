@@ -15,7 +15,6 @@ func stream_chunk(data):
 
 func add_from_function(data):
 	var base_position = data[0]
-	print("Loading new Chunk "+str(base_position)+" for "+str(target_player_network_id))
 	data.erase(base_position)
 	base_position *= 8
 	for object in data:
@@ -27,9 +26,7 @@ func add_from_function(data):
 func load_chunk(location):
 	loadedChunks.append(location)
 	var chunk = Constants.World.level.get_chunk_by_chunk_position(location)
-	print("Trying to load Chunk at "+str(location))
 	if chunk == null:
-		print("There was no Chunk at "+str(location))
 		return
 	var chunk_instances = chunk.get_level_object_instances()
 	var chunk_data = [location]
