@@ -103,6 +103,7 @@ func level_zip_file_path(levelname):
 	return path
 
 func upload_level(levelname,publiclevelname):
+	print("Uploading "+str(levelname)+" as "+str(publiclevelname))
 	compress_level(levelname)
 	var http_request = HTTPRequest.new()
 	add_child(http_request)

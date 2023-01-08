@@ -76,4 +76,7 @@ func _on_upload_level():
 	
 func upload_level():
 	print("Uploading Level")
-	ApiAccess.upload_level(str(level_list.selected_level),uploadlevelname.text)
+	DirAccess.rename_absolute("user://level/localLevels/"+str(level_list.selected_level),"user://level/localLevels/"+uploadlevelname.text)
+	ApiAccess.upload_level(uploadlevelname.text,uploadlevelname.text)
+	DirAccess.rename_absolute("user://level/localLevels/"+uploadlevelname.text,"user://level/localLevels/"+str(level_list.selected_level))
+	
