@@ -1,12 +1,14 @@
 extends Control
 
+@onready var tabmenu: TabContainer = $TabContainer
 @onready var nameText: TextEdit = $TabContainer/NewLevel/VBoxContainer/LevelName
 @onready var level_list = $TabContainer/EditLevel/LevelList
 @onready var start_edit_button: Button = $TabContainer/EditLevel/CenterContainer/HBoxContainer/Edit
 @onready var delete_button: Button = $TabContainer/EditLevel/CenterContainer/HBoxContainer/Delete
 @onready var upload_button: Button = $TabContainer/EditLevel/CenterContainer/HBoxContainer/Upload
 
-@onready var tabmenu: TabContainer = $TabContainer
+@onready var remote_level_list = $TabContainer/DownloadLevel/VBoxContainer/LevelList
+@onready var download_button: Button = $TabContainer/DownloadLevel/VBoxContainer/Download
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,16 +16,22 @@ func _ready():
 	var levels = load_level_list()
 	level_list.set_level_list(levels)
 	level_list.on_selection.connect(func (x): 
-		pass
 		start_edit_button.modulate = Color.WHITE
 		delete_button.modulate = Color.WHITE
 		upload_button.modulate = Color.WHITE
 		)
+	remote_level_list.on_selection.connect(func (x): 
+		download_button.modulate = Color.WHITE
+		)
 	if levels.size() == 0:
 		pass
 		#open new level tab immediately
+	ApiAccess.levels_fetched.connect(load_remote_level_list)
+	ApiAccess.fetch_level_list()
 
-
+func load_remote_level_list(list):
+	remote_level_list.set_level_list(list)
+	
 func load_level_list():
 	var local_levels = DirAccess.open("user://level/localLevels/").get_directories()
 	var levels = []
@@ -31,6 +39,10 @@ func load_level_list():
 		levels.append({"name":l,"ulid":l})
 	return levels
 
+func on_download_level():
+	var level = remote_level_list.selected_level
+	print(remote_level_list.selected_level)
+	ApiAccess.download_level(remote_level_list.selected_level,true)
 
 
 func start_new_level():

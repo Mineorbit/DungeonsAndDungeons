@@ -23,12 +23,15 @@ func _ready():
 
 signal level_download_finished
 
-func download_level(ulid):
+func download_level(ulid,local = false):
 	print("Downloading Level with ULID: "+str(ulid))
 	# Create an HTTP request node and connect its completion signal.
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	http_request.request_completed.connect(level_download_http_request_completed)
+	http_request.request_completed.connect(
+		func(a,b,c,d):
+			level_download_http_request_completed(a,b,c,d,local)
+	)
 	http_request.download_file = level_zip_file_path("download")
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
 	var error = http_request.request(str(url)+"level/download?proto_resp=false&ulid="+str(ulid))
@@ -39,11 +42,11 @@ func download_level(ulid):
 
 
 # Called when the HTTP request is completed.
-func level_download_http_request_completed(result, _response_code, _headers, _body):
+func level_download_http_request_completed(result, _response_code, _headers, _body,local):
 	if result != OK:
 		push_error("Download Failed")
 	print("Finished Downloading Level")
-	decompress_level("download")
+	decompress_level("download",local)
 	level_download_finished.emit()
 
 
@@ -83,9 +86,12 @@ func compress_level(levelname,local = true):
 	OS.execute("powershell.exe",["Compress-Archive",path,result])
 	
 # only for windows now
-func decompress_level(levelname):
+func decompress_level(levelname,local = false):
+	var subpath = "downloadLevels"
+	if local:
+		subpath = "localLevels"
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
-	var result = ProjectSettings.globalize_path("user://level/downloadLevels")
+	var result = ProjectSettings.globalize_path("user://level/"+subpath)
 	print("Decompressing "+str(path))
 	OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 
