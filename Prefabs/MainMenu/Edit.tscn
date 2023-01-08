@@ -100,3 +100,4 @@ text = "Upload"
 [connection signal="pressed" from="TabContainer/EditLevel/CenterContainer/HBoxContainer/Delete" to="." method="_on_delete_level"]
 [connection signal="pressed" from="TabContainer/EditLevel/CenterContainer/HBoxContainer/Upload" to="." method="_on_upload_level"]
 [connection signal="pressed" from="TabContainer/NewLevel/VBoxContainer/Start" to="." method="start_new_level"]
+[connection signal="pressed" from="TabContainer/UploadLevel/VBoxContainer/Upload" to="." method="upload_level"]

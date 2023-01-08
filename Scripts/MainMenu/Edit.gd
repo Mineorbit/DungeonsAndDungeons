@@ -62,3 +62,6 @@ func _on_upload_level():
 	uploadlevelname.text = str(level_list.selected_level)
 	uploadLabel.text = "Upload Level: "+str(level_list.selected_level)
 	
+func upload_level():
+	print("Uploading Level")
+	ApiAccess.upload_level(str(level_list.selected_level),uploadlevelname.text)

@@ -74,8 +74,11 @@ func level_list_http_request_completed(_result, _response_code, _headers, body):
 
 
 # only for windows now
-func compress_level(levelname):
-	var path = ProjectSettings.globalize_path("user://level/downloadLevels/"+str(levelname))
+func compress_level(levelname,local = true):
+	var subpath = "localLevels"
+	if not local:
+		subpath = "downloadLevels"
+	var path = ProjectSettings.globalize_path("user://level/"+str(subpath)+"/"+str(levelname))
 	var result = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	OS.execute("powershell.exe",["Compress-Archive",path,result])
 	
@@ -93,11 +96,10 @@ func level_zip_file_path(levelname):
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	return path
 
-func upload_level(levelname):
+func upload_level(levelname,publiclevelname):
 	compress_level(levelname)
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	
 	http_request.request_completed.connect(upload_http_request_completed)
 	
 	
@@ -118,14 +120,16 @@ func upload_level(levelname):
 	body.append_array(thumbnail_content)
 	body.append_array("\r\n--BodyBoundaryHere--\r\n".to_utf8_buffer())
 	
-	var headers =  [
+	var headers = [
 		"Authorization: Bearer "+str(auth_token),
 	"Content-Length: " + str(body.size()),
 	"Content-Type: multipart/form-data; boundary=\"BodyBoundaryHere\""
 	]
 	var description = "This is a level".uri_encode()
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request_raw(str(url)+"level/?proto_resp=false&name="+str(levelname)+"&description="+str(description)+"&r=t&g=t&b=t&y=t", headers, true, HTTPClient.METHOD_POST, body)
+	var public_level_name = publiclevelname.uri_encode()
+	var request_url = str(url)+"level/?proto_resp=false&name="+str(public_level_name)+"&description="+str(description)+"&r=t&g=t&b=t&y=t"
+	var error = http_request.request_raw(request_url, headers, true, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
