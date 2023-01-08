@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvguibn21nvmq"]
+[gd_scene load_steps=3 format=3 uid="uid://bvguibn21nvmq"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Edit.gd" id="1_6w7v4"]
-[ext_resource type="Script" path="res://Scripts/MainMenu/SubMenuScaler.gd" id="2_hpiiy"]
 [ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="2_mb7u1"]
 
 [node name="Edit" type="Control"]
@@ -13,106 +12,62 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6w7v4")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 31.0
-grow_horizontal = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer"]
-layout_mode = 2
-
-[node name="Edit" type="Button" parent="AspectRatioContainer/HBoxContainer"]
-layout_mode = 2
-text = "Edit"
-
-[node name="New" type="Button" parent="AspectRatioContainer/HBoxContainer"]
-layout_mode = 2
-text = "New"
-
-[node name="SubMenu" type="ScrollContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.05
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
+tab_alignment = 1
+use_hidden_tabs_for_min_size = true
 
-[node name="GridContainer" type="GridContainer" parent="SubMenu"]
+[node name="EditLevel" type="VBoxContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
-columns = 2
-script = ExtResource("2_hpiiy")
 
-[node name="VSplitContainer" type="VSplitContainer" parent="SubMenu/GridContainer"]
-layout_mode = 2
-dragger_visibility = 2
-
-[node name="LevelList" parent="SubMenu/GridContainer/VSplitContainer" instance=ExtResource("2_mb7u1")]
+[node name="LevelList" parent="TabContainer/EditLevel" instance=ExtResource("2_mb7u1")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="SubMenu/GridContainer/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/EditLevel"]
 layout_mode = 2
 
-[node name="Edit" type="Button" parent="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/EditLevel/CenterContainer"]
+layout_mode = 2
+
+[node name="Edit" type="Button" parent="TabContainer/EditLevel/CenterContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 text = "Edit"
 
-[node name="Delete" type="Button" parent="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/HBoxContainer"]
+[node name="Delete" type="Button" parent="TabContainer/EditLevel/CenterContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 text = "Delete"
 
-[node name="ColorRect" type="ColorRect" parent="SubMenu/GridContainer"]
+[node name="NewLevel" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
-color = Color(0.517647, 0.517647, 0.517647, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubMenu/GridContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.025
-anchor_right = 0.025
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "New Level
-"
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/NewLevel"]
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="SubMenu/GridContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.1
-anchor_right = 0.95
-anchor_bottom = 0.2
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/NewLevel/VBoxContainer"]
+layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="SubMenu/GridContainer/ColorRect/MarginContainer"]
+[node name="Label" type="Label" parent="TabContainer/NewLevel/VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "Create an new Level"
+
+[node name="LevelName" type="TextEdit" parent="TabContainer/NewLevel/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Name"
+scroll_fit_content_height = true
 
-[node name="Start" type="Button" parent="SubMenu/GridContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.975
-anchor_right = 1.0
-anchor_bottom = 0.975
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Start" type="Button" parent="TabContainer/NewLevel/VBoxContainer"]
+layout_mode = 2
 text = "Start"
 
-[connection signal="pressed" from="AspectRatioContainer/HBoxContainer/Edit" to="." method="_on_edit_level"]
-[connection signal="pressed" from="AspectRatioContainer/HBoxContainer/New" to="." method="_on_new_level"]
-[connection signal="pressed" from="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/HBoxContainer/Edit" to="." method="start_edit_level"]
-[connection signal="pressed" from="SubMenu/GridContainer/VSplitContainer/AspectRatioContainer3/HBoxContainer/Delete" to="." method="_on_delete_level"]
-[connection signal="pressed" from="SubMenu/GridContainer/ColorRect/Start" to="." method="start_new_level"]
+[connection signal="pressed" from="TabContainer/EditLevel/CenterContainer/HBoxContainer/Edit" to="." method="start_edit_level"]
+[connection signal="pressed" from="TabContainer/EditLevel/CenterContainer/HBoxContainer/Delete" to="." method="_on_delete_level"]
+[connection signal="pressed" from="TabContainer/NewLevel/VBoxContainer/Start" to="." method="start_new_level"]
