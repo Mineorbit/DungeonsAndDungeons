@@ -11,3 +11,5 @@ script = ExtResource("1_pwnu2")
 
 [node name="Camera" type="Camera3D" parent="."]
 cull_mask = 1048573
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera"]

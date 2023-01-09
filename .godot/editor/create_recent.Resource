@@ -1,3 +1,4 @@
+AudioStreamWAV
 StandardMaterial3D
 ShaderMaterial
 VisualShader

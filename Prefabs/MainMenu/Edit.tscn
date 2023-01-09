@@ -13,7 +13,6 @@ grow_vertical = 2
 script = ExtResource("1_6w7v4")
 
 [node name="TabContainer" type="TabContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,93 +22,102 @@ tab_alignment = 1
 use_hidden_tabs_for_min_size = true
 
 [node name="EditLevel" type="VBoxContainer" parent="TabContainer"]
-layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="LevelList" parent="TabContainer/EditLevel" instance=ExtResource("2_mb7u1")]
 custom_minimum_size = Vector2(200, 500)
-layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 500.0
 
 [node name="CenterContainer" type="CenterContainer" parent="TabContainer/EditLevel"]
-layout_mode = 2
+offset_top = 504.0
+offset_right = 1152.0
+offset_bottom = 535.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/EditLevel/CenterContainer"]
-layout_mode = 2
+offset_left = 491.0
+offset_right = 660.0
+offset_bottom = 31.0
 
 [node name="Edit" type="Button" parent="TabContainer/EditLevel/CenterContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 2
+offset_right = 38.0
+offset_bottom = 31.0
 text = "Edit"
 
 [node name="Delete" type="Button" parent="TabContainer/EditLevel/CenterContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 2
+offset_left = 42.0
+offset_right = 101.0
+offset_bottom = 31.0
 text = "Delete"
 
 [node name="Upload" type="Button" parent="TabContainer/EditLevel/CenterContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 2
+offset_left = 105.0
+offset_right = 169.0
+offset_bottom = 31.0
 text = "Upload"
 
 [node name="NewLevel" type="MarginContainer" parent="TabContainer"]
 visible = false
-layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/NewLevel"]
-layout_mode = 2
+offset_right = 156.0
+offset_bottom = 100.0
 
 [node name="CenterContainer" type="CenterContainer" parent="TabContainer/NewLevel/VBoxContainer"]
-layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/NewLevel/VBoxContainer/CenterContainer"]
-layout_mode = 2
+offset_right = 156.0
+offset_bottom = 26.0
 text = "Create an new Level"
 
 [node name="LevelName" type="TextEdit" parent="TabContainer/NewLevel/VBoxContainer"]
-layout_mode = 2
 placeholder_text = "Name"
 scroll_fit_content_height = true
 
 [node name="Start" type="Button" parent="TabContainer/NewLevel/VBoxContainer"]
-layout_mode = 2
 text = "Start"
 
 [node name="UploadLevel" type="MarginContainer" parent="TabContainer"]
 visible = false
-layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UploadLevel"]
-layout_mode = 2
+offset_right = 133.0
+offset_bottom = 100.0
 
 [node name="CenterContainer" type="CenterContainer" parent="TabContainer/UploadLevel/VBoxContainer"]
-layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/UploadLevel/VBoxContainer/CenterContainer"]
-layout_mode = 2
+offset_right = 133.0
+offset_bottom = 26.0
 text = "Upload this Level"
 
 [node name="LevelName" type="TextEdit" parent="TabContainer/UploadLevel/VBoxContainer"]
-layout_mode = 2
 placeholder_text = "Name"
 scroll_fit_content_height = true
 
 [node name="Upload" type="Button" parent="TabContainer/UploadLevel/VBoxContainer"]
-layout_mode = 2
 text = "Upload"
 
 [node name="DownloadLevel" type="MarginContainer" parent="TabContainer"]
 visible = false
-layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/DownloadLevel"]
-layout_mode = 2
+offset_right = 200.0
+offset_bottom = 235.0
 
 [node name="LevelList" parent="TabContainer/DownloadLevel/VBoxContainer" instance=ExtResource("2_mb7u1")]
 custom_minimum_size = Vector2(200, 512)
-layout_mode = 2
 
 [node name="Download" type="Button" parent="TabContainer/DownloadLevel/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 2
 text = "Download"
 
 [connection signal="pressed" from="TabContainer/EditLevel/CenterContainer/HBoxContainer/Edit" to="." method="start_edit_level"]
