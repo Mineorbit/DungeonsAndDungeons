@@ -14,9 +14,9 @@ var is_active = false
 func process_entered(_x):
 	if get_parent().has_method("activate"):
 		if is_active:
-			get_parent().deactivate()
+			get_parent().deactivate_connected()
 		else:
-			get_parent().activate()
+			get_parent().activate_connected()
 
 
 @rpc

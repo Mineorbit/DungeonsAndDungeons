@@ -1,15 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgeg3oqko2dj8"]
+[gd_scene load_steps=4 format=3 uid="uid://dgeg3oqko2dj8"]
 
 [ext_resource type="Script" path="res://Scripts/Gate.gd" id="1_huajc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpsws"]
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_ecxq7"]
-vertices = PackedVector3Array(-0.15, 0.45, -1.4, -0.15, 0.45, 1.4, 0.15, 0.45, 1.4, 0.15, 0.45, -1.4)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-cell_size = 0.1
-agent_height = 0.5
-agent_radius = 0.05
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
 
@@ -26,7 +19,6 @@ skeleton = NodePath("../..")
 
 [node name="Navigation" type="NavigationRegion3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-navmesh = SubResource("NavigationMesh_ecxq7")
 navigation_layers = 3
 
 [node name="Collision" type="StaticBody3D" parent="."]

@@ -44,6 +44,7 @@ func process(activation):
 		activate()
 	else:
 		deactivate()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
@@ -78,6 +79,9 @@ func activate():
 		contained_level_object.activate()
 		#this does not work if changed before loading
 		contained_level_object.rpc("activate")
+
+
+func activate_connected():
 	activationSignal.emit(true)
 
 
@@ -86,8 +90,9 @@ func deactivate():
 		contained_level_object.deactivate()
 		#this does not work if changed before loading
 		contained_level_object.rpc("deactivate")
-	activationSignal.emit(false)
 
+func deactivate_connected():
+	activationSignal.emit(false)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
