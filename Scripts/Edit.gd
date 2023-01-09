@@ -51,7 +51,7 @@ func _process(delta) -> void:
 		enter_test_mode()
 	if Input.is_action_just_pressed("Edit"):
 		enter_edit_mode()
-	if Input.is_action_just_pressed("SwitchPlayer"):
+	if Input.is_action_just_pressed("SwitchPlayer") and Constants.currentMode == 2:
 		current_player = (current_player + 1) % 4
 		Players.playerControllers.set_current_player(current_player)
 	
