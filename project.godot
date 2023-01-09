@@ -48,6 +48,11 @@ _global_script_classes=[{
 "class": &"Player",
 "language": &"GDScript",
 "path": "res://Scripts/Player.gd"
+}, {
+"base": "Resource",
+"class": &"Settings",
+"language": &"GDScript",
+"path": "res://Scripts/Settings.gd"
 }]
 _global_script_class_icons={
 "ElementType": "",
@@ -57,7 +62,8 @@ _global_script_class_icons={
 "ItemEntity": "",
 "LevelObject": "",
 "LevelObjectData": "",
-"Player": ""
+"Player": "",
+"Settings": ""
 }
 
 [application]

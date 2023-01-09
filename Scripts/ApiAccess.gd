@@ -1,19 +1,21 @@
 extends Node
 
 
-var url = "https://mstillger.de/api/"
 var auth_token = ""
 
 
 var level_list
+signal level_download_finished
+
+func get_api_url():
+	return Options.settings.api_url
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+
+func prepare_api():
 	fetch_api_data()
 	login("test","test")
-	#download_level(6)
-
+	
 #func _process(delta):
 #	if Input.is_action_just_pressed("Connect"):
 #		upload_level("test")
@@ -21,7 +23,6 @@ func _ready():
 
 
 
-signal level_download_finished
 
 func download_level(ulid,local = false):
 	print("Downloading Level with ULID: "+str(ulid))
@@ -34,8 +35,8 @@ func download_level(ulid,local = false):
 	)
 	http_request.download_file = level_zip_file_path("download")
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request(str(url)+"level/download?proto_resp=false&ulid="+str(ulid))
-	print("Link: "+str(str(url)+"level/download?proto_resp=false&ulid="+str(ulid)))
+	var error = http_request.request(str(get_api_url())+"level/download?proto_resp=false&ulid="+str(ulid))
+	print("Link: "+str(get_api_url()+"level/download?proto_resp=false&ulid="+str(ulid)))
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
@@ -58,7 +59,7 @@ func fetch_level_list():
 	add_child(http_request)
 	http_request.request_completed.connect(level_list_http_request_completed)
 	# Perform a GET request. The URL below returns JSON as of writing.
-	var error = http_request.request(str(url)+"level/all?proto_resp=f")
+	var error = http_request.request(str(get_api_url())+"level/all?proto_resp=f")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 	# Perform a POST request. The URL below returns JSON as of writing.
@@ -135,7 +136,7 @@ func upload_level(levelname,publiclevelname):
 	var description = "This is a level".uri_encode()
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
 	var public_level_name = publiclevelname.uri_encode()
-	var request_url = str(url)+"level/?proto_resp=false&name="+str(public_level_name)+"&description="+str(description)+"&r=t&g=t&b=t&y=t"
+	var request_url = str(get_api_url())+"level/?proto_resp=false&name="+str(public_level_name)+"&description="+str(description)+"&r=t&g=t&b=t&y=t"
 	var error = http_request.request_raw(request_url, headers, true, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
@@ -155,7 +156,7 @@ func login(username,password):
 	http_request.request_completed.connect(login_http_request_completed)
 	var body = "grant_type=&username="+str(username)+"&password="+str(password)+"&scope=&client_id=&client_secret="
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request(str(url)+"auth/token", ["Content-Type: application/x-www-form-urlencoded"], true, HTTPClient.METHOD_POST, body)
+	var error = http_request.request(str(get_api_url())+"auth/token", ["Content-Type: application/x-www-form-urlencoded"], true, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
@@ -179,7 +180,7 @@ func download_thumbnail(ulid):
 	add_child(http_request)
 	http_request.request_completed.connect(thumbnail_http_request_completed)
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request(str(url)+"level/pic?proto_resp=false&ulid="+str(ulid))
+	var error = http_request.request(str(get_api_url())+"level/pic?proto_resp=false&ulid="+str(ulid))
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
@@ -190,7 +191,7 @@ func fetch_api_data():
 	add_child(http_request)
 	http_request.request_completed.connect(data_http_request_completed)
 	# Perform a GET request. The URL below returns JSON as of writing.
-	var error = http_request.request(str(url)+"")
+	var error = http_request.request(str(get_api_url())+"")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 	# Perform a POST request. The URL below returns JSON as of writing.
