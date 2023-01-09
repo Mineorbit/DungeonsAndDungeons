@@ -17,6 +17,9 @@ var builderhud
 var playerhud
 var testhud
 
+
+@onready var buildmusic = $buildmusic
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	builderpref = load("res://Prefabs/Builder.tscn")
@@ -70,6 +73,7 @@ func enter_edit_mode():
 		remove_child(playerhud)
 		remove_child(testhud)
 	add_child(builderhud)
+	buildmusic.play()
 	connections.show()
 
 func enter_test_mode():
@@ -88,6 +92,7 @@ func enter_test_mode():
 	add_child(testhud)
 	Players.set_start_positions()
 	Players.playerControllers.set_current_player(current_player)
+	buildmusic.stop()
 	connections.hide()
 	
 

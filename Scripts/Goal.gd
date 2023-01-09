@@ -6,18 +6,24 @@ extends Node3D
 # var b = "text"
 
 
+@onready var goalAudio: AudioStreamPlayer3D = $ambient
 
 var numberOfPlayersInside = 0
 @onready var enterArea: Area3D = $Area
 
 
+var can_enter = true
 
 func reset():
 	print("Resetting Goal")
 	numberOfPlayersInside = 0
 	can_enter = true
+	if Constants.currentMode > 1:
+		goalAudio.play()
+	else:
+		goalAudio.stop()
 
-var can_enter = true
+
 
 func number_of_players_needed():
 	return Constants.World.players.number_of_players()

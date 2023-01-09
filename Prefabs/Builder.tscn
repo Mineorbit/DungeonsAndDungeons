@@ -37,3 +37,6 @@ target_position = Vector3(0, 0, 1)
 [node name="GridCursorMesh" type="MeshInstance3D" parent="CursorArm/Cursor"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("2")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true

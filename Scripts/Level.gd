@@ -240,6 +240,7 @@ func load(level_name, immediate = false, download_level = false):
 	else:
 		print("An error occurred when trying to access the path.")
 
+var toAdd = []
 
 func add_from_string(base_position,line):
 	var lineData = line.split("|")
@@ -262,7 +263,6 @@ func add_from_string(base_position,line):
 	var pos = Vector3(i,j,k)
 	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects)
 
-var toAdd = []
 
 func _process(delta):
 	if toAdd.size() > 0:
