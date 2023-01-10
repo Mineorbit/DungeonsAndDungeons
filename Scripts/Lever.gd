@@ -14,8 +14,10 @@ var is_active = false
 func process_entered(_x):
 	if get_parent().has_method("activate"):
 		if is_active:
+			deactivate()
 			get_parent().deactivate_connected()
 		else:
+			activate()
 			get_parent().activate_connected()
 
 

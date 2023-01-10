@@ -4,14 +4,15 @@ extends Node3D
 @onready var gateModel: Node3D = $GateModel
 @onready var nav = $Navigation
 @onready var collision = $Collision
-@export var is_open = false:	
+
+@export var is_open = false:
 	set(val):
 		if val:
-			if gateModel.get_parent() != null:
-				remove_child(gateModel)
+			if gateModel != null:
+				gateModel.open()
 		else:
-			if gateModel != null and gateModel.get_parent() == null:
-				add_child(gateModel)
+			if gateModel != null:
+				gateModel.close()
 		is_open = val
 
 # Called when the node enters the scene tree for the first time.

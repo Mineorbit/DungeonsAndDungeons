@@ -1,0 +1,43 @@
+[gd_scene load_steps=12 format=3 uid="uid://dh8s03utg40vo"]
+
+[ext_resource type="PackedScene" uid="uid://c3o5qiu0fqx6n" path="res://Assets/Models/LevelObjects/Interactive/gate.blend" id="1_4fstp"]
+[ext_resource type="Script" path="res://Scripts/GateModel.gd" id="2_t26fj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0peox"]
+animation = &"Switch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_spgcf"]
+animation = &"SwitchBack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spauc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w25fn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v351x"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xls2i"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8m0b8"]
+states/Start/position = Vector2(201, 100)
+states/Switch/node = SubResource("AnimationNodeAnimation_0peox")
+states/Switch/position = Vector2(438, 105)
+states/SwitchBack/node = SubResource("AnimationNodeAnimation_spgcf")
+states/SwitchBack/position = Vector2(648, 105)
+transitions = ["Start", "Switch", SubResource("AnimationNodeStateMachineTransition_spauc"), "Switch", "SwitchBack", SubResource("AnimationNodeStateMachineTransition_w25fn"), "SwitchBack", "Switch", SubResource("AnimationNodeStateMachineTransition_v351x"), "SwitchBack", "End", SubResource("AnimationNodeStateMachineTransition_xls2i")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wasry"]
+graph_offset = Vector2(-511, 91)
+nodes/openfsm/node = SubResource("AnimationNodeStateMachine_8m0b8")
+nodes/openfsm/position = Vector2(-176.2, 167.8)
+node_connections = [&"output", 0, &"openfsm"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_vqffo"]
+
+[node name="GateModel" instance=ExtResource("1_4fstp")]
+script = ExtResource("2_t26fj")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource("AnimationNodeBlendTree_wasry")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/openfsm/playback = SubResource("AnimationNodeStateMachinePlayback_vqffo")
