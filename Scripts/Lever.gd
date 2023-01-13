@@ -1,7 +1,7 @@
 extends Node3D
 
 
-@onready var activationArea: Area3D = $Node3D/Area3D
+@onready var activationArea: Area3D = $Node3D/InteractionArea
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	activationArea.body_entered.connect(process_entered)
