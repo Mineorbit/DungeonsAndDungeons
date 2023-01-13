@@ -1,5 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce6sva6a2sejj"]
+[gd_scene load_steps=12 format=3 uid="uid://ce6sva6a2sejj"]
 
 [ext_resource type="PackedScene" uid="uid://dx5tyojs7flbh" path="res://Assets/Models/LevelObjects/Interactive/lever.blend" id="1_ww5qs"]
+[ext_resource type="Script" path="res://Scripts/SwitchingModel.gd" id="2_2xyrv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrwg8"]
+animation = &"Switch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3cfkh"]
+animation = &"SwitchBack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3612p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_70dt6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_un0eh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6lbqb"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ncnj2"]
+states/Switch/node = SubResource("AnimationNodeAnimation_qrwg8")
+states/Switch/position = Vector2(394, 100)
+states/SwitchBack/node = SubResource("AnimationNodeAnimation_3cfkh")
+states/SwitchBack/position = Vector2(663, 100)
+transitions = ["Start", "Switch", SubResource("AnimationNodeStateMachineTransition_3612p"), "Switch", "SwitchBack", SubResource("AnimationNodeStateMachineTransition_70dt6"), "SwitchBack", "Switch", SubResource("AnimationNodeStateMachineTransition_un0eh"), "SwitchBack", "End", SubResource("AnimationNodeStateMachineTransition_6lbqb")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mcfrg"]
+graph_offset = Vector2(-345.167, 239)
+nodes/fsm/node = SubResource("AnimationNodeStateMachine_ncnj2")
+nodes/fsm/position = Vector2(80, 140)
+node_connections = [&"output", 0, &"fsm"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_7j286"]
 
 [node name="LeverModel" instance=ExtResource("1_ww5qs")]
+script = ExtResource("2_2xyrv")
+
+[node name="Handle" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource("AnimationNodeBlendTree_mcfrg")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/fsm/playback = SubResource("AnimationNodeStateMachinePlayback_7j286")

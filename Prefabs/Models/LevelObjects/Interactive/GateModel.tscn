@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh8s03utg40vo"]
+[gd_scene load_steps=12 format=3 uid="uid://bw6qrxsk7er8f"]
 
 [ext_resource type="PackedScene" uid="uid://c3o5qiu0fqx6n" path="res://Assets/Models/LevelObjects/Interactive/gate.blend" id="1_4fstp"]
-[ext_resource type="Script" path="res://Scripts/GateModel.gd" id="2_t26fj"]
+[ext_resource type="Script" path="res://Scripts/SwitchingModel.gd" id="2_vbp6q"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0peox"]
 animation = &"Switch"
@@ -26,18 +26,18 @@ states/SwitchBack/position = Vector2(648, 105)
 transitions = ["Start", "Switch", SubResource("AnimationNodeStateMachineTransition_spauc"), "Switch", "SwitchBack", SubResource("AnimationNodeStateMachineTransition_w25fn"), "SwitchBack", "Switch", SubResource("AnimationNodeStateMachineTransition_v351x"), "SwitchBack", "End", SubResource("AnimationNodeStateMachineTransition_xls2i")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wasry"]
-graph_offset = Vector2(-511, 91)
-nodes/openfsm/node = SubResource("AnimationNodeStateMachine_8m0b8")
-nodes/openfsm/position = Vector2(-176.2, 167.8)
-node_connections = [&"output", 0, &"openfsm"]
+graph_offset = Vector2(-594.268, 327.339)
+nodes/fsm/node = SubResource("AnimationNodeStateMachine_8m0b8")
+nodes/fsm/position = Vector2(-176.2, 167.8)
+node_connections = [&"output", 0, &"fsm"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_vqffo"]
 
 [node name="GateModel" instance=ExtResource("1_4fstp")]
-script = ExtResource("2_t26fj")
+script = ExtResource("2_vbp6q")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 tree_root = SubResource("AnimationNodeBlendTree_wasry")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/openfsm/playback = SubResource("AnimationNodeStateMachinePlayback_vqffo")
+parameters/fsm/playback = SubResource("AnimationNodeStateMachinePlayback_vqffo")

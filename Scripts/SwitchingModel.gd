@@ -2,10 +2,10 @@ extends Node3D
 @onready var animtree: AnimationTree = $AnimationTree
 var fsm
 func _ready():
-	fsm = animtree["parameters/openfsm/playback"]
+	fsm = animtree["parameters/fsm/playback"]
 
-func open():
+func switch():
 	fsm.travel("Switch")
 
-func close():
+func switchback():
 	fsm.travel("SwitchBack")

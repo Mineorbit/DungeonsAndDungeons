@@ -1,5 +1,5 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1673639368
+::res://::1673644853
 default_env.tres::Environment::-1::1666704872::0::1::::<><>::
 editor_settings-4.tres::EditorSettings::-1::1668613370::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1673286489::0::1::::<><>::
@@ -33,7 +33,7 @@ Water.tres::StandardMaterial3D::3086554182617661578::1673287481::0::1::::<><>::
 ::res://Assets/Materials/Entities/Blog/::1668633185
 Eye.tres::StandardMaterial3D::535858568822889440::1668633185::0::1::::<><>::
 ::res://Assets/Materials/Entities/Player/::1673639458
-Eye.tres::ShaderMaterial::3320939838727106818::1673639458::0::1::::<><>::res://Assets/Materials/Entities/Player/EyeShader.gdshader<>uid://dohbmcpjwbeuk
+Eye.tres::ShaderMaterial::3320939838727106818::1673644870::0::1::::<><>::res://Assets/Materials/Entities/Player/EyeShader.gdshader<>uid://dohbmcpjwbeuk
 EyeShader.gdshader::Shader::-1::1672938268::0::1::::<><>::
 Mouth.tres::StandardMaterial3D::6962527866687534152::1672156640::0::1::::<><>::uid://dsorrcjap3668
 PlayerAlt.tres::StandardMaterial3D::6308710000180229144::1672019644::0::1::::<><>::
@@ -91,7 +91,7 @@ teeth.material::StandardMaterial3D::-1::1666704871::0::1::::<><>::
 MyriadPro-Bold.otf::FontFile::1290661131073671521::1666704871::1668619549::1::::<><>::
 ::res://Assets/Models/LevelObjects/Entities/Ribo/textures/::1668620383
 ribo_face_albedo.png::CompressedTexture2D::4341743544841026370::1666704871::1668620383::1::::<><>::
-::res://Assets/Models/LevelObjects/Interactive/::1673639937
+::res://Assets/Models/LevelObjects/Interactive/::1673639942
 andGate.blend::PackedScene::3568333283201467915::1673306390::1673306498::1::::<><>::
 gate.blend::PackedScene::6768880812519531255::1673630345::1673639364::1::::<><>::
 lever.blend::PackedScene::8836734019383073021::1673639937::1673639942::1::::<><>::uid://b20aktbdkqncb
@@ -224,9 +224,9 @@ Blog.tscn::PackedScene::7193452156320161259::1673125356::0::1::::<><>::res://Scr
 BombGlove.tscn::PackedScene::7596431309230166312::1672771530::0::1::::<><>::res://Scripts/Items/BombGlove.gd<>uid://vemxfi6slcsu<>res://Scripts/ItemSynchronizer.gd
 Bow.tscn::PackedScene::4804740756233114044::1672771530::0::1::::<><>::uid://5qjssq37vgam<>res://Scripts/Bow.gd<>res://Scripts/ItemSynchronizer.gd
 Sword.tscn::PackedScene::6423639755159411807::1672771530::0::1::::<><>::res://Scripts/Sword.gd<>uid://m1gjv10tevsd<>res://Scripts/ItemSynchronizer.gd
-::res://Prefabs/LevelObjects/Interactive/::1673639521
+::res://Prefabs/LevelObjects/Interactive/::1673640072
 Gate.tscn::PackedScene::7589067688627573079::1673368594::0::1::::<><>::res://Scripts/Gate.gd<>uid://dh8s03utg40vo
-Lever.tscn::PackedScene::6819808904426346597::1673639521::0::1::::<><>::res://Scripts/Lever.gd
+Lever.tscn::PackedScene::6819808904426346597::1673640072::0::1::::<><>::res://Scripts/Lever.gd<>uid://ce6sva6a2sejj
 Torch.tscn::PackedScene::2837235990914563140::1673368594::0::1::::<><>::uid://c6ejdp0xahvkj
 ::res://Prefabs/LevelObjects/Spawners/::1672096956
 BlogSpawner.tscn::PackedScene::8312850940640350365::1668612577::0::1::::<><>::res://Scripts/Spawner.gd
@@ -252,8 +252,9 @@ PlayerModel.tscn::PackedScene::6115384183336849993::1673368594::0::1::::<><>::re
 ::res://Prefabs/Models/Items/::1668612577
 Bow.tscn::PackedScene::2139274921884074444::1668612577::0::1::::<><>::uid://g54gp0jpcp4i
 ::res://Prefabs/Models/LevelObjects/::1673308439
-::res://Prefabs/Models/LevelObjects/Interactive/::1673639458
-GateModel.tscn::PackedScene::7719847475569274084::1673639458::0::1::::<><>::uid://c3o5qiu0fqx6n<>res://Scripts/GateModel.gd
+::res://Prefabs/Models/LevelObjects/Interactive/::1673639980
+GateModel.tscn::PackedScene::7719847475569274084::1673645014::0::1::::<><>::uid://c3o5qiu0fqx6n<>res://Scripts/GateModel.gd
+LeverModel.tscn::PackedScene::5118722907781714251::1673645005::0::1::::<><>::uid://dx5tyojs7flbh
 ::res://Prefabs/Particles/::1671060192
 ExplosionParticles.tscn::PackedScene::243984604923059358::1671060192::0::1::::<><>::
 ::res://Resources/::1672962905
@@ -285,7 +286,7 @@ menu.tscn::PackedScene::160909606022178722::1673125355::0::1::::<><>::res://Scri
 OverlayCamera.gd::GDScript::-1::1671752076::0::1::::<>Camera3D<>::
 play.tscn::PackedScene::4598042733683413512::1673125356::0::1::::<><>::res://Scripts/Play.gd<>uid://7picxrwyqh4b
 ServerNetworkManagement.tscn::PackedScene::3532977616504043646::1673368594::0::1::::<><>::res://Scripts/ServerNetworkManagement.gd<>uid://dgu3gfhb0pqub
-::res://Scripts/::1673311484
+::res://Scripts/::1673640072
 ApiAccess.gd::GDScript::-1::1673289254::0::1::::<>Node<>::
 Arrow.gd::GDScript::-1::1672670268::0::1::::<>RigidBody3D<>::
 Blog.gd::GDScript::-1::1672108575::0::1::::<>Enemy<>::
@@ -306,7 +307,7 @@ Enemy.gd::GDScript::-1::1673122529::0::1::::Enemy<>Entity<>::
 Entities.gd::GDScript::-1::1666704872::0::1::::<>Node3D<>::
 Entity.gd::GDScript::-1::1673117491::0::1::::Entity<>CharacterBody3D<>::
 Gate.gd::GDScript::-1::1673311283::0::1::::<>Node3D<>::
-GateModel.gd::GDScript::-1::1673311228::0::1::::<>Node3D<>::
+GateModel.gd::GDScript::-1::1673645005::0::1::::<>Node3D<>::
 Goal.gd::GDScript::-1::1673285493::0::1::::<>Node3D<>::
 HitArea.gd::GDScript::-1::1667833383::0::1::::<>ShapeCast3D<>::
 InteractiveLevelObject.gd::GDScript::-1::1673292316::0::1::::InteractiveLevelObject<>LevelObject<>::
@@ -322,7 +323,7 @@ LevelObjectData.gd::GDScript::-1::1672678628::0::1::::LevelObjectData<>Resource<
 LevelObjectList.gd::GDScript::-1::1672670597::0::1::::<>Node3D<>::
 LevelSelectionScreen.gd::GDScript::-1::1673117343::0::1::::<>MeshInstance3D<>::
 level_objects.gd::GDScript::-1::1672678672::0::1::::<>Node3D<>::
-Lever.gd::GDScript::-1::1673311484::0::1::::<>Node3D<>::
+Lever.gd::GDScript::-1::1673640072::0::1::::<>Node3D<>::
 Lobby.gd::GDScript::-1::1672671817::0::1::::<>Node3D<>::
 MainMenu.gd::GDScript::-1::1673049671::0::1::::<>Node2D<>::
 MultiplayerConstants.gd::GDScript::-1::1673121917::0::1::::<>Node<>::

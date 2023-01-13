@@ -1,7 +1,9 @@
 extends Node3D
 
 
-@onready var activationArea: Area3D = $Node3D/InteractionArea
+
+@onready var activationArea: Area3D = $InteractionArea
+@onready var levermodel = $LeverModel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	activationArea.body_entered.connect(process_entered)
@@ -20,11 +22,13 @@ func process_entered(_x):
 			activate()
 			get_parent().activate_connected()
 
+@rpc
+func activate():
+	is_active = true
+	levermodel.switch()
 
 @rpc
 func deactivate():
 	is_active = false
+	levermodel.switchback()
 
-@rpc
-func activate():
-	is_active = true

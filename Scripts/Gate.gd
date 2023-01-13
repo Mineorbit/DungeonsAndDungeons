@@ -9,10 +9,10 @@ extends Node3D
 	set(val):
 		if val:
 			if gateModel != null:
-				gateModel.open()
+				gateModel.switch()
 		else:
 			if gateModel != null:
-				gateModel.close()
+				gateModel.switchback()
 		is_open = val
 
 # Called when the node enters the scene tree for the first time.
