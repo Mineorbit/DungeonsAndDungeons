@@ -90,6 +90,7 @@ func get_level_object_instances():
 					instance.z = floor(grid_position.z - global_transform.origin.z)
 					#does instance.rotation need to be set here?
 					instance.levelObjectData = levelObjectData
+					print(levelObjectData.name)
 					levelObjectInstances.append(instance)
 	for n in get_level_objects():
 		var instance = LevelObjectInstance.new()

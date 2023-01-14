@@ -31,6 +31,7 @@ func _physics_process(delta):
 	auto_navigate(delta)
 
 var target_entity = null
+var follow_target = false
 
 func track_target():
 	if target_entity != null:

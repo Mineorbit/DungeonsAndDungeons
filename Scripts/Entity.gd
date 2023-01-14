@@ -8,7 +8,7 @@ var health: int = 100:
 
 var max_health := 100
 
-var speed := 5
+@export var speed: float = 5
 var turnAngle := 0.2
 var kickbackTime = 2
 var jump_strength = 10.0
@@ -23,7 +23,7 @@ var started = false
 
 
 
-var look_direction = Vector2.ZERO
+var look_direction = Vector2(1,0)
 var fresh_kickback = false
 var kickback_direction = Vector3.ZERO
 var stun_done = false
@@ -73,15 +73,19 @@ func ent_can_shoot(v):
 	can_shoot = v
 
 func _ready():
+	target_rot = global_transform.basis
+	print(target_rot)
 	on_entity_can_shoot.connect(ent_can_shoot)
 	on_entity_melee_strike.connect(MeleeStrike)
 	_velocity = Vector3.ZERO
 	
 func start():
+	target_rot = global_transform.basis
 	health = max_health
 	started = true
 	
 func reset():
+	target_rot = global_transform.basis
 	started = false
 
 
@@ -153,6 +157,7 @@ func _physics_process(delta: float) -> void:
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
+
 
 
 func kickback(direction) -> void:

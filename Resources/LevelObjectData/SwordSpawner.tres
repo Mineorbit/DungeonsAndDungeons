@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dre7fy54aa481"]
 
 [ext_resource type="Script" path="res://Scripts/LevelObjectData.gd" id="1_pcw0e"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_pcw0e")
 name = "SwordSpawner"
 tiled = false
 interactive = false
-tileIndex = 0
+tileIndex = -1
 levelObjectId = 7
 maximumNumber = -1
 offset = Vector3(0, 0, 0)

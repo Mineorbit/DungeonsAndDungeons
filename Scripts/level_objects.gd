@@ -7,8 +7,22 @@ extends Node3D
 
 @onready var LevelObjectList = $LevelObjectList
 
+func load_levelobject_list():
+	var resourcedir = DirAccess.open("res://Resources/LevelObjectData")
+	for resource in resourcedir.get_files():
+		var newres = ResourceLoader.load("res://Resources/LevelObjectData/"+resource)
+		print(str(newres.levelObjectId)+" "+str(newres.name))
+		Constants.LevelObjectData[newres.levelObjectId] = newres
+		#ResourceLoader.load()"res://Resources/LevelObjectData/"+levelobjectname+".tres"
+	Constants.levelObjects_initialized = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load_levelobject_list()
+	get_parent().remove_child(self)
+	hide()
+
+func setup_resources():
 	if Constants.levelObjects_initialized:
 		return
 	Constants.levelObjects_initialized = true
@@ -47,5 +61,3 @@ func _ready():
 				meshlibrary_id = meshlibrary_id + 1
 	
 	ResourceSaver.save(meshlibrary,"res://Resources/grid.tres")
-	get_parent().remove_child(self)
-	hide()

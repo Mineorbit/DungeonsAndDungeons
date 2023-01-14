@@ -3,7 +3,7 @@ extends Node3D
 @export var spawnedEntity = "Enemies/Blog"
 
 var prefab
-var currentSpawned
+var currentSpawned: Node3D
 @onready var text = $Text
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,7 +45,9 @@ func spawnEntity():
 	if currentSpawned != null:
 		currentSpawned.remove()
 	currentSpawned = prefab.instantiate()
+	currentSpawned.rotate_y(deg_to_rad(global_rotation_degrees.y))
 	Constants.World.level.spawn_entity(currentSpawned)
+	
 	Constants.buffer()
 	set_spawn_pos()
 	currentSpawned.on_entity_remove.connect(clear_after_remove)

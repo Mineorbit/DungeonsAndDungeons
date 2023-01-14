@@ -9,7 +9,8 @@ class_name LevelObjectData
 @export var tiled = false
 @export var interactive = false
 var gridScale = 2
-@export var tileIndex = 0
+# -1 if this is not a tiled object
+@export var tileIndex = -1
 @export var levelObjectId = -1
 @export var maximumNumber = -1
 @export var offset = Vector3.ZERO
@@ -24,7 +25,7 @@ func to_cell():
 
 static func from_cell(cellTileIndex,_cellTileOrientation):
 	for levelObject in Constants.LevelObjectData.values():
-		if cellTileIndex == levelObject.tileIndex:
+		if levelObject.tiled and cellTileIndex == levelObject.tileIndex:
 			return levelObject
 	return Constants.Default_Floor
 # Called every frame. 'delta' is the elapsed time since the previous frame.
