@@ -29,6 +29,8 @@ var LevelObjectData = {}
 
 var levelObjects_initialized = false
 
+var builder: Node3D
+
 var builderPosition = Vector3.ZERO
 
 var remoteAddress = "127.0.0.1"

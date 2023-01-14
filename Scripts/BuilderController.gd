@@ -21,6 +21,7 @@ func start():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _ready() -> void:
+	Constants.builder = self
 	cursor = $CursorArm/Cursor
 	collisionRay = $CursorArm/Cursor/RayCast
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh

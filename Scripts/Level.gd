@@ -157,7 +157,6 @@ func delete_level(level_name):
 func save():
 	print("Saving Level "+level_name)
 	delete_level(level_name)
-	var dir = DirAccess.new()
 	
 	DirAccess.make_dir_absolute("user://level/localLevels")
 	DirAccess.make_dir_absolute("user://level/localLevels/"+level_name)
