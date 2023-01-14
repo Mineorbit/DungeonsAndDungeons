@@ -14,6 +14,7 @@ var mouse_sensitivity = 0.025
 var closestIndex = 0
 
 func start():
+	current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
@@ -46,13 +47,9 @@ func _physics_process(delta: float) -> void:
 	smallest_dist = 200
 	velocity = move_direction
 	global_transform.origin += velocity
-	#colliding = removalRay.is_colliding()
 
 
 
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:
 		move_camera(event.relative)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

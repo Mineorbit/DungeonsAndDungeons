@@ -6,7 +6,6 @@ var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	peer = ENetMultiplayerPeer.new()
-	Constants.World.players.playerControllers.create_player_camera()
 	#multiplayer.peer_connected.connect(self.create_player)
 	
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
@@ -75,7 +74,7 @@ func player_created(player):
 func setup_local_controls():
 	if id_set and player_exists:
 		print(str(Constants.id)+" ID: "+str(MultiplayerConstants.local_id))
-		Constants.World.players.playerControllers.camera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
+		PlayerCamera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
 		get_parent().spawn_player_hud()
 
 func _process(delta):
