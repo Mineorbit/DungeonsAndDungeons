@@ -41,6 +41,11 @@ func setup_new():
 
 func reset():
 	print("=== Reseting Level ===")
+	clear_entities()
+	resetting_level_objects()
+
+
+func resetting_level_objects():
 	for chunk in chunks.values():
 		for levelobject in chunk.get_level_objects():
 			if levelobject.has_method("reset"):
@@ -49,16 +54,10 @@ func reset():
 				levelobject.clearSignals()
 			if levelobject.has_method("deactivate"):
 				levelobject.deactivate()
-				
-	clear_entities()
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
-	
+	# there may be new entities
 	for entity in Entities.get_children():
 		if entity.has_method("reset"):
 			entity.reset()
-		
 
 func build_navigation():
 	for chunk in chunks.values():

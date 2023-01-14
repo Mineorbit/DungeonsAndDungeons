@@ -21,10 +21,7 @@ func start():
 func reset():
 	print("Resetting Spawner")
 	show_text()
-	if currentSpawned != null:
-		set_spawn_pos()
-	else:
-		spawnEntity()
+	spawnEntity()
 
 func set_spawn_pos():
 	currentSpawned.global_transform.origin = self.global_transform.origin + Vector3(0,1,0)
@@ -43,12 +40,11 @@ func spawnEntity():
 	if Constants.currentMode > 2:
 		return
 	if currentSpawned != null:
-		currentSpawned.remove()
+		currentSpawned.queue_free()
 	currentSpawned = prefab.instantiate()
 	currentSpawned.rotate_y(deg_to_rad(global_rotation_degrees.y))
-	Constants.World.level.spawn_entity(currentSpawned)
-	Constants.buffer()
 	set_spawn_pos()
+	Constants.World.level.spawn_entity(currentSpawned)
 	currentSpawned.on_entity_remove.connect(clear_after_remove)
 
 func on_remove():

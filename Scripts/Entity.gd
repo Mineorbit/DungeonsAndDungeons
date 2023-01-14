@@ -73,7 +73,7 @@ func ent_can_shoot(v):
 	can_shoot = v
 
 func _ready():
-	#tree_exiting.connect(remove)
+	tree_exiting.connect(on_remove)
 	target_rot = global_transform.basis
 	on_entity_can_shoot.connect(ent_can_shoot)
 	on_entity_melee_strike.connect(MeleeStrike)
@@ -88,8 +88,10 @@ func reset():
 	target_rot = global_transform.basis
 	started = false
 
-
 func remove():
+	get_parent().remove_child(self)
+
+func on_remove():
 	print("Removing Entity "+str(self))
 	on_entity_remove.emit()
 
@@ -172,7 +174,7 @@ func kickback(direction) -> void:
 
 # this is the current method later on do tree removal
 func Kill():
-	queue_free()
+	remove()
 
 
 func Hit(damage, hitting_entity,direction = null):
