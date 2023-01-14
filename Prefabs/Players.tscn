@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://co2kcfe3pm3f6"]
+[gd_scene load_steps=3 format=3 uid="uid://b3lvyly783kk6"]
 
-[ext_resource type="Script" path="res://Scripts/Players.gd" id="1_wnodv"]
-[ext_resource type="PackedScene" uid="uid://biisre6gougwf" path="res://Prefabs/PlayerControllers.tscn" id="2_33e1n"]
+[ext_resource type="Script" path="res://Scripts/Players/Players.gd" id="1_d85ec"]
+[ext_resource type="PackedScene" path="res://Prefabs/PlayerControllers.tscn" id="2_33e1n"]
 
 [node name="Players" type="Node3D"]
-script = ExtResource("1_wnodv")
+script = ExtResource("1_d85ec")
 
 [node name="PlayerEntities" type="Node3D" parent="."]
 

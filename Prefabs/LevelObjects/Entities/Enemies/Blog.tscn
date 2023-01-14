@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://daqtdutyrekvj"]
+[gd_scene load_steps=9 format=3 uid="uid://rv5fhuogmm7i"]
 
-[ext_resource type="Script" path="res://Scripts/Blog.gd" id="1_rre65"]
-[ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_5eeht"]
+[ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
 [ext_resource type="PackedScene" uid="uid://b088frp8gi5t" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_yeygo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
@@ -25,7 +25,7 @@ properties/1/sync = true
 [node name="Blog" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_rre65")
+script = ExtResource("1_5eeht")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")

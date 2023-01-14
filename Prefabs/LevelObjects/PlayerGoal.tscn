@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdde83tsw38mj"]
+[gd_scene load_steps=6 format=3 uid="uid://dk78w8hqpjd62"]
 
-[ext_resource type="Script" path="res://Scripts/Goal.gd" id="1_nokji"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Goal.gd" id="1_hfb0v"]
 [ext_resource type="AudioStream" uid="uid://cc2xy3a3v85dy" path="res://Assets/Sounds/ambient/goal_ambient.mp3" id="2_wdang"]
 
 [sub_resource type="SphereShape3D" id="1"]
@@ -16,7 +16,7 @@ roughness = 0.0
 material = SubResource("2")
 
 [node name="PlayerGoal" type="Node3D"]
-script = ExtResource("1_nokji")
+script = ExtResource("1_hfb0v")
 
 [node name="Area" type="Area3D" parent="."]
 collision_layer = 16

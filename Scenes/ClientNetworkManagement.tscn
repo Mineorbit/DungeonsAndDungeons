@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c07fxesa6c1wr"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/ClientNetworkManagement.gd" id="1_51kos"]
+[ext_resource type="Script" path="res://Scripts/Networking/ClientNetworkManagement.gd" id="1_51kos"]
 
 [node name="ClientNetworkManagement" type="Node3D"]
 script = ExtResource("1_51kos")

@@ -1,8 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://ctelqpslyhno8"]
+[gd_scene load_steps=43 format=3 uid="uid://bryply5pm5nlg"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerSkeleton.gd" id="1_wbk7d"]
 [ext_resource type="PackedScene" uid="uid://cpookyadc6ocv" path="res://Assets/Models/LevelObjects/Entities/Player/Player.blend" id="1_yr3ub"]
-[ext_resource type="Script" path="res://Scripts/PlayerModel.gd" id="2_bcy34"]
+[ext_resource type="Script" path="res://Scripts/Players/PlayerModel.gd" id="2_oqrot"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6pph3"]
 radius = 0.0116667
@@ -172,7 +172,7 @@ properties/5/spawn = true
 properties/5/sync = true
 
 [node name="PlayerModel" instance=ExtResource("1_yr3ub")]
-script = ExtResource("2_bcy34")
+script = ExtResource("2_oqrot")
 
 [node name="Skeleton3D" parent="root" index="0"]
 bones/0/rotation = Quaternion(0.00129191, 0.707108, -0.00129208, 0.707103)

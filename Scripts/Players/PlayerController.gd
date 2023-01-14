@@ -34,7 +34,6 @@ func report_network():
 
 @rpc
 func Jump():
-	print(str(Constants.id)+" "+str(player))
 	if player != null:
 		player.jump()
 
@@ -136,7 +135,7 @@ func get_player_camera():
 	if Constants.id == 1:
 		return MultiplayerConstants.player_cameras[str(name).to_int()]
 	else:
-		return get_parent().camera
+		return PlayerCamera
 
 
 func _physics_process(delta):
@@ -146,7 +145,6 @@ func _physics_process(delta):
 		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
 		if get_player_camera() != null:
 			input_direction = input_direction.rotated(Vector3.UP, get_player_camera().rotation.y).normalized()
-		
 		synchronizer.input_direction = input_direction
 		if Input.is_action_just_pressed("LeftUse"):
 			UseLeftAction()

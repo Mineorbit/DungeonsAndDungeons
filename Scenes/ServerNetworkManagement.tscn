@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqlnvixwjww0u"]
+[gd_scene load_steps=3 format=3 uid="uid://b6e4cqjhb4ndq"]
 
-[ext_resource type="Script" path="res://Scripts/ServerNetworkManagement.gd" id="1_1twme"]
+[ext_resource type="Script" path="res://Scripts/Networking/ServerNetworkManagement.gd" id="1_0qxtc"]
 [ext_resource type="PackedScene" uid="uid://dgu3gfhb0pqub" path="res://Prefabs/ServerCamera.tscn" id="2_m1qs3"]
 
 [node name="ServerNetworkManagement" type="Node3D"]
-script = ExtResource("1_1twme")
+script = ExtResource("1_0qxtc")
 
 [node name="Node2d" type="Node2D" parent="."]
 

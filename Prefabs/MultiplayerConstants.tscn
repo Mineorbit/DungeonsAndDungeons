@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://t4aitd1xi30n"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://Scripts/MultiplayerConstants.gd" id="1_mu5cy"]
+[ext_resource type="Script" path="res://Scripts/Networking/MultiplayerConstants.gd" id="1_mu5cy"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t1wgh"]
 properties/0/path = NodePath(".:local_id_to_id")

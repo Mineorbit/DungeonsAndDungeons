@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cappm4jw3g3vs"]
+[gd_scene load_steps=6 format=3 uid="uid://br6tyfj76udvu"]
 
 [ext_resource type="PackedScene" uid="uid://5qjssq37vgam" path="res://Prefabs/Models/Items/Bow.tscn" id="1_44l0g"]
-[ext_resource type="Script" path="res://Scripts/Bow.gd" id="1_c716e"]
-[ext_resource type="Script" path="res://Scripts/ItemSynchronizer.gd" id="3_oo5oj"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Bow.gd" id="1_yog6x"]
+[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_d2u0n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3cla"]
 size = Vector3(0.2, 2.5, 0.6)
@@ -18,7 +18,7 @@ properties/1/sync = true
 [node name="Bow" type="CharacterBody3D"]
 collision_layer = 6
 collision_mask = 3
-script = ExtResource("1_c716e")
+script = ExtResource("1_yog6x")
 offset = Vector3(-0.25, 0, 0)
 hold_rot = Vector3(90, 180, 90)
 
@@ -31,7 +31,7 @@ shape = SubResource("BoxShape3D_o3cla")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u6sld")
-script = ExtResource("3_oo5oj")
+script = ExtResource("3_d2u0n")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 one_shot = true

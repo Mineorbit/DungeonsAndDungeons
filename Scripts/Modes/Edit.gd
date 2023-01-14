@@ -54,6 +54,7 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed("SwitchPlayer") and Constants.currentMode == 2:
 		current_player = (current_player + 1) % 4
 		Players.playerControllers.set_current_player(current_player)
+		PlayerCamera.player = Players.get_player(current_player)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -92,6 +93,7 @@ func enter_test_mode():
 	add_child(testhud)
 	Players.set_start_positions()
 	Players.playerControllers.set_current_player(current_player)
+	PlayerCamera.player = Players.get_player(current_player)
 	buildmusic.stop()
 	connections.hide()
 	

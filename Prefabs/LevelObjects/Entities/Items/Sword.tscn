@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxrwn47lflupj"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Sword.gd" id="1_2x1ta"]
-[ext_resource type="PackedScene" uid="uid://m1gjv10tevsd" path="res://Prefabs/HitArea.tscn" id="2_aimnf"]
-[ext_resource type="Script" path="res://Scripts/ItemSynchronizer.gd" id="3_me3ac"]
+[ext_resource type="Script" path="res://Scripts/Level/Sword.gd" id="1_2x1ta"]
+[ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_aimnf"]
+[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_me3ac"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgxee"]
 albedo_color = Color(0.984314, 0.984314, 0, 1)

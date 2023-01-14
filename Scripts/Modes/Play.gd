@@ -16,7 +16,6 @@ func _ready():
 	# start_lobby()
 	
 func start_lobby():
-	print(str(Constants.id)+" Starting Lobby")
 	get_tree().paused = true
 	remove_chunk_streamers()
 	Constants.World.end()
@@ -80,14 +79,8 @@ func add_player(id):
 func respawn_player(id):
 	print("Respawning Player "+str(id))
 	var player = await Constants.World.players.spawn_player(id)
-	if Constants.id == 1:
-		Constants.World.players.playerControllers.of(id).player = player
 
 func remove_player(id):
 	Constants.World.players.despawn_player(id)
 
-func add_player_controller(id = 0,peer_id = 0):
-	var playercontroller = Constants.World.players.spawn_player_controller(id,peer_id)
-	print(playercontroller)
-	return playercontroller
 

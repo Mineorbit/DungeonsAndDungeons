@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c55j0acrsp5hp"]
+[gd_scene load_steps=2 format=3 uid="uid://dc82dghj30vrq"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerCamera.gd" id="1_pwnu2"]
+[ext_resource type="Script" path="res://Scripts/Players/PlayerCamera.gd" id="1_b020v"]
 
 [node name="PlayerCamera" type="SpringArm3D"]
 spring_length = 5.0
 margin = 0.2
-script = ExtResource("1_pwnu2")
+script = ExtResource("1_b020v")
 
 [node name="CameraHoldingPoint" type="Node3D" parent="."]
 

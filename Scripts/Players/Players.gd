@@ -58,13 +58,13 @@ func despawn_player_controllers():
 func spawn_player_controllers():
 	for i in range(4):
 		spawn_player_controller(i)
-	playerControllers.of(0).spawn()
+	playerControllers.playerControllers[0].spawn()
 
 
 func spawn_player_controller(i,owner_id = 0):
 	var p = get_player(i)
 	playerControllers.add(p,i,owner_id)
-	var newplayercontroller = playerControllers.of(i)
+	var newplayercontroller = playerControllers.playerControllers[i]
 	p.playercontroller = newplayercontroller
 	p.playercontroller.player = p
 	print("Spawned playercontroller "+str(newplayercontroller))

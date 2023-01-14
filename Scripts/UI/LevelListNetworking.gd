@@ -12,7 +12,6 @@ func new_list_element(element):
 	element.get_node("MultiplayerSynchronizer").set_multiplayer_authority(ownerid)
 
 func set_auth(id:int):
-	print("["+str(Constants.id)+"] Setting owner of LevelList to "+str(id))
 	for child in get_children():
 		child.set_multiplayer_authority(id)
 	ownerid = id

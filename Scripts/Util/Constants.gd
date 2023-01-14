@@ -47,7 +47,6 @@ var Default_Floor = load("res://Resources/LevelObjectData/Floor.tres")
 # Called when the node enters the scene tree for the first time.
 
 
-
 func buffer():
 	await get_tree().physics_frame
 	await get_tree().physics_frame

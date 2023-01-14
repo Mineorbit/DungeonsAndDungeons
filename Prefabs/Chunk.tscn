@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg0x6ci2rec82"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Chunk.gd" id="1"]
-[ext_resource type="MeshLibrary" uid="uid://lc6hvvgoxlv7" path="res://Resources/grid.tres" id="3_cc4lu"]
+[ext_resource type="Script" path="res://Scripts/Level/Chunk.gd" id="1"]
+[ext_resource type="MeshLibrary" uid="uid://txc43s8r4uig" path="res://Resources/grid.tres" id="3_cc4lu"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
 agent_radius = 0.1

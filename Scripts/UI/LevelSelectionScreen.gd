@@ -45,7 +45,6 @@ func update_interface_owner():
 	if Constants.id != 1:
 		return
 	var new_owner_id = MultiplayerConstants.get_first_connected()
-	print("Update interface owner on all clients")
 	owner_id = new_owner_id
 	#trigger update on other clients
 	rpc("set_interface_owner",owner_id)
@@ -59,7 +58,6 @@ func update_interface_owner():
 func set_interface_owner(id):
 	if owner_id == id:
 		return
-	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(id))
 	owner_id = id
 	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
 	interface.get_node("CursorSpawner").set_multiplayer_authority(id)
@@ -76,8 +74,6 @@ func player_entered(player):
 	# server does not have to continue
 	if Constants.id == 1:
 		update_interface_owner()
-	#print(str(Constants.id)+" Local Player:"+str(Constants.World.players.get_player(MultiplayerConstants.local_id)))
-	#print(str(Constants.id)+" Entered Player: "+str(player))
 	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -128,7 +124,6 @@ func add_checkbox(local_id):
 
 func check_ready():
 	if levellist.selected_level == null:
-		print("No Level was selected")
 		return false
 	for child in checkboxes.get_children():
 		if not child.button_pressed:

@@ -1,17 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpllvelpgsund"]
+[gd_scene load_steps=17 format=3 uid="uid://bpqrsbwd745am"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
-[ext_resource type="Script" path="res://Scripts/LevelObjectList.gd" id="1_srj5y"]
-[ext_resource type="PackedScene" uid="uid://cdde83tsw38mj" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
-[ext_resource type="PackedScene" uid="uid://c4ftiyin7vo0t" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
+[ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
+[ext_resource type="PackedScene" uid="uid://dugp2bkorh4g" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
 [ext_resource type="Material" uid="uid://bwdmyoav5klf2" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
 [ext_resource type="PackedScene" uid="uid://dya31aho2aoh2" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
-[ext_resource type="PackedScene" uid="uid://dgeg3oqko2dj8" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
-[ext_resource type="PackedScene" uid="uid://dqo2o8ghoe4np" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
-[ext_resource type="PackedScene" uid="uid://c2i5wm48oywkb" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_cp1tb"]
-[ext_resource type="PackedScene" uid="uid://brfdmgexloksh" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
-[ext_resource type="PackedScene" uid="uid://dtxtw55scu3n0" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="10_3e6xb"]
-[ext_resource type="PackedScene" uid="uid://b4y5uir6eiemq" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="11_60hu6"]
+[ext_resource type="PackedScene" uid="uid://c1iw5d7te4wr" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_cp1tb"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="10_3e6xb"]
+[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="11_60hu6"]
 [ext_resource type="PackedScene" uid="uid://bgom4k0xbayum" path="res://Prefabs/LevelObjects/Interactive/Torch.tscn" id="13_4apm0"]
 
 [sub_resource type="BoxMesh" id="1"]
@@ -25,7 +25,7 @@ material = ExtResource("3_mypbp")
 
 [node name="LevelObjectList" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
-script = ExtResource("1_srj5y")
+script = ExtResource("1_jx2mm")
 
 [node name="TiledFloor" type="Node3D" parent="."]
 

@@ -26,6 +26,12 @@ func _ready():
 	Signals.on_new_world_created.connect(Constants.entity_control_function)
 
 
+func create_player_camera():
+	var camera = load("res://Prefabs/PlayerCamera.tscn").instantiate()
+	Constants.localPlayerCamera = camera
+	add_child(camera)
+
+
 func disable_local_computations(entity):
 	print(str(Constants.id)+" Muting Entity "+str(entity))
 	entity.ready.connect(func():

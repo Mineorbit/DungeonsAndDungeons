@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccaa1tk0ai85a"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pxvv1tt5f4w" path="res://Prefabs/Entities.tscn" id="2_fl8ir"]
 
 [node name="Level" type="NavigationRegion3D"]

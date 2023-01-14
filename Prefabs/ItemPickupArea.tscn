@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyftlbbtcobqv"]
+[gd_scene load_steps=3 format=3 uid="uid://cwhbpya0c0w61"]
 
-[ext_resource type="Script" path="res://Scripts/ItemPickupArea.gd" id="1_elaus"]
+[ext_resource type="Script" path="res://Scripts/Util/ItemPickupArea.gd" id="1_yh08x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_btc0r"]
 radius = 1.25
@@ -8,4 +8,4 @@ radius = 1.25
 [node name="ItemPickupArea" type="ShapeCast3D"]
 shape = SubResource("SphereShape3D_btc0r")
 collision_mask = 4
-script = ExtResource("1_elaus")
+script = ExtResource("1_yh08x")

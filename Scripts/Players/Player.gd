@@ -111,6 +111,7 @@ func DettachAllItems():
 	if itemRight != null:
 		Dettach(itemRight)
 
+
 func start():
 	super.start()
 	Signals.playerHealthChanged.emit(id,health)

@@ -12,6 +12,7 @@ func _ready():
 	multiplayer.set_multiplayer_peer(peer)
 	multiplayer.peer_connected.connect(player_connected)
 	multiplayer.peer_disconnected.connect(player_disconnected)
+	Constants.World.players.player_added.connect(on_player_added)
 	get_parent().start_lobby()
 
 
@@ -33,13 +34,21 @@ func player_connected(id):
 	
 	
 	get_parent().add_player(i)
-	var newplayercontroller = get_parent().add_player_controller(i,id)
+	var newplayercontroller = add_player_controller(i,id)
 	newplayercontroller.is_active = false
 	var campos = load("res://Prefabs/PlayerCameraPosition.tscn").instantiate()
 	campos.name = str(id)
 	get_parent().add_child(campos)
 	MultiplayerConstants.player_cameras[i] = campos
 	# spawn player camera position
+
+func add_player_controller(id = 0,peer_id = 0):
+	var playercontroller = Constants.World.players.spawn_player_controller(id,peer_id)
+	return playercontroller
+
+
+func on_player_added(player):
+	print(Constants.World.players.playerControllers.playerControllers)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
