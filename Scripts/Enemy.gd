@@ -52,5 +52,5 @@ func auto_navigate(delta):
 	navAgent.set_velocity(_velocity)
 
 func remove():
-	target.queue_free()
+	#target.queue_free()
 	super.remove()
