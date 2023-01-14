@@ -34,6 +34,7 @@ func report_network():
 
 @rpc
 func Jump():
+	print(str(Constants.id)+" "+str(player))
 	if player != null:
 		player.jump()
 

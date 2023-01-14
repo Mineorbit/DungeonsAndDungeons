@@ -51,6 +51,8 @@ signal on_entity_pickup
 
 signal on_entity_hit
 
+signal on_entity_died
+
 signal on_entity_landed
 
 signal on_entity_melee_strike(damage)
@@ -90,9 +92,10 @@ func reset():
 
 func remove():
 	get_parent().remove_child(self)
+	queue_free()
 
 func on_remove():
-	print("Removing Entity "+str(self))
+	print("Removed Entity "+str(self))
 	on_entity_remove.emit()
 
 
@@ -113,7 +116,6 @@ func _process(_delta):
 func _physics_process(delta: float) -> void:
 	if not started:
 		return
-	
 	if global_transform.origin.y < Constants.deathplane:
 		Kill()
 	
@@ -175,6 +177,7 @@ func kickback(direction) -> void:
 # this is the current method later on do tree removal
 func Kill():
 	remove()
+	on_entity_died.emit()
 
 
 func Hit(damage, hitting_entity,direction = null):

@@ -32,7 +32,7 @@ func start_lobby():
 func complete_start_round():
 	get_tree().paused = true
 	# start world with level from downloads
-	Constants.World.start(selected_level_name,true,true)
+	await Constants.World.start(selected_level_name,true,true)
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	remove_child(lobby)
@@ -73,8 +73,15 @@ func add_chunk_streamer_for_player(i):
 	Constants.World.level.ChunkStreamers.add_child(new_chunk_streamer)
 
 func add_player(id):
-	Constants.World.players.spawn_player(id)
-	
+	var player = await Constants.World.players.spawn_player(id)
+	player.on_entity_died.connect(func():
+		respawn_player(id))
+
+func respawn_player(id):
+	print("Respawning Player "+str(id))
+	var player = await Constants.World.players.spawn_player(id)
+	if Constants.id == 1:
+		Constants.World.players.playerControllers.of(id).player = player
 
 func remove_player(id):
 	Constants.World.players.despawn_player(id)

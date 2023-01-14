@@ -129,8 +129,7 @@ func _physics_process(delta):
 	if playercontroller != null:
 		move_direction.x = playercontroller.input_direction.x
 		move_direction.z = playercontroller.input_direction.z
-		super._physics_process(delta)
-
+	super._physics_process(delta)
 
 
 @rpc(any_peer, call_local)

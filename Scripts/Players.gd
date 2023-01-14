@@ -32,6 +32,7 @@ func set_start_position(i):
 				base = Constants.World.level.player_spawns[i].global_transform.origin
 			else:
 				base = Vector3(2*i,2,0)
+			print(base)
 			get_player(i).set_position(base)
 			get_player(i)._velocity = Vector3.ZERO
 			await Constants.buffer()
@@ -79,11 +80,12 @@ func spawn_player(i):
 		else:
 			player = get_player(i)
 		playerEntities.add_child(player)
-		player.global_transform.origin = Vector3(0.5 + i * 2,5,0.5)
+		set_start_position(i)
 		await Constants.buffer()
 		player._velocity = Vector3.ZERO
 		player_spawned.emit(i)
 		player.start()
+		return player
 
 
 func despawn_player(i):
