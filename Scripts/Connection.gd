@@ -22,6 +22,7 @@ func _process(delta):
 	var a = point_a.global_transform.origin
 	var b = point_b.global_transform.origin
 	
+	# this cannot be factored out
 	arr_mesh = ArrayMesh.new()
 	mesh = PlaneMesh.new()
 	array = mesh.get_mesh_arrays()
@@ -36,7 +37,8 @@ func _process(delta):
 	var planenormal = Vector3.UP.cross(b-a)
 	# determine side of plane through a with vectors ab and up
 	var factor = -1
-	#var factor = -sign(Constants.builder.basis.z.dot(planenormal))
+	
+	# these are the coordinates of all for corners of the connection mesh
 	array[0][0] =  (b-a)+factor*scaleing* offset
 	array[0][1] = (b-a)-factor*scaleing* offset
 	array[0][2] = factor*scaleing* offset
