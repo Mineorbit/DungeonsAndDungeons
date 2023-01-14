@@ -6,21 +6,25 @@ extends Node3D
 @onready var closest = $Closest
 @onready var wiremodel: MeshInstance3D = $Wire/WireModel
 var mat
+var mesh
+var array
+var arr_mesh
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mat = StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.albedo_color = Color.GREEN
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var a = point_a.global_transform.origin
 	var b = point_b.global_transform.origin
-	var arr_mesh := ArrayMesh.new()
-	var mesh: Mesh = PlaneMesh.new()
-	var array = mesh.get_mesh_arrays()
 	
+	arr_mesh = ArrayMesh.new()
+	mesh = PlaneMesh.new()
+	array = mesh.get_mesh_arrays()
 	# this should instead be the cross product of the orthogonal of the camera position and normal and the ab direction
 	var n = (b-a).normalized()
 	var p = Constants.builderPosition
