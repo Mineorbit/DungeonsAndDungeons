@@ -48,7 +48,11 @@ func add_player_controller(id = 0,peer_id = 0):
 
 
 func on_player_added(player):
-	print(Constants.World.players.playerControllers.playerControllers)
+	var playercontroller = Constants.World.players.playerControllers.playerControllers[int(str(player.name))]
+	# this only matters if player respawns
+	if playercontroller != null:
+		player.playercontroller = playercontroller
+		player.playercontroller.player = player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
