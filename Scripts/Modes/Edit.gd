@@ -34,8 +34,17 @@ func _ready():
 	world.create_new_level()
 	enter_edit_mode()
 	world.game_won.connect(enter_edit_mode)
+	Constants.World.players.player_removed.connect(func(player):
+		if player.id == current_player:
+			next_player())
 
 
+func next_player():
+		current_player = (current_player + 1) % 4
+		while Players.get_player(current_player) == null:
+			current_player = (current_player + 1) % 4
+		Players.playerControllers.set_current_player(current_player)
+		PlayerCamera.player = Players.get_player(current_player)
 
 
 func edit(name):
@@ -52,9 +61,7 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed("Edit"):
 		enter_edit_mode()
 	if Input.is_action_just_pressed("SwitchPlayer") and Constants.currentMode == 2:
-		current_player = (current_player + 1) % 4
-		Players.playerControllers.set_current_player(current_player)
-		PlayerCamera.player = Players.get_player(current_player)
+		next_player()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

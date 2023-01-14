@@ -5,6 +5,7 @@ extends Node3D
 @onready var playerControllers = $PlayerControllers
 
 signal player_added(player)
+signal player_removed(player)
 signal player_spawned(local_id)
 
 var playerpref
@@ -14,10 +15,10 @@ var playerpref
 func _ready():
 	playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 	Constants.players = self
-	playerEntities.child_entered_tree.connect(new_player_added)
-
-func new_player_added(node):
-	player_added.emit(node)
+	playerEntities.child_entered_tree.connect(func(player):
+		player_added.emit(player))
+	playerEntities.child_exiting_tree.connect(func(player):
+		player_removed.emit(player))
 
 
 func set_start_positions():
