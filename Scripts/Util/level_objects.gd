@@ -11,7 +11,6 @@ func load_levelobject_list():
 	var resourcedir = DirAccess.open("res://Resources/LevelObjectData")
 	for resource in resourcedir.get_files():
 		var newres = ResourceLoader.load("res://Resources/LevelObjectData/"+resource)
-		print(str(newres.levelObjectId)+" "+str(newres.name))
 		Constants.LevelObjectData[newres.levelObjectId] = newres
 		#ResourceLoader.load()"res://Resources/LevelObjectData/"+levelobjectname+".tres"
 	Constants.levelObjects_initialized = true
