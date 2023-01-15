@@ -15,7 +15,7 @@ func _ready():
 	preparing_Collision()
 
 func preparing_Collision():
-	Constants.mode_changed.connect(on_mode_change)
+	Signals.mode_changed.connect(on_mode_change)
 	
 func apply_construction_data():
 	if construction_collision != null:

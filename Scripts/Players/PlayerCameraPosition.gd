@@ -9,5 +9,5 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Constants.id != 1:
-			global_transform.origin = PlayerCamera.global_transform.origin
-			global_rotation = PlayerCamera.global_rotation
+			global_transform.origin = PlayerCamera.Camera.global_transform.origin
+			global_rotation = PlayerCamera.Camera.global_rotation

@@ -71,8 +71,6 @@ func _physics_process(delta):
 	update_camera_rigging(delta)
 	
 func _process(delta):
-	#Camera.global_transform.origin = ( TargetPoint.global_transform.origin + Camera.global_transform.origin)*0.5
-	#move_camera(dir)
 	update_camera_rigging(0)
 
 func update_camera_rigging(delta):

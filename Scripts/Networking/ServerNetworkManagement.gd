@@ -35,10 +35,20 @@ func player_connected(id):
 	
 	get_parent().add_player(i)
 	var newplayercontroller = add_player_controller(i,id)
-	newplayercontroller.is_active = false
+	newplayercontroller.ready.connect(func():
+		newplayercontroller.set_process(false)
+		newplayercontroller.set_physics_process(false)
+	)
+	newplayercontroller.set_process(false)
+	newplayercontroller.set_physics_process(false)
 	var campos = load("res://Prefabs/PlayerCameraPosition.tscn").instantiate()
 	campos.name = str(id)
+	campos.ready.connect(func():
+		campos.set_process(false)
+		campos.set_physics_process(false)
+	)
 	get_parent().add_child(campos)
+	
 	MultiplayerConstants.player_cameras[i] = campos
 	# spawn player camera position
 

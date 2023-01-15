@@ -1,6 +1,5 @@
-res://Prefabs/LevelObjects/Interactive/AndGate.tscn
-res://Assets/Materials/Entities/Player/Eye.tres
 res://Prefabs/MainMenu/Edit.tscn
+res://Assets/Materials/Entities/Player/Eye.tres
 res://Scenes/ServerNetworkManagement.tscn
 res://Prefabs/PlayerCamera.tscn
 res://Scenes/Bootstrap.tscn
@@ -31,8 +30,10 @@ res://Prefabs/LevelObjects/Interactive/Spike.tscn
 res://Prefabs/Models/LevelObjects/Interactive/SpikeModel.tscn
 res://Scenes/level_objects.tscn
 res://Editor/level_object_initialization.tscn
-res://Scripts/Level/LevelObject/AndGate.gd
-res://Assets/Materials/Entities/Player/EyeShader.gdshader
+res://Prefabs/LevelObjects/Interactive/AndGate.tscn
 res://node_3d.tscn
-res://Scripts/Util/Constants.gd
-res://Scripts/Util/level_objects.gd
+res://Scripts/Level/LevelObject.gd
+res://Scripts/Players/PlayerCamera.gd
+res://Scripts/Networking/ServerNetworkManagement.gd
+res://Prefabs/PlayerCameraPosition.tscn
+res://Scripts/Players/PlayerCameraPosition.gd
