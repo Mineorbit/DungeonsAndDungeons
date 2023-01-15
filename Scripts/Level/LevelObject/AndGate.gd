@@ -16,15 +16,12 @@ func on_mode_change_and_gate():
 
 @rpc
 func activate():
-	
 	activated = min(get_parent().connectedObjects.size(),activated + 1)
-	print(activated)
 	if get_parent().connectedObjects.size() == activated:
 		get_parent().activate_connected()
 
 @rpc
 func deactivate():
 	activated = max(0,activated - 1)
-	print(activated)
 	if get_parent().connectedObjects.size() > activated:
 		get_parent().deactivate_connected()
