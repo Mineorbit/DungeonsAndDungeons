@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ku4vnqtrapbb"]
+
+[ext_resource type="PackedScene" uid="uid://cqrqy3nmhsuji" path="res://Prefabs/Models/LevelObjects/Interactive/SpikeModel.tscn" id="1_jrcou"]
+
+[node name="Spike" type="Node3D"]
+
+[node name="SpikeModel" parent="." instance=ExtResource("1_jrcou")]

@@ -23,9 +23,6 @@ func _ready():
 	hide()
 
 func setup_resources():
-	if Constants.levelObjects_initialized:
-		return
-	Constants.levelObjects_initialized = true
 	var meshlibrary = MeshLibrary.new()
 	var unique_id = 0
 	var meshlibrary_id = 0

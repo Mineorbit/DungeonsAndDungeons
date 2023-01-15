@@ -1,5 +1,10 @@
-res://Prefabs/Players.tscn
 res://Assets/Materials/Entities/Player/Eye.tres
+res://Prefabs/Models/LevelObjects/Interactive/SpikeModel.tscn
+res://Prefabs/LevelObjects/Interactive/Spike.tscn
+res://Prefabs/LevelObjects/LevelObjectList.tscn
+res://Scenes/level_objects.tscn
+res://Editor/level_object_initialization.tscn
+res://Editor/level_object_initialization.gd
 res://Prefabs/MainMenu/Edit.tscn
 res://Scenes/ServerNetworkManagement.tscn
 res://Prefabs/PlayerCamera.tscn
@@ -18,7 +23,6 @@ res://Prefabs/Models/LevelObjects/Interactive/LeverModel.tscn
 res://Prefabs/LevelObjects/Entities/Items/BombGlove.tscn
 res://Prefabs/LevelObjects/Entities/Items/Bow.tscn
 res://Prefabs/Models/Entities/BlogModel.tscn
-res://Prefabs/LevelObjects/LevelObjectList.tscn
 res://Prefabs/Entities.tscn
 res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn
 res://Prefabs/Connection.tscn
@@ -26,11 +30,6 @@ res://Prefabs/ItemPickupArea.tscn
 res://Prefabs/LevelObjects/Entities/Bomb.tscn
 res://Prefabs/ServerCamera.tscn
 res://Prefabs/World.tscn
-res://Scripts/Players/Player.gd
-res://Scripts/Players/PlayerCamera.gd
-res://Scripts/Modes/Edit.gd
-res://Scripts/Networking/ClientNetworkManagement.gd
-res://Scripts/Players/PlayerCameraPosition.gd
-res://Scripts/ServerCamera.gd
-res://Scripts/Networking/ServerNetworkManagement.gd
-res://Scripts/Players/Players.gd
+res://Prefabs/Players.tscn
+res://Scripts/Util/level_objects.gd
+res://Resources/LevelObjectData/Spike.tres
