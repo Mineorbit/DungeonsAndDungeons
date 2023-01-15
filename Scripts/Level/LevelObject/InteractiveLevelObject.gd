@@ -70,7 +70,7 @@ func sign_up():
 #this should be extracted into another prefab
 func preparing_Collision():
 	construction_collision = $ConstructionCollision
-	Constants.mode_changed.connect(on_mode_change)
+	Signals.mode_changed.connect(on_mode_change)
 	
 
 

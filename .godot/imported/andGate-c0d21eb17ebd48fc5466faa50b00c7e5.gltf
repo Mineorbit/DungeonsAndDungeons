@@ -3,6 +3,10 @@
         "generator" : "Khronos glTF Blender I/O v3.4.50",
         "version" : "2.0"
     },
+    "extensionsUsed" : [
+        "KHR_materials_specular",
+        "KHR_materials_ior"
+    ],
     "scene" : 0,
     "scenes" : [
         {
@@ -21,16 +25,25 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "Material",
+            "extensions" : {
+                "KHR_materials_specular" : {
+                    "specularColorFactor" : [
+                        0.603618291578252,
+                        0.603618291578252,
+                        0.603618291578252
+                    ]
+                },
+                "KHR_materials_ior" : {
+                    "ior" : 1.4500000476837158
+                }
+            },
+            "name" : "AndGate",
             "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.800000011920929,
-                    0.800000011920929,
-                    0.800000011920929,
-                    1
-                ],
+                "baseColorTexture" : {
+                    "index" : 0
+                },
                 "metallicFactor" : 0,
-                "roughnessFactor" : 0.4000000059604645
+                "roughnessFactor" : 0.6045454740524292
             }
         }
     ],
@@ -51,11 +64,24 @@
             ]
         }
     ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "andgate_Albedo.png",
+            "uri" : "../../Assets/Textures/LevelObject/AndGate/andgate_Albedo.png"
+        }
+    ],
     "accessors" : [
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 6984,
+            "count" : 2208,
             "max" : [
                 1,
                 1,
@@ -71,19 +97,19 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 6984,
+            "count" : 2208,
             "type" : "VEC2"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 6984,
+            "count" : 2208,
             "type" : "VEC3"
         },
         {
             "bufferView" : 3,
             "componentType" : 5126,
-            "count" : 6984,
+            "count" : 2208,
             "type" : "VEC4"
         },
         {
@@ -96,38 +122,44 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 83808,
+            "byteLength" : 26496,
             "byteOffset" : 0,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 55872,
-            "byteOffset" : 83808,
+            "byteLength" : 17664,
+            "byteOffset" : 26496,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 83808,
-            "byteOffset" : 139680,
+            "byteLength" : 26496,
+            "byteOffset" : 44160,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 111744,
-            "byteOffset" : 223488,
+            "byteLength" : 35328,
+            "byteOffset" : 70656,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 21384,
-            "byteOffset" : 335232,
+            "byteOffset" : 105984,
             "target" : 34963
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 356616,
+            "byteLength" : 127368,
             "uri" : "andGate-c0d21eb17ebd48fc5466faa50b00c7e5.bin"
         }
     ]

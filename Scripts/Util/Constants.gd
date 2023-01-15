@@ -52,10 +52,12 @@ func buffer():
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 
-signal mode_changed
+
+
+
 func set_mode(new_mode):
 	currentMode = new_mode
-	emit_signal("mode_changed")
+	Signals.mode_changed.emit()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

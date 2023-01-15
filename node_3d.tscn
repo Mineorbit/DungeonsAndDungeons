@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6wgmv6dtnt5i"]
+
+[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="1_s3trc"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="PlayerModel" parent="." instance=ExtResource("1_s3trc")]
+
+[node name="PlayerModel2" parent="." instance=ExtResource("1_s3trc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123861, 1.53405, 0)

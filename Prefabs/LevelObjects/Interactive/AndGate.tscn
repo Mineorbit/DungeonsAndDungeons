@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmmdkxfrlsyrm"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/AndGate.gd" id="1_a7161"]
+[ext_resource type="PackedScene" uid="uid://cdcmlnq3k2r2t" path="res://Assets/Models/LevelObjects/Interactive/andGate.blend" id="1_h15gd"]
+
+[node name="AndGate" type="Node3D"]
+script = ExtResource("1_a7161")
+
+[node name="AndGateModel" parent="." instance=ExtResource("1_h15gd")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
