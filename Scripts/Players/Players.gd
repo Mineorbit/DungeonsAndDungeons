@@ -53,13 +53,13 @@ func spawn_players():
 func despawn_player_controllers():
 	for i in range(4):
 		if get_player(i) != null:
-			playerControllers.of(i).despawn()
+			playerControllers.playerControllers[i].queue_free()
+			playerControllers.playerControllers[i] = null
 
 
 func spawn_player_controllers():
 	for i in range(4):
 		spawn_player_controller(i)
-	playerControllers.playerControllers[0].spawn()
 
 
 func spawn_player_controller(i,owner_id = 0):

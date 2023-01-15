@@ -9,11 +9,11 @@ extends Node3D
 		if val:
 			if spikeModel != null:
 				pass
-				#spikeModel.switch()
+				spikeModel.switch()
 		else:
 			if spikeModel != null:
 				pass
-				#spikeModel.switchback()
+				spikeModel.switchback()
 		is_open = val
 
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +22,8 @@ func _ready():
 	hitArea.body_entered.connect(trystrike)
 
 func trystrike(object):
-	object.Hit(25,self)
+	if not is_open:
+		object.Hit(25,self)
 
 @rpc
 func activate():

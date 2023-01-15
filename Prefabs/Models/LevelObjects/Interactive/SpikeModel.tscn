@@ -1,5 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqrqy3nmhsuji"]
+[gd_scene load_steps=12 format=3 uid="uid://cqrqy3nmhsuji"]
 
 [ext_resource type="PackedScene" uid="uid://vwn5m1itfgrc" path="res://Assets/Models/LevelObjects/Interactive/spike.blend" id="1_ooikr"]
+[ext_resource type="Script" path="res://Scripts/SwitchingModel.gd" id="2_lv2p0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2vpqb"]
+animation = &"Switch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ejmo"]
+animation = &"SwitchBack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gqq1v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wvt86"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_we7lg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i7fur"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5n684"]
+states/Switch/node = SubResource("AnimationNodeAnimation_2vpqb")
+states/Switch/position = Vector2(406, 100)
+states/SwitchBack/node = SubResource("AnimationNodeAnimation_1ejmo")
+states/SwitchBack/position = Vector2(634, 100)
+transitions = ["Start", "Switch", SubResource("AnimationNodeStateMachineTransition_gqq1v"), "Switch", "SwitchBack", SubResource("AnimationNodeStateMachineTransition_wvt86"), "SwitchBack", "Switch", SubResource("AnimationNodeStateMachineTransition_we7lg"), "SwitchBack", "End", SubResource("AnimationNodeStateMachineTransition_i7fur")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ay0g3"]
+graph_offset = Vector2(-180, 115)
+nodes/fsm/node = SubResource("AnimationNodeStateMachine_5n684")
+nodes/fsm/position = Vector2(60, 160)
+node_connections = [&"output", 0, &"fsm"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_7xxvm"]
 
 [node name="SpikeModel" instance=ExtResource("1_ooikr")]
+script = ExtResource("2_lv2p0")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_ay0g3")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/fsm/playback = SubResource("AnimationNodeStateMachinePlayback_7xxvm")

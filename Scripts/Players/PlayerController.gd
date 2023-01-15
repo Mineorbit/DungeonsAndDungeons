@@ -2,7 +2,6 @@ extends Node
 
 var player
 var is_active = false
-var spawned = false
 
 @export var input_direction = Vector3.ZERO
 @onready var synchronizer = $MultiplayerSynchronizer
@@ -17,15 +16,10 @@ func setup_playercontroller_networking():
 	synchronizer.set_multiplayer_authority(str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
 	
-
-func spawn():
-	spawned = true
 	
 func set_active(active):
 	is_active = active
 
-func despawn():
-	spawned = false
 
 func report_network():
 	print("Me: "+str(Constants.id))

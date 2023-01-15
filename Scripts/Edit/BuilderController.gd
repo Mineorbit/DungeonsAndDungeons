@@ -16,9 +16,11 @@ var edit
 var move_speed = 4
 
 var closestIndex = 0
+@onready var camera = $BuilderCamera
 
 func start():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera.current = true
 
 func _ready() -> void:
 	Constants.builder = self

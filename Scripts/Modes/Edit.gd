@@ -35,7 +35,7 @@ func _ready():
 	enter_edit_mode()
 	world.game_won.connect(enter_edit_mode)
 	Constants.World.players.player_removed.connect(func(player):
-		if player.id == current_player:
+		if Constants.currentMode == 2 and player.id == current_player:
 			next_player())
 
 
