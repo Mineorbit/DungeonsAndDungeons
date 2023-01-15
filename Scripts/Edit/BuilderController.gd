@@ -74,7 +74,6 @@ var start_object
 func connect_interactive_objects(a, b):
 	if a == null or b == null or a == b:
 		return
-		
 	# check or cycle
 	if a is InteractiveLevelObject and b is InteractiveLevelObject:
 		if not a.unique_instance_id in b.connectedObjects:

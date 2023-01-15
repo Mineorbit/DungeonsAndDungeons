@@ -1,7 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://ku4vnqtrapbb"]
+[gd_scene load_steps=4 format=3 uid="uid://ku4vnqtrapbb"]
 
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Spike.gd" id="1_jdedr"]
 [ext_resource type="PackedScene" uid="uid://cqrqy3nmhsuji" path="res://Prefabs/Models/LevelObjects/Interactive/SpikeModel.tscn" id="1_jrcou"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_blpa2"]
+
 [node name="Spike" type="Node3D"]
+script = ExtResource("1_jdedr")
 
 [node name="SpikeModel" parent="." instance=ExtResource("1_jrcou")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.05, 0)
+
+[node name="HitArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+shape = SubResource("BoxShape3D_blpa2")
