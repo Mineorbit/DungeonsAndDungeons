@@ -1,34 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://b088frp8gi5t"]
+[gd_scene load_steps=4 format=3 uid="uid://db3xijpudgayj"]
 
-[ext_resource type="PackedScene" uid="uid://dm3tfckewoxgd" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.glb" id="1_0cgyp"]
-[ext_resource type="Animation" uid="uid://bsnku0tlfd04c" path="res://Assets/Animations/Blog/Idle.res" id="1_68hjo"]
-[ext_resource type="Animation" uid="uid://dmsoo3wutycna" path="res://Assets/Animations/Blog/Walk.res" id="3_6wkc7"]
-[ext_resource type="Animation" uid="uid://dph1utcatq64" path="res://Assets/Animations/Blog/Stunned.res" id="4_jv4j4"]
-[ext_resource type="Animation" uid="uid://cpjncqkub61vv" path="res://Assets/Animations/Blog/Strike.res" id="5_xkp5y"]
+[ext_resource type="PackedScene" uid="uid://cqgexg1255cc7" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.blend" id="1_awtxg"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wk4bg"]
-_data = {
-"Idle": ExtResource("1_68hjo"),
-"Strike": ExtResource("5_xkp5y"),
-"Stunned": ExtResource("4_jv4j4"),
-"Walk": ExtResource("3_6wkc7")
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0f7e"]
+animation = &"Idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e482k"]
-animation = &"BlogAnimationLibrary/Idle"
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sohj0"]
+graph_offset = Vector2(-426.757, 80.5472)
+nodes/idleanimation/node = SubResource("AnimationNodeAnimation_o0f7e")
+nodes/idleanimation/position = Vector2(47.3911, 164.269)
+node_connections = [&"output", 0, &"idleanimation"]
 
-[node name="BlogModel" type="Node3D"]
+[node name="BlogModel" instance=ExtResource("1_awtxg")]
 
-[node name="Blog" parent="." instance=ExtResource("1_0cgyp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0683053, 0)
+[node name="Skeleton3D" parent="Blog" index="0"]
+bones/0/position = Vector3(0, -0.141397, 0)
+bones/1/rotation = Quaternion(0.71497, 7.08439e-06, 7.4151e-06, 0.699155)
+bones/2/rotation = Quaternion(-0.574886, -0.425074, -0.415672, 0.56217)
+bones/3/rotation = Quaternion(-0.585706, 0.462823, 0.326533, 0.579758)
+bones/5/rotation = Quaternion(0.574071, -0.3533, 0.287122, 0.680575)
+bones/6/rotation = Quaternion(-0.564777, 0.36292, 0.303041, 0.676374)
+bones/7/rotation = Quaternion(0.574071, 0.3533, -0.287122, 0.680575)
+bones/8/rotation = Quaternion(-0.564777, -0.36292, -0.303041, 0.676374)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Blog")
-libraries = {
-"BlogAnimationLibrary": SubResource("AnimationLibrary_wk4bg")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeAnimation_e482k")
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_sohj0")
 anim_player = NodePath("../AnimationPlayer")
 active = true
