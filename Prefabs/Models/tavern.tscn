@@ -30,7 +30,6 @@ shape = SubResource("ConcavePolygonShape3D_1odc5")
 shape = SubResource("ConcavePolygonShape3D_jontg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube004" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube004/StaticBody3D" index="0"]
 shape = SubResource("BoxShape3D_61q3o")
