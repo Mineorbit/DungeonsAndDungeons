@@ -42,12 +42,14 @@ func ChangeMovementState(aiming):
 
 
 var last_input_time = 0
+
 #should be higher than inputrate framerate
-var tolerance = 0.04
+var tolerance: float = 0.04
 
-@export var controllerCameraSpeed = 6
+@export var controllerCameraSpeed: float = 6
 
-var dir = Vector2.ZERO
+var dir: Vector2 = Vector2.ZERO
+var target_position: Vector3 = Vector3.ZERO
 
 func move_camera_rig(vec: Vector2) -> void:
 		rotation.x -= vec.y * mouse_sensitivity
@@ -57,11 +59,10 @@ func move_camera_rig(vec: Vector2) -> void:
 		rotation.y = rotation.y
 
 
-var target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
 	var new_target_position = get_camera_target_position()
-	if((new_target_position-target_position).length() < 0.0001):
+	if((new_target_position-target_position).length() < 0.00001):
 		# return early as position has no changed
 		return
 	target_position = get_camera_target_position()

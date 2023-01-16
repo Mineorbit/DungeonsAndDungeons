@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var players = $Players
+@onready var players: Node3D = $Players
 @onready var light = $DirectionalLight
 var level
 
@@ -24,6 +24,7 @@ func end():
 	if level != null:
 		level.clear()
 		level.queue_free()
+		level = null
 
 
 func prepare_level():
