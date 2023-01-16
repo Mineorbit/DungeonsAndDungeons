@@ -23,14 +23,13 @@ func reset():
 	else:
 		goalAudio.stop()
 
-
+func start():
+	Constants.World.level.player_goal = self
 
 func number_of_players_needed():
 	return Constants.World.players.number_of_players()
 
 func _ready():
-	if Constants.World != null:
-		Constants.World.level.player_goal = self
 	enterArea.body_entered.connect(playerEntered)
 	enterArea.body_exited.connect(playerLeft)
 	

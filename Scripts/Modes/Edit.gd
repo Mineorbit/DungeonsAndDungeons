@@ -5,7 +5,6 @@ extends Node
 # var b = "text"
 
 var builder = $Builder
-var level
 var builderpref
 var playerhudpref
 var testhudpref
@@ -31,9 +30,8 @@ func _ready():
 	builderhud = builderhudpref.instantiate()
 	testhud = testhudpref.instantiate()
 	builder.global_transform.origin = Vector3(0,5,0)
-	world.create_new_level()
 	enter_edit_mode()
-	world.game_won.connect(enter_edit_mode)
+	Constants.World.game_won.connect(enter_edit_mode)
 	Constants.World.players.player_removed.connect(func(player):
 		if Constants.currentMode == 2 and player.id == current_player:
 			next_player())
@@ -47,8 +45,14 @@ func next_player():
 		PlayerCamera.player = Players.get_player(current_player)
 
 
-func edit(name):
-	world.level.load(name)
+func prepare_edit(name):
+	if Constants.World == null:
+		Constants.World = get_node("World")
+	if name == null:
+		Constants.World.create_new_level()
+	else:
+		Constants.World.prepare_level()
+		Constants.World.level.load(name)
 
 var current_player = 0
 
@@ -74,7 +78,8 @@ func enter_edit_mode():
 	Constants.set_mode(1)
 	Players.despawn_players()
 	Players.despawn_player_controllers()
-	world.level.reset()
+	if Constants.World.level != null:
+		Constants.World.level.reset()
 	add_child(builder)
 	builder.start()
 	if playerhud in get_children():
@@ -91,7 +96,7 @@ func enter_test_mode():
 		return
 	Constants.set_mode(2)
 	remove_child(builder)
-	await world.level.start()
+	await Constants.World.level.start()
 	Players.spawn_players()
 	Players.spawn_player_controllers()
 	if builderhud in get_children():

@@ -35,6 +35,7 @@ func prepare_level():
 func create_new_level():
 	prepare_level()
 	level.setup_new()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

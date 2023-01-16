@@ -22,7 +22,7 @@ script = ExtResource("1_yog6x")
 offset = Vector3(-0.25, 0, 0)
 hold_rot = Vector3(90, 180, 90)
 
-[node name="Mesh" parent="." instance=ExtResource("1_44l0g")]
+[node name="Model" parent="." instance=ExtResource("1_44l0g")]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

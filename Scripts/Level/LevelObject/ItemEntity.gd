@@ -24,7 +24,6 @@ signal on_item_dettached(old_item_owner)
 
 
 func _ready():
-	super._ready()
 	collisionlayer = collision_layer
 	collisionmask = collision_mask
 

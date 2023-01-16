@@ -93,8 +93,11 @@ func decompress_level(levelname,local = false):
 		subpath = "localLevels"
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	var result = ProjectSettings.globalize_path("user://level/"+subpath)
-	print("Decompressing "+str(path))
-	OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
+	print("Decompressing "+str(path)+" on "+str(OS.get_name()))
+	if OS.get_name() == "Windows":
+		OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
+	else:
+		OS.execute("unzip",[path,"-d "+str(result)])
 
 
 	

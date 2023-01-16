@@ -46,7 +46,7 @@ func on_download_level():
 
 
 func start_new_level():
-	get_parent().get_parent().get_parent().start_edit()
+	Bootstrap.start_edit(null)
 	Constants.World.level.level_name = nameText.text
 	Constants.World.level.save()
 
@@ -54,7 +54,7 @@ func start_edit_level():
 	if level_list.selected_level == null:
 		return
 	print("Starting to edit Level: "+str(level_list.selected_level))
-	get_parent().get_parent().get_parent().start_edit(level_list.selected_level)
+	Bootstrap.start_edit(level_list.selected_level)
 
 func _on_delete_level():
 	for file in DirAccess.open("user://level/localLevels/"+str(level_list.selected_level)).get_files():

@@ -15,6 +15,7 @@ func setup():
 	spawnEntity()
 	
 func start():
+	print("Spawning now")
 	show_text()
 	spawnEntity()
 
@@ -37,6 +38,7 @@ func show_text():
 	
 
 func spawnEntity():
+	print(Constants.currentMode)
 	if Constants.currentMode > 2:
 		return
 	if currentSpawned != null:

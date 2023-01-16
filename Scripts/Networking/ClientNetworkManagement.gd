@@ -36,6 +36,7 @@ func disable_local_computations(entity):
 	entity.ready.connect(func():
 		entity.set_physics_process(false)
 		entity.set_process(false)
+		print(str(entity)+" "+str(entity.model))
 		entity.model.set_physics_process(false)
 		entity.model.set_process(false)
 		)

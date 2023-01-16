@@ -59,9 +59,9 @@ func start_play():
 func start_edit(levelname = null):
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/edit.tscn").instantiate()
+		# prepare edit
 		add_child(current_scene)
-		if levelname != null:
-			current_scene.call_deferred("edit",levelname)
+		current_scene.prepare_edit(levelname)
 			#current_scene.edit(levelname)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -47,7 +47,7 @@ var can_shoot = false
 
 
 # The name of the Model of an entity should allways be named Model
-var model = $Model
+@onready var model = $Model
 
 
 @onready var meleehitarea = $MeleeHitArea
@@ -100,11 +100,12 @@ func reset():
 	started = false
 
 func remove():
+	print(str(Constants.id)+" triggering remove ")
 	get_parent().remove_child(self)
 	queue_free()
 
 func on_remove():
-	print("Removed Entity "+str(self))
+	print(str(Constants.id)+" Removed Entity "+str(self))
 	on_entity_remove.emit()
 
 var num_of_climb_areas = 0
@@ -155,7 +156,9 @@ func _physics_process(delta: float) -> void:
 	if can_climb and in_climb_area:
 		if move_direction.length() > 0.1:
 			_velocity.y = climb_velocity
-			climbing = true
+		else:
+			_velocity.y = -climb_velocity
+		climbing = true
 	
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
 	if just_landed:

@@ -6,7 +6,6 @@ extends CharacterBody3D
 # var b = "text"
 
 
-var level = null
 var cursor
 var collisionRay
 var gridCursorMesh
@@ -27,7 +26,6 @@ func _ready() -> void:
 	cursor = $CursorArm/Cursor
 	collisionRay = $CursorArm/Cursor/RayCast
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
-	level = $"../World/Level"
 	top_level = true
 	edit = get_parent()
 	
@@ -94,15 +92,15 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed("RotateRight"):
 		selected_rotation = (selected_rotation + 1)%4
 	if Input.is_action_just_pressed("Place"):
-		level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation)
+		Constants.World.level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation)
 	if Input.is_action_just_pressed("Displace"):
 		if colliding:
 			var aim = cursor.get_global_transform().basis
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin  - forward
-			var isRemoved = level.remove_by_position(position_to_remove)
+			var isRemoved = Constants.World.level.remove_by_position(position_to_remove)
 			if not isRemoved:
-				level.remove_by_object(get_collided_level_object())
+				Constants.World.level.remove_by_object(get_collided_level_object())
 	if Input.is_action_just_pressed("Connect"):
 		start_object = get_collided_level_object()
 		if start_object != null:

@@ -36,12 +36,13 @@ var level_name = "Test"
 func setup_new():
 	for i in range(-8,8):
 		for j in range(-8,8):
+			pass
 			add(Constants.Default_Floor,Vector3(i,0,j))
 
 
 func reset():
 	print("=== Reseting Level ===")
-	clear_entities()
+	#clear_entities()
 	resetting_level_objects()
 
 
@@ -97,15 +98,6 @@ var changes = true
 func start():
 	print("=== Starting Level ===")
 	reset()
-	
-	
-	# This is to prevent instant level restart in edit mode, because player position does not get updated correctly
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
-	Constants.buffer()
 	
 	await build_navigation()
 	
@@ -193,8 +185,6 @@ func clear():
 
 var started_loading = false
 func load(level_name, immediate = false, download_level = false):
-	
-	clear()
 	self.level_name = level_name
 	started_loading = true
 	var leveltype = "localLevels"
@@ -202,6 +192,7 @@ func load(level_name, immediate = false, download_level = false):
 		leveltype = "downloadLevels"
 	var path = "user://level/"+str(leveltype)+"/"+level_name
 	var dir = DirAccess.open(path+"/chunks")
+	print("Loading Level at "+str(path))
 	# eventuell probleme
 	if  true:
 		dir.list_dir_begin()
