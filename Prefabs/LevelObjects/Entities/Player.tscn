@@ -47,4 +47,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bnrka")
 
-[node name="PlayerModel" parent="." instance=ExtResource("4_ixgl3")]
+[node name="Model" parent="." instance=ExtResource("4_ixgl3")]

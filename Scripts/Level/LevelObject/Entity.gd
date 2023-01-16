@@ -40,7 +40,12 @@ var allowed_to_move = true
 var last_floor = false
 
 var can_shoot = false
- 
+
+
+# The name of the Model of an entity should allways be named Model
+var model = $Model
+
+
 @onready var meleehitarea = $MeleeHitArea
 
 signal on_entity_remove
@@ -160,7 +165,6 @@ func _physics_process(delta: float) -> void:
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)
-
 
 
 func kickback(direction) -> void:

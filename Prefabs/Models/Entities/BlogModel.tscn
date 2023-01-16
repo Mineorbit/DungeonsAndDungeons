@@ -1,23 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://db3xijpudgayj"]
+[gd_scene load_steps=12 format=3 uid="uid://db3xijpudgayj"]
 
 [ext_resource type="PackedScene" uid="uid://cqgexg1255cc7" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.blend" id="1_awtxg"]
+[ext_resource type="Script" path="res://Scripts/BlogModel.gd" id="2_rgnqd"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r8x38"]
+animation = &"Strike"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ntspv"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_gcj26"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_e333o"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0f7e"]
 animation = &"Idle"
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_q07de"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_y16lv"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sohj0"]
-graph_offset = Vector2(-426.757, 80.5472)
+graph_offset = Vector2(-329.141, 128.143)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_ntspv")
+nodes/Animation/position = Vector2(-380, 280)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_r8x38")
+"nodes/Animation 2/position" = Vector2(140, 380)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_e333o")
+nodes/TimeScale/position = Vector2(-114.692, 298.102)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_gcj26")
+"nodes/TimeScale 2/position" = Vector2(320, 280)
 nodes/idleanimation/node = SubResource("AnimationNodeAnimation_o0f7e")
-nodes/idleanimation/position = Vector2(47.3911, 164.269)
-node_connections = [&"output", 0, &"idleanimation"]
+nodes/idleanimation/position = Vector2(-200, 120)
+nodes/output/position = Vector2(760, 120)
+nodes/speed/node = SubResource("AnimationNodeBlend2_q07de")
+nodes/speed/position = Vector2(60, 120)
+nodes/strike/node = SubResource("AnimationNodeOneShot_y16lv")
+nodes/strike/position = Vector2(480, 100)
+node_connections = [&"output", 0, &"strike", &"speed", 0, &"idleanimation", &"speed", 1, &"TimeScale", &"TimeScale", 0, &"Animation", &"strike", 0, &"speed", &"strike", 1, &"TimeScale 2", &"TimeScale 2", 0, &"Animation 2"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a2obx"]
+properties/0/path = NodePath("AnimationTree:parameters/speed/blend_amount")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("AnimationTree:parameters/strike/active")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="BlogModel" instance=ExtResource("1_awtxg")]
+script = ExtResource("2_rgnqd")
 
 [node name="Skeleton3D" parent="Blog" index="0"]
-bones/0/position = Vector3(0, -0.141397, 0)
+bones/0/position = Vector3(0, -0.00823194, 0)
 bones/1/rotation = Quaternion(0.71497, 7.08439e-06, 7.4151e-06, 0.699155)
-bones/2/rotation = Quaternion(-0.574886, -0.425074, -0.415672, 0.56217)
-bones/3/rotation = Quaternion(-0.585706, 0.462823, 0.326533, 0.579758)
+bones/2/rotation = Quaternion(-0.562506, -0.441326, -0.431564, 0.550064)
+bones/3/rotation = Quaternion(-0.56461, 0.447426, 0.41834, 0.553188)
 bones/5/rotation = Quaternion(0.574071, -0.3533, 0.287122, 0.680575)
 bones/6/rotation = Quaternion(-0.564777, 0.36292, 0.303041, 0.676374)
 bones/7/rotation = Quaternion(0.574071, 0.3533, -0.287122, 0.680575)
@@ -27,3 +64,10 @@ bones/8/rotation = Quaternion(-0.564777, -0.36292, -0.303041, 0.676374)
 tree_root = SubResource("AnimationNodeBlendTree_sohj0")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/TimeScale/scale = 1.5
+"parameters/TimeScale 2/scale" = 2.0
+parameters/speed/blend_amount = 0
+parameters/strike/active = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="3"]
+replication_config = SubResource("SceneReplicationConfig_a2obx")

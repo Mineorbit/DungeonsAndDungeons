@@ -36,6 +36,8 @@ func disable_local_computations(entity):
 	entity.ready.connect(func():
 		entity.set_physics_process(false)
 		entity.set_process(false)
+		entity.model.set_physics_process(false)
+		entity.model.set_process(false)
 		)
 
 var id_set = false
@@ -54,7 +56,7 @@ func player_created(player):
 	# temporary
 	player.playercontroller = null
 	
-	var playermodel = player.get_node("PlayerModel")
+	var playermodel = player.get_node("Model")
 	
 	# need to cancel on ready
 	player.ready.connect(

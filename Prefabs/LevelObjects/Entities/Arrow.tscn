@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://cx7omi0atqfcp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Arrow.gd" id="1_bcyha"]
 [ext_resource type="PackedScene" uid="uid://ba0346gtf005y" path="res://Assets/Models/LevelObjects/Entities/Arrow.glb" id="2_wafa0"]
@@ -45,7 +45,7 @@ wait_time = 16.0
 one_shot = true
 autostart = true
 
-[node name="Arrow" parent="." instance=ExtResource("2_wafa0")]
+[node name="Model" parent="." instance=ExtResource("2_wafa0")]
 transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)
 
 [connection signal="timeout" from="Timer" to="." method="despawn"]

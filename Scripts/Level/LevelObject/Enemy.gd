@@ -5,7 +5,9 @@ class_name Enemy
 
 @onready var navAgent = $Navigation
 @onready var target = $Target
+@onready var strikeArea: Area3D = $StrikeArea
 var _timer = null
+
 func _ready():
 	super._ready()
 	remove_child(target)
@@ -22,7 +24,8 @@ func setup_calculation_routine():
 	_timer.start()
 
 func try_strike():
-	on_entity_melee_strike.emit(15)
+	if strikeArea.get_overlapping_bodies().size() > 0:
+		on_entity_melee_strike.emit(15)
 	
 
 func _physics_process(delta):
