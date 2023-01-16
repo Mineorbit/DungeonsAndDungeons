@@ -90,8 +90,6 @@ func update_vertical_state_machine_remote(state):
 	verticalfsm.travel(state)
 
 
-
-
 func _physics_process(delta):
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
@@ -100,8 +98,6 @@ func _physics_process(delta):
 	speed_pos.y = 0
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
-	
-	
 	anim_tree["parameters/speed/blend_amount"] = speed*8
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)

@@ -96,9 +96,7 @@ var changes = true
 #this is a start routine for a level
 func start():
 	print("=== Starting Level ===")
-	
 	await build_navigation()
-	
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():
 			if object.has_method("attachSignals"):
@@ -119,9 +117,11 @@ func get_interactive_objects():
 func get_interactive_object(unique_id):
 	return null
 
-
+var entity_id = 0
 func spawn_entity(entity):
 	print("Spawning Entity "+str(entity)+" at "+str(entity.global_transform.origin)+" in World "+str(Constants.World))
+	entity.name = str(entity_id)
+	entity_id = entity_id + 1
 	Constants.World.level.Entities.add_child(entity)
 
 
