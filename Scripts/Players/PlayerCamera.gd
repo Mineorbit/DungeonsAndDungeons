@@ -18,6 +18,7 @@ extends Node3D
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Camera.current = true
 			player_to_follow_exists = true
+			update_camera_rigging(0)
 			player.on_entity_remove.connect(func():player_to_follow_exists = false)
 			player.on_entity_despawn.connect(func():player_to_follow_exists = false)
 			player.on_entity_aiming.connect(ChangeMovementState)
@@ -59,8 +60,12 @@ func move_camera_rig(vec: Vector2) -> void:
 var target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
+	var new_target_position = get_camera_target_position()
+	if((new_target_position-target_position).length() < 0.0001):
+		# return early as position has no changed
+		return
+	target_position = get_camera_target_position()
 	Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
-	target_position = 0.9*target_position+0.1*get_camera_target_position()
 	Camera.look_at(target_position)
 
 
@@ -68,9 +73,11 @@ func get_camera_target_position():
 	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
 
 func _physics_process(delta):
+	pass
 	update_camera_rigging(delta)
 	
 func _process(delta):
+	pass
 	update_camera_rigging(0)
 
 func update_camera_rigging(delta):
