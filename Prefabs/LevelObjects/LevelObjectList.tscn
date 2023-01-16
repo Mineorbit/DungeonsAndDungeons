@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=20 format=3 uid="uid://bpqrsbwd745am"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bgom4k0xbayum" path="res://Prefabs/LevelObjects/Interactive/Torch.tscn" id="13_4apm0"]
 [ext_resource type="PackedScene" uid="uid://ku4vnqtrapbb" path="res://Prefabs/LevelObjects/Interactive/Spike.tscn" id="14_xr7yj"]
 [ext_resource type="PackedScene" uid="uid://cmmdkxfrlsyrm" path="res://Prefabs/LevelObjects/Interactive/AndGate.tscn" id="15_q7a3p"]
+[ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="16_rtp0j"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")
@@ -89,3 +90,5 @@ local_id = 3
 [node name="Spike" parent="." instance=ExtResource("14_xr7yj")]
 
 [node name="AndGate" parent="." instance=ExtResource("15_q7a3p")]
+
+[node name="Ladder" parent="." instance=ExtResource("16_rtp0j")]

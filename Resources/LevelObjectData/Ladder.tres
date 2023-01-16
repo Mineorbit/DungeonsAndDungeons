@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ce77efyd5qxq2"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_ralkx"]
+
+[resource]
+script = ExtResource("1_ralkx")
+name = "Ladder"
+tiled = false
+interactive = false
+tileIndex = -1
+levelObjectId = 17
+maximumNumber = -1
+offset = Vector3(0.125, 0.5, 0.5)
+construction_collision_offset = Vector3(0, 0, 0)
+construction_collision_scale = Vector3(1, 1, 1)

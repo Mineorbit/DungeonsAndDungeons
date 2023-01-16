@@ -7,8 +7,12 @@ var health: int = 100:
 		on_entity_health_changed.emit(health)
 
 var max_health := 100
+var in_climb_area = false
 
 @export var speed: float = 5
+@export var can_climb: bool = false
+@export var climb_velocity: float = 1
+
 var turnAngle := 0.2
 var kickbackTime = 2
 var jump_strength = 10.0
@@ -103,7 +107,17 @@ func on_remove():
 	print("Removed Entity "+str(self))
 	on_entity_remove.emit()
 
+var num_of_climb_areas = 0
 
+func entered_climb_area(area):
+	num_of_climb_areas = num_of_climb_areas + 1
+	in_climb_area = true
+
+
+func exited_climb_area(area):
+	num_of_climb_areas = max(0,num_of_climb_areas - 1)
+	if num_of_climb_areas == 0:
+		in_climb_area = false
 
 func jump():
 	if not input_blocked and not stunned:
@@ -117,6 +131,7 @@ func _process(_delta):
 	transform.basis = Basis(smoothrot)
 
 
+var climbing = false
 
 func _physics_process(delta: float) -> void:
 	if not started:
@@ -136,6 +151,12 @@ func _physics_process(delta: float) -> void:
 	last_floor = is_on_floor()
 	if not is_on_floor():
 		_velocity.y -= gravity * delta
+	climbing = false
+	if can_climb and in_climb_area:
+		if move_direction.length() > 0.1:
+			_velocity.y = climb_velocity
+			climbing = true
+	
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
 	if just_landed:
 		is_jumping = false
@@ -159,9 +180,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
+		# TODO: if climbing, the look direction should be towards the ladder
+		
 		look_direction = Vector2(velocity.x,_velocity.z)
 		look_direction = look_direction.normalized()
+		
 		target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
+		
+		
 		var current_rot = Quaternion(transform.basis)
 		var smoothrot = current_rot.slerp(target_rot, turnAngle)
 		transform.basis = Basis(smoothrot)

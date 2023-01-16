@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cii0vc12m12om"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://3pxvv1tt5f4w" path="res://Prefabs/Entities.tscn" id="2_fl8ir"]
+[ext_resource type="PackedScene" uid="uid://cyyl12pvlc3qn" path="res://Prefabs/Entities.tscn" id="2_fl8ir"]
 
 [node name="Level" type="NavigationRegion3D"]
 script = ExtResource("1")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://doj2m1b66ehq1"]
+[gd_scene load_steps=8 format=3 uid="uid://doj2m1b66ehq1"]
 
 [ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_ju1or"]
 [ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
@@ -23,10 +23,15 @@ properties/3/path = NodePath(".:health_ui")
 properties/3/spawn = true
 properties/3/sync = true
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0nwwf"]
+radius = 0.75
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 18
 collision_mask = 3
 script = ExtResource("1_ju1or")
+can_climb = true
+climb_velocity = 3.0
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -48,3 +53,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 replication_config = SubResource("SceneReplicationConfig_bnrka")
 
 [node name="Model" parent="." instance=ExtResource("4_ixgl3")]
+
+[node name="ClimbArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClimbArea"]
+shape = SubResource("CapsuleShape3D_0nwwf")
+
+[connection signal="body_entered" from="ClimbArea" to="." method="entered_climb_area"]
+[connection signal="body_exited" from="ClimbArea" to="." method="exited_climb_area"]

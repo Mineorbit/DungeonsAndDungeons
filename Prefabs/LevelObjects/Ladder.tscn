@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3bin5hmoaehm"]
+
+[ext_resource type="PackedScene" uid="uid://bjt7b6kuujghq" path="res://Prefabs/Models/LevelObjects/LadderModel.tscn" id="1_kthks"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qcwd"]
+size = Vector3(0.33, 2, 2)
+
+[node name="Ladder" type="Node3D"]
+
+[node name="LadderModel" parent="." instance=ExtResource("1_kthks")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_5qcwd")

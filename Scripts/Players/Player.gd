@@ -4,7 +4,6 @@ class_name Player
 @export var health_ui: int
 
 
-
 var id: int = 0:
 	get:
 		return id
@@ -151,3 +150,4 @@ func Dettach(item):
 		itemRight = null
 	else:
 		itemLeft = null
+
