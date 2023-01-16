@@ -9,6 +9,7 @@ class_name Enemy
 var _timer = null
 
 func _ready():
+	super._ready()
 	remove_child(target)
 	navAgent.ignore_y = false
 	get_parent().add_child(target)

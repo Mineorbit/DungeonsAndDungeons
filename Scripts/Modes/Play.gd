@@ -47,7 +47,6 @@ func start_round(sel_lev,sel_lev_name):
 	print("===Starting Round===")
 	selected_level = sel_lev
 	selected_level_name = sel_lev_name
-	
 	ApiAccess.download_level(selected_level)
 
 func remove_chunk_streamers():

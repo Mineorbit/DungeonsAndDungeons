@@ -11,3 +11,5 @@ func _physics_process(delta):
 		time_since_seen = 0
 	if time_since_seen > 5:
 		target_entity = null
+
+

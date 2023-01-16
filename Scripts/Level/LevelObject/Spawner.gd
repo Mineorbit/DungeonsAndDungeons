@@ -12,7 +12,6 @@ func _ready():
 
 func setup():
 	show_text()
-	spawnEntity()
 	
 func start():
 	print("Spawning now")
@@ -22,7 +21,6 @@ func start():
 func reset():
 	print("Resetting Spawner")
 	show_text()
-	spawnEntity()
 
 func set_spawn_pos():
 	currentSpawned.global_transform.origin = self.global_transform.origin + Vector3(0,1,0)
@@ -38,11 +36,8 @@ func show_text():
 	
 
 func spawnEntity():
-	print(Constants.currentMode)
 	if Constants.currentMode > 2:
 		return
-	if currentSpawned != null:
-		currentSpawned.queue_free()
 	currentSpawned = prefab.instantiate()
 	currentSpawned.rotate_y(deg_to_rad(global_rotation_degrees.y))
 	set_spawn_pos()

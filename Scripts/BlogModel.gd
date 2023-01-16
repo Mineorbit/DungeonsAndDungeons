@@ -5,9 +5,9 @@ var yspeed
 var speed
 @onready var anim_tree = $AnimationTree
 
-func _ready():
-	get_parent().on_entity_melee_strike.connect(func(damage):
-		anim_tree["parameters/strike/active"] = true)
+
+func StrikeAnimation(damage):
+	anim_tree["parameters/strike/active"] = true
 
 func _physics_process(delta):
 	var last_speed_pos = lastpos
@@ -18,3 +18,4 @@ func _physics_process(delta):
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
 	anim_tree["parameters/speed/blend_amount"] = speed*8
+

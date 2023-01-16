@@ -72,3 +72,5 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StrikeArea"]
 shape = SubResource("BoxShape3D_f5r85")
+
+[connection signal="on_entity_melee_strike" from="." to="Model" method="StrikeAnimation"]

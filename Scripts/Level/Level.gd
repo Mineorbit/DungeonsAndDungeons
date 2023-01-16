@@ -19,6 +19,8 @@ var player_goal = null
 var numberOfPlacedLevelObjects = {}
 
 
+var level_name = "Test"
+
 var changedChunks = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -31,18 +33,15 @@ func _ready():
 			Constants.World.on_entity_spawned.emit(entity)
 	)
 
-var level_name = "Test"
-
 func setup_new():
 	for i in range(-8,8):
 		for j in range(-8,8):
-			pass
 			add(Constants.Default_Floor,Vector3(i,0,j))
 
 
 func reset():
 	print("=== Reseting Level ===")
-	#clear_entities()
+	clear_entities()
 	resetting_level_objects()
 
 
@@ -97,7 +96,6 @@ var changes = true
 #this is a start routine for a level
 func start():
 	print("=== Starting Level ===")
-	reset()
 	
 	await build_navigation()
 	

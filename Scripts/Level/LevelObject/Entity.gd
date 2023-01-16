@@ -78,6 +78,7 @@ signal on_entity_health_changed(health)
 
 
 func MeleeStrike(damage):
+	print("Test3")
 	meleehitarea.Strike(damage,self)
 
 func ent_can_shoot(v):
