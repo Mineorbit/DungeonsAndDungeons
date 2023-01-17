@@ -16,7 +16,7 @@ var builderhud
 var playerhud
 var testhud
 
-
+var level_time = 0
 @onready var buildmusic = $buildmusic
 
 # Called when the node enters the scene tree for the first time.

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkt6ynrirtse5"]
+[gd_scene load_steps=5 format=3 uid="uid://dkt6ynrirtse5"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Spawner.gd" id="1_iw6sl"]
+[ext_resource type="PackedScene" uid="uid://ba8jd6whrhve0" path="res://Prefabs/Models/Items/SwordModel.tscn" id="2_se80q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
 
@@ -14,3 +15,6 @@ spawnedEntity = "Items/Sword"
 
 [node name="Text" type="MeshInstance3D" parent="."]
 mesh = SubResource("TextMesh_kbi3g")
+
+[node name="SwordModel" parent="Text" instance=ExtResource("2_se80q")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.23586, 0)
