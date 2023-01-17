@@ -14,8 +14,14 @@ func _ready():
 
 	# only if is on server change this in local mode
 	# start_lobby()
-	
+
+@export var level_time: float = 0
+
+var is_in_play = false
+
 func start_lobby():
+	is_in_play = false
+	level_time = 0
 	get_tree().paused = true
 	remove_chunk_streamers()
 	Constants.World.end()
@@ -39,6 +45,13 @@ func complete_start_round():
 	#Constants.World.players.spawn()
 	Constants.World.players.set_start_positions()
 	get_tree().paused = false
+	level_time = 0
+	is_in_play = true
+
+func _physics_process(delta):
+	if is_in_play:
+		level_time += delta
+
 
 @rpc(any_peer)
 func start_round(sel_lev,sel_lev_name):

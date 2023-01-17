@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dqwu4faoe1fir"]
 
 [ext_resource type="Script" path="res://Scripts/UI/LevelInterface.gd" id="1_6ebat"]
-[ext_resource type="PackedScene" uid="uid://ct78tplyjahgt" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
+[ext_resource type="PackedScene" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
 
 [node name="Interface" type="SubViewport"]
 own_world_3d = true
@@ -40,9 +40,9 @@ text = "Refresh"
 
 [node name="CheckBoxes" type="HBoxContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.9
-anchor_right = 0.1
+anchor_left = 0.05
+anchor_top = 0.85
+anchor_right = 0.95
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0

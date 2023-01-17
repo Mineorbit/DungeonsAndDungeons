@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://dqaemjsvk1bjo"]
 
 [ext_resource type="Script" path="res://Scripts/Players/PlayerHUD.gd" id="1_0mkx8"]
 [ext_resource type="Texture2D" uid="uid://cfmd4tdoplnq5" path="res://Assets/Textures/prog_bar_bot.png" id="1_3acd5"]
@@ -14,14 +14,12 @@ offset_right = 512.0
 offset_bottom = 128.0
 
 [node name="Layout" type="HBoxContainer" parent="CanvasLayer/PlayerUI"]
-offset_right = 32.0
-offset_bottom = 96.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PlayerUI/Layout"]
-offset_right = 32.0
-offset_bottom = 96.0
+layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 96
 
@@ -42,3 +40,11 @@ allow_lesser = true
 texture_under = ExtResource("1_3acd5")
 texture_progress = ExtResource("2_y766l")
 tint_progress = Color(0, 0.862745, 0.0235294, 0.498039)
+
+[node name="Time" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
