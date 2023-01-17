@@ -76,6 +76,7 @@ signal on_entity_jump
 
 signal on_entity_health_changed(health)
 
+var climbing = false
 
 func MeleeStrike(damage):
 	meleehitarea.Strike(damage,self)
@@ -126,13 +127,17 @@ func jump():
 		if is_jumping:
 			on_entity_jump.emit()
 
-func _process(_delta):
+
+func rotate_object():
 	var current_rot = Quaternion(transform.basis)
 	var smoothrot = current_rot.slerp(target_rot, turnAngle)
 	transform.basis = Basis(smoothrot)
 
 
-var climbing = false
+func _process(_delta):
+	rotate_object()
+
+
 
 func _physics_process(delta: float) -> void:
 	if not started:
@@ -187,13 +192,8 @@ func _physics_process(delta: float) -> void:
 		
 		look_direction = Vector2(velocity.x,_velocity.z)
 		look_direction = look_direction.normalized()
-		
 		target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
-		
-		
-		var current_rot = Quaternion(transform.basis)
-		var smoothrot = current_rot.slerp(target_rot, turnAngle)
-		transform.basis = Basis(smoothrot)
+		rotate_object()
 
 
 func kickback(direction) -> void:

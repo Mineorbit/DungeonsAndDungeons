@@ -39,9 +39,11 @@ func spawnEntity():
 	if Constants.currentMode > 2:
 		return
 	currentSpawned = prefab.instantiate()
-	currentSpawned.rotate_y(deg_to_rad(global_rotation_degrees.y))
+	var rot_target = deg_to_rad(global_rotation_degrees.y-90)
+	
 	set_spawn_pos()
 	Constants.World.level.spawn_entity(currentSpawned)
+	currentSpawned.rotate_y(rot_target)
 	currentSpawned.on_entity_remove.connect(clear_after_remove)
 
 func on_remove():
