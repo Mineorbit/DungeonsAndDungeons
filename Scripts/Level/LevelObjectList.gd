@@ -10,6 +10,9 @@ func _ready():
 		levelObject.transform.origin = Vector3(2*i + 1,0,0)
 		i = i+1
 	if display:
+		for child in get_children():
+			child.set_process(false)
+			child.set_physics_process(false)
 		Signals.selected_level_object_changed.connect(selection_changed)
 		set_positions_cyclic(0)
 	num_of_elems_on_screen = len(get_children()) + (len(get_children())%2)
