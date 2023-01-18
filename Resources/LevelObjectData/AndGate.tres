@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bks4wy0wj4s7c"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_4qfdp"]
 
@@ -6,10 +6,10 @@
 script = ExtResource("1_4qfdp")
 name = "AndGate"
 tiled = false
-interactive = false
+interactive = true
 tileIndex = PackedInt32Array()
 levelObjectId = 16
 maximumNumber = -1
-offset = Vector3(0, 0, 0)
+offset = Vector3(0.5, 0.5, 0.5)
 construction_collision_offset = Vector3(0, 0, 0)
 construction_collision_scale = Vector3(1, 1, 1)

@@ -170,6 +170,9 @@ func get_auth_header():
 func login_http_request_completed(_result, _response_code, _headers, body):
 	var json_object: JSON = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
+	if json_object.data == null:
+		print("Could not parse JSON")
+		return
 	if not json_object.data.has("access_token"):
 		return
 	auth_token = json_object.data["access_token"]
