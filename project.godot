@@ -20,10 +20,10 @@ config/icon="res://Assets/Textures/gearwheel.png"
 [autoload]
 
 Options="*res://Prefabs/Options.tscn"
+LevelObjects="*res://Scenes/level_objects.tscn"
 PauseMenu="*res://Prefabs/PauseMenu.tscn"
 Signals="*res://Prefabs/Signals.tscn"
 Constants="*res://Scripts/Util/Constants.gd"
-LevelObjects="*res://Scenes/level_objects.tscn"
 Bootstrap="*res://Scenes/Bootstrap.tscn"
 MultiplayerConstants="*res://Prefabs/MultiplayerConstants.tscn"
 ApiAccess="*res://Prefabs/ApiAccess.tscn"

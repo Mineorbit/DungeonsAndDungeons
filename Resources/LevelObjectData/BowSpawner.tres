@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_0652d"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_wykd1"]
 
 [resource]
-script = ExtResource("1_0652d")
+script = ExtResource("1_wykd1")
 name = "BowSpawner"
 tiled = false
 interactive = false
-tileIndex = 0
+tileIndex = PackedInt32Array()
 levelObjectId = 8
 maximumNumber = -1
 offset = Vector3(0, 0, 0)

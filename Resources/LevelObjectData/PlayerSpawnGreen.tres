@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_3b0my"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_yu7n5"]
 
 [resource]
-script = ExtResource("1_3b0my")
+script = ExtResource("1_yu7n5")
 name = "PlayerSpawnGreen"
 tiled = false
 interactive = false
-tileIndex = 0
+tileIndex = PackedInt32Array()
 levelObjectId = 12
-maximumNumber = 1
-offset = Vector3(0.5, 0.5, 0.5)
+maximumNumber = -1
+offset = Vector3(0, 0, 0)
 construction_collision_offset = Vector3(0, 0, 0)
 construction_collision_scale = Vector3(1, 1, 1)

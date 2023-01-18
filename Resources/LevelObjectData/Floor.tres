@@ -1,13 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bra335lg3ckjv"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_4mywt"]
 
 [resource]
-script = ExtResource("1")
+script = ExtResource("1_4mywt")
 name = "Floor"
 tiled = true
 interactive = false
-tileIndex = 0
+tileIndex = PackedInt32Array(0)
 levelObjectId = 0
 maximumNumber = -1
 offset = Vector3(0, 0, 0)

@@ -1,13 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://fsrtlwr6ciph"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_kw2t6"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_pnbve"]
 
 [resource]
-script = ExtResource("1_kw2t6")
+script = ExtResource("1_pnbve")
 name = "Stone"
 tiled = true
 interactive = false
-tileIndex = 1
+tileIndex = PackedInt32Array(1)
 levelObjectId = 2
 maximumNumber = -1
 offset = Vector3(0, 0, 0)
