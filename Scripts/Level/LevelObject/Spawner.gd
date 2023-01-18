@@ -12,7 +12,10 @@ func _ready():
 
 func setup():
 	show_text()
-	
+
+func getSpawnedEntity():
+	return currentSpawned
+
 func start():
 	print("Spawning now")
 	show_text()

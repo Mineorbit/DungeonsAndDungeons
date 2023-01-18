@@ -72,6 +72,9 @@ signal levels_fetched(list)
 func level_list_http_request_completed(_result, _response_code, _headers, body):
 	var json_object = JSON.new()
 	json_object.parse(body.get_string_from_utf8())
+	if json_object.data != null:
+		print("JSON could not be parsed")
+		return
 	level_list = json_object.data["levels"]
 	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
 	levels_fetched.emit(level_list)
