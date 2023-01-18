@@ -1,5 +1,5 @@
-AudioStreamWAV
-StandardMaterial3D
 ShaderMaterial
 VisualShader
+AudioStreamWAV
+StandardMaterial3D
 AnimationLibrary

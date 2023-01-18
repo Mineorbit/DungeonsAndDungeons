@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cpmfo55b7jcey"]
 
 [ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://vf6t1xcfodjo" path="res://Prefabs/Models/MainScene.tscn" id="2_edb4s"]
@@ -10,7 +10,7 @@ script = ExtResource("2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.356574)
 
 [node name="Camera" type="Camera3D" parent="Spatial"]
-transform = Transform3D(0.53261, 0, 0.846361, 0, 1, 0, -0.846361, 0, 0.53261, 5.7202, 0.67301, 3.04706)
+transform = Transform3D(0.53261, 0, 0.846361, 0, 1, 0, -0.846361, 0, 0.53261, 5.55743, 0.67301, 2.69831)
 
 [node name="MainScene" parent="Spatial" instance=ExtResource("2_edb4s")]
 

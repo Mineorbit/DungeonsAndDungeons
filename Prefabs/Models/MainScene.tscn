@@ -1,20 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://vf6t1xcfodjo"]
+[gd_scene load_steps=5 format=3 uid="uid://vf6t1xcfodjo"]
 
 [ext_resource type="PackedScene" uid="uid://4ce2fpaaxv1q" path="res://Prefabs/Models/tavern.tscn" id="1_k4v4w"]
+[ext_resource type="Script" path="res://Scripts/MainScene.gd" id="1_w0010"]
+[ext_resource type="AudioStream" uid="uid://curlhq7selpo7" path="res://Assets/Sounds/music/MainTheme.mp3" id="2_jjywl"]
 
 [sub_resource type="Environment" id="Environment_sx08w"]
+ambient_light_energy = 0.0
 ssao_enabled = true
+ssao_intensity = 1.0
 ssil_enabled = true
+ssil_intensity = 0.5
 glow_enabled = true
 
 [node name="MainScene" type="Node3D"]
+script = ExtResource("1_w0010")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sx08w")
 
 [node name="Tavern_base" parent="." instance=ExtResource("1_k4v4w")]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="TavernLight" type="SpotLight3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.240179, -0.0124606)
 light_color = Color(0.701961, 0.780392, 0.121569, 1)
 light_energy = 6.275
@@ -23,3 +29,8 @@ light_volumetric_fog_energy = 3.111
 shadow_enabled = true
 spot_range = 41.7095
 spot_angle = 36.4849
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jjywl")
+volume_db = -4.0
+autoplay = true
