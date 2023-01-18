@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyu5utei4r4c5"]
+
+[ext_resource type="PackedScene" uid="uid://chhqackd78to1" path="res://Assets/Models/LevelObjects/Interactive/Sign.blend" id="1_ijoih"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dmcn"]
+size = Vector3(0.125, 1.25, 1)
+
+[node name="Sign" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("1_ijoih")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_7dmcn")
+
+[node name="Text" type="Label3D" parent="."]
+transform = Transform3D(0.0174399, 0.0378646, 0.999131, -0.000660827, 0.999283, -0.0378588, -0.999848, 0, 0.0174524, 0.180879, 0.896363, 0.0522366)
+pixel_size = 0.0013
+alpha_cut = 1
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Lorem ipsum dolor sit amet,
+ consectetur adipiscing elit,
+ sed do eiusmod tempor 
+incididunt ut labore et dolore
+ magna aliqua."
+font_size = 48

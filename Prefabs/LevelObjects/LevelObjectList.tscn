@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=21 format=3 uid="uid://bpqrsbwd745am"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
@@ -7,15 +7,16 @@
 [ext_resource type="Material" uid="uid://bwdmyoav5klf2" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
 [ext_resource type="PackedScene" uid="uid://dya31aho2aoh2" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
 [ext_resource type="PackedScene" uid="uid://c1iw5d7te4wr" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_cp1tb"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
+[ext_resource type="PackedScene" uid="uid://ckfbma7csfka0" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_v0a86"]
+[ext_resource type="PackedScene" uid="uid://bqiutkpya2s8y" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_cp1tb"]
+[ext_resource type="PackedScene" uid="uid://dkt6ynrirtse5" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="9_s5hm6"]
 [ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="10_3e6xb"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="11_60hu6"]
+[ext_resource type="PackedScene" uid="uid://dilmtjeo8nc3s" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="11_60hu6"]
 [ext_resource type="PackedScene" uid="uid://bgom4k0xbayum" path="res://Prefabs/LevelObjects/Interactive/Torch.tscn" id="13_4apm0"]
 [ext_resource type="PackedScene" uid="uid://ku4vnqtrapbb" path="res://Prefabs/LevelObjects/Interactive/Spike.tscn" id="14_xr7yj"]
 [ext_resource type="PackedScene" uid="uid://cmmdkxfrlsyrm" path="res://Prefabs/LevelObjects/Interactive/AndGate.tscn" id="15_q7a3p"]
 [ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="16_rtp0j"]
+[ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="17_qq23b"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")
@@ -92,3 +93,5 @@ local_id = 3
 [node name="AndGate" parent="." instance=ExtResource("15_q7a3p")]
 
 [node name="Ladder" parent="." instance=ExtResource("16_rtp0j")]
+
+[node name="Sign" parent="." instance=ExtResource("17_qq23b")]
