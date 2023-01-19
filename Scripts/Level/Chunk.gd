@@ -22,39 +22,48 @@ class LevelObjectInstance:
 
 
 var level
-@onready var gridMap = $GridMap
+@onready var levelGridMap = $GridMap
+@onready var waterGridMap = $WaterGridMap
 @onready var levelObjects = $LevelObjects
 @onready var mesh: MeshInstance3D = $mesh
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 static func load_chunk():
 	pass
 	
 var change_in_chunk = false
 
-func set_tile_level_object(pos,index):
+func set_tile_level_object(pos,index,is_water):
+	var gridMap = levelGridMap
+	if is_water:
+		gridMap = waterGridMap
 	var x = floor(pos.x - global_transform.origin.x)
 	var y = floor(pos.y - global_transform.origin.y)
 	var z = floor(pos.z - global_transform.origin.z)
 	var localPos = Vector3(x,y,z)
 	gridMap.set_cell_item(localPos,index)
 
+# this should be done differently
 func remove_tile_level_object(pos):
-	if get_tile_level_object(pos) != -1:
-		set_tile_level_object(pos,-1)
-		return true
-	return false
+	print("Remove Object from grid at "+str(pos))
+	print(get_tile_level_object(pos,levelGridMap))
+	print(get_tile_level_object(pos,waterGridMap))
+	var result = false 
+	if get_tile_level_object(pos,levelGridMap) != -1:
+		set_tile_level_object(pos,-1,false)
+		result = true
+	if get_tile_level_object(pos,waterGridMap) != -1:
+		set_tile_level_object(pos,-1,true)
+		result = true
+	return result
 
-func get_tile_level_object(pos):
+func get_tile_level_object(pos,gridMap):
 	var x = floor(pos.x - global_transform.origin.x)
 	var y = floor(pos.y - global_transform.origin.y)
 	var z = floor(pos.z - global_transform.origin.z)
 	var localPos = Vector3(x,y,z)
 	return gridMap.get_cell_item(localPos)
 
-func get_tile_level_object_orient(pos):
+func get_tile_level_object_orient(pos,gridMap):
 	var x = floor(pos.x - global_transform.origin.x)
 	var y = floor(pos.y - global_transform.origin.y)
 	var z = floor(pos.z - global_transform.origin.z)
@@ -75,22 +84,36 @@ func update_navigation():
 func get_level_objects():
 	return levelObjects.get_children()
 
+func get_level_object_instance_of_cell(i,j,k,levelObjectInstances,gridMap):
+	var instance = LevelObjectInstance.new()
+	var offset = Vector3(i,j,k)
+	var grid_position = level.get_grid_position(global_transform.origin+offset)
+	if not get_tile_level_object(grid_position,gridMap) == -1:
+		var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position,gridMap),get_tile_level_object_orient(grid_position,gridMap))
+		instance.x = floor(grid_position.x - global_transform.origin.x)
+		instance.y = floor(grid_position.y - global_transform.origin.y)
+		instance.z = floor(grid_position.z - global_transform.origin.z)
+		#does instance.rotation need to be set here?
+		instance.levelObjectData = levelObjectData
+		levelObjectInstances.append(instance)
+
+
 func get_level_object_instances():
 	var levelObjectInstances = []
+	# get level objects of levelGridMap
+	
 	for i in range(8):
 		for j in range(8):
 			for k in range(8):
-				var instance = LevelObjectInstance.new()
-				var offset = Vector3(i,j,k)
-				var grid_position = level.get_grid_position(global_transform.origin+offset)
-				if not get_tile_level_object(grid_position) == -1:
-					var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position),get_tile_level_object_orient(grid_position))
-					instance.x = floor(grid_position.x - global_transform.origin.x)
-					instance.y = floor(grid_position.y - global_transform.origin.y)
-					instance.z = floor(grid_position.z - global_transform.origin.z)
-					#does instance.rotation need to be set here?
-					instance.levelObjectData = levelObjectData
-					levelObjectInstances.append(instance)
+				get_level_object_instance_of_cell(i,j,k,levelObjectInstances,levelGridMap)
+	
+	
+	# get level objects of waterGridMap
+	for i in range(8):
+		for j in range(8):
+			for k in range(8):
+				get_level_object_instance_of_cell(i,j,k,levelObjectInstances,waterGridMap)
+	
 	for n in get_level_objects():
 		var instance = LevelObjectInstance.new()
 		levelObjectInstances.append(n.to_instance(instance))

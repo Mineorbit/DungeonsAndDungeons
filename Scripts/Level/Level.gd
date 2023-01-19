@@ -305,7 +305,13 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		# for now, always use 0 element, later on base it on surrounding grid
 		var localIndex = 0
 		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
-		chunk.set_tile_level_object(pos,levelObjectData.tileIndex[localIndex])
+		
+		var water = false
+		#
+		if levelObjectData == Constants.Water:
+			water = true
+		
+		chunk.set_tile_level_object(pos,levelObjectData.tileIndex[localIndex],water)
 	else:
 		var new_level_object
 		if levelObjectData.interactive:
