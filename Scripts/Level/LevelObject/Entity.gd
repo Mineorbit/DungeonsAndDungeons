@@ -138,13 +138,25 @@ func exited_swim_area(area):
 	if num_of_swim_areas == 0:
 		in_swim_area = false
 
+var jump_cool_down = 0
 
+@export var jump_cool_down_time: float = 0.5
+
+func can_jump():
+	if not input_blocked and not stunned:
+		if in_swim_area:
+			#cool down
+			if jump_cool_down < 0.1:
+				jump_cool_down = jump_cool_down_time
+				return true
+			return false
+		else:
+			return is_on_floor()
 
 func jump():
-	if not input_blocked and not stunned:
-		is_jumping = is_on_floor()
-		if is_jumping:
-			on_entity_jump.emit()
+	is_jumping = can_jump()
+	if is_jumping and not in_swim_area:
+		on_entity_jump.emit()
 
 
 func rotate_object():
@@ -157,25 +169,46 @@ func _process(_delta):
 	rotate_object()
 
 
+@export var waterSpeed:float = speed*0.5
+@export var waterGravity:float = gravity*0.0625
 
+
+var last_swim = false
 func _physics_process(delta: float) -> void:
 	if not started:
 		return
+	
+	if jump_cool_down > 0:
+		jump_cool_down = jump_cool_down - delta
+	
 	if global_transform.origin.y < Constants.deathplane:
 		Kill()
 	
 	if (not input_blocked) and (not stunned):
 		if allowed_to_move:
-			_velocity.x = move_direction.x * speed
-			_velocity.z = move_direction.z * speed
+			var current_speed = speed
+			if in_swim_area:
+				current_speed = waterSpeed
+			_velocity.x = move_direction.x * current_speed
+			_velocity.z = move_direction.z * current_speed
 		else:
 			_velocity.x = 0
 			_velocity.z = 0
 	if (not last_floor)  and is_on_floor():
 		on_entity_landed.emit(_velocity.y)
 	last_floor = is_on_floor()
+	
+	#break on water impact
+	if not last_swim and in_swim_area:
+		_velocity *= 0.5
+	
 	if not is_on_floor():
-		_velocity.y -= gravity * delta
+		var current_gravity = gravity
+		if in_swim_area:
+			current_gravity = waterGravity
+		#print(current_gravity)
+		_velocity.y -= current_gravity * delta
+			
 	climbing = false
 	if can_climb and in_climb_area:
 		if move_direction.length() > 0.1:
@@ -184,11 +217,20 @@ func _physics_process(delta: float) -> void:
 			_velocity.y = -climb_velocity
 		climbing = true
 	
+	if in_swim_area:
+		if is_jumping:
+			_velocity.y = waterSpeed
+		else:
+			pass
+			#_velocity.y = max(_velocity.y,-waterSpeed)
+		
 	var just_landed := is_on_floor() and _snap_vector == Vector3.ZERO
 	if just_landed:
 		is_jumping = false
 	if is_jumping:
-		_velocity.y = jump_strength
+		if not in_swim_area:
+			print("Real jumping")
+			_velocity.y = jump_strength
 		_snap_vector = Vector3.ZERO
 		is_jumping = false
 	elif just_landed:
@@ -205,7 +247,7 @@ func _physics_process(delta: float) -> void:
 		_velocity = kickback_direction
 	velocity = _velocity
 	move_and_slide()
-	
+	last_swim = in_swim_area
 	if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
 		# TODO: if climbing, the look direction should be towards the ladder
 		

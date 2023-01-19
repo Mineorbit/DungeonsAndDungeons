@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cmmdkxfrlsyrm" path="res://Prefabs/LevelObjects/Interactive/AndGate.tscn" id="15_q7a3p"]
 [ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="16_rtp0j"]
 [ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="17_qq23b"]
-[ext_resource type="Material" uid="uid://cfq8io2ro1lkf" path="res://Assets/Materials/Water.tres" id="18_chs3f"]
+[ext_resource type="Material" uid="uid://cfq8io2ro1lkf" path="res://Assets/Materials/Water.tres" id="18_36oqg"]
 
 [sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_gj2pu")
@@ -28,8 +28,12 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
 material = ExtResource("3_mypbp")
 
-[sub_resource type="BoxMesh" id="BoxMesh_h6tt3"]
-material = ExtResource("18_chs3f")
+[sub_resource type="PlaneMesh" id="PlaneMesh_2g4um"]
+material = ExtResource("18_36oqg")
+size = Vector2(1, 1)
+subdivide_width = 4
+subdivide_depth = 4
+center_offset = Vector3(0, 0.45, 0)
 
 [node name="LevelObjectList" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
@@ -104,7 +108,7 @@ local_id = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
 
 [node name="WaterBase" type="MeshInstance3D" parent="TiledWater"]
-mesh = SubResource("BoxMesh_h6tt3")
+mesh = SubResource("PlaneMesh_2g4um")
 skeleton = NodePath("../../TiledFloor")
 
 [node name="CollisionShape" type="StaticBody3D" parent="TiledWater/WaterBase"]
