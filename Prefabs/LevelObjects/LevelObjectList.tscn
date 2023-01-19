@@ -117,3 +117,13 @@ collision_mask = 128
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TiledWater/WaterBase/CollisionShape"]
 shape = SubResource("ConcavePolygonShape3D_s8l3b")
+
+[node name="WaterInside" type="MeshInstance3D" parent="TiledWater"]
+skeleton = NodePath("../../TiledFloor")
+
+[node name="CollisionShape" type="StaticBody3D" parent="TiledWater/WaterInside"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledWater/WaterInside/CollisionShape"]
+shape = SubResource("ConcavePolygonShape3D_s8l3b")

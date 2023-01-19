@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b1qikuofe8mkp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_8sfr5"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_8sfr5")
 name = "Water"
 tiled = true
 interactive = false
-tileIndex = PackedInt32Array(2)
+tileIndex = PackedInt32Array(2, 3)
 levelObjectId = 19
 maximumNumber = -1
 offset = Vector3(0, 0, 0)

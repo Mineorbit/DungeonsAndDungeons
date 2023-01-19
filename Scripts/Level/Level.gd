@@ -285,6 +285,20 @@ func add_chunk(position):
 
 var free_unique_instance_id = 0
 
+
+func update_tiled_object(pos,levelObjectData):
+	# for now, always use 0 element, later on base it on surrounding grid
+		var localIndex = 0
+		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
+		
+		var water = false
+		#
+		if levelObjectData == Constants.Water:
+			water = true
+		
+		chunk.set_tile_level_object(pos,levelObjectData.tileIndex[localIndex],water)
+
+
 func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
 	
 	# this sets the table of maximum numbers at the start
@@ -302,16 +316,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 	changes = true
 	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
-		# for now, always use 0 element, later on base it on surrounding grid
-		var localIndex = 0
-		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
-		
-		var water = false
-		#
-		if levelObjectData == Constants.Water:
-			water = true
-		
-		chunk.set_tile_level_object(pos,levelObjectData.tileIndex[localIndex],water)
+		update_tiled_object(pos,levelObjectData)
 	else:
 		var new_level_object
 		if levelObjectData.interactive:
