@@ -229,7 +229,6 @@ func _physics_process(delta: float) -> void:
 		is_jumping = false
 	if is_jumping:
 		if not in_swim_area:
-			print("Real jumping")
 			_velocity.y = jump_strength
 		_snap_vector = Vector3.ZERO
 		is_jumping = false
