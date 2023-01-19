@@ -8,6 +8,64 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Resource",
+"class": &"ElementType",
+"language": &"GDScript",
+"path": "res://Scripts/ElementType.gd"
+}, {
+"base": "Entity",
+"class": &"Enemy",
+"language": &"GDScript",
+"path": "res://Scripts/Level/LevelObject/Enemy.gd"
+}, {
+"base": "CharacterBody3D",
+"class": &"Entity",
+"language": &"GDScript",
+"path": "res://Scripts/Level/LevelObject/Entity.gd"
+}, {
+"base": "LevelObject",
+"class": &"InteractiveLevelObject",
+"language": &"GDScript",
+"path": "res://Scripts/Level/LevelObject/InteractiveLevelObject.gd"
+}, {
+"base": "Entity",
+"class": &"ItemEntity",
+"language": &"GDScript",
+"path": "res://Scripts/Level/LevelObject/ItemEntity.gd"
+}, {
+"base": "Node3D",
+"class": &"LevelObject",
+"language": &"GDScript",
+"path": "res://Scripts/Level/LevelObject.gd"
+}, {
+"base": "Resource",
+"class": &"LevelObjectData",
+"language": &"GDScript",
+"path": "res://Scripts/Level/LevelObjectData.gd"
+}, {
+"base": "Entity",
+"class": &"Player",
+"language": &"GDScript",
+"path": "res://Scripts/Players/Player.gd"
+}, {
+"base": "Resource",
+"class": &"Settings",
+"language": &"GDScript",
+"path": "res://Scripts/Util/Settings.gd"
+}]
+_global_script_class_icons={
+"ElementType": "",
+"Enemy": "",
+"Entity": "",
+"InteractiveLevelObject": "",
+"ItemEntity": "",
+"LevelObject": "",
+"LevelObjectData": "",
+"Player": "",
+"Settings": ""
+}
+
 [application]
 
 config/name="DungeonsAndDungeons"
@@ -28,10 +86,6 @@ Bootstrap="*res://Scenes/Bootstrap.tscn"
 MultiplayerConstants="*res://Prefabs/MultiplayerConstants.tscn"
 ApiAccess="*res://Prefabs/ApiAccess.tscn"
 PlayerCamera="*res://Prefabs/PlayerCamera.tscn"
-
-[editor]
-
-export/convert_text_resources_to_binary=true
 
 [input]
 

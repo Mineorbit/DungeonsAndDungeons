@@ -19,6 +19,7 @@ var playercontroller
 @onready var leftHandAttachment = $Model/root/Skeleton3D/lefthand
 @onready var rightHandAttachment = $Model/root/Skeleton3D/righthand
 
+
 # changing colors
 func setColor():
 	var mesh = $Model/root/Skeleton3D/Body
@@ -151,3 +152,7 @@ func Dettach(item):
 	else:
 		itemLeft = null
 
+
+
+func _on_water_test_body_entered(body):
+	print("Test")

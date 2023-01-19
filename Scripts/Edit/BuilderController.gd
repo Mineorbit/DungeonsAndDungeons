@@ -97,7 +97,7 @@ func _process(delta) -> void:
 		if colliding:
 			var aim = cursor.get_global_transform().basis
 			var forward = -aim.z
-			var position_to_remove = cursor.global_transform.origin  - forward
+			var position_to_remove = cursor.global_transform.origin - forward
 			var isRemoved = Constants.World.level.remove_by_position(position_to_remove)
 			if not isRemoved:
 				Constants.World.level.remove_by_object(get_collided_level_object())

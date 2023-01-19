@@ -7,7 +7,8 @@ var health: int = 100:
 		on_entity_health_changed.emit(health)
 
 var max_health := 100
-var in_climb_area = false
+
+
 
 @export var speed: float = 5
 @export var can_climb: bool = false
@@ -25,6 +26,8 @@ var _snap_vector := Vector3.DOWN
 var started = false
 
 
+var in_climb_area = false
+var in_swim_area = false
 
 
 var look_direction = Vector2(1,0)
@@ -111,6 +114,10 @@ func on_remove():
 
 var num_of_climb_areas = 0
 
+var num_of_swim_areas = 0
+
+#these are actually body checks, as it would be hard to assign areas to these objects (water blocks/ ladder blocks)
+#this should be fixed later on
 func entered_climb_area(area):
 	num_of_climb_areas = num_of_climb_areas + 1
 	in_climb_area = true
@@ -120,6 +127,18 @@ func exited_climb_area(area):
 	num_of_climb_areas = max(0,num_of_climb_areas - 1)
 	if num_of_climb_areas == 0:
 		in_climb_area = false
+
+func entered_swim_area(area):
+	num_of_swim_areas = num_of_swim_areas + 1
+	in_swim_area = true
+
+
+func exited_swim_area(area):
+	num_of_swim_areas = max(0,num_of_swim_areas - 1)
+	if num_of_swim_areas == 0:
+		in_swim_area = false
+
+
 
 func jump():
 	if not input_blocked and not stunned:
