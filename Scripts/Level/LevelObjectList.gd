@@ -23,8 +23,8 @@ func _ready():
 			if child.name.begins_with("Tiled"):
 				var first = true
 				for subtile in child.get_children():
-					if first:
-						first = false
+					if subtile.name == str(0):
+						subtile.transform.origin = Vector3(0,0,0)
 					else:
 						subtile.hide()
 			i = i+1

@@ -1,9 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://1i3w0tti58x8"]
+[gd_scene load_steps=49 format=3 uid="uid://1i3w0tti58x8"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Chunk.gd" id="1"]
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="2_2gsyd"]
 [ext_resource type="Material" uid="uid://bwdmyoav5klf2" path="res://Assets/Materials/Stone.tres" id="3_x5kxt"]
 [ext_resource type="Material" uid="uid://cfq8io2ro1lkf" path="res://Assets/Materials/Water.tres" id="4_dsy41"]
+[ext_resource type="MeshLibrary" uid="uid://cl3mx2oese0yd" path="res://Resources/grid.tres" id="5_i7m7q"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
 agent_radius = 0.1
@@ -433,7 +434,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="mesh" type="MeshInstance3D" parent="."]
 
 [node name="WaterGridMap" type="GridMap" parent="."]
-mesh_library = SubResource("MeshLibrary_lm6oy")
+mesh_library = ExtResource("5_i7m7q")
 cell_size = Vector3(1, 1, 1)
 collision_layer = 128
 collision_mask = 128

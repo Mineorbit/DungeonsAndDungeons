@@ -322,18 +322,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		#up
 		elif get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 0
+			rot = 1
 
 		#down
 		elif get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 8
+			rot = 3
 			
 		
 		#front
 		elif get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
 			localIndex = 2
 			rot = 4
+			
 		#back
 		elif get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
 			localIndex = 2
@@ -343,16 +344,16 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		#left
 		elif get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 1
+			rot = 0
+			
 		#right
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 3
+			rot = 8
 		
-		print(localIndex)
 		#print(localIndex)
 	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
-		if not levelObjectData.tileIndex.size() > localIndex:
+		if levelObjectData.tileIndex.size() <= localIndex:
 			localIndex = 0
 		new_index = levelObjectData.tileIndex[localIndex]
 	# if the tile value has changed
@@ -368,7 +369,6 @@ func updateNeighbors(pos):
 					var local_chunk = get_chunk(local_pos)
 					if local_chunk == null:
 						continue
-					#update only those neighbors of the same levelobjectdata
 					var levelObjectData = get_neighbor(i,j,k,pos)
 					if levelObjectData == Constants.Water:
 						update_tiled_object(local_pos,levelObjectData,local_chunk.waterGridMap)
@@ -393,8 +393,10 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
 		var local_gridmap = chunk.levelGridMap
+		
 		if Constants.Water == levelObjectData:
 			local_gridmap = chunk.waterGridMap
+		
 		update_tiled_object(pos,levelObjectData,local_gridmap)
 	else:
 		var new_level_object
