@@ -1,7 +1,9 @@
-res://Prefabs/LevelObjects/LevelObjectList.tscn
+res://Scenes/edit.tscn
 res://Shaders/Water.tres
 res://Assets/Materials/Entities/Player/Eye.tres
+res://Editor/Floor.tres
 res://Prefabs/LevelObjects/Interactive/Sign.tscn
+res://Prefabs/LevelObjects/LevelObjectList.tscn
 res://Editor/level_object_initialization.tscn
 res://Prefabs/MainMenu/Main.tscn
 res://Prefabs/Models/MainScene.tscn
@@ -20,4 +22,7 @@ res://Prefabs/LevelObject.tscn
 res://Scenes/Bootstrap.tscn
 res://Scenes/play.tscn
 res://Prefabs/MainMenu/Edit.tscn
-res://Scenes/edit.tscn
+res://Scripts/Edit/Connection.gd
+res://Scripts/Edit/BuilderController.gd
+res://Editor/level_object_initialization.gd
+res://Scripts/Level/Level.gd

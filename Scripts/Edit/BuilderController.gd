@@ -14,6 +14,12 @@ var mouse_sensitivity := 0.005
 var edit
 var move_speed = 4
 
+var rot_x = 0
+var rot_y = 0
+var colliding = true
+var smallest_dist = 1
+var selection = 0
+var start_object
 var closestIndex = 0
 @onready var camera = $BuilderCamera
 
@@ -30,8 +36,6 @@ func _ready() -> void:
 	edit = get_parent()
 	
 
-var rot_x = 0
-var rot_y = 0
 
 func move_camera(vec: Vector2) -> void:
 	rot_x += -vec.x * mouse_sensitivity
@@ -42,8 +46,6 @@ func move_camera(vec: Vector2) -> void:
 	rotate_object_local(Vector3(1, 0, 0), rot_y)
 
 
-var colliding = true
-var smallest_dist = 1
 func _physics_process(delta: float) -> void:
 	var aim = get_global_transform().basis
 	var forward = -aim.z
@@ -59,7 +61,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	#colliding = removalRay.is_colliding()
 
-var selection = 0
 
 func get_collided_level_object():
 	if collisionRay.is_colliding():
@@ -68,7 +69,6 @@ func get_collided_level_object():
 			var level_object = result.get_parent()
 			return level_object
 
-var start_object
 
 
 func connect_interactive_objects(a, b):

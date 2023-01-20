@@ -17,11 +17,18 @@ func _ready():
 	
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	var a = point_a.global_transform.origin
-	var b = point_b.global_transform.origin
+var lasta = Vector3.ZERO
+var lastb = Vector3.ZERO
+var a = Vector3.ZERO
+var b = Vector3.ZERO
+func update_mesh():
+	a = (a + point_a.global_transform.origin)*0.5
+	b = (b + point_b.global_transform.origin)*0.5
 	
+	if not ((a-lasta).length() > 0 or (b-lastb).length() > 0):
+		return
+	lasta = a
+	lastb = b
 	# this cannot be factored out
 	arr_mesh = ArrayMesh.new()
 	mesh = PlaneMesh.new()
@@ -48,3 +55,12 @@ func _process(delta):
 	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLE_STRIP,array)
 	wiremodel.mesh = arr_mesh
 	arr_mesh.surface_set_material(0,mat)
+
+
+func _physics_process(delta):
+	update_mesh()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	update_mesh()

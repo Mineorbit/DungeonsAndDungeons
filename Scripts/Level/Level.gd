@@ -358,9 +358,9 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 	# if the tile value has changed
 	if not new_index == last_index:
 		chunk.set_tile_level_object(pos,new_index,gridMap,rot)
-		updateNeighbors(pos,gridMap)
+		updateNeighbors(pos)
 
-func updateNeighbors(pos,gridMap):
+func updateNeighbors(pos):
 		for i in range(-1,2):
 			for j in range(-1,2):
 				for k in range(-1,2):
@@ -369,8 +369,11 @@ func updateNeighbors(pos,gridMap):
 					if local_chunk == null:
 						continue
 					#update only those neighbors of the same levelobjectdata
-					var levelObjectData = LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,gridMap),local_chunk.get_tile_level_object_orient(local_pos,gridMap))
-					update_tiled_object(local_pos,levelObjectData,gridMap)
+					var levelObjectData = get_neighbor(i,j,k,pos)
+					if levelObjectData == Constants.Water:
+						update_tiled_object(local_pos,levelObjectData,local_chunk.waterGridMap)
+					else:
+						update_tiled_object(local_pos,levelObjectData,local_chunk.levelGridMap)
 
 func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
 	
