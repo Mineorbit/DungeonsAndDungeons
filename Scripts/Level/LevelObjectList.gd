@@ -20,6 +20,13 @@ func _ready():
 				child.ready.connect(func():
 					child.getSpawnedEntity().scale = Constants.LevelObjectData[i].display_scale
 				)
+			if child.name.begins_with("Tiled"):
+				var first = true
+				for subtile in child.get_children():
+					if first:
+						first = false
+					else:
+						subtile.hide()
 			i = i+1
 		Signals.selected_level_object_changed.connect(selection_changed)
 		set_positions_cyclic(0)

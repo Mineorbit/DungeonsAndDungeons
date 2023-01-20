@@ -86,7 +86,7 @@ func enter_edit_mode():
 		remove_child(playerhud)
 		remove_child(testhud)
 	add_child(builderhud)
-	buildmusic.play()
+	#buildmusic.play()
 	connections.show()
 
 func enter_test_mode():
@@ -106,7 +106,7 @@ func enter_test_mode():
 	Players.set_start_positions()
 	Players.playerControllers.set_current_player(current_player)
 	PlayerCamera.player = Players.get_player(current_player)
-	buildmusic.stop()
+	#buildmusic.stop()
 	connections.hide()
 	
 

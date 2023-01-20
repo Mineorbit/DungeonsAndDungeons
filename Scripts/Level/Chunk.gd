@@ -32,21 +32,15 @@ static func load_chunk():
 	
 var change_in_chunk = false
 
-func set_tile_level_object(pos,index,is_water):
-	var gridMap = levelGridMap
-	if is_water:
-		gridMap = waterGridMap
+func set_tile_level_object(pos,index,gridMap,rot):
 	var x = floor(pos.x - global_transform.origin.x)
 	var y = floor(pos.y - global_transform.origin.y)
 	var z = floor(pos.z - global_transform.origin.z)
 	var localPos = Vector3(x,y,z)
-	gridMap.set_cell_item(localPos,index)
+	gridMap.set_cell_item(localPos,index,rot)
 
 # this should be done differently
 func remove_tile_level_object(pos):
-	print("Remove Object from grid at "+str(pos))
-	print(get_tile_level_object(pos,levelGridMap))
-	print(get_tile_level_object(pos,waterGridMap))
 	var result = false 
 	if get_tile_level_object(pos,levelGridMap) != -1:
 		#set_tile_level_object(pos,-1,false)
