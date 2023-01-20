@@ -284,19 +284,52 @@ func add_chunk(position):
 	return chunk
 
 var free_unique_instance_id = 0
+func get_neighbor(i,j,k,pos,water):
+				var local_pos = pos + Vector3(i,j,k)
+				var local_chunk = get_chunk(local_pos)
+				if local_chunk == null:
+					return null
+				var local_gridmap = local_chunk.levelGridMap
+				if water:
+					local_gridmap = local_chunk.waterGridMap
+				return LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap))
+				
 
-
+# update local tile indices for new level object
+# NOTE: every tile index has exactly one LevelObjectData type
 func update_tiled_object(pos,levelObjectData):
-	# for now, always use 0 element, later on base it on surrounding grid
-		var localIndex = 0
+	var water = false
+	var chunk = get_chunk(pos)
+	var gridMap = chunk.levelGridMap
+	if levelObjectData == Constants.Water:
+		water = true
+		gridMap = chunk.waterGridMap
+	var last_index = chunk.get_tile_level_object(pos,gridMap)
+	# default, all sides visible
+	var localIndex = 0
 		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
-		
-		var water = false
-		#
-		if levelObjectData == Constants.Water:
-			water = true
-		
-		chunk.set_tile_level_object(pos,levelObjectData.tileIndex[localIndex],water)
+	if get_neighbor(0,1,0,pos,water) == levelObjectData:
+		localIndex = 1
+	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
+	if not levelObjectData.tileIndex.size() > localIndex:
+		localIndex = 0
+	var new_index = levelObjectData.tileIndex[localIndex]
+	# if the tile value has changed
+	if not new_index == last_index:
+		chunk.set_tile_level_object(pos,new_index,water)
+		for i in range(-1,2):
+			for j in range(-1,2):
+				for k in range(-1,2):
+					var local_pos = pos + Vector3(i,j,k)
+					var local_chunk = get_chunk(local_pos)
+					if local_chunk == null:
+						continue
+					var local_gridmap = local_chunk.levelGridMap
+					if water:
+						local_gridmap = local_chunk.waterGridMap
+					#update only those neighbors of the same levelobjectdata
+					if levelObjectData == LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap)):
+						update_tiled_object(local_pos,levelObjectData)
 
 
 func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):

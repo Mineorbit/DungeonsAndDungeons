@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=24 format=3 uid="uid://bpqrsbwd745am"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
@@ -27,6 +27,9 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
 material = ExtResource("3_mypbp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ohmsw"]
+material = ExtResource("18_36oqg")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2g4um"]
 material = ExtResource("18_36oqg")
@@ -106,6 +109,17 @@ local_id = 3
 
 [node name="TiledWater" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
+
+[node name="WaterFull" type="MeshInstance3D" parent="TiledWater"]
+mesh = SubResource("BoxMesh_ohmsw")
+skeleton = NodePath("../../TiledFloor")
+
+[node name="CollisionShape" type="StaticBody3D" parent="TiledWater/WaterFull"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledWater/WaterFull/CollisionShape"]
+shape = SubResource("ConcavePolygonShape3D_s8l3b")
 
 [node name="WaterBase" type="MeshInstance3D" parent="TiledWater"]
 mesh = SubResource("PlaneMesh_2g4um")

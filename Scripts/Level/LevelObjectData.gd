@@ -29,7 +29,8 @@ static func from_cell(cellTileIndex,_cellTileOrientation):
 	for levelObject in Constants.LevelObjectData.values():
 		if levelObject.tiled and (cellTileIndex in levelObject.tileIndex):
 			return levelObject
-	return Constants.Default_Floor
+	# if there is no match return null
+	return null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
