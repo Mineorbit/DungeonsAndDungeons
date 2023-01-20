@@ -292,31 +292,37 @@ func get_neighbor(i,j,k,pos,water):
 				var local_gridmap = local_chunk.levelGridMap
 				if water:
 					local_gridmap = local_chunk.waterGridMap
-				return LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap))
-				
+#				return LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap))
+				return LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap))
 
-# update local tile indices for new level object
+
+
+# update local tile indices, whose LevelObjectData are allready set correctly with new center levelobject
+# NOTE: Deleting is handled seperately in the Chunk script
 # NOTE: every tile index has exactly one LevelObjectData type
-func update_tiled_object(pos,levelObjectData):
+func update_tiled_object(pos,levelObjectData,gridMap):
+		# empty field updates dont need to be handled (this is done by the delete method in the Chunk script) 
+	
 	var water = false
 	var chunk = get_chunk(pos)
-	var gridMap = chunk.levelGridMap
-	if levelObjectData == Constants.Water:
-		water = true
-		gridMap = chunk.waterGridMap
+	var new_index = -1
 	var last_index = chunk.get_tile_level_object(pos,gridMap)
+	if not levelObjectData == null:
 	# default, all sides visible
-	var localIndex = 0
+		var localIndex = 0
 		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
-	if get_neighbor(0,1,0,pos,water) == levelObjectData:
-		localIndex = 1
+		if get_neighbor(0,1,0,pos,water) == levelObjectData:
+			localIndex = 1
 	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
-	if not levelObjectData.tileIndex.size() > localIndex:
-		localIndex = 0
-	var new_index = levelObjectData.tileIndex[localIndex]
+		if not levelObjectData.tileIndex.size() > localIndex:
+			localIndex = 0
+		new_index = levelObjectData.tileIndex[localIndex]
 	# if the tile value has changed
 	if not new_index == last_index:
 		chunk.set_tile_level_object(pos,new_index,water)
+		updateNeighbors(pos,water)
+
+func updateNeighbors(pos,water):
 		for i in range(-1,2):
 			for j in range(-1,2):
 				for k in range(-1,2):
@@ -328,9 +334,8 @@ func update_tiled_object(pos,levelObjectData):
 					if water:
 						local_gridmap = local_chunk.waterGridMap
 					#update only those neighbors of the same levelobjectdata
-					if levelObjectData == LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap)):
-						update_tiled_object(local_pos,levelObjectData)
-
+					var levelObjectData = LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap))
+					update_tiled_object(local_pos,levelObjectData,local_gridmap)
 
 func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
 	
@@ -349,7 +354,10 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 	changes = true
 	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
-		update_tiled_object(pos,levelObjectData)
+		var local_gridmap = chunk.levelGridMap
+		if Constants.Water == levelObjectData:
+			local_gridmap = chunk.waterGridMap
+		update_tiled_object(pos,levelObjectData,local_gridmap)
 	else:
 		var new_level_object
 		if levelObjectData.interactive:

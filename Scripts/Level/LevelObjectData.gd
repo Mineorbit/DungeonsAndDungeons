@@ -25,7 +25,7 @@ func _ready():
 func to_cell():
 	return tileIndex
 
-static func from_cell(cellTileIndex,_cellTileOrientation):
+static func from_cell(cellTileIndex,_cellTileOrientation = null):
 	for levelObject in Constants.LevelObjectData.values():
 		if levelObject.tiled and (cellTileIndex in levelObject.tileIndex):
 			return levelObject

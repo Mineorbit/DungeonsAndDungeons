@@ -49,10 +49,13 @@ func remove_tile_level_object(pos):
 	print(get_tile_level_object(pos,waterGridMap))
 	var result = false 
 	if get_tile_level_object(pos,levelGridMap) != -1:
-		set_tile_level_object(pos,-1,false)
+		#set_tile_level_object(pos,-1,false)
+		# update tile and neighbors (null is the -1 tile index i.e. empty)
+		Constants.World.level.update_tiled_object(pos,null,levelGridMap)
 		result = true
 	if get_tile_level_object(pos,waterGridMap) != -1:
-		set_tile_level_object(pos,-1,true)
+		#set_tile_level_object(pos,-1,true)
+		Constants.World.level.update_tiled_object(pos,null,waterGridMap)
 		result = true
 	return result
 

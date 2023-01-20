@@ -56,6 +56,7 @@ func start_edit_level():
 	print("Starting to edit Level: "+str(level_list.selected_level))
 	Bootstrap.start_edit(level_list.selected_level)
 
+
 func _on_delete_level():
 	for file in DirAccess.open("user://level/localLevels/"+str(level_list.selected_level)).get_files():
 			DirAccess.remove_absolute("user://level/localLevels/"+str(level_list.selected_level)+"/"+str(file))
