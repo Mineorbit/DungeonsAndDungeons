@@ -337,22 +337,33 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 			rot = 22
 		
 		
-		
-		#back
+		#back CORRECT
 		elif get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
 			localIndex = 2
 			rot = 16
 		
 		
-		#left
+		
+		#left CORRECT
 		elif get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
 			rot = 10
 			
-		#right
+		
+		#right CORRECT
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 1
+			rot = 0
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		#print(localIndex)
 	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
