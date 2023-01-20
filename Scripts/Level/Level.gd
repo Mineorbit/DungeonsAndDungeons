@@ -319,37 +319,40 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		
 		# sides
-		#up
+		#up CORRECT
 		elif get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
 			rot = 1
 
-		#down
+		#down CORRECT
 		elif get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
 			rot = 3
 			
 		
-		#front
+		
+		#front CORRECT
 		elif get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
 			localIndex = 2
-			rot = 4
-			
+			rot = 22
+		
+		
+		
 		#back
 		elif get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
 			localIndex = 2
-			rot = 12
+			rot = 16
 		
 		
 		#left
 		elif get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 0
+			rot = 10
 			
 		#right
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
-			rot = 8
+			rot = 1
 		
 		#print(localIndex)
 	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
