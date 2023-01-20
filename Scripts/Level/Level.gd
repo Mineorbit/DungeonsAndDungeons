@@ -317,14 +317,13 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		if get_neighbor(0,1,0,pos) != null and get_neighbor(0,-1,0,pos) != null and get_neighbor(1,0,0,pos) != null and get_neighbor(-1,0,0,pos) != null and get_neighbor(0,0,1,pos) != null and get_neighbor(0,0,-1,pos) != null:
 			localIndex = 1
 		
-		elif get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
-			localIndex = 3
-			rot = 8
-		
-		elif get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
-			localIndex = 3
+		elif get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 2
 			rot = 0
-			
+
+		
+		
+		print(localIndex)
 		#print(localIndex)
 	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
 		if not levelObjectData.tileIndex.size() > localIndex:

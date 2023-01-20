@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=59 format=3 uid="uid://bpqrsbwd745am"]
 
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
@@ -32,13 +32,6 @@ material = ExtResource("3_mypbp")
 material = ExtResource("18_36oqg")
 subdivide_width = 4
 subdivide_height = 4
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_2g4um"]
-material = ExtResource("18_36oqg")
-size = Vector2(1, 1)
-subdivide_width = 4
-subdivide_depth = 4
-center_offset = Vector3(0, 0.45, 0)
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_lpbiq"]
 operator = 2
@@ -487,20 +480,8 @@ collision_mask = 128
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TiledWater/WaterInside/CollisionShape"]
 shape = SubResource("ConcavePolygonShape3D_s8l3b")
 
-[node name="WaterBase" type="MeshInstance3D" parent="TiledWater"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-mesh = SubResource("PlaneMesh_2g4um")
-skeleton = NodePath("../../TiledFloor")
-
-[node name="CollisionShape" type="StaticBody3D" parent="TiledWater/WaterBase"]
-collision_layer = 128
-collision_mask = 128
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledWater/WaterBase/CollisionShape"]
-shape = SubResource("ConcavePolygonShape3D_s8l3b")
-
 [node name="WaterSide" type="MeshInstance3D" parent="TiledWater"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = SubResource("PlaneMesh_ujr6f")
 skeleton = NodePath("../../TiledFloor")
 
