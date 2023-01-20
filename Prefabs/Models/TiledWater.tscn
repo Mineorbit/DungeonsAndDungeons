@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d06kcwbiooxit"]
 
-[ext_resource type="PackedScene" uid="uid://b06obryhtjck2" path="res://Assets/Models/Block.blend" id="1_ox3yk"]
+[ext_resource type="PackedScene" uid="uid://bum32pswxv2cl" path="res://Assets/Models/Block.blend" id="1_ox3yk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2lpre"]
 
@@ -48,8 +48,8 @@ shape = SubResource("BoxShape3D_2lpre")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="0" index="0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="0/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_2lpre")
+[node name="2" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.7563)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="2" index="0"]
 

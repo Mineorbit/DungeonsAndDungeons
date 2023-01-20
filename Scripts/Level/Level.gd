@@ -356,8 +356,11 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 			rot = 0
 		
 		
-		
-		
+		#edges
+		#right CORRECT
+		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 6
+			rot = 17
 		
 		
 		

@@ -53,6 +53,24 @@ func buffer():
 	await get_tree().physics_frame
 
 
+var t = 0
+var water_speed = 0.125
+var materials = []
+
+
+func _ready():
+	var mesh_library = load("res://Resources/grid.tres")
+	for index in Constants.Water.tileIndex:
+		if mesh_library.get_item_mesh(index) != null:
+			var mat = mesh_library.get_item_mesh(index).surface_get_material(0)
+			materials.append(mat)
+			print(mat)
+
+func _process(delta):
+	t += delta
+	for mat in materials:
+		mat.set_shader_parameter("triplanar_offset",Vector3(water_speed*t,water_speed*t,water_speed*t))
+
 
 
 func set_mode(new_mode):
