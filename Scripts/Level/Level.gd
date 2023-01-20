@@ -317,11 +317,37 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		if get_neighbor(0,1,0,pos) != null and get_neighbor(0,-1,0,pos) != null and get_neighbor(1,0,0,pos) != null and get_neighbor(-1,0,0,pos) != null and get_neighbor(0,0,1,pos) != null and get_neighbor(0,0,-1,pos) != null:
 			localIndex = 1
 		
+		
+		# sides
+		#up
 		elif get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 2
 			rot = 0
 
+		#down
+		elif get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 2
+			rot = 8
+			
 		
+		#front
+		elif get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
+			localIndex = 2
+			rot = 4
+		#back
+		elif get_neighbor(0,0,-1,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null:
+			localIndex = 2
+			rot = 12
+		
+		
+		#left
+		elif get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 2
+			rot = 1
+		#right
+		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 2
+			rot = 3
 		
 		print(localIndex)
 		#print(localIndex)
