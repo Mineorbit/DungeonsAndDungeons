@@ -48,6 +48,9 @@ shape = SubResource("BoxShape3D_2lpre")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="0" index="0"]
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="0/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_2lpre")
+
 [node name="2" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.7563)
 

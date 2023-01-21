@@ -356,11 +356,93 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 			rot = 0
 		
 		
+		
+		
+		
+		
 		#edges
-		#right CORRECT
+		#topfront CORRECT
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
-			localIndex = 6
-			rot = 17
+			localIndex = 4
+			rot = 0
+		
+		
+		
+		#topback CORRECT
+		elif get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 1
+		
+		
+		
+		#topright CORRECT
+		elif not get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 5
+			
+		#topleft CORRECT
+		elif not get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 13
+		
+		
+		
+	
+		#bottomfront CORRECT
+		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 3
+		
+		
+		
+		#bottomback CORRECT
+		elif get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 2
+		
+		
+		
+		#bottomright CORRECT
+		elif not get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 7
+			
+		#bottomleft CORRECT
+		elif not get_neighbor(-1,0,0,pos) == null and not get_neighbor(1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 4
+			rot = 15
+		
+		
+		
+		
+	
+		#frontleft CORRECT
+		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			#localIndex = 4
+			rot = 1
+		
+		
+		
+		#frontright CORRECT
+		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null  and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			#localIndex = 4
+			rot = 2
+		
+		
+		
+		#leftback CORRECT
+		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			#localIndex = 4
+			rot = 0
+			
+		#leftright CORRECT
+		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			#localIndex = 4
+			rot = 0
+		
+		
+		
+		
 		
 		
 		
