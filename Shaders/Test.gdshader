@@ -25,7 +25,7 @@ uniform sampler2D noise1;
 
 float waveheight(vec2 position,float time,float y)
 {
-	return cos(1.5*(position.x+position.y+time))*0.025+y;
+	return cos(1.5*(position.x+position.y+time))*0.025-0.03+y;
 }
 
 void vertex() {
@@ -55,8 +55,8 @@ void fragment() {
 	}
 // Output:0
 	ALBEDO = ColorParameter.xyz+vec3(highlightcolor.xyz);
-	ALPHA = 0.5;
-	EMISSION = vec3(highlightcolor.xyz);
+	ALPHA = 0.75;
+	EMISSION = 0.5*vec3(highlightcolor.xyz);
 
 
 }

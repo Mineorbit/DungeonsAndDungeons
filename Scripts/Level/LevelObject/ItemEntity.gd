@@ -47,12 +47,13 @@ func _process(_delta):
 
 func UpdateRelativePosition(_passive = false):
 	if itemOwner != null and collision_layer == 0:
-		var new_position = itemAttachmentPoint.to_global(offset)
-		transform.basis = itemAttachmentPoint.global_transform.basis
-		rotate_object_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
-		rotate_object_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
-		rotate_object_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
-		transform.origin = new_position
+		var attachmentpoint = itemOwner.model.playerSkeleton.get_bone_global_pose(itemAttachmentPoint)
+		var new_transform = attachmentpoint.translated_local(offset)
+		#transform.basis = attachmentpoint.global_transform.basis
+		new_transform = new_transform.rotated_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
+		new_transform = new_transform.rotated_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
+		new_transform = new_transform.rotated_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
+		global_transform =  itemOwner.model.playerSkeleton.global_transform*new_transform
 
 # gravity should be set by global constant
 

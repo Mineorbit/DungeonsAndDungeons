@@ -16,8 +16,6 @@ var itemRight
 var playercontroller
 
 @onready var camera_offset = $CameraAnchor/CameraOffset
-@onready var leftHandAttachment = $Model/root/Skeleton3D/lefthand
-@onready var rightHandAttachment = $Model/root/Skeleton3D/righthand
 
 
 # changing colors
@@ -133,15 +131,16 @@ func _physics_process(delta):
 	super._physics_process(delta)
 
 
+
 @rpc(any_peer, call_local)
 func Attach(item):
 	super.Attach(item)
 	if item.hand:
 		itemRight = item
-		item.itemAttachmentPoint = rightHandAttachment
+		item.itemAttachmentPoint = model.right_hand()
 	else:
 		itemLeft = item
-		item.itemAttachmentPoint = leftHandAttachment
+		item.itemAttachmentPoint = model.left_hand()
 
 
 @rpc(any_peer, call_local)

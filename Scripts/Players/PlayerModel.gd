@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var anim_tree = $AnimationTree
 
+@onready var playerSkeleton: Skeleton3D = $root/Skeleton3D
 var aimfsm: AnimationNodeStateMachinePlayback
 var verticalfsm: AnimationNodeStateMachinePlayback
 var lastpos
@@ -42,7 +43,7 @@ func can_shoot(can_shootnow):
 
 
 func player_striking(v):
-	anim_tree["parameters/strike/active"] = true
+	anim_tree["parameters/strike/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 
 func player_jump():
@@ -58,8 +59,11 @@ func player_landed(blend):
 
 
 
+func left_hand():
+	return playerSkeleton.find_bone("hand.l")
 
-
+func right_hand():
+	return playerSkeleton.find_bone("hand.r")
 
 var aimtargetstate = ""
 var verticaltargetstate = ""
