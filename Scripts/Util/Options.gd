@@ -1,7 +1,7 @@
 extends Node
 
 
-var settings: Settings
+var settings
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if DirAccess.open("user://").file_exists("settings.tres"):

@@ -1,38 +1,22 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cfq8io2ro1lkf"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cfq8io2ro1lkf"]
 
-[ext_resource type="Shader" uid="uid://b4pu3fb16gjm4" path="res://Shaders/Water.tres" id="1_3skp8"]
+[ext_resource type="Shader" path="res://Shaders/Test.gdshader" id="1_m04y8"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5o4x5"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y1ldq"]
 noise_type = 2
-seed = 17
 fractal_type = 0
 cellular_distance_function = 1
-cellular_jitter = 0.739
+cellular_jitter = 0.57
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d2e2q"]
-in_3d_space = true
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hm37f"]
 seamless = true
-noise = SubResource("FastNoiseLite_5o4x5")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8m7k"]
-noise_type = 2
-seed = 55
-offset = Vector3(1, 0, 0)
-fractal_type = 0
-cellular_distance_function = 1
-cellular_jitter = 0.725
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cu85w"]
-in_3d_space = true
-seamless = true
-noise = SubResource("FastNoiseLite_d8m7k")
+noise = SubResource("FastNoiseLite_y1ldq")
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_3skp8")
+shader = ExtResource("1_m04y8")
 shader_parameter/ColorParameter = null
 shader_parameter/triplanar_scale = Vector3(1, 1, 1)
 shader_parameter/triplanar_offset = Vector3(0, 0, 0)
 shader_parameter/triplanar_sharpness = null
-shader_parameter/noise1 = SubResource("NoiseTexture2D_d2e2q")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_cu85w")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_hm37f")

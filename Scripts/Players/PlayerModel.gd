@@ -54,7 +54,7 @@ func player_landed(blend):
 	landblend = min(1,-blend/35)
 	update_vertical_state_machine("Fall")
 	anim_tree["parameters/landidle/blend_amount"] = landblend
-	anim_tree["parameters/land/active"] = true
+	anim_tree["parameters/land/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 
 
