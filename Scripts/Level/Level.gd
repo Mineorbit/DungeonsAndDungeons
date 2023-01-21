@@ -526,6 +526,20 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		
 		
+		#ground tubes
+		# no 7 has 12 cases: each face with 2 rotations
+		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 16
+		elif not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 0
+		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and  get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 18
+		elif not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and  get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 2
 		
 		
 		#print(localIndex)
