@@ -418,27 +418,27 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 	
 		#frontleft CORRECT
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
-			#localIndex = 4
-			rot = 1
+			localIndex = 4
+			rot = 4
 		
 		
 		
 		#frontright CORRECT
 		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null  and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
-			#localIndex = 4
-			rot = 2
+			localIndex = 4
+			rot = 6
 		
 		
 		
 		#leftback CORRECT
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
-			#localIndex = 4
-			rot = 0
+			localIndex = 4
+			rot = 12
 			
 		#leftright CORRECT
 		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
-			#localIndex = 4
-			rot = 0
+			localIndex = 4
+			rot = 14
 		
 		
 		
