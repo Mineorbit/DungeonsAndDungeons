@@ -562,18 +562,26 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 7
 			rot = 17
-		
-		
 		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
 			localIndex = 7
 			rot = 13
 		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
 			localIndex = 7
 			rot = 5
-				
 		
+		
+		# plate midsections
+		elif not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 8
+			rot = 0
+		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 8
+			rot = 1
+		elif not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 8
+			rot = 4
 			
-	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
+							#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
 		if levelObjectData.tileIndex.size() <= localIndex:
 			localIndex = 0
 		new_index = levelObjectData.tileIndex[localIndex]
