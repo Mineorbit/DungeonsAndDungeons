@@ -544,12 +544,35 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
 			localIndex = 7
 			rot = 3
+		
 		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
 			localIndex = 7
 			rot = 1
+			
+		elif not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 4
+		elif not get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 12
+			
+		elif get_neighbor(1,0,0,pos) == null and not get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 19
+		elif not get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and get_neighbor(0,1,0,pos) == null and get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 17
 		
-
-		print(localIndex)
+		
+		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and not get_neighbor(0,0,1,pos) == null and get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 13
+		elif get_neighbor(1,0,0,pos) == null and get_neighbor(-1,0,0,pos) == null and not get_neighbor(0,1,0,pos) == null and not get_neighbor(0,-1,0,pos) == null and get_neighbor(0,0,1,pos) == null and not get_neighbor(0,0,-1,pos) == null:
+			localIndex = 7
+			rot = 5
+				
+		
+			
 	#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
 		if levelObjectData.tileIndex.size() <= localIndex:
 			localIndex = 0
