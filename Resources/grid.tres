@@ -1,19 +1,19 @@
-[gd_resource type="MeshLibrary" load_steps=28 format=3 uid="uid://cl3mx2oese0yd"]
+[gd_resource type="MeshLibrary" load_steps=26 format=3]
 
-[ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_7d2os"]
-[ext_resource type="Material" uid="uid://bwdmyoav5klf2" path="res://Assets/Materials/Stone.tres" id="2_r8x0i"]
-[ext_resource type="Material" uid="uid://cfq8io2ro1lkf" path="res://Assets/Materials/Water.tres" id="3_781yq"]
+[ext_resource type="Material" path="res://Assets/Materials/Floor.tres" id="1_7d2os"]
+[ext_resource type="Material" path="res://Assets/Materials/Stone.tres" id="2_r8x0i"]
+[ext_resource type="Material" path="res://Assets/Materials/Water.tres" id="3_781yq"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_285o3"]
+[sub_resource type="BoxMesh" id="1"]
 material = ExtResource("1_7d2os")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y5ted"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8l3b"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6r32d"]
+[sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
 material = ExtResource("2_r8x0i")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3tghc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_jabd5"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
 "format": 4097,
@@ -26,7 +26,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5emg0"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_e8ots"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube005"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
@@ -41,11 +41,11 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 191, 255, 255, 255, 190, 0, 0, 0, 191, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 255, 127, 255, 191, 0, 0, 0, 191, 255, 255, 255, 62, 0, 0, 0, 63, 255, 127, 255, 255, 255, 127, 255, 191, 0, 0, 0, 63, 255, 255, 255, 190, 0, 0, 0, 191, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 127, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 255, 127, 255, 191, 0, 0, 0, 63, 255, 255, 255, 62, 0, 0, 0, 63, 255, 127, 255, 255, 255, 127, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_3tghc")
+shadow_mesh = SubResource("ArrayMesh_jabd5")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_plgxb"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2lpre"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fvcbl"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_hdfy2"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
 "format": 4097,
@@ -58,7 +58,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6sa3w"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_n8nh5"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube007"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
@@ -73,41 +73,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_fvcbl")
+shadow_mesh = SubResource("ArrayMesh_hdfy2")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_kbtlx"]
-_surfaces = [{
-"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
-"format": 4097,
-"index_count": 18,
-"index_data": PackedByteArray(2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0),
-"lods": [0.6742, PackedByteArray(3, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 0, 0, 5, 0)],
-"name": "Material",
-"primitive": 3,
-"vertex_count": 8,
-"vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191)
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_71ljp"]
-resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube008"
-_surfaces = [{
-"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
-"attribute_data": PackedByteArray(0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63),
-"format": 4119,
-"index_count": 18,
-"index_data": PackedByteArray(2, 0, 10, 0, 3, 0, 2, 0, 8, 0, 10, 0, 9, 0, 7, 0, 11, 0, 9, 0, 5, 0, 7, 0, 4, 0, 1, 0, 6, 0, 4, 0, 0, 0, 1, 0),
-"lods": [0.6742, PackedByteArray(3, 0, 8, 0, 10, 0, 9, 0, 7, 0, 11, 0, 9, 0, 5, 0, 7, 0, 4, 0, 0, 0, 6, 0)],
-"material": ExtResource("3_781yq"),
-"name": "Material",
-"primitive": 3,
-"vertex_count": 12,
-"vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255)
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_kbtlx")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_rlqr5"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_21asu"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
 "format": 4097,
@@ -120,7 +88,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_248bm"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_k1skr"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube009"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
@@ -135,9 +103,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_rlqr5")
+shadow_mesh = SubResource("ArrayMesh_21asu")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xdvfj"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_h2cs8"]
 _surfaces = [{
 "aabb": AABB(0.5, -0.5, -0.5, 1.00136e-05, 1, 1.00001),
 "format": 4097,
@@ -150,7 +118,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_jqypd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_tfebx"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube011"
 _surfaces = [{
 "aabb": AABB(0.5, -0.5, -0.5, 1.00136e-05, 1, 1.00001),
@@ -165,9 +133,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_xdvfj")
+shadow_mesh = SubResource("ArrayMesh_h2cs8")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_defk3"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_b130u"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1.00001, 1.00001, 1),
 "format": 4097,
@@ -180,7 +148,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_rq8bi"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_s0ohu"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1.00001, 1.00001, 1),
@@ -195,9 +163,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_defk3")
+shadow_mesh = SubResource("ArrayMesh_b130u")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_b0pv0"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_mohra"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1.00001, 1.00001, 1),
 "format": 4097,
@@ -210,7 +178,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_s36fd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_4dtyc"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube001"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1.00001, 1.00001, 1),
@@ -225,9 +193,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_b0pv0")
+shadow_mesh = SubResource("ArrayMesh_mohra")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_k1na3"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_x43bh"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
 "format": 4097,
@@ -240,7 +208,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_n377l"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_bfu6t"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube002"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
@@ -255,9 +223,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 127, 255, 127, 255, 255)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_k1na3")
+shadow_mesh = SubResource("ArrayMesh_x43bh")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0hwgm"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_773sy"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
 "format": 4097,
@@ -270,7 +238,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7m8ty"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_3efhj"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube003"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
@@ -285,9 +253,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 127, 0, 0, 255, 255, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_0hwgm")
+shadow_mesh = SubResource("ArrayMesh_773sy")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_un4wp"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_1bowa"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
 "format": 4097,
@@ -301,7 +269,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5sulu"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_psyeo"]
 resource_name = "Block-1f2b04154bb3e6612492a5fce55ea805_Cube004"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1.00001),
@@ -317,83 +285,77 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 255, 127, 255, 255, 0, 0, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_un4wp")
+shadow_mesh = SubResource("ArrayMesh_1bowa")
 
 [resource]
 item/0/name = ""
-item/0/mesh = SubResource("BoxMesh_285o3")
+item/0/mesh = SubResource("1")
 item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/shapes = [SubResource("ConcavePolygonShape3D_y5ted"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/shapes = [SubResource("ConcavePolygonShape3D_s8l3b"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 item/1/name = ""
-item/1/mesh = SubResource("BoxMesh_6r32d")
+item/1/mesh = SubResource("BoxMesh_wv3na")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/1/shapes = [SubResource("ConcavePolygonShape3D_y5ted"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/shapes = [SubResource("ConcavePolygonShape3D_s8l3b"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
 item/2/name = ""
-item/2/mesh = SubResource("ArrayMesh_248bm")
+item/2/mesh = SubResource("ArrayMesh_k1skr")
 item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/2/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
 item/3/name = ""
 item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/3/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/3/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/navigation_layers = 1
 item/4/name = ""
-item/4/mesh = SubResource("ArrayMesh_jqypd")
+item/4/mesh = SubResource("ArrayMesh_tfebx")
 item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/4/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/4/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/4/navigation_layers = 1
 item/5/name = ""
-item/5/mesh = SubResource("ArrayMesh_rq8bi")
+item/5/mesh = SubResource("ArrayMesh_s0ohu")
 item/5/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/5/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/5/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/5/navigation_layers = 1
 item/6/name = ""
-item/6/mesh = SubResource("ArrayMesh_s36fd")
+item/6/mesh = SubResource("ArrayMesh_4dtyc")
 item/6/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/6/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/6/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/6/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/6/navigation_layers = 1
 item/7/name = ""
-item/7/mesh = SubResource("ArrayMesh_n377l")
+item/7/mesh = SubResource("ArrayMesh_bfu6t")
 item/7/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/7/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/7/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/7/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/7/navigation_layers = 1
 item/8/name = ""
-item/8/mesh = SubResource("ArrayMesh_7m8ty")
+item/8/mesh = SubResource("ArrayMesh_3efhj")
 item/8/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/8/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/8/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/8/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/8/navigation_layers = 1
 item/9/name = ""
-item/9/mesh = SubResource("ArrayMesh_5sulu")
+item/9/mesh = SubResource("ArrayMesh_psyeo")
 item/9/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/9/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/9/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/9/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/9/navigation_layers = 1
 item/10/name = ""
-item/10/mesh = SubResource("ArrayMesh_5emg0")
+item/10/mesh = SubResource("ArrayMesh_e8ots")
 item/10/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/10/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/10/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/10/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/10/navigation_layers = 1
 item/11/name = ""
-item/11/mesh = SubResource("ArrayMesh_6sa3w")
+item/11/mesh = SubResource("ArrayMesh_n8nh5")
 item/11/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/11/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/11/shapes = [SubResource("BoxShape3D_2lpre"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/11/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/11/navigation_layers = 1
-item/12/name = ""
-item/12/mesh = SubResource("ArrayMesh_71ljp")
-item/12/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/12/shapes = [SubResource("BoxShape3D_plgxb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
-item/12/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/12/navigation_layers = 1
