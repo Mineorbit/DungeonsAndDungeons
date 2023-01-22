@@ -55,6 +55,6 @@ func _process(delta):
 		var i = 0
 		for levelObject in get_children():
 			var new_pos = Vector3( ((i - selection + num_of_elems_on_screen/2 + num_of_elems_on_screen +1)%(num_of_elems_on_screen + 1))*4 - num_of_elems_on_screen*2,0,0)
-			levelObject.transform.origin = (new_pos + levelObject.transform.origin)/2
+			levelObject.transform.origin = (new_pos + levelObject.transform.origin)/2 + (Constants.LevelObjectData[i].display_offset)
 			i = i+1
 
