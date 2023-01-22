@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2ea3rs0cq3rm"]
+[gd_scene load_steps=5 format=3 uid="uid://b2ea3rs0cq3rm"]
 
 [ext_resource type="Script" path="res://Scripts/UI/BuilderHUD.gd" id="1_erva2"]
 [ext_resource type="PackedScene" uid="uid://bpqrsbwd745am" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
 [ext_resource type="Script" path="res://Scripts/UI/EditPanel.gd" id="2_6nevs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a6nvk"]
 
 [node name="BuilderHUD" type="Node2D"]
 script = ExtResource("1_erva2")
@@ -81,6 +83,8 @@ display = true
 layout_mode = 2
 
 [node name="EditPanel" type="Panel" parent="CanvasLayer"]
+top_level = true
+material = SubResource("CanvasItemMaterial_a6nvk")
 anchors_preset = -1
 anchor_left = 0.25
 anchor_top = 0.25
