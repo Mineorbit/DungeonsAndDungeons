@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://8rnbleflf87o"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_4dt4y"]
 
@@ -6,7 +6,7 @@
 script = ExtResource("1_4dt4y")
 name = "Sign"
 tiled = false
-interactive = false
+interactive = true
 tileIndex = PackedInt32Array()
 levelObjectId = 18
 maximumNumber = -1
