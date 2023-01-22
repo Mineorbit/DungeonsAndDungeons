@@ -69,7 +69,8 @@ func setup_resources():
 				var new_transform = child.transform
 				new_transform.origin = Vector3.ZERO
 				meshlibrary.set_item_mesh_transform(id,new_transform)
-				meshlibrary.set_item_shapes(id,[child.get_child(0).get_child(0).shape,child.get_child(0).get_child(0).transform])
+				if child.get_child(0) != null:
+					meshlibrary.set_item_shapes(id,[child.get_child(0).get_child(0).shape,child.get_child(0).get_child(0).transform])
 				i = i + 1
 			meshlibrary_id = local_mesh_library_id + i
 

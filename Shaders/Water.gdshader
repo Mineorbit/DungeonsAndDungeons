@@ -25,7 +25,7 @@ uniform sampler2D noise1;
 
 float waveheight(vec2 position,float time,float y)
 {
-	return cos(1.5*(position.x+position.y+time))*0.035 - 0.04+y;
+	return cos(1.5*(position.x+position.y+time))*0.025 - 0.045+y;
 }
 
 void vertex() {

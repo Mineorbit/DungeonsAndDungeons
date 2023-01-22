@@ -65,7 +65,7 @@ func Shoot():
 	var arrow: RigidBody3D = arrowprefab.instantiate()
 	Constants.World.level.spawn_entity(arrow)
 	arrow.global_transform.origin = global_transform.origin + -0.5*transform.basis.z
-	var strength = 25
+	var strength = 20
 	#arrow.gravity_scale = 0
 	# this needs to be generalized for item carrying enemies
 	var new_rot = itemOwner.playercontroller.get_player_camera().rotation

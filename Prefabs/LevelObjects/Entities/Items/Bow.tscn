@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://vmp4kfy2gr3w"]
 
 [ext_resource type="PackedScene" uid="uid://5qjssq37vgam" path="res://Prefabs/Models/Items/BowModel.tscn" id="1_44l0g"]
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Bow.gd" id="1_yog6x"]
@@ -19,8 +19,8 @@ properties/1/sync = true
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_yog6x")
-offset = Vector3(-0.25, 0, 0)
-hold_rot = Vector3(90, 180, 90)
+offset = Vector3(0, 0.1, 0)
+hold_rot = Vector3(90, 0, 120)
 
 [node name="Model" parent="." instance=ExtResource("1_44l0g")]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)

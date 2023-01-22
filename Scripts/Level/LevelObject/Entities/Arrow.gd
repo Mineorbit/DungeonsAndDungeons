@@ -23,18 +23,23 @@ func TryStrike(body):
 
 var can_reflect = true
 
-var max_bounces = 4
+var max_bounces = 16
 var bounces = 0
 
 func _physics_process(delta):
-	var result = move_and_collide(Vector3.ZERO)
+	var result = move_and_collide(-basis.z*delta,true,0.001,false,4)
 	if result != null and bounces < max_bounces:
 		bounces += 1
-		var reflect = result.get_remainder().bounce(result.get_normal())
-		linear_velocity = linear_velocity.bounce(result.get_normal())
+		print(get_contact_count())
+		var normal = result.get_normal()
+		print(normal)
+		var reflect = result.get_remainder().bounce(normal)
+		linear_velocity = linear_velocity.bounce(normal)
 		move_and_collide(reflect*0.5)
 		look_at(position + linear_velocity)
-	
+
+
+
 func despawn():
 	queue_free()
 
