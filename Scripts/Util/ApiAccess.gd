@@ -100,7 +100,7 @@ func decompress_level(levelname,local = false):
 	if OS.get_name() == "Windows":
 		OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 	else:
-		OS.execute("unzip",[path,"-d "+str(result)])
+		OS.execute("unzip",[path,"-d",str(result)])
 
 
 	
