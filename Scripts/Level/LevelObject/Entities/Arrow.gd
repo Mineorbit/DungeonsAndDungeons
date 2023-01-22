@@ -28,16 +28,38 @@ var bounces = 0
 
 func _physics_process(delta):
 	var result = move_and_collide(-basis.z*delta,true,0.001,false,4)
+	
 	if result != null and bounces < max_bounces:
 		bounces += 1
-		print(get_contact_count())
 		var normal = result.get_normal()
+		if result.get_collider() is GridMap and not is_principal_direction(normal):
+			return
+		
 		print(normal)
+		print(result.get_collision_count())
+		print(result.get_collider())
 		var reflect = result.get_remainder().bounce(normal)
 		linear_velocity = linear_velocity.bounce(normal)
-		move_and_collide(reflect*0.5)
+		move_and_collide(delta*reflect*0.5)
 		look_at(position + linear_velocity)
 
+var tolerance = 0.1
+
+func is_principal_direction(vec):
+	if((Vector3(1,0,0) - vec).length() < tolerance):
+		return true
+	if((Vector3(-1,0,0) - vec).length() < tolerance):
+		return true
+	if((Vector3(0,1,0) - vec).length() < tolerance):
+		return true
+	if((Vector3(0,-1,0) - vec).length() < tolerance):
+		return true
+	if((Vector3(0,0,1) - vec).length() < tolerance):
+		return true
+	if((Vector3(0,0,-1) - vec).length() < tolerance):
+		return true
+	return false
+	
 
 
 func despawn():
