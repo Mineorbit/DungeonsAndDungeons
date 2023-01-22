@@ -629,6 +629,7 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 							#print(str(levelObjectData)+" "+str(levelObjectData.tileIndex.size()))
 		if levelObjectData.tileIndex.size() <= localIndex:
 			localIndex = 0
+			
 		new_index = levelObjectData.tileIndex[localIndex]
 	# if the tile value has changed
 	if not new_index == last_index:

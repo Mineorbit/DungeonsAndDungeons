@@ -20,8 +20,8 @@ properties/1/sync = true
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_2x1ta")
-offset = Vector3(-0.35, 0, 0)
-hold_rot = Vector3(0, 0, -90)
+offset = Vector3(0, 0.1, 0)
+hold_rot = Vector3(0, -45, -90)
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
@@ -35,3 +35,7 @@ script = ExtResource("3_me3ac")
 
 [node name="Model" parent="." instance=ExtResource("4_rq6ba")]
 transform = Transform3D(2.7, 0, 0, 0, 2.7, 0, 0, 0, 2.7, 0, 0.235, 0)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="SwingFinished"]

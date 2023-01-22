@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=21 format=3 uid="uid://bpqrsbwd745am"]
 
-[ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="1_gj2pu"]
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
 [ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
+[ext_resource type="PackedScene" uid="uid://mdw64i386rt7" path="res://Prefabs/Models/TiledFloor.tscn" id="2_gfayc"]
 [ext_resource type="PackedScene" uid="uid://dugp2bkorh4g" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
 [ext_resource type="Material" uid="uid://bwdmyoav5klf2" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
 [ext_resource type="PackedScene" uid="uid://dya31aho2aoh2" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
@@ -19,29 +19,17 @@
 [ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="17_qq23b"]
 [ext_resource type="PackedScene" uid="uid://d06kcwbiooxit" path="res://Prefabs/Models/TiledWater.tscn" id="18_qydt0"]
 
-[sub_resource type="BoxMesh" id="1"]
-material = ExtResource("1_gj2pu")
+[sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
+material = ExtResource("3_mypbp")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8l3b"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wv3na"]
-material = ExtResource("3_mypbp")
 
 [node name="LevelObjectList" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
 script = ExtResource("1_jx2mm")
 
-[node name="TiledFloor" type="Node3D" parent="."]
-
-[node name="0" type="MeshInstance3D" parent="TiledFloor"]
-mesh = SubResource("1")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape" type="StaticBody3D" parent="TiledFloor/0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TiledFloor/0/CollisionShape"]
-shape = SubResource("ConcavePolygonShape3D_s8l3b")
+[node name="TiledFloor" parent="." instance=ExtResource("2_gfayc")]
 
 [node name="PlayerGoal" parent="." instance=ExtResource("2_6tpvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
@@ -51,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="0" type="MeshInstance3D" parent="TiledStone"]
 mesh = SubResource("BoxMesh_wv3na")
-skeleton = NodePath("../../TiledFloor")
+skeleton = NodePath("")
 
 [node name="CollisionShape" type="StaticBody3D" parent="TiledStone/0"]
 

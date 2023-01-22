@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d2psvwgsrumri"
+uid="uid://bvao8a3kuel54"
 path="res://.godot/imported/CorneredBlock.blend-3cb2c13228e55227183fdad076ff7471.scn"
 
 [deps]
@@ -27,7 +27,14 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"Material": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Floor.tres"
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/punctual_lights=true
 blender/nodes/cameras=true
