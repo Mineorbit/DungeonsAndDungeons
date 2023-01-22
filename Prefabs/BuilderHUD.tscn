@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2ea3rs0cq3rm"]
+[gd_scene load_steps=3 format=3 uid="uid://b2ea3rs0cq3rm"]
 
-[ext_resource type="PackedScene" uid="uid://dpllvelpgsund" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
+[ext_resource type="PackedScene" uid="uid://bpqrsbwd745am" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
+[ext_resource type="Script" path="res://Scripts/UI/EditPanel.gd" id="2_6nevs"]
 
 [node name="BuilderHUD" type="Node2D"]
 
@@ -16,12 +17,13 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="CanvasLayer/Control2"]
+layout_mode = 0
 offset_right = 68.0
 offset_bottom = 31.0
 text = "TEST (T)"
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/Control2"]
-anchors_preset = 12
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,14 +33,11 @@ grow_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control2/CenterContainer2"]
 custom_minimum_size = Vector2(128, 128)
-offset_left = 512.0
-offset_top = 17.0
-offset_right = 640.0
-offset_bottom = 145.0
+layout_mode = 2
 color = Color(0.894118, 0.811765, 0, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control2"]
-anchors_preset = 12
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,17 +47,11 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control2/CenterContainer"]
-anchors_preset = -1
-offset_right = 2048.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Control2/CenterContainer/MarginContainer"]
 layout_direction = 2
-offset_right = 2048.0
-offset_bottom = 128.0
-grow_vertical = 2
+layout_mode = 2
 focus_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/Control2/CenterContainer/MarginContainer/SubViewportContainer"]
@@ -83,7 +76,36 @@ transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, -0.875)
 display = true
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control2/CenterContainer"]
-offset_left = 1024.0
-offset_top = 64.0
-offset_right = 1024.0
-offset_bottom = 64.0
+layout_mode = 2
+
+[node name="EditPanel" type="Panel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_6nevs")
+
+[node name="Button" type="Button" parent="CanvasLayer/EditPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.075
+offset_bottom = -3.2028
+text = "X"
+flat = true
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/EditPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.5
+offset_right = 0.0719604
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="CanvasLayer/EditPanel/Button" to="CanvasLayer/EditPanel" method="stop_property_edit"]

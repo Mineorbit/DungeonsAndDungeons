@@ -34,6 +34,15 @@ func _ready() -> void:
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
 	top_level = true
 	edit = get_parent()
+	Signals.edited_interactive_level_object.connect(
+		func(levelobject):
+			if levelobject == null:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+				editing = false
+			else:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+				editing = true
+	)
 	
 
 
@@ -87,7 +96,16 @@ func connect_interactive_objects(a, b):
 
 var selected_rotation = 0
 
+var editing = false
 func _process(delta) -> void:
+	
+	if Input.is_action_just_pressed("EditProperties"):
+		if not editing:
+			var to_edit = get_collided_level_object()
+			if to_edit != null:
+				Signals.edited_interactive_level_object.emit(to_edit)
+	if editing:
+		return
 	Constants.builderPosition = global_transform.origin
 	if Input.is_action_just_pressed("RotateRight"):
 		selected_rotation = (selected_rotation + 1)%4
@@ -123,7 +141,7 @@ func _process(delta) -> void:
 
 var is_connecting = false
 func _input(event):
-	if event is InputEventMouseMotion and event.relative:
+	if event is InputEventMouseMotion and event.relative and not editing:
 		move_camera(event.relative)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
