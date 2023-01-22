@@ -103,7 +103,7 @@ offset_bottom = -3.2028
 text = "X"
 flat = true
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer/EditPanel"]
+[node name="text" type="TextEdit" parent="CanvasLayer/EditPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -115,3 +115,4 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [connection signal="pressed" from="CanvasLayer/EditPanel/Button" to="CanvasLayer/EditPanel" method="stop_property_edit"]
+[connection signal="text_changed" from="CanvasLayer/EditPanel/text" to="." method="text_changed"]

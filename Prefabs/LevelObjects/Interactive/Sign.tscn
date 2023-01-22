@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyu5utei4r4c5"]
+[gd_scene load_steps=4 format=3 uid="uid://cyu5utei4r4c5"]
 
 [ext_resource type="PackedScene" uid="uid://chhqackd78to1" path="res://Assets/Models/LevelObjects/Interactive/Sign.blend" id="1_ijoih"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Sign.gd" id="1_w8xw1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dmcn"]
 size = Vector3(0.125, 1.25, 1)
 
 [node name="Sign" type="Node3D"]
+script = ExtResource("1_w8xw1")
 
 [node name="Model" parent="." instance=ExtResource("1_ijoih")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -19,6 +19,7 @@ extends Node3D
 			Camera.current = true
 			player_to_follow_exists = true
 			update_camera_rigging(0)
+			_move_camera()
 			player.on_entity_remove.connect(func():player_to_follow_exists = false)
 			player.on_entity_despawn.connect(func():player_to_follow_exists = false)
 			player.on_entity_aiming.connect(ChangeMovementState)
@@ -65,16 +66,17 @@ func move_camera():
 	if((new_target_position-target_position).length() < 0.00001):
 		# return early as position has no changed
 		return
+	_move_camera()
+
+func _move_camera():
 	target_position = get_camera_target_position()
 	Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
 	Camera.look_at(target_position)
-
 
 func get_camera_target_position():
 	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
 
 func _physics_process(delta):
-	pass
 	update_camera_rigging(delta)
 	
 func _process(delta):
