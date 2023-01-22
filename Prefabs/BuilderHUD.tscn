@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2ea3rs0cq3rm"]
+[gd_scene load_steps=4 format=3 uid="uid://b2ea3rs0cq3rm"]
 
+[ext_resource type="Script" path="res://Scripts/UI/BuilderHUD.gd" id="1_erva2"]
 [ext_resource type="PackedScene" uid="uid://bpqrsbwd745am" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
 [ext_resource type="Script" path="res://Scripts/UI/EditPanel.gd" id="2_6nevs"]
 
 [node name="BuilderHUD" type="Node2D"]
+script = ExtResource("1_erva2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -56,6 +56,8 @@ func move_camera(vec: Vector2) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if editing:
+		return
 	var aim = get_global_transform().basis
 	var forward = -aim.z
 	var right = aim.x

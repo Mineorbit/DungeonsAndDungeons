@@ -60,8 +60,9 @@ var current_player = 0
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Save"):
 		world.level.save()
-	if Input.is_action_just_pressed("Test"):
+	if not Constants.builder.editing and Input.is_action_just_pressed("Test"):
 		enter_test_mode()
+		
 	if Input.is_action_just_pressed("Edit"):
 		enter_edit_mode()
 	if Input.is_action_just_pressed("SwitchPlayer") and Constants.currentMode == 2:
