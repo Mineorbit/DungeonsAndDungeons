@@ -12,7 +12,6 @@ func _ready():
 			hide()
 			return
 		editing_level_object = object.contained_level_object
-		print(object.contained_level_object.get_property_list())
 		var prefab = load("res://Prefabs/Property.tscn")
 		for prop in object.contained_level_object.get_property_list():
 			var prop_name = prop["name"]

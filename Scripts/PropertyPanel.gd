@@ -8,7 +8,10 @@ var property_name
 func setup(level_object,prop_name):
 	property_name = prop_name
 	editing_level_object = level_object
-	property_name_label.text = prop_name
+	var prop_label = prop_name
+	prop_label = prop_label.trim_prefix("var_")
+	prop_label = prop_label.capitalize()
+	property_name_label.text = prop_label
 	property_value.text = level_object.get(prop_name)
 
 func text_changed():
