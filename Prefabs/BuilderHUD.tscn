@@ -94,7 +94,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_6nevs")
 
-[node name="Button" type="Button" parent="CanvasLayer/EditPanel"]
+[node name="Exit" type="Button" parent="CanvasLayer/EditPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.035
@@ -103,16 +103,15 @@ offset_bottom = -3.2028
 text = "X"
 flat = true
 
-[node name="text" type="TextEdit" parent="CanvasLayer/EditPanel"]
+[node name="Properties" type="VBoxContainer" parent="CanvasLayer/EditPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
-anchor_bottom = 0.5
-offset_right = 0.0719604
+anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/EditPanel/Button" to="CanvasLayer/EditPanel" method="stop_property_edit"]
-[connection signal="text_changed" from="CanvasLayer/EditPanel/text" to="." method="text_changed"]
+[connection signal="pressed" from="CanvasLayer/EditPanel/Exit" to="CanvasLayer/EditPanel" method="stop_property_edit"]

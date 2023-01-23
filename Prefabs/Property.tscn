@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1o787s5ysg3u"]
+
+[ext_resource type="Script" path="res://Scripts/PropertyPanel.gd" id="1_47ufv"]
+
+[node name="Property" type="MarginContainer"]
+theme_override_constants/margin_bottom = 12
+script = ExtResource("1_47ufv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PropertyName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="PropertyValue" type="TextEdit" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "Test"
+placeholder_text = "Test"
+
+[connection signal="text_changed" from="VBoxContainer/PropertyValue" to="." method="text_changed"]
