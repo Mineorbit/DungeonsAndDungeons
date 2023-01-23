@@ -238,17 +238,23 @@ func add_from_string(base_position,line):
 	var r = lineData[4].to_int()
 	var instance_id = null
 	var connectedInteractiveObjects = null
+	var properties = null
+	#parse properties
 	if lineData.size() > 5:
-		instance_id = lineData[5].to_int()
+		properties = JSON.parse_string(lineData[5])
+	#parse connections
+	if lineData.size() > 6:
+		instance_id = lineData[6].to_int()
 		connectedInteractiveObjects = []
-		var commalist = lineData[6].split("[")[1].split("]")[0].split(",")
+		var commalist = lineData[7].split("[")[1].split("]")[0].split(",")
 		for instanceid in commalist:
 			if instanceid == "":
 				continue
 			connectedInteractiveObjects.append(instanceid.to_int())
 	var levelObjectData = Constants.LevelObjectData[id]
+	
 	var pos = Vector3(i,j,k)
-	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects)
+	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects,properties)
 
 
 func _process(delta):
@@ -650,7 +656,7 @@ func updateNeighbors(pos):
 					else:
 						update_tiled_object(local_pos,levelObjectData,local_chunk.levelGridMap)
 
-func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = []):
+func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = [],properties = null):
 	
 	# this sets the table of maximum numbers at the start
 	if not numberOfPlacedLevelObjects.has(levelObjectData.levelObjectId):
@@ -723,6 +729,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		# correct internal positions:
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
+		new_level_object.decode_properties(properties)
 
 
 func get_chunk_position(startpos):

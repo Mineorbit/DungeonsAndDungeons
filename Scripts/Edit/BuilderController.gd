@@ -34,7 +34,7 @@ func _ready() -> void:
 	gridCursorMesh = $CursorArm/Cursor/GridCursorMesh
 	top_level = true
 	edit = get_parent()
-	Signals.edited_interactive_level_object.connect(
+	Signals.edited_level_object.connect(
 		func(levelobject):
 			if levelobject == null:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -105,7 +105,7 @@ func _process(delta) -> void:
 		if not editing:
 			var to_edit = get_collided_level_object()
 			if to_edit != null:
-				Signals.edited_interactive_level_object.emit(to_edit)
+				Signals.edited_level_object.emit(to_edit)
 	if editing:
 		return
 	Constants.builderPosition = global_transform.origin

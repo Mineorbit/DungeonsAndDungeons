@@ -7,12 +7,15 @@ extends Panel
 var editing_level_object: Node3D
 
 func _ready():
-	Signals.edited_interactive_level_object.connect(func (object):
+	Signals.edited_level_object.connect(func (object):
 		if object == null:
 			hide()
 			return
 		editing_level_object = object.contained_level_object
 		var prefab = load("res://Prefabs/Property.tscn")
+		if object.contained_level_object.get_property_list().size() == 0:
+			Signals.edited_level_object.emit(null)
+			return
 		for prop in object.contained_level_object.get_property_list():
 			var prop_name = prop["name"]
 			if prop_name.begins_with("var"):
@@ -27,4 +30,4 @@ func _ready():
 func stop_property_edit():
 	for prop in properties.get_children():
 		prop.queue_free()
-	Signals.edited_interactive_level_object.emit(null)
+	Signals.edited_level_object.emit(null)

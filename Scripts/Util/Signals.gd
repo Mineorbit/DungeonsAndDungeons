@@ -5,7 +5,7 @@ extends Node
 
 signal selected_level_object_changed(int)
 
-signal edited_interactive_level_object(levelobject)
+signal edited_level_object(levelobject)
 
 signal connection_added(a,list)
 signal connection_removed(a,list)

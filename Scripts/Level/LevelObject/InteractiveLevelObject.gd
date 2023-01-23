@@ -21,6 +21,7 @@ func to_instance(instance):
 		rot = ( rot + 4) % 4
 		instance.rotation = rot
 		instance.levelObjectData = levelObjectData
+		instance.properties = encode_properties()
 		instance.unique_instance_id = unique_instance_id
 		instance.connectedObjects = connectedObjects
 		return instance

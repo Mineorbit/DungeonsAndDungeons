@@ -37,6 +37,22 @@ func on_remove():
 		contained_level_object.on_remove()
 
 
+func encode_properties():
+	var result_table = {}
+	var property_added = false
+	for prop in contained_level_object.get_property_list():
+			var prop_name = prop["name"]
+			if prop_name.begins_with("var"):
+				result_table[prop_name] = contained_level_object.get(prop_name)
+				property_added = true
+	if not property_added:
+		return null
+	return result_table
+
+func decode_properties(properties):
+	if properties != null:
+		for prop in properties:
+			contained_level_object.set(prop,properties[prop])
 
 func on_mode_change():
 	if Constants.currentMode == 1:
@@ -52,6 +68,7 @@ func to_instance(instance):
 		rot = ( rot + 4) % 4
 		instance.rotation = rot
 		instance.levelObjectData = levelObjectData
+		instance.properties = encode_properties()
 		return instance
 
 func _process(delta):
