@@ -104,8 +104,11 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed("EditProperties"):
 		if not editing:
 			var to_edit = get_collided_level_object()
-			if to_edit != null:
-				Signals.edited_level_object.emit(to_edit)
+			if to_edit != null and to_edit is LevelObject:
+				for prop in to_edit.contained_level_object.get_property_list():
+					if prop["name"].begins_with("var"):
+						Signals.edited_level_object.emit(to_edit)
+						break
 	if editing:
 		return
 	Constants.builderPosition = global_transform.origin

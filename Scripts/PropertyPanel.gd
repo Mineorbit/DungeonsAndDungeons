@@ -12,7 +12,7 @@ func setup(level_object,prop_name):
 	prop_label = prop_label.trim_prefix("var_")
 	prop_label = prop_label.capitalize()
 	property_name_label.text = prop_label
-	property_value.text = level_object.get(prop_name)
+	property_value.text = str(level_object.get(prop_name))
 
 func text_changed():
 	editing_level_object.set(property_name,property_value.text)

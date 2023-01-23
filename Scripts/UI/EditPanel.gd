@@ -13,9 +13,7 @@ func _ready():
 			return
 		editing_level_object = object.contained_level_object
 		var prefab = load("res://Prefabs/Property.tscn")
-		if object.contained_level_object.get_property_list().size() == 0:
-			Signals.edited_level_object.emit(null)
-			return
+
 		for prop in object.contained_level_object.get_property_list():
 			var prop_name = prop["name"]
 			if prop_name.begins_with("var"):
