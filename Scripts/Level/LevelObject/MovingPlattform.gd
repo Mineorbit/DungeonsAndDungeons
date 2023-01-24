@@ -4,18 +4,21 @@ var start_pos = Vector3.ZERO
 @onready var plattform = $Plattform
 @export var var_plattform_distance: float = 8
 @export var var_plattform_time: float = 2
+var p = 0
 func _ready():
+	p = 0
 	plattform.transform.origin = start_pos
 
 func start():
+	p = 0
 	plattform.transform.origin = start_pos
 
 
 func reset():
+	p = 0
 	plattform.transform.origin = start_pos
 
 var phase = 1
-var p = 0
 func _physics_process(delta):
 	if(Constants.currentMode == 2):
 		var a = start_pos
@@ -28,4 +31,4 @@ func _physics_process(delta):
 			phase = 1
 			
 		p += phase*delta*speed
-		plattform.transform.origin = (1-p)*b + p*a
+		plattform.transform.origin = p*b + (1-p)*a
