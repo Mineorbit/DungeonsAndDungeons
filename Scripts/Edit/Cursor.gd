@@ -8,5 +8,7 @@ extends Node3D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-var gridCursor = $GridCursorMesh
-var regularCursor = $MeshInstance
+@onready var gridCursor = $GridCursorMesh
+@onready var regularCursor = $MeshInstance
+@onready var placeSound = $Place
+@onready var displaceSound = $Displace

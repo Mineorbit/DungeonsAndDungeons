@@ -25,6 +25,10 @@ func reset():
 
 func start():
 	Constants.World.level.player_goal = self
+	if Constants.currentMode > 1:
+		goalAudio.play()
+	else:
+		goalAudio.stop()
 
 func number_of_players_needed():
 	return Constants.World.players.number_of_players()

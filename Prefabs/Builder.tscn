@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlro8vdvd0npd"]
+[gd_scene load_steps=7 format=3 uid="uid://dlro8vdvd0npd"]
 
 [ext_resource type="Script" path="res://Scripts/Edit/BuilderController.gd" id="1_bhwd2"]
 [ext_resource type="Script" path="res://Scripts/Edit/Cursor.gd" id="2_rmx1k"]
+[ext_resource type="AudioStream" uid="uid://cymjda87n1g6f" path="res://Assets/Sounds/sfx/builder/BuilderDisplace.wav" id="3_faduo"]
+[ext_resource type="AudioStream" uid="uid://bmxtn17o22pmr" path="res://Assets/Sounds/sfx/builder/BuilderPlace.wav" id="3_kuvdx"]
 
 [sub_resource type="SphereShape3D" id="1"]
 
@@ -38,6 +40,14 @@ target_position = Vector3(0, 0, 1)
 [node name="GridCursorMesh" type="MeshInstance3D" parent="CursorArm/Cursor"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("2")
+
+[node name="Displace" type="AudioStreamPlayer3D" parent="CursorArm/Cursor"]
+stream = ExtResource("3_faduo")
+volume_db = 6.0
+unit_size = 20.0
+
+[node name="Place" type="AudioStreamPlayer3D" parent="CursorArm/Cursor"]
+stream = ExtResource("3_kuvdx")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true

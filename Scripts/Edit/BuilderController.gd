@@ -22,7 +22,8 @@ var selection = 0
 var start_object
 var closestIndex = 0
 @onready var camera = $BuilderCamera
-
+signal on_levelobject_placed
+signal on_levelobject_displaced
 func start():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
@@ -43,6 +44,10 @@ func _ready() -> void:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 				editing = true
 	)
+	on_levelobject_placed.connect(func():
+		cursor.placeSound.play())
+	on_levelobject_displaced.connect(func():
+		cursor.displaceSound.play())
 	
 
 
@@ -116,14 +121,19 @@ func _process(delta) -> void:
 		selected_rotation = (selected_rotation + 1)%4
 	if Input.is_action_just_pressed("Place"):
 		Constants.World.level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation)
+		on_levelobject_placed.emit()
 	if Input.is_action_just_pressed("Displace"):
 		if colliding:
 			var aim = cursor.get_global_transform().basis
 			var forward = -aim.z
 			var position_to_remove = cursor.global_transform.origin - forward
 			var isRemoved = Constants.World.level.remove_by_position(position_to_remove)
-			if not isRemoved:
-				Constants.World.level.remove_by_object(get_collided_level_object())
+			if isRemoved:
+				on_levelobject_displaced.emit()
+			else:
+				if get_collided_level_object() != null:
+					on_levelobject_displaced.emit()
+					Constants.World.level.remove_by_object(get_collided_level_object())
 	if Input.is_action_just_pressed("Connect"):
 		start_object = get_collided_level_object()
 		if start_object != null:
@@ -151,3 +161,4 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
