@@ -18,8 +18,10 @@ func _ready():
 			var prop_name = prop["name"]
 			if prop_name.begins_with("var"):
 				var propertypanel = prefab.instantiate()
+				propertypanel.ready.connect(func():
+					propertypanel.setup(object.contained_level_object,prop_name)
+				)
 				properties.add_child(propertypanel)
-				propertypanel.setup(object.contained_level_object,prop_name)
 		show()
 		)
 	hide()

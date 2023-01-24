@@ -35,7 +35,8 @@ func start_lobby():
 
 #this is called once the level was downloaded
 func complete_start_round():
-	get_tree().paused = true
+	
+	#get_tree().paused = true
 	# start world with level from downloads
 	await Constants.World.start(selected_level_name,true,true)
 	for i in range(4):
@@ -44,7 +45,8 @@ func complete_start_round():
 	lobby = null
 	#Constants.World.players.spawn()
 	Constants.World.players.set_start_positions()
-	get_tree().paused = false
+	
+	#get_tree().paused = false
 	level_time = 0
 	is_in_play = true
 
