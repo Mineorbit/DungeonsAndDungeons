@@ -7,7 +7,7 @@ var speed
 
 
 func StrikeAnimation(damage):
-	anim_tree["parameters/strike/active"] = true
+	anim_tree["parameters/strike/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 func _physics_process(delta):
 	var last_speed_pos = lastpos
@@ -19,3 +19,9 @@ func _physics_process(delta):
 	lastpos = global_transform.origin
 	anim_tree["parameters/speed/blend_amount"] = speed*8
 
+@onready var strikeSound = $StrikeSound
+
+
+func animation_started(anim_name):
+	if anim_name == "Strike":
+		strikeSound.play()
