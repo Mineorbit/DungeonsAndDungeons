@@ -19,7 +19,7 @@ func _physics_process(delta):
 	lastpos = global_transform.origin
 	anim_tree["parameters/speed/blend_amount"] = speed*8
 
-@onready var strikeSound = $StrikeSound
+@onready var strikeSound: AudioStreamPlayer3D = $StrikeSound
 
 
 func animation_started(anim_name):
