@@ -1,8 +1,0 @@
-Shader
-ArrayMesh
-BoxMesh
-ShaderMaterial
-VisualShader
-AudioStreamWAV
-StandardMaterial3D
-AnimationLibrary
