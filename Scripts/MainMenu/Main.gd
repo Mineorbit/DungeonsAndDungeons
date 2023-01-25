@@ -1,6 +1,6 @@
 extends Control
 
-@onready var ipText: TextEdit = $CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer/IP
+@onready var ipText: LineEdit = $CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer/IP
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

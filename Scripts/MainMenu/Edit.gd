@@ -1,7 +1,7 @@
 extends Control
 
 @onready var tabmenu: TabContainer = $TabContainer
-@onready var nameText: TextEdit = $TabContainer/NewLevel/VBoxContainer/LevelName
+@onready var nameText: LineEdit = $TabContainer/NewLevel/VBoxContainer/LevelName
 @onready var level_list = $TabContainer/EditLevel/LevelList
 @onready var start_edit_button: Button = $TabContainer/EditLevel/CenterContainer/HBoxContainer/Edit
 @onready var delete_button: Button = $TabContainer/EditLevel/CenterContainer/HBoxContainer/Delete

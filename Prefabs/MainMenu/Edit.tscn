@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvguibn21nvmq"]
+[gd_scene load_steps=4 format=3 uid="uid://bvguibn21nvmq"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Edit.gd" id="1_6w7v4"]
 [ext_resource type="PackedScene" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="2_mb7u1"]
+[ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="3_3un6i"]
 
 [node name="Edit" type="Control"]
 layout_mode = 3
@@ -63,9 +64,14 @@ layout_mode = 2
 layout_mode = 2
 text = "Create an new Level"
 
-[node name="LevelName" type="TextEdit" parent="TabContainer/NewLevel/VBoxContainer"]
+[node name="LevelName" type="LineEdit" parent="TabContainer/NewLevel/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Name"
+
+[node name="LevelDescription" type="TextEdit" parent="TabContainer/NewLevel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_3un6i")
+placeholder_text = "Level Description"
 scroll_fit_content_height = true
 
 [node name="Start" type="Button" parent="TabContainer/NewLevel/VBoxContainer"]

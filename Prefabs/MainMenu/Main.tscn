@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://n8jy6pe2mrtm"]
+[gd_scene load_steps=3 format=3 uid="uid://n8jy6pe2mrtm"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Main.gd" id="1_brb28"]
+[ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="2_c8d5n"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -32,16 +33,18 @@ theme_override_constants/margin_top = 512
 theme_override_constants/margin_right = 256
 theme_override_constants/margin_bottom = 256
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="IP" type="TextEdit" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer"]
+[node name="IP" type="LineEdit" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 32)
 layout_mode = 2
+theme = ExtResource("2_c8d5n")
 text = "127.0.0.1"
 
 [node name="PlayButton" type="Button" parent="CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_c8d5n")
 text = "Play"
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/HBoxContainer"]
@@ -56,6 +59,7 @@ layout_mode = 2
 
 [node name="EditButton" type="Button" parent="CenterContainer/HBoxContainer/MarginContainer/CenterContainer2"]
 layout_mode = 2
+theme = ExtResource("2_c8d5n")
 text = "Edit"
 
 [node name="RichTextLabel" type="Label" parent="."]
