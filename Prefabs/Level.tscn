@@ -9,5 +9,5 @@ script = ExtResource("1")
 [node name="Entities" parent="." instance=ExtResource("2_fl8ir")]
 
 [node name="EntitiesSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn", "res://Prefabs/LevelObjects/Entities/Items/Sword.tscn", "res://Prefabs/LevelObjects/Entities/Items/Bow.tscn", "res://Prefabs/LevelObjects/Entities/Items/BombGlove.tscn", "res://Prefabs/LevelObjects/Entities/Arrow.tscn", "res://Prefabs/LevelObjects/Entities/Bomb.tscn")
+_spawnable_scenes = PackedStringArray("res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn", "res://Prefabs/LevelObjects/Entities/Items/Sword.tscn", "res://Prefabs/LevelObjects/Entities/Items/Bow.tscn", "res://Prefabs/LevelObjects/Entities/Items/BombGlove.tscn", "res://Prefabs/LevelObjects/Entities/Arrow.tscn", "res://Prefabs/LevelObjects/Entities/Bomb.tscn", "res://Prefabs/LevelObjects/Entities/PlattformEntity.tscn")
 spawn_path = NodePath("../Entities")

@@ -80,7 +80,6 @@ func _physics_process(delta):
 	update_camera_rigging(delta)
 	
 func _process(delta):
-	pass
 	update_camera_rigging(0)
 
 func update_camera_rigging(delta):

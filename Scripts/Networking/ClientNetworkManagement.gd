@@ -20,10 +20,6 @@ func _ready():
 	print("Connected signal to "+str(Constants.World))
 	Constants.World.on_entity_spawned.connect(disable_local_computations)
 	
-	Constants.entity_control_function = func():
-		print("Connected signal to "+str(Constants.World))
-		Constants.World.on_entity_spawned.connect(disable_local_computations)
-	Signals.on_new_world_created.connect(Constants.entity_control_function)
 
 
 func create_player_camera():

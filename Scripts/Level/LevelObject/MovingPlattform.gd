@@ -1,34 +1,29 @@
 extends Node3D
 
-var start_pos = Vector3.ZERO
-@onready var plattform = $Plattform
+var plattform
 @export var var_plattform_distance: float = 8
 @export var var_plattform_time: float = 2
+@onready var model = $MovingPlattformModel
 var p = 0
 func _ready():
-	p = 0
-	plattform.transform.origin = start_pos
+	show_plattform()
 
 func start():
 	p = 0
-	plattform.transform.origin = start_pos
-
+	plattform = load("res://Prefabs/LevelObjects/Entities/PlattformEntity.tscn").instantiate()
+	plattform.start_pos = global_transform.origin
+	plattform.end_pos = global_transform.origin + basis.x*var_plattform_distance
+	plattform.plattform_distance = var_plattform_distance
+	plattform.plattform_time = var_plattform_time
+	Constants.World.level.spawn_entity(plattform)
+	show_plattform()
 
 func reset():
-	p = 0
-	plattform.transform.origin = start_pos
+	show_plattform()
 
-var phase = 1
-func _physics_process(delta):
-	if(Constants.currentMode == 2):
-		var a = start_pos
-		var b = start_pos + basis.x*var_plattform_distance
-		var time = max(var_plattform_time,2)
-		var speed = var_plattform_distance/(2*time)
-		if p > 1:
-			phase = -1
-		elif p < 0:
-			phase = 1
-			
-		p += phase*delta*speed
-		plattform.transform.origin = p*b + (1-p)*a
+func show_plattform():
+	if Constants.currentMode > 1:
+			model.hide()
+	else:
+			model.show()
+	

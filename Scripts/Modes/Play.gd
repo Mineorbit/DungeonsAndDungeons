@@ -22,6 +22,7 @@ var is_in_play = false
 func start_lobby():
 	is_in_play = false
 	level_time = 0
+	level_locked = false
 	get_tree().paused = true
 	remove_chunk_streamers()
 	Constants.World.end()
@@ -41,10 +42,11 @@ func remove_level():
 func complete_start_round(levelname):
 		
 	print(str(Constants.id)+" Starting Level "+str(levelname))
+	rpc("prepare_level")
+	# maybe here await all players answers that they have created the level
 	get_tree().paused = true
 	# start world with level from downloads
 	await Constants.World.start(selected_level_name,true,true)
-	rpc("prepare_level")
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	remove_child(lobby)
@@ -59,16 +61,29 @@ func complete_start_round(levelname):
 @rpc
 func prepare_level():
 	await Constants.World.prepare_level()
+	Constants.World.level.level_object_added.connect(func(object):
+		object.contained_level_object.ready.connect(func():
+			print("Muting "+str(object.contained_level_object))
+			object.contained_level_object.set_process(false)
+			object.contained_level_object.set_physics_process(false))
+		print("Muting "+str(object.contained_level_object))
+		object.contained_level_object.set_process(false)
+		object.contained_level_object.set_physics_process(false))
+		
 
 func _physics_process(delta):
 	if is_in_play:
 		level_time += delta
 
-
+var level_locked = false
 @rpc(any_peer)
 func start_round(sel_lev,sel_lev_name):
 	if multiplayer.get_remote_sender_id() != lobby.LevelSelectionScreen.owner_id:
 		return 
+	if level_locked:
+		print("Level allready selected")
+		return
+	level_locked = true
 	print("===Starting Round===")
 	selected_level = sel_lev
 	selected_level_name = sel_lev_name

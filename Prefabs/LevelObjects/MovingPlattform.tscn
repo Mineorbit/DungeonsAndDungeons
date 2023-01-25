@@ -1,27 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dya31aho2aoh2"]
+[gd_scene load_steps=3 format=3 uid="uid://djyftwsvbthiy"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/MovingPlattform.gd" id="1_2digm"]
 [ext_resource type="PackedScene" uid="uid://fpq3nks6kcbr" path="res://Prefabs/Models/LevelObjects/MovingPlattformModel.tscn" id="2_g4x0x"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_n78ou"]
-properties/0/path = NodePath("Plattform:position")
-properties/0/spawn = true
-properties/0/sync = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_aang8"]
-size = Vector3(3, 0.15, 3)
-
 [node name="MovingPlattform" type="Node3D"]
 script = ExtResource("1_2digm")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_n78ou")
-
-[node name="Plattform" type="CharacterBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plattform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-shape = SubResource("BoxShape3D_aang8")
-
-[node name="MovingPlattformModel" parent="Plattform" instance=ExtResource("2_g4x0x")]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.35, 0)
+[node name="MovingPlattformModel" parent="." instance=ExtResource("2_g4x0x")]

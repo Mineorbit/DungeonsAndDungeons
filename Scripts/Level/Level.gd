@@ -22,6 +22,8 @@ var level_name = "Test"
 
 var changedChunks = 0
 
+signal level_object_added(level_object)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Constants.World.level = self
@@ -730,6 +732,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		if level_object_dupe.has_method("setup"):
 			level_object_dupe.setup()
 		new_level_object.decode_properties(properties)
+		level_object_added.emit(new_level_object)
 
 
 func get_chunk_position(startpos):
