@@ -6,18 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://3ewlsokdi8v0" path="res://Assets/Models/Tavern/rock.blend" id="4_bdwsn"]
 
 [sub_resource type="Environment" id="Environment_sx08w"]
+background_energy_multiplier = 0.5
 ambient_light_energy = 0.0
 ssao_enabled = true
 ssao_intensity = 1.0
+ssao_power = 1.0
 ssil_enabled = true
 ssil_intensity = 0.5
 glow_enabled = true
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_w0010")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_sx08w")
 
 [node name="Tavern_base" parent="." instance=ExtResource("1_k4v4w")]
 
@@ -46,3 +45,6 @@ transform = Transform3D(0.569683, 0, 0.487812, 0, 0.75, 0, -0.487812, 0, 0.56968
 
 [node name="rock3" parent="." instance=ExtResource("4_bdwsn")]
 transform = Transform3D(-0.392894, 0, 0.402543, 0.372124, 0.214506, 0.363204, -0.153508, 0.519994, -0.149828, 5.96451, -0.0426123, -5.64244)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sx08w")

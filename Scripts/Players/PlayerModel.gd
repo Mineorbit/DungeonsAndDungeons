@@ -118,7 +118,6 @@ func _physics_process(delta):
 		v = 0
 	else:
 		v = 1
-	print(speed)
 	runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
 	
 	anim_tree["parameters/vertical/blend_amount"] = v

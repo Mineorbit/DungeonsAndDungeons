@@ -56,7 +56,7 @@ void fragment() {
 // Output:0
 	ALBEDO = ColorParameter.xyz+vec3(highlightcolor.xyz);
 	ALPHA = 0.75;
-	EMISSION = 0.5*vec3(highlightcolor.xyz);
+	EMISSION = 0.125*vec3(highlightcolor.xyz);
 
 
 }
