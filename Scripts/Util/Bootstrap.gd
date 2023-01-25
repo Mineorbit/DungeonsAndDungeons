@@ -14,6 +14,8 @@ func _ready():
 var started = false
 
 func start(should_be_server):
+	if started:
+		return
 	var dir_access = DirAccess.open("user://")
 	dir_access.make_dir("level")
 	dir_access.make_dir("level/localLevels")
