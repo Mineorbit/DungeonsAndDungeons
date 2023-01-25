@@ -18,6 +18,7 @@ extends Node3D
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Camera.current = true
 			player_to_follow_exists = true
+			update_camera_target_position()
 			update_camera_rigging(0)
 			_move_camera()
 			player.on_entity_remove.connect(func():player_to_follow_exists = false)
@@ -50,7 +51,6 @@ var tolerance: float = 0.04
 @export var controllerCameraSpeed: float = 6
 
 var dir: Vector2 = Vector2.ZERO
-var target_position: Vector3 = Vector3.ZERO
 
 func move_camera_rig(vec: Vector2) -> void:
 		rotation.x -= vec.y * mouse_sensitivity
@@ -60,21 +60,36 @@ func move_camera_rig(vec: Vector2) -> void:
 		rotation.y = rotation.y
 
 
+var camera_ideal_target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
-	var new_target_position = get_camera_target_position()
-	if((new_target_position-target_position).length() < 0.00001):
+	update_camera_target_position()
+	var new_target_position = get_ideal_camera_target_position()
+	if((new_target_position-camera_ideal_target_position).length() < 0.00001):
 		# return early as position has no changed
 		return
+	camera_ideal_target_position = new_target_position
 	_move_camera()
 
+func get_ideal_camera_target_position():
+	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
+
 func _move_camera():
-	target_position = get_camera_target_position()
+	var target_position = get_camera_target_position()
 	Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
 	Camera.look_at(target_position)
 
+var camera_target_position = Vector3(0,0,0)
+
 func get_camera_target_position():
-	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
+	return camera_target_position
+
+func update_camera_target_position():
+	var ideal_position = get_ideal_camera_target_position()
+	camera_target_position.x = ideal_position.x
+	var p = 0.975
+	camera_target_position.y = p*camera_target_position.y + (1-p)*ideal_position.y
+	camera_target_position.z = ideal_position.z
 
 func _physics_process(delta):
 	update_camera_rigging(delta)
