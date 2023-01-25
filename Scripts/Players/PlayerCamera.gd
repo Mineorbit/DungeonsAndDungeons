@@ -98,7 +98,7 @@ func _process(delta):
 	update_camera_rigging(0)
 
 func update_camera_rigging(delta):
-	if player_to_follow_exists and (player != null):
+	if player_to_follow_exists and (player != null) and player.is_inside_tree():
 		move_camera()
 		#Camera.look_at(player.global_transform.origin)
 		global_transform.origin = get_camera_target_position()

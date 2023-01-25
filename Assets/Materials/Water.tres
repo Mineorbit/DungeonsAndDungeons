@@ -15,8 +15,8 @@ noise = SubResource("FastNoiseLite_y1ldq")
 [resource]
 render_priority = 0
 shader = ExtResource("1_m04y8")
-shader_parameter/ColorParameter = null
+shader_parameter/ColorParameter = Color(0, 0.34664, 0.668477, 1)
 shader_parameter/triplanar_scale = Vector3(1, 1, 1)
 shader_parameter/triplanar_offset = Vector3(0, 0, 0)
-shader_parameter/triplanar_sharpness = null
+shader_parameter/triplanar_sharpness = 0.5
 shader_parameter/noise1 = SubResource("NoiseTexture2D_hm37f")
