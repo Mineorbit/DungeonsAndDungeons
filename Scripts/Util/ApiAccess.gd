@@ -98,6 +98,7 @@ func decompress_level(levelname,local = false):
 	var result = ProjectSettings.globalize_path("user://level/"+subpath)
 	print("Decompressing "+str(path)+" on "+str(OS.get_name()))
 	print("Unpacking to "+str(result))
+	delete_level(levelname)
 	if OS.get_name() == "Windows":
 		OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 	else:
@@ -109,6 +110,16 @@ func decompress_level(levelname,local = false):
 func level_zip_file_path(levelname):
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
 	return path
+
+func delete_level(levelname):
+	for file in DirAccess.open("user://level/downloadLevels/"+levelname).get_files():
+		DirAccess.remove_absolute("user://level/downloadLevels/"+levelname+"/"+str(file))
+	for file in DirAccess.open("user://level/downloadLevels/"+levelname+"/chunks").get_files():
+		DirAccess.remove_absolute("user://level/downloadLevels/"+levelname+"/chunks/"+str(file))
+	
+	DirAccess.remove_absolute("user://level/downloadLevels/"+levelname+"/chunks")
+	DirAccess.remove_absolute("user://level/downloadLevels/"+levelname)
+
 
 func upload_level(levelname,publiclevelname):
 	print("Uploading "+str(levelname)+" as "+str(publiclevelname))

@@ -12,10 +12,8 @@ var uniqueLevelObjectId
 @onready var construction_collision: StaticBody3D = $ConstructionCollision
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	preparing_Collision()
-
-func preparing_Collision():
 	Signals.mode_changed.connect(on_mode_change)
+
 	
 func apply_construction_data():
 	if construction_collision != null:

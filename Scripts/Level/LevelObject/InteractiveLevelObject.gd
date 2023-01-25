@@ -49,7 +49,6 @@ func process(activation):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-	preparing_Collision()
 
 func on_remove():
 	super.on_remove()
@@ -68,11 +67,6 @@ func on_remove():
 func sign_up():
 	Constants.World.level.interactiveLevelObjects[unique_instance_id] = self
 
-#this should be extracted into another prefab
-func preparing_Collision():
-	construction_collision = $ConstructionCollision
-	Signals.mode_changed.connect(on_mode_change)
-	
 
 
 func activate():

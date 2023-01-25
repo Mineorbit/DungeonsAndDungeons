@@ -20,6 +20,7 @@ func start(should_be_server):
 	dir_access.make_dir("level/downloadLevels")
 	started = true
 	var server = should_be_server or is_server or OS.has_feature("Server") or "--server" in OS.get_cmdline_args()
+	print(OS.get_cmdline_args())
 	if server:
 		print("===Starting Server===")
 		start_server()
@@ -39,7 +40,7 @@ func _process(_delta):
 			start(false)
 		if Input.is_action_just_pressed("Client"):
 			start(false)
-		if Input.is_action_just_pressed("Server"):
+		if Input.is_action_just_pressed("Server") or "--server" in OS.get_cmdline_args():
 			start(true)
 
 func start_server():

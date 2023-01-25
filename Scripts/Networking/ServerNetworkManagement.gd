@@ -47,7 +47,7 @@ func player_connected(id):
 		campos.set_process(false)
 		campos.set_physics_process(false)
 	)
-	get_parent().add_child(campos)
+	get_parent().add_child(campos,true)
 	
 	MultiplayerConstants.player_cameras[i] = campos
 	# spawn player camera position
