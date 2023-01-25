@@ -15,7 +15,7 @@ func add(playerEntity,id, owner_id = 0):
 	playercontroller.player = playerEntity
 	playerControllers[id] = playercontroller
 	playercontroller.name = str(owner_id)
-	add_child(playercontroller)
+	add_child(playercontroller,true)
 
 
 

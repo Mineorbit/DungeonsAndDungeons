@@ -38,9 +38,9 @@ func _process(_delta):
 	if not started:
 		if not OS.is_debug_build():
 			start(false)
-		if Input.is_action_just_pressed("Client"):
+		elif Input.is_action_just_pressed("Client"):
 			start(false)
-		if Input.is_action_just_pressed("Server") or "--server" in OS.get_cmdline_args():
+		elif Input.is_action_just_pressed("Server") or "--server" in OS.get_cmdline_args():
 			start(true)
 
 func start_server():
