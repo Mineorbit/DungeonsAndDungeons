@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var players: Node3D = $Players
 @onready var light = $DirectionalLight
+@onready var ChunkStreamers = $ChunkStreamers
 var level
 
 signal game_won

@@ -5,7 +5,7 @@ var auth_token = ""
 
 
 var level_list
-signal level_download_finished
+signal level_download_finished(levelname)
 
 func get_api_url():
 	return Options.settings.api_url
@@ -48,7 +48,6 @@ func level_download_http_request_completed(result, _response_code, _headers, _bo
 		push_error("Download Failed")
 	print("Finished Downloading Level")
 	decompress_level("download",local)
-	level_download_finished.emit()
 
 
 
@@ -91,21 +90,24 @@ func compress_level(levelname,local = true):
 	
 # only for windows now
 func decompress_level(levelname,local = false):
-	var subpath = "downloadLevels"
-	if local:
-		subpath = "localLevels"
-	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
-	var result = ProjectSettings.globalize_path("user://level/"+subpath)
-	print("Decompressing "+str(path)+" on "+str(OS.get_name()))
-	print("Unpacking to "+str(result))
-	delete_level(levelname)
-	if OS.get_name() == "Windows":
-		OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
-	else:
-		OS.execute("unzip",["-o",path,"-d",str(result)])
+	var t = Thread.new()
+	t.start(func():
+		var subpath = "downloadLevels"
+		if local:
+			subpath = "localLevels"
+		var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")
+		var result = ProjectSettings.globalize_path("user://level/"+subpath)
+		print("Decompressing "+str(path)+" on "+str(OS.get_name()))
+		print("Unpacking to "+str(result))
+		delete_level(levelname)
+		if OS.get_name() == "Windows":
+			OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
+		else:
+			OS.execute("unzip",["-o",path,"-d",str(result)])
+		print("Finished unpacking Level "+str(levelname))
+		level_download_finished.emit(levelname)
+	)
 
-
-	
 
 func level_zip_file_path(levelname):
 	var path = ProjectSettings.globalize_path("user://level/"+str(levelname)+".zip")

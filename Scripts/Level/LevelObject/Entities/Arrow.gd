@@ -35,9 +35,6 @@ func _physics_process(delta):
 		if result.get_collider() is GridMap and not is_principal_direction(normal):
 			return
 		
-		print(normal)
-		print(result.get_collision_count())
-		print(result.get_collider())
 		var reflect = result.get_remainder().bounce(normal)
 		linear_velocity = linear_velocity.bounce(normal)
 		move_and_collide(delta*reflect*0.5)

@@ -22,10 +22,12 @@ script = ExtResource("1_dx6rb")
 
 [node name="Players" parent="." instance=ExtResource("1_2p4o4")]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Level.tscn")
-spawn_path = NodePath("..")
+[node name="ChunkStreamers" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3s232")
 camera_attributes = SubResource("CameraAttributesPractical_ic0qb")
+
+[node name="ChunkStreamersSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Prefabs/ChunkStreamer.tscn")
+spawn_path = NodePath("../ChunkStreamers")

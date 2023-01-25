@@ -36,7 +36,6 @@ func set_start_position(i):
 			print(base)
 			get_player(i).set_position(base)
 			get_player(i)._velocity = Vector3.ZERO
-			await Constants.buffer()
 			player_spawned.emit(i)
 	
 
@@ -95,7 +94,7 @@ func despawn_player(i):
 		return
 	player.global_transform.origin = Vector3(0.5,-5,0.5)
 	player.on_entity_despawn.emit()
-	await Constants.buffer()
+	print("Despawning Player "+str(player))
 	playerEntities.remove_child(player)
 
 
@@ -108,3 +107,4 @@ func get_player(i):
 			return child
 	print("Player not found: "+str(i))
 	return null
+

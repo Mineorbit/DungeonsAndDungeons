@@ -9,7 +9,6 @@ var chunkPrefab
 var levelObjectPrefab
 var interactiveLevelObjectPrefab
 @onready var Entities = $Entities
-@onready var ChunkStreamers = $ChunkStreamers
 
 
 var player_spawns = [null,null,null,null]
@@ -25,6 +24,7 @@ var changedChunks = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Constants.World.level = self
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	interactiveLevelObjectPrefab = load("res://Prefabs/InteractiveLevelObject.tscn")

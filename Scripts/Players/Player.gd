@@ -151,7 +151,3 @@ func Dettach(item):
 	else:
 		itemLeft = null
 
-
-
-func _on_water_test_body_entered(body):
-	print("Test")

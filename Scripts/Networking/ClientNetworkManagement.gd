@@ -11,6 +11,7 @@ func _ready():
 	#multiplayer.peer_disconnected.connect(self.destroy_player)
 	peer.create_client(Constants.remoteAddress,13565)
 	multiplayer.peer_connected.connect(connected)
+	multiplayer.peer_disconnected.connect(disconnected)
 	multiplayer.set_multiplayer_peer(peer)
 	Constants.World.players.player_added.connect(player_created)
 	MultiplayerConstants.on_local_id_set.connect(func(id):id_set = true)
@@ -50,7 +51,8 @@ func connected(id):
 	print("Connected with "+str(peer.get_unique_id()))
 	Constants.id = peer.get_unique_id()
 
-
+func disconnected(id):
+	print("Disconnected: "+str(id))
 
 func player_created(player):
 	print(str(Constants.id)+" Player Created")

@@ -17,3 +17,5 @@ spawn_path = NodePath("../PlayerEntities")
 [node name="PlayerControllerMPSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/PlayerController.tscn")
 spawn_path = NodePath("../PlayerControllers")
+
+[connection signal="despawned" from="PlayerMPSpawner" to="." method="_on_player_mp_spawner_despawned"]

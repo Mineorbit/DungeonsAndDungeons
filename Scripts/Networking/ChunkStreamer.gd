@@ -13,14 +13,23 @@ func _ready():
 func stream_chunk(data):
 	add_from_function(data)
 
+var objects = []
+
 func add_from_function(data):
 	var base_position = data[0]
 	data.erase(base_position)
 	base_position *= 8
 	for object in data:
-		# World does not call _ready on client so level needs to be assigned manually
-		Constants.World.level = Constants.World.get_node("Level")
-		Constants.World.level.add_from_string(base_position,object)
+		objects.append([base_position,object])
+
+func _process(delta):
+	if Constants.World.level != null:
+		if objects.size() > 0:
+			var o = objects[0]
+			var base_position = o[0]
+			var object = o[1]
+			objects.remove_at(0)
+			Constants.World.level.add_from_string(base_position,object)
 
 
 func load_chunk(location):
@@ -33,6 +42,8 @@ func load_chunk(location):
 	for chunk_instance in chunk_instances:
 		chunk_data.append(chunk_instance.serialize())
 	rpc_id(target_player_network_id,"stream_chunk",chunk_data)
+	#print("Sending to "+str(target_player_network_id))
+	#rpc_id(target_player_network_id,"stream_chunk")
 
 
 

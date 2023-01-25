@@ -108,7 +108,7 @@ func remove():
 	get_parent().remove_child(self)
 	queue_free()
 
-func on_remove():
+func on_remove(node):
 	print(str(Constants.id)+" Removed Entity "+str(self))
 	on_entity_remove.emit()
 
@@ -269,6 +269,8 @@ func kickback(direction) -> void:
 
 # this is the current method later on do tree removal
 func Kill():
+	print("Killing Entity "+str(self))
+	print_stack()
 	remove()
 	on_entity_died.emit()
 
