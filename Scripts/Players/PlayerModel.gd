@@ -4,20 +4,30 @@ extends Node3D
 
 @onready var playerSkeleton: Skeleton3D = $root/Skeleton3D
 @onready var runTrail = $RunTrail
+@onready var face: MeshInstance3D = $root/Skeleton3D/Face
+
 var aimfsm: AnimationNodeStateMachinePlayback
 var verticalfsm: AnimationNodeStateMachinePlayback
 var lastpos
+var mouth: ShaderMaterial
+var eyes: ShaderMaterial
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	lastpos = global_transform.origin
 	get_parent().on_entity_landed.connect(player_landed)
 	get_parent().on_entity_melee_strike.connect(player_striking)
+	get_parent().on_entity_hit.connect(player_hit)
 	get_parent().on_entity_aiming.connect(player_aiming)
 	get_parent().on_entity_shoot.connect(player_shot)
 	get_parent().on_entity_can_shoot.connect(can_shoot)
 	get_parent().on_entity_jump.connect(player_jump)
 	aimfsm = anim_tree["parameters/aimingstatemachine/playback"]
 	verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
+	mouth = face.mesh.surface_get_material(0).duplicate(true)
+	eyes = face.mesh.surface_get_material(1).duplicate(true)
+	face.set_surface_override_material(0,mouth)
+	face.set_surface_override_material(1,eyes)
+	
 
 var speed = 0
 var yspeed = 0
@@ -33,6 +43,11 @@ func player_aiming(is_aiming):
 		update_aim_state_machine("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
 
+
+func player_hit():
+	print("HIT on "+str(self))
+	mouth.set_shader_parameter("character",1)
+	eyes.set_shader_parameter("character",1)
 
 func player_shot():
 	update_aim_state_machine("Release")
@@ -55,6 +70,8 @@ var animate_local = true
 func player_landed(blend):
 	landblend = min(1,-blend/35)
 	update_vertical_state_machine("Fall")
+	mouth.set_shader_parameter("character",0)
+	eyes.set_shader_parameter("character",0)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
 	anim_tree["parameters/land/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
