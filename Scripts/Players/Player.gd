@@ -145,6 +145,7 @@ func Attach(item):
 
 @rpc(any_peer, call_local)
 func Dettach(item):
+	print("Dettaching "+str(self))
 	super.Dettach(item)
 	if item.hand:
 		itemRight = null

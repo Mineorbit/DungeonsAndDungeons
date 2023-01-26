@@ -108,7 +108,7 @@ func remove():
 	get_parent().remove_child(self)
 	queue_free()
 
-func on_remove(node):
+func on_remove():
 	print(str(Constants.id)+" Removed Entity "+str(self))
 	on_entity_remove.emit()
 
