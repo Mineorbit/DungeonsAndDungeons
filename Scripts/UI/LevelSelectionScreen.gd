@@ -49,9 +49,13 @@ func update_interface_owner():
 	#trigger update on other clients
 	rpc("set_interface_owner",owner_id)
 	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
-	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
+	set_auth_on_objects(owner_id)
 
 
+func set_auth_on_objects(id):
+	interface.get_node("LevelList/LevelListNetworking").set_auth(id)
+	interface.get_node("CursorSpawner").set_multiplayer_authority(id)
+	interface.get_node("CheckboxSpawner").set_multiplayer_authority(id)
 #only called by server
 
 @rpc(any_peer)
@@ -59,9 +63,7 @@ func set_interface_owner(id):
 	if owner_id == id:
 		return
 	owner_id = id
-	interface.get_node("LevelList/LevelListNetworking").set_auth(owner_id)
-	interface.get_node("CursorSpawner").set_multiplayer_authority(id)
-	interface.get_node("CheckboxSpawner").set_multiplayer_authority(id)
+	set_auth_on_objects(owner_id)
 	if owner_id == Constants.id:
 		ApiAccess.levels_fetched.connect(load_level_list)
 		refreshButton.pressed.connect(refresh_level_list)
@@ -155,13 +157,15 @@ func end():
 	local_player_inside = false
 
 
+func pass_inputs_to_interface(event):
+		if interface != null:
+			if event is InputEventMouseButton:
+				interface.push_input(event, true)
 
 func _input(event):
 	var local_coord = true
+	pass_inputs_to_interface(event)
 	if local_player_inside:
-		if interface != null:
-			if event is InputEventMouseButton:
-				interface.push_input(event, local_coord)
 		if event is InputEventMouseButton or event is InputEventMouseMotion:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
 			var from = camera.project_ray_origin(event.position)
