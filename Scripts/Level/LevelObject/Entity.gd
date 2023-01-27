@@ -270,7 +270,6 @@ func kickback(direction) -> void:
 # this is the current method later on do tree removal
 func Kill():
 	print("Killing Entity "+str(self))
-	print_stack()
 	remove()
 	on_entity_died.emit()
 
