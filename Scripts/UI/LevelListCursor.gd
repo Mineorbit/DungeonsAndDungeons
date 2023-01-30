@@ -19,7 +19,7 @@ func _input(event):
 
 
 
-@rpc(any_peer)
+@rpc("any_peer")
 func click(code,pressed):
 	if Constants.id != get_parent().get_parent().get_parent().owner_id:
 		return
@@ -30,7 +30,7 @@ func click(code,pressed):
 	Input.parse_input_event(event)
 
 
-@rpc(any_peer,unreliable_ordered)
+@rpc("any_peer","unreliable_ordered")
 func move(direction,pos):
 	if Constants.id != get_parent().get_parent().get_parent().owner_id:
 		return

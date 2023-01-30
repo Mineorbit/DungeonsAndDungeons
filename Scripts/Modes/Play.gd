@@ -76,7 +76,9 @@ func _physics_process(delta):
 		level_time += delta
 
 var level_locked = false
-@rpc(any_peer)
+
+
+@rpc("any_peer")
 func start_round(sel_lev,sel_lev_name):
 	if multiplayer.get_remote_sender_id() != lobby.LevelSelectionScreen.owner_id:
 		return 
@@ -88,6 +90,7 @@ func start_round(sel_lev,sel_lev_name):
 	selected_level = sel_lev
 	selected_level_name = sel_lev_name
 	ApiAccess.download_level(selected_level)
+
 
 func remove_chunk_streamers():
 	if Constants.World.level == null:

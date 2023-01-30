@@ -132,7 +132,7 @@ func _physics_process(delta):
 
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func Attach(item):
 	super.Attach(item)
 	if item.hand:
@@ -143,7 +143,7 @@ func Attach(item):
 		item.itemAttachmentPoint = model.left_hand()
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func Dettach(item):
 	print("Dettaching "+str(self))
 	super.Dettach(item)

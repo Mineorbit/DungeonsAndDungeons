@@ -58,7 +58,7 @@ func set_auth_on_objects(id):
 	interface.get_node("CheckboxSpawner").set_multiplayer_authority(id)
 #only called by server
 
-@rpc(any_peer)
+@rpc("any_peer")
 func set_interface_owner(id):
 	if owner_id == id:
 		return
@@ -78,7 +78,8 @@ func player_entered(player):
 		update_interface_owner()
 	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
 		camera.current = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+		#Input.set_mouse
 		local_player_inside = true
 	if Constants.id == owner_id:
 		add_checkbox(player.name)

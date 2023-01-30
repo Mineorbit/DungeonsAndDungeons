@@ -3,7 +3,7 @@ class_name Enemy
 
 # Called when the node enters the scene tree for the first time.
 
-@onready var navAgent = $Navigation
+@onready var navAgent: NavigationAgent3D = $Navigation
 @onready var target = $Target
 @onready var strikeArea: Area3D = $StrikeArea
 var _timer = null
@@ -42,13 +42,15 @@ func track_target():
 
 func plan_route():
 	if (is_inside_tree() and target.is_inside_tree()):
-		navAgent.set_target_location(target.global_transform.origin)
+		navAgent.target_position = target.global_transform.origin
 
+var immediate_target_pos = Vector3.ZERO
 
 func auto_navigate(delta):
+	immediate_target_pos = navAgent.get_next_path_position()
 	var canreach = navAgent.is_target_reachable() and not navAgent.is_target_reached()
 	if canreach:
-		move_direction = ( navAgent.get_next_location() - global_transform.origin).normalized() *0.5
+		move_direction = ( immediate_target_pos - global_transform.origin).normalized() *0.5
 	else:
 		move_direction = Vector3.ZERO
 	super._physics_process(delta)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c82a53h87w45y"]
 
-[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="1_s4dwl"]
+[ext_resource type="Texture2D" uid="uid://qsagb1hct4dh" path="res://Assets/Textures/gearwheel.png" id="1_jof56"]
 [ext_resource type="Script" path="res://Scripts/UI/LevelListCursor.gd" id="2_dqtor"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yeo2a"]
@@ -9,7 +9,8 @@ properties/0/spawn = true
 properties/0/sync = true
 
 [node name="LevelListCursor" type="Sprite2D"]
-texture = ExtResource("1_s4dwl")
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("1_jof56")
 script = ExtResource("2_dqtor")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
