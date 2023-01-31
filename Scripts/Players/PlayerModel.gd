@@ -5,6 +5,7 @@ extends Node3D
 @onready var playerSkeleton: Skeleton3D = $root/Skeleton3D
 @onready var runTrail = $RunTrail
 @onready var face: MeshInstance3D = $root/Skeleton3D/Face
+@onready var hitSound: AudioStreamPlayer3D = $HitSound
 
 var aimfsm: AnimationNodeStateMachinePlayback
 var verticalfsm: AnimationNodeStateMachinePlayback
@@ -43,11 +44,14 @@ func player_aiming(is_aiming):
 		update_aim_state_machine("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
 
-
+var rng = RandomNumberGenerator.new()
 func player_hit():
 	print(str(Constants.id)+" HIT on "+str(self))
 	mouth.set_shader_parameter("character",1)
 	eyes.set_shader_parameter("character",1)
+	var random_num = rng.randf_range(0.5, 1.5)
+	hitSound.pitch_scale = random_num
+	hitSound.play()
 
 func player_shot():
 	update_aim_state_machine("Release")
