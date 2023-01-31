@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://db3xijpudgayj"]
+[gd_scene load_steps=14 format=3 uid="uid://db3xijpudgayj"]
 
 [ext_resource type="PackedScene" uid="uid://cqgexg1255cc7" path="res://Assets/Models/LevelObjects/Entities/Blog/Blog.blend" id="1_awtxg"]
 [ext_resource type="Script" path="res://Scripts/BlogModel.gd" id="2_rgnqd"]
 [ext_resource type="AudioStream" uid="uid://cau57liy0vewv" path="res://Assets/Sounds/ambient/blog_strike.mp3" id="3_1m0vq"]
+[ext_resource type="AudioStream" uid="uid://btxrdugeymdpx" path="res://Assets/Sounds/sfx/Hit.mp3" id="4_45mtv"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r8x38"]
 animation = &"Strike"
@@ -52,10 +53,10 @@ properties/1/sync = true
 script = ExtResource("2_rgnqd")
 
 [node name="Skeleton3D" parent="Blog" index="0"]
-bones/0/position = Vector3(0, -0.0562875, 0)
+bones/0/position = Vector3(0, -0.0823186, 0)
 bones/1/rotation = Quaternion(0.71497, 7.08439e-06, 7.4151e-06, 0.699155)
-bones/2/rotation = Quaternion(-0.568224, -0.433939, -0.424341, 0.555655)
-bones/3/rotation = Quaternion(-0.574946, 0.455013, 0.376869, 0.566013)
+bones/2/rotation = Quaternion(-0.56884, -0.433131, -0.423551, 0.556258)
+bones/3/rotation = Quaternion(-0.576002, 0.455784, 0.3723, 0.567341)
 bones/5/rotation = Quaternion(0.574071, -0.3533, 0.287122, 0.680575)
 bones/6/rotation = Quaternion(-0.564777, 0.36292, 0.303041, 0.676374)
 bones/7/rotation = Quaternion(0.574071, 0.3533, -0.287122, 0.680575)
@@ -79,6 +80,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = ExtResource("3_1m0vq")
 volume_db = -2.0
 pitch_scale = 1.2
+panning_strength = 2.0
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="." index="5"]
+stream = ExtResource("4_45mtv")
+volume_db = -4.0
+max_db = 1.0
+max_distance = 16.0
+max_polyphony = 4
 panning_strength = 2.0
 
 [connection signal="animation_started" from="AnimationTree" to="." method="animation_started"]

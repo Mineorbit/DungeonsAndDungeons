@@ -1,11 +1,10 @@
-extends Node3D
+extends EntityModel
 
 @onready var anim_tree = $AnimationTree
 
 @onready var playerSkeleton: Skeleton3D = $root/Skeleton3D
 @onready var runTrail = $RunTrail
 @onready var face: MeshInstance3D = $root/Skeleton3D/Face
-@onready var hitSound: AudioStreamPlayer3D = $HitSound
 
 var aimfsm: AnimationNodeStateMachinePlayback
 var verticalfsm: AnimationNodeStateMachinePlayback
@@ -14,10 +13,10 @@ var mouth: ShaderMaterial
 var eyes: ShaderMaterial
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super._ready()
 	lastpos = global_transform.origin
 	get_parent().on_entity_landed.connect(player_landed)
 	get_parent().on_entity_melee_strike.connect(player_striking)
-	get_parent().on_entity_hit.connect(player_hit)
 	get_parent().on_entity_aiming.connect(player_aiming)
 	get_parent().on_entity_shoot.connect(player_shot)
 	get_parent().on_entity_can_shoot.connect(can_shoot)
@@ -44,14 +43,12 @@ func player_aiming(is_aiming):
 		update_aim_state_machine("Stop")
 	anim_tree["parameters/aim/blend_amount"] = v
 
-var rng = RandomNumberGenerator.new()
-func player_hit():
+
+func entity_hit():
+	super.entity_hit()
 	print(str(Constants.id)+" HIT on "+str(self))
 	mouth.set_shader_parameter("character",1)
 	eyes.set_shader_parameter("character",1)
-	var random_num = rng.randf_range(0.5, 1.5)
-	hitSound.pitch_scale = random_num
-	hitSound.play()
 
 func player_shot():
 	update_aim_state_machine("Release")

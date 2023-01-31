@@ -1,10 +1,12 @@
-extends Node3D
+extends EntityModel
 
 var lastpos = Vector3.ZERO
 var yspeed
 var speed
 @onready var anim_tree = $AnimationTree
 
+func _ready():
+	super._ready()
 
 func StrikeAnimation(damage):
 	anim_tree["parameters/strike/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
