@@ -46,7 +46,6 @@ func player_aiming(is_aiming):
 
 func player_hit():
 	print(str(Constants.id)+" HIT on "+str(self))
-	print_stack()
 	mouth.set_shader_parameter("character",1)
 	eyes.set_shader_parameter("character",1)
 

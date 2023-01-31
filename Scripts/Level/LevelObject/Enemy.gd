@@ -6,7 +6,6 @@ class_name Enemy
 @onready var navAgent: NavigationAgent3D = $Navigation
 @onready var target = $Target
 @onready var strikeArea: Area3D = $StrikeArea
-var _timer = null
 
 func _ready():
 	super._ready()

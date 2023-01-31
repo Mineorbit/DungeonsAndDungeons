@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Entity
 
-var health: int = 100:
+@export var health: int = 100:
 	set(value):
 		health = value
 		on_entity_health_changed.emit(health)
