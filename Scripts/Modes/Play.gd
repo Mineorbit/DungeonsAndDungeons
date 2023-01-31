@@ -63,10 +63,10 @@ func prepare_level():
 	await Constants.World.prepare_level()
 	Constants.World.level.level_object_added.connect(func(object):
 		object.contained_level_object.ready.connect(func():
-			print("Muting "+str(object.contained_level_object))
+			print("Muting LevelObject "+str(object.contained_level_object))
 			object.contained_level_object.set_process(false)
 			object.contained_level_object.set_physics_process(false))
-		print("Muting "+str(object.contained_level_object))
+		print("Muting LevelObject "+str(object.contained_level_object))
 		object.contained_level_object.set_process(false)
 		object.contained_level_object.set_physics_process(false))
 		

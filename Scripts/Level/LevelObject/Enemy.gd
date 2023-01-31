@@ -13,24 +13,21 @@ func _ready():
 	remove_child(target)
 	navAgent.ignore_y = false
 	get_parent().add_child(target)
-	setup_calculation_routine()
 
-func setup_calculation_routine():
-	_timer = Timer.new()
-	add_child(_timer)
-	_timer.timeout.connect(try_strike)
-	_timer.set_wait_time(1.0)
-	_timer.set_one_shot(false) # Make sure it loops
-	_timer.start()
 
 func try_strike():
 	if strikeArea.get_overlapping_bodies().size() > 0:
 		on_entity_melee_strike.emit(15)
 	
+var strike_time = 0
 
 func _physics_process(delta):
 	track_target()
 	plan_route()
+	strike_time += delta
+	if strike_time > 1:
+		try_strike()
+		strike_time = 0
 	auto_navigate(delta)
 
 var target_entity = null

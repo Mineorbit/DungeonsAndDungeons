@@ -72,6 +72,8 @@ func spawn_player_controller(i,owner_id = 0):
 
 
 func spawn_player(i):
+		if playerpref == null:
+			playerpref = load("res://Prefabs/LevelObjects/Entities/Player.tscn")
 		var player
 		if get_player(i) == null:
 			player = playerpref.instantiate()

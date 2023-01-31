@@ -30,6 +30,7 @@ func _ready():
 	chunkPrefab = load("res://Prefabs/Chunk.tscn")
 	levelObjectPrefab = load("res://Prefabs/LevelObject.tscn")
 	interactiveLevelObjectPrefab = load("res://Prefabs/InteractiveLevelObject.tscn")
+	print("Level ready "+str(Constants.id))
 	Entities.child_entered_tree.connect(
 		func(entity):
 			Constants.World.on_entity_spawned.emit(entity)
@@ -121,7 +122,7 @@ func get_interactive_object(unique_id):
 
 var entity_id = 0
 func spawn_entity(entity):
-	print("Spawning Entity "+str(entity)+" at "+str(entity.global_transform.origin)+" in World "+str(Constants.World))
+	print(str(Constants.id)+" Spawning Entity "+str(entity)+" at "+str(entity.global_transform.origin)+" in World "+str(Constants.World))
 	entity.name = str(entity_id)
 	entity_id = entity_id + 1
 	Constants.World.level.Entities.add_child(entity)
