@@ -1,7 +1,7 @@
 extends ColorRect
 
 
-@onready var levellistelement: RichTextLabel = $Name
+@onready var levellistelement: Label = $Name
 @onready var button: BaseButton = $Button
 @onready var selection = $selection
 @onready var thumbnailRect: TextureRect = $Thumbnail

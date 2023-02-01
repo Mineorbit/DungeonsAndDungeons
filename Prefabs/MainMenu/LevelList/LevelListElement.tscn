@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dao4vnbermdpd"]
+[gd_scene load_steps=6 format=3 uid="uid://dao4vnbermdpd"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/LevelListElement.gd" id="1_fh31g"]
-[ext_resource type="Texture2D" uid="uid://b76y5ke53nen0" path="res://Assets/Models/LevelObjects/Entities/Blog/eye.png" id="2_ootdg"]
+[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="2_o1jps"]
+[ext_resource type="Theme" uid="uid://v0rlgyoix0hi" path="res://OvertextTheme.tres" id="3_865gq"]
 [ext_resource type="Texture2D" uid="uid://b1xqwph4cqbrm" path="res://Assets/Textures/selection.png" id="3_guv80"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_27c0p"]
@@ -24,17 +25,17 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.6
-texture = ExtResource("2_ootdg")
+texture = ExtResource("2_o1jps")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Name" type="RichTextLabel" parent="."]
+[node name="Name" type="Label" parent="."]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 0.156
 offset_bottom = 0.0639992
+theme = ExtResource("3_865gq")
 text = "Test"
-scroll_active = false
 
 [node name="Button" type="BaseButton" parent="."]
 _import_path = NodePath("")
@@ -95,14 +96,14 @@ theme = null
 theme_type_variation = &""
 disabled = false
 toggle_mode = false
-shortcut_in_tooltip = true
 button_pressed = false
 action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
+button_group = null
 shortcut = null
 shortcut_feedback = true
-button_group = null
+shortcut_in_tooltip = true
 script = null
 
 [node name="selection" type="NinePatchRect" parent="."]
