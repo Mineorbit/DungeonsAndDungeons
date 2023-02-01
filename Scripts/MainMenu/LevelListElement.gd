@@ -30,8 +30,7 @@ func set_level_data(ldata):
 	level_name = ldata["name"]
 	id = ldata["ulid"]
 	if ldata.has("thumbnail"):
-		print(Constants.levelThumbnails[ldata["thumbnail"]].get_size())
-		thumbnailRect.texture = Constants.levelThumbnails[ldata["thumbnail"]]
+		thumbnailRect.texture = ldata["thumbnail"]
 
 
 func on_selected():

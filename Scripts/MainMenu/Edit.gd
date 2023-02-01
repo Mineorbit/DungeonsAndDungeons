@@ -40,15 +40,9 @@ func load_level_list():
 		var leveldata = {"name":l,"ulid":l}
 		print(l)
 		if FileAccess.file_exists("user://level/localLevels/"+l+"/thumbnail.png"):
-			print("File exists")
 			var image = Image.load_from_file("user://level/localLevels/"+l+"/thumbnail.png")
-			print(image.get_size())
-			print(image.get_format())
-			print("user://level/localLevels/"+l+"/thumbnail.png")
 			var imt = ImageTexture.create_from_image(image)
-			print("Test: "+str(imt.get_size()))
-			Constants.levelThumbnails.append(imt)
-			leveldata["thumbnail"] = Constants.levelThumbnails.size() - 1
+			leveldata["thumbnail"] = imt
 		levels.append(leveldata)
 	return levels
 

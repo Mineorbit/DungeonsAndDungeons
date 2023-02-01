@@ -47,7 +47,6 @@ var Water = load("res://Resources/LevelObjectData/Water.tres")
 # Called when the node enters the scene tree for the first time.
 
 
-var levelThumbnails = []
 
 func buffer():
 	await get_tree().physics_frame
