@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dao4vnbermdpd"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/LevelListElement.gd" id="1_fh31g"]
-[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="1_o21qy"]
+[ext_resource type="Texture2D" uid="uid://b76y5ke53nen0" path="res://Assets/Models/LevelObjects/Entities/Blog/eye.png" id="2_ootdg"]
 [ext_resource type="Texture2D" uid="uid://b1xqwph4cqbrm" path="res://Assets/Textures/selection.png" id="3_guv80"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_27c0p"]
@@ -19,14 +19,17 @@ offset_bottom = 256.0
 color = Color(0.415686, 0.415686, 0.415686, 1)
 script = ExtResource("1_fh31g")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Thumbnail" type="TextureRect" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.6
-texture = ExtResource("1_o21qy")
+texture = ExtResource("2_ootdg")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="Name" type="RichTextLabel" parent="."]
-anchors_preset = -1
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 0.156
 offset_bottom = 0.0639992
@@ -46,6 +49,10 @@ show_behind_parent = false
 top_level = false
 clip_children = 0
 light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
 texture_filter = 0
 texture_repeat = 0
 material = null
@@ -53,7 +60,7 @@ use_parent_material = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 0)
 layout_direction = 0
-layout_mode = 3
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0
 anchor_top = 0.0
@@ -72,6 +79,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 auto_translate = true
+localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
@@ -93,11 +101,12 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 shortcut = null
+shortcut_feedback = true
 button_group = null
 script = null
 
 [node name="selection" type="NinePatchRect" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

@@ -4,7 +4,7 @@ extends ColorRect
 @onready var levellistelement: RichTextLabel = $Name
 @onready var button: BaseButton = $Button
 @onready var selection = $selection
-
+@onready var thumbnailRect: TextureRect = $Thumbnail
 # this needs to be a long int
 var id:
 	get:
@@ -29,6 +29,9 @@ func set_level_data(ldata):
 	levellistelement = $Name
 	level_name = ldata["name"]
 	id = ldata["ulid"]
+	if ldata.has("thumbnail"):
+		print(Constants.levelThumbnails[ldata["thumbnail"]].get_size())
+		thumbnailRect.texture = Constants.levelThumbnails[ldata["thumbnail"]]
 
 
 func on_selected():

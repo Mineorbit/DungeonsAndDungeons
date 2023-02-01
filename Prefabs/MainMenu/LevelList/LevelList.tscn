@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://6hpdpss4wair"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/LevelList.gd" id="1_gmgvp"]
 [ext_resource type="Script" path="res://Scripts/UI/LevelListNetworking.gd" id="2_ov2dl"]
@@ -21,8 +21,10 @@ follow_focus = true
 script = ExtResource("1_gmgvp")
 
 [node name="Control" type="PanelContainer" parent="."]
+layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
+layout_mode = 2
 
 [node name="LevelListNetworking" type="Node" parent="."]
 script = ExtResource("2_ov2dl")

@@ -145,20 +145,23 @@ func delete_level(level_name):
 			file_name = chunkdirectory.get_next()
 	
 	chunkdirectory.remove("user://level/localLevels/"+level_name+"/chunks/")
-	
+
+func get_level_path():
+	return "user://level/localLevels/"+level_name
+
 
 func save():
 	print("Saving Level "+level_name)
 	delete_level(level_name)
-	
+	var level_path = get_level_path()
 	DirAccess.make_dir_absolute("user://level/localLevels")
-	DirAccess.make_dir_absolute("user://level/localLevels/"+level_name)
-	DirAccess.make_dir_absolute("user://level/localLevels/"+level_name+"/chunks")
-	var save_game = FileAccess.open("user://level/localLevels/"+level_name+"/index.json", FileAccess.WRITE)
+	DirAccess.make_dir_absolute(level_path)
+	DirAccess.make_dir_absolute(level_path+"/chunks")
+	var save_game = FileAccess.open(level_path+"/index.json", FileAccess.WRITE)
 	save_game.store_line(level_name)
 	for c in chunks.keys():
 		var chunk = chunks[c]
-		var chunk_file = FileAccess.open("user://level/localLevels/"+level_name+"/chunks/"+str(c), FileAccess.WRITE)
+		var chunk_file = FileAccess.open(level_path+"/chunks/"+str(c), FileAccess.WRITE)
 		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
 			chunk_file.store_line(object.serialize())

@@ -31,12 +31,27 @@ func _ready():
 
 func load_remote_level_list(list):
 	remote_level_list.set_level_list(list)
-	
+
+
 func load_level_list():
 	var local_levels = DirAccess.open("user://level/localLevels/").get_directories()
 	var levels = []
 	for l in local_levels:
-		levels.append({"name":l,"ulid":l})
+		var leveldata = {"name":l,"ulid":l}
+		print(l)
+		if FileAccess.file_exists("user://level/localLevels/"+l+"/thumbnail.png"):
+			print("File exists")
+			var imt = ImageTexture.new()
+			var image = Image.new()
+			image.load("user://level/localLevels/"+l+"/thumbnail.png")
+			print(image.get_size())
+			print(image.get_format())
+			print("user://level/localLevels/"+l+"/thumbnail.png")
+			imt.create_from_image(image)
+			print("Test: "+str(imt.get_size()))
+			Constants.levelThumbnails.append(imt)
+			leveldata["thumbnail"] = Constants.levelThumbnails.size() - 1
+		levels.append(leveldata)
 	return levels
 
 func on_download_level():

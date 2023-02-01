@@ -56,10 +56,23 @@ func prepare_edit(name):
 
 var current_player = 0
 
+func save_image():
+	remove_child(builderhud)
+	var timer = Timer.new()
+	timer.timeout.connect(func():
+		var image = get_viewport().get_texture().get_image()
+		image.save_png(world.level.get_level_path()+"/thumbnail.png")
+		add_child(builderhud)
+		)
+	timer.one_shot = true
+	timer.wait_time = 0.125
+	add_child(timer)
+	timer.start()
 
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("Save"):
 		world.level.save()
+		save_image()
 	if not Constants.builder.editing and Input.is_action_just_pressed("Test"):
 		enter_test_mode()
 		
