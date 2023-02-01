@@ -135,8 +135,15 @@ func upload_level(levelname,publiclevelname):
 	var file_content = file.get_buffer(file.get_length())
 	
 	var tn_file_name = "icon.png"
-	var tnfile = FileAccess.open('res://%s' % tn_file_name, FileAccess.READ)
+	var tnfile
+	var path = "user://level/localLevels/"+levelname+"/thumbnail.png"
+	if FileAccess.file_exists(path): 
+		tnfile = FileAccess.open(path, FileAccess.READ)
+		tn_file_name = "thumbnail.png"
+	else:
+		tnfile = FileAccess.open('res://%s' % tn_file_name, FileAccess.READ)
 	var thumbnail_content = tnfile.get_buffer(tnfile.get_length())
+	print(path)
 	var body = PackedByteArray()
 	body.append_array("\r\n--BodyBoundaryHere\r\n".to_utf8_buffer())
 	body.append_array(("Content-Disposition: form-data; name=\"levelFiles\"; filename=\"%s\"\r\n" % levelname).to_utf8_buffer())
