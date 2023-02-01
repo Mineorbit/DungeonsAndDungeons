@@ -148,7 +148,7 @@ func upload_level(levelname,publiclevelname):
 	body.append_array(thumbnail_content)
 	body.append_array("\r\n--BodyBoundaryHere--\r\n".to_utf8_buffer())
 	
-	var headers = [
+	var headers: PackedStringArray = [
 		"Authorization: Bearer "+str(auth_token),
 	"Content-Length: " + str(body.size()),
 	"Content-Type: multipart/form-data; boundary=\"BodyBoundaryHere\""
@@ -157,7 +157,7 @@ func upload_level(levelname,publiclevelname):
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
 	var public_level_name = publiclevelname.uri_encode()
 	var request_url = str(get_api_url())+"level/?proto_resp=false&name="+str(public_level_name)+"&description="+str(description)+"&r=t&g=t&b=t&y=t"
-	var error = http_request.request_raw(request_url, headers, true, HTTPClient.METHOD_POST, body)
+	var error = http_request.request_raw(request_url, headers, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
@@ -176,7 +176,7 @@ func login(username,password):
 	http_request.request_completed.connect(login_http_request_completed)
 	var body = "grant_type=&username="+str(username)+"&password="+str(password)+"&scope=&client_id=&client_secret="
 	# Perform the HTTP request. The URL below returns a PNG image as of writing.
-	var error = http_request.request(str(get_api_url())+"auth/token", ["Content-Type: application/x-www-form-urlencoded"], true, HTTPClient.METHOD_POST, body)
+	var error = http_request.request(str(get_api_url())+"auth/token", ["Content-Type: application/x-www-form-urlencoded"], HTTPClient.METHOD_POST, body)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
