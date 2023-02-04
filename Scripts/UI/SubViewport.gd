@@ -13,5 +13,4 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
-		#print("AHOI")
 		sprite.transform.origin = event.position

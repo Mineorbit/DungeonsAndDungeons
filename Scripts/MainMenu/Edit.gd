@@ -38,7 +38,6 @@ func load_level_list():
 	var levels = []
 	for l in local_levels:
 		var leveldata = {"name":l,"ulid":l}
-		print(l)
 		if FileAccess.file_exists("user://level/localLevels/"+l+"/thumbnail.png"):
 			var image = Image.load_from_file("user://level/localLevels/"+l+"/thumbnail.png")
 			var imt = ImageTexture.create_from_image(image)

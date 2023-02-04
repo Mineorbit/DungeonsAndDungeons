@@ -32,7 +32,6 @@ func entity_hit():
 
 func _physics_process(delta):
 	var swim_blend = 0
-	print(get_parent())
 	if not (get_parent() is Entity):
 		return
 	if get_parent().in_swim_area:

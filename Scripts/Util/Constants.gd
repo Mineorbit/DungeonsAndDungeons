@@ -65,7 +65,6 @@ func _ready():
 		if mesh_library.get_item_mesh(index) != null:
 			var mat = mesh_library.get_item_mesh(index).surface_get_material(0)
 			materials.append(mat)
-			print(mat)
 
 func _process(delta):
 	t += delta

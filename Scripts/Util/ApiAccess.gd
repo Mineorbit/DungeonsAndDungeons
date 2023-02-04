@@ -143,7 +143,6 @@ func upload_level(levelname,publiclevelname):
 	else:
 		tnfile = FileAccess.open('res://%s' % tn_file_name, FileAccess.READ)
 	var thumbnail_content = tnfile.get_buffer(tnfile.get_length())
-	print(path)
 	var body = PackedByteArray()
 	body.append_array("\r\n--BodyBoundaryHere\r\n".to_utf8_buffer())
 	body.append_array(("Content-Disposition: form-data; name=\"levelFiles\"; filename=\"%s\"\r\n" % levelname).to_utf8_buffer())
