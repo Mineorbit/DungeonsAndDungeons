@@ -324,46 +324,54 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 	# default, all sides visible
 		var localIndex = 0
 		
+		
+		var up = get_neighbor(0,1,0,pos)
+		var down = get_neighbor(0,-1,0,pos)
+		var front = get_neighbor(1,0,0,pos)
+		var back = get_neighbor(-1,0,0,pos)
+		var left = get_neighbor(0,0,1,pos)
+		var right = get_neighbor(0,0,-1,pos)
+		
 		#here we pick the local tile index and rotation based on what neighbors there are
 		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
-		if not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		if not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 1
 		
 		
 		# sides
 		#up CORRECT
-		elif get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 2
 			rot = 1
 
 		#down CORRECT
-		elif get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif down != levelObjectData and not up != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 2
 			rot = 3
 			
 		
 		
 		#front CORRECT
-		elif get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData:
+		elif left != levelObjectData and not right != levelObjectData and not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData:
 			localIndex = 2
 			rot = 22
 		
 		
 		#back CORRECT
-		elif get_neighbor(0,0,-1,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData:
+		elif right != levelObjectData and not left != levelObjectData and not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData:
 			localIndex = 2
 			rot = 16
 		
 		
 		
 		#left CORRECT
-		elif get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif back != levelObjectData and not front != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 2
 			rot = 10
 			
 		
 		#right CORRECT
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 2
 			rot = 0
 		
@@ -375,19 +383,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#
 		
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 3
 			rot = 2
 		
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and not up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 3
 			rot = 11
 		
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 3
 			rot = 1
 		
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 3
 			rot = 10
 		
@@ -395,19 +403,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		
 		
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 3
 			rot = 3
 		
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 3
 			rot = 8
 		
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 3
 			rot = 0
 		
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 3
 			rot = 9
 	
@@ -417,26 +425,26 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#edges
 		#topfront CORRECT
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 0
 		
 		
 		
 		#topback CORRECT
-		elif get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif back != levelObjectData and not front != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 1
 		
 		
 		
 		#topright CORRECT
-		elif not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not back != levelObjectData and not front != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 5
 			
 		#topleft CORRECT
-		elif not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not back != levelObjectData and not front != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 4
 			rot = 13
 		
@@ -444,26 +452,26 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 	
 		#bottomfront CORRECT
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 3
 		
 		
 		
 		#bottomback CORRECT
-		elif get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif back != levelObjectData and not front != levelObjectData and not up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 2
 		
 		
 		
 		#bottomright CORRECT
-		elif not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not back != levelObjectData and not front != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 7
 			
 		#bottomleft CORRECT
-		elif not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not back != levelObjectData and not front != levelObjectData and not up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 4
 			rot = 15
 		
@@ -472,26 +480,26 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 	
 		#frontleft CORRECT
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 4
 		
 		
 		
 		#frontright CORRECT
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData  and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData  and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 4
 			rot = 6
 		
 		
 		
 		#leftback CORRECT
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 4
 			rot = 12
 			
 		#leftright CORRECT
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 4
 			rot = 14
 		
@@ -499,22 +507,22 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		
 		# tube caps
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 5
 			rot = 2
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 5
 			rot = 0
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 5
 			rot = 3
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 5
 			rot = 1
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 5
 			rot = 16
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 5
 			rot = 20
 	
@@ -526,13 +534,13 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 	
 	
 		# tubes
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 6
 			rot = 16
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 6
 			rot = 1
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 6
 			rot = 0
 		
@@ -540,100 +548,100 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#ground tubes
 		# no 7 has 12 cases: each face with 2 rotations
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 7
 			rot = 16
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 7
 			rot = 0
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and  get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and  down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 7
 			rot = 18
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and  get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and not up != levelObjectData and  down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 7
 			rot = 2
 			
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 7
 			rot = 3
 		
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 7
 			rot = 1
 			
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 7
 			rot = 4
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 7
 			rot = 12
 			
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 7
 			rot = 19
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 7
 			rot = 17
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 7
 			rot = 13
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 7
 			rot = 5
 		
 		
 		# plate midsections
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 8
 			rot = 0
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
 			localIndex = 8
 			rot = 1
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 8
 			rot = 4
 		
 		
 		# plate corners have 12 cases again
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 14
 		# plate corners have 12 cases again
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 12
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 9
 			rot = 6
 		# plate corners have 12 cases again
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 9
 			rot = 21
 		
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 9
 			rot = 5
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and not get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and not right != levelObjectData:
 			localIndex = 9
 			rot = 7
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 13
-		elif get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and not get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and down != levelObjectData and not left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 15
 		
 		
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 1
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and get_neighbor(0,1,0,pos) != levelObjectData and not get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 9
-		elif not get_neighbor(1,0,0,pos) != levelObjectData and get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif not front != levelObjectData and back != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 2
-		elif get_neighbor(1,0,0,pos) != levelObjectData and not get_neighbor(-1,0,0,pos) != levelObjectData and not get_neighbor(0,1,0,pos) != levelObjectData and get_neighbor(0,-1,0,pos) != levelObjectData and get_neighbor(0,0,1,pos) != levelObjectData and get_neighbor(0,0,-1,pos) != levelObjectData:
+		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and down != levelObjectData and left != levelObjectData and right != levelObjectData:
 			localIndex = 9
 			rot = 3
 
