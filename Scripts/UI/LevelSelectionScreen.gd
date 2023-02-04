@@ -118,10 +118,10 @@ func add_checkbox(local_id):
 	if Constants.id != owner_id:
 		return
 	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
-	var checkbox: Button = checkbox_pref.instantiate()
+	var checkbox: CenterContainer = checkbox_pref.instantiate()
+	checkbox.size = Vector2(256,256)
 	checkbox.name = str(local_id)
-	checkbox.scale = Vector2(4,4)
-	checkbox.pressed.connect(start_round)
+	checkbox.get_node("Container/CheckBox").pressed.connect(start_round)
 	checkboxes.add_child(checkbox)
 
 
@@ -129,7 +129,7 @@ func check_ready():
 	if levellist.selected_level == null:
 		return false
 	for child in checkboxes.get_children():
-		if not child.button_pressed:
+		if not child.get_node("Container/CheckBox").button_pressed:
 			return false
 	return true
 

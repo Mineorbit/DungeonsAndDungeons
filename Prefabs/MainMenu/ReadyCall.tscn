@@ -1,14 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfrgl1ei4r6c0"]
+[gd_scene load_steps=4 format=3 uid="uid://cfrgl1ei4r6c0"]
+
+[ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="1_5gpp1"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5pggu"]
 properties/0/path = NodePath(".:button_pressed")
 properties/0/spawn = true
 properties/0/sync = true
 
-[node name="ReadyCall" type="CheckBox"]
-offset_right = 32.0
-offset_bottom = 32.0
-scale = Vector2(16, 16)
+[sub_resource type="LabelSettings" id="LabelSettings_472ny"]
+font_size = 72
+
+[node name="ReadyCall" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5pggu")
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Container"]
+layout_mode = 2
+theme = ExtResource("1_5gpp1")
+alignment = 1
+
+[node name="Label" type="Label" parent="Container"]
+layout_mode = 2
+text = "Player"
+label_settings = SubResource("LabelSettings_472ny")

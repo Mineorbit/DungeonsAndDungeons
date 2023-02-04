@@ -3,7 +3,6 @@ extends EntityModel
 var lastpos = Vector3.ZERO
 var yspeed
 var speed
-@onready var anim_tree = $AnimationTree
 
 func _ready():
 	super._ready()

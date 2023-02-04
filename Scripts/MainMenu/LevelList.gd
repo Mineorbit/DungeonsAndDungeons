@@ -19,9 +19,8 @@ var displaysize = 1
 func update_column_tiling(test):
 	grid.columns = int(floor(sqrt(grid.get_children().size())))
 
-func set_display_size(size):
-	displaysize = 2
-	scale =Vector2(displaysize,displaysize)
+func set_display_size(custom_size):
+	displaysize = custom_size
 
 signal added_element(element)
 
@@ -29,12 +28,14 @@ func set_level_list(level_list):
 	clear()
 	var num = 0
 	for level in level_list:
-		var level_list_element = level_list_element_prefab.instantiate()
+		var level_list_element: ColorRect = level_list_element_prefab.instantiate()
 		# this must be unique per level
 		level_list_element.name = str(num)
 		grid.add_child(level_list_element)
 		level_list_element.on_select.connect(selected)
 		level_list_element.set_level_data(level)
+		level_list_element.set_display_size(Vector2(displaysize,displaysize))
+		print(str(Constants.id)+" spawning Level List element")
 		added_element.emit(level_list_element)
 		num = num + 1
 	#control.size = grid.size

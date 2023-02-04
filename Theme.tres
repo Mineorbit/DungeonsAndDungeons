@@ -1,6 +1,11 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bogksdbh4fu6o"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bogksdbh4fu6o"]
 
+[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="1_n10ua"]
 [ext_resource type="FontFile" uid="uid://bunuu1xs4aqsi" path="res://Assets/Fonts/Barlow-Medium.ttf" id="1_nraun"]
 
 [resource]
+default_base_scale = 2.0
 default_font = ExtResource("1_nraun")
+CheckBox/icons/checked = ExtResource("1_n10ua")
+CheckBox/icons/checked_disabled = ExtResource("1_n10ua")
+CheckBox/icons/unchecked = ExtResource("1_n10ua")

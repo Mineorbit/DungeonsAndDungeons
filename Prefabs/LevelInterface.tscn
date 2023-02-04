@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqwu4faoe1fir"]
+[gd_scene load_steps=4 format=3 uid="uid://dqwu4faoe1fir"]
 
 [ext_resource type="Script" path="res://Scripts/UI/LevelInterface.gd" id="1_6ebat"]
-[ext_resource type="PackedScene" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
+[ext_resource type="PackedScene" uid="uid://6hpdpss4wair" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
+[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="3_wpuct"]
 
 [node name="Interface" type="SubViewport"]
 own_world_3d = true
 handle_input_locally = false
 gui_embed_subwindows = true
-size_2d_override = Vector2i(1280, 512)
+size = Vector2i(2048, 1024)
+size_2d_override = Vector2i(2048, 1024)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 script = ExtResource("1_6ebat")
@@ -30,22 +32,20 @@ metadata/_edit_use_anchors_ = true
 [node name="Cursors" type="Node2D" parent="."]
 
 [node name="Refresh" type="Button" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -8.0
-offset_bottom = 8.0
-grow_horizontal = 0
-text = "Refresh"
-
-[node name="CheckBoxes" type="HBoxContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.85
-anchor_right = 0.95
+anchor_left = 0.9
+anchor_right = 1.0
+grow_horizontal = 0
+icon = ExtResource("3_wpuct")
+
+[node name="CheckBoxes" type="HSplitContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.8
+anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+dragger_visibility = 1
 
 [node name="CursorSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")

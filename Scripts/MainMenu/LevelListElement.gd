@@ -24,6 +24,11 @@ func _ready():
 signal on_select(data)
 
 
+func set_display_size(display_size):
+	custom_minimum_size = 256*display_size
+	levellistelement.reset_size()
+
+
 func set_level_data(ldata):
 	# this is necessary ater return to lobby because else it is null while the set_level_data method is called
 	levellistelement = $Name

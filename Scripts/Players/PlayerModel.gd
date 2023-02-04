@@ -1,6 +1,5 @@
 extends EntityModel
 
-@onready var anim_tree = $AnimationTree
 
 @onready var playerSkeleton: Skeleton3D = $root/Skeleton3D
 @onready var runTrail = $RunTrail
@@ -114,6 +113,7 @@ func update_vertical_state_machine_remote(state):
 
 
 func _physics_process(delta):
+	super._physics_process(delta)
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
 	yspeed = speed_pos.y - last_speed_pos.y
@@ -126,6 +126,8 @@ func _physics_process(delta):
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
+	
+	
 	# travel darf nur einmal aufgerufen werden, transitions werden quasi gebuffered
 	if yspeed<0:
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
