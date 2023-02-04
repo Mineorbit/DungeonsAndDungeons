@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpmfo55b7jcey"]
+[gd_scene load_steps=4 format=3 uid="uid://cpmfo55b7jcey"]
 
 [ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://vf6t1xcfodjo" path="res://Prefabs/Models/MainScene.tscn" id="2_edb4s"]
+[ext_resource type="AudioStream" uid="uid://curlhq7selpo7" path="res://Assets/Sounds/music/MainTheme.mp3" id="3_x7yf0"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("2")
@@ -15,3 +16,9 @@ transform = Transform3D(0.53261, 0, 0.846361, 0, 1, 0, -0.846361, 0, 0.53261, 5.
 [node name="MainScene" parent="Spatial" instance=ExtResource("2_edb4s")]
 
 [node name="MainMenuLayer" type="CanvasLayer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x7yf0")
+volume_db = -14.0
+autoplay = true
+bus = &"music"

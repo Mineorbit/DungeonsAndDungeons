@@ -170,10 +170,12 @@ func _process(_delta):
 
 
 @export var waterSpeed:float = speed*0.5
-@export var waterGravity:float = gravity*0.0625
+@export var waterGravity:float = gravity*0.0325
 
 
 var last_swim = false
+
+
 func _physics_process(delta: float) -> void:
 	if not started:
 		return

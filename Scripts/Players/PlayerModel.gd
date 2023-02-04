@@ -7,7 +7,6 @@ extends EntityModel
 
 var aimfsm: AnimationNodeStateMachinePlayback
 var verticalfsm: AnimationNodeStateMachinePlayback
-var lastpos
 var mouth: ShaderMaterial
 var eyes: ShaderMaterial
 # Called when the node enters the scene tree for the first time.
@@ -27,11 +26,6 @@ func _ready():
 	face.set_surface_override_material(0,mouth)
 	face.set_surface_override_material(1,eyes)
 	
-
-var speed = 0
-var yspeed = 0
-var lastyspeed = 0
-var landblend = 0
 
 func player_aiming(is_aiming):
 	var v = 0
@@ -114,14 +108,6 @@ func update_vertical_state_machine_remote(state):
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	var last_speed_pos = lastpos
-	var speed_pos = global_transform.origin
-	yspeed = speed_pos.y - last_speed_pos.y
-	last_speed_pos.y = 0
-	speed_pos.y = 0
-	speed = (speed_pos - last_speed_pos).length()
-	lastpos = global_transform.origin
-	
 	anim_tree["parameters/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
