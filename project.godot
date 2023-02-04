@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Assets/Textures/gearwheel.png"
 config/icon="res://Assets/Textures/gearwheel.png"
 
+[audio]
+
+buses/default_bus_layout="res://Resources/audio_buses.tres"
+
 [autoload]
 
 Options="*res://Prefabs/Options.tscn"
