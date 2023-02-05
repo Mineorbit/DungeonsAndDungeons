@@ -370,8 +370,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 
 		#down CORRECT
 		elif down != levelObjectData and not up != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			if corners_visible and levelObjectData.tileIndex.size() > 13:
-				localIndex = 13
+			
+			var full_plane = true
+			
+			for i in range(1):
+				for j in range(1):
+					if get_neighbor(-1 + 2*i,0,-1+2*j,pos) != levelObjectData:
+						full_plane = false
+			
+			if corners_visible:
+				if full_plane and levelObjectData.tileIndex.size() > 13:
+					localIndex = 13
+				elif levelObjectData.tileIndex.size() > 15:
+					localIndex = 15
 			else:
 				localIndex = 2
 			rot = 3
@@ -380,8 +391,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#left CORRECT
 		elif left != levelObjectData and not right != levelObjectData and not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData:
-			if corners_visible and levelObjectData.tileIndex.size() > 13:
-				localIndex = 13
+			
+			var full_plane = true
+			
+			for i in range(1):
+				for j in range(1):
+					if get_neighbor(-1 + 2*i,-1+2*j,0,pos) != levelObjectData:
+						full_plane = false
+			
+			if corners_visible:
+				if full_plane and levelObjectData.tileIndex.size() > 13:
+					localIndex = 13
+				elif levelObjectData.tileIndex.size() > 15:
+					localIndex = 15
 			else:
 				localIndex = 2
 			rot = 22
@@ -389,8 +411,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#right CORRECT
 		elif right != levelObjectData and not left != levelObjectData and not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData:
-			if corners_visible and levelObjectData.tileIndex.size() > 13:
-				localIndex = 13
+			
+			var full_plane = true
+			
+			for i in range(1):
+				for j in range(1):
+					if get_neighbor(-1 + 2*i,-1+2*j,0,pos) != levelObjectData:
+						full_plane = false
+			
+			if corners_visible:
+				if full_plane and levelObjectData.tileIndex.size() > 13:
+					localIndex = 13
+				elif levelObjectData.tileIndex.size() > 15:
+					localIndex = 15
 			else:
 				localIndex = 2
 			rot = 16
@@ -399,8 +432,19 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#back CORRECT
 		elif back != levelObjectData and not front != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			if corners_visible and levelObjectData.tileIndex.size() > 13:
-				localIndex = 13
+			
+			var full_plane = true
+			
+			for i in range(1):
+				for j in range(1):
+					if get_neighbor(0,-1 + 2*i,-1+2*j,pos) != levelObjectData:
+						full_plane = false
+			
+			if corners_visible:
+				if full_plane and levelObjectData.tileIndex.size() > 13:
+					localIndex = 13
+				elif levelObjectData.tileIndex.size() > 15:
+					localIndex = 15
 			else:
 				localIndex = 2
 			rot = 10
@@ -408,11 +452,24 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		#front CORRECT
 		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			if corners_visible and levelObjectData.tileIndex.size() > 13:
-				localIndex = 13
+			
+			var full_plane = true
+			
+			for i in range(1):
+				for j in range(1):
+					if get_neighbor(0,-1 + 2*i,-1+2*j,pos) != levelObjectData:
+						full_plane = false
+			
+			if corners_visible:
+				if full_plane and levelObjectData.tileIndex.size() > 13:
+					localIndex = 13
+				elif levelObjectData.tileIndex.size() > 15:
+					localIndex = 15
 			else:
 				localIndex = 2
 			rot = 0
+		
+		
 		
 		
 		
