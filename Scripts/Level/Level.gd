@@ -332,47 +332,86 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		var left = get_neighbor(0,0,1,pos)
 		var right = get_neighbor(0,0,-1,pos)
 		
+		var corners_visible = false
+		for i in range(1):
+				for j in range(1):
+					for k in range(1):
+						if get_neighbor(-1 + 2*i,-1+2*j,-1+2*k,pos) != levelObjectData:
+							corners_visible = true
+							break
 		#here we pick the local tile index and rotation based on what neighbors there are
 		# TODO Compute tileIndex by neighboring tile indices of levelobjects with same levelobjectid
 		if not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 1
+			if corners_visible and levelObjectData.tileIndex.size() > 14:
+				localIndex = 14
+			else:
+				localIndex = 1
 		
 		
 		# sides
 		#up CORRECT
 		elif up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 2
+			
+			var full_plane = true
+			
+			for i in range(1):
+				for j in range(1):
+					if get_neighbor(-1 + 2*i,0,-1+2*j,pos) != levelObjectData:
+						full_plane = false
+			
+			if corners_visible:
+				if full_plane and levelObjectData.tileIndex.size() > 13:
+					localIndex = 13
+				elif levelObjectData.tileIndex.size() > 15:
+					localIndex = 15
+			else:
+				localIndex = 2
 			rot = 1
 
 		#down CORRECT
 		elif down != levelObjectData and not up != levelObjectData and not front != levelObjectData and not back != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 2
+			if corners_visible and levelObjectData.tileIndex.size() > 13:
+				localIndex = 13
+			else:
+				localIndex = 2
 			rot = 3
 			
 		
 		
-		#front CORRECT
+		#left CORRECT
 		elif left != levelObjectData and not right != levelObjectData and not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData:
-			localIndex = 2
+			if corners_visible and levelObjectData.tileIndex.size() > 13:
+				localIndex = 13
+			else:
+				localIndex = 2
 			rot = 22
 		
 		
-		#back CORRECT
+		#right CORRECT
 		elif right != levelObjectData and not left != levelObjectData and not up != levelObjectData and not down != levelObjectData and not front != levelObjectData and not back != levelObjectData:
-			localIndex = 2
+			if corners_visible and levelObjectData.tileIndex.size() > 13:
+				localIndex = 13
+			else:
+				localIndex = 2
 			rot = 16
 		
 		
 		
-		#left CORRECT
+		#back CORRECT
 		elif back != levelObjectData and not front != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 2
+			if corners_visible and levelObjectData.tileIndex.size() > 13:
+				localIndex = 13
+			else:
+				localIndex = 2
 			rot = 10
 			
 		
-		#right CORRECT
+		#front CORRECT
 		elif front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 2
+			if corners_visible and levelObjectData.tileIndex.size() > 13:
+				localIndex = 13
+			else:
+				localIndex = 2
 			rot = 0
 		
 		
@@ -592,13 +631,22 @@ func update_tiled_object(pos,levelObjectData,gridMap):
 		
 		# plate midsections
 		elif not front != levelObjectData and not back != levelObjectData and up != levelObjectData and down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 8
+			if corners_visible and levelObjectData.tileIndex.size() > 12:
+				localIndex = 12
+			else:
+				localIndex = 8
 			rot = 0
 		elif front != levelObjectData and back != levelObjectData and not up != levelObjectData and not down != levelObjectData and not left != levelObjectData and not right != levelObjectData:
-			localIndex = 8
+			if corners_visible and levelObjectData.tileIndex.size() > 12:
+				localIndex = 12
+			else:
+				localIndex = 8
 			rot = 1
 		elif not front != levelObjectData and not back != levelObjectData and not up != levelObjectData and not down != levelObjectData and left != levelObjectData and right != levelObjectData:
-			localIndex = 8
+			if corners_visible and levelObjectData.tileIndex.size() > 12:
+				localIndex = 12
+			else:
+				localIndex = 8
 			rot = 4
 		
 		

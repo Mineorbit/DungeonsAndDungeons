@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
 [ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
-[ext_resource type="PackedScene" uid="uid://mdw64i386rt7" path="res://Prefabs/Models/TiledFloor.tscn" id="2_gfayc"]
+[ext_resource type="PackedScene" uid="uid://mdw64i386rt7" path="res://Prefabs/Models/TiledFloor.tscn" id="2_qwxk6"]
 [ext_resource type="PackedScene" uid="uid://dugp2bkorh4g" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
 [ext_resource type="Material" uid="uid://bwdmyoav5klf2" path="res://Assets/Materials/Stone.tres" id="3_mypbp"]
 [ext_resource type="PackedScene" uid="uid://djyftwsvbthiy" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
@@ -29,7 +29,7 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
 script = ExtResource("1_jx2mm")
 
-[node name="TiledFloor" parent="." instance=ExtResource("2_gfayc")]
+[node name="TiledFloor" parent="." instance=ExtResource("2_qwxk6")]
 
 [node name="PlayerGoal" parent="." instance=ExtResource("2_6tpvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)

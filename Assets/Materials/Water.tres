@@ -2,15 +2,15 @@
 
 [ext_resource type="Shader" path="res://Shaders/Water.gdshader" id="1_m04y8"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_y1ldq"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jxqcn"]
 noise_type = 2
 fractal_type = 0
 cellular_distance_function = 1
 cellular_jitter = 0.57
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hm37f"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3onp"]
 seamless = true
-noise = SubResource("FastNoiseLite_y1ldq")
+noise = SubResource("FastNoiseLite_jxqcn")
 
 [resource]
 render_priority = 0
@@ -19,4 +19,4 @@ shader_parameter/ColorParameter = Color(0, 0.34664, 0.668477, 1)
 shader_parameter/triplanar_scale = Vector3(1, 1, 1)
 shader_parameter/triplanar_offset = Vector3(0, 0, 0)
 shader_parameter/triplanar_sharpness = 0.5
-shader_parameter/noise1 = SubResource("NoiseTexture2D_hm37f")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_t3onp")
