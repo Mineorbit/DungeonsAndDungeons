@@ -70,7 +70,7 @@ func save_image():
 	timer.start()
 
 func _process(delta) -> void:
-	if Input.is_action_just_pressed("Save"):
+	if (Constants.currentMode == 1) and Input.is_action_just_pressed("Save"):
 		world.level.save()
 		save_image()
 	if not Constants.builder.editing and Input.is_action_just_pressed("Test"):

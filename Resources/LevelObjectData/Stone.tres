@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_pnbve"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_pnbve")
 name = "Stone"
 tiled = true
 interactive = false
-tileIndex = PackedInt32Array(10)
+tileIndex = PackedInt32Array(14)
 levelObjectId = 2
 maximumNumber = -1
 offset = Vector3(0, 0, 0)
