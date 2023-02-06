@@ -39,10 +39,6 @@ shadow_mesh = SubResource("ArrayMesh_3q66t")
 [node name="BevelTest" type="Node3D"]
 script = ExtResource("1_xuvbu")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.844355, -0.504158, 0.181355, 0.26394, 0.685961, 0.678081, -0.466263, -0.524673, 0.712262, 0, 0, 0)
-shadow_enabled = true
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.959215, 0.282676, 0, -0.282676, 0.959215, 0, 3.01364, 9.21125)
 fov = 90.0
@@ -60,3 +56,6 @@ surface_material_override/0 = ExtResource("3_kmjv8")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.847542, -3.68297)
 mesh = SubResource("ArrayMesh_72e6s")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29506, 1.11142, 2.01019)

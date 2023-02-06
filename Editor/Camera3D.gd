@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	move_direction += up*(Input.get_action_strength("up") - Input.get_action_strength("down"))
 	move_direction *= move_speed
 	smallest_dist = 200
-	global_transform.origin += 0.125 * move_direction
+	global_transform.origin += 0.05 * move_direction
 
 func _input(event):
 	if event is InputEventMouseMotion and event.relative:

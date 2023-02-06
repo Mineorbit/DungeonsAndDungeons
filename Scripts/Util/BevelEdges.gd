@@ -43,7 +43,6 @@ func CreateBevelEdgeMesh(inputmesh):
 	
 	var n = mdt.get_edge_count()
 	
-	var corner_verts = []
 	var edge_verts = []
 	for i in n:
 		# two edges that share corners need to be connected
@@ -78,8 +77,24 @@ func CreateBevelEdgeMesh(inputmesh):
 				#	var collection = [edgea[0],edgea[1],edgeb[0],edgeb[1]]
 					# since these two edges share points and are collinear, they must connect two faces
 				#	edge_verts.append(collection)
-			
-	print("TEST")
+	# collect all vertices that are at same position
+	var corner_verts = []
+	var vertex_list = range(mdt.get_vertex_count()).duplicate()
+	while vertex_list.size() > 0:
+		var same_vertices = []
+		var vertpos = mdt.get_vertex(vertex_list[0])
+		same_vertices.append(vertex_list[0])
+		vertex_list.remove_at(0)
+		var i = 0
+		while i < vertex_list.size():
+			var secondvertpos = mdt.get_vertex(vertex_list[i])
+			if (vertpos-secondvertpos).length() < 0.0001:
+				same_vertices.append(vertex_list[i])
+				vertex_list.remove_at(i)
+			else:
+				i = i + 1
+		corner_verts.append(same_vertices)
+	# update vertices to new positions
 	#print("I: "+str(i)+" "+str(edgea)+" J: "+str(j)+" "+str(edgeb))
 	for i in mdt.get_vertex_count():
 		mdt.set_vertex(i,mdt.get_vertex(i)+shift_dir[i])
@@ -89,6 +104,15 @@ func CreateBevelEdgeMesh(inputmesh):
 	for e in edge_verts:
 		#we copy over the normal
 		edges.append([mdt.get_vertex(e[0]),mdt.get_vertex(e[1]),mdt.get_vertex(e[2]),mdt.get_vertex(e[3]),e[4]])
+	
+	
+	var corners = []
+	for c in corner_verts:
+		var corner = []
+		for x in c:
+			corner.append(mdt.get_vertex(x))
+		print(corner)
+		corners.append(corner)
 	
 	
 	# translate both corner verts and edge_verts to their actual "new" positions
@@ -103,7 +127,7 @@ func CreateBevelEdgeMesh(inputmesh):
 				var d2 = e[2] - e[0]
 				var facenormal = e[4]
 				facenormal = facenormal.normalized()
-				var offset = 0.00001*facenormal
+				var offset = 0.00005*facenormal
 				if facenormal.dot(Vector3(0,1,0)) > 0.5:
 					st.set_normal (facenormal)
 					st.add_vertex(e[2]+offset)
@@ -189,7 +213,11 @@ func CreateBevelEdgeMesh(inputmesh):
 					st.add_vertex(e[2]+offset)
 					st.set_normal (facenormal)
 					st.add_vertex(e[0]+offset)
-				
+	for c in corners:
+		st.add_triangle_fan(c)
+	
+	
+	
 	st.index()
 	st.generate_normals()
 	st.append_from(mesh,0,Transform3D.IDENTITY)
