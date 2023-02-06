@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5uqm8dv4mpjf"]
+[gd_scene load_steps=8 format=3 uid="uid://c5uqm8dv4mpjf"]
 
 [ext_resource type="Script" path="res://Editor/bevel_test.gd" id="1_xuvbu"]
+[ext_resource type="Script" path="res://Editor/Camera3D.gd" id="2_meurb"]
+[ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="3_kmjv8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q25vk"]
 
@@ -46,13 +48,19 @@ transform = Transform3D(1, 0, 0, 0, 0.959215, 0.282676, 0, -0.282676, 0.959215, 
 fov = 90.0
 size = 9.68037
 far = 4021.82
+script = ExtResource("2_meurb")
 
 [node name="Cube2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.00416)
 visible = false
 mesh = SubResource("BoxMesh_q25vk")
+surface_material_override/0 = ExtResource("3_kmjv8")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.847542, -3.68297)
 mesh = SubResource("ArrayMesh_72e6s")
 skeleton = NodePath("")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.904033, 0.0691386, -0.421833, 0.26394, 0.685962, 0.67808, 0.336243, -0.724346, 0.601884, 0, 0, 0)
+shadow_enabled = true

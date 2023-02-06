@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cleuxq8emorin" path="res://Assets/Textures/floor.png" id="1_tilqg"]
 
 [resource]
+cull_mode = 2
 albedo_texture = ExtResource("1_tilqg")
 uv1_triplanar = true
 uv1_world_triplanar = true

@@ -58,15 +58,28 @@ func CreateBevelEdgeMesh(inputmesh):
 			var b1 = mdt.get_vertex(edgeb[1])
 			var dirb = b0 - b1
 			var d = dira.dot(dirb)
-			var collection = [edgea[0],edgea[1],edgeb[0],edgeb[1]]
 			if d < 0.125 or d > -0.125:
 				#  we need to check that the positions of edge vertices are "close"
-				if (close(a0,b0) or close(a0,b1)) and (close(a1,b0) or close(a1,b1)):
+				if close(a0,b0) and close(a1,b1):
+					# every edge has exactly one face, therefore we can just add face normals
+					var normala = mdt.get_face_normal(mdt.get_edge_faces(i)[0])
+					var normalb = mdt.get_face_normal(mdt.get_edge_faces(j)[0])
+					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0],normala+normalb]
 					# since these two edges share points and are collinear, they must connect two faces
 					edge_verts.append(collection)
+				if close(a0,b1) and close(a1,b0):
+					pass
+					#var collection = [edgeb[0],edgeb[1],edgea[1],edgea[0]]
+					# since these two edges share points and are collinear, they must connect two faces
+					#edge_verts.append(collection)
+					
+				#if (close(a0,b0) or close(a0,b1)) and (close(a1,b0) or close(a1,b1)):
+					
+				#	var collection = [edgea[0],edgea[1],edgeb[0],edgeb[1]]
+					# since these two edges share points and are collinear, they must connect two faces
+				#	edge_verts.append(collection)
 			
 	print("TEST")
-	print(edge_verts)
 	#print("I: "+str(i)+" "+str(edgea)+" J: "+str(j)+" "+str(edgeb))
 	for i in mdt.get_vertex_count():
 		mdt.set_vertex(i,mdt.get_vertex(i)+shift_dir[i])
@@ -74,9 +87,42 @@ func CreateBevelEdgeMesh(inputmesh):
 	var edges = []
 	
 	for e in edge_verts:
-		edges.append([mdt.get_vertex(e[0]),mdt.get_vertex(e[1]),mdt.get_vertex(e[2]),mdt.get_vertex(e[3])])
+		#we copy over the normal
+		edges.append([mdt.get_vertex(e[0]),mdt.get_vertex(e[1]),mdt.get_vertex(e[2]),mdt.get_vertex(e[3]),e[4]])
 	
 	
 	# translate both corner verts and edge_verts to their actual "new" positions
 	mdt.commit_to_surface(mesh)
-	return mesh
+	
+	var st = SurfaceTool.new()
+	st.index()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for e in edges:
+				var d1 = e[1] - e[0]
+				var d2 = e[2] - e[0]
+				var facenormal = e[4]
+				facenormal = facenormal.normalized()
+				var offset = 0.5*facenormal
+				st.set_normal (facenormal)
+				st.add_vertex(e[2]+offset)
+				st.set_normal (facenormal)
+				st.add_vertex(e[1]+offset)
+				st.set_normal (facenormal)
+				st.add_vertex(e[0]+offset)
+		
+				st.set_normal (facenormal)
+				st.add_vertex(e[3]+offset)
+				st.set_normal (facenormal)
+				st.add_vertex(e[2]+offset)
+				st.set_normal (facenormal)
+				st.add_vertex(e[0]+offset)
+				
+				
+	st.index()
+	st.generate_normals()
+	st.append_from(mesh,0,Transform3D.IDENTITY)
+	var resultmesh = st.commit()
+	var mat = load("res://Assets/Materials/Floor.tres")
+	resultmesh.surface_set_material(0,mat)
+	return resultmesh
+
