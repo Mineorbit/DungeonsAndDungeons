@@ -97,26 +97,98 @@ func CreateBevelEdgeMesh(inputmesh):
 	var st = SurfaceTool.new()
 	st.index()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var threshold = 0.5
 	for e in edges:
 				var d1 = e[1] - e[0]
 				var d2 = e[2] - e[0]
 				var facenormal = e[4]
 				facenormal = facenormal.normalized()
-				var offset = 0.5*facenormal
-				st.set_normal (facenormal)
-				st.add_vertex(e[2]+offset)
-				st.set_normal (facenormal)
-				st.add_vertex(e[1]+offset)
-				st.set_normal (facenormal)
-				st.add_vertex(e[0]+offset)
+				var offset = 0.00001*facenormal
+				if facenormal.dot(Vector3(0,1,0)) > 0.5:
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[1]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
 		
-				st.set_normal (facenormal)
-				st.add_vertex(e[3]+offset)
-				st.set_normal (facenormal)
-				st.add_vertex(e[2]+offset)
-				st.set_normal (facenormal)
-				st.add_vertex(e[0]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[3]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+				elif facenormal.dot(Vector3(0,-1,0)) > 0.5:
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[1]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+		
+					st.set_normal (facenormal)
+					st.add_vertex(e[3]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
 				
+				elif facenormal.dot(Vector3(1,0,0)) > 0.5:
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[1]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+		
+					st.set_normal (facenormal)
+					st.add_vertex(e[3]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+				elif facenormal.dot(Vector3(-1,0,0)) > 0.5:
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[1]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+		
+					st.set_normal (facenormal)
+					st.add_vertex(e[3]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+				elif facenormal.dot(Vector3(0,0,1)) > 0.5:
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[1]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+		
+					st.set_normal (facenormal)
+					st.add_vertex(e[3]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+				elif facenormal.dot(Vector3(0,0,-1)) > 0.5:
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[1]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
+		
+					st.set_normal (facenormal)
+					st.add_vertex(e[3]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[2]+offset)
+					st.set_normal (facenormal)
+					st.add_vertex(e[0]+offset)
 				
 	st.index()
 	st.generate_normals()
