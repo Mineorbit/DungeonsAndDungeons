@@ -3,6 +3,48 @@ extends Node
 func close(a,b):
 	return (a-b).length() < 0.1
 
+func sort_by_clock(list,normal):
+	var center = Vector3.ZERO
+	for l in list:
+		center += l
+	center = center/list.size()
+	print("===")
+	print("Center "+str(center))
+	print("Normal "+str(normal))
+	normal = normal.normalized()
+	# pick start as first element
+	var result = []
+	var plane = Plane(normal,0)
+	var d = list[0]-center
+	d = plane.project(d)
+	var d1 = d.normalized()
+	var resultangles = []
+	for i in range(0,list.size()):
+		var pd = list[i] - center
+		var pointdir = plane.project(pd)
+		var d2 = pointdir.normalized()
+		var dot = d1.dot(d2)
+		var det = d1.x*d2.y*normal.z + d2.x*normal.y*d1.z + normal.x*d1.y*d2.z - (d1.z*d2.y*normal.x + d2.z*normal.y*d1.x + normal.z*d1.y*d2.x)
+		var resultangle = atan2(det,dot)
+		resultangles.append([list[i],resultangle,i])
+	resultangles.sort_custom(sort_rule)
+	print(resultangles)
+	# rotate list until 0 is at 0
+	while resultangles[0][2] != 0:
+		var new_resultangles = resultangles.duplicate()
+		for i in range(resultangles.size()):
+			new_resultangles[(i-1)%resultangles.size()] = resultangles[i]
+		resultangles = new_resultangles
+	print(resultangles)
+	for x in resultangles:
+		result.append(x[0])
+	return result
+
+func sort_rule(a,b):
+	if a[1] < b[1]:
+		return true
+	return false
+
 func CreateBevelEdgeMesh(inputmesh):
 	
 	var workingmesh = ArrayMesh.new()
@@ -21,6 +63,7 @@ func CreateBevelEdgeMesh(inputmesh):
 	
 	var shift_dir = {}
 	
+	var bevelsize = 0.1
 	
 	var facecenter = Vector3.ZERO
 	for i in mdt.get_face_count():
@@ -38,7 +81,7 @@ func CreateBevelEdgeMesh(inputmesh):
 					var id = mdt.get_face_vertex(m,n)
 					var p = mdt.get_vertex(mdt.get_face_vertex(m,n))
 					if not id in shift_dir:
-						shift_dir[id] = 0.125*(center-p)
+						shift_dir[id] = bevelsize*(center-p)
 			facecenter = Vector3.ZERO
 	
 	var n = mdt.get_edge_count()
@@ -109,10 +152,11 @@ func CreateBevelEdgeMesh(inputmesh):
 	var corners = []
 	for c in corner_verts:
 		var corner = []
+		var corner_normal = []
 		for x in c:
 			corner.append(mdt.get_vertex(x))
-		print(corner)
-		corners.append(corner)
+			corner_normal.append(mdt.get_vertex_normal(x))
+		corners.append([corner,corner_normal])
 	
 	
 	# translate both corner verts and edge_verts to their actual "new" positions
@@ -214,8 +258,15 @@ func CreateBevelEdgeMesh(inputmesh):
 					st.set_normal (facenormal)
 					st.add_vertex(e[0]+offset)
 	for c in corners:
-		st.add_triangle_fan(c)
-	
+		var normal = Vector3.ZERO
+		for x in c[1]:
+			normal += x
+		normal = normal/c[1].size()
+		normal = normal.normalized()
+		# todo: order according to normal and center point of corner
+		var result = sort_by_clock(c[0],normal)
+		st.add_triangle_fan(result)
+
 	
 	
 	st.index()
