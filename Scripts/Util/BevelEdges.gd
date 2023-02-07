@@ -8,9 +8,6 @@ func sort_by_clock(list,normal):
 	for l in list:
 		center += l
 	center = center/list.size()
-	print("===")
-	print("Center "+str(center))
-	print("Normal "+str(normal))
 	normal = normal.normalized()
 	# pick start as first element
 	var result = []
@@ -24,18 +21,17 @@ func sort_by_clock(list,normal):
 		var pointdir = plane.project(pd)
 		var d2 = pointdir.normalized()
 		var dot = d1.dot(d2)
-		var det = d1.x*d2.y*normal.z + d2.x*normal.y*d1.z + normal.x*d1.y*d2.z - (d1.z*d2.y*normal.x + d2.z*normal.y*d1.x + normal.z*d1.y*d2.x)
+		var det = normal.dot(d1.cross(d2))
+		#var det = d1.x*d2.y*normal.z + d2.x*normal.y*d1.z + normal.x*d1.y*d2.z - (d1.z*d2.y*normal.x + d2.z*normal.y*d1.x + normal.z*d1.y*d2.x)
 		var resultangle = atan2(det,dot)
 		resultangles.append([list[i],resultangle,i])
 	resultangles.sort_custom(sort_rule)
-	print(resultangles)
 	# rotate list until 0 is at 0
 	while resultangles[0][2] != 0:
 		var new_resultangles = resultangles.duplicate()
 		for i in range(resultangles.size()):
 			new_resultangles[(i-1)%resultangles.size()] = resultangles[i]
 		resultangles = new_resultangles
-	print(resultangles)
 	for x in resultangles:
 		result.append(x[0])
 	return result
@@ -167,96 +163,11 @@ func CreateBevelEdgeMesh(inputmesh):
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var threshold = 0.5
 	for e in edges:
-				var d1 = e[1] - e[0]
-				var d2 = e[2] - e[0]
 				var facenormal = e[4]
 				facenormal = facenormal.normalized()
-				var offset = 0.00005*facenormal
-				if facenormal.dot(Vector3(0,1,0)) > 0.5:
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[1]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-		
-					st.set_normal (facenormal)
-					st.add_vertex(e[3]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-				elif facenormal.dot(Vector3(0,-1,0)) > 0.5:
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[1]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-		
-					st.set_normal (facenormal)
-					st.add_vertex(e[3]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-				
-				elif facenormal.dot(Vector3(1,0,0)) > 0.5:
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[1]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-		
-					st.set_normal (facenormal)
-					st.add_vertex(e[3]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-				elif facenormal.dot(Vector3(-1,0,0)) > 0.5:
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[1]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-		
-					st.set_normal (facenormal)
-					st.add_vertex(e[3]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-				elif facenormal.dot(Vector3(0,0,1)) > 0.5:
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[1]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-		
-					st.set_normal (facenormal)
-					st.add_vertex(e[3]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-				elif facenormal.dot(Vector3(0,0,-1)) > 0.5:
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[1]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
-		
-					st.set_normal (facenormal)
-					st.add_vertex(e[3]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[2]+offset)
-					st.set_normal (facenormal)
-					st.add_vertex(e[0]+offset)
+				var list = [e[0],e[1],e[2],e[3]]
+				var result = sort_by_clock(list,facenormal)
+				st.add_triangle_fan(result)
 	for c in corners:
 		var normal = Vector3.ZERO
 		for x in c[1]:
