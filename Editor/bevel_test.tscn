@@ -41,7 +41,7 @@ shadow_mesh = SubResource("ArrayMesh_3q66t")
 script = ExtResource("1_xuvbu")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.959215, 0.282676, 0, -0.282676, 0.959215, 0, 3.01364, 9.21125)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 fov = 90.0
 size = 9.68037
 far = 4021.82
@@ -55,6 +55,7 @@ surface_material_override/0 = ExtResource("3_kmjv8")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.847542, -3.68297)
+visible = false
 mesh = SubResource("ArrayMesh_72e6s")
 skeleton = NodePath("")
 
