@@ -173,7 +173,7 @@ func CreateBevelEdgeMesh(inputmesh):
 		var threshold = 0.5
 		for e in edges:
 					var facenormal = e[4]
-					facenormal = facenormal.normalized()
+					facenormal = - facenormal.normalized()
 					var list = [e[0],e[1],e[2],e[3]]
 					var result = sort_by_clock(list,facenormal)
 					st.add_triangle_fan(result)
@@ -182,12 +182,12 @@ func CreateBevelEdgeMesh(inputmesh):
 			for x in c[1]:
 				normal += x
 			normal = normal/c[1].size()
-			normal = normal.normalized()
+			normal = - normal.normalized()
 			# todo: order according to normal and center point of corner
 			var result = sort_by_clock(c[0],normal)
 			st.add_triangle_fan(result)
 		st.index()
-		st.generate_normals()
+		st.generate_normals(false)
 		st.generate_tangents()
 	
 	

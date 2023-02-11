@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5uqm8dv4mpjf"]
+[gd_scene load_steps=10 format=3 uid="uid://c5uqm8dv4mpjf"]
 
 [ext_resource type="Script" path="res://Editor/bevel_test.gd" id="1_xuvbu"]
 [ext_resource type="Script" path="res://Editor/Camera3D.gd" id="2_meurb"]
@@ -37,6 +37,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3q66t")
 
+[sub_resource type="SphereMesh" id="SphereMesh_ni77p"]
+
 [node name="BevelTest" type="Node3D"]
 script = ExtResource("1_xuvbu")
 
@@ -64,3 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29506, 1.11142, 2.01019)
 
 [node name="GridMesh" type="MeshInstance3D" parent="."]
 script = ExtResource("4_r4a2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02947, 0, 0)
+mesh = SubResource("SphereMesh_ni77p")
