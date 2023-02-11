@@ -4,7 +4,7 @@ extends Node
 # var a = 2
 # var b = "text"
 
-var builder = $Builder
+@onready var builder = $Builder
 var builderpref
 var playerhudpref
 var testhudpref

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5uqm8dv4mpjf"]
+[gd_scene load_steps=9 format=3 uid="uid://c5uqm8dv4mpjf"]
 
 [ext_resource type="Script" path="res://Editor/bevel_test.gd" id="1_xuvbu"]
 [ext_resource type="Script" path="res://Editor/Camera3D.gd" id="2_meurb"]
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="3_kmjv8"]
+[ext_resource type="Script" path="res://Scripts/GridMesh.gd" id="4_r4a2m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q25vk"]
 
@@ -59,3 +60,6 @@ skeleton = NodePath("")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29506, 1.11142, 2.01019)
+
+[node name="GridMesh" type="MeshInstance3D" parent="."]
+script = ExtResource("4_r4a2m")

@@ -182,6 +182,7 @@ func CreateBevelEdgeMesh(inputmesh):
 	
 	st.index()
 	st.generate_normals()
+	st.generate_tangents()
 	st.append_from(mesh,0,Transform3D.IDENTITY)
 	var resultmesh = st.commit()
 	var mat = load("res://Assets/Materials/Floor.tres")
