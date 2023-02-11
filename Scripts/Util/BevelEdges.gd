@@ -3,7 +3,7 @@ extends Node
 func close(a,b):
 	return (a-b).length() < 0.1
 
-func sort_by_clock(list,normal):
+func sort_by_clock(list,normal,normals):
 	var center = Vector3.ZERO
 	for l in list:
 		center += l
@@ -24,7 +24,7 @@ func sort_by_clock(list,normal):
 		var det = normal.dot(d1.cross(d2))
 		#var det = d1.x*d2.y*normal.z + d2.x*normal.y*d1.z + normal.x*d1.y*d2.z - (d1.z*d2.y*normal.x + d2.z*normal.y*d1.x + normal.z*d1.y*d2.x)
 		var resultangle = atan2(det,dot)
-		resultangles.append([list[i],resultangle,i])
+		resultangles.append([list[i],resultangle,i,normals[i]])
 	resultangles.sort_custom(sort_rule)
 	# rotate list until 0 is at 0
 	while resultangles[0][2] != 0:
@@ -33,7 +33,7 @@ func sort_by_clock(list,normal):
 			new_resultangles[(i-1)%resultangles.size()] = resultangles[i]
 		resultangles = new_resultangles
 	for x in resultangles:
-		result.append(x[0])
+		result.append([x[0],x[3]])
 	return result
 
 func sort_rule(a,b):
@@ -149,18 +149,20 @@ func CreateBevelEdgeMesh(inputmesh):
 	
 	for e in edge_verts:
 		#we copy over the normal
-		edges.append([mdt.get_vertex(e[0]),mdt.get_vertex(e[1]),mdt.get_vertex(e[2]),mdt.get_vertex(e[3]),e[4]])
+		edges.append([
+			[mdt.get_vertex(e[0]),mdt.get_vertex_normal(e[0])],
+			[mdt.get_vertex(e[1]),mdt.get_vertex_normal(e[1])],
+			[mdt.get_vertex(e[2]),mdt.get_vertex_normal(e[2])],
+			[mdt.get_vertex(e[3]),mdt.get_vertex_normal(e[3])]
+			])
 	
 	
 	var corners = []
 	for c in corner_verts:
 		var corner = []
-		var corner_normal = []
 		for x in c:
-			corner.append(mdt.get_vertex(x))
-			corner_normal.append(mdt.get_vertex_normal(x))
-		corners.append([corner,corner_normal])
-	
+			corner.append([mdt.get_vertex(x),mdt.get_vertex_normal(x)])
+		corners.append(corner)
 	
 	# translate both corner verts and edge_verts to their actual "new" positions
 	mdt.commit_to_surface(mesh)
@@ -172,26 +174,56 @@ func CreateBevelEdgeMesh(inputmesh):
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
 		var threshold = 0.5
 		for e in edges:
-					var facenormal = e[4]
-					facenormal = - facenormal.normalized()
-					var list = [e[0],e[1],e[2],e[3]]
-					var result = sort_by_clock(list,facenormal)
-					st.add_triangle_fan(result)
+					var vertlist = [e[0][0],e[1][0],e[2][0],e[3][0]]
+					var normallist = [e[0][1],e[1][1],e[2][1],e[3][1]]
+					# or rather add normals
+					var facenormal = Vector3.ZERO
+					for x in normallist:
+						facenormal += x
+					facenormal = facenormal/normallist.size()
+					facenormal = facenormal.normalized()
+					var r = sort_by_clock(vertlist,facenormal,normallist)
+					r.reverse()
+					for i in range(0,r.size()-2):
+						st.set_normal(r[0][1])
+						st.add_vertex(r[0][0])
+						for j in range(1,3):
+							st.set_normal(r[j+i][1])
+							st.add_vertex(r[j+i][0])
+							#st.add_triangle_fan(resultvertlist,null,null,null,resultnormallist)
+		
+		
 		for c in corners:
+			var vertlist = []
+			var normallist = []
+			
+			for x in c:
+				vertlist.append(x[0])
+				normallist.append(x[1])
+			
 			var normal = Vector3.ZERO
-			for x in c[1]:
+			#print("===")
+			#print(c)
+			
+			for x in normallist:
 				normal += x
-			normal = normal/c[1].size()
-			normal = - normal.normalized()
+			normal = normal/normallist.size()
+			normal =  normal.normalized()
+			
 			# todo: order according to normal and center point of corner
-			var result = sort_by_clock(c[0],normal)
-			st.add_triangle_fan(result)
-		st.index()
-		st.generate_normals(false)
-		st.generate_tangents()
+			var r = sort_by_clock(vertlist,normal,normallist)
+			r.reverse()
+			for i in range(0,r.size()-2):
+				st.set_normal(r[0][1])
+				st.add_vertex(r[0][0])
+				for j in range(1,3):
+					st.set_normal(r[j+i][1])
+					st.add_vertex(r[j+i][0])
 	
-	
+	st.index()
 	st.append_from(mesh,0,Transform3D.IDENTITY)
+	#st.generate_normals()
+	st.generate_tangents()
 	var resultmesh = st.commit()
 	var mat = load("res://Assets/Materials/Floor.tres")
 	resultmesh.surface_set_material(0,mat)

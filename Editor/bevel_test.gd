@@ -6,4 +6,10 @@ func _ready():
 	#var new_mesh = BevelEdges.CreateBevelEdgeMesh(meshinstance.mesh)
 	#meshinstance.mesh = new_mesh
 	#print(meshinstance.mesh)
-	gridmesh.add(1,1,1)
+	for i in range(8):
+		for j in range(8):
+			pass
+			gridmesh.add(i,0,j)
+	#gridmesh.add(0,0,0)
+	gridmesh.build()
+	ResourceSaver.save(gridmesh.mesh,"res://Editor/mesh.res")
