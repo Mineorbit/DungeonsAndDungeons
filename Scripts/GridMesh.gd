@@ -33,18 +33,18 @@ func get_at(x,y,z):
 	return grid[index]
 
 func add_top_face(st,pos):
-	st.set_normal(Vector3(0,-1,0))
+	st.set_normal(Vector3(0,1,0))
+	st.add_vertex(pos+Vector3(0.5,0.5,-0.5))
+	st.set_normal(Vector3(0,1,0))
+	st.add_vertex(pos+Vector3(-0.5,0.5,0.5))
+	st.set_normal(Vector3(0,1,0))
 	st.add_vertex(pos+Vector3(-0.5,0.5,-0.5))
-	st.set_normal(Vector3(0,-1,0))
-	st.add_vertex(pos+Vector3(-0.5,0.5,0.5))
-	st.set_normal(Vector3(0,-1,0))
-	st.add_vertex(pos+Vector3(0.5,0.5,-0.5))
 	
-	st.set_normal(Vector3(0,-1,0))
+	st.set_normal(Vector3(0,1,0))
 	st.add_vertex(pos+Vector3(-0.5,0.5,0.5))
-	st.set_normal(Vector3(0,-1,0))
+	st.set_normal(Vector3(0,1,0))
 	st.add_vertex(pos+Vector3(0.5,0.5,-0.5))
-	st.set_normal(Vector3(0,-1,0))
+	st.set_normal(Vector3(0,1,0))
 	st.add_vertex(pos+Vector3(0.5,0.5,0.5))
 
 func build_mesh():
@@ -54,11 +54,10 @@ func build_mesh():
 		for j in range(grid_size):
 			for k in range(grid_size):
 				if get_at(i,j,k):
-					print("LOL")
 					var basepos = Vector3(i,j,k)
 					add_top_face(st,basepos)
 	var resultmesh = st.commit()
 	var mat = load("res://Assets/Materials/Floor.tres")
 	resultmesh.surface_set_material(0,mat)
 	mesh = resultmesh
-	#mesh = BevelEdges.CreateBevelEdgeMesh(resultmesh)
+	mesh = BevelEdges.CreateBevelEdgeMesh(resultmesh)

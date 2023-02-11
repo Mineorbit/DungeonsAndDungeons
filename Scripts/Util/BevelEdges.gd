@@ -41,6 +41,9 @@ func sort_rule(a,b):
 		return true
 	return false
 
+
+var modify = true
+
 func CreateBevelEdgeMesh(inputmesh):
 	
 	var workingmesh = ArrayMesh.new()
@@ -59,7 +62,7 @@ func CreateBevelEdgeMesh(inputmesh):
 	
 	var shift_dir = {}
 	
-	var bevelsize = 0.1
+	var bevelsize = 0.2
 	
 	var facecenter = Vector3.ZERO
 	for i in mdt.get_face_count():
@@ -99,13 +102,17 @@ func CreateBevelEdgeMesh(inputmesh):
 			if d < 0.125 or d > -0.125:
 				#  we need to check that the positions of edge vertices are "close"
 				if close(a0,b0) and close(a1,b1):
-					# every edge has exactly one face, therefore we can just add face normals
 					var normala = mdt.get_face_normal(mdt.get_edge_faces(i)[0])
 					var normalb = mdt.get_face_normal(mdt.get_edge_faces(j)[0])
 					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0],normala+normalb]
-					# since these two edges share points and are collinear, they must connect two faces
 					edge_verts.append(collection)
+					# every edge has exactly one face, therefore we can just add face normals
+					# since these two edges share points and are collinear, they must connect two faces
 				if close(a0,b1) and close(a1,b0):
+					var normala = mdt.get_face_normal(mdt.get_edge_faces(i)[0])
+					var normalb = mdt.get_face_normal(mdt.get_edge_faces(j)[0])
+					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0],normala+normalb]
+					edge_verts.append(collection)
 					pass
 					#var collection = [edgeb[0],edgeb[1],edgea[1],edgea[0]]
 					# since these two edges share points and are collinear, they must connect two faces
@@ -159,30 +166,31 @@ func CreateBevelEdgeMesh(inputmesh):
 	mdt.commit_to_surface(mesh)
 	
 	var st = SurfaceTool.new()
-	st.index()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var threshold = 0.5
-	for e in edges:
-				var facenormal = e[4]
-				facenormal = facenormal.normalized()
-				var list = [e[0],e[1],e[2],e[3]]
-				var result = sort_by_clock(list,facenormal)
-				st.add_triangle_fan(result)
-	for c in corners:
-		var normal = Vector3.ZERO
-		for x in c[1]:
-			normal += x
-		normal = normal/c[1].size()
-		normal = normal.normalized()
-		# todo: order according to normal and center point of corner
-		var result = sort_by_clock(c[0],normal)
-		st.add_triangle_fan(result)
-
+	
+	if modify:
+		st.index()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var threshold = 0.5
+		for e in edges:
+					var facenormal = e[4]
+					facenormal = facenormal.normalized()
+					var list = [e[0],e[1],e[2],e[3]]
+					var result = sort_by_clock(list,facenormal)
+					st.add_triangle_fan(result)
+		for c in corners:
+			var normal = Vector3.ZERO
+			for x in c[1]:
+				normal += x
+			normal = normal/c[1].size()
+			normal = normal.normalized()
+			# todo: order according to normal and center point of corner
+			var result = sort_by_clock(c[0],normal)
+			st.add_triangle_fan(result)
+		st.index()
+		st.generate_normals()
+		st.generate_tangents()
 	
 	
-	st.index()
-	st.generate_normals()
-	st.generate_tangents()
 	st.append_from(mesh,0,Transform3D.IDENTITY)
 	var resultmesh = st.commit()
 	var mat = load("res://Assets/Materials/Floor.tres")
