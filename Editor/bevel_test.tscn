@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5uqm8dv4mpjf"]
+[gd_scene load_steps=10 format=3 uid="uid://c5uqm8dv4mpjf"]
 
 [ext_resource type="Script" path="res://Editor/bevel_test.gd" id="1_xuvbu"]
 [ext_resource type="Script" path="res://Editor/Camera3D.gd" id="2_meurb"]
 [ext_resource type="Material" uid="uid://bi7d8f6mfs6ss" path="res://Assets/Materials/Floor.tres" id="3_kmjv8"]
 [ext_resource type="Script" path="res://Scripts/GridMesh.gd" id="4_r4a2m"]
+[ext_resource type="ArrayMesh" uid="uid://cy6vef7b2bx0i" path="res://Editor/mesh.res" id="5_p6pnn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q25vk"]
 
@@ -68,6 +69,6 @@ script = ExtResource("4_r4a2m")
 [node name="MeshInstance3D" type="MultiMeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83866, 3.08639, 0)
 
-[node name="MeshInstance3D2" type="MultiMeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83866, 3.08639, -3.28187)
-visible = false
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83866, 9.9965, -3.28187)
+mesh = ExtResource("5_p6pnn")

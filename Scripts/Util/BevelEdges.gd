@@ -213,9 +213,10 @@ func CreateBevelEdgeMesh(inputmesh):
 				for j in range(1,3):
 					st.set_normal(r[j+i][1])
 					st.add_vertex(r[j+i][0])
-	
-	st.index()
-	st.append_from(mesh,0,Transform3D.IDENTITY)
+
+	for i in mesh.get_surface_count():
+		st.index()
+		st.append_from(mesh,i,Transform3D.IDENTITY)
 	#st.generate_normals()
 	var resultmesh = st.commit()
 	return resultmesh
