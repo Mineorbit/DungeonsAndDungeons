@@ -14,7 +14,7 @@ func _ready():
 				grid.append(false)
 
 func compute_index(x,y,z):
-	return 100*y+10*x+z
+	return grid_size*grid_size*y+grid_size*x+z
 
 func add(x,y,z, with_rebuild = false):
 	var index = compute_index(x,y,z)
@@ -32,7 +32,7 @@ func remove(x,y,z, with_rebuild = false):
 
 func get_at(x,y,z):
 	var index = compute_index(x,y,z)
-	if index >= grid.size() or index < 0:
+	if x < 0 or x >= grid_size or y < 0 or y >= grid_size or z < 0 or z >= grid_size:
 		return false
 	return grid[index]
 
@@ -40,16 +40,12 @@ func get_at(x,y,z):
 
 func add_top_face(st,pos):
 	st.index()
-	var planemesh = PlaneMesh.new()
-	planemesh.size = Vector2(1,1)
 	var t = Transform3D.IDENTITY
 	t = t.translated_local(pos+Vector3(0,0.5,0))
 	st.append_from(planemesh,0,t)
 
 func add_bottom_face(st,pos):
 	st.index()
-	var planemesh = PlaneMesh.new()
-	planemesh.size = Vector2(1,1)
 	var t = Transform3D.IDENTITY
 	t = t.translated_local(pos+Vector3(0,-0.5,0))
 	t = t.rotated_local(Vector3(1,0,0),PI)
@@ -60,8 +56,6 @@ func add_bottom_face(st,pos):
 
 func add_front_face(st,pos):
 	st.index()
-	var planemesh = PlaneMesh.new()
-	planemesh.size = Vector2(1,1)
 	var t = Transform3D.IDENTITY
 	t = t.translated_local(pos+Vector3(0.5,0,0))
 	t = t.rotated_local(Vector3(0,0,1),-PI/2)
@@ -71,8 +65,6 @@ func add_front_face(st,pos):
 
 func add_back_face(st,pos):
 	st.index()
-	var planemesh = PlaneMesh.new()
-	planemesh.size = Vector2(1,1)
 	var t = Transform3D.IDENTITY
 	t = t.translated_local(pos+Vector3(-0.5,0,0))
 	t = t.rotated_local(Vector3(0,0,1),PI/2)
@@ -82,8 +74,6 @@ func add_back_face(st,pos):
 
 func add_left_face(st,pos):
 	st.index()
-	var planemesh = PlaneMesh.new()
-	planemesh.size = Vector2(1,1)
 	var t = Transform3D.IDENTITY
 	t = t.translated_local(pos+Vector3(0,0,-0.5))
 	t = t.rotated_local(Vector3(1,0,0),-PI/2)
@@ -91,16 +81,17 @@ func add_left_face(st,pos):
 
 
 func add_right_face(st: SurfaceTool,pos):
-	var normal = Vector3(0,0,1)
 	st.index()
-	var planemesh = PlaneMesh.new()
-	planemesh.size = Vector2(1,1)
 	var t = Transform3D.IDENTITY
 	t = t.translated_local(pos+Vector3(0,0,0.5))
 	t = t.rotated_local(Vector3(1,0,0),PI/2)
 	st.append_from(planemesh,0,t)
-	
+
+var planemesh
+
 func build():
+	planemesh = PlaneMesh.new()
+	planemesh.size = Vector2(1,1)
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	for i in range(grid_size):
@@ -128,7 +119,5 @@ func build():
 						add_right_face(st,basepos)
 	#st.generate_normals()
 	var resultmesh = st.commit()
-	var mat = load("res://Assets/Materials/Floor.tres")
-	resultmesh.surface_set_material(0,mat)
 	mesh = resultmesh
 	mesh = BevelEdges.CreateBevelEdgeMesh(resultmesh)
