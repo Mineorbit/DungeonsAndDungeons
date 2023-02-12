@@ -1,8 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bi7d8f6mfs6ss"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://de2dqg7bqq8q4"]
 
-[ext_resource type="Texture2D" uid="uid://cleuxq8emorin" path="res://Assets/Textures/floor.png" id="1_tilqg"]
+[ext_resource type="Shader" path="res://Shaders/Floor.gdshader" id="1_jrx01"]
+[ext_resource type="Texture2D" uid="uid://cleuxq8emorin" path="res://Assets/Textures/floor.png" id="2_3j0v4"]
 
 [resource]
-albedo_texture = ExtResource("1_tilqg")
-uv1_triplanar = true
-uv1_world_triplanar = true
+render_priority = 0
+shader = ExtResource("1_jrx01")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+shader_parameter/triplanar_scale = Vector3(1, 1, 1)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 0.9
+shader_parameter/floortexture = ExtResource("2_3j0v4")

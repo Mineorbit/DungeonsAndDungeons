@@ -7,17 +7,17 @@ func _ready():
 	#meshinstance.mesh = new_mesh
 	#print(meshinstance.mesh)
 	#gridmesh.add(0,0,0)
-	gridmesh.add(1,1,1)
-	gridmesh.build()
-	ResourceSaver.save(gridmesh.mesh,"res://Editor/mesh.res")
+	pass
 
 func test():
-	for i in range(6):
-		for j in range(6):
-			pass
-			gridmesh.add(i,0,j)
-	var t = Thread.new()
-	t.start(func():  gridmesh.build())
+	var rand = RandomNumberGenerator.new()
+	#gridmesh.add(rand.randi_range(0,5),rand.randi_range(0,5),rand.randi_range(0,5))
+	for i in range(8):
+		for j in range(8):
+			for k in range(8):
+				gridmesh.add(i,j,k)
+	gridmesh.build()
+	ResourceSaver.save(gridmesh.mesh,"res://Editor/mesh.res")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Connect"):

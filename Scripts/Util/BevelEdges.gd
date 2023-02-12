@@ -191,7 +191,8 @@ func CreateBevelEdgeMesh(inputmesh):
 		for c in corners:
 			var vertlist = []
 			var normallist = []
-			
+			if c.size() > 5:
+				continue
 			for x in c:
 				vertlist.append(x[0])
 				normallist.append(x[1])
@@ -202,7 +203,6 @@ func CreateBevelEdgeMesh(inputmesh):
 			
 			for x in normallist:
 				normal += x
-			normal = normal/normallist.size()
 			normal =  normal.normalized()
 			
 			# todo: order according to normal and center point of corner
