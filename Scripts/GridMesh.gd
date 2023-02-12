@@ -3,7 +3,7 @@ extends MeshInstance3D
 
 @export var face_granularity = 1
 
-@export var grid_size = 10
+@export var grid_size = 6
 
 var grid = []
 

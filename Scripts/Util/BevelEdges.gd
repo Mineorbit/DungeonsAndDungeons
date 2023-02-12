@@ -37,7 +37,7 @@ func sort_by_clock(list,normal,normals):
 	return result
 
 func sort_rule(a,b):
-	if a[1] < b[1]:
+	if a[1] > b[1]:
 		return true
 	return false
 
@@ -70,7 +70,7 @@ func CreateBevelEdgeMesh(inputmesh):
 		
 		for j in range(3):
 			var id = mdt.get_face_vertex(i,j)
-			var p = mdt.get_vertex(mdt.get_face_vertex(i,j))
+			var p = mdt.get_vertex(id)
 			facecenter += p
 			
 		if i % 2 == 1:
@@ -78,9 +78,8 @@ func CreateBevelEdgeMesh(inputmesh):
 			for m in range(i-1,i+1):
 				for n in range(3):
 					var id = mdt.get_face_vertex(m,n)
-					var p = mdt.get_vertex(mdt.get_face_vertex(m,n))
-					if not id in shift_dir:
-						shift_dir[id] = bevelsize*(center-p)
+					var p = mdt.get_vertex(id)
+					shift_dir[id] = bevelsize*(center-p)
 			facecenter = Vector3.ZERO
 	
 	var n = mdt.get_edge_count()
@@ -101,17 +100,15 @@ func CreateBevelEdgeMesh(inputmesh):
 			var d = dira.dot(dirb)
 			if d < 0.125 or d > -0.125:
 				#  we need to check that the positions of edge vertices are "close"
+				
 				if close(a0,b0) and close(a1,b1):
-					var normala = mdt.get_face_normal(mdt.get_edge_faces(i)[0])
-					var normalb = mdt.get_face_normal(mdt.get_edge_faces(j)[0])
-					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0],normala+normalb]
+					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0]]
 					edge_verts.append(collection)
+					pass
 					# every edge has exactly one face, therefore we can just add face normals
 					# since these two edges share points and are collinear, they must connect two faces
 				if close(a0,b1) and close(a1,b0):
-					var normala = mdt.get_face_normal(mdt.get_edge_faces(i)[0])
-					var normalb = mdt.get_face_normal(mdt.get_edge_faces(j)[0])
-					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0],normala+normalb]
+					var collection = [edgea[0],edgea[1],edgeb[1],edgeb[0]]
 					edge_verts.append(collection)
 					pass
 					#var collection = [edgeb[0],edgeb[1],edgea[1],edgea[0]]
@@ -125,21 +122,20 @@ func CreateBevelEdgeMesh(inputmesh):
 				#	edge_verts.append(collection)
 	# collect all vertices that are at same position
 	var corner_verts = []
-	var vertex_list = range(mdt.get_vertex_count()).duplicate()
-	while vertex_list.size() > 0:
-		var same_vertices = []
-		var vertpos = mdt.get_vertex(vertex_list[0])
-		same_vertices.append(vertex_list[0])
-		vertex_list.remove_at(0)
-		var i = 0
-		while i < vertex_list.size():
-			var secondvertpos = mdt.get_vertex(vertex_list[i])
-			if (vertpos-secondvertpos).length() < 0.0001:
-				same_vertices.append(vertex_list[i])
-				vertex_list.remove_at(i)
-			else:
-				i = i + 1
-		corner_verts.append(same_vertices)
+	var vertex_list = range(mdt.get_vertex_count())
+	var corner_pos = {}
+	for i in vertex_list:
+		#print(hash(mdt.get_vertex(i)))
+		var p = mdt.get_vertex(i)
+		corner_pos[i] = p
+		var added = false
+		for corner in corner_verts:
+			if (corner_pos[corner[0]] - p).length_squared() < 0.01:
+				corner.append(i)
+				added = true
+		if not added:
+			corner_verts.append([i])
+
 	# update vertices to new positions
 	#print("I: "+str(i)+" "+str(edgea)+" J: "+str(j)+" "+str(edgeb))
 	for i in mdt.get_vertex_count():
@@ -183,7 +179,6 @@ func CreateBevelEdgeMesh(inputmesh):
 					facenormal = facenormal/normallist.size()
 					facenormal = facenormal.normalized()
 					var r = sort_by_clock(vertlist,facenormal,normallist)
-					r.reverse()
 					for i in range(0,r.size()-2):
 						st.set_normal(r[0][1])
 						st.add_vertex(r[0][0])
@@ -212,7 +207,6 @@ func CreateBevelEdgeMesh(inputmesh):
 			
 			# todo: order according to normal and center point of corner
 			var r = sort_by_clock(vertlist,normal,normallist)
-			r.reverse()
 			for i in range(0,r.size()-2):
 				st.set_normal(r[0][1])
 				st.add_vertex(r[0][0])
@@ -223,9 +217,6 @@ func CreateBevelEdgeMesh(inputmesh):
 	st.index()
 	st.append_from(mesh,0,Transform3D.IDENTITY)
 	#st.generate_normals()
-	st.generate_tangents()
 	var resultmesh = st.commit()
-	var mat = load("res://Assets/Materials/Floor.tres")
-	resultmesh.surface_set_material(0,mat)
 	return resultmesh
 
