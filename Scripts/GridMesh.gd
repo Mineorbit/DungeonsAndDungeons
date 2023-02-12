@@ -117,7 +117,6 @@ func build():
 					if not get_at(i,j,k+1):
 						pass
 						add_right_face(st,basepos)
-	#st.generate_normals()
 	var resultmesh = st.commit()
+	resultmesh = BevelEdges.CreateBevelEdgeMesh(resultmesh)
 	mesh = resultmesh
-	mesh = BevelEdges.CreateBevelEdgeMesh(resultmesh)
