@@ -4,8 +4,7 @@
 
 extends MeshInstance3D
 
-var material = null
-@export var isolevel: float : set = generate
+@export var isolevel: float
 
 var edgeTable = [
 0x0	, 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
@@ -301,9 +300,12 @@ var triTable = [
 
 var levelObjectId
 
+var surfacematerial
+
 var centers = []
 func _ready():
-	generate()
+	surfacematerial = load("res://Assets/Materials/Floor.tres")
+	#generate()
 
 var exponent = 8
 
@@ -326,6 +328,7 @@ func generate():
 	surfTool.generate_normals()
 	rmesh = surfTool.commit()
 	#ResourceSaver.save(rmesh,"res://test.tres")
+	rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = rmesh
 	print(Time.get_ticks_msec()-start)
 	

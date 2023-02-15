@@ -327,7 +327,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 	changes = true
 	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
-		chunk.update_tiled_object(pos,levelObjectData)
+		chunk.add_tiled_level_object(pos,levelObjectData)
 	else:
 		var new_level_object
 		if levelObjectData.interactive:

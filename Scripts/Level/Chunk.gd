@@ -52,6 +52,11 @@ func update_navigation():
 
 
 
+func add_tiled_level_object(pos,levelObjectData):
+	cellGrids.add_tiled_level_object(pos,levelObjectData)
+
+func remove_tiled_level_object(pos):
+	cellGrids.remove_tiled_level_object(pos)
 
 
 func get_level_objects():
