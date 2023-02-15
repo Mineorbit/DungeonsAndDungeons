@@ -300,14 +300,11 @@ var triTable = [
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]
 
 
+var levelObjectId = 0
+
 var centers = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	for i in range(4):
-		for j in range(4):
-			centers.append(Vector3(2*i,2,2*j))
-	
 	generate(0.725)
 
 var exponent = 8
@@ -319,10 +316,18 @@ func getBox(x,y,z,center):
 	
 	return max(r,0.5)
 
+
+
+
 func getValue(x, y, z):
 	var result = 1
-	for c in centers:
-		result = min(result,getBox(x,y,z,c))
+	for a in range(-1, 2):
+		for b in range(-1, 2):
+			for c in range(-1, 2):
+				var gridpos = get_parent().get_grid_position(Vector3(x+a,y+b,z+c))
+				var has_box = get_parent().get_at(gridpos) == levelObjectId
+				if has_box:
+					result = min(result,getBox(x,y,z,gridpos))
 	return  max(0.6,result)
 	
 func vertexInterp(a, b, isolevel):

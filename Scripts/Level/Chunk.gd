@@ -24,10 +24,8 @@ class LevelObjectInstance:
 
 
 var level
-@onready var levelGridMap = $GridMap
-@onready var waterGridMap = $WaterGridMap
+@onready var cellGrids = $CellGrids
 @onready var levelObjects = $LevelObjects
-@onready var mesh: MeshInstance3D = $mesh
 
 static func load_chunk():
 	pass
@@ -41,33 +39,6 @@ func set_tile_level_object(pos,index,gridMap,rot):
 	var localPos = Vector3(x,y,z)
 	gridMap.set_cell_item(localPos,index,rot)
 
-# this should be done differently
-func remove_tile_level_object(pos):
-	var result = false 
-	if get_tile_level_object(pos,levelGridMap) != -1:
-		#set_tile_level_object(pos,-1,false)
-		# update tile and neighbors (null is the -1 tile index i.e. empty)
-		Constants.World.level.update_tiled_object(pos,null,levelGridMap)
-		result = true
-	if get_tile_level_object(pos,waterGridMap) != -1:
-		#set_tile_level_object(pos,-1,true)
-		Constants.World.level.update_tiled_object(pos,null,waterGridMap)
-		result = true
-	return result
-
-func get_tile_level_object(pos,gridMap):
-	var x = floor(pos.x - global_transform.origin.x)
-	var y = floor(pos.y - global_transform.origin.y)
-	var z = floor(pos.z - global_transform.origin.z)
-	var localPos = Vector3(x,y,z)
-	return gridMap.get_cell_item(localPos)
-
-func get_tile_level_object_orient(pos,gridMap):
-	var x = floor(pos.x - global_transform.origin.x)
-	var y = floor(pos.y - global_transform.origin.y)
-	var z = floor(pos.z - global_transform.origin.z)
-	var localPos = Vector3(x,y,z)
-	return gridMap.get_cell_item_orientation(localPos)
 
 func update_navigation():
 	#mesh.mesh = navmesh
@@ -78,17 +49,21 @@ func update_navigation():
 		print("Finished")
 		change_in_chunk = false
 		get_parent().changedChunks = get_parent().changedChunks - 1
-		
+
+
+
+
 
 func get_level_objects():
 	return levelObjects.get_children()
 
-func get_level_object_instance_of_cell(i,j,k,levelObjectInstances,gridMap):
+func get_level_object_instance_of_cell(i,j,k,levelObjectInstances):
 	var instance = LevelObjectInstance.new()
 	var offset = Vector3(i,j,k)
 	var grid_position = level.get_grid_position(global_transform.origin+offset)
-	if not get_tile_level_object(grid_position,gridMap) == -1:
-		var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position,gridMap),get_tile_level_object_orient(grid_position,gridMap))
+	if not cellGrids.get_at(grid_position) == -1:
+		var levelObjectData = LevelObjectData.new()
+		#var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position,gridMap),get_tile_level_object_orient(grid_position,gridMap))
 		instance.x = floor(grid_position.x - global_transform.origin.x)
 		instance.y = floor(grid_position.y - global_transform.origin.y)
 		instance.z = floor(grid_position.z - global_transform.origin.z)
@@ -104,14 +79,7 @@ func get_level_object_instances():
 	for i in range(8):
 		for j in range(8):
 			for k in range(8):
-				get_level_object_instance_of_cell(i,j,k,levelObjectInstances,levelGridMap)
-	
-	
-	# get level objects of waterGridMap
-	for i in range(8):
-		for j in range(8):
-			for k in range(8):
-				get_level_object_instance_of_cell(i,j,k,levelObjectInstances,waterGridMap)
+				get_level_object_instance_of_cell(i,j,k,levelObjectInstances)
 	
 	for n in get_level_objects():
 		var instance = LevelObjectInstance.new()
