@@ -299,15 +299,36 @@ var triTable = [
 [0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]
 
-
-var levelObjectId = 0
+var levelObjectId
 
 var centers = []
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	generate(0.725)
+	generate()
 
 var exponent = 8
+
+
+
+# this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
+func generate():
+	var start = Time.get_ticks_msec()
+	isolevel = 0.725
+	
+	var surfTool = SurfaceTool.new()
+	var rmesh = ArrayMesh.new()
+	#surfTool.set_material(material)
+	surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	for x in range(-border_size, border_size+grid_size*2):
+		for y in range(-border_size, border_size+grid_size*2):
+			for z in range(-border_size, border_size+grid_size*2):
+				addVerts(1.0 * x, 1.0 * y, 1.0 * z, surfTool, isolevel)
+	surfTool.generate_normals()
+	rmesh = surfTool.commit()
+	#ResourceSaver.save(rmesh,"res://test.tres")
+	self.mesh = rmesh
+	print(Time.get_ticks_msec()-start)
+	
 
 func getBox(x,y,z,center):
 	var r = 1
@@ -403,25 +424,6 @@ var border_size = 2
 
 var grid_size = 4
 
-func generate(newIsolevel):
-	var start = Time.get_ticks_msec()
-	isolevel = newIsolevel
-	
-	var surfTool = SurfaceTool.new()
-	var rmesh = ArrayMesh.new()
-	#surfTool.set_material(material)
-	surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
-	for x in range(-border_size, border_size+grid_size*2):
-		for y in range(-border_size, border_size+grid_size*2):
-			for z in range(-border_size, border_size+grid_size*2):
-				addVerts(1.0 * x, 1.0 * y, 1.0 * z, surfTool, isolevel)
-	surfTool.generate_normals()
-	rmesh = surfTool.commit()
-	#ResourceSaver.save(rmesh,"res://test.tres")
-	self.mesh = rmesh
-	print(Time.get_ticks_msec()-start)
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjxtji6tau8ti"]
-
-[ext_resource type="Script" path="res://Scripts/GridMesh.gd" id="1_3bn4e"]
-
-[node name="GridMesh" type="MeshInstance3D"]
-skeleton = NodePath("../..")
-script = ExtResource("1_3bn4e")

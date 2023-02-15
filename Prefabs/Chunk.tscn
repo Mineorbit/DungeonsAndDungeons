@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://1i3w0tti58x8"]
+[gd_scene load_steps=4 format=3 uid="uid://6oouqvjxe6m8"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Chunk.gd" id="1"]
 [ext_resource type="Script" path="res://Scripts/CellGrids.gd" id="2_2qd3d"]
-[ext_resource type="PackedScene" uid="uid://cjxtji6tau8ti" path="res://Prefabs/GridMesh.tscn" id="3_jf2iq"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
 agent_radius = 0.1
@@ -15,5 +14,3 @@ script = ExtResource("1")
 
 [node name="CellGrids" type="Node3D" parent="."]
 script = ExtResource("2_2qd3d")
-
-[node name="GridMesh" parent="CellGrids" instance=ExtResource("3_jf2iq")]
