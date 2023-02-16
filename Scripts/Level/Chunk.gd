@@ -32,13 +32,6 @@ static func load_chunk():
 	
 var change_in_chunk = false
 
-func set_tile_level_object(pos,index,gridMap,rot):
-	var x = floor(pos.x - global_transform.origin.x)
-	var y = floor(pos.y - global_transform.origin.y)
-	var z = floor(pos.z - global_transform.origin.z)
-	var localPos = Vector3(x,y,z)
-	gridMap.set_cell_item(localPos,index,rot)
-
 
 func update_navigation():
 	#mesh.mesh = navmesh
@@ -53,10 +46,10 @@ func update_navigation():
 
 
 func add_tiled_level_object(pos,levelObjectData):
-	cellGrids.add_tiled_level_object(pos,levelObjectData)
+	cellGrids.add_tiled_level_object(pos- global_transform.origin,levelObjectData)
 
 func remove_tiled_level_object(pos):
-	cellGrids.remove_tiled_level_object(pos)
+	cellGrids.remove_tiled_level_object(pos - global_transform.origin)
 
 
 func get_level_objects():
@@ -66,7 +59,7 @@ func get_level_object_instance_of_cell(i,j,k,levelObjectInstances):
 	var instance = LevelObjectInstance.new()
 	var offset = Vector3(i,j,k)
 	var grid_position = level.get_grid_position(global_transform.origin+offset)
-	if not cellGrids.get_at(grid_position) == -1:
+	if not cellGrids.get_at(offset) == -1:
 		var levelObjectData = LevelObjectData.new()
 		#var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position,gridMap),get_tile_level_object_orient(grid_position,gridMap))
 		instance.x = floor(grid_position.x - global_transform.origin.x)

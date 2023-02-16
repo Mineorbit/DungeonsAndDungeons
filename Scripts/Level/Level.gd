@@ -296,17 +296,6 @@ func add_chunk(position):
 	return chunk
 
 var free_unique_instance_id = 0
-func get_neighbor(i,j,k,pos):
-				var local_pos = pos + Vector3(i,j,k)
-				var local_chunk = get_chunk(local_pos)
-				if local_chunk == null:
-					return null
-#				return LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_gridmap),local_chunk.get_tile_level_object_orient(local_pos,local_gridmap))
-				var resulta = LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_chunk.waterGridMap))
-				var resultb = LevelObjectData.from_cell(local_chunk.get_tile_level_object(local_pos,local_chunk.levelGridMap))
-				if not resulta == null:
-					return resulta
-				return resultb
 
 
 

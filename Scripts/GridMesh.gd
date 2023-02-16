@@ -298,6 +298,8 @@ var triTable = [
 [0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]
 
+
+
 var levelObjectId
 
 var surfacematerial
@@ -341,8 +343,6 @@ func getBox(x,y,z,center):
 	return max(r,0.5)
 
 
-
-
 func getValue(x, y, z):
 	var result = 1
 	for a in range(-1, 2):
@@ -350,6 +350,7 @@ func getValue(x, y, z):
 			for c in range(-1, 2):
 				var gridpos = get_parent().get_grid_position(Vector3(x+a,y+b,z+c))
 				var has_box = get_parent().get_at(gridpos) == levelObjectId
+				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 				if has_box:
 					result = min(result,getBox(x,y,z,gridpos))
 	return  max(0.6,result)
