@@ -307,11 +307,15 @@ var surfacematerial
 var centers = []
 func _ready():
 	surfacematerial = load("res://Assets/Materials/Floor.tres")
+	
+	transform.origin = Vector3(2.0/grid_size,(2.0+0.5)/grid_size,2.0/grid_size)
 	#generate()
 
 var exponent = 3
 
 @onready var col = $Collision/CollisionShape3D
+
+var grid_size = 8
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
@@ -336,26 +340,18 @@ func generate():
 	print(Time.get_ticks_msec()-start)
 	
 
-func getBox(x,y,z,center):
-	var r = 1
-	var result  = 0.4
-	r = ( (x-center.x)**exponent + (y-center.y)**exponent + (z-center.z)**exponent)/60
-	
-	return r#max(r*0.5,0.6)
-
+var n = 1
 
 func getValue(x, y, z):
 	var result = 1
-	for a in range(-1, 2):
-		for b in range(-1, 2):
-			for c in range(-1, 2):
-				var localpos = Vector3(x+0.25*a,y+0.25*b,z+0.25*c)
-				#print(localpos)
-				var gridpos = get_parent().get_grid_position(localpos)
-				var has_box = get_parent().get_at(gridpos) == levelObjectId
+	var gridpos = get_parent().get_grid_position(4.0/grid_size*Vector3(x,y,z))
+	var has_box = get_parent().get_at(gridpos) == levelObjectId
 				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
-				if has_box:
-					result = 0
+	if has_box:
+		result = 0
+				
+				
+					#result = min(result,(gridpos-Vector3i(x,y,z)).length_squared()**2)
 	return  max(0.6,result)
 	
 func vertexInterp(a, b, isolevel):
@@ -425,11 +421,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 		for j in range(0, 3):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
-			surfTool.add_vertex(a)
-
-var border_size = 2
-
-var grid_size = 8
+			surfTool.add_vertex(4.0/grid_size*a)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
