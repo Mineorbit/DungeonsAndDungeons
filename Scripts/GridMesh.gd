@@ -309,29 +309,30 @@ func _ready():
 	surfacematerial = load("res://Assets/Materials/Floor.tres")
 	#generate()
 
-var exponent = 8
+var exponent = 3
 
-
+@onready var col = $Collision/CollisionShape3D
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
 	var start = Time.get_ticks_msec()
-	isolevel = 0.725
+	isolevel = 0.7
 	
 	var surfTool = SurfaceTool.new()
 	var rmesh = ArrayMesh.new()
 	#surfTool.set_material(material)
 	surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	for x in range(-border_size, border_size+grid_size*2):
-		for y in range(-border_size, border_size+grid_size*2):
-			for z in range(-border_size, border_size+grid_size*2):
-				addVerts(1.0 * x, 1.0 * y, 1.0 * z, surfTool, isolevel)
+	for x in range(grid_size*2):
+		for y in range(grid_size*2):
+			for z in range(grid_size*2):
+				addVerts( x, y, z, surfTool, isolevel)
 	surfTool.generate_normals()
 	rmesh = surfTool.commit()
 	#ResourceSaver.save(rmesh,"res://test.tres")
 	rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = rmesh
+	col.shape = rmesh.create_trimesh_shape()
 	print(Time.get_ticks_msec()-start)
 	
 
@@ -340,7 +341,7 @@ func getBox(x,y,z,center):
 	var result  = 0.4
 	r = ( (x-center.x)**exponent + (y-center.y)**exponent + (z-center.z)**exponent)/60
 	
-	return max(r,0.5)
+	return r#max(r*0.5,0.6)
 
 
 func getValue(x, y, z):
@@ -348,11 +349,13 @@ func getValue(x, y, z):
 	for a in range(-1, 2):
 		for b in range(-1, 2):
 			for c in range(-1, 2):
-				var gridpos = get_parent().get_grid_position(Vector3(x+a,y+b,z+c))
+				var localpos = Vector3(x+0.25*a,y+0.25*b,z+0.25*c)
+				#print(localpos)
+				var gridpos = get_parent().get_grid_position(localpos)
 				var has_box = get_parent().get_at(gridpos) == levelObjectId
 				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 				if has_box:
-					result = min(result,getBox(x,y,z,gridpos))
+					result = 0
 	return  max(0.6,result)
 	
 func vertexInterp(a, b, isolevel):
@@ -426,7 +429,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 
 var border_size = 2
 
-var grid_size = 4
+var grid_size = 8
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -5,3 +5,7 @@
 [node name="TiledFloor" type="MeshInstance3D"]
 skeleton = NodePath("../..")
 script = ExtResource("1_bun6d")
+
+[node name="Collision" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision"]
