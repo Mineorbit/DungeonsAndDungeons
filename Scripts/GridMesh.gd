@@ -342,16 +342,33 @@ func generate():
 	print(Time.get_ticks_msec()-start)
 	
 
-var n = [Vector3(0,0,0),Vector3(1,0,1),Vector3(1,0,-1),Vector3(-1,0,1),Vector3(-1,0,-1)]
-
+var n = [Vector3(0,0,0),
+		Vector3(1,0,1),
+		Vector3(1,0,-1),
+		Vector3(-1,0,1),
+		Vector3(-1,0,-1),
+		Vector3(0,-1,0),
+		Vector3(1,-1,1),
+		Vector3(1,-1,-1),
+		Vector3(-1,-1,1),
+		Vector3(-1,-1,-1),
+		Vector3(0,1,0),
+		Vector3(1,1,1),
+		Vector3(1,1,-1),
+		Vector3(-1,1,1),
+		Vector3(-1,1,-1),
+		]
+		
+#var n = [Vector3(0,0,0),Vector3(1,0,1),Vector3(-1,0,-1)]
 
 
 func getValue(x, y, z):
 	var result = 1
-	
+	var par = get_parent()
+	var par2 = get_parent().get_parent()
 	for h in n:
-				var gridpos = get_parent().get_parent().get_grid_position(4.0/grid_size*(Vector3(x,y,z) + 0.025*h))
-				var has_box = get_parent().get_parent().get_at(offset+gridpos) == get_parent().levelObjectId
+				var gridpos = par2.get_grid_position(4.0/grid_size*(Vector3(x,y,z) + 0.025*h))
+				var has_box = par2.get_at(offset+gridpos) == par.levelObjectId
 				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 				if has_box:
 					result = 0
