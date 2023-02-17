@@ -22,14 +22,11 @@ class LevelObjectInstance:
 		return data
 
 
-
 var level
 @onready var cellGrids = $CellGrids
 @onready var levelObjects = $LevelObjects
 
-static func load_chunk():
-	pass
-	
+
 var change_in_chunk = false
 
 
@@ -46,7 +43,6 @@ func update_navigation():
 
 func generate_grid():
 	for grid in cellGrids.get_children():
-		print(grid)
 		grid.generate()
 
 

@@ -257,6 +257,8 @@ func add_from_string(base_position,line):
 			if instanceid == "":
 				continue
 			connectedInteractiveObjects.append(instanceid.to_int())
+	if id == -1:
+		return
 	var levelObjectData = Constants.LevelObjectData[id]
 	
 	var pos = Vector3(i,j,k)
