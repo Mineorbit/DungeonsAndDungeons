@@ -320,7 +320,8 @@ func _ready():
 var grid_size: int = 16
 var grid_extend: float = 0.5
 
-var border = 0
+# this is jank but is needed for grid borders between chunks
+var border = 2
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
@@ -354,10 +355,11 @@ var n = [Vector3(0,0,0),
 func getValue(x, y, z):
 	var result = 1
 	for h in n:
-				var gridpos = par2.get_grid_position(global_transform.origin+4.0/grid_size*(Vector3(x,y,z)))
-				var has_box = par2.get_at(gridpos) == par.levelObjectId
+				var p = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
+				var has_box = par2.get_at(p) == par.levelObjectId
 				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 				if has_box:
+					#print(str(p)+" "+str(self))
 					result = 0
 					return 0
 				
@@ -437,7 +439,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
 			surfTool.surface_set_normal(n)
-			var p = 4.0/grid_size*a
+			var p = 4.0/grid_size*a + Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 			surfTool.surface_add_vertex (p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

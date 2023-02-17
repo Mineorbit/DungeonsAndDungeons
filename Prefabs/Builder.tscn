@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlro8vdvd0npd"]
+[gd_scene load_steps=8 format=3 uid="uid://dlro8vdvd0npd"]
 
 [ext_resource type="Script" path="res://Scripts/Edit/BuilderController.gd" id="1_bhwd2"]
 [ext_resource type="Script" path="res://Scripts/Edit/Cursor.gd" id="2_rmx1k"]
@@ -8,6 +8,8 @@
 [sub_resource type="SphereShape3D" id="1"]
 
 [sub_resource type="SphereMesh" id="2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0qw1v"]
 
 [node name="Builder" type="CharacterBody3D"]
 collision_layer = 2
@@ -24,7 +26,7 @@ current = true
 [node name="CursorArm" type="SpringArm3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.75)
 collision_mask = 129
-spring_length = 15.0
+spring_length = 6.0
 margin = 0.75
 
 [node name="Cursor" type="Node3D" parent="CursorArm"]
@@ -51,3 +53,7 @@ stream = ExtResource("3_kuvdx")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true
+
+[node name="ExtraCursor" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, -1.73771)
+mesh = SubResource("SphereMesh_0qw1v")

@@ -22,7 +22,9 @@ func get_at(world_position):
 		#print(local_pos)
 		#print(local_pos)
 		#print_stack()
-		return grid[get_grid_index(local_pos)]
+		var x = get_grid_position(local_pos)
+		#print(x)
+		return chunk.cellGrids.grid[get_grid_index(x)]
 	return -1
 
 func get_grid_position(v):
