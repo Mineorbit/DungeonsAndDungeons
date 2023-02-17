@@ -315,7 +315,7 @@ var exponent = 3
 
 @onready var col = $Collision/CollisionShape3D
 
-var grid_size = 8
+var grid_size = 12
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
