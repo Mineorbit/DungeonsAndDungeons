@@ -310,12 +310,11 @@ func _ready():
 	transform.origin += Vector3(0,(0.5)/grid_size,0)
 	#generate()
 
-var exponent = 3
 
 @onready var col = $Collision/CollisionShape3D
 
-var grid_size = 16
-var grid_extend = 0.5
+var grid_size: int = 8
+var grid_extend: float = 0.5
 
 
 
@@ -340,7 +339,7 @@ func generate():
 	self.mesh = rmesh
 	col.shape = rmesh.create_trimesh_shape()
 	print(Time.get_ticks_msec()-start)
-	
+
 
 var n = [Vector3(0,0,0),
 		Vector3(1,0,1),
