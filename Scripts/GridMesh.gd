@@ -439,7 +439,9 @@ func addVerts(x, y, z, surfTool, isolevel):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
 			surfTool.surface_set_normal(n)
-			var p = 4.0/grid_size*a + Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
+			var offset = Vector3(0,1.0/grid_size,0)
+			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
+			var p = 4.0/grid_size*a + offset
 			surfTool.surface_add_vertex (p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
