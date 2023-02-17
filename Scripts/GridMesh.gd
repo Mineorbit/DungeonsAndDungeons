@@ -439,7 +439,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
 			surfTool.surface_set_normal(n)
-			var offset = Vector3(0,1.0/grid_size,0)
+			var offset = Vector3(2.0/grid_size,1.0/grid_size,2.0/grid_size)
 			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 			var p = 4.0/grid_size*a + offset
 			surfTool.surface_add_vertex (p)
