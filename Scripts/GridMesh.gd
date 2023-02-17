@@ -300,22 +300,22 @@ var triTable = [
 
 
 
-var levelObjectId
 
 var surfacematerial
-
+var offset
 var centers = []
 func _ready():
 	surfacematerial = load("res://Assets/Materials/Floor.tres")
-	
-	transform.origin = Vector3(2.0/grid_size,(2.0+0.5)/grid_size,2.0/grid_size)
+	offset = Vector3i(transform.origin.x,transform.origin.y,transform.origin.z)
+	transform.origin += Vector3(0,(0.5)/grid_size,0)
 	#generate()
 
 var exponent = 3
 
 @onready var col = $Collision/CollisionShape3D
 
-var grid_size = 12
+var grid_size = 16
+var grid_extend = 0.5
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
@@ -327,9 +327,9 @@ func generate():
 	#surfTool.set_material(material)
 	surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	for x in range(grid_size*2):
-		for y in range(grid_size*2):
-			for z in range(grid_size*2):
+	for x in range(-1,grid_extend*grid_size*2 + 1):
+		for y in range(-1,grid_extend*grid_size*2 + 1):
+			for z in range(-1,grid_extend*grid_size*2 + 1):
 				addVerts( x, y, z, surfTool, isolevel)
 	surfTool.generate_normals()
 	rmesh = surfTool.commit()
@@ -344,11 +344,15 @@ var n = 1
 
 func getValue(x, y, z):
 	var result = 1
-	var gridpos = get_parent().get_grid_position(4.0/grid_size*Vector3(x,y,z))
-	var has_box = get_parent().get_at(gridpos) == levelObjectId
+	
+	for i in range(-1,2,2):
+			for k in range(-1,2,2):
+				var gridpos = get_parent().get_parent().get_grid_position(4.0/grid_size*Vector3(x+0.025*i,y,z+0.025*k))
+				var has_box = get_parent().get_parent().get_at(offset+gridpos) == get_parent().levelObjectId
 				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
-	if has_box:
-		result = 0
+				if has_box:
+					result = 0
+					return 0
 				
 				
 					#result = min(result,(gridpos-Vector3i(x,y,z)).length_squared()**2)
