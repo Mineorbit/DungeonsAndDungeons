@@ -120,7 +120,7 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed("RotateRight"):
 		selected_rotation = (selected_rotation + 1)%4
 	if Input.is_action_just_pressed("Place"):
-		Constants.World.level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation)
+		Constants.World.level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation,null,[],null,true)
 		on_levelobject_placed.emit()
 	if Input.is_action_just_pressed("Displace"):
 		if colliding:

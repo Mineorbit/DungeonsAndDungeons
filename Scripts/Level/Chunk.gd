@@ -44,12 +44,19 @@ func update_navigation():
 		get_parent().changedChunks = get_parent().changedChunks - 1
 
 
+func generate_grid():
+	for grid in cellGrids.get_children():
+		print(grid)
+		grid.generate()
 
-func add_tiled_level_object(pos,levelObjectData):
-	cellGrids.add_tiled_level_object(pos- global_transform.origin,levelObjectData)
+
+func add_tiled_level_object(pos,levelObjectData, generate = false):
+	cellGrids.add_tiled_level_object(pos - global_transform.origin,levelObjectData, generate)
+	change_in_chunk = true
 
 func remove_tiled_level_object(pos):
 	cellGrids.remove_tiled_level_object(pos - global_transform.origin)
+	change_in_chunk = true
 
 
 func get_level_objects():

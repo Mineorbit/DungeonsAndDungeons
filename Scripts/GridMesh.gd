@@ -317,6 +317,8 @@ var exponent = 3
 var grid_size = 16
 var grid_extend = 0.5
 
+
+
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
 	var start = Time.get_ticks_msec()
@@ -340,14 +342,15 @@ func generate():
 	print(Time.get_ticks_msec()-start)
 	
 
-var n = 1
+var n = [Vector3(0,0,0),Vector3(1,0,1),Vector3(1,0,-1),Vector3(-1,0,1),Vector3(-1,0,-1)]
+
+
 
 func getValue(x, y, z):
 	var result = 1
 	
-	for i in range(-1,2,2):
-			for k in range(-1,2,2):
-				var gridpos = get_parent().get_parent().get_grid_position(4.0/grid_size*Vector3(x+0.025*i,y,z+0.025*k))
+	for h in n:
+				var gridpos = get_parent().get_parent().get_grid_position(4.0/grid_size*(Vector3(x,y,z) + 0.025*h))
 				var has_box = get_parent().get_parent().get_at(offset+gridpos) == get_parent().levelObjectId
 				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 				if has_box:

@@ -260,8 +260,11 @@ func add_from_string(base_position,line):
 	var levelObjectData = Constants.LevelObjectData[id]
 	
 	var pos = Vector3(i,j,k)
-	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects,properties)
+	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects,properties, false)
 
+func generate_all_grids():
+	for c in chunks.values():
+		c.generate_grid()
 
 func _process(delta):
 	if toAdd.size() > 0:
@@ -299,7 +302,7 @@ var free_unique_instance_id = 0
 
 
 
-func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = [],properties = null):
+func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instance_id = null, connectedObjects = [],properties = null, generate = false):
 	
 	# this sets the table of maximum numbers at the start
 	if not numberOfPlacedLevelObjects.has(levelObjectData.levelObjectId):
@@ -316,7 +319,7 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 	changes = true
 	var pos = get_grid_position(position)
 	if(levelObjectData.tiled):
-		chunk.add_tiled_level_object(pos,levelObjectData)
+		chunk.add_tiled_level_object(pos,levelObjectData,generate)
 	else:
 		var new_level_object
 		if levelObjectData.interactive:
