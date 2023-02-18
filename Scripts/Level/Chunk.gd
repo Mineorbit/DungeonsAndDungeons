@@ -4,6 +4,13 @@ extends NavigationRegion3D
 # var a = 2
 # var b = "text"
 
+var level
+@onready var cellGrids = $CellGrids
+@onready var levelObjects = $LevelObjects
+
+
+var change_in_chunk = false
+
 class LevelObjectInstance:
 	var x = 0
 	var y = 0
@@ -22,12 +29,6 @@ class LevelObjectInstance:
 		return data
 
 
-var level
-@onready var cellGrids = $CellGrids
-@onready var levelObjects = $LevelObjects
-
-
-var change_in_chunk = false
 
 
 func update_navigation():

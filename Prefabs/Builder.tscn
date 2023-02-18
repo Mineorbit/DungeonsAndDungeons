@@ -56,4 +56,5 @@ current = true
 
 [node name="ExtraCursor" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, -1.73771)
+visible = false
 mesh = SubResource("SphereMesh_0qw1v")

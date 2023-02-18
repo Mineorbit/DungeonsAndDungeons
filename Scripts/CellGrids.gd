@@ -4,7 +4,7 @@ extends Node3D
 var gridmeshes = {}
 
 var grid: PackedInt32Array = []
-var grid_size = 8
+var grid_size = 12
 
 func _ready():
 	for i in range(grid_size):
@@ -43,20 +43,36 @@ func add_tiled_level_object(pos,levelObjectData, generate = false):
 	var grid_index = get_grid_index(gridpos)
 	grid[grid_index] = levelObjectData.levelObjectId
 	if generate:
-		grid_mesh.generate()
+		#get_parent().generate_grid()
+		start_generate_at(global_transform.origin+gridpos,levelObjectData.levelObjectId)
+
+
+func start_generate_at(pos,ulid):
+	for i in range(-1,2):
+		for j in range(-1,2):
+			for k in range(-1,2):
+				var n = Vector3(i,j,k)
+				var p = pos + n
+				var chunk = Constants.World.level.get_chunk(p)
+				if chunk != null:
+					#chunks.append(chunk)
+					chunk.cellGrids.start_generate_cell(p,ulid)
+
+func start_generate_cell(pos,ulid):
+	gridmeshes[ulid].queue_generate(pos)
 
 func get_grid_index(grid_position):
 	return grid_size*grid_size*grid_position.y+grid_size*grid_position.x+grid_position.z
 
 func remove_tiled_level_object(pos):
-	var grid_index = get_grid_index(get_grid_position(pos))
+	var grid_pos = get_grid_position(pos)
+	var grid_index = get_grid_index(grid_pos)
 	var oldid = grid[grid_index]
 	if oldid == -1:
 		return false
-	print(pos)
 	var grid_mesh = gridmeshes[oldid]
 	grid[grid_index] = -1
-	grid_mesh.generate()
+	start_generate_at(global_transform.origin+grid_pos,oldid)
 	return true
 
 

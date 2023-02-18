@@ -317,7 +317,7 @@ func _ready():
 
 @onready var col = $Collision/CollisionShape3D
 
-var grid_size: int = 16
+var grid_size: int = 8
 var grid_extend: float = 0.5
 
 # this is jank but is needed for grid borders between chunks
@@ -355,13 +355,13 @@ var n = [Vector3(0,0,0),
 func getValue(x, y, z):
 	var result = 1
 	for h in n:
-				var p = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
-				var has_box = par2.get_at(p) == par.levelObjectId
-				#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
-				if has_box:
-					#print(str(p)+" "+str(self))
-					result = 0
-					return 0
+		var p = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
+		var has_box = par2.get_at(p) == par.levelObjectId
+		#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
+		if has_box:
+			#print(str(p)+" "+str(self))
+			result = 0
+			return 0
 				
 				
 					#result = min(result,(gridpos-Vector3i(x,y,z)).length_squared()**2)
@@ -382,7 +382,7 @@ func vertexInterp(a, b, isolevel):
 	)
 
 func addVerts(x, y, z, surfTool, isolevel):
-	var value = 0
+	var value: int = 0
 	var grid = [
 		[x, y, z],
 		[x + 1, y, z],
@@ -393,7 +393,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 		[x + 1, y + 1, z + 1],
 		[x, y + 1, z + 1]
 	]
-	var check = 1
+	var check: int = 1
 	for i in range(8):
 		grid[i].append(getValue(grid[i][0], grid[i][1], grid[i][2]))
 		if grid[i][3] < isolevel:
@@ -439,7 +439,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
 			surfTool.surface_set_normal(n)
-			var offset = Vector3(2.0/grid_size,1.0/grid_size,2.0/grid_size)
+			var offset = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size)
 			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 			var p = 4.0/grid_size*a + offset
 			surfTool.surface_add_vertex (p)
