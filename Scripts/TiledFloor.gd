@@ -3,14 +3,34 @@ extends MeshInstance3D
 
 var levelObjectId
 
-var t
+var threads = []
+
 var generating = false
+
+var subgrid = {}
+var generating_at = {}
+
+func _ready():
+	for x in get_children():
+		print(x.name)
+		subgrid[x.name] = x
+		generating_at[x.name] = false
+
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():
-	print(global_transform.origin)
 	#later on should only regenerate those, whose neighbor changed
 	for x in get_children():
 		x.generate()
+
+func generate_for(x, force = false):
+	if not generating_at[x.name] or force:
+		generating_at[x.name] = true
+		var t = Thread.new()
+		t.start( func():
+			x.generate()
+			generating_at[x.name] = false
+		)
+	
 
 var generate_tasks = []
 
@@ -20,21 +40,25 @@ func queue_generate(pos):
 func start_generate(pos):
 	generating = true
 	print("Starting Generation")
-	t = Thread.new()
-	t.start( func():
-		generate()
-		generating = false
-	)
-	
+
+func get_subgrid(pos):
+	var local_pos = pos - global_transform.origin
+	var gridname = str(int(local_pos.x > 3))+str(int(local_pos.y > 3))+str(int(local_pos.z > 3))
+	#print(gridname)
+	#print(str(local_pos)+" "+str(global_transform.origin))
+	return subgrid[gridname]
 
 func _physics_process(delta):
 	if generate_tasks.size() > 0:
-		print(generate_tasks)
 		if not generating:
 			var pos = generate_tasks[0]
-			generate_tasks.remove_at(0)
-			start_generate(pos)
+			var x = get_subgrid(pos)
+			if not generating_at[x.name]:
+				generate_for(x)
+				generate_tasks.remove_at(0)
+			#start_generate(pos)
 
 func _exit_tree():
-	if t != null:
-		t.wait_to_finish()
+	pass
+	#if t != null:
+	#	t.wait_to_finish()

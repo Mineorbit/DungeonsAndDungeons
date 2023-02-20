@@ -7,25 +7,25 @@
 skeleton = NodePath("../..")
 script = ExtResource("1_olqco")
 
-[node name="SubGrid" parent="." instance=ExtResource("2_sh1lp")]
+[node name="000" parent="." instance=ExtResource("2_sh1lp")]
 
-[node name="SubGrid2" parent="." instance=ExtResource("2_sh1lp")]
+[node name="100" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="SubGrid3" parent="." instance=ExtResource("2_sh1lp")]
+[node name="001" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="SubGrid4" parent="." instance=ExtResource("2_sh1lp")]
+[node name="101" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 
-[node name="SubGrid5" parent="." instance=ExtResource("2_sh1lp")]
+[node name="010" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
-[node name="SubGrid6" parent="." instance=ExtResource("2_sh1lp")]
+[node name="110" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0)
 
-[node name="SubGrid7" parent="." instance=ExtResource("2_sh1lp")]
+[node name="011" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
 
-[node name="SubGrid8" parent="." instance=ExtResource("2_sh1lp")]
+[node name="111" parent="." instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4)
