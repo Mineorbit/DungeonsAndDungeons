@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/CellGrids.gd" id="2_2qd3d"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
+geometry_parsed_geometry_type = 1
 agent_radius = 0.1
 
 [node name="Chunk" type="NavigationRegion3D"]

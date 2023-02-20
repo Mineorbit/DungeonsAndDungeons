@@ -23,7 +23,7 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_y16lv"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sohj0"]
-graph_offset = Vector2(-329.141, 128.143)
+graph_offset = Vector2(-482.518, -9.09547)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ntspv")
 nodes/Animation/position = Vector2(-380, 280)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_r8x38")
@@ -53,10 +53,10 @@ properties/1/sync = true
 script = ExtResource("2_rgnqd")
 
 [node name="Skeleton3D" parent="Blog" index="0"]
-bones/0/position = Vector3(0, -0.0943185, 0)
+bones/0/position = Vector3(0, -0.000635907, 0)
 bones/1/rotation = Quaternion(0.71497, 7.08439e-06, 7.4151e-06, 0.699155)
-bones/2/rotation = Quaternion(-0.571857, -0.429141, -0.419648, 0.559208)
-bones/3/rotation = Quaternion(-0.580996, 0.459418, 0.349673, 0.57368)
+bones/2/rotation = Quaternion(-0.560911, -0.443352, -0.433546, 0.548504)
+bones/3/rotation = Quaternion(-0.561561, 0.445176, 0.42961, 0.549457)
 bones/5/rotation = Quaternion(0.574071, -0.3533, 0.287122, 0.680575)
 bones/6/rotation = Quaternion(-0.564777, 0.36292, 0.303041, 0.676374)
 bones/7/rotation = Quaternion(0.574071, 0.3533, -0.287122, 0.680575)

@@ -434,7 +434,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 		var d1 = vertlist[triTable[value][i + 1]] - vertlist[triTable[value][i + 0]]
 		var d2 = vertlist[triTable[value][i + 2]] - vertlist[triTable[value][i + 0]]
 		var n = d1.cross(d2)
-		n = n.normalized()
+		n = -n.normalized()
 		for j in range(0, 3):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))

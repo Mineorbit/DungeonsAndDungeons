@@ -164,7 +164,6 @@ func save():
 		var chunk_file = FileAccess.open(level_path+"/chunks/"+str(c), FileAccess.WRITE)
 		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
-			print(object)
 			chunk_file.store_line(object.serialize())
 
 
