@@ -343,7 +343,7 @@ func generate():
 	#rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = rmesh
 	col.shape = rmesh.create_trimesh_shape()
-	print(Time.get_ticks_msec()-start)
+	#print(Time.get_ticks_msec()-start)
 
 
 

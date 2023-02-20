@@ -1,16 +1,46 @@
 extends Node3D
-
 # this maps a unique levelobject id to a gridmesh
 var gridmeshes = {}
 
 var grid: PackedInt32Array = []
-var grid_size = 12
+var grid_size = 8
+
+class LevelObjectInstance:
+	var x = 0
+	var y = 0
+	var z = 0
+	var levelObjectData: LevelObjectData
+	func serialize():
+		var data = str(levelObjectData.levelObjectId)+"|"+str(x)+"|"+str(y)+"|"+str(z)
+		return data
+
+
 
 func _ready():
 	for i in range(grid_size):
 		for j in range(grid_size):
 			for k in range(grid_size):
 				grid.append(-1)
+
+
+func get_instances():
+	var instances = []
+	for i in range(grid_size):
+		for j in range(grid_size):
+			for k in range(grid_size):
+				var p = get_grid_position(Vector3(i,j,k))
+				var index = get_grid_index(p)
+				var levelObjectId = grid[index]
+				if levelObjectId == -1:
+					continue
+				var levelObjectData = Constants.LevelObjectData[levelObjectId]
+				var instance = LevelObjectInstance.new()
+				instance.x = i
+				instance.y = j
+				instance.z = k
+				instance.levelObjectData = levelObjectData
+				instances.append(instance)
+	return instances
 
 func get_at(world_position):
 	#print(world_position)

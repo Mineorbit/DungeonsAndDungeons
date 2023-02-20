@@ -164,6 +164,7 @@ func save():
 		var chunk_file = FileAccess.open(level_path+"/chunks/"+str(c), FileAccess.WRITE)
 		var levelObjects = chunk.get_level_object_instances()
 		for object in levelObjects:
+			print(object)
 			chunk_file.store_line(object.serialize())
 
 
@@ -227,7 +228,7 @@ func load(level_name, immediate = false, download_level = false):
 					line = file.get_line()
 				#close file access is automatically done
 			file_name = dir.get_next()
-		if immediate:	
+		if immediate:
 			print("Loaded level")
 			Signals.level_loaded.emit()
 	else:
@@ -241,7 +242,9 @@ func add_from_string(base_position,line):
 	var i = lineData[1].to_int()
 	var j = lineData[2].to_int()
 	var k = lineData[3].to_int()
-	var r = lineData[4].to_int()
+	var r = 0
+	if lineData.size() > 4:
+		r = lineData[4].to_int()
 	var instance_id = null
 	var connectedInteractiveObjects = null
 	var properties = null
@@ -352,7 +355,6 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 		new_level_object.levelObjectData = levelObjectData
 		# in future this should only be done in edit mode
 		
-		
 		var translation = Vector3.ZERO
 		if rotation == 1:
 			translation = Vector3(-1,0,0)
@@ -360,7 +362,6 @@ func add(levelObjectData: LevelObjectData, position,rotation = 0, unique_instanc
 			translation = Vector3(-1,0,-1)
 		if rotation == 3:
 			translation = Vector3(0,0,-1)
-		
 		
 		new_level_object.rotate(Vector3.UP,rotation*PI/2)
 		level_object_dupe.transform = level_object_dupe.transform.translated_local(translation)

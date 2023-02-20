@@ -105,8 +105,8 @@ func connect_interactive_objects(a, b):
 var selected_rotation = 0
 
 var editing = false
+
 func _process(delta) -> void:
-	
 	extracursor.global_transform.origin = Vector3(floor(cursor.global_transform.origin.x),floor(cursor.global_transform.origin.y),floor(cursor.global_transform.origin.z))
 	if Input.is_action_just_pressed("EditProperties"):
 		if not editing:

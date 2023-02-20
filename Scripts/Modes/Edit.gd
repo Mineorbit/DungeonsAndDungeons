@@ -52,7 +52,8 @@ func prepare_edit(name):
 		Constants.World.create_new_level()
 	else:
 		Constants.World.prepare_level()
-		Constants.World.level.load(name)
+		Constants.World.level.load(name,true)
+	print("Generating Grids")
 	Constants.World.level.generate_all_grids()
 
 var current_player = 0

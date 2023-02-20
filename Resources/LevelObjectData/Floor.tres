@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://cdseyl0j5ocik"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_indht"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_indht")
 name = "Floor"
 tiled = true
 interactive = false
-tileIndex = PackedInt32Array()
+tileIndex = []
 levelObjectId = 0
 maximumNumber = -1
 offset = Vector3(0, 0, 0)

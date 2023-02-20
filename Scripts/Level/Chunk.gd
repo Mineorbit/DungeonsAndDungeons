@@ -59,29 +59,13 @@ func remove_tiled_level_object(pos):
 func get_level_objects():
 	return levelObjects.get_children()
 
-func get_level_object_instance_of_cell(i,j,k,levelObjectInstances):
-	var instance = LevelObjectInstance.new()
-	var offset = Vector3(i,j,k)
-	var grid_position = level.get_grid_position(global_transform.origin+offset)
-	if not cellGrids.get_at(offset) == -1:
-		var levelObjectData = LevelObjectData.new()
-		#var levelObjectData = LevelObjectData.from_cell(get_tile_level_object(grid_position,gridMap),get_tile_level_object_orient(grid_position,gridMap))
-		instance.x = floor(grid_position.x - global_transform.origin.x)
-		instance.y = floor(grid_position.y - global_transform.origin.y)
-		instance.z = floor(grid_position.z - global_transform.origin.z)
-		#does instance.rotation need to be set here?
-		instance.levelObjectData = levelObjectData
-		levelObjectInstances.append(instance)
 
 
 func get_level_object_instances():
 	var levelObjectInstances = []
 	# get level objects of levelGridMap
 	
-	for i in range(8):
-		for j in range(8):
-			for k in range(8):
-				get_level_object_instance_of_cell(i,j,k,levelObjectInstances)
+	levelObjectInstances += cellGrids.get_instances()
 	
 	for n in get_level_objects():
 		var instance = LevelObjectInstance.new()
