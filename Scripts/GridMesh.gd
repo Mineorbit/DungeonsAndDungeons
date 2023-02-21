@@ -307,7 +307,7 @@ var par
 var par2
 
 func _ready():
-	par = get_parent()
+	par = get_parent().get_parent()
 	par2 = par.get_parent()
 	#global_transform.origin = -Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 	surfacematerial = load("res://Assets/Materials/Floor.tres")

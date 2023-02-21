@@ -9,17 +9,21 @@ var generating = false
 
 var subgrid = {}
 var generating_at = {}
+@onready var subgrids = $Subgrids
+@onready var previewmesh = $Preview
 
 func _ready():
-	for x in get_children():
-		print(x.name)
+	if get_parent().get("display") == null:
+		print("REMOVING FOR "+str(get_parent()))
+		remove_child(previewmesh)
+	for x in subgrids.get_children():
 		subgrid[x.name] = x
 		generating_at[x.name] = false
 
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():
 	#later on should only regenerate those, whose neighbor changed
-	for x in get_children():
+	for x in subgrids.get_children():
 		x.generate()
 
 func generate_for(x, force = false):
