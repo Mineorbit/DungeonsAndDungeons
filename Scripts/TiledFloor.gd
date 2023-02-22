@@ -10,11 +10,12 @@ var generating = false
 var subgrid = {}
 var generating_at = {}
 @onready var subgrids = $Subgrids
-@onready var previewmesh = $Preview
+var previewmesh
 
 func _ready():
+	previewmesh = get_node("0")
 	if get_parent().get("display") == null:
-		print("REMOVING FOR "+str(get_parent()))
+		previewmesh.hide()
 		remove_child(previewmesh)
 	for x in subgrids.get_children():
 		subgrid[x.name] = x
