@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://x222g4oy75j2"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Button.gd" id="1_yef3v"]
+[ext_resource type="PackedScene" uid="uid://cexvql23l21mx" path="res://Prefabs/Models/LevelObjects/Interactive/ButtonModel.tscn" id="2_to70t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0jiq4"]
+size = Vector3(1, 0.125, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gs4tu"]
+
+[node name="Button" type="Node3D"]
+script = ExtResource("1_yef3v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, 0)
+shape = SubResource("BoxShape3D_0jiq4")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.590625, 0)
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_gs4tu")
+
+[node name="Model" parent="." instance=ExtResource("2_to70t")]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)

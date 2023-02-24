@@ -32,15 +32,15 @@ func _ready():
 	builder.global_transform.origin = Vector3(0,5,0)
 	enter_edit_mode()
 	Constants.World.game_won.connect(enter_edit_mode)
-	Constants.World.players.player_removed.connect(func(player):
-		if Constants.currentMode == 2 and player.id == current_player:
-			next_player())
 
 
 func next_player():
 		current_player = (current_player + 1) % 4
-		while Players.get_player(current_player) == null:
+		# can only look 4 times else there is no player
+		var count = 0
+		while Players.get_player(current_player) == null and count < 4:
 			current_player = (current_player + 1) % 4
+			count = count + 1
 		Players.playerControllers.set_current_player(current_player)
 		PlayerCamera.player = Players.get_player(current_player)
 
@@ -120,6 +120,10 @@ func enter_test_mode():
 	add_child(playerhud)
 	add_child(testhud)
 	Players.set_start_positions()
+	for player in Players.get_players():
+		player.tree_exited.connect(func():
+			if Constants.currentMode == 2 and player.id == current_player:
+				next_player())
 	Players.playerControllers.set_current_player(current_player)
 	PlayerCamera.player = Players.get_player(current_player)
 	#buildmusic.stop()

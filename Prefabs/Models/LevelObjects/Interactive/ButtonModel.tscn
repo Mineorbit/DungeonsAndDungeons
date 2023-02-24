@@ -1,0 +1,46 @@
+[gd_scene load_steps=12 format=3 uid="uid://cexvql23l21mx"]
+
+[ext_resource type="PackedScene" uid="uid://dbblc2r38ma1h" path="res://Assets/Models/LevelObjects/Interactive/button.blend" id="1_082yk"]
+[ext_resource type="Script" path="res://Scripts/SwitchingModel.gd" id="2_dgshe"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bss6k"]
+animation = &"Switch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5cwxv"]
+animation = &"SwitchBack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d8bxg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g6y6q"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6a02x"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e6vud"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fwfvb"]
+states/Switch/node = SubResource("AnimationNodeAnimation_bss6k")
+states/Switch/position = Vector2(405, 100)
+states/SwitchBack/node = SubResource("AnimationNodeAnimation_5cwxv")
+states/SwitchBack/position = Vector2(646, 100)
+transitions = ["Start", "Switch", SubResource("AnimationNodeStateMachineTransition_d8bxg"), "Switch", "SwitchBack", SubResource("AnimationNodeStateMachineTransition_g6y6q"), "SwitchBack", "End", SubResource("AnimationNodeStateMachineTransition_6a02x"), "SwitchBack", "Switch", SubResource("AnimationNodeStateMachineTransition_e6vud")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_is3ox"]
+graph_offset = Vector2(-210, 110)
+nodes/fsm/node = SubResource("AnimationNodeStateMachine_fwfvb")
+nodes/fsm/position = Vector2(80, 160)
+node_connections = [&"output", 0, &"fsm"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_xtk7s"]
+
+[node name="ButtonModel" instance=ExtResource("1_082yk")]
+script = ExtResource("2_dgshe")
+
+[node name="Skeleton3D" parent="SwitchHandle" index="0"]
+bones/0/position = Vector3(0, 0.1, 0)
+bones/0/scale = Vector3(1, 0.3, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeBlendTree_is3ox")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/fsm/playback = SubResource("AnimationNodeStateMachinePlayback_xtk7s")

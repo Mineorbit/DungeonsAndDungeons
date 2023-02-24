@@ -42,6 +42,8 @@ func despawn_players():
 	for i in range(4):
 		despawn_player(i)
 
+func get_players():
+	return playerEntities.get_children()
 
 func spawn_players():
 	for i in range(4):

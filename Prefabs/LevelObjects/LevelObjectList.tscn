@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=18 format=3 uid="uid://bpqrsbwd745am"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
 [ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ku4vnqtrapbb" path="res://Prefabs/LevelObjects/Interactive/Spike.tscn" id="14_xr7yj"]
 [ext_resource type="PackedScene" uid="uid://cmmdkxfrlsyrm" path="res://Prefabs/LevelObjects/Interactive/AndGate.tscn" id="15_q7a3p"]
 [ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="16_rtp0j"]
+[ext_resource type="PackedScene" uid="uid://x222g4oy75j2" path="res://Prefabs/LevelObjects/Interactive/Button.tscn" id="17_7rrjf"]
 [ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="17_qq23b"]
 
 [node name="LevelObjectList" type="Node3D"]
@@ -64,3 +65,5 @@ local_id = 3
 [node name="Ladder" parent="." instance=ExtResource("16_rtp0j")]
 
 [node name="Sign" parent="." instance=ExtResource("17_qq23b")]
+
+[node name="Button" parent="." instance=ExtResource("17_7rrjf")]

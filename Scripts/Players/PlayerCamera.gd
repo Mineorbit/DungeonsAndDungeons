@@ -10,19 +10,26 @@ extends Node3D
 		return player
 	set(value):
 		player = value
+		print("PLAYER "+str(player))
 		if value == null:
 			Camera.current = false
 			player_to_follow_exists = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
+			print("TEST "+str(player))
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Camera.current = true
 			player_to_follow_exists = true
 			update_camera_target_position()
 			update_camera_rigging(0)
 			_move_camera()
-			player.on_entity_remove.connect(func():player_to_follow_exists = false)
-			player.on_entity_despawn.connect(func():player_to_follow_exists = false)
+			player.tree_exited.connect(func():
+				print("AHOI")
+				if player == null:
+					player_to_follow_exists = false
+				)
+			#player.on_entity_remove.connect(func():player_to_follow_exists = false)
+			#player.on_entity_despawn.connect(func():player_to_follow_exists = false)
 			player.on_entity_aiming.connect(ChangeMovementState)
 
 var player_to_follow_exists = false

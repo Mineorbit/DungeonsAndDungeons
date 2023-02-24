@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://datoydqwb1c4d"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_d27qg"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_d27qg")
 name = "PlayerSpawnGreen"
 tiled = false
 interactive = false
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 11
 maximumNumber = 1
 offset = Vector3(0.5, 0.5, 0.5)
