@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_ir2m7"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_l6dmf"]
 
 [resource]
-script = ExtResource("1_ir2m7")
+script = ExtResource("1_l6dmf")
 name = "Lever"
 tiled = false
 interactive = true
 tileIndex = PackedInt32Array()
-levelObjectId = 3
+levelObjectId = 2
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)
 construction_collision_offset = Vector3(0, 0, 0)

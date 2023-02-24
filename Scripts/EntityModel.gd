@@ -9,7 +9,7 @@ class_name EntityModel
 var has_swim = false
 
 
-var lastpos
+var lastpos = Vector3.ZERO
 
 
 var speed = 0
@@ -45,6 +45,7 @@ func _physics_process(delta):
 	speed_pos.y = 0
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
-	anim_tree["parameters/swim_speed/blend_amount"] = speed*16*get_parent().move_direction.length()
+	if "parameters/swim_speed/blend_amount" in anim_tree:
+		anim_tree["parameters/swim_speed/blend_amount"] = speed*16*get_parent().move_direction.length()
 	anim_tree["parameters/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
 	

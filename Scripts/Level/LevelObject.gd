@@ -54,8 +54,10 @@ func decode_properties(properties):
 
 func on_mode_change():
 	if Constants.currentMode == 1:
+		pass
 		add_child(construction_collision)
 	else:
+		pass
 		remove_child(construction_collision)
 
 func to_instance(instance):

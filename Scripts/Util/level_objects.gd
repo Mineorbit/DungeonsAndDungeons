@@ -29,9 +29,7 @@ func _ready():
 	hide()
 
 func setup_resources():
-	var meshlibrary = MeshLibrary.new()
 	var unique_id = 0
-	var meshlibrary_id = 0
 	for levelobject in LevelObjectList.get_children():
 		var is_tiled = false
 		var levelobjectname = str(levelobject.name)
@@ -52,28 +50,4 @@ func setup_resources():
 		Constants.LevelObjectData[unique_id] = new_res
 		unique_id = unique_id + 1
 		#Constants.numberOfPlacedLevelObjects[new_res.levelObjectId] = 0
-		if is_tiled:
-			# allways build Tile Index from scratch
-			new_res.tileIndex = []
-			print(levelobject.get_children())
-			var num_of_tiles = 0
-			var local_mesh_library_id = meshlibrary_id
-			var i = 0
-			for x in range(levelobject.get_child_count()):
-				var child = levelobject.get_node(str(x))
-				var id = local_mesh_library_id + child.name.to_int()
-				# this should be replaced with an array
-				new_res.tileIndex.append(id)
-				meshlibrary.create_item(id)
-				meshlibrary.set_item_mesh(id,child.get_mesh())
-				var new_transform = child.transform
-				new_transform.origin = Vector3.ZERO
-				meshlibrary.set_item_mesh_transform(id,new_transform)
-				if child.get_child(0) != null:
-					meshlibrary.set_item_shapes(id,[child.get_child(0).get_child(0).shape,child.get_child(0).get_child(0).transform])
-				i = i + 1
-			meshlibrary_id = local_mesh_library_id + i
-
-			
 		ResourceSaver.save(new_res, path)
-	ResourceSaver.save(meshlibrary,"res://Resources/grid.tres")

@@ -60,11 +60,12 @@ var materials = []
 
 
 func _ready():
-	var mesh_library = load("res://Resources/grid.tres")
-	for index in Constants.Water.tileIndex:
-		if mesh_library.get_item_mesh(index) != null:
-			var mat = mesh_library.get_item_mesh(index).surface_get_material(0)
-			materials.append(mat)
+	pass
+	#var mesh_library = load("res://Resources/grid.tres")
+	#for index in Constants.Water.tileIndex:
+	#	if mesh_library.get_item_mesh(index) != null:
+	#		var mat = mesh_library.get_item_mesh(index).surface_get_material(0)
+	#		materials.append(mat)
 
 func _process(delta):
 	t += delta

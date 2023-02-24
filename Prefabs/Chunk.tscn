@@ -1,27 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://1i3w0tti58x8"]
+[gd_scene load_steps=4 format=3 uid="uid://6oouqvjxe6m8"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Chunk.gd" id="1"]
-[ext_resource type="MeshLibrary" uid="uid://dcxeig54s83fo" path="res://Resources/grid.tres" id="5_i7m7q"]
+[ext_resource type="Script" path="res://Scripts/CellGrids.gd" id="2_2qd3d"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
+geometry_parsed_geometry_type = 1
 agent_radius = 0.1
 
 [node name="Chunk" type="NavigationRegion3D"]
 navigation_mesh = SubResource("NavigationMesh_abs6g")
 script = ExtResource("1")
 
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("5_i7m7q")
-cell_size = Vector3(1, 1, 1)
-metadata/_editor_floor_ = Vector3(0, 0, 0)
-
 [node name="LevelObjects" type="Node3D" parent="."]
 
-[node name="mesh" type="MeshInstance3D" parent="."]
-
-[node name="WaterGridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("5_i7m7q")
-cell_size = Vector3(1, 1, 1)
-collision_layer = 128
-collision_mask = 128
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="CellGrids" type="Node3D" parent="."]
+script = ExtResource("2_2qd3d")

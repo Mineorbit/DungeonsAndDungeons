@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_jye7q"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_e1233"]
 
 [resource]
-script = ExtResource("1_jye7q")
+script = ExtResource("1_e1233")
 name = "Torch"
 tiled = false
 interactive = false
 tileIndex = PackedInt32Array()
-levelObjectId = 14
+levelObjectId = 13
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)
 construction_collision_offset = Vector3(0, 0, 0)

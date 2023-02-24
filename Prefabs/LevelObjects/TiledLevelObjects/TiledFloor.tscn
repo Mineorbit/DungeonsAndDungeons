@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjxtji6tau8ti"]
+
+[ext_resource type="Script" path="res://Scripts/TiledFloor.gd" id="1_olqco"]
+[ext_resource type="Material" uid="uid://r7jwhno6nawy" path="res://Assets/Materials/Floor.tres" id="2_einmk"]
+[ext_resource type="PackedScene" uid="uid://b76bebu6pubwh" path="res://Prefabs/SubGrid.tscn" id="2_sh1lp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_78uxd"]
+material = ExtResource("2_einmk")
+
+[node name="TiledFloor" type="MeshInstance3D"]
+skeleton = NodePath("../..")
+script = ExtResource("1_olqco")
+
+[node name="0" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_78uxd")
+
+[node name="Subgrids" type="Node3D" parent="."]
+
+[node name="000" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+skeleton = NodePath("../..")
+
+[node name="100" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="001" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="101" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="010" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+skeleton = NodePath("../..")
+
+[node name="110" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0)
+skeleton = NodePath("../..")
+
+[node name="011" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
+skeleton = NodePath("../..")
+
+[node name="111" parent="Subgrids" instance=ExtResource("2_sh1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4)
+skeleton = NodePath("../..")

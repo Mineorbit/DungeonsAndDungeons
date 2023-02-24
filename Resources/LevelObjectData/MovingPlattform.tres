@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_iwwrj"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_wxnj3"]
 
 [resource]
-script = ExtResource("1_iwwrj")
+script = ExtResource("1_wxnj3")
 name = "MovingPlattform"
 tiled = false
 interactive = false
 tileIndex = PackedInt32Array()
-levelObjectId = 4
+levelObjectId = 3
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)
 construction_collision_offset = Vector3(0, 0, 0)

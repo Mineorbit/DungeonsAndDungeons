@@ -21,6 +21,7 @@ var smallest_dist = 1
 var selection = 0
 var start_object
 var closestIndex = 0
+@onready var extracursor = $ExtraCursor
 @onready var camera = $BuilderCamera
 signal on_levelobject_placed
 signal on_levelobject_displaced
@@ -104,8 +105,9 @@ func connect_interactive_objects(a, b):
 var selected_rotation = 0
 
 var editing = false
+
 func _process(delta) -> void:
-	
+	extracursor.global_transform.origin = Vector3(floor(cursor.global_transform.origin.x),floor(cursor.global_transform.origin.y),floor(cursor.global_transform.origin.z))
 	if Input.is_action_just_pressed("EditProperties"):
 		if not editing:
 			var to_edit = get_collided_level_object()
@@ -120,7 +122,7 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed("RotateRight"):
 		selected_rotation = (selected_rotation + 1)%4
 	if Input.is_action_just_pressed("Place"):
-		Constants.World.level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation)
+		Constants.World.level.add(Constants.LevelObjectData[selection],cursor.get_global_transform().origin,selected_rotation,null,[],null,true)
 		on_levelobject_placed.emit()
 	if Input.is_action_just_pressed("Displace"):
 		if colliding:
