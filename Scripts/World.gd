@@ -18,6 +18,7 @@ func start(levelpath = null,immediate = false,download_level = false):
 	prepare_level()
 	if levelpath != null:
 		await level.load(levelpath,immediate,download_level)
+		level.generate_all_grids()
 	await level.start()
 	
 

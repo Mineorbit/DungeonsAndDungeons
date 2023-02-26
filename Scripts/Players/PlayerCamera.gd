@@ -16,7 +16,6 @@ extends Node3D
 			player_to_follow_exists = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
-			print("TEST "+str(player))
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Camera.current = true
 			player_to_follow_exists = true
