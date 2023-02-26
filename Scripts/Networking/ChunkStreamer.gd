@@ -20,7 +20,10 @@ func add_from_function(data):
 	data.erase(base_position)
 	base_position *= 8
 	for object in data:
-		objects.append([base_position,object])
+		Constants.World.level.add_from_string(base_position,object)
+		#objects.append([base_position,object])
+	var chunk = Constants.World.level.get_chunk(base_position)
+	chunk.generate_grid()
 
 func _process(delta):
 	if Constants.World.level != null:

@@ -23,7 +23,7 @@ extends Node3D
 			update_camera_rigging(0)
 			_move_camera()
 			player.tree_exited.connect(func():
-				print("AHOI")
+				print(str(Constants.id)+" AHOI")
 				if player == null:
 					player_to_follow_exists = false
 				)
