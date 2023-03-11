@@ -30,7 +30,7 @@
 
 extends MeshInstance3D
 
-@export var isolevel: float
+@export var isolevel: float = 0.6
 
 var edgeTable = [
 0x0	, 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
@@ -327,7 +327,9 @@ var triTable = [
 
 
 
-var surfacematerial
+@export var surfacematerial: Material
+
+@export_flags_3d_physics var collision
 var centers = []
 var par
 var par2
@@ -336,12 +338,11 @@ func _ready():
 	par = get_parent().get_parent()
 	par2 = par.get_parent()
 	#global_transform.origin = -Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
-	surfacematerial = load("res://Assets/Materials/Floor.tres")
 	#transform.origin += Vector3(0,,0)
 	#generate()
 
-
-@onready var col = $Collision/CollisionShape3D
+@onready var staticbody: StaticBody3D = $Collision
+@onready var col: CollisionShape3D = $Collision/CollisionShape3D
 
 var grid_size: int = 8
 var grid_extend: float = 0.5
@@ -351,8 +352,6 @@ var border = 2
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
-	var start = Time.get_ticks_msec()
-	isolevel = 0.6
 	
 	var rmesh = ImmediateMesh.new()
 	rmesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES,surfacematerial)
@@ -369,6 +368,8 @@ func generate():
 	#rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = rmesh
 	col.shape = rmesh.create_trimesh_shape()
+	staticbody.collision_mask = collision
+	staticbody.collision_layer = collision
 	#print(Time.get_ticks_msec()-start)
 
 

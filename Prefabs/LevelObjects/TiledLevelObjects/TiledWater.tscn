@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://yq5h51sbr22u"]
+
+[ext_resource type="Script" path="res://Scripts/TiledFloor.gd" id="1_0gy63"]
+[ext_resource type="Material" uid="uid://xeth77b5bjw7" path="res://Assets/Materials/Water.tres" id="2_u1f8c"]
+[ext_resource type="PackedScene" uid="uid://b76bebu6pubwh" path="res://Prefabs/SubGrid.tscn" id="3_tqqpc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_78uxd"]
+material = ExtResource("2_u1f8c")
+
+[node name="TiledWater" type="MeshInstance3D"]
+skeleton = NodePath("../..")
+script = ExtResource("1_0gy63")
+
+[node name="0" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_78uxd")
+
+[node name="Subgrids" type="Node3D" parent="."]
+
+[node name="000" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="100" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="001" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="101" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="010" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="110" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="011" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128
+
+[node name="111" parent="Subgrids" instance=ExtResource("3_tqqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4)
+skeleton = NodePath("../..")
+isolevel = 0.8
+surfacematerial = ExtResource("2_u1f8c")
+collision = 128

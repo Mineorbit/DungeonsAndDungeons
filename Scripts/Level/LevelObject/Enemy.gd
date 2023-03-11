@@ -52,6 +52,12 @@ func auto_navigate(delta):
 	super._physics_process(delta)
 	navAgent.set_velocity(_velocity)
 
+
+
+func on_navigation_velocity_computed(safe_velocity):
+	move_direction = safe_velocity
+
+
 func remove():
 	#target.queue_free()
 	super.remove()

@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_i2gwp"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_y0qlf"]
 
 [resource]
-script = ExtResource("1_i2gwp")
-name = "Button"
-tiled = false
-interactive = true
+script = ExtResource("1_y0qlf")
+name = "Water"
+tiled = true
+interactive = false
 tileIndex = PackedInt32Array()
-levelObjectId = 18
+levelObjectId = 19
 maximumNumber = -1
-offset = Vector3(0.5, 0, 0.5)
+offset = Vector3(0, 0, 0)
 construction_collision_offset = Vector3(0, 0, 0)
 construction_collision_scale = Vector3(1, 1, 1)
 display_offset = Vector3(0, 0, 0)

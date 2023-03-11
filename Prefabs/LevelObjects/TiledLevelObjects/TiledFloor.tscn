@@ -18,31 +18,47 @@ mesh = SubResource("BoxMesh_78uxd")
 
 [node name="000" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="100" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="001" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="101" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="010" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="110" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="011" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1
 
 [node name="111" parent="Subgrids" instance=ExtResource("2_sh1lp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4)
 skeleton = NodePath("../..")
+surfacematerial = ExtResource("2_einmk")
+collision = 1

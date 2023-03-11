@@ -37,6 +37,7 @@ shape = SubResource("SphereShape3D_xuwxo")
 path_desired_distance = 0.84
 path_max_distance = 12.9
 navigation_layers = 3
+avoidance_enabled = true
 max_speed = 5.0
 ignore_y = false
 
@@ -74,3 +75,4 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_f5r85")
 
 [connection signal="on_entity_melee_strike" from="." to="Model" method="StrikeAnimation"]
+[connection signal="velocity_computed" from="Navigation" to="." method="on_navigation_velocity_computed"]
