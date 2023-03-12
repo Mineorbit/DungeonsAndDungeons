@@ -24,8 +24,10 @@ var neighbors = [Vector3(0,1,0),
 
 @onready var collisionshape = $Collision
 
-# regenerate mesh at position where stuff changed / in worst case the location can be ignored
-func generate():
+var building = false
+
+func rebuild_mesh():
+	building = true
 	var surfaceTool = SurfaceTool.new()
 	
 	for n in collisionshape.get_children():
@@ -140,8 +142,12 @@ func generate():
 	var mesh = surfaceTool.commit()
 	gridmesh.mesh = mesh
 	gridmesh.set_surface_override_material(0,surfacematerial)
+	
+	building = false
 	#collisionshape.shape = mesh.create_trimesh_shape()
-
+# regenerate mesh at position where stuff changed / in worst case the location can be ignored
+func generate():
+	rebuild_mesh()
 
 func queue_generate(p):
 	generate()

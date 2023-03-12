@@ -13,6 +13,7 @@ var max_health := 100
 @export var speed: float = 5
 @export var can_climb: bool = false
 @export var climb_velocity: float = 1
+@export var buoyancy: float = 0.8
 
 var turnAngle := 0.2
 var kickbackTime = 2
@@ -49,8 +50,11 @@ var last_floor = false
 var can_shoot = false
 
 
+
 # The name of the Model of an entity should allways be named Model
 @onready var model = $Model
+
+
 
 
 @onready var meleehitarea = $MeleeHitArea
@@ -222,8 +226,9 @@ func _physics_process(delta: float) -> void:
 		climbing = true
 	
 	if in_swim_area:
+		_velocity.y += buoyancy*delta
 		if is_jumping:
-			_velocity.y = waterSpeed
+			_velocity.y += waterSpeed
 		else:
 			pass
 			#_velocity.y = max(_velocity.y,-waterSpeed)
