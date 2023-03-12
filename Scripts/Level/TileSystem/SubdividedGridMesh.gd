@@ -11,6 +11,11 @@ var threads = []
 
 var generating = false
 
+@export var surfacematerial: Material
+
+@export_flags_3d_physics var collision
+
+
 var subgrid = {}
 var generating_at = {}
 @onready var subgrids = $Subgrids

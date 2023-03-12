@@ -19,5 +19,3 @@ mesh = SubResource("BoxMesh_78uxd")
 [node name="Collision" type="StaticBody3D" parent="."]
 collision_layer = 128
 collision_mask = 128
-
-[node name="CollisionShape" type="CollisionShape3D" parent="Collision"]

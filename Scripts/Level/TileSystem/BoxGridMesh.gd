@@ -22,17 +22,25 @@ func _ready():
 var neighbors = [Vector3(0,1,0),
 				Vector3(0,-1,0)]
 
-@onready var collisionshape = $Collision/CollisionShape
+@onready var collisionshape = $Collision
 
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():
 	var surfaceTool = SurfaceTool.new()
+	
+	for n in collisionshape.get_children():
+		collisionshape.remove_child(n)
+		n.queue_free()
 	surfaceTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for x in range(8):
 		for y in range(8):
 			for z in range(8):
 				var p = global_transform.origin + Vector3(x,y,z)
 				if get_parent().get_at(p) == levelObjectId:
+					var box_col = CollisionShape3D.new()
+					box_col.shape = BoxShape3D.new()
+					box_col.position = Vector3(x+0.5,y+0.5,z+0.5)
+					collisionshape.add_child(box_col)
 					#top face
 					if get_parent().get_at(p+Vector3(0,1,0)) != levelObjectId:
 						surfaceTool.set_normal(Vector3(0,1,0))
@@ -131,11 +139,8 @@ func generate():
 	surfaceTool.generate_tangents()
 	var mesh = surfaceTool.commit()
 	gridmesh.mesh = mesh
-	#gridmesh.set_surface_override_material(0,surfacematerial)
+	gridmesh.set_surface_override_material(0,surfacematerial)
 	#collisionshape.shape = mesh.create_trimesh_shape()
-	var shape = mesh.create_trimesh_shape()
-	#shape.backface_collision = true
-	collisionshape.shape = shape
 
 
 func queue_generate(p):
