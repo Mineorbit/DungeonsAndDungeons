@@ -373,24 +373,20 @@ func generate():
 
 
 
-var n = [Vector3(0,0,0),
-		]
-		
 
 func getValue(x, y, z):
 	var result = 1
-	for h in n:
-		var p = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
-		var has_box = par2.get_at(p) == par.levelObjectId
+	var p = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
+	var has_box = par2.get_at(p) == par.levelObjectId
 		#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
-		if has_box:
+	if has_box:
 			#print(str(p)+" "+str(self))
-			result = 0
-			return 0
+		result = 0
+		return 0
 				
 				
 					#result = min(result,(gridpos-Vector3i(x,y,z)).length_squared()**2)
-	return  max(0.6,result)
+	return result
 	
 func vertexInterp(a, b, isolevel):
 	if abs(isolevel - a[3]) < 0.00001:

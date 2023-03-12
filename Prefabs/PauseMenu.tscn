@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://ddotkeero4nrq"]
 
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="1_l1uhx"]
 [ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="1_vlxht"]
+[ext_resource type="Script" path="res://Scripts/UI/OptionsMenu.gd" id="3_81hcf"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -19,7 +20,7 @@ grow_vertical = 2
 theme = ExtResource("1_vlxht")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.1
 anchor_top = 0.1
 anchor_right = 0.9
@@ -29,36 +30,80 @@ grow_vertical = 2
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
-offset_top = 73.0
-offset_right = 368.0
-offset_bottom = 136.0
+layout_mode = 2
 theme_override_constants/margin_bottom = 32
 
 [node name="Close" type="Button" parent="Menu/VBoxContainer/MarginContainer"]
-offset_right = 368.0
-offset_bottom = 31.0
+layout_mode = 2
 text = "Close"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Menu/VBoxContainer"]
-offset_top = 140.0
-offset_right = 368.0
-offset_bottom = 203.0
+layout_mode = 2
 theme_override_constants/margin_bottom = 32
 
 [node name="Options" type="Button" parent="Menu/VBoxContainer/MarginContainer2"]
-offset_right = 368.0
-offset_bottom = 31.0
+layout_mode = 2
 text = "Options"
 
 [node name="MarginContainer3" type="MarginContainer" parent="Menu/VBoxContainer"]
-offset_top = 207.0
-offset_right = 368.0
-offset_bottom = 238.0
+layout_mode = 2
 
 [node name="MainMenu" type="Button" parent="Menu/VBoxContainer/MarginContainer3"]
-offset_right = 368.0
-offset_bottom = 31.0
+layout_mode = 2
 text = "Back to Main Menu"
+
+[node name="CenterContainer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CenterContainer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -115.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Close"
+
+[node name="OptionsMenu" type="TabContainer" parent="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_81hcf")
+
+[node name="General" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+layout_mode = 2
+
+[node name="Video" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+visible = false
+layout_mode = 2
+
+[node name="Resolution" type="Label" parent="CenterContainer/OptionsMenu/Video"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="CenterContainer/OptionsMenu/Video"]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Test"
+popup/item_0/id = 0
+popup/item_1/text = "Test2"
+popup/item_1/id = 1
+
+[node name="Audio" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/OptionsMenu/Audio"]
+layout_mode = 2
+text = "Main Volume"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/OptionsMenu/Audio"]
+layout_mode = 2
+
+[node name="Input" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+visible = false
+layout_mode = 2
 
 [connection signal="pressed" from="Menu/VBoxContainer/MarginContainer/Close" to="." method="unpause"]
 [connection signal="pressed" from="Menu/VBoxContainer/MarginContainer3/MainMenu" to="." method="exit_to_main_menu"]
