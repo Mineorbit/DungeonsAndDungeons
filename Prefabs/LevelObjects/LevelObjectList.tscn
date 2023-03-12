@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
 [ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
-[ext_resource type="PackedScene" uid="uid://cjxtji6tau8ti" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledFloor.tscn" id="2_sf4hp"]
+[ext_resource type="PackedScene" uid="uid://dxy34lopfi1j1" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledFloor.tscn" id="2_sf4hp"]
 [ext_resource type="PackedScene" uid="uid://dugp2bkorh4g" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="3_kq8kr"]
 [ext_resource type="PackedScene" uid="uid://djyftwsvbthiy" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="4_8hky4"]
 [ext_resource type="PackedScene" uid="uid://c1iw5d7te4wr" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="5_hgr8h"]
@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="16_rtp0j"]
 [ext_resource type="PackedScene" uid="uid://x222g4oy75j2" path="res://Prefabs/LevelObjects/Interactive/Button.tscn" id="17_7rrjf"]
 [ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="17_qq23b"]
-[ext_resource type="PackedScene" uid="uid://yq5h51sbr22u" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledWater.tscn" id="18_klvl0"]
+[ext_resource type="PackedScene" uid="uid://wfj2i28vjum3" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledWater.tscn" id="18_klvl0"]
 
 [node name="LevelObjectList" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)

@@ -68,6 +68,7 @@ func add_tiled_level_object(pos,levelObjectData, generate = false):
 		add_child(grid_object)
 		grid_object.levelObjectId = levelObjectData.levelObjectId
 		gridmeshes[levelObjectData.levelObjectId] = grid_object
+		print("Added "+str(grid_object)+" "+str(levelObjectData.levelObjectId))
 	var grid_mesh = gridmeshes[levelObjectData.levelObjectId]
 	var gridpos = get_grid_position(pos)
 	var grid_index = get_grid_index(gridpos)
@@ -89,7 +90,10 @@ func start_generate_at(pos,ulid):
 					chunk.cellGrids.start_generate_cell(p,ulid)
 
 func start_generate_cell(pos,ulid):
-	gridmeshes[ulid].queue_generate(pos)
+	if ulid in gridmeshes:
+		gridmeshes[ulid].queue_generate(pos)
+	else:
+		print("There is no Grid for "+str(pos)+" in "+str(self))
 
 func get_grid_index(grid_position):
 	return grid_size*grid_size*grid_position.y+grid_size*grid_position.x+grid_position.z

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5uqm8dv4mpjf"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://Editor/bevel_test.gd" id="1_xuvbu"]
 [ext_resource type="Script" path="res://Editor/Camera3D.gd" id="2_meurb"]
 [ext_resource type="Texture2D" uid="uid://cleuxq8emorin" path="res://Assets/Textures/floor.png" id="3_v8mkh"]
-[ext_resource type="Script" path="res://Scripts/GridMesh.gd" id="4_r4a2m"]
+[ext_resource type="Script" path="res://Scripts/Level/TileSystem/VoxelGridMesh.gd" id="4_r4a2m"]
+
 
 [sub_resource type="BoxMesh" id="BoxMesh_q25vk"]
 

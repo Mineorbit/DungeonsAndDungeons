@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://6oouqvjxe6m8"]
+[gd_scene load_steps=4 format=3 uid="uid://biuiiel62pvcb"]
 
-[ext_resource type="Script" path="res://Scripts/Level/Chunk.gd" id="1"]
-[ext_resource type="Script" path="res://Scripts/CellGrids.gd" id="2_2qd3d"]
+[ext_resource type="Script" path="res://Scripts/Level/TileSystem/Chunk.gd" id="1_wnlys"]
+[ext_resource type="Script" path="res://Scripts/Level/TileSystem/CellGrids.gd" id="2_qkmcf"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
 geometry_parsed_geometry_type = 1
@@ -9,9 +9,9 @@ agent_radius = 0.1
 
 [node name="Chunk" type="NavigationRegion3D"]
 navigation_mesh = SubResource("NavigationMesh_abs6g")
-script = ExtResource("1")
+script = ExtResource("1_wnlys")
 
 [node name="LevelObjects" type="Node3D" parent="."]
 
 [node name="CellGrids" type="Node3D" parent="."]
-script = ExtResource("2_2qd3d")
+script = ExtResource("2_qkmcf")

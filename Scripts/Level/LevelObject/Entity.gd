@@ -128,15 +128,21 @@ func exited_climb_area(area):
 	if num_of_climb_areas == 0:
 		in_climb_area = false
 
+var just_entered = false
+
 func entered_swim_area(area):
-	num_of_swim_areas = num_of_swim_areas + 1
-	in_swim_area = true
+	print("TEST "+str(area))
+	just_entered = true
 
 
 func exited_swim_area(area):
-	num_of_swim_areas = max(0,num_of_swim_areas - 1)
-	if num_of_swim_areas == 0:
+	print("TEST out "+str(area))
+	if just_entered and not in_swim_area:
+		in_swim_area = true
+		just_entered = false
+	if just_entered and in_swim_area:
 		in_swim_area = false
+		just_entered = false
 
 var jump_cool_down = 0
 
