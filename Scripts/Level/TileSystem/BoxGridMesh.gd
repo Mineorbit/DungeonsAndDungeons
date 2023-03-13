@@ -27,7 +27,6 @@ var neighbors = [Vector3(0,1,0),
 var building = false
 
 func rebuild_mesh():
-	building = true
 	var surfaceTool = SurfaceTool.new()
 	
 	for n in collisionshape.get_children():
@@ -143,11 +142,16 @@ func rebuild_mesh():
 	gridmesh.mesh = mesh
 	gridmesh.set_surface_override_material(0,surfacematerial)
 	
-	building = false
 	#collisionshape.shape = mesh.create_trimesh_shape()
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():
-	rebuild_mesh()
+	if not building:
+		building = true
+		var t = Thread.new()
+		t.start(func():
+			rebuild_mesh()
+			building = false
+			)
 
 func queue_generate(p):
 	generate()
