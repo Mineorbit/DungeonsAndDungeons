@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 @onready var menu = $Menu
+@onready var PauseMenu = $Menu/PauseMenu
+@onready var OptionsLayer = $Menu/OptionsLayer
+
 var open = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,8 +32,7 @@ func unpause():
 	get_tree().paused = false
 	menu.hide()
 	open = false
-	
-	
+
 
 
 func exit_to_main_menu():
@@ -39,3 +41,25 @@ func exit_to_main_menu():
 	multiplayer.set_multiplayer_peer(null)
 	if Constants.entity_control_function != null:
 		Signals.on_new_world_created.disconnect(Constants.entity_control_function)
+
+var b = false
+
+func toggle_options_menu():
+	if not b:
+		PauseMenu.hide()
+		OptionsLayer.show()
+		b = true
+	else:
+		PauseMenu.show()
+		OptionsLayer.hide()
+
+func on_options_pressed():
+	toggle_options_menu()
+
+
+func on_close_pressed():
+	toggle_options_menu()
+
+
+func set_main_volume(value):
+	pass # Replace with function body.

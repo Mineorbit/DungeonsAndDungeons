@@ -1,11 +1,20 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bogksdbh4fu6o"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bogksdbh4fu6o"]
 
+[ext_resource type="StyleBox" uid="uid://ctfqa7np0x4g8" path="res://Assets/UI/ButtonStyle.tres" id="1_c1871"]
 [ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="1_n10ua"]
 [ext_resource type="FontFile" uid="uid://bunuu1xs4aqsi" path="res://Assets/Fonts/Barlow-Medium.ttf" id="1_nraun"]
+[ext_resource type="StyleBox" uid="uid://dtwhob1t18ntx" path="res://Assets/UI/ButtonNormalAlt.tres" id="2_rcqme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrwr6"]
 
 [resource]
 default_base_scale = 2.0
 default_font = ExtResource("1_nraun")
+Button/styles/disabled = ExtResource("1_c1871")
+Button/styles/focus = SubResource("StyleBoxFlat_wrwr6")
+Button/styles/hover = ExtResource("1_c1871")
+Button/styles/normal = ExtResource("2_rcqme")
+Button/styles/pressed = null
 CheckBox/icons/checked = ExtResource("1_n10ua")
 CheckBox/icons/checked_disabled = ExtResource("1_n10ua")
 CheckBox/icons/unchecked = ExtResource("1_n10ua")

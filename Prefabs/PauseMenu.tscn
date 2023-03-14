@@ -9,17 +9,27 @@ process_mode = 3
 layer = 2
 script = ExtResource("1_l1uhx")
 
-[node name="Menu" type="Panel" parent="."]
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="Panel" parent="Menu"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3
 anchor_top = 0.2
 anchor_right = 0.7
 anchor_bottom = 0.8
+offset_bottom = 0.599976
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_vlxht")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PauseMenu"]
 layout_mode = 0
 anchor_left = 0.1
 anchor_top = 0.1
@@ -29,32 +39,83 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/PauseMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 32
 
-[node name="Close" type="Button" parent="Menu/VBoxContainer/MarginContainer"]
+[node name="Close" type="Button" parent="Menu/PauseMenu/VBoxContainer/MarginContainer"]
 layout_mode = 2
 text = "Close"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Menu/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/PauseMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 32
 
-[node name="Options" type="Button" parent="Menu/VBoxContainer/MarginContainer2"]
+[node name="Options" type="Button" parent="Menu/PauseMenu/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 text = "Options"
 
-[node name="MarginContainer3" type="MarginContainer" parent="Menu/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="Menu/PauseMenu/VBoxContainer"]
 layout_mode = 2
 
-[node name="MainMenu" type="Button" parent="Menu/VBoxContainer/MarginContainer3"]
+[node name="MainMenu" type="Button" parent="Menu/PauseMenu/VBoxContainer/MarginContainer3"]
 layout_mode = 2
 text = "Back to Main Menu"
 
-[node name="CenterContainer" type="CanvasLayer" parent="."]
+[node name="OptionsLayer" type="Control" parent="Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer"]
+[node name="OptionsMenu" type="TabContainer" parent="Menu/OptionsLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_81hcf")
+
+[node name="General" type="VBoxContainer" parent="Menu/OptionsLayer/OptionsMenu"]
+layout_mode = 2
+
+[node name="Video" type="VBoxContainer" parent="Menu/OptionsLayer/OptionsMenu"]
+visible = false
+layout_mode = 2
+
+[node name="Resolution" type="Label" parent="Menu/OptionsLayer/OptionsMenu/Video"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="Menu/OptionsLayer/OptionsMenu/Video"]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Test"
+popup/item_0/id = 0
+popup/item_1/text = "Test2"
+popup/item_1/id = 1
+
+[node name="Audio" type="VBoxContainer" parent="Menu/OptionsLayer/OptionsMenu"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/OptionsLayer/OptionsMenu/Audio"]
+layout_mode = 2
+text = "Main Volume"
+
+[node name="HSlider" type="HSlider" parent="Menu/OptionsLayer/OptionsMenu/Audio"]
+layout_mode = 2
+
+[node name="Input" type="VBoxContainer" parent="Menu/OptionsLayer/OptionsMenu"]
+visible = false
+layout_mode = 2
+
+[node name="Close" type="Button" parent="Menu/OptionsLayer"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -63,47 +124,8 @@ offset_bottom = 31.0
 grow_horizontal = 0
 text = "Close"
 
-[node name="OptionsMenu" type="TabContainer" parent="CenterContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_81hcf")
-
-[node name="General" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
-layout_mode = 2
-
-[node name="Video" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
-visible = false
-layout_mode = 2
-
-[node name="Resolution" type="Label" parent="CenterContainer/OptionsMenu/Video"]
-layout_mode = 2
-text = "Resolution"
-
-[node name="OptionButton" type="OptionButton" parent="CenterContainer/OptionsMenu/Video"]
-layout_mode = 2
-item_count = 2
-popup/item_0/text = "Test"
-popup/item_0/id = 0
-popup/item_1/text = "Test2"
-popup/item_1/id = 1
-
-[node name="Audio" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/OptionsMenu/Audio"]
-layout_mode = 2
-text = "Main Volume"
-
-[node name="HSlider" type="HSlider" parent="CenterContainer/OptionsMenu/Audio"]
-layout_mode = 2
-
-[node name="Input" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
-visible = false
-layout_mode = 2
-
-[connection signal="pressed" from="Menu/VBoxContainer/MarginContainer/Close" to="." method="unpause"]
-[connection signal="pressed" from="Menu/VBoxContainer/MarginContainer3/MainMenu" to="." method="exit_to_main_menu"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MarginContainer/Close" to="." method="unpause"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MarginContainer2/Options" to="." method="on_options_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MarginContainer3/MainMenu" to="." method="exit_to_main_menu"]
+[connection signal="value_changed" from="Menu/OptionsLayer/OptionsMenu/Audio/HSlider" to="Menu/OptionsLayer/OptionsMenu" method="set_main_volume"]
+[connection signal="pressed" from="Menu/OptionsLayer/Close" to="." method="on_close_pressed"]

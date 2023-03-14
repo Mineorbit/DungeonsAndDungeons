@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://n8jy6pe2mrtm"]
+[gd_scene load_steps=6 format=3 uid="uid://n8jy6pe2mrtm"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Main.gd" id="1_brb28"]
 [ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="2_c8d5n"]
+[ext_resource type="StyleBox" uid="uid://cfy4i6yo0iwxe" path="res://Assets/UI/ButtonNormal.tres" id="3_hpt83"]
+[ext_resource type="StyleBox" uid="uid://ctfqa7np0x4g8" path="res://Assets/UI/ButtonStyle.tres" id="3_q4h68"]
+
+[sub_resource type="Theme" id="Theme_lwe2v"]
+Button/styles/hover = ExtResource("3_q4h68")
+Button/styles/normal = ExtResource("3_hpt83")
+Button/styles/pressed = ExtResource("3_q4h68")
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -54,12 +61,9 @@ theme_override_constants/margin_top = 512
 theme_override_constants/margin_right = 256
 theme_override_constants/margin_bottom = 256
 
-[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/HBoxContainer/MarginContainer"]
+[node name="EditButton" type="Button" parent="CenterContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
-
-[node name="EditButton" type="Button" parent="CenterContainer/HBoxContainer/MarginContainer/CenterContainer2"]
-layout_mode = 2
-theme = ExtResource("2_c8d5n")
+theme = SubResource("Theme_lwe2v")
 text = "Edit"
 
 [node name="RichTextLabel" type="Label" parent="."]
@@ -77,4 +81,4 @@ grow_vertical = 0
 text = "Mineorbit,  Josch557"
 
 [connection signal="pressed" from="CenterContainer/HBoxContainer/CenterContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="open_play_menu"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/MarginContainer/CenterContainer2/EditButton" to="." method="_open_edit_menu"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/MarginContainer/EditButton" to="." method="_open_edit_menu"]
