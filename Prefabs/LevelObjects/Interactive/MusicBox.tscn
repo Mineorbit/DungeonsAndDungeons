@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1nbqa7q8jcrs"]
+
+[ext_resource type="PackedScene" uid="uid://8rn6robvysqx" path="res://Assets/Models/LevelObjects/Interactive/MusicBox.blend" id="1_e1cdn"]
+
+[node name="MusicBox" type="Node3D"]
+
+[node name="MusicBox" parent="." instance=ExtResource("1_e1cdn")]
