@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfrgl1ei4r6c0"]
+[gd_scene load_steps=3 format=3 uid="uid://cfrgl1ei4r6c0"]
 
 [ext_resource type="Theme" uid="uid://c4ejvlooatsvg" path="res://Assets/UI/ReadyCallCheckBoxTheme.tres" id="1_o8vfu"]
 
@@ -7,17 +7,12 @@ properties/0/path = NodePath(".:button_pressed")
 properties/0/spawn = true
 properties/0/sync = true
 
-[sub_resource type="LabelSettings" id="LabelSettings_472ny"]
-font_size = 427
-shadow_size = 4
-shadow_color = Color(0, 0, 0, 1)
-
-[node name="ReadyCall" type="HBoxContainer"]
-anchors_preset = -1
-anchor_right = 0.197
-anchor_bottom = 0.113
-offset_right = 1586.06
-offset_bottom = 512.776
+[node name="ReadyCall" type="Control"]
+layout_mode = 3
+anchor_right = 0.023
+anchor_bottom = 0.04
+offset_right = 181.504
+offset_bottom = 182.08
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.125, 0.125)
@@ -27,11 +22,13 @@ replication_config = SubResource("SceneReplicationConfig_5pggu")
 
 [node name="CheckBox" type="CheckBox" parent="."]
 layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 312.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
 theme = ExtResource("1_o8vfu")
 alignment = 1
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 2
-text = "Player"
-label_settings = SubResource("LabelSettings_472ny")
-vertical_alignment = 1
+icon_alignment = 1
