@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c4ejvlooatsvg"]
+
+[ext_resource type="Texture2D" uid="uid://3nxptyeg1e4m" path="res://Assets/UI/crosstoggle_off.png" id="1_26uvg"]
+[ext_resource type="Texture2D" uid="uid://cd3ipky1dre7q" path="res://Assets/UI/crosstoggle_on.png" id="2_wx3hp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvij6"]
+texture = ExtResource("1_26uvg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uo25v"]
+texture = ExtResource("1_26uvg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1x4k4"]
+texture = ExtResource("1_26uvg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6g2m3"]
+texture = ExtResource("2_wx3hp")
+
+[resource]
+CheckBox/styles/disabled = SubResource("StyleBoxTexture_lvij6")
+CheckBox/styles/focus = SubResource("StyleBoxTexture_uo25v")
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = SubResource("StyleBoxTexture_1x4k4")
+CheckBox/styles/pressed = SubResource("StyleBoxTexture_6g2m3")
