@@ -119,7 +119,8 @@ func add_checkbox(local_id):
 		return
 	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
 	var checkbox = checkbox_pref.instantiate()
-	checkbox.size = Vector2(256,256)
+	checkbox.size = Vector2(0.125,0.125)
+	checkbox.scale = Vector2(0.125,0.125)
 	checkbox.name = str(local_id)
 	checkbox.get_node("CheckBox").pressed.connect(start_round)
 	checkboxes.add_child(checkbox)

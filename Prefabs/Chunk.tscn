@@ -3,12 +3,14 @@
 [ext_resource type="Script" path="res://Scripts/Level/TileSystem/Chunk.gd" id="1_wnlys"]
 [ext_resource type="Script" path="res://Scripts/Level/TileSystem/CellGrids.gd" id="2_qkmcf"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_abs6g"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_42akc"]
 geometry_parsed_geometry_type = 1
-agent_radius = 0.1
+cell_size = 0.1
+agent_radius = 1.0
+region_merge_size = 4096.0
 
 [node name="Chunk" type="NavigationRegion3D"]
-navigation_mesh = SubResource("NavigationMesh_abs6g")
+navigation_mesh = SubResource("NavigationMesh_42akc")
 script = ExtResource("1_wnlys")
 
 [node name="LevelObjects" type="Node3D" parent="."]

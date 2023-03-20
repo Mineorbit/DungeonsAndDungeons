@@ -1,11 +1,16 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c4ejvlooatsvg"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c4ejvlooatsvg"]
 
 [ext_resource type="Texture2D" uid="uid://3nxptyeg1e4m" path="res://Assets/UI/crosstoggle_off.png" id="1_26uvg"]
 [ext_resource type="Texture2D" uid="uid://cd3ipky1dre7q" path="res://Assets/UI/crosstoggle_on.png" id="2_wx3hp"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l2j7i"]
+
 [resource]
+CheckBox/colors/font_outline_color = Color(1, 1, 1, 0)
+CheckBox/constants/h_separation = 0
 CheckBox/icons/checked = ExtResource("2_wx3hp")
 CheckBox/icons/checked_disabled = null
 CheckBox/icons/radio_checked = null
 CheckBox/icons/radio_checked_disabled = null
 CheckBox/icons/unchecked = ExtResource("1_26uvg")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_l2j7i")

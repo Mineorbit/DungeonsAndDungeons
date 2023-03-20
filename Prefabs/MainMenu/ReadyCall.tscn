@@ -8,41 +8,30 @@ properties/0/spawn = true
 properties/0/sync = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_472ny"]
-font_size = 72
+font_size = 427
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
 
-[node name="ReadyCall" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ReadyCall" type="HBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.197
+anchor_bottom = 0.113
+offset_right = 1586.06
+offset_bottom = 512.776
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.125, 0.125)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5pggu")
 
 [node name="CheckBox" type="CheckBox" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.325
-anchor_right = 0.325
-anchor_bottom = 0.715
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
+layout_mode = 2
 theme = ExtResource("1_o8vfu")
 alignment = 1
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.225
-anchor_top = 0.138
-anchor_right = 0.5
-anchor_bottom = 0.53
-offset_left = -0.200012
-offset_top = -0.424011
-offset_right = 327.0
-offset_bottom = 258.56
-scale = Vector2(0.5, 0.5)
+layout_mode = 2
 text = "Player"
 label_settings = SubResource("LabelSettings_472ny")
+vertical_alignment = 1

@@ -68,8 +68,8 @@ func build_navigation():
 			if object.has_method("prepare_for_navmesh_build"):
 				object.prepare_for_navmesh_build()
 		
-	for map in NavigationServer3D.get_maps():
-		NavigationServer3D.map_set_edge_connection_margin(map,2)
+	#for map in NavigationServer3D.get_maps():
+	#	NavigationServer3D.map_set_edge_connection_margin(map,2)
 	for chunk in chunks.values():
 		if chunk.change_in_chunk:
 			changedChunks = changedChunks + 1
@@ -80,12 +80,12 @@ func build_navigation():
 	#await bake_navigation_mesh(false)
 	
 	print("Finished Building Nav Mesh")
-	for map in NavigationServer3D.get_maps():
-		NavigationServer3D.map_set_edge_connection_margin(map,2)
+	#for map in NavigationServer3D.get_maps():
+	#	NavigationServer3D.map_set_edge_connection_margin(map,2)
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():
 			if object.has_method("restore_after_navmesh_build"):
-				object.restore_after_navmesh_build()				
+				object.restore_after_navmesh_build()
 	
 	
 func build_navigation_per_chunk():
