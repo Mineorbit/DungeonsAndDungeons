@@ -4,11 +4,10 @@ extends Node3D
 @onready var model = $Model
 @onready var audio: AudioStreamPlayer = $Audio
 func _ready():
-	show_music()
+	Signals.mode_changed.connect(show_music)
 
 func reset():
 	audio.stop()
-	show_music()
 
 func start():
 	audio.stream = load("res://Resources/Music/"+var_music+".mp3")

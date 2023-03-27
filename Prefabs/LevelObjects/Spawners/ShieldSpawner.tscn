@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmk8rcqgcohj8"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Spawner.gd" id="1_vi7qe"]
+[ext_resource type="PackedScene" uid="uid://dpm8bv3j57fpm" path="res://Assets/Models/LevelObjects/Entities/Items/Shield/Shield.blend" id="2_l5qt5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
+
+[sub_resource type="TextMesh" id="TextMesh_kbi3g"]
+material = SubResource("StandardMaterial3D_dibhe")
+text = "Spawner"
+
+[node name="ShieldSpawner" type="Node3D"]
+script = ExtResource("1_vi7qe")
+spawnedEntity = "Items/Shield"
+
+[node name="Text" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_kbi3g")
+
+[node name="ShieldModel" parent="Text" instance=ExtResource("2_l5qt5")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0, 0.75, 0)

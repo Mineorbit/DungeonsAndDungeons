@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://vmp4kfy2gr3w"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="PackedScene" uid="uid://5qjssq37vgam" path="res://Prefabs/Models/Items/BowModel.tscn" id="1_44l0g"]
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Bow.gd" id="1_yog6x"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Bow.gd" id="1_yog6x"]
 [ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_d2u0n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3cla"]
@@ -35,5 +35,7 @@ script = ExtResource("3_d2u0n")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="on_shoot_timeout"]

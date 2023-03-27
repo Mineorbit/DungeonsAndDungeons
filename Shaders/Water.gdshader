@@ -2,6 +2,7 @@ shader_type spatial;
 render_mode world_vertex_coords;
 
 uniform sampler2D tex_vtx_10;
+uniform vec3 direction;
 uniform vec4 ColorParameter : source_color = vec4(0.000000, 0.346640, 0.668477, 1.000000);
 uniform sampler2D noise1;
 
@@ -25,7 +26,7 @@ uniform sampler2D noise1;
 
 float waveheight(vec2 position,float time,float y)
 {
-	return cos(1.5*(position.x+position.y+time))*0.025 - 0.045+y;
+	return cos(1.5*(position.x+position.y+time))*0.025 - 0.25+y;
 }
 
 void vertex() {
@@ -47,7 +48,7 @@ void fragment() {
 
 
 // TextureUniformTriplanar:2
-	vec4 n_out2p0 = triplanar_texture(noise1, triplanar_power_normal, triplanar_pos+vec3(TIME*0.125,TIME*0.125,TIME*0.125));
+	vec4 n_out2p0 = triplanar_texture(noise1, triplanar_power_normal, triplanar_pos+TIME*direction);
 	vec4 highlightcolor = vec4(1,1,1,1);
 	if((n_out2p0.y+n_out2p0.x+n_out2p0.z) < 1.1)
 	{

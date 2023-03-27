@@ -75,6 +75,8 @@ collision_mask = 128
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("CapsuleShape3D_ntqoq")
 
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+
 [connection signal="body_entered" from="ClimbArea" to="." method="entered_climb_area"]
 [connection signal="body_exited" from="ClimbArea" to="." method="exited_climb_area"]
 [connection signal="body_entered" from="WaterArea" to="." method="entered_swim_area"]
