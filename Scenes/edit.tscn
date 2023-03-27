@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://nheqycck8a3c"]
+[gd_scene load_steps=4 format=3 uid="uid://nheqycck8a3c"]
 
 [ext_resource type="Script" path="res://Scripts/Modes/Edit.gd" id="1_twisy"]
 [ext_resource type="Script" path="res://Scripts/Edit/Connections.gd" id="2_cohth"]
 [ext_resource type="PackedScene" uid="uid://7picxrwyqh4b" path="res://Prefabs/World.tscn" id="3_vovdh"]
-[ext_resource type="AudioStream" uid="uid://bulvntx1u2u8m" path="res://Assets/Sounds/music/BuildTheme.mp3" id="4_3u2cg"]
 
 [node name="Edit" type="Node3D"]
 script = ExtResource("1_twisy")
@@ -12,9 +11,3 @@ script = ExtResource("1_twisy")
 script = ExtResource("2_cohth")
 
 [node name="World" parent="." instance=ExtResource("3_vovdh")]
-
-[node name="buildmusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_3u2cg")
-volume_db = -10.0
-autoplay = true
-bus = &"music"

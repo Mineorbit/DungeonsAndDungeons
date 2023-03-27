@@ -1,0 +1,2 @@
+extends AudioStreamMP3
+class_name Music

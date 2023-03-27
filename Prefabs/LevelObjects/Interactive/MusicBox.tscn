@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1nbqa7q8jcrs"]
+[gd_scene load_steps=3 format=3 uid="uid://d1nbqa7q8jcrs"]
 
 [ext_resource type="PackedScene" uid="uid://8rn6robvysqx" path="res://Assets/Models/LevelObjects/Interactive/MusicBox.blend" id="1_e1cdn"]
+[ext_resource type="Script" path="res://Scripts/MusicBox.gd" id="1_j8126"]
 
 [node name="MusicBox" type="Node3D"]
+script = ExtResource("1_j8126")
 
-[node name="MusicBox" parent="." instance=ExtResource("1_e1cdn")]
+[node name="Model" parent="." instance=ExtResource("1_e1cdn")]
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+volume_db = -4.0
+autoplay = true

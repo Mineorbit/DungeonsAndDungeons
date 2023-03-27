@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2ea3rs0cq3rm"]
+[gd_scene load_steps=6 format=3 uid="uid://b2ea3rs0cq3rm"]
 
 [ext_resource type="Script" path="res://Scripts/UI/BuilderHUD.gd" id="1_erva2"]
 [ext_resource type="PackedScene" uid="uid://bpqrsbwd745am" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="1_okj36"]
 [ext_resource type="Script" path="res://Scripts/UI/EditPanel.gd" id="2_6nevs"]
+[ext_resource type="AudioStream" uid="uid://bulvntx1u2u8m" path="res://Assets/Sounds/music/BuildTheme.mp3" id="4_en62v"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a6nvk"]
 
@@ -113,5 +114,11 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+
+[node name="buildmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_en62v")
+volume_db = -10.0
+autoplay = true
+bus = &"music"
 
 [connection signal="pressed" from="CanvasLayer/EditPanel/Exit" to="CanvasLayer/EditPanel" method="stop_property_edit"]
