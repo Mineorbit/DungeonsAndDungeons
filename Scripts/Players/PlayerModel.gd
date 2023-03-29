@@ -34,7 +34,7 @@ func player_aiming(is_aiming):
 		update_aim_state_machine("Aim")
 	else:
 		update_aim_state_machine("Stop")
-	anim_tree["parameters/aim/blend_amount"] = v
+	anim_tree["parameters/aim/add_amount"] = v
 
 
 func entity_hit():

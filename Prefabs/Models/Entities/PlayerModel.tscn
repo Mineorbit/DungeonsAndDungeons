@@ -52,7 +52,7 @@ animation = &"Strike"
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6lwhx"]
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_d0o7x"]
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_lkmns"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bgmt8"]
 animation = &"Aim"
@@ -122,7 +122,7 @@ transitions = ["Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(-69, -31)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dcbpa"]
-graph_offset = Vector2(-1759.13, -514.378)
+graph_offset = Vector2(-1533.38, -447.299)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_fh2rq")
 nodes/Animation/position = Vector2(-1020, 500)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_6eu5d")
@@ -147,8 +147,8 @@ nodes/TimeScale/position = Vector2(-820, 360)
 "nodes/TimeScale 4/position" = Vector2(-2281.52, -61.24)
 "nodes/TimeScale 5/node" = SubResource("AnimationNodeTimeScale_etkup")
 "nodes/TimeScale 5/position" = Vector2(-1640.24, -427.216)
-nodes/aim/node = SubResource("AnimationNodeBlend2_d0o7x")
-nodes/aim/position = Vector2(0, 100)
+nodes/aim/node = SubResource("AnimationNodeAdd2_lkmns")
+nodes/aim/position = Vector2(100, 100)
 nodes/aimingstatemachine/node = SubResource("AnimationNodeStateMachine_qrexw")
 nodes/aimingstatemachine/position = Vector2(-260, 220)
 nodes/land/node = SubResource("AnimationNodeOneShot_eoek4")
@@ -168,9 +168,9 @@ nodes/vertical/node = SubResource("AnimationNodeBlend2_a00wc")
 nodes/vertical/position = Vector2(-1440, -120)
 nodes/verticalstatemachine/node = SubResource("AnimationNodeStateMachine_doh4d")
 nodes/verticalstatemachine/position = Vector2(-1820, 40)
-node_connections = [&"output", 0, &"aim", &"TimeScale", 0, &"Animation", &"TimeScale 2", 0, &"Animation 3", &"TimeScale 3", 0, &"Animation 2", &"TimeScale 4", 0, &"Animation 7", &"TimeScale 5", 0, &"Animation 4", &"aim", 0, &"strike", &"aim", 1, &"aimingstatemachine", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale 3", &"landidle", 0, &"swim", &"landidle", 1, &"land", &"speed", 0, &"Animation 6", &"speed", 1, &"TimeScale 4", &"strike", 0, &"landidle", &"strike", 1, &"TimeScale", &"swim", 0, &"vertical", &"swim", 1, &"swim_speed", &"swim_speed", 0, &"Animation 5", &"swim_speed", 1, &"TimeScale 5", &"vertical", 0, &"speed", &"vertical", 1, &"verticalstatemachine"]
+node_connections = [&"output", 0, &"aim", &"TimeScale", 0, &"Animation", &"TimeScale 2", 0, &"Animation 3", &"TimeScale 3", 0, &"Animation 2", &"TimeScale 4", 0, &"Animation 7", &"TimeScale 5", 0, &"Animation 4", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale 3", &"landidle", 0, &"swim", &"landidle", 1, &"land", &"speed", 0, &"Animation 6", &"speed", 1, &"TimeScale 4", &"strike", 0, &"landidle", &"strike", 1, &"TimeScale", &"swim", 0, &"vertical", &"swim", 1, &"swim_speed", &"swim_speed", 0, &"Animation 5", &"swim_speed", 1, &"TimeScale 5", &"vertical", 0, &"speed", &"vertical", 1, &"verticalstatemachine", &"aim", 0, &"strike", &"aim", 1, &"aimingstatemachine"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2owt8"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_xnd1q"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_cbrd0"]
 
@@ -248,12 +248,12 @@ bones/34/rotation = Quaternion(-4.65661e-09, 3.42261e-08, 6.51926e-09, 1)
 script = ExtResource("1_wbk7d")
 
 [node name="Physical Bone band_attachr" type="PhysicalBone3D" parent="root/Skeleton3D" index="6"]
-transform = Transform3D(-0.457456, -0.470281, 0.753293, -0.219885, 0.882161, 0.415875, -0.856383, 0.0246958, -0.509477, -0.209422, 1.47625, 0.0296944)
+transform = Transform3D(-0.457456, -0.47028, 0.753293, -0.219885, 0.882162, 0.415875, -0.856383, 0.0246955, -0.509477, -0.209422, 1.47625, 0.0296945)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00553382, 0.00318717, 0.0491366)
-body_offset = Transform3D(0.995472, -0.00654191, -0.000305533, -0.000640988, -0.0111345, -0.999923, 0.00651565, 0.999908, -0.0111089, -0.0054729, 0.0491719, -0.00267708)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00553397, 0.00318718, 0.0491368)
+body_offset = Transform3D(0.995472, -0.00654177, -0.000305504, -0.000640929, -0.0111346, -0.999923, 0.00651513, 0.999908, -0.0111089, -0.00547305, 0.049172, -0.00267708)
 gravity_scale = 0.0
 bone_name = "band_attach.r"
 joint_constraints/bias = 0.3
@@ -265,12 +265,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_6pph3")
 
 [node name="Physical Bone band_topr" type="PhysicalBone3D" parent="root/Skeleton3D" index="7"]
-transform = Transform3D(-0.510701, -0.268675, 0.816942, -0.139199, 0.963938, 0.229711, -0.849055, 0.00264055, -0.529131, -0.311311, 1.43572, 0.0969691)
+transform = Transform3D(-0.510701, -0.268683, 0.816943, -0.139199, 0.963971, 0.22971, -0.849056, 0.00263543, -0.529131, -0.311311, 1.43572, 0.0969757)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00573456, -0.000488836, 0.0617169)
-body_offset = Transform3D(1.00052, -0.00601122, 2.70009e-05, -0.000120074, -0.0115118, -1.00001, 0.00680031, 1.0006, -0.0109673, -0.00574215, 0.0617126, 0.001127)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00574005, -0.000487977, 0.0617207)
+body_offset = Transform3D(1.00052, -0.00600693, 2.74181e-05, -0.000120312, -0.0115147, -1.00001, 0.00680012, 1.00063, -0.0109674, -0.00574766, 0.0617164, 0.00112617)
 angular_damp = 25.0
 bone_name = "band_top.r"
 joint_constraints/bias = 0.3
@@ -282,12 +282,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_uiaqg")
 
 [node name="Physical Bone band_attachl" type="PhysicalBone3D" parent="root/Skeleton3D" index="8"]
-transform = Transform3D(0.431987, -0.49619, 0.753297, 0.271326, 0.86861, 0.415866, -0.860101, -0.0165006, 0.50951, -0.209422, 1.47627, -0.0212274)
+transform = Transform3D(0.431988, -0.496284, 0.753297, 0.271325, 0.868613, 0.415865, -0.860101, -0.0185452, 0.509511, -0.209421, 1.47627, -0.0212281)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00546568, 0.00347903, 0.0492112)
-body_offset = Transform3D(0.99998, 0.0421134, -0.00036338, -0.000309974, 0.0098335, -0.999939, -0.00659197, 0.999545, -0.0111169, 0.00533694, 0.0491723, -0.0029664)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00547207, 0.00347988, 0.0492157)
+body_offset = Transform3D(0.99998, 0.043832, -0.000363678, -0.000309378, 0.0109448, -0.999939, -0.00659218, 0.999544, -0.011117, 0.00533733, 0.0491729, -0.00296724)
 gravity_scale = 0.0
 bone_name = "band_attach.l"
 joint_constraints/bias = 0.3
@@ -299,12 +299,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_d6e7d")
 
 [node name="Physical Bone band_topl" type="PhysicalBone3D" parent="root/Skeleton3D" index="9"]
-transform = Transform3D(0.508143, -0.272198, 0.816905, 0.147316, 0.957119, 0.22969, -0.848569, 0.000869899, 0.529056, -0.311314, 1.43575, -0.0884121)
+transform = Transform3D(0.508144, -0.27183, 0.816905, 0.147315, 0.954421, 0.229689, -0.848569, -0.00116779, 0.529057, -0.311314, 1.43575, -0.0884124)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00568911, -0.000471629, 0.0616803)
-body_offset = Transform3D(0.999967, 0.0087548, -8.03769e-05, -6.07967e-06, -0.00886341, -0.999936, -0.00684413, 0.994994, -0.0109761, 0.00569801, 0.0616721, 0.00110734)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00568841, -0.000472788, 0.0616799)
+body_offset = Transform3D(0.999967, 0.0102547, -8.05855e-05, -6.22869e-06, -0.00743623, -0.999936, -0.00684453, 0.992296, -0.0109761, 0.00569804, 0.0616724, 0.00110722)
 angular_damp = 25.0
 bone_name = "band_top.l"
 joint_constraints/bias = 0.3
@@ -324,8 +324,8 @@ parameters/TimeScale/scale = 1.25
 "parameters/TimeScale 3/scale" = 1.2
 "parameters/TimeScale 4/scale" = 1.5
 "parameters/TimeScale 5/scale" = 1.5
-parameters/aim/blend_amount = 0.0
-parameters/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_2owt8")
+parameters/aim/add_amount = 0
+parameters/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_xnd1q")
 parameters/land/active = false
 parameters/land/request = 0
 parameters/landidle/blend_amount = 0
