@@ -10,7 +10,6 @@ extends Node3D
 		return player
 	set(value):
 		player = value
-		print("PLAYER "+str(player))
 		if value == null:
 			Camera.current = false
 			player_to_follow_exists = false
@@ -22,12 +21,8 @@ extends Node3D
 			update_camera_target_position()
 			update_camera_rigging(0)
 			_move_camera()
-			player.tree_exited.connect(func():
-				print(str(Constants.id)+" AHOI")
-				if player == null:
-					player_to_follow_exists = false
-				)
-			#player.on_entity_remove.connect(func():player_to_follow_exists = false)
+			player.tree_exiting.connect(func():
+				player = null)
 			#player.on_entity_despawn.connect(func():player_to_follow_exists = false)
 			player.on_entity_aiming.connect(ChangeMovementState)
 
@@ -60,7 +55,7 @@ var dir: Vector2 = Vector2.ZERO
 
 func move_camera_rig(vec: Vector2) -> void:
 		rotation.x -= vec.y * mouse_sensitivity
-		rotation.x	 = clamp(rotation.x, -0.9, 0.3)
+		rotation.x = clamp(rotation.x, -0.9, 0.3)
 		
 		rotation.y -= vec.x * mouse_sensitivity
 		rotation.y = rotation.y
