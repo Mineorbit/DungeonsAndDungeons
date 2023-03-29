@@ -17,6 +17,15 @@ var playercontroller
 
 @onready var camera_offset = $CameraAnchor/CameraOffset
 
+func Hit(damage, hitting_entity,direction = null):
+	var modifier = 1
+	if direction != null:
+		if itemRight is Shield:
+			modifier = itemRight.damage_modifier(direction)
+	if modifier != 0:
+		super.Hit(modifier*damage,hitting_entity,direction)
+		Signals.playerHealthChanged.emit(id,health)
+
 
 # changing colors
 func setColor():
@@ -115,9 +124,6 @@ func start():
 	Signals.playerHealthChanged.emit(id,health)
 
 
-func Hit(damage,hitting_entity,direction = null):
-	super.Hit(damage,hitting_entity,direction)
-	Signals.playerHealthChanged.emit(id,health)
 
 func _process(delta):
 	if playercontroller != null:
