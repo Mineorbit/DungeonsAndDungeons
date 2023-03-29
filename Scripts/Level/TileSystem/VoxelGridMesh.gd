@@ -341,7 +341,7 @@ func _ready():
 @onready var staticbody: StaticBody3D = $Collision
 @onready var col: CollisionShape3D = $Collision/CollisionShape3D
 
-var grid_size: int = 8
+var grid_size: int = 16
 var grid_extend: float = 0.5
 
 # this is jank but is needed for grid borders between chunks

@@ -17,17 +17,14 @@ func getSpawnedEntity():
 	return currentSpawned
 
 func start():
-	print("Spawning now")
 	show_text()
 	spawnEntity()
 
 func reset():
-	print("Resetting Spawner")
 	show_text()
 
 func set_spawn_pos():
 	currentSpawned.global_transform.origin = self.global_transform.origin + Vector3(0,1,0)
-	print("Setting position to "+str(currentSpawned.global_transform.origin))
 
 func show_text():
 	if Constants.currentMode > 1:

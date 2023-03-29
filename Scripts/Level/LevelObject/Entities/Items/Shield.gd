@@ -11,7 +11,6 @@ func OnAttach(new_owner):
 
 
 func OnDettach():
-	itemOwner.on_entity_aiming.emit(false)
 	super.OnDettach()
 	in_use = false
 
@@ -22,8 +21,6 @@ func OnDettach():
 
 func Use():
 	super.Use()
-	itemOwner.on_entity_can_shoot.emit(false)
-	itemOwner.on_entity_aiming.emit(true)
 
 
 func StopUse():

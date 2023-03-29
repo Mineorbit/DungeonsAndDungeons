@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_1lp5q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3cla"]
-size = Vector3(0.2, 1.15586, 1.10282)
+size = Vector3(0.075784, 0.514552, 0.532842)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u6sld"]
 properties/0/path = NodePath(".:position")
@@ -22,10 +22,10 @@ script = ExtResource("1_lhrhd")
 hand = true
 
 [node name="Model" parent="." instance=ExtResource("2_l5ogq")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0167154, 0)
 shape = SubResource("BoxShape3D_o3cla")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
