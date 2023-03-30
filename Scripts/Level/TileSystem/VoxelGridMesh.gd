@@ -340,7 +340,7 @@ func _ready():
 @onready var staticbody: StaticBody3D = $Collision
 @onready var col: CollisionShape3D = $Collision/CollisionShape3D
 
-var grid_size: int = 24
+var grid_size: int = 20
 var grid_extend: float = 0.5
 
 @export var isolevel: float = 1
@@ -350,6 +350,41 @@ var border = 2
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
+	
+	var arr_mesh = ArrayMesh.new()
+	var surface_count = 0
+	for x in range(-border,grid_extend*grid_size*2 + border):
+		var vertices = PackedVector3Array()
+		var normals = PackedVector3Array()
+	#surfTool.set_material(material)
+	#surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+		for y in range(-border,grid_extend*grid_size*2 + border):
+			for z in range(-border,grid_extend*grid_size*2 + border):
+				addVerts( x, y, z, vertices,normals, isolevel)
+	#surfTool.generate_normals()
+		var arrays = []
+		arrays.resize(Mesh.ARRAY_MAX)
+		if vertices.size() == 0:
+			continue
+		surface_count = surface_count + 1
+		arrays[Mesh.ARRAY_VERTEX] = vertices
+		arrays[Mesh.ARRAY_NORMAL] = normals
+# Create the Mesh.
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	#ResourceSaver.save(rmesh,"res://test.tres")
+	#rmesh.surface_set_material(0,surfacematerial)
+	self.mesh = arr_mesh
+	if surface_count > 0:
+		for i in range(surface_count):
+			set_surface_override_material(i,par.surfacematerial)
+	col.shape = arr_mesh.create_trimesh_shape()
+	staticbody.collision_mask = par.collision
+	staticbody.collision_layer = par.collision
+	#print(Time.get_ticks_msec()-start)
+
+
+func generate_safe():
 	
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
@@ -375,10 +410,6 @@ func generate():
 	col.shape = arr_mesh.create_trimesh_shape()
 	staticbody.collision_mask = par.collision
 	staticbody.collision_layer = par.collision
-	#print(Time.get_ticks_msec()-start)
-
-
-
 
 
 func getValue(x, y, z):
