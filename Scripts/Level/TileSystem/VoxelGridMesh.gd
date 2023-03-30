@@ -465,7 +465,7 @@ func addVerts(x, y, z, surfTool, isolevel):
 			var offset = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size)
 			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 			var p = 4.0/grid_size*a + offset
-			surfTool.add_vertex (p)
+			surfTool.surface_add_vertex (p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
