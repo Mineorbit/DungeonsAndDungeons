@@ -351,20 +351,22 @@ var border = 2
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
 	
-	var rmesh = ImmediateMesh.new()
-	rmesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES,par.surfacematerial)
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	#surfTool.set_material(material)
 	#surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
 	for x in range(-border,grid_extend*grid_size*2 + border):
 		for y in range(-border,grid_extend*grid_size*2 + border):
 			for z in range(-border,grid_extend*grid_size*2 + border):
-				addVerts( x, y, z, rmesh, isolevel)
+				addVerts( x, y, z, st, isolevel)
 	#surfTool.generate_normals()
-	rmesh.surface_end()
+	var rmesh = st.commit()
+	
 	#ResourceSaver.save(rmesh,"res://test.tres")
 	#rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = rmesh
+	#set_surface_override_material(0,mat)
 	col.shape = rmesh.create_trimesh_shape()
 	staticbody.collision_mask = par.collision
 	staticbody.collision_layer = par.collision
@@ -459,11 +461,11 @@ func addVerts(x, y, z, surfTool, isolevel):
 		for j in range(0, 3):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
-			surfTool.surface_set_normal(n)
+			surfTool.set_normal(n)
 			var offset = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size)
 			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 			var p = 4.0/grid_size*a + offset
-			surfTool.surface_add_vertex (p)
+			surfTool.add_vertex (p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

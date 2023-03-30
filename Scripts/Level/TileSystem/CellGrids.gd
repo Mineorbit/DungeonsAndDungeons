@@ -84,13 +84,20 @@ func start_generate_at(pos,ulid):
 			for k in range(-1,2):
 				var n = Vector3(i,j,k)
 				var p = pos + n
-				var chunk = Constants.World.level.get_chunk(p)
-				if chunk != null:
+				var chunk: Node3D = Constants.World.level.get_chunk(p)
+				if chunk == null:
+					print("There is no chunk at "+str(p))
+					chunk = Constants.World.level.add_chunk(p)
 					#chunks.append(chunk)
-					chunk.cellGrids.start_generate_cell(p,ulid)
+				if not chunk.is_inside_tree():
+					chunk.ready.connect(func():
+						chunk.cellGrids.start_generate_cell(p,ulid)
+						)
+				chunk.cellGrids.start_generate_cell(p,ulid)
 
 func start_generate_cell(pos,ulid):
 	if ulid in gridmeshes:
+		print("GEN AT "+str(pos))
 		gridmeshes[ulid].queue_generate(pos)
 	else:
 		print("There is no Grid for "+str(pos)+" in "+str(self))

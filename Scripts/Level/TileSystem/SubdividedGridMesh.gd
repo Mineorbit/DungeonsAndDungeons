@@ -51,9 +51,6 @@ var generate_tasks = []
 func queue_generate(pos):
 	generate_tasks.append(pos)
 
-func start_generate(pos):
-	generating = true
-	print("Starting Generation")
 
 func get_subgrid(pos):
 	var local_pos = pos - global_transform.origin
