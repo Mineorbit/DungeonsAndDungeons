@@ -36,15 +36,21 @@ func generate():
 	for x in subgrids.get_children():
 		x.generate()
 
-func generate_for(x, force = false):
-	if not generating_at[x.name] or force:
-		var t = Thread.new()
-		generating_at[x.name] = true
-		t.start( func():
-			x.generate()
-			generating_at[x.name] = false
-			print("Actual Generate "+str(x))
+func generate_for(set, force = false):
+	get_parent().get_parent().change_in_chunk = true
+	var t = Thread.new()
+	t.start(func():
+		print(set)
+		for x in set:
+			if not generating_at[x.name] or force:
+				x.generate()
+		print("Done")
 		)
+		#t.start( func():
+		#	x.generate()
+		#	generating_at[x.name] = false
+		#	print("Actual Generate "+str(x))
+		#)
 		
 	
 
@@ -62,15 +68,19 @@ func get_subgrid(pos):
 	return subgrid[gridname]
 
 func _physics_process(delta):
-	#var set = []
+	var set = []
 	while generate_tasks.size() > 0:
 			var pos = generate_tasks[0]
 			var x = get_subgrid(pos)
 			if not generating_at[x.name]:
-				generate_for(x)
-				#set.append(x)
+				generating_at[x.name] = true
+				set.append(x)
 			generate_tasks.remove_at(0)
 			#start_generate(pos)
+	if set.size() > 0:
+		generate_for(set)
+	for x in set:
+		generating_at[x.name] = false
 
 func _exit_tree():
 	pass
