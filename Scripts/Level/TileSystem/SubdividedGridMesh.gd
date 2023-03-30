@@ -40,7 +40,6 @@ func generate_for(set, force = false):
 	get_parent().get_parent().change_in_chunk = true
 	var t = Thread.new()
 	t.start(func():
-		print(set)
 		for x in set:
 			if not generating_at[x.name] or force:
 				x.generate()
