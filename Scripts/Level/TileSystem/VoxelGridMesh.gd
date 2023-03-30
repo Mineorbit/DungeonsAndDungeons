@@ -340,7 +340,7 @@ func _ready():
 @onready var staticbody: StaticBody3D = $Collision
 @onready var col: CollisionShape3D = $Collision/CollisionShape3D
 
-var grid_size: int = 16
+var grid_size: int = 24
 var grid_extend: float = 0.5
 
 @export var isolevel: float = 1
@@ -371,7 +371,7 @@ func generate():
 	#ResourceSaver.save(rmesh,"res://test.tres")
 	#rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = arr_mesh
-	#set_surface_override_material(0,mat)
+	set_surface_override_material(0,par.surfacematerial)
 	col.shape = arr_mesh.create_trimesh_shape()
 	staticbody.collision_mask = par.collision
 	staticbody.collision_layer = par.collision
