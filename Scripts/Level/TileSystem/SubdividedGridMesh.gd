@@ -42,6 +42,7 @@ func generate_for(x, force = false):
 		var t = Thread.new()
 		t.start( func():
 			x.generate()
+			print("Actual Generate "+str(x))
 			generating_at[x.name] = false
 		)
 	
@@ -66,7 +67,7 @@ func _physics_process(delta):
 			var x = get_subgrid(pos)
 			if not generating_at[x.name]:
 				generate_for(x)
-				generate_tasks.remove_at(0)
+			generate_tasks.remove_at(0)
 			#start_generate(pos)
 
 func _exit_tree():

@@ -30,7 +30,6 @@
 
 extends MeshInstance3D
 
-@export var isolevel: float = 0.6
 
 var edgeTable = [
 0x0	, 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
@@ -344,6 +343,7 @@ func _ready():
 var grid_size: int = 16
 var grid_extend: float = 0.5
 
+@export var isolevel: float = 1
 # this is jank but is needed for grid borders between chunks
 var border = 2
 
@@ -351,23 +351,28 @@ var border = 2
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
 	
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var vertices = PackedVector3Array()
+	var normals = PackedVector3Array()
 	#surfTool.set_material(material)
 	#surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
 	for x in range(-border,grid_extend*grid_size*2 + border):
 		for y in range(-border,grid_extend*grid_size*2 + border):
 			for z in range(-border,grid_extend*grid_size*2 + border):
-				addVerts( x, y, z, st, isolevel)
+				addVerts( x, y, z, vertices,normals, isolevel)
 	#surfTool.generate_normals()
-	var rmesh = st.commit()
-	
+	var arr_mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+# Create the Mesh.
+	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	#ResourceSaver.save(rmesh,"res://test.tres")
 	#rmesh.surface_set_material(0,surfacematerial)
-	self.mesh = rmesh
+	self.mesh = arr_mesh
 	#set_surface_override_material(0,mat)
-	col.shape = rmesh.create_trimesh_shape()
+	col.shape = arr_mesh.create_trimesh_shape()
 	staticbody.collision_mask = par.collision
 	staticbody.collision_layer = par.collision
 	#print(Time.get_ticks_msec()-start)
@@ -404,7 +409,7 @@ func vertexInterp(a, b, isolevel):
 		a[2] + mu * (b[2] - a[2])
 	)
 
-func addVerts(x, y, z, surfTool, isolevel):
+func addVerts(x, y, z, vertices,normals, isolevel):
 	var value: int = 0
 	var grid = [
 		[x, y, z],
@@ -461,11 +466,11 @@ func addVerts(x, y, z, surfTool, isolevel):
 		for j in range(0, 3):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
-			surfTool.set_normal(n)
-			var offset = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size)
+			normals.push_back(n)
+			var offset = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size) - Vector3(0,0.125,0)
 			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
 			var p = 4.0/grid_size*a + offset
-			surfTool.add_vertex (p)
+			vertices.push_back (p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -282,12 +282,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_uiaqg")
 
 [node name="Physical Bone band_attachl" type="PhysicalBone3D" parent="root/Skeleton3D" index="8"]
-transform = Transform3D(0.431986, -0.497006, 0.7533, 0.271323, 0.868463, 0.415864, -0.860104, -0.028104, 0.509513, -0.209421, 1.47627, -0.0212279)
+transform = Transform3D(0.431986, -0.497175, 0.7533, 0.271323, 0.868407, 0.415864, -0.860104, -0.0298292, 0.509513, -0.209421, 1.47627, -0.0212279)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054996, 0.00347886, 0.0492338)
-body_offset = Transform3D(0.999982, 0.0517028, -0.000364751, -0.000305593, 0.0164189, -0.999942, -0.00659327, 0.999545, -0.0111202, 0.0053376, 0.0491722, -0.00296605)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00550446, 0.00347889, 0.0492374)
+body_offset = Transform3D(0.999982, 0.053099, -0.000364751, -0.000305593, 0.0174478, -0.999942, -0.00659327, 0.99954, -0.0111202, 0.0053376, 0.0491722, -0.00296605)
 gravity_scale = 0.0
 bone_name = "band_attach.l"
 joint_constraints/bias = 0.3
@@ -299,12 +299,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_d6e7d")
 
 [node name="Physical Bone band_topl" type="PhysicalBone3D" parent="root/Skeleton3D" index="9"]
-transform = Transform3D(0.508144, -0.270256, 0.816901, 0.147313, 0.942818, 0.229688, -0.848565, -0.0104027, 0.529061, -0.311314, 1.43574, -0.0884145)
+transform = Transform3D(0.508144, -0.269982, 0.816901, 0.147313, 0.940802, 0.229688, -0.848565, -0.0120735, 0.529061, -0.311314, 1.43574, -0.0884145)
 collision_layer = 0
 collision_mask = 0
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0056856, -0.000473007, 0.0616797)
-body_offset = Transform3D(0.999963, 0.0171025, -8.69632e-05, -8.37445e-06, -0.00104387, -0.999935, -0.00684607, 0.980693, -0.0109764, 0.00569884, 0.0616751, 0.00110197)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00568499, -0.000473983, 0.0616791)
+body_offset = Transform3D(0.999963, 0.0183486, -8.69632e-05, -8.37445e-06, 0.000101617, -0.999935, -0.00684607, 0.978676, -0.0109764, 0.00569884, 0.0616751, 0.00110197)
 angular_damp = 25.0
 bone_name = "band_top.l"
 joint_constraints/bias = 0.3
