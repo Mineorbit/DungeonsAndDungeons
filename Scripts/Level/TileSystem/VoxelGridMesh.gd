@@ -461,7 +461,7 @@ func addVerts(x, y, z, vertices,normals, isolevel):
 	if edgeTable[value] == 0:
 		return
 	
-	var vertlist = [null, null, null, null, null, null, null, null, null, null, null, null]
+	var vertlist: PackedVector3Array = [null, null, null, null, null, null, null, null, null, null, null, null]
 	if edgeTable[value] & 1:
 		vertlist[0] = vertexInterp(grid[0], grid[1], isolevel)
 	if edgeTable[value] & 2:
