@@ -340,7 +340,7 @@ func _ready():
 @onready var staticbody: StaticBody3D = $Collision
 @onready var col: CollisionShape3D = $Collision/CollisionShape3D
 
-var grid_size: int = 20
+@export var grid_size: int = 20
 var grid_extend: float = 0.5
 
 @export var isolevel: float = 1
