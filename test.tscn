@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cip4xt7d0d6e8"]
+
+[ext_resource type="Script" path="res://test.gd" id="1_2n4dg"]
+[ext_resource type="ArrayMesh" uid="uid://ch4hkgwnkhonc" path="res://new_array_mesh.tres" id="1_lvfyn"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_lvfyn")
+script = ExtResource("1_2n4dg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142647, 0.945128)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.816974, 0.32132, -0.47886, 0, 0.830382, 0.557195, 0.576675, -0.455213, 0.6784, -0.430551, 0, 0)

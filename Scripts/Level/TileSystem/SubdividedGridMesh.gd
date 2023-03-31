@@ -43,7 +43,6 @@ func generate_for(set, force = false):
 		for x in set:
 			if not generating_at[x.name] or force:
 				x.generate()
-		print("Done")
 		)
 		#t.start( func():
 		#	x.generate()

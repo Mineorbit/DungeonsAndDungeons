@@ -344,8 +344,9 @@ func _ready():
 var grid_extend: float = 0.5
 
 @export var isolevel: float = 1
+
 # this is jank but is needed for grid borders between chunks
-var border = 2
+var border = 1
 
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
@@ -391,18 +392,18 @@ func generate_safe():
 	#surfTool.set_material(material)
 	#surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
+	var arr_mesh = ArrayMesh.new()
 	for x in range(-border,grid_extend*grid_size*2 + border):
 		for y in range(-border,grid_extend*grid_size*2 + border):
 			for z in range(-border,grid_extend*grid_size*2 + border):
 				addVerts( x, y, z, vertices,normals, isolevel)
 	#surfTool.generate_normals()
-	var arr_mesh = ArrayMesh.new()
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_NORMAL] = normals
+		var arrays = []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = vertices
+		arrays[Mesh.ARRAY_NORMAL] = normals
 # Create the Mesh.
-	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	#ResourceSaver.save(rmesh,"res://test.tres")
 	#rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = arr_mesh
@@ -492,8 +493,8 @@ func addVerts(x, y, z, vertices,normals, isolevel):
 			continue
 		var d1 = vertlist[triTable[value][i + 1]] - vertlist[triTable[value][i + 0]]
 		var d2 = vertlist[triTable[value][i + 2]] - vertlist[triTable[value][i + 0]]
-		var n = d1.cross(d2)
-		n = -n.normalized()
+		var n = d2.cross(d1)
+		n = n.normalized()
 		for j in range(0, 3):
 			var a = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))

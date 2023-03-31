@@ -77,12 +77,19 @@ func add_tiled_level_object(pos,levelObjectData, generate = false):
 		#get_parent().generate_grid()
 		start_generate_at(global_transform.origin+gridpos,levelObjectData.levelObjectId)
 
+var neighbors = [
+	Vector3(0,0,0),
+	Vector3(0,1,0),
+	Vector3(0,-1,0),
+	Vector3(1,0,0),
+	Vector3(-1,0,0),
+	Vector3(0,0,1),
+	Vector3(0,0,-1),
+	
+]
 
 func start_generate_at(pos,ulid):
-	for i in range(-1,2):
-		for j in range(-1,2):
-			for k in range(-1,2):
-				var n = Vector3(i,j,k)
+			for n in neighbors:
 				var p = pos + n
 				var chunk: Node3D = Constants.World.level.get_chunk(p)
 				if chunk == null:
@@ -97,7 +104,6 @@ func start_generate_at(pos,ulid):
 
 func start_generate_cell(pos,ulid):
 	if ulid in gridmeshes:
-		print("GEN AT "+str(pos))
 		gridmeshes[ulid].queue_generate(pos)
 	else:
 		print("There is no Grid for "+str(pos)+" in "+str(self))
