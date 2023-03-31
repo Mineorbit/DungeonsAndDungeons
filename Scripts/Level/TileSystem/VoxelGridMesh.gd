@@ -371,10 +371,8 @@ func generate():
 		surface_count = surface_count + 1
 		arrays[Mesh.ARRAY_VERTEX] = vertices
 		arrays[Mesh.ARRAY_NORMAL] = normals
-# Create the Mesh.
+		# Create the Mesh.
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	#ResourceSaver.save(rmesh,"res://test.tres")
-	#rmesh.surface_set_material(0,surfacematerial)
 	self.mesh = arr_mesh
 	if surface_count > 0:
 		for i in range(surface_count):
@@ -382,17 +380,16 @@ func generate():
 	col.shape = arr_mesh.create_trimesh_shape()
 	staticbody.collision_mask = par.collision
 	staticbody.collision_layer = par.collision
-	#print(Time.get_ticks_msec()-start)
 
 
 func generate_safe():
 	
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
+	var vertices: PackedVector3Array = PackedVector3Array()
+	var normals: PackedVector3Array = PackedVector3Array()
 	#surfTool.set_material(material)
 	#surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	var arr_mesh = ArrayMesh.new()
+	var arr_mesh: ArrayMesh = ArrayMesh.new()
 	for x in range(-border,grid_extend*grid_size*2 + border):
 		for y in range(-border,grid_extend*grid_size*2 + border):
 			for z in range(-border,grid_extend*grid_size*2 + border):
@@ -414,9 +411,9 @@ func generate_safe():
 
 
 func getValue(x, y, z):
-	var result = 1
-	var p = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
-	var has_box = par2.get_at(p) == par.levelObjectId
+	var result: float = 1
+	var p: Vector3 = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
+	var has_box: bool = par2.get_at(p) == par.levelObjectId
 		#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 	if has_box:
 			#print(str(p)+" "+str(self))
@@ -491,17 +488,17 @@ func addVerts(x, y, z, vertices,normals, isolevel):
 	for i in range(0, 12, 3):
 		if triTable[value][i] == -1:
 			continue
-		var d1 = vertlist[triTable[value][i + 1]] - vertlist[triTable[value][i + 0]]
-		var d2 = vertlist[triTable[value][i + 2]] - vertlist[triTable[value][i + 0]]
-		var n = d2.cross(d1)
+		var d1: Vector3 = vertlist[triTable[value][i + 1]] - vertlist[triTable[value][i + 0]]
+		var d2: Vector3 = vertlist[triTable[value][i + 2]] - vertlist[triTable[value][i + 0]]
+		var n: Vector3 = d2.cross(d1)
 		n = n.normalized()
 		for j in range(0, 3):
-			var a = vertlist[triTable[value][i + j]]
+			var a: Vector3 = vertlist[triTable[value][i + j]]
 			#surfTool.set_uv(Vector2(a.x, a.z))
 			normals.push_back(n)
-			var offset = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size) - Vector3(0,0.125,0)
+			var offset: Vector3 = Vector3(2.0/grid_size,2.0/grid_size,2.0/grid_size) - Vector3(0,0.125,0)
 			#offset = Vector3(1.0/grid_size,1.0/grid_size,1.0/grid_size)
-			var p = 4.0/grid_size*a + offset
+			var p: Vector3 = 4.0/grid_size*a + offset
 			vertices.push_back (p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
