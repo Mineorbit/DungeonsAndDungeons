@@ -8,7 +8,7 @@ var target = true
 var t = 1
 
 @onready var panel: Panel = $Panel
-
+@onready var timers = $Timers
 signal opened
 
 
@@ -19,12 +19,14 @@ func open():
 	t = 0
 	var timer = Timer.new()
 	timer.one_shot = true
-	add_child(timer)
+	timers.add_child(timer)
 	timer.start(transition_time)
 	return timer
 
 
 func close():
+	for timer in timers.get_children():
+		remove_child(timer)
 	if not target:
 		return
 	target = false
