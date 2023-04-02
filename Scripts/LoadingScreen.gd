@@ -9,14 +9,38 @@ var t = 1
 
 @onready var panel: Panel = $Panel
 @onready var timers = $Timers
+@onready var text = $Panel/Label
+
 signal opened
 
+
+var flavor_texts = [
+	"Ey die Hunde!",
+	"Gut gebügelt ist halb genäht",
+	"Keine Haftung für die Garderobe",
+	"Einfach Orangensaft",
+	"Es ist halt einfach ein weites Feld"
+	
+	
+	
+]
+
+var rand
+func set_text():
+	var n = rand.randi_range(0,flavor_texts.size()-1)
+	text.text = flavor_texts[n]
+
+func _ready():
+	
+	rand = RandomNumberGenerator.new()
+	set_text()
 
 func open():
 	if target:
 		return
 	target = true
 	t = 0
+	set_text()
 	var timer = Timer.new()
 	timer.one_shot = true
 	timers.add_child(timer)

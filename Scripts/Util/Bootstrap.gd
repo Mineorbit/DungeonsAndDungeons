@@ -32,10 +32,22 @@ func start(should_be_server):
 	
 
 func start_main_menu():
+	var t = LoadingScreen.open() 
+	if t == null:
+		
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
 		LoadingScreen.close()
+		return
+		
+	t.timeout.connect(
+		func():
+		remove_child(current_scene)
+		current_scene = load("res://Scenes/menu.tscn").instantiate()
+		add_child(current_scene)
+		LoadingScreen.close()
+	)
 
 func _process(_delta):
 	if not started:
