@@ -5,6 +5,7 @@ extends ColorRect
 @onready var button: BaseButton = $Button
 @onready var selection = $selection
 @onready var thumbnailRect: TextureRect = $Thumbnail
+@onready var description: Label = $Description
 # this needs to be a long int
 var id:
 	get:
@@ -36,7 +37,8 @@ func set_level_data(ldata):
 	id = ldata["ulid"]
 	if ldata.has("thumbnail"):
 		thumbnailRect.texture = ldata["thumbnail"]
-
+	if ldata.has("description"):
+		description.text = ldata["description"]
 
 func on_selected():
 	on_select.emit(id,self)

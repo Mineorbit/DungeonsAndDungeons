@@ -29,7 +29,7 @@ var flavor_texts = [
 	"Es riecht symmetrisch",
 	"Taffe Kassee",
 	"Scheiß Turnschuhsozialisten",
-	"da hab ich mich in der Küche wiedergefunden wie ich das Brot anschreie, dass es so gut schmeckt",
+	"Da hab ich mich in der Küche wiedergefunden wie ich das Brot anschreie, dass es so gut schmeckt",
 	"Also ich mein wir könnten hier auch zwei Esel mit einer Klappe verprügeln...",
 	"Ikea ist literal eine Mensa mit angetackertem Möbelhandel",
 	"Ganz ehrlich: Alligatoah ist die Volt Partei des Deutschrap",

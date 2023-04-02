@@ -122,4 +122,14 @@ patch_margin_bottom = 1
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_27c0p")
 
+[node name="Description" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.637
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Description"
+
 [connection signal="pressed" from="Button" to="." method="on_selected"]
