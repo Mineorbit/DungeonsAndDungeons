@@ -11,24 +11,30 @@ func OnAttach(new_owner):
 
 
 func OnDettach():
-	super.OnDettach()
 	in_use = false
+	itemOwner.on_entity_using_shield.emit(false)
+	super.OnDettach()
 
 
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 
 func damage_modifier(direction):
 	var hit_direction = direction.normalized()
+	print(itemOwner.global_transform.basis.z)
+	print(hit_direction)
 	if in_use and hit_direction.dot(itemOwner.global_transform.basis.z) > 0:
 		return 0
 	return 1 
 
 func Use():
 	super.Use()
+	in_use = true
+	itemOwner.on_entity_using_shield.emit(true)
 
 
 func StopUse():
 	super.StopUse()
 	in_use = false
+	itemOwner.on_entity_using_shield.emit(false)
 #	itemOwner.global_rotation = start_rot
 	#itemOwner.target_rot = Quaternion(Vector3.UP,PI/2)

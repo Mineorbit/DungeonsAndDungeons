@@ -79,6 +79,8 @@ signal on_entity_can_shoot(can)
 
 signal on_entity_aiming(aiming)
 
+signal on_entity_using_shield(aiming)
+
 signal on_entity_jump
 
 signal on_entity_health_changed(health)
