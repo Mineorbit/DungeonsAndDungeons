@@ -54,6 +54,10 @@ func prepare_edit(name):
 		Constants.World.prepare_level()
 		Constants.World.level.load(name,true)
 	print("Generating Grids")
+	var grid_thread = Thread.new()
+	#grid_thread.start(func():
+	#	Constants.World.level.generate_all_grids()
+	#	)
 	Constants.World.level.generate_all_grids()
 
 var current_player = 0
@@ -75,7 +79,7 @@ func _process(delta) -> void:
 	if (Constants.currentMode == 1) and Input.is_action_just_pressed("Save"):
 		world.level.save()
 		save_image()
-	if not Constants.builder.editing and Input.is_action_just_pressed("Test"):
+	if not Constants.builder == null and not Constants.builder.editing and Input.is_action_just_pressed("Test"):
 		enter_test_mode()
 		
 	if Input.is_action_just_pressed("Edit"):

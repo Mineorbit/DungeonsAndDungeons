@@ -12,6 +12,7 @@ Panel/styles/panel = SubResource("StyleBoxFlat_nbjkc")
 [node name="LoadingScreen" type="CanvasLayer"]
 layer = 4
 script = ExtResource("1_wljf4")
+transition_time = 1.0
 
 [node name="Panel" type="Panel" parent="."]
 top_level = true

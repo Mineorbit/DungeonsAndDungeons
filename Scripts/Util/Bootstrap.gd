@@ -35,6 +35,7 @@ func start_main_menu():
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/menu.tscn").instantiate()
 		add_child(current_scene)
+		LoadingScreen.close()
 
 func _process(_delta):
 	if not started:
@@ -53,18 +54,32 @@ func start_server():
 
 
 func start_play():
+		LoadingScreen.open()
 		remove_child(current_scene)
 		current_scene = load("res://Scenes/play.tscn").instantiate()
 		add_child(current_scene)
 		var client_management = load("res://Scenes/ClientNetworkManagement.tscn").instantiate()
 		current_scene.add_child(client_management)
+		LoadingScreen.close()
 
 func start_edit(levelname = null):
-		remove_child(current_scene)
-		current_scene = load("res://Scenes/edit.tscn").instantiate()
-		# prepare edit
-		add_child(current_scene)
-		current_scene.prepare_edit(levelname)
+	
+		
+	LoadingScreen.open().timeout.connect(
+		func():
+			print("Starting Edit")
+			var t = Thread.new()
+			t.start(func():
+				remove_child(current_scene)
+				current_scene = load("res://Scenes/edit.tscn").instantiate()
+			# prepare edit
+				add_child(current_scene)
+				current_scene.prepare_edit(levelname)
+				LoadingScreen.close()
+			)
+	)
+		#t.start(func():
+		#)
 			#current_scene.edit(levelname)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

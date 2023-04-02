@@ -1,37 +1,48 @@
 extends CanvasLayer
 
-var is_open = true
+var target = true
 
-var transition_time = 2
+@export var transition_time:float = 0.5
+
 
 var t = 1
 
 @onready var panel: Panel = $Panel
 
+signal opened
+
 
 func open():
-	if is_open:
+	if target:
 		return
-	is_open = true
+	target = true
 	t = 0
+	var timer = Timer.new()
+	timer.one_shot = true
+	add_child(timer)
+	timer.start(transition_time)
+	return timer
 
 
 func close():
-	if not is_open:
+	if not target:
 		return
-	is_open = false
+	target = false
 	t = 1
 
 
 func _process(delta):
 	var dir = -1
-	if is_open:
+	if target:
 		dir = 1
 	if t > 0:
 		visible = true
 	else:
 		visible = false
 	var velocity = (dir*delta)/transition_time
+	var last_t = t
 	t = clamp(t+velocity,0,1)
+	if last_t <= 0.99 and t > 0.99:
+		opened.emit()
 	panel.modulate.a = t
 	
