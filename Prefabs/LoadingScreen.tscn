@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx5s7ni0xbw6o"]
+[gd_scene load_steps=4 format=3 uid="uid://dx5s7ni0xbw6o"]
+
+[ext_resource type="Script" path="res://Scripts/LoadingScreen.gd" id="1_wljf4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbjkc"]
 bg_color = Color(0, 0, 0, 1)
@@ -9,6 +11,7 @@ Panel/styles/panel = SubResource("StyleBoxFlat_nbjkc")
 
 [node name="LoadingScreen" type="CanvasLayer"]
 layer = 4
+script = ExtResource("1_wljf4")
 
 [node name="Panel" type="Panel" parent="."]
 top_level = true
