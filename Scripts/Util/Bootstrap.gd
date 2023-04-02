@@ -74,7 +74,7 @@ func start_play():
 		current_scene.add_child(client_management)
 		LoadingScreen.close()
 
-func start_edit(levelname = null):
+func start_edit(levelname = null, new_level = false):
 	
 		
 	LoadingScreen.open().timeout.connect(
@@ -86,7 +86,12 @@ func start_edit(levelname = null):
 				current_scene = load("res://Scenes/edit.tscn").instantiate()
 			# prepare edit
 				add_child(current_scene)
-				current_scene.prepare_edit(levelname)
+				current_scene.prepare_edit(null)
+				if new_level:
+					Constants.World.level.level_name = levelname
+					Constants.World.level.save()
+				else:
+					current_scene.prepare_edit(levelname)
 				LoadingScreen.close()
 			)
 	)

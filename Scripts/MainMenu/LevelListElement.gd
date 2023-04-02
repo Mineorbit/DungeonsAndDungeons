@@ -33,6 +33,7 @@ func set_display_size(display_size):
 func set_level_data(ldata):
 	# this is necessary ater return to lobby because else it is null while the set_level_data method is called
 	levellistelement = $Name
+	description = $Description
 	level_name = ldata["name"]
 	id = ldata["ulid"]
 	if ldata.has("thumbnail"):

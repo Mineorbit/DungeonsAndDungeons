@@ -52,9 +52,8 @@ func on_download_level():
 
 
 func start_new_level():
-	Bootstrap.start_edit(null)
-	Constants.World.level.level_name = nameText.text
-	Constants.World.level.save()
+	Bootstrap.start_edit(nameText.text,true)
+	
 
 func start_edit_level():
 	if level_list.selected_level == null:

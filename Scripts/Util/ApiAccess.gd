@@ -52,6 +52,7 @@ func level_download_http_request_completed(result, _response_code, _headers, _bo
 
 
 func fetch_level_list():
+	print("Fetched level List")
 	# Create an HTTP request node and connect its completion signal.
 	print(str(Constants.id)+" Started fetching Level List")
 	var http_request = HTTPRequest.new()
