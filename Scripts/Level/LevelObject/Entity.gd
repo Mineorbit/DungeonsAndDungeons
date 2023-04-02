@@ -34,7 +34,7 @@ var in_swim_area = false
 var look_direction = Vector2(1,0)
 var fresh_kickback = false
 var kickback_direction = Vector3.ZERO
-var stun_done = false
+var kickback_done = false
 
 var should_jump = false
 
@@ -42,7 +42,7 @@ var move_direction := Vector3.ZERO
 var is_jumping = false
 
 var target_rot = Quaternion.IDENTITY
-var stunned = false
+var stunned_by_kickback = false
 var input_blocked = false
 var allowed_to_move = true
 var last_floor = false
@@ -151,7 +151,7 @@ var jump_cool_down = 0
 @export var jump_cool_down_time: float = 0.5
 
 func can_jump():
-	if not input_blocked and not stunned:
+	if not input_blocked and not stunned_by_kickback:
 		if in_swim_area:
 			#cool down
 			if jump_cool_down < 0.1:
@@ -194,7 +194,7 @@ func _physics_process(delta: float) -> void:
 	if global_transform.origin.y < Constants.deathplane:
 		Kill()
 	
-	if (not input_blocked) and (not stunned):
+	if (not input_blocked) and (not stunned()):
 		if allowed_to_move:
 			var current_speed = speed
 			if in_swim_area:
@@ -245,11 +245,11 @@ func _physics_process(delta: float) -> void:
 		is_jumping = false
 	elif just_landed:
 		_snap_vector = Vector3.DOWN
-		if stun_done:
+		if kickback_done:
 			_velocity = Vector3.ZERO
 			input_blocked = false
-			stunned = false
-			stun_done = false
+			stunned_by_kickback = false
+			kickback_done = false
 	
 	if fresh_kickback:
 		fresh_kickback = false
@@ -269,14 +269,17 @@ func _physics_process(delta: float) -> void:
 
 func kickback(direction) -> void:
 	input_blocked = true
-	stunned = true
-	stun_done = false
+	stunned_by_kickback = true
+	kickback_done = false
 	fresh_kickback = true
 	kickback_direction = direction*speed
 	#await get_tree().create_timer(kickbackTime),"timeout"
-	stun_done = true
+	kickback_done = true
 	# starts kickback process:
 	# character moves backwards in ballistic arch until
+
+func stunned():
+	return stunned_by_kickback
 
 # this is the current method later on do tree removal
 func Kill():
@@ -299,6 +302,11 @@ func Hit(damage, hitting_entity,direction = null):
 	health = health - damage
 	if health < 0:
 		Kill()
+
+func Stun(duration, stunning_entity, direction):
+	var kickback_direction = (direction.normalized() + Vector3.UP).normalized()
+	if kickback_direction.length() > 0.5:
+		kickback(2*kickback_direction)
 
 
 func Attach(item):

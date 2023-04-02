@@ -25,6 +25,8 @@ func Hit(damage, hitting_entity,direction = null):
 	if modifier != 0:
 		super.Hit(modifier*damage,hitting_entity,direction)
 		Signals.playerHealthChanged.emit(id,health)
+	if modifier < 1:
+		hitting_entity.Stun(1,self,-direction)
 
 
 # changing colors
