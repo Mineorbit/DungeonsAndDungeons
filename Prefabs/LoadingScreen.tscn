@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx5s7ni0xbw6o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbjkc"]
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="Theme" id="Theme_bln2c"]
+Panel/styles/panel = SubResource("StyleBoxFlat_nbjkc")
+
+[node name="LoadingScreen" type="CanvasLayer"]
+layer = 4
+
+[node name="Panel" type="Panel" parent="."]
+top_level = true
+light_mask = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bln2c")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.8
+anchor_right = 0.9
+anchor_bottom = 0.9
+text = "Eyyyyy"
+horizontal_alignment = 1
+vertical_alignment = 1

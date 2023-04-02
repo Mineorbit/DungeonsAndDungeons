@@ -306,7 +306,7 @@ func Hit(damage, hitting_entity,direction = null):
 func Stun(duration, stunning_entity, direction):
 	var kickback_direction = (direction.normalized() + Vector3.UP).normalized()
 	if kickback_direction.length() > 0.5:
-		kickback(2*kickback_direction)
+		kickback(1.5*kickback_direction)
 
 
 func Attach(item):
