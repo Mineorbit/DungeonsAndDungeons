@@ -19,7 +19,12 @@ var flavor_texts = [
 	"Gut gebügelt ist halb genäht",
 	"Keine Haftung für die Garderobe",
 	"Einfach Orangensaft",
-	"Es ist halt einfach ein weites Feld"
+	"Es ist halt einfach ein weites Feld",
+	"3, 2 ,1 , Frankfurt!",
+	"Geisterfahrer sind immer entgegekommend",
+	"Wo ist der Sexraum?",
+	"ch glaube der Tod hat hier die meisten Kills",
+	"Wollen wir das draußen klären?"
 	
 	
 	
