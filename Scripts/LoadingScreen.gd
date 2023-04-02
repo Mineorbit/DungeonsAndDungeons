@@ -24,7 +24,21 @@ var flavor_texts = [
 	"Geisterfahrer sind immer entgegekommend",
 	"Wo ist der Sexraum?",
 	"ch glaube der Tod hat hier die meisten Kills",
-	"Wollen wir das draußen klären?"
+	"Wollen wir das draußen klären?",
+	"Amerika ist halt Rom",
+	"Es riecht symmetrisch",
+	"Taffe Kassee",
+	"Scheiß Turnschuhsozialisten",
+	"da hab ich mich in der Küche wiedergefunden wie ich das Brot anschreie, dass es so gut schmeckt",
+	"Also ich mein wir könnten hier auch zwei Esel mit einer Klappe verprügeln...",
+	"Ikea ist literal eine Mensa mit angetackertem Möbelhandel",
+	"Ganz ehrlich: Alligatoah ist die Volt Partei des Deutschrap",
+	"Das sieht aus wie eine industrielle Hobbithöhle",
+	"Zitat: So'n Schnitzel strahlt auch schon so ne Wärme aus",
+	"Metakäse",
+	"Der schiefe Turm von Zewa",
+	"Die holländische Sprache ist wie Valorant: Sie kombiniert zwei Sachen und macht keins von beidem besser",
+	"Anfang April ist für mich auch Ende März"
 	
 	
 	
