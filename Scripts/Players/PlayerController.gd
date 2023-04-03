@@ -112,11 +112,14 @@ func PickupAction():
 	if player != null:
 		Pickup()
 	else:
-		rpc_id(1,"Pickup") 	
+		rpc_id(1,"Pickup")
 
 func check():
+	if is_active:
+		return true
 	if Constants.id != 0:
-		return (synchronizer.is_multiplayer_authority())
+		if not multiplayer.is_server():
+			return (synchronizer.is_multiplayer_authority())
 	return false
 
 
@@ -128,7 +131,7 @@ func get_player_camera():
 
 
 func _physics_process(delta):
-	if is_active or check():
+	if check():
 		input_direction = Vector3.ZERO
 		input_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")

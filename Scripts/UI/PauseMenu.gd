@@ -38,7 +38,6 @@ func unpause():
 func exit_to_main_menu():
 	unpause()
 	Bootstrap.start_main_menu()
-	multiplayer.set_multiplayer_peer(null)
 	if Constants.entity_control_function != null:
 		Signals.on_new_world_created.disconnect(Constants.entity_control_function)
 

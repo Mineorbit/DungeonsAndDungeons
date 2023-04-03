@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dao4vnbermdpd"]
+[gd_scene load_steps=8 format=3 uid="uid://dao4vnbermdpd"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/LevelListElement.gd" id="1_fh31g"]
 [ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="2_o1jps"]
 [ext_resource type="Theme" uid="uid://v0rlgyoix0hi" path="res://OvertextTheme.tres" id="3_865gq"]
 [ext_resource type="Texture2D" uid="uid://b1xqwph4cqbrm" path="res://Assets/Textures/selection.png" id="3_guv80"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nri71"]
+line_spacing = 12.0
+font_size = 36
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_27c0p"]
 properties/0/path = NodePath("selection:visible")
@@ -12,6 +16,9 @@ properties/0/sync = true
 properties/1/path = NodePath("Name:text")
 properties/1/spawn = true
 properties/1/sync = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_ojl86"]
+font_size = 36
 
 [node name="LevelListElement" type="ColorRect"]
 custom_minimum_size = Vector2(256, 256)
@@ -37,6 +44,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 theme = ExtResource("3_865gq")
 text = "Test"
+label_settings = SubResource("LabelSettings_nri71")
 
 [node name="Button" type="BaseButton" parent="."]
 _import_path = NodePath("")
@@ -131,6 +139,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Description"
+label_settings = SubResource("LabelSettings_ojl86")
 
 [node name="Spawns" type="HFlowContainer" parent="."]
 visible = false

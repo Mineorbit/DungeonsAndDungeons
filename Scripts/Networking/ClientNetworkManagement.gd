@@ -1,6 +1,6 @@
 extends Node3D
 
-var peer
+var peer: MultiplayerPeer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,13 +13,18 @@ func _ready():
 	multiplayer.peer_connected.connect(connected)
 	multiplayer.peer_disconnected.connect(disconnected)
 	multiplayer.set_multiplayer_peer(peer)
+	
 	Constants.World.players.player_added.connect(player_created)
 	MultiplayerConstants.on_local_id_set.connect(func(id):id_set = true)
 	#start an empty world
 	#get_parent().world.start()
 	print("Connected signal to "+str(Constants.World))
 	Constants.World.on_entity_spawned.connect(disable_local_computations)
-	
+	tree_exiting.connect(close_connection)
+
+func close_connection():
+	Constants.id = 0
+	peer.close()
 
 
 func create_player_camera():
