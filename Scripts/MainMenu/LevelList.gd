@@ -4,6 +4,9 @@ extends ScrollContainer
 @onready var grid: GridContainer = $Control/GridContainer
 @onready var control: Control = $Control
 @export var enabled = true
+@export var font_size = 24
+
+
 var selected_level = null
 var selected_level_name = null
 

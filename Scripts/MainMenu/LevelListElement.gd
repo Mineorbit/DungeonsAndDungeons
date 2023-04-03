@@ -27,6 +27,11 @@ signal on_select(data)
 
 func set_display_size(display_size):
 	custom_minimum_size = 256*display_size
+	var labelstyle = LabelSettings.new()
+	labelstyle.font_size = display_size.x*18
+	
+	description.label_settings = labelstyle
+	levellistelement.label_settings = labelstyle
 	levellistelement.reset_size()
 
 
