@@ -37,7 +37,6 @@ func set_level_list(level_list):
 		grid.add_child(level_list_element)
 		level_list_element.on_select.connect(selected)
 		level_list_element.set_level_data(level)
-		level_list_element.set_display_size(Vector2(displaysize,displaysize))
 		print(str(Constants.id)+" spawning Level List element")
 		added_element.emit(level_list_element)
 		num = num + 1

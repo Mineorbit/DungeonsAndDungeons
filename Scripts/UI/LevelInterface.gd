@@ -3,9 +3,7 @@ extends SubViewport
 
 @onready var levellist = $LevelList
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
 func _ready():
 	setupInterfaceMaterial()
 

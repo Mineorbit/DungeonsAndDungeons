@@ -21,14 +21,17 @@ var level_name: String:
 
 func _ready():
 	selection.hide()
+	set_display_size()
 
 signal on_select(data)
 
 
-func set_display_size(display_size):
-	custom_minimum_size = 256*display_size
+func set_display_size():
+	var ds = get_parent().get_parent().get_parent().displaysize
+	var s = Vector2(ds,ds)
+	custom_minimum_size = 256*s
 	var labelstyle = LabelSettings.new()
-	labelstyle.font_size = display_size.x*18
+	labelstyle.font_size = s.x*18
 	
 	description.label_settings = labelstyle
 	levellistelement.label_settings = labelstyle
