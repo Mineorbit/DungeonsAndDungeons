@@ -220,7 +220,8 @@ StopEditProperties={
 
 [physics]
 
-common/physics_ticks_per_second=50
+common/physics_ticks_per_second=64
+common/max_physics_steps_per_frame=12
 3d/physics_engine="GodotPhysics3D"
 3d/solver/solver_iterations=64
 3d/solver/contact_max_separation=0.1
