@@ -55,6 +55,8 @@ func complete_start_round(levelname):
 	Constants.World.players.set_start_positions()
 	
 	get_tree().paused = false
+	
+	rpc("start_round_finish_client")
 	level_time = 0
 	is_in_play = true
 
@@ -78,6 +80,15 @@ func _physics_process(delta):
 var level_locked = false
 
 
+@rpc
+func start_round_client():
+	LoadingScreen.open()
+
+@rpc
+func start_round_finish_client():
+	# here we should possibly await loading of the starting chunks until we open"
+	LoadingScreen.close()
+
 @rpc("any_peer")
 func start_round(sel_lev,sel_lev_name):
 	if multiplayer.get_remote_sender_id() != lobby.LevelSelectionScreen.owner_id:
@@ -87,6 +98,8 @@ func start_round(sel_lev,sel_lev_name):
 		return
 	level_locked = true
 	print("===Starting Round===")
+	
+	rpc("start_round_client")
 	selected_level = sel_lev
 	selected_level_name = sel_lev_name
 	ApiAccess.download_level(selected_level)

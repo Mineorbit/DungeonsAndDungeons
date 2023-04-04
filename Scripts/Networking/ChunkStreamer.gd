@@ -11,7 +11,7 @@ func _ready():
 
 @rpc
 func stream_chunk(data,immediate):
-	add_from_function(data,immediate)
+	add_from_function(data,false)
 
 var objects = []
 
