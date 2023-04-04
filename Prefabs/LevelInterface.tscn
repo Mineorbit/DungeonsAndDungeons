@@ -38,14 +38,22 @@ anchor_right = 1.0
 grow_horizontal = 0
 icon = ExtResource("3_wpuct")
 
-[node name="CheckBoxes" type="HSplitContainer" parent="."]
+[node name="CheckboxPanel" type="Panel" parent="."]
 anchors_preset = -1
+anchor_left = 0.1
 anchor_top = 0.75
-anchor_right = 1.0
+anchor_right = 0.9
+anchor_bottom = 1.0
+
+[node name="CheckBoxes" type="HBoxContainer" parent="CheckboxPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
-dragger_visibility = 1
+grow_vertical = 2
 
 [node name="CursorSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
@@ -53,4 +61,4 @@ spawn_path = NodePath("../Cursors")
 
 [node name="CheckboxSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/ReadyCall.tscn")
-spawn_path = NodePath("../CheckBoxes")
+spawn_path = NodePath("../CheckboxPanel/CheckBoxes")

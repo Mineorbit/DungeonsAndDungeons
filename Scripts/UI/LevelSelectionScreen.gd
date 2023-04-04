@@ -4,7 +4,7 @@ extends MeshInstance3D
 @onready var camera: Camera3D = $LevelListCamera
 @onready var selectionArea: Area3D = $SelectionArea
 @onready var interface = $Interface
-@onready var checkboxes = $Interface/CheckBoxes
+@onready var checkboxes = $Interface/CheckboxPanel/CheckBoxes
 @onready var levellist = $Interface/LevelList
 @onready var refreshButton: Button = $Interface/Refresh
 @onready var cursors = $Interface/Cursors
