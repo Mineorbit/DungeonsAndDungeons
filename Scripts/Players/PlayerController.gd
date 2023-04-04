@@ -18,6 +18,8 @@ func setup_playercontroller_networking():
 	synchronizer.set_multiplayer_authority(str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
 	
+	playercamera.get_node("MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int())
+	
 	
 func set_active(active):
 	is_active = active
