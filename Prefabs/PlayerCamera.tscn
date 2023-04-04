@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/Players/PlayerCamera.gd" id="1_b020v"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_82nwo"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath("../../Camera:position")
 properties/0/spawn = true
 properties/0/sync = true
-properties/1/path = NodePath(".:rotation")
+properties/1/path = NodePath("../../Camera:rotation")
 properties/1/spawn = true
 properties/1/sync = true
 
@@ -20,11 +20,12 @@ cull_mask = 1048573
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
 current = true
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera"]
+root_path = NodePath("../../Spring/CameraPosition")
+replication_config = SubResource("SceneReplicationConfig_82nwo")
+
 [node name="Spring" type="SpringArm3D" parent="."]
 spring_length = 5.0
 margin = 0.4
 
 [node name="CameraPosition" type="Node3D" parent="Spring"]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Spring/CameraPosition"]
-replication_config = SubResource("SceneReplicationConfig_82nwo")

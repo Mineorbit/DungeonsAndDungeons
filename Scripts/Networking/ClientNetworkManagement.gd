@@ -27,7 +27,7 @@ func disable_local_computations(entity):
 	entity.ready.connect(func():
 		entity.set_physics_process(false)
 		entity.set_process(false)
-		if entity.model != null:
+		if not entity.get("model") == null:
 			entity.model.set_physics_process(false)
 			entity.model.set_process(false)
 		)
@@ -47,7 +47,9 @@ func disconnected(id):
 
 func playercontroller_created(playercontroller):
 	if str(playercontroller.name).to_int() == Constants.id:
-		playercontroller.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
+		var p =  Constants.World.players.get_player(MultiplayerConstants.local_id)
+		playercontroller.player = p
+		p.playercontroller = playercontroller
 	playercontroller.set_active(str(playercontroller.name).to_int() == Constants.id)
 
 func player_created(player):

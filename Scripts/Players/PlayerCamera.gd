@@ -86,7 +86,8 @@ func move_camera_rig(vec: Vector2) -> void:
 
 var camera_ideal_target_position = Vector3.ZERO
 var target_position = Vector3.ZERO
-# interpolate camera position between current position and the target Position (Holding point)
+
+# interpolate camera position between current position and the target Position because networking is slow
 func move_camera():
 	var s = 0.35
 	var t = 0.75
@@ -110,7 +111,6 @@ func _physics_process(delta):
 
 func update_camera_rigging(delta):
 	if (player != null) and player.is_inside_tree():
-		#Camera.look_at(player.global_transform.origin)
 		global_transform.origin = get_camera_target_position()
 		if last_input_time < tolerance:
 			move_camera_rig(dir)

@@ -5,6 +5,7 @@ var is_active = false
 
 @export var input_direction = Vector3.ZERO
 @onready var playercamera = $PlayerCamera
+@onready var playercameraposition = $PlayerCamera/Camera
 @onready var synchronizer = $MultiplayerSynchronizer
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,10 +18,11 @@ func setup_playercontroller_networking():
 		return
 	synchronizer.set_multiplayer_authority(str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
-	
-	playercamera.get_node("Spring/CameraPosition/MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int())
-	
-	
+	playercamera.get_node("Camera/MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int())
+
+func get_player_camera_position():
+	return playercameraposition
+
 func set_active(active):
 	is_active = active
 	if active:
@@ -29,6 +31,8 @@ func set_active(active):
 			playercamera.activate()
 		else:
 			playercamera.ready.connect(playercamera.activate)
+
+
 
 
 func report_network():
