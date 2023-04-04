@@ -31,6 +31,7 @@ var mouse_sensitivity := 0.005
 @onready var player = get_parent().get_parent().get_parent()
 
 
+
 func activate():
 	Constants.PlayerCamera = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -97,9 +98,11 @@ func get_camera_target_position():
 
 func _process(delta):
 	update_camera_rigging(delta)
+
 func _physics_process(delta):
-	move_camera()
-	update_camera_rigging(0)
+	if Camera.current:
+		move_camera()
+		update_camera_rigging(0)
 
 func update_camera_rigging(delta):
 	if (player != null) and player.is_inside_tree():
