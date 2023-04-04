@@ -55,6 +55,7 @@ anchor_right = 0.875
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Cursors" type="Node2D" parent="."]
 
@@ -65,3 +66,5 @@ spawn_path = NodePath("../Cursors")
 [node name="CheckboxSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/ReadyCall.tscn")
 spawn_path = NodePath("../CheckboxPanel/CheckBoxes")
+
+[connection signal="pressed" from="Refresh" to="." method="refresh_level_list"]

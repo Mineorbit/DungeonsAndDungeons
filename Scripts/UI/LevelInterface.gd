@@ -14,3 +14,7 @@ func setupInterfaceMaterial():
 	get_parent().material_override = newmaterial
 	levellist.set_display_size(2)
 	
+
+
+func refresh_level_list():
+	pass # Replace with function body.

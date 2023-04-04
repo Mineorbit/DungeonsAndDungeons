@@ -59,6 +59,7 @@ func _process(_delta):
 			start(true)
 
 func start_server():
+	LoadingScreen.close()
 	current_scene = load("res://Scenes/play.tscn").instantiate()
 	add_child(current_scene)
 	var server_management = load("res://Scenes/ServerNetworkManagement.tscn").instantiate()

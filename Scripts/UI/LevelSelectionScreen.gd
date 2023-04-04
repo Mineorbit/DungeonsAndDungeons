@@ -47,9 +47,9 @@ func update_interface_owner():
 	var new_owner_id = MultiplayerConstants.get_first_connected()
 	owner_id = new_owner_id
 	#trigger update on other clients
+	set_auth_on_objects(owner_id)
 	rpc("set_interface_owner",owner_id)
 	print("["+str(Constants.id)+"] Changing Interface Owner to "+str(new_owner_id))
-	set_auth_on_objects(owner_id)
 
 
 func set_auth_on_objects(id):
@@ -58,6 +58,8 @@ func set_auth_on_objects(id):
 	interface.get_node("CheckboxSpawner").set_multiplayer_authority(id)
 #only called by server
 
+var initialize_list = false
+
 @rpc("any_peer")
 func set_interface_owner(id):
 	if owner_id == id:
@@ -65,23 +67,11 @@ func set_interface_owner(id):
 	owner_id = id
 	set_auth_on_objects(owner_id)
 	if owner_id == Constants.id:
-		ApiAccess.levels_fetched.connect(load_level_list)
-		refreshButton.pressed.connect(refresh_level_list)
-		refresh_level_list()
+		if not initialize_list:
+			initialize_list = true
+			ApiAccess.levels_fetched.connect(load_level_list)
+			refresh_level_list()
 
-
-
-
-func player_entered(player):
-	# server does not have to continue
-	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
-		camera.current = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
-		#Input.set_mouse
-		local_player_inside = true
-	if Constants.id == owner_id:
-		add_checkbox(player)
-		add_cursor(player)
 
 
 func add_cursor(player):
@@ -98,9 +88,10 @@ func remove_cursor(player):
 var checkbox_list = {}
 
 func add_checkbox(player):
-	var local_id = player.name
 	if Constants.id != owner_id:
 		return
+	
+	var local_id = player.name
 	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
 	var checkbox = checkbox_pref.instantiate()
 	checkbox.size = Vector2(0.125,0.125)
@@ -116,7 +107,20 @@ func remove_checkbox(player):
 	if local_id in checkbox_list:
 		checkboxes.remove_child(checkbox_list[local_id])
 
-func player_left(player):	
+
+
+func player_entered(player):
+	# server does not have to continue
+	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
+		camera.current = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+		#Input.set_mouse
+		local_player_inside = true
+	if Constants.id == owner_id:
+		add_checkbox(player)
+		add_cursor(player)
+
+func player_left(player):
 	if 1 == Constants.id:
 		camera.current = false
 		localcursor = null
@@ -170,6 +174,10 @@ func pass_inputs_to_interface(event):
 		if interface != null:
 			if event is InputEventMouseButton:
 				interface.push_input(event, true)
+
+func _process(delta):
+	if Input.is_action_just_pressed("Connect"):
+		print(interface.get_node("CheckboxSpawner").get_multiplayer_authority())
 
 func _input(event):
 	var local_coord = true

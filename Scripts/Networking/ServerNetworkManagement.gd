@@ -68,4 +68,5 @@ func on_player_added(player):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Connect"):
-		Constants.World.players.set_start_positions()
+		pass
+		#Constants.World.players.set_start_positions()

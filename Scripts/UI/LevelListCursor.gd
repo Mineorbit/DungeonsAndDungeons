@@ -5,9 +5,11 @@ extends Sprite2D
 var levellist
 
 func _ready():
-	synchronizer.set_multiplayer_authority(str(name).to_int())
-	set_multiplayer_authority(str(name).to_int())
 	levellist = get_parent().get_parent().get_parent().levellist
+
+func _enter_tree():
+	get_node("MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int())
+	set_multiplayer_authority(str(name).to_int())
 
 func _input(event):
 	if name != str(Constants.id):
