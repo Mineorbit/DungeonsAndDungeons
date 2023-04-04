@@ -28,11 +28,11 @@ extends Node3D
 
 var player_to_follow_exists = false
 var mouse_sensitivity := 0.005
-@onready var player = get_parent().get_parent().get_parent()
-
+@onready var player = get_parent().player
 
 
 func activate():
+	player = get_parent().player
 	Constants.PlayerCamera = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Camera.current = true

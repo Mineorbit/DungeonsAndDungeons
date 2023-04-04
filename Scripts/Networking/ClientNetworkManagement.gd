@@ -15,11 +15,11 @@ func _ready():
 	multiplayer.peer_connected.connect(connected)
 	multiplayer.peer_disconnected.connect(disconnected)
 	multiplayer.set_multiplayer_peer(peer)
+	Constants.World.players.playerControllers.child_entered_tree.connect(playercontroller_created)
 
 func close_connection():
 	Constants.id = 0
 	peer.close()
-
 
 
 
@@ -44,12 +44,17 @@ func connected(id):
 func disconnected(id):
 	print("Disconnected: "+str(id))
 
+
+func playercontroller_created(playercontroller):
+	if str(playercontroller.name).to_int() == Constants.id:
+		playercontroller.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
+	playercontroller.set_active(str(playercontroller.name).to_int() == Constants.id)
+
 func player_created(player):
 	print(str(Constants.id)+" Player Created")
-	# temporary
-	player.playercontroller = null
 	
 	var playermodel = player.get_node("Model")
+	
 	
 	# need to cancel on ready
 	player.ready.connect(
@@ -62,11 +67,12 @@ func player_created(player):
 			playermodel.set_physics_process(false)
 			playermodel.set_process(false)
 	)
+	
 	player_exists = true
 	setup_local_controls()
 
 
 func setup_local_controls():
 	if id_set and player_exists:
-		PlayerCamera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
+		#Constants.PlayerCamera.player = Constants.World.players.get_player(MultiplayerConstants.local_id)
 		get_parent().spawn_player_hud()

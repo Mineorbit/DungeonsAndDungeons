@@ -16,9 +16,6 @@ var itemRight
 var playercontroller
 
 
-@onready var camera_offset = $CameraAnchor/CameraOffset
-@onready var camera = $CameraAnchor/CameraOffset/PlayerCamera
-
 func Hit(damage, hitting_entity,direction = null):
 	var modifier = 1
 	if direction != null:

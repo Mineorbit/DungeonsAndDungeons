@@ -22,7 +22,11 @@ func setup_playercontroller_networking():
 func set_active(active):
 	is_active = active
 	if active:
-		playercamera.activate()
+		playercamera = $PlayerCamera
+		if playercamera.is_inside_tree():
+			playercamera.activate()
+		else:
+			playercamera.ready.connect(playercamera.activate)
 
 
 func report_network():
@@ -36,7 +40,7 @@ func Jump():
 		player.jump()
 
 func JumpAction():
-	if player != null:
+	if Constants.id == 0:
 		Jump()
 	else:
 		#only to server
@@ -61,14 +65,14 @@ func StopUseLeft():
 
 
 func UseLeftAction():
-	if player != null:
+	if Constants.id == 0:
 		UseLeft()
 	else:
 		rpc_id(1,"UseLeft") 
 
 
 func StopUseLeftAction():
-	if player != null:
+	if Constants.id == 0:
 		StopUseLeft()
 	else:
 		rpc_id(1,"StopUseLeft") 
@@ -90,17 +94,16 @@ func StopUseRight():
 
 
 func UseRightAction():
-	if player != null:
+	if Constants.id == 0:
 		#if right item is bow:
 		#StartAimingCamera()
-		
 		UseRight()
 	else:
 		rpc_id(1,"UseRight") 
 
 
 func StopUseRightAction():
-	if player != null:
+	if Constants.id == 0:
 		#StopAimingCamera()
 		StopUseRight()
 	else:
@@ -113,7 +116,7 @@ func Pickup():
 	player.on_entity_pickup.emit()
 	
 func PickupAction():
-	if player != null:
+	if Constants.id == 0:
 		Pickup()
 	else:
 		rpc_id(1,"Pickup")
@@ -128,10 +131,7 @@ func check():
 
 
 func get_player_camera():
-	if Constants.id == 1:
-		return MultiplayerConstants.player_cameras[str(name).to_int()]
-	else:
-		return Constants.PlayerCamera
+	return playercamera
 
 
 func _physics_process(delta):

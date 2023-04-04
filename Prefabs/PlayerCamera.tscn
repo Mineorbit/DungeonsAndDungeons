@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc82dghj30vrq"]
+[gd_scene load_steps=3 format=3 uid="uid://dc82dghj30vrq"]
 
 [ext_resource type="Script" path="res://Scripts/Players/PlayerCamera.gd" id="1_b020v"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_82nwo"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="PlayerCamera" type="Node3D"]
 top_level = true
@@ -17,3 +25,6 @@ spring_length = 5.0
 margin = 0.4
 
 [node name="CameraPosition" type="Node3D" parent="Spring"]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Spring/CameraPosition"]
+replication_config = SubResource("SceneReplicationConfig_82nwo")
