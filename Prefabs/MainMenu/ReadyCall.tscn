@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c4ejvlooatsvg" path="res://Assets/UI/ReadyCallCheckBoxTheme.tres" id="1_o8vfu"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5pggu"]
-properties/0/path = NodePath(".:button_pressed")
+properties/0/path = NodePath("CheckBox:button_pressed")
 properties/0/spawn = true
 properties/0/sync = true
 
@@ -17,9 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.125, 0.125)
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_5pggu")
-
 [node name="CheckBox" type="CheckBox" parent="."]
 layout_mode = 2
 anchor_right = 1.0
@@ -32,3 +29,6 @@ scale = Vector2(0.4, 0.4)
 theme = ExtResource("1_o8vfu")
 alignment = 1
 icon_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5pggu")

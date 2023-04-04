@@ -82,22 +82,41 @@ func player_entered(player):
 		#Input.set_mouse
 		local_player_inside = true
 	if Constants.id == owner_id:
-		add_checkbox(player.name)
-		create_cursor(player)
+		add_checkbox(player)
+		add_cursor(player)
 
 
-func create_cursor(player):
+func add_cursor(player):
 	var cursorprefab = load("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
 	var cursor = cursorprefab.instantiate()
 	cursor.name = str(MultiplayerConstants.local_id_to_id[player.id])
 	cursors.add_child(cursor)
 
-func remove_checkbox(player):
-	checkboxes.remove_child(checkboxes.get_child(0))
-
 func remove_cursor(player):
 	var cursor = cursors.get_node(str(MultiplayerConstants.local_id_to_id[player.id]))
 	cursors.remove_child(cursor)
+
+
+var checkbox_list = {}
+
+func add_checkbox(player):
+	var local_id = player.name
+	if Constants.id != owner_id:
+		return
+	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
+	var checkbox = checkbox_pref.instantiate()
+	checkbox.size = Vector2(0.125,0.125)
+	checkbox.scale = Vector2(0.125,0.125)
+	checkbox.name = str(local_id)
+	checkbox.get_node("CheckBox").pressed.connect(start_round)
+	checkboxes.add_child(checkbox)
+	print(checkboxes.get_children())
+	checkbox_list[local_id] = checkbox
+
+func remove_checkbox(player):
+	var local_id = player.name
+	if local_id in checkbox_list:
+		checkboxes.remove_child(checkbox_list[local_id])
 
 func player_left(player):	
 	if 1 == Constants.id:
@@ -114,16 +133,6 @@ func player_left(player):
 		remove_checkbox(player)
 
 
-func add_checkbox(local_id):
-	if Constants.id != owner_id:
-		return
-	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
-	var checkbox = checkbox_pref.instantiate()
-	checkbox.size = Vector2(0.125,0.125)
-	checkbox.scale = Vector2(0.125,0.125)
-	checkbox.name = str(local_id)
-	checkbox.get_node("CheckBox").pressed.connect(start_round)
-	checkboxes.add_child(checkbox)
 
 
 func check_ready():
