@@ -2,15 +2,18 @@
 
 [ext_resource type="Script" path="res://Scripts/Players/PlayerCamera.gd" id="1_b020v"]
 
-[node name="PlayerCamera" type="SpringArm3D"]
-spring_length = 5.0
-margin = 0.2
+[node name="PlayerCamera" type="Node3D"]
+top_level = true
 script = ExtResource("1_b020v")
-
-[node name="CameraPosition" type="Node3D" parent="."]
 
 [node name="Camera" type="Camera3D" parent="."]
 cull_mask = 1048573
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
 current = true
+
+[node name="Spring" type="SpringArm3D" parent="."]
+spring_length = 5.0
+margin = 0.4
+
+[node name="CameraPosition" type="Node3D" parent="Spring"]

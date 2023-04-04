@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var CameraPosition = $CameraPosition
+@onready var CameraPosition = $Spring/CameraPosition
 @onready var Camera = $Camera
 
 
@@ -66,19 +66,29 @@ var tolerance: float = 0.04
 
 var dir: Vector2 = Vector2.ZERO
 
+var s = 0
+
+var t = 0
+
+
 func move_camera_rig(vec: Vector2) -> void:
-		rotation.x -= vec.y * mouse_sensitivity
-		rotation.x = clamp(rotation.x, -0.9, 0.3)
+		s -= vec.y * mouse_sensitivity
+		s = clamp(s,-0.9,0.3)
+		global_rotation.x = s
 		
-		rotation.y -= vec.x * mouse_sensitivity
-		rotation.y = rotation.y
+		
+		t -= vec.x * mouse_sensitivity
+		
+		global_rotation.y = t
+		global_rotation.z = 0
 
 
 var camera_ideal_target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
 	var target_position = get_camera_target_position()
-	Camera.global_transform.origin = CameraPosition.global_transform.origin
+	var t = 0.85
+	Camera.global_transform.origin =t*Camera.global_transform.origin + (1-t) *CameraPosition.global_transform.origin
 	Camera.look_at(target_position)
 
 func get_camera_target_position():
@@ -87,14 +97,18 @@ func get_camera_target_position():
 
 func _process(delta):
 	update_camera_rigging(delta)
+func _physics_process(delta):
+	move_camera()
+	update_camera_rigging(0)
 
 func update_camera_rigging(delta):
 	if (player != null) and player.is_inside_tree():
-		move_camera()
 		#Camera.look_at(player.global_transform.origin)
 		global_transform.origin = get_camera_target_position()
 		if last_input_time < tolerance:
 			move_camera_rig(dir)
+		else:
+			move_camera_rig(Vector2(0.0,0.0))
 	last_input_time += delta
 
 
