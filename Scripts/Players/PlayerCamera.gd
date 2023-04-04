@@ -1,37 +1,50 @@
 extends Node3D
 
-@onready var CameraHoldingPoint = $CameraHoldingPoint
+@onready var CameraPosition = $CameraPosition
 @onready var Camera = $Camera
-@onready var TargetPoint:Node3D = $TargetPoint
 
 
-@export var player: Node:
-	get:
-		return player
-	set(value):
-		player = value
-		if value == null:
-			Camera.current = false
-			player_to_follow_exists = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			Camera.current = true
-			player_to_follow_exists = true
-			update_camera_target_position()
-			update_camera_rigging(0)
-			_move_camera()
-			player.tree_exiting.connect(func():
-				player = null)
-			#player.on_entity_despawn.connect(func():player_to_follow_exists = false)
-			player.on_entity_aiming.connect(ChangeMovementState)
+#@export var player: Node:
+#	get:
+#		return player
+#	set(value):
+#		player = value
+#		if value == null:
+#			Camera.current = false
+#			player_to_follow_exists = false
+#			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+#		else:
+#			Constants.PlayerCamera = self
+#			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+#			Camera.current = true
+#			player_to_follow_exists = true
+#			update_camera_target_position()
+#			update_camera_rigging(0)
+#			_move_camera()
+#			player.tree_exiting.connect(func():
+#				player = null)
+#			#player.on_entity_despawn.connect(func():player_to_follow_exists = false)
+#			player.on_entity_aiming.connect(ChangeMovementState)
 
 var player_to_follow_exists = false
 var mouse_sensitivity := 0.005
+@onready var player = get_parent().get_parent().get_parent()
+
+
+func activate():
+	Constants.PlayerCamera = self
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Camera.current = true
+	player_to_follow_exists = true
+	update_camera_rigging(0)
+	player.tree_exiting.connect(func():
+		player = null)
+	player.on_entity_despawn.connect(func():player_to_follow_exists = false)
+	player.on_entity_aiming.connect(ChangeMovementState)
 
 func _ready() -> void:
-	player = null
-	set_as_top_level(true)
+	print("Camera is ready")
+	Camera.set_as_top_level(true)
 
 var offset = 0
 
@@ -64,42 +77,19 @@ func move_camera_rig(vec: Vector2) -> void:
 var camera_ideal_target_position = Vector3.ZERO
 # interpolate camera position between current position and the target Position (Holding point)
 func move_camera():
-	update_camera_target_position()
-	var new_target_position = get_ideal_camera_target_position()
-	if((new_target_position-camera_ideal_target_position).length() < 0.00001):
-		# return early as position has no changed
-		return
-	camera_ideal_target_position = new_target_position
-	_move_camera()
-
-func get_ideal_camera_target_position():
-	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
-
-func _move_camera():
 	var target_position = get_camera_target_position()
-	Camera.global_transform.origin = CameraHoldingPoint.global_transform.origin
+	Camera.global_transform.origin = CameraPosition.global_transform.origin
 	Camera.look_at(target_position)
 
-var camera_target_position = Vector3(0,0,0)
-
 func get_camera_target_position():
-	return camera_target_position
+	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
 
-func update_camera_target_position():
-	var ideal_position = get_ideal_camera_target_position()
-	camera_target_position.x = ideal_position.x
-	var p = 0.975
-	camera_target_position.y = p*camera_target_position.y + (1-p)*ideal_position.y
-	camera_target_position.z = ideal_position.z
 
-func _physics_process(delta):
-	update_camera_rigging(delta)
-	
 func _process(delta):
-	update_camera_rigging(0)
+	update_camera_rigging(delta)
 
 func update_camera_rigging(delta):
-	if player_to_follow_exists and (player != null) and player.is_inside_tree():
+	if (player != null) and player.is_inside_tree():
 		move_camera()
 		#Camera.look_at(player.global_transform.origin)
 		global_transform.origin = get_camera_target_position()

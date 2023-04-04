@@ -127,7 +127,7 @@ func get_player_camera():
 	if Constants.id == 1:
 		return MultiplayerConstants.player_cameras[str(name).to_int()]
 	else:
-		return PlayerCamera
+		return Constants.PlayerCamera
 
 
 func _physics_process(delta):

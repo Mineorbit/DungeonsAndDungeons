@@ -15,7 +15,9 @@ var itemLeft
 var itemRight
 var playercontroller
 
+
 @onready var camera_offset = $CameraAnchor/CameraOffset
+@onready var camera = $CameraAnchor/CameraOffset/PlayerCamera
 
 func Hit(damage, hitting_entity,direction = null):
 	var modifier = 1
@@ -27,6 +29,7 @@ func Hit(damage, hitting_entity,direction = null):
 		Signals.playerHealthChanged.emit(id,health)
 	if modifier < 1:
 		hitting_entity.Stun(1,self,-direction)
+
 
 
 # changing colors
