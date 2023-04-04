@@ -128,7 +128,6 @@ func enter_test_mode():
 		player.tree_exited.connect(func():
 			if Constants.currentMode == 2 and player.id == current_player:
 				next_player())
-	Players.get_player(current_player).camera.activate()
 	Players.playerControllers.set_current_player(current_player)
 	#buildmusic.stop()
 	connections.hide()

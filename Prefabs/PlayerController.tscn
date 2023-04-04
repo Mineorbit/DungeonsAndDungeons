@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdpq5dmnmow5u"]
+[gd_scene load_steps=5 format=3 uid="uid://cdpq5dmnmow5u"]
 
 [ext_resource type="Script" path="res://Scripts/Players/PlayerController.gd" id="1_hko7f"]
 [ext_resource type="Script" path="res://Scripts/Players/PlayerControllerSynchronizer.gd" id="2_20dnh"]
+[ext_resource type="PackedScene" uid="uid://dc82dghj30vrq" path="res://Prefabs/PlayerCamera.tscn" id="3_hdkt4"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8fvqn"]
 properties/0/path = NodePath(".:input_direction")
@@ -15,3 +16,5 @@ script = ExtResource("1_hko7f")
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_8fvqn")
 script = ExtResource("2_20dnh")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("3_hdkt4")]

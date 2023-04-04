@@ -4,10 +4,12 @@ var player
 var is_active = false
 
 @export var input_direction = Vector3.ZERO
+@onready var playercamera = $PlayerCamera
 @onready var synchronizer = $MultiplayerSynchronizer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setup_playercontroller_networking()
+	playercamera.player = player
 
 func setup_playercontroller_networking():
 	# if this is not in multiplayer, do not authority
@@ -19,6 +21,8 @@ func setup_playercontroller_networking():
 	
 func set_active(active):
 	is_active = active
+	if active:
+		playercamera.activate()
 
 
 func report_network():

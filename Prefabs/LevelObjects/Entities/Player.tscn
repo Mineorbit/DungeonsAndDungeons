@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://doj2m1b66ehq1"]
+[gd_scene load_steps=9 format=3 uid="uid://doj2m1b66ehq1"]
 
 [ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_ju1or"]
 [ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
-[ext_resource type="PackedScene" uid="uid://dc82dghj30vrq" path="res://Prefabs/PlayerCamera.tscn" id="2_uow57"]
 [ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_7kqva"]
 [ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_ixgl3"]
 
@@ -47,8 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
 
 [node name="CameraOffset" type="Node3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
-
-[node name="PlayerCamera" parent="CameraAnchor/CameraOffset" instance=ExtResource("2_uow57")]
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_4q7mt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)
