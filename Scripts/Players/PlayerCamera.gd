@@ -97,7 +97,9 @@ func get_camera_target_position():
 
 
 func _process(delta):
-	update_camera_rigging(delta)
+	if Camera.current:
+		update_camera_rigging(delta)
+		move_camera()
 
 func _physics_process(delta):
 	if Camera.current:
