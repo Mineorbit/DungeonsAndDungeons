@@ -74,8 +74,6 @@ func set_interface_owner(id):
 
 func player_entered(player):
 	# server does not have to continue
-	if Constants.id == 1:
-		update_interface_owner()
 	if Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
 		camera.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
