@@ -39,9 +39,13 @@ func activate():
 	player_to_follow_exists = true
 	update_camera_rigging(0)
 	player.tree_exiting.connect(func():
-		player = null)
-	player.on_entity_despawn.connect(func():player_to_follow_exists = false)
+		deactivate())
+	player.on_entity_despawn.connect(func():deactivate())
 	player.on_entity_aiming.connect(ChangeMovementState)
+
+func deactivate():
+	Camera.current = false
+
 
 func _ready() -> void:
 	print("Camera is ready")
