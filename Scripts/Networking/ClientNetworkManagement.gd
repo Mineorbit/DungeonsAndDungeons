@@ -7,6 +7,7 @@ var peer: MultiplayerPeer
 func _ready():
 	
 	Constants.World.players.player_added.connect(player_created)
+	Constants.World.players.playerEntities.child_entered_tree.connect(player_controls_activate)
 	Constants.World.on_entity_spawned.connect(disable_local_computations)
 	MultiplayerConstants.on_local_id_set.connect(func(id):id_set = true)
 	tree_exiting.connect(close_connection)
@@ -22,6 +23,14 @@ func close_connection():
 	peer.close()
 
 
+
+func player_controls_activate(player):
+	var playercontroller = Constants.World.players.playerControllers.playerControllers[str(player.name).to_int()]
+	if playercontroller != null:
+		playercontroller.player = player
+		player.playercontroller = playercontroller
+		#print("Enabling Player controls "+str(player))
+		playercontroller.set_active(str(playercontroller.name).to_int() == Constants.id)
 
 func disable_local_computations(entity):
 	entity.ready.connect(func():
@@ -48,9 +57,8 @@ func disconnected(id):
 func playercontroller_created(playercontroller):
 	if str(playercontroller.name).to_int() == Constants.id:
 		var p =  Constants.World.players.get_player(MultiplayerConstants.local_id)
-		playercontroller.player = p
-		p.playercontroller = playercontroller
-	playercontroller.set_active(str(playercontroller.name).to_int() == Constants.id)
+		Constants.World.players.playerControllers.playerControllers[str(p.name).to_int()] = playercontroller
+		player_controls_activate(p)
 	#var cameratarget = playercontroller.get_node("PlayerCamera/CameraTarget")
 	#cameratarget.ready.connect(
 	#	func():

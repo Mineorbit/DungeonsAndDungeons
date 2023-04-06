@@ -130,6 +130,7 @@ func add_player(id):
 	var player = await Constants.World.players.spawn_player(id)
 	player.on_entity_died.connect(func():
 		respawn_player(id))
+	return player
 
 func respawn_player(id):
 	print("Respawning Player "+str(id))

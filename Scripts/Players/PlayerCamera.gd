@@ -40,6 +40,8 @@ func activate():
 	update_camera_rigging(0)
 	player.tree_exiting.connect(func():
 		deactivate())
+	camera_target = $CameraTarget
+	camera_target.prepare_camera_target(player)
 	player.on_entity_despawn.connect(func():deactivate())
 
 func deactivate():
