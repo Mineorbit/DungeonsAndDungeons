@@ -51,6 +51,12 @@ func playercontroller_created(playercontroller):
 		playercontroller.player = p
 		p.playercontroller = playercontroller
 	playercontroller.set_active(str(playercontroller.name).to_int() == Constants.id)
+	#var cameratarget = playercontroller.get_node("PlayerCamera/CameraTarget")
+	#cameratarget.ready.connect(
+	#	func():
+	#		cameratarget.set_physics_process(false)
+	#		cameratarget.set_process(false)
+	#)
 
 func player_created(player):
 	print(str(Constants.id)+" Player Created")

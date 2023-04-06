@@ -16,9 +16,9 @@ func setup_playercontroller_networking():
 	# if this is not in multiplayer, do not authority
 	if Constants.id == 0:
 		return
-	synchronizer.set_multiplayer_authority(str(name).to_int())
-	set_multiplayer_authority(str(name).to_int())
-	playercamera.get_node("Camera/MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int())
+	synchronizer.set_multiplayer_authority(str(name).to_int(),false)
+	set_multiplayer_authority(str(name).to_int(),false)
+	playercamera.get_node("Camera/MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int(),false)
 
 func get_player_camera_position():
 	return playercameraposition
@@ -51,8 +51,6 @@ func JumpAction():
 	else:
 		#only to server
 		rpc_id(1,"Jump") 
-		
-	
 
 
 @rpc

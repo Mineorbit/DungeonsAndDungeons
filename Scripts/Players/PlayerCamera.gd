@@ -29,7 +29,7 @@ extends Node3D
 var player_to_follow_exists = false
 var mouse_sensitivity := 0.005
 @onready var player = get_parent().player
-
+@onready var camera_target = $CameraTarget
 
 func activate():
 	player = get_parent().player
@@ -41,7 +41,6 @@ func activate():
 	player.tree_exiting.connect(func():
 		deactivate())
 	player.on_entity_despawn.connect(func():deactivate())
-	player.on_entity_aiming.connect(ChangeMovementState)
 
 func deactivate():
 	Camera.current = false
@@ -53,11 +52,6 @@ func _ready() -> void:
 
 var offset = 0
 
-func ChangeMovementState(aiming):
-	if aiming:
-		offset = 1
-	else:
-		offset = 0
 	# this changes the relative position of the camera, instead need to change relative position of PlayerCamera, i.e., self
 	#Camera.top_level = true
 
@@ -93,15 +87,13 @@ var target_position = Vector3.ZERO
 
 # interpolate camera position between current position and the target Position because networking is slow
 func move_camera():
-	var s = 0.35
 	var t = 0.75
-	target_position = s* target_position + (1-s)*get_camera_target_position()
 	Camera.global_transform.origin =t*Camera.global_transform.origin + (1-t) *CameraPosition.global_transform.origin
-	Camera.look_at(target_position)
+	Camera.look_at(camera_target.global_transform.origin)
+
 
 func get_camera_target_position():
 	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
-
 
 func _process(delta):
 	if Camera.current:
