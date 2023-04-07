@@ -46,6 +46,7 @@ anchor_right = 0.9
 anchor_bottom = 1.0
 
 [node name="CheckBoxes" type="HBoxContainer" parent="CheckboxPanel"]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
@@ -55,8 +56,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-
-[node name="Cursors" type="Node2D" parent="."]
 
 [node name="Panel" type="ColorRect" parent="."]
 visible = false
@@ -68,12 +67,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.803922, 0.572549, 1)
 
+[node name="Cursors" type="Node2D" parent="."]
+
 [node name="CursorSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")
 spawn_path = NodePath("../Cursors")
 
 [node name="CheckboxSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/ReadyCall.tscn")
+_spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/CheckBox.tscn")
 spawn_path = NodePath("../CheckboxPanel/CheckBoxes")
 
 [connection signal="pressed" from="Refresh" to="." method="refresh_level_list"]

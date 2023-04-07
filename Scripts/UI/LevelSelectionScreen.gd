@@ -14,7 +14,7 @@ var owner_id = 1
 #change to local player inside
 var has_sent = false
 
-
+signal owner_changed(owner_id)
 
 var player_cursors = {}
 
@@ -56,6 +56,7 @@ func set_auth_on_objects(id):
 	interface.get_node("LevelList/LevelListNetworking").set_auth(id)
 	interface.get_node("CursorSpawner").set_multiplayer_authority(id)
 	interface.get_node("CheckboxSpawner").set_multiplayer_authority(id)
+	owner_changed.emit(id)
 #only called by server
 
 var initialize_list = false
@@ -92,14 +93,13 @@ func add_checkbox(player):
 		return
 	
 	var local_id = player.name
-	var checkbox_pref = load("res://Prefabs/MainMenu/ReadyCall.tscn")
+	var checkbox_pref = load("res://Prefabs/MainMenu/CheckBox.tscn")
 	var checkbox = checkbox_pref.instantiate()
 	checkbox.size = Vector2(0.125,0.125)
 	checkbox.scale = Vector2(0.125,0.125)
 	checkbox.name = str(local_id)
 	checkbox.get_node("CheckBox").pressed.connect(start_round)
 	checkboxes.add_child(checkbox)
-	print(checkboxes.get_children())
 	checkbox_list[local_id] = checkbox
 
 func remove_checkbox(player):
@@ -147,6 +147,7 @@ func check_ready():
 
 
 func start_round():
+	print("Trying to start")
 	var can_start = check_ready()
 	if can_start:
 		get_parent().get_parent().rpc_id(1,"start_round",levellist.selected_level,levellist.selected_level_name)
@@ -170,7 +171,6 @@ func end():
 	local_player_inside = false
 
 
-
 func _process(delta):
 	if Input.is_action_just_pressed("Connect"):
 		print(interface.get_node("CheckboxSpawner").get_multiplayer_authority())
@@ -178,8 +178,15 @@ func _process(delta):
 func _input(event):
 	var local_coord = true
 	#pass_inputs_to_interface(event)
-	if local_player_inside:
-		if event is InputEventMouseButton or event is InputEventMouseMotion:
+	if event is InputEventMouseButton or event is InputEventMouseMotion:
+		var copyevent
+		if event is InputEventMouseButton:
+			copyevent = InputEventMouseButton.new()
+			copyevent.position = event.position
+			copyevent.button_index = copyevent.button_index
+		if event is InputEventMouseMotion:
+			copyevent = InputEventMouseMotion.new()
+		if local_player_inside:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
 			var from = camera.project_ray_origin(event.position)
 			var to = from + camera.project_ray_normal(event.position) * 100
@@ -200,12 +207,7 @@ func _input(event):
 				event.position.x = rel_pos.x * interface.size.x
 				event.position.y = rel_pos.y * interface.size.y 
 				local_coord = false
-				if Constants.id == owner_id:
-					interface.push_input(event, local_coord)
-				else:
-					interface.push_input(event, local_coord)
-					if event is InputEventMouseButton:
-						print(str(Constants.id)+" "+str(event))
+			interface.push_input(event, local_coord)
 
 
 

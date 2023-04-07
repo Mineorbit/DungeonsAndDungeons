@@ -17,5 +17,4 @@ func setupInterfaceMaterial():
 
 
 func refresh_level_list():
-	print("TEST")
 	get_parent().refresh_level_list()
