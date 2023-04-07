@@ -68,7 +68,6 @@ func add_tiled_level_object(pos,levelObjectData, generate = false):
 		add_child(grid_object)
 		grid_object.levelObjectId = levelObjectData.levelObjectId
 		gridmeshes[levelObjectData.levelObjectId] = grid_object
-		print("Added "+str(grid_object)+" "+str(levelObjectData.levelObjectId))
 	var grid_mesh = gridmeshes[levelObjectData.levelObjectId]
 	var gridpos = get_grid_position(pos)
 	var grid_index = get_grid_index(gridpos)
@@ -91,9 +90,9 @@ var neighbors = [
 func start_generate_at(pos,ulid):
 			for n in neighbors:
 				var p = pos + n
+				print(n)
 				var chunk: Node3D = Constants.World.level.get_chunk(p)
 				if chunk == null:
-					print("There is no chunk at "+str(p))
 					chunk = Constants.World.level.add_chunk(p)
 					#chunks.append(chunk)
 				if not chunk.is_inside_tree():
@@ -104,9 +103,11 @@ func start_generate_at(pos,ulid):
 
 func start_generate_cell(pos,ulid):
 	if ulid in gridmeshes:
+		#print("Regenerating for "+str(pos))
 		gridmeshes[ulid].queue_generate(pos)
 	else:
-		print("There is no Grid for "+str(pos)+" in "+str(self))
+		pass
+		#print("There is no Grid for "+str(pos)+" in "+str(self))
 
 func get_grid_index(grid_position):
 	return grid_size*grid_size*grid_position.y+grid_size*grid_position.x+grid_position.z
@@ -115,11 +116,12 @@ func remove_tiled_level_object(pos):
 	var grid_pos = get_grid_position(pos)
 	var grid_index = get_grid_index(grid_pos)
 	var oldid = grid[grid_index]
+	print("Test2: "+str(pos)+" "+str(oldid))
 	if oldid == -1:
 		return false
 	var grid_mesh = gridmeshes[oldid]
 	grid[grid_index] = -1
-	start_generate_at(global_transform.origin+grid_pos,oldid)
+	start_generate_at(global_transform.origin+pos,oldid)
 	return true
 
 

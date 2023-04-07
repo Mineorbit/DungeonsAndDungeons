@@ -48,12 +48,12 @@ func next_player():
 func prepare_edit(name):
 	if Constants.World == null:
 		Constants.World = get_node("World")
+	print(name)
 	if name == null:
 		Constants.World.create_new_level()
 	else:
 		Constants.World.prepare_level()
 		Constants.World.level.load(name,true)
-	print("Generating Grids")
 	var grid_thread = Thread.new()
 	#grid_thread.start(func():
 	#	Constants.World.level.generate_all_grids()

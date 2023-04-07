@@ -41,8 +41,8 @@ func generate_for(set, force = false):
 	var t = Thread.new()
 	t.start(func():
 		for x in set:
-			if not generating_at[x.name] or force:
-				x.generate()
+			print(str(x)+" generating")
+			x.generate()
 		)
 		#t.start( func():
 		#	x.generate()
@@ -70,12 +70,15 @@ func _physics_process(delta):
 	while generate_tasks.size() > 0:
 			var pos = generate_tasks[0]
 			var x = get_subgrid(pos)
-			if not generating_at[x.name]:
-				generating_at[x.name] = true
+			print(str(x)+" "+str(x.name))
+			if not generating_at[str(x.name)]:
+				generating_at[str(x.name)] = true
 				set.append(x)
 			generate_tasks.remove_at(0)
 			#start_generate(pos)
 	if set.size() > 0:
+		print(generating_at)
+		print(set)
 		generate_for(set)
 	for x in set:
 		generating_at[x.name] = false

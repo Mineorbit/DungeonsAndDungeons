@@ -391,6 +391,7 @@ func remove_by_object(objectToRemove):
 func remove_by_position(pos: Vector3):
 	var isRemoved = false
 	var gridposition = get_grid_position(pos)
+	print(str(pos)+" "+str(gridposition))
 	var floatPosition = Vector3(gridposition.x,gridposition.y,gridposition.z)
 	var chunk = get_chunk(gridposition)
 	if chunk != null:
@@ -399,6 +400,7 @@ func remove_by_position(pos: Vector3):
 				remove_level_object(levelObject)
 				isRemoved = true
 				return isRemoved
+		print("Test: "+str(isRemoved)+" "+str(chunk))
 		isRemoved = chunk.remove_tiled_level_object(gridposition)
 	return isRemoved
 

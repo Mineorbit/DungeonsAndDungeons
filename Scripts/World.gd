@@ -30,6 +30,8 @@ func end():
 
 
 func prepare_level():
+	print("Preparing")
+	print_stack()
 	level = load("res://Prefabs/Level.tscn").instantiate()
 	add_child(level)
 	

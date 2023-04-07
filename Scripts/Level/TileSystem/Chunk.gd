@@ -8,7 +8,6 @@ var level
 @onready var cellGrids = $CellGrids
 @onready var levelObjects = $LevelObjects
 
-
 var change_in_chunk = false
 
 class LevelObjectInstance:

@@ -89,12 +89,11 @@ func start_edit(levelname = null, new_level = false):
 				current_scene = load("res://Scenes/edit.tscn").instantiate()
 			# prepare edit
 				add_child(current_scene)
-				current_scene.prepare_edit(null)
 				if new_level:
+					current_scene.prepare_edit(null)
 					Constants.World.level.level_name = levelname
 					Constants.World.level.save()
 				else:
-					print("Test")
 					current_scene.prepare_edit(levelname)
 				LoadingScreen.close()
 			)
