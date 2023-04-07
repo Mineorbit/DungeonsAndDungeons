@@ -67,13 +67,15 @@ func start_server():
 
 
 func start_play():
-		LoadingScreen.open()
-		remove_child(current_scene)
-		current_scene = load("res://Scenes/play.tscn").instantiate()
-		add_child(current_scene)
-		var client_management = load("res://Scenes/ClientNetworkManagement.tscn").instantiate()
-		current_scene.add_child(client_management)
-		LoadingScreen.close()
+		LoadingScreen.open().timeout.connect(
+			func():
+			remove_child(current_scene)
+			current_scene = load("res://Scenes/play.tscn").instantiate()
+			add_child(current_scene)
+			var client_management = load("res://Scenes/ClientNetworkManagement.tscn").instantiate()
+			current_scene.add_child(client_management)
+			LoadingScreen.close()
+		)
 
 func start_edit(levelname = null, new_level = false):
 	
@@ -92,6 +94,7 @@ func start_edit(levelname = null, new_level = false):
 					Constants.World.level.level_name = levelname
 					Constants.World.level.save()
 				else:
+					print("Test")
 					current_scene.prepare_edit(levelname)
 				LoadingScreen.close()
 			)

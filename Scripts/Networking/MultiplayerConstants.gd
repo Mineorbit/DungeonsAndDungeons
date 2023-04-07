@@ -14,11 +14,14 @@ var local_id = -1:
 
 @export var local_id_to_id = [null,null,null,null]
 
+
+
 var player_cameras = [null,null,null,null]
 
 @rpc
 func set_local_id(id):
 	local_id = id
+	
 	
 func get_first_connected():
 	var i = 0

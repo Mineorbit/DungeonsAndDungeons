@@ -83,6 +83,8 @@ signal on_entity_using_shield(aiming)
 
 signal on_entity_jump
 
+signal on_entity_teleport
+
 signal on_entity_health_changed(health)
 
 var climbing = false
@@ -307,6 +309,7 @@ func Stun(duration, stunning_entity, direction):
 	var kickback_direction = (direction.normalized() + Vector3.UP).normalized()
 	if kickback_direction.length() > 0.5:
 		kickback(1.5*kickback_direction)
+
 
 
 func Attach(item):

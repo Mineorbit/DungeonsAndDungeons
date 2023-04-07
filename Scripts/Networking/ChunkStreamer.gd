@@ -10,12 +10,12 @@ func _ready():
 
 
 @rpc
-func stream_chunk(data):
-	add_from_function(data)
+func stream_chunk(data,immediate):
+	add_from_function(data,false)
 
 var objects = []
 
-func add_from_function(data):
+func add_from_function(data,immediate):
 	var base_position = data[0]
 	data.erase(base_position)
 	base_position *= 8
@@ -23,7 +23,14 @@ func add_from_function(data):
 		Constants.World.level.add_from_string(base_position,object)
 		#objects.append([base_position,object])
 	var chunk = Constants.World.level.get_chunk(base_position)
-	chunk.generate_grid()
+	if immediate:
+		chunk.generate_grid()
+	else:
+		var chunkgrid_thread = Thread.new()
+		chunkgrid_thread.start(
+			func():
+			chunk.generate_grid()
+			)
 
 func _process(delta):
 	if Constants.World.level != null:
@@ -35,7 +42,7 @@ func _process(delta):
 			Constants.World.level.add_from_string(base_position,object)
 
 
-func load_chunk(location):
+func load_chunk(location,immediate):
 	loadedChunks.append(location)
 	var chunk = Constants.World.level.get_chunk_by_chunk_position(location)
 	if chunk == null:
@@ -44,20 +51,20 @@ func load_chunk(location):
 	var chunk_data = [location]
 	for chunk_instance in chunk_instances:
 		chunk_data.append(chunk_instance.serialize())
-	rpc_id(target_player_network_id,"stream_chunk",chunk_data)
+	rpc_id(target_player_network_id,"stream_chunk",chunk_data,immediate)
 	#print("Sending to "+str(target_player_network_id))
 	#rpc_id(target_player_network_id,"stream_chunk")
 
 
 
-func test(position):
+func test(position,immediate):
 	if target_player_network_id == 0:
 		return
 	if Constants.World.level == null:
 		return
 	var currentChunk = Constants.World.level.get_chunk_position(position)
 	if not loadedChunks.has(currentChunk):
-		load_chunk(currentChunk)
+		load_chunk(currentChunk,immediate)
 	
 
 func _physics_process(delta):
@@ -66,4 +73,5 @@ func _physics_process(delta):
 	for i in range(-1,2):
 		for j in range(-1,2):
 			for k in range(-1,2):
-				test(global_transform.origin+(8*Vector3(i,j,k)))
+				var immediate = (i == 0) and (j == 0) and (k == 0)
+				test(global_transform.origin+(8*Vector3(i,j,k)),immediate)

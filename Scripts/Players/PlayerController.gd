@@ -4,21 +4,35 @@ var player
 var is_active = false
 
 @export var input_direction = Vector3.ZERO
+@onready var playercamera = $PlayerCamera
+@onready var playercameraposition = $PlayerCamera/Camera
 @onready var synchronizer = $MultiplayerSynchronizer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setup_playercontroller_networking()
+	playercamera.player = player
 
 func setup_playercontroller_networking():
 	# if this is not in multiplayer, do not authority
 	if Constants.id == 0:
 		return
-	synchronizer.set_multiplayer_authority(str(name).to_int())
-	set_multiplayer_authority(str(name).to_int())
-	
-	
+	synchronizer.set_multiplayer_authority(str(name).to_int(),false)
+	set_multiplayer_authority(str(name).to_int(),false)
+	playercamera.get_node("Camera/MultiplayerSynchronizer").set_multiplayer_authority(str(name).to_int(),false)
+
+func get_player_camera_position():
+	return playercameraposition
+
 func set_active(active):
 	is_active = active
+	if active:
+		playercamera = $PlayerCamera
+		if playercamera.is_inside_tree():
+			playercamera.activate()
+		else:
+			playercamera.ready.connect(playercamera.activate)
+
+
 
 
 func report_network():
@@ -32,13 +46,11 @@ func Jump():
 		player.jump()
 
 func JumpAction():
-	if player != null:
+	if Constants.id == 0:
 		Jump()
 	else:
 		#only to server
 		rpc_id(1,"Jump") 
-		
-	
 
 
 @rpc
@@ -57,14 +69,14 @@ func StopUseLeft():
 
 
 func UseLeftAction():
-	if player != null:
+	if Constants.id == 0:
 		UseLeft()
 	else:
 		rpc_id(1,"UseLeft") 
 
 
 func StopUseLeftAction():
-	if player != null:
+	if Constants.id == 0:
 		StopUseLeft()
 	else:
 		rpc_id(1,"StopUseLeft") 
@@ -86,17 +98,16 @@ func StopUseRight():
 
 
 func UseRightAction():
-	if player != null:
+	if Constants.id == 0:
 		#if right item is bow:
 		#StartAimingCamera()
-		
 		UseRight()
 	else:
 		rpc_id(1,"UseRight") 
 
 
 func StopUseRightAction():
-	if player != null:
+	if Constants.id == 0:
 		#StopAimingCamera()
 		StopUseRight()
 	else:
@@ -109,7 +120,7 @@ func Pickup():
 	player.on_entity_pickup.emit()
 	
 func PickupAction():
-	if player != null:
+	if Constants.id == 0:
 		Pickup()
 	else:
 		rpc_id(1,"Pickup")
@@ -124,10 +135,7 @@ func check():
 
 
 func get_player_camera():
-	if Constants.id == 1:
-		return MultiplayerConstants.player_cameras[str(name).to_int()]
-	else:
-		return PlayerCamera
+	return playercamera
 
 
 func _physics_process(delta):

@@ -33,23 +33,16 @@ func player_connected(id):
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	
 	
-	get_parent().add_player(i)
+	var player = await get_parent().add_player(i)
 	var newplayercontroller = add_player_controller(i,id)
 	newplayercontroller.ready.connect(func():
 		newplayercontroller.set_process(false)
 		newplayercontroller.set_physics_process(false)
 	)
+	newplayercontroller.get_node("PlayerCamera/CameraTarget").prepare_camera_target(player)
 	newplayercontroller.set_process(false)
 	newplayercontroller.set_physics_process(false)
-	var campos = load("res://Prefabs/PlayerCameraPosition.tscn").instantiate()
-	campos.name = str(id)
-	campos.ready.connect(func():
-		campos.set_process(false)
-		campos.set_physics_process(false)
-	)
-	get_parent().add_child(campos,true)
-	
-	MultiplayerConstants.player_cameras[i] = campos
+	#MultiplayerConstants.player_cameras[i] = campos
 	# spawn player camera position
 
 func add_player_controller(id = 0,peer_id = 0):
@@ -63,6 +56,7 @@ func on_player_added(player):
 	if playercontroller != null:
 		player.playercontroller = playercontroller
 		player.playercontroller.player = player
+		player.playercontroller.get_node("PlayerCamera/CameraTarget").prepare_camera_target(player)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

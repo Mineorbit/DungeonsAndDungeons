@@ -32,7 +32,6 @@ Constants="*res://Scripts/Util/Constants.gd"
 Bootstrap="*res://Scenes/Bootstrap.tscn"
 MultiplayerConstants="*res://Prefabs/MultiplayerConstants.tscn"
 ApiAccess="*res://Prefabs/ApiAccess.tscn"
-PlayerCamera="*res://Prefabs/PlayerCamera.tscn"
 BevelEdges="*res://Scripts/Util/BevelEdges.gd"
 
 [dotnet]
@@ -219,9 +218,14 @@ StopEditProperties={
 ]
 }
 
+[network]
+
+limits/packet_peer_stream/max_buffer_po2=32
+
 [physics]
 
-common/physics_ticks_per_second=50
+common/physics_ticks_per_second=64
+common/max_physics_steps_per_frame=12
 3d/physics_engine="GodotPhysics3D"
 3d/solver/solver_iterations=64
 3d/solver/contact_max_separation=0.1

@@ -42,7 +42,7 @@ func next_player():
 			current_player = (current_player + 1) % 4
 			count = count + 1
 		Players.playerControllers.set_current_player(current_player)
-		PlayerCamera.player = Players.get_player(current_player)
+		Constants.PlayerCamera.player = Players.get_player(current_player)
 
 
 func prepare_edit(name):
@@ -129,7 +129,6 @@ func enter_test_mode():
 			if Constants.currentMode == 2 and player.id == current_player:
 				next_player())
 	Players.playerControllers.set_current_player(current_player)
-	PlayerCamera.player = Players.get_player(current_player)
 	#buildmusic.stop()
 	connections.hide()
 	

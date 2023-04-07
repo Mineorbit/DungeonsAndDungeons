@@ -1,16 +1,56 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc82dghj30vrq"]
+[gd_scene load_steps=6 format=3 uid="uid://dc82dghj30vrq"]
 
 [ext_resource type="Script" path="res://Scripts/Players/PlayerCamera.gd" id="1_b020v"]
+[ext_resource type="Script" path="res://Scripts/CameraTarget.gd" id="2_7j1kf"]
+[ext_resource type="Texture2D" uid="uid://qsagb1hct4dh" path="res://Assets/Textures/gearwheel.png" id="3_sbnrw"]
 
-[node name="PlayerCamera" type="SpringArm3D"]
-spring_length = 5.0
-margin = 0.2
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_82nwo"]
+properties/0/path = NodePath("../../Camera:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("../../Camera:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tsehf"]
+properties/0/path = NodePath("CameraTarget:offset")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="PlayerCamera" type="Node3D"]
+top_level = true
 script = ExtResource("1_b020v")
-
-[node name="CameraHoldingPoint" type="Node3D" parent="."]
 
 [node name="Camera" type="Camera3D" parent="."]
 cull_mask = 1048573
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
 current = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera"]
+root_path = NodePath("../../Spring/CameraPosition")
+replication_config = SubResource("SceneReplicationConfig_82nwo")
+
+[node name="Crosshair" type="SpringArm3D" parent="Camera"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1)
+spring_length = 12.0
+
+[node name="CrosshairHold" type="Node3D" parent="Camera/Crosshair"]
+
+[node name="Crosshair" type="Sprite3D" parent="Camera/Crosshair/CrosshairHold"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.4, 0, 0)
+visible = false
+texture = ExtResource("3_sbnrw")
+
+[node name="Spring" type="SpringArm3D" parent="."]
+spring_length = 5.0
+margin = 0.4
+
+[node name="CameraPosition" type="Node3D" parent="Spring"]
+
+[node name="CameraTarget" type="Node3D" parent="."]
+script = ExtResource("2_7j1kf")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CameraTarget"]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_tsehf")
