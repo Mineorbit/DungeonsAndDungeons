@@ -97,10 +97,16 @@ func move_camera():
 func get_camera_target_position():
 	return player.global_transform.origin + Vector3.UP*0.75 + player.basis.x*offset
 
+@onready var crosshair = $Camera/Crosshair/CrosshairHold/Crosshair
+
 func _process(delta):
 	if Camera.current:
 		update_camera_rigging(delta)
 		move_camera()
+		if int(camera_target.offset) > 0.5:
+			crosshair.show()
+		else:
+			crosshair.hide()
 
 func _physics_process(delta):
 	if Camera.current:

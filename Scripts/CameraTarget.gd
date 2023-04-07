@@ -27,6 +27,7 @@ var s = 0.35
 var t = 0.9
 @export var target_distance = 1.5
 
+
 func get_camera_target_position():
 	var aim_offset = Vector3.ZERO
 	if player != null:
