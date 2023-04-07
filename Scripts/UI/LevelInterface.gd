@@ -17,4 +17,5 @@ func setupInterfaceMaterial():
 
 
 func refresh_level_list():
-	pass # Replace with function body.
+	print("TEST")
+	get_parent().refresh_level_list()

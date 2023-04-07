@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqwu4faoe1fir"]
+[gd_scene load_steps=5 format=3 uid="uid://dqwu4faoe1fir"]
 
 [ext_resource type="Script" path="res://Scripts/UI/LevelInterface.gd" id="1_6ebat"]
 [ext_resource type="PackedScene" uid="uid://6hpdpss4wair" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
 [ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="3_wpuct"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5chwe"]
+blend_mode = 1
 
 [node name="Interface" type="SubViewport"]
 own_world_3d = true
@@ -14,11 +17,6 @@ size_2d_override = Vector2i(2048, 1440)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 script = ExtResource("1_6ebat")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447447, 0.896562)
-visible = false
-current = true
 
 [node name="LevelList" parent="." instance=ExtResource("1_bwgyu")]
 custom_minimum_size = Vector2(0, 0)
@@ -59,6 +57,16 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Cursors" type="Node2D" parent="."]
+
+[node name="Panel" type="ColorRect" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_5chwe")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.803922, 0.572549, 1)
 
 [node name="CursorSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/MainMenu/LevelList/LevelListCursor.tscn")

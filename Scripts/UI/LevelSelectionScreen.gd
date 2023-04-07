@@ -170,10 +170,6 @@ func end():
 	local_player_inside = false
 
 
-func pass_inputs_to_interface(event):
-		if interface != null:
-			if event is InputEventMouseButton:
-				interface.push_input(event, true)
 
 func _process(delta):
 	if Input.is_action_just_pressed("Connect"):
@@ -181,7 +177,7 @@ func _process(delta):
 
 func _input(event):
 	var local_coord = true
-	pass_inputs_to_interface(event)
+	#pass_inputs_to_interface(event)
 	if local_player_inside:
 		if event is InputEventMouseButton or event is InputEventMouseMotion:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
@@ -204,7 +200,12 @@ func _input(event):
 				event.position.x = rel_pos.x * interface.size.x
 				event.position.y = rel_pos.y * interface.size.y 
 				local_coord = false
-				interface.push_input(event, local_coord)
+				if Constants.id == owner_id:
+					interface.push_input(event, local_coord)
+				else:
+					interface.push_input(event, local_coord)
+					if event is InputEventMouseButton:
+						print(str(Constants.id)+" "+str(event))
 
 
 
