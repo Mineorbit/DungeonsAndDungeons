@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/LevelInterface.gd" id="1_6ebat"]
 [ext_resource type="PackedScene" uid="uid://6hpdpss4wair" path="res://Prefabs/MainMenu/LevelList/LevelList.tscn" id="1_bwgyu"]
-[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="3_wpuct"]
+[ext_resource type="Texture2D" uid="uid://dg6qulbnek6na" path="res://Assets/UI/refresh.png" id="3_3cvym"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5chwe"]
 blend_mode = 1
@@ -17,6 +17,14 @@ size_2d_override = Vector2i(2048, 1440)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 script = ExtResource("1_6ebat")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.768627, 0.768627, 0.533333, 1)
 
 [node name="LevelList" parent="." instance=ExtResource("1_bwgyu")]
 custom_minimum_size = Vector2(0, 0)
@@ -33,10 +41,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Refresh" type="Button" parent="."]
 anchors_preset = -1
-anchor_left = 0.9
+anchor_left = 0.925
 anchor_right = 1.0
 grow_horizontal = 0
-icon = ExtResource("3_wpuct")
+icon = ExtResource("3_3cvym")
+flat = true
 
 [node name="CheckboxPanel" type="Panel" parent="."]
 anchors_preset = -1
