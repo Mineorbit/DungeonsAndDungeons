@@ -177,14 +177,16 @@ func _input(event):
 	var local_coord = true
 	#pass_inputs_to_interface(event)
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
-		var copyevent
+		var is_foreign = false
 		if event is InputEventMouseButton:
-			copyevent = InputEventMouseButton.new()
-			copyevent.position = event.position
-			copyevent.button_index = copyevent.button_index
+			if event.button_index > 32:
+				is_foreign = true
+				event.button_index = event.button_index - 32
 		if event is InputEventMouseMotion:
-			copyevent = InputEventMouseMotion.new()
-		if local_player_inside:
+			if event.pressure > 0.5:
+				is_foreign = true
+				event.pressure = 0
+		if local_player_inside or is_foreign:
 			var relative_pos = Vector2(event.position.x/get_viewport().size.x,event.position.y/get_viewport().size.y)
 			var from = camera.project_ray_origin(event.position)
 			var to = from + camera.project_ray_normal(event.position) * 100
@@ -202,10 +204,13 @@ func _input(event):
 				rel_pos = (rel_pos + Vector2(1,1))/2
 				rel_pos.x = clamp(1-rel_pos.x,0,1)
 				rel_pos.y = clamp(1-rel_pos.y,0,1)
-				event.position.x = rel_pos.x * interface.size.x
-				event.position.y = rel_pos.y * interface.size.y 
+				if not is_foreign:
+					event.position.x = rel_pos.x * interface.size.x
+					event.position.y = rel_pos.y * interface.size.y 
 				local_coord = false
-			interface.push_input(event, local_coord)
+				print(str(is_foreign)+" "+str(event))
+			if local_player_inside or is_foreign:
+				interface.push_input(event, local_coord)
 
 
 

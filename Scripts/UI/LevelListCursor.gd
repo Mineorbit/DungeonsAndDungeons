@@ -26,7 +26,7 @@ func click(code,pressed):
 	if Constants.id != get_parent().get_parent().get_parent().owner_id:
 		return
 	var event = InputEventMouseButton.new()
-	event.button_index = code
+	event.button_index = code+32
 	event.pressed = pressed
 	event.position = position
 	Input.parse_input_event(event)
@@ -38,6 +38,7 @@ func move(direction,pos):
 		return
 	var event = InputEventMouseMotion.new()
 	event.relative = direction
+	event.pressure = 1
 	event.position = Vector2(-1,-1)
 	Input.parse_input_event(event)
 	
