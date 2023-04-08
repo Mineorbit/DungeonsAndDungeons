@@ -129,6 +129,7 @@ func player_left(player):
 	elif Constants.World.players.get_player(MultiplayerConstants.local_id) == player:
 		camera.current = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Constants.World.players.get_player(MultiplayerConstants.local_id).playercontroller.playercamera.activate()
 		local_player_inside = false
 	if owner_id == Constants.id:
 		remove_cursor(player)
@@ -171,9 +172,6 @@ func end():
 	local_player_inside = false
 
 
-func _process(delta):
-	if Input.is_action_just_pressed("Connect"):
-		print(interface.get_node("CheckboxSpawner").get_multiplayer_authority())
 
 func _input(event):
 	var local_coord = true
