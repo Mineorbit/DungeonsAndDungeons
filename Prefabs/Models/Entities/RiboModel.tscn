@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://evx2rdayce7g"]
+
+[ext_resource type="PackedScene" uid="uid://vsol4ir2l05g" path="res://Assets/Models/LevelObjects/Entities/Ribo/ribo_rigged.glb" id="1_v3ow1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fvrkk"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6r455"]
+graph_offset = Vector2(-232, 134)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_fvrkk")
+nodes/Animation/position = Vector2(118, 195)
+node_connections = [&"output", 0, &"Animation"]
+
+[node name="RiboModel" instance=ExtResource("1_v3ow1")]
+
+[node name="Skeleton3D" parent="root" index="0"]
+bones/16/rotation = Quaternion(0.00466876, 0.00672604, 3.14034e-05, 0.999967)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_6r455")
+anim_player = NodePath("../AnimationPlayer")
+active = true

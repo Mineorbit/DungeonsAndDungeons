@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://2giiqwbh3pr4"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_bl6a4"]
+
+[resource]
+script = ExtResource("1_bl6a4")
+name = "RiboSpawner"
+tiled = false
+interactive = false
+tileIndex = []
+levelObjectId = 22
+maximumNumber = -1
+offset = Vector3(0.5, 0.5, 0.5)
+construction_collision_offset = Vector3(0, 0, 0)
+construction_collision_scale = Vector3(1, 1, 1)
+display_offset = Vector3(0, 0, 0)
+display_scale = Vector3(1, 1, 1)

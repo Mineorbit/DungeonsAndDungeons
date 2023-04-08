@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ibygdee2t42"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Spawner.gd" id="1_402m0"]
+[ext_resource type="PackedScene" uid="uid://evx2rdayce7g" path="res://Prefabs/Models/Entities/RiboModel.tscn" id="2_4jb5u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
+
+[sub_resource type="TextMesh" id="TextMesh_kbi3g"]
+material = SubResource("StandardMaterial3D_dibhe")
+text = "Spawner"
+
+[node name="RiboSpawner" type="Node3D"]
+script = ExtResource("1_402m0")
+spawnedEntity = "Enemies/Ribo"
+
+[node name="Text" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_kbi3g")
+
+[node name="RiboModel" parent="Text" instance=ExtResource("2_4jb5u")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)

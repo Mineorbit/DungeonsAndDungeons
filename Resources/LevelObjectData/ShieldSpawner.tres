@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://x7v7wuor38xt"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_prs48"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_prs48")
 name = "ShieldSpawner"
 tiled = false
 interactive = false
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 21
 maximumNumber = -1
 offset = Vector3(0.5, 0.25, 0.5)

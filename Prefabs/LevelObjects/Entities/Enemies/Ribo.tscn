@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgkf1aq1kxjfp"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_u15kl"]
+[ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
+[ext_resource type="PackedScene" uid="uid://evx2rdayce7g" path="res://Prefabs/Models/Entities/RiboModel.tscn" id="3_5ifii"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
+radius = 0.45
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
+size = Vector3(2, 1, 4)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q63ex"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta4rm"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_pywra"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5r85"]
+size = Vector3(1.01933, 1, 1)
+
+[node name="Ribo" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_u15kl")
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xuwxo")
+
+[node name="Navigation" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.84
+path_max_distance = 12.9
+navigation_layers = 3
+avoidance_enabled = true
+max_speed = 5.0
+ignore_y = false
+
+[node name="VisionCheck" type="ShapeCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_do8j2")
+target_position = Vector3(0, 0, 2)
+collision_mask = 16
+
+[node name="Target" type="Node3D" parent="."]
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="Target"]
+visible = false
+mesh = SubResource("CylinderMesh_q63ex")
+
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_jjp5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ta4rm")
+
+[node name="BackupModel" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_pywra")
+
+[node name="StrikeArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20661, 0, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StrikeArea"]
+shape = SubResource("BoxShape3D_f5r85")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+
+[node name="Model" parent="." instance=ExtResource("3_5ifii")]
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.5, 0)
+
+[connection signal="velocity_computed" from="Navigation" to="." method="on_navigation_velocity_computed"]
