@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://evx2rdayce7g"]
 
-[ext_resource type="PackedScene" uid="uid://vsol4ir2l05g" path="res://Assets/Models/LevelObjects/Entities/Ribo/ribo_rigged.glb" id="1_v3ow1"]
+[ext_resource type="PackedScene" path="res://Assets/Models/LevelObjects/Entities/Ribo/ribo_rigged.glb" id="1_v3ow1"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fvrkk"]
 animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6r455"]
-graph_offset = Vector2(-232, 134)
+graph_offset = Vector2(-63, 113)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_fvrkk")
 nodes/Animation/position = Vector2(118, 195)
 node_connections = [&"output", 0, &"Animation"]
