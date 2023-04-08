@@ -15,7 +15,8 @@ func _ready():
 func OnAttach(new_owner):
 	super.OnAttach(new_owner)
 	print(str(Constants.id)+" "+str(itemOwner.playercontroller))
-	CameraPosition = itemOwner.playercontroller.get_player_camera_position()
+	if itemOwner.playercontroller != null:
+		CameraPosition = itemOwner.playercontroller.get_player_camera_position()
 
 func OnDettach():
 	itemOwner.on_entity_aiming.emit(false)
