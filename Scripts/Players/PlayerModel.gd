@@ -146,7 +146,7 @@ func update_vertical_state_machine_remote(state):
 func _physics_process(delta):
 	super._physics_process(delta)
 	anim_tree["parameters/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
-	anim_tree["parameters/strikespeed/blend_amount"] = speed*8*get_parent().move_direction.length()
+	anim_tree["parameters/strikespeed/blend_amount"] = speed*10*get_parent().move_direction.length()
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend
