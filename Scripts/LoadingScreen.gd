@@ -23,7 +23,7 @@ var flavor_texts = [
 	"3, 2 ,1 , Frankfurt!",
 	"Geisterfahrer sind immer entgegekommend",
 	"Wo ist der Sexraum?",
-	"ch glaube der Tod hat hier die meisten Kills",
+	"Ich glaube der Tod hat hier die meisten Kills",
 	"Wollen wir das draußen klären?",
 	"Amerika ist halt Rom",
 	"Es riecht symmetrisch",

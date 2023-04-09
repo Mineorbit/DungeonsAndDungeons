@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://k4wmacyn48wa"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Sword.gd" id="1_vyx8c"]
+[ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_ycl5b"]
+[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_o87ot"]
+[ext_resource type="PackedScene" uid="uid://dnuysx83xafa3" path="res://Assets/Models/LevelObjects/Entities/Items/Spear/Spear.blend" id="4_2dy6b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ruhvi"]
+size = Vector3(0.125, 4, 0.25)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_moqfe"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="Spear" type="CharacterBody3D"]
+collision_layer = 6
+collision_mask = 3
+script = ExtResource("1_vyx8c")
+offset = Vector3(0, 0.1, 0)
+hold_rot = Vector3(0, -45, -90)
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+shape = SubResource("BoxShape3D_ruhvi")
+
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_ycl5b")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_moqfe")
+script = ExtResource("3_o87ot")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+
+[node name="Model" parent="." instance=ExtResource("4_2dy6b")]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0, 1, 0)
+
+[connection signal="timeout" from="Timer" to="." method="SwingFinished"]

@@ -10,9 +10,14 @@ var verticalfsm: AnimationNodeStateMachinePlayback
 var shieldfsm: AnimationNodeStateMachinePlayback
 var mouth: ShaderMaterial
 var eyes: ShaderMaterial
+var strikeTimer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	strikeTimer = Timer.new()
+	add_child(strikeTimer)
+	
+	strikeTimer.timeout.connect(stop_strike)
 	lastpos = global_transform.origin
 	get_parent().on_entity_landed.connect(player_landed)
 	get_parent().on_entity_melee_strike.connect(player_striking)
@@ -66,8 +71,15 @@ func can_shoot(can_shootnow):
 		update_aim_state_machine("Aim")
 
 
+func stop_strike():
+	anim_tree["parameters/Strike/add_amount"] = 0
+	
+
 func player_striking(v):
-	anim_tree["parameters/strike/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+	print(v)
+	anim_tree["parameters/Strike/add_amount"] = 1
+	anim_tree["parameters/StrikeStart/seek_request"] = 0
+	strikeTimer.start(0.35)
 
 
 func player_jump():
@@ -134,6 +146,7 @@ func update_vertical_state_machine_remote(state):
 func _physics_process(delta):
 	super._physics_process(delta)
 	anim_tree["parameters/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
+	anim_tree["parameters/strikespeed/blend_amount"] = speed*8*get_parent().move_direction.length()
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
 	anim_tree["parameters/landidle/blend_amount"] = landblend

@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://cgkf1aq1kxjfp"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_u15kl"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Ribo.gd" id="1_idayt"]
 [ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
 [ext_resource type="PackedScene" uid="uid://evx2rdayce7g" path="res://Prefabs/Models/Entities/RiboModel.tscn" id="3_5ifii"]
-[ext_resource type="PackedScene" path="res://Prefabs/LevelObjects/Entities/Items/Bow.tscn" id="4_1juaw"]
+[ext_resource type="PackedScene" uid="uid://k4wmacyn48wa" path="res://Prefabs/LevelObjects/Entities/Items/Spear.tscn" id="4_u1lqj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 radius = 0.45
@@ -29,7 +29,7 @@ size = Vector3(1.01933, 1, 1)
 [node name="Ribo" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_u15kl")
+script = ExtResource("1_idayt")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
@@ -75,9 +75,9 @@ shape = SubResource("BoxShape3D_f5r85")
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
 [node name="Model" parent="." instance=ExtResource("3_5ifii")]
-transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, 0.25, 0)
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, 0.425, 0)
 
-[node name="Bow" parent="." instance=ExtResource("4_1juaw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0942764, -0.792124)
+[node name="Spear" parent="." instance=ExtResource("4_u1lqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.459877, -0.6916)
 
 [connection signal="velocity_computed" from="Navigation" to="." method="on_navigation_velocity_computed"]
