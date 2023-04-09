@@ -74,6 +74,6 @@ shape = SubResource("BoxShape3D_f5r85")
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
 [node name="Model" parent="." instance=ExtResource("3_5ifii")]
-transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.5, 0)
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, 0.25, 0)
 
 [connection signal="velocity_computed" from="Navigation" to="." method="on_navigation_velocity_computed"]
