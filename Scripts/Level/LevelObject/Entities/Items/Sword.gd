@@ -5,6 +5,8 @@ var default_offset
 var default_rot
 @onready var timer = $Timer
 
+
+
 func _ready():
 	super._ready()
 	default_offset = offset
@@ -19,7 +21,7 @@ func Use():
 	itemOwner.on_entity_melee_strike.emit(15)
 	hold_rot = Vector3(0,0,0)
 	offset = Vector3(0,0,0)
-	timer.start(0.35)
+	timer.start(Constants.SwordStrikeTime)
 	
 
 func SwingFinished():

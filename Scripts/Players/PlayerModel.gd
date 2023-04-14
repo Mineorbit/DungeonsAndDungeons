@@ -79,7 +79,7 @@ func player_striking(v):
 	print(v)
 	anim_tree["parameters/PlayerTop/strike/blend_amount"] = 1
 	anim_tree["parameters/PlayerTop/strikestart/seek_request"] = 0
-	strikeTimer.start(0.35)
+	strikeTimer.start(Constants.SwordStrikeTime)
 
 
 func player_jump():
@@ -143,6 +143,7 @@ func update_vertical_state_machine_remote(state):
 	verticalfsm.travel(state)
 
 
+var current_v = 0
 func _physics_process(delta):
 	super._physics_process(delta)
 	anim_tree["parameters/PlayerBot/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
@@ -160,9 +161,10 @@ func _physics_process(delta):
 	lastyspeed = yspeed
 	var v = 0
 	if get_parent().is_on_floor():
-		v = 0
+		v = -1
 	else:
 		v = 1
 	runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
-	
-	anim_tree["parameters/vertical/blend_amount"] = v
+	current_v = min(max(0,current_v+8*delta*v),1)
+	anim_tree["parameters/PlayerBot/jump/blend_amount"] = current_v
+	anim_tree["parameters/PlayerTop/jump/blend_amount"] = current_v
