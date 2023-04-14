@@ -44,64 +44,103 @@ func rebuild_mesh():
 					collisionshape.add_child(box_col)
 					#top face
 					if get_parent().get_at(p+Vector3(0,1,0)) != levelObjectId:
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,1,0))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z+1))
+						
+						
+						surfaceTool.set_uv(Vector2(1,0))
 						surfaceTool.set_normal(Vector3(0,1,0))
 						surfaceTool.add_vertex(Vector3(x,y+1,z+1))
+						
+						
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,1,0))
 						surfaceTool.add_vertex(Vector3(x,y+1,z))
+						
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,1,0))
 						surfaceTool.add_vertex(Vector3(x,y+1,z))
+						
+						
+						surfaceTool.set_uv(Vector2(0,1))
 						surfaceTool.set_normal(Vector3(0,1,0))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z))
+						
+						
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,1,0))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z+1))
 					
 					#right face
 					
 					if get_parent().get_at(p+Vector3(1,0,0)) != levelObjectId:
+						
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(1,0,0))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z+1))
+						
+						surfaceTool.set_uv(Vector2(1,0))
 						surfaceTool.set_normal(Vector3(1,0,0))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z))
+						
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(1,0,0))
 						surfaceTool.add_vertex(Vector3(x+1,y,z))
+						
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(1,0,0))
 						surfaceTool.add_vertex(Vector3(x+1,y,z))
+						
+						surfaceTool.set_uv(Vector2(0,1))
 						surfaceTool.set_normal(Vector3(1,0,0))
 						surfaceTool.add_vertex(Vector3(x+1,y,z+1))
+						
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(1,0,0))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z+1))
 					
 					#left face
 					
 					if get_parent().get_at(p+Vector3(-1,0,0)) != levelObjectId:
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(-1,0,0))
 						surfaceTool.add_vertex(Vector3(x,y,z))
+						surfaceTool.set_uv(Vector2(1,0))
 						surfaceTool.set_normal(Vector3(-1,0,0))
 						surfaceTool.add_vertex(Vector3(x,y+1,z))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(-1,0,0))
 						surfaceTool.add_vertex(Vector3(x,y+1,z+1))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(-1,0,0))
 						surfaceTool.add_vertex(Vector3(x,y+1,z+1))
+						surfaceTool.set_uv(Vector2(0,1))
 						surfaceTool.set_normal(Vector3(-1,0,0))
 						surfaceTool.add_vertex(Vector3(x,y,z+1))
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(-1,0,0))
 						surfaceTool.add_vertex(Vector3(x,y,z))
 					
 					#front face
 					
 					if get_parent().get_at(p+Vector3(0,0,1)) != levelObjectId:
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,0,1))
 						surfaceTool.add_vertex(Vector3(x,y,z+1))
+						surfaceTool.set_uv(Vector2(1,0))
 						surfaceTool.set_normal(Vector3(0,0,1))
 						surfaceTool.add_vertex(Vector3(x,y+1,z+1))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,0,1))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z+1))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,0,1))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z+1))
+						surfaceTool.set_uv(Vector2(0,1))
 						surfaceTool.set_normal(Vector3(0,0,1))
 						surfaceTool.add_vertex(Vector3(x+1,y,z+1))
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,0,1))
 						surfaceTool.add_vertex(Vector3(x,y,z+1))
 					
@@ -109,31 +148,43 @@ func rebuild_mesh():
 					
 					
 					if get_parent().get_at(p+Vector3(0,0,-1)) != levelObjectId:
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,0,-1))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z))
+						surfaceTool.set_uv(Vector2(1,0))
 						surfaceTool.set_normal(Vector3(0,0,-1))
 						surfaceTool.add_vertex(Vector3(x,y+1,z))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,0,-1))
 						surfaceTool.add_vertex(Vector3(x,y,z))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,0,-1))
 						surfaceTool.add_vertex(Vector3(x,y,z))
+						surfaceTool.set_uv(Vector2(0,1))
 						surfaceTool.set_normal(Vector3(0,0,-1))
 						surfaceTool.add_vertex(Vector3(x+1,y,z))
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,0,-1))
 						surfaceTool.add_vertex(Vector3(x+1,y+1,z))
 					
 					#bottom face
 					if get_parent().get_at(p+Vector3(0,-1,0)) != levelObjectId:
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,-1,0))
 						surfaceTool.add_vertex(Vector3(x,y,z))
+						surfaceTool.set_uv(Vector2(1,0))
 						surfaceTool.set_normal(Vector3(0,-1,0))
 						surfaceTool.add_vertex(Vector3(x,y,z+1))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,-1,0))
 						surfaceTool.add_vertex(Vector3(x+1,y,z+1))
+						surfaceTool.set_uv(Vector2(1,1))
 						surfaceTool.set_normal(Vector3(0,-1,0))
 						surfaceTool.add_vertex(Vector3(x+1,y,z+1))
+						surfaceTool.set_uv(Vector2(0,1))
 						surfaceTool.set_normal(Vector3(0,-1,0))
 						surfaceTool.add_vertex(Vector3(x+1,y,z))
+						surfaceTool.set_uv(Vector2(0,0))
 						surfaceTool.set_normal(Vector3(0,-1,0))
 						surfaceTool.add_vertex(Vector3(x,y,z))
 	surfaceTool.generate_normals()
