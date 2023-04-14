@@ -26,7 +26,7 @@ func _ready():
 	get_parent().on_entity_shoot.connect(player_shot)
 	get_parent().on_entity_can_shoot.connect(can_shoot)
 	get_parent().on_entity_jump.connect(player_jump)
-	aimfsm = anim_tree["parameters/aimingstatemachine/playback"]
+	aimfsm = anim_tree["parameters/PlayerTop/aimingstatemachine/playback"]
 	verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
 	shieldfsm = anim_tree["parameters/shieldstatemachine/playback"]
 	mouth = face.mesh.surface_get_material(0).duplicate(true)
@@ -42,7 +42,7 @@ func player_aiming(is_aiming):
 		update_aim_state_machine("Aim")
 	else:
 		update_aim_state_machine("Stop")
-	anim_tree["parameters/aim/add_amount"] = v
+	anim_tree["parameters/PlayerTop/aim/blend_amount"] = v
 
 
 
@@ -159,12 +159,14 @@ func _physics_process(delta):
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
 		update_vertical_state_machine("Fall")
 	lastyspeed = yspeed
+	
 	var v = 0
 	if get_parent().is_on_floor():
-		v = -1
+		v = 0
 	else:
-		v = 1
+		v = sign(yspeed)
 	runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
-	current_v = min(max(0,current_v+8*delta*v),1)
-	anim_tree["parameters/PlayerBot/jump/blend_amount"] = current_v
-	anim_tree["parameters/PlayerTop/jump/blend_amount"] = current_v
+	var d = (v - current_v)
+	current_v = min(max(-1,current_v+8*delta*sign(d)),1)
+	anim_tree["parameters/PlayerBot/vertical/blend_amount"] = current_v
+	anim_tree["parameters/PlayerTop/vertical/blend_amount"] = current_v
