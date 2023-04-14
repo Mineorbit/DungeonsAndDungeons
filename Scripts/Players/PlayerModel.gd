@@ -72,13 +72,13 @@ func can_shoot(can_shootnow):
 
 
 func stop_strike():
-	anim_tree["parameters/Strike/add_amount"] = 0
+	anim_tree["parameters/PlayerTop/strike/blend_amount"] = 0
 	
 
 func player_striking(v):
 	print(v)
-	anim_tree["parameters/Strike/add_amount"] = 1
-	anim_tree["parameters/StrikeStart/seek_request"] = 0
+	anim_tree["parameters/PlayerTop/strike/blend_amount"] = 1
+	anim_tree["parameters/PlayerTop/strikestart/seek_request"] = 0
 	strikeTimer.start(0.35)
 
 
