@@ -69,13 +69,15 @@ func Shoot():
 	itemOwner.on_entity_shoot.emit()
 	var arrow: RigidBody3D = arrowprefab.instantiate()
 	Constants.World.level.spawn_entity(arrow)
-	arrow.global_transform.origin = global_transform.origin + -0.5*transform.basis.z
+	arrow.global_transform.origin = global_transform.origin - 1.5*itemOwner.global_transform.basis.z
 	var strength = 20
 	#arrow.gravity_scale = 0
 	# this needs to be generalized for item carrying enemies
 	var new_rot = CameraPosition.rotation
 	arrow.rotation = new_rot
-	arrow.apply_impulse(strength*(-1*CameraPosition.transform.basis.z+Vector3.UP*0.25))
+	
+	var shoot_dir = (CameraPosition.transform.basis.z-0.25*Vector3.UP).normalized()
+	arrow.apply_impulse(-strength*shoot_dir)
 	
 	
 	itemOwner.on_entity_can_shoot.emit(false)

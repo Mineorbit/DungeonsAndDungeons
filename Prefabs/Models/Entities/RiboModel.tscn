@@ -1,41 +1,50 @@
-[gd_scene load_steps=8 format=3 uid="uid://evx2rdayce7g"]
+[gd_scene load_steps=11 format=3 uid="uid://evx2rdayce7g"]
 
 [ext_resource type="PackedScene" uid="uid://bn51kdh3wyhp5" path="res://Assets/Models/LevelObjects/Entities/Ribo/ribo.blend" id="1_cpp8k"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v5fsm"]
-radius = 0.0542307
-height = 0.542307
+[ext_resource type="Script" path="res://Scripts/RiboModel.gd" id="2_ky1so"]
+[ext_resource type="AudioStream" uid="uid://btxrdugeymdpx" path="res://Assets/Sounds/sfx/Hit.mp3" id="3_laleu"]
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_0viqm"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8rbpi"]
 animation = &"twitch"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lg4q5"]
+animation = &"idle"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3y2b6"]
 animation = &"idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ptyxb"]
 
 [sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_7cf6s"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gkvid"]
-graph_offset = Vector2(-418.528, 73.3321)
+graph_offset = Vector2(-309.891, 15.0912)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_0viqm")
 nodes/Add2/position = Vector2(360, 60)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3y2b6")
 nodes/Animation/position = Vector2(0, 100)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_8rbpi")
 "nodes/Animation 2/position" = Vector2(-120, 280)
-nodes/output/position = Vector2(640, 60)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_lg4q5")
+"nodes/Animation 3/position" = Vector2(540, 200)
+nodes/output/position = Vector2(1120, 80)
+nodes/speed/node = SubResource("AnimationNodeBlend2_ptyxb")
+nodes/speed/position = Vector2(790.774, 51.377)
 nodes/twitch_trigger/node = SubResource("AnimationNodeTimeSeek_7cf6s")
 nodes/twitch_trigger/position = Vector2(140, 300)
-node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Animation", &"Add2", 1, &"twitch_trigger", &"twitch_trigger", 0, &"Animation 2"]
+node_connections = [&"output", 0, &"speed", &"Add2", 0, &"Animation", &"Add2", 1, &"twitch_trigger", &"speed", 0, &"Add2", &"speed", 1, &"Animation 3", &"twitch_trigger", 0, &"Animation 2"]
 
 [node name="RiboModel" instance=ExtResource("1_cpp8k")]
+script = ExtResource("2_ky1so")
+attachmentPoints = [NodePath("HandL")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/rotation = Quaternion(0.0812686, -2.68063e-26, -8.3236e-18, 0.996692)
-bones/0/scale = Vector3(1.01976, 1.01976, 1.01976)
-bones/1/rotation = Quaternion(-0.152442, 1.17816e-07, 1.40822e-09, 0.988313)
-bones/2/rotation = Quaternion(0.0838841, 1.23447e-14, 9.22503e-09, 0.996476)
+bones/0/rotation = Quaternion(0.066051, 0, 0, 0.997816)
+bones/0/scale = Vector3(1.01615, 1.01615, 1.01615)
+bones/1/rotation = Quaternion(-0.124053, 1.18288e-07, 1.47883e-08, 0.992276)
+bones/2/rotation = Quaternion(0.068179, 1.39624e-14, -3.92915e-16, 0.997673)
 bones/4/rotation = Quaternion(1.24928e-07, -1.27041e-07, -0.12892, 0.991655)
 bones/5/rotation = Quaternion(0.738415, 1.04507e-06, 1.32041e-06, 0.674347)
 bones/6/rotation = Quaternion(0.0704819, 1.18886e-07, 2.43663e-07, 0.997513)
@@ -46,7 +55,7 @@ bones/10/rotation = Quaternion(1.24928e-07, 1.27041e-07, 0.12892, 0.991655)
 bones/11/rotation = Quaternion(0.672335, -1.42202e-06, -1.11101e-06, 0.740247)
 bones/12/rotation = Quaternion(0.49755, -0.418074, 0.566781, 0.506377)
 bones/13/rotation = Quaternion(-0.0862049, 0.11131, -0.782746, 0.606208)
-bones/14/rotation = Quaternion(0.182462, 0.0123686, -0.166862, 0.968871)
+bones/14/rotation = Quaternion(0.183178, 0.0133955, -0.173039, 0.967638)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/rotation = Quaternion(0.0831602, -0.020561, -0.10987, 0.990248)
 bones/15/scale = Vector3(1, 1, 1)
@@ -54,7 +63,7 @@ bones/16/rotation = Quaternion(-0.0582084, 0.0115097, 0.0538815, 0.996783)
 bones/17/rotation = Quaternion(-0.0701012, -9.67948e-08, 0.225217, 0.971784)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/rotation = Quaternion(-0.0862049, -0.11131, 0.782746, 0.606208)
-bones/19/rotation = Quaternion(0.18324, -0.0129077, 0.167971, 0.968526)
+bones/19/rotation = Quaternion(0.183781, -0.0136797, 0.172633, 0.967592)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(0.0831602, 0.020561, 0.10987, 0.990248)
 bones/20/scale = Vector3(1, 1, 1)
@@ -76,24 +85,25 @@ bones/31/scale = Vector3(1, 1, 1)
 bones/33/rotation = Quaternion(-0.368527, 0.0229424, 0.0248514, 0.929002)
 bones/33/scale = Vector3(1, 1, 1)
 
-[node name="HandL" type="PhysicalBone3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.659173, -0.105238, -0.771165, -0.769217, -0.0644631, 0.666506, -0.117517, 1.01226, -0.0377145, 1.74272, -0.250493, 0.0892446)
-joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1247e-05, 1.11077e-06, 0.271059)
-body_offset = Transform3D(1.00005, -1.96695e-06, -1.18841e-05, -8.47396e-05, -1.46367e-05, -1.00021, 1.49012e-08, 0.999996, -1.04681e-06, -3.80278e-05, 0.271116, -8.27014e-07)
-gravity_scale = 0.0
-bone_name = "hand.L"
-joint_constraints/bias = 0.3
-joint_constraints/damping = 1.0
-joint_constraints/impulse_clamp = 0.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/HandL" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_v5fsm")
-
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_gkvid")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Add2/add_amount = 1.0
+parameters/speed/blend_amount = 0
 parameters/twitch_trigger/seek_request = -1.0
+
+[node name="HandL" type="BoneAttachment3D" parent="." index="3"]
+transform = Transform3D(-0.666528, 0.759687, -0.105686, -0.761231, -0.672346, -0.032086, -0.0939165, 0.0581267, 1.01013, 1.51746, -0.0796975, 0.0812212)
+bone_name = "hand.L"
+bone_idx = 16
+use_external_skeleton = true
+external_skeleton = NodePath("../Armature/Skeleton3D")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="." index="4"]
+stream = ExtResource("3_laleu")
+volume_db = -4.0
+max_db = 1.0
+max_distance = 16.0
+max_polyphony = 4
+panning_strength = 2.0

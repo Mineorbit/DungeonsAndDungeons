@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bpqrsbwd745am"]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_jx2mm"]
 [ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="2_6tpvq"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://wfj2i28vjum3" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledWater.tscn" id="18_klvl0"]
 [ext_resource type="PackedScene" uid="uid://d1nbqa7q8jcrs" path="res://Prefabs/LevelObjects/Interactive/MusicBox.tscn" id="19_lpqf8"]
 [ext_resource type="PackedScene" uid="uid://dmk8rcqgcohj8" path="res://Prefabs/LevelObjects/Spawners/ShieldSpawner.tscn" id="20_gxp6n"]
-[ext_resource type="PackedScene" uid="uid://c6ibygdee2t42" path="res://Prefabs/LevelObjects/Spawners/RiboSpawner.tscn" id="21_sr62q"]
+[ext_resource type="PackedScene" uid="uid://c6ibygdee2t42" path="res://RiboSpawner.tscn" id="21_sr62q"]
 [ext_resource type="PackedScene" uid="uid://c1mjlp5rplnoo" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledBrick.tscn" id="22_6g2bu"]
 
 [node name="LevelObjectList" type="Node3D"]

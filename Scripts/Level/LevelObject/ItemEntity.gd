@@ -49,12 +49,13 @@ func _process(_delta):
 func UpdateRelativePosition(_passive = false):
 	if itemOwner != null and collision_layer == 0:
 		var attachmentpoint = itemAttachmentPoint.global_transform
-		var new_transform = attachmentpoint.translated_local(offset)
+		var new_transform: Transform3D = attachmentpoint
 		#transform.basis = attachmentpoint.global_transform.basis
+		new_transform = new_transform.translated_local(offset)
 		new_transform = new_transform.rotated_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
 		new_transform = new_transform.rotated_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
 		new_transform = new_transform.rotated_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
-		global_transform =  itemOwner.model.global_transform*new_transform
+		global_transform = new_transform
 
 
 # gravity should be set by global constant

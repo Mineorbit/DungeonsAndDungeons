@@ -1,15 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgkf1aq1kxjfp"]
+[gd_scene load_steps=10 format=3 uid="uid://cgkf1aq1kxjfp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Ribo.gd" id="1_idayt"]
-[ext_resource type="PackedScene" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
 [ext_resource type="PackedScene" uid="uid://evx2rdayce7g" path="res://Prefabs/Models/Entities/RiboModel.tscn" id="3_5ifii"]
-[ext_resource type="PackedScene" uid="uid://k4wmacyn48wa" path="res://Prefabs/LevelObjects/Entities/Items/Spear.tscn" id="4_u1lqj"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
-radius = 0.45
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aa5fx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
-size = Vector3(2, 1, 4)
+size = Vector3(2, 1, 8)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_q63ex"]
 
@@ -30,9 +28,11 @@ size = Vector3(1.01933, 1, 1)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_idayt")
+minimum_distance_to_target = 2
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_xuwxo")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_aa5fx")
 
 [node name="Navigation" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.84
@@ -45,7 +45,7 @@ ignore_y = false
 [node name="VisionCheck" type="ShapeCast3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_do8j2")
-target_position = Vector3(0, 0, 2)
+target_position = Vector3(0, 0, 4)
 collision_mask = 16
 
 [node name="Target" type="Node3D" parent="."]
@@ -76,8 +76,5 @@ shape = SubResource("BoxShape3D_f5r85")
 
 [node name="Model" parent="." instance=ExtResource("3_5ifii")]
 transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, 0.425, 0)
-
-[node name="Spear" parent="." instance=ExtResource("4_u1lqj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.459877, -0.6916)
 
 [connection signal="velocity_computed" from="Navigation" to="." method="on_navigation_velocity_computed"]

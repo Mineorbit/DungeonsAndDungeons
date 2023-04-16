@@ -19,7 +19,7 @@ var playercontroller
 func Hit(damage, hitting_entity,direction = null):
 	var modifier = 1
 	if direction != null:
-		if item[1] is Shield:
+		if has_item(1) and item[1] is Shield:
 			modifier = item[1].damage_modifier(direction)
 	if modifier != 0:
 		super.Hit(modifier*damage,hitting_entity,direction)
@@ -66,12 +66,12 @@ func setColor():
 	mesh.set_surface_override_material(1, material)
 
 func UseLeft():
-	if item[0] != null:
+	if has_item(0):
 		item[0].Use()
 
 
 func StopUseLeft():
-	if item[0] != null:
+	if has_item(0):
 		item[0].StopUse()
 
 func UseRight():

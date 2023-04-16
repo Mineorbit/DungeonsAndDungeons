@@ -276,10 +276,14 @@ func _physics_process(delta: float) -> void:
 	if not input_blocked and velocity.length() > 0.2 and move_direction.length() > 0.4:
 		# TODO: if climbing, the look direction should be towards the ladder
 		
-		look_direction = Vector2(velocity.x,_velocity.z)
-		look_direction = look_direction.normalized()
-		target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
+		look_into_direction(Vector2(velocity.x,velocity.z))
 		rotate_object()
+
+
+func look_into_direction(look_direction):
+	look_direction = look_direction.normalized()
+	target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
+	
 
 
 func kickback(direction) -> void:
@@ -332,7 +336,7 @@ func Attach(item_to_attach):
 
 
 func Dettach(item_to_dettach):
-	if item == null:
+	if item_to_dettach == null:
 		return
 	item[item_to_dettach.attachment] = null
 	item_to_dettach.OnDettach()
