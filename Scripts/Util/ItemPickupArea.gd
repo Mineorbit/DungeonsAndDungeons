@@ -14,7 +14,7 @@ func Pickup():
 	var left_avail = []
 	var right_avail = []
 	for item in items_inside_range:
-		if item.hand:
+		if item.attachment == 1:
 			right_avail.append(item)
 		else:
 			left_avail.append(item)
@@ -23,16 +23,16 @@ func Pickup():
 	change_right_hand(right_avail,any_items)
 
 func change_left_hand(avail,any_items):
-	if(get_parent().itemLeft != null and (avail.size()>0 or not any_items)):
-		get_parent().Dettach(get_parent().itemLeft)
+	if(get_parent().has_item(0) and (avail.size()>0 or not any_items)):
+		get_parent().Dettach(get_parent().item[0])
 	if avail.size() > 0:
 		get_parent().Attach(avail[0])
 
 
 
 func change_right_hand(avail,any_items):
-	if(get_parent().itemRight != null and (avail.size()>0 or not any_items)):
-		get_parent().Dettach(get_parent().itemRight)
+	if(get_parent().has_item(1) and (avail.size()>0 or not any_items)):
+		get_parent().Dettach(get_parent().item[1])
 	if avail.size() > 0:
 		get_parent().Attach(avail[0])
 

@@ -7,8 +7,9 @@ var itemAttachmentPoint
 var isEquipped = false
 
 # which hand? false = left
-@export var hand = false
+@export var attachment: int = 0 
 
+var attachmentPoint: BoneAttachment3D
 
 # this later needs to be replaced by itemhandle system
 @export var offset = Vector3.ZERO
@@ -47,13 +48,14 @@ func _process(_delta):
 
 func UpdateRelativePosition(_passive = false):
 	if itemOwner != null and collision_layer == 0:
-		var attachmentpoint = itemOwner.model.playerSkeleton.get_bone_global_pose(itemAttachmentPoint)
+		var attachmentpoint = itemAttachmentPoint.global_transform
 		var new_transform = attachmentpoint.translated_local(offset)
 		#transform.basis = attachmentpoint.global_transform.basis
 		new_transform = new_transform.rotated_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
 		new_transform = new_transform.rotated_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
 		new_transform = new_transform.rotated_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
-		global_transform =  itemOwner.model.playerSkeleton.global_transform*new_transform
+		global_transform =  itemOwner.model.global_transform*new_transform
+
 
 # gravity should be set by global constant
 
@@ -65,6 +67,7 @@ func OnAttach(new_owner):
 	gravity = 0
 	isEquipped = true
 	itemOwner = new_owner
+	itemAttachmentPoint = itemOwner.model.get_node(itemOwner.model.attachmentPoints[attachment])
 	on_item_attached.emit(itemOwner)
 
 func OnDettach():

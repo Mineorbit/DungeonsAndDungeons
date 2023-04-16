@@ -3,8 +3,10 @@ class_name EntityModel
 
 @onready var hitSound = $HitSound
 
-
 @onready var anim_tree = $AnimationTree
+
+@export var attachmentPoints: Array = []
+
 
 var has_swim = false
 

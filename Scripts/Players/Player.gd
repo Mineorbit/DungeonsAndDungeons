@@ -11,16 +11,16 @@ var id: int = 0:
 		id = value
 		setColor()
 
-var itemLeft
-var itemRight
+
+
 var playercontroller
 
 
 func Hit(damage, hitting_entity,direction = null):
 	var modifier = 1
 	if direction != null:
-		if itemRight is Shield:
-			modifier = itemRight.damage_modifier(direction)
+		if item[1] is Shield:
+			modifier = item[1].damage_modifier(direction)
 	if modifier != 0:
 		super.Hit(modifier*damage,hitting_entity,direction)
 		Signals.playerHealthChanged.emit(id,health)
@@ -66,28 +66,28 @@ func setColor():
 	mesh.set_surface_override_material(1, material)
 
 func UseLeft():
-	if itemLeft != null:
-		itemLeft.Use()
+	if item[0] != null:
+		item[0].Use()
 
 
 func StopUseLeft():
-	if itemLeft != null:
-		itemLeft.StopUse()
+	if item[0] != null:
+		item[0].StopUse()
 
 func UseRight():
 	var tried_shot = false
-	if itemLeft != null:
+	if has_item(0):
 		#check if item in right is bow
-		if itemLeft.has_method("Shoot"):
+		if item[0].has_method("Shoot"):
 			tried_shot = true
-			itemLeft.Shoot()
-	if itemRight != null and not tried_shot:
-		itemRight.Use()
+			item[0].Shoot()
+	if has_item(1) and not tried_shot:
+		item[1].Use()
 
 
 func StopUseRight():
-	if itemRight != null:
-		itemRight.StopUse()
+	if has_item(1):
+		item[1].StopUse()
 
 
 func _ready():
@@ -115,10 +115,10 @@ func ChangeMovementState(aiming):
 		_velocity.z = 0
 
 func DettachAllItems():
-	if itemLeft != null:
-		Dettach(itemLeft)
-	if itemRight != null:
-		Dettach(itemRight)
+	if has_item(0):
+		Dettach(item[0])
+	if has_item(1):
+		Dettach(item[1])
 
 
 func start():
@@ -141,22 +141,14 @@ func _physics_process(delta):
 
 
 @rpc("any_peer", "call_local")
-func Attach(item):
-	super.Attach(item)
-	if item.hand:
-		itemRight = item
-		item.itemAttachmentPoint = model.right_hand()
-	else:
-		itemLeft = item
-		item.itemAttachmentPoint = model.left_hand()
+func Attach(item_to_attach):
+	super.Attach(item_to_attach)
+	item[item_to_attach.attachment] = item_to_attach
 
 
 @rpc("any_peer", "call_local")
-func Dettach(item):
+func Dettach(item_to_dettach):
 	print("Dettaching "+str(self))
-	super.Dettach(item)
-	if item.hand:
-		itemRight = null
-	else:
-		itemLeft = null
+	super.Dettach(item_to_dettach)
+	item[item_to_dettach.attachment] = null
 

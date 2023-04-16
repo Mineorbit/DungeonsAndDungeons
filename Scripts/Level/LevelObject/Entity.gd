@@ -50,6 +50,7 @@ var last_floor = false
 var can_shoot = false
 
 
+var item = {}
 
 # The name of the Model of an entity should allways be named Model
 @onready var model = $Model
@@ -124,11 +125,23 @@ var num_of_climb_areas = 0
 
 var num_of_swim_areas = 0
 
+
+func has_item(attachment):
+	return attachment in item and item[attachment] != null
+
+
+
 #these are actually body checks, as it would be hard to assign areas to these objects (water blocks/ ladder blocks)
 #this should be fixed later on
+
+
+
+
 func entered_climb_area(area):
 	num_of_climb_areas = num_of_climb_areas + 1
 	in_climb_area = true
+
+
 
 
 func exited_climb_area(area):
@@ -312,12 +325,14 @@ func Stun(duration, stunning_entity, direction):
 
 
 
-func Attach(item):
-	print("Attaching "+str(item))
-	item.OnAttach(self)
+func Attach(item_to_attach):
+	print("Attaching "+str(item_to_attach))
+	item[item_to_attach.attachment] = item
+	item_to_attach.OnAttach(self)
 
 
-func Dettach(item):
+func Dettach(item_to_dettach):
 	if item == null:
 		return
-	item.OnDettach()
+	item[item_to_dettach.attachment] = null
+	item_to_dettach.OnDettach()

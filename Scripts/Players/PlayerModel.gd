@@ -5,6 +5,7 @@ extends EntityModel
 @onready var runTrail = $RunTrail
 @onready var face: MeshInstance3D = $root/Skeleton3D/Face
 
+
 var aimfsm: AnimationNodeStateMachinePlayback
 var verticalfsm: AnimationNodeStateMachinePlayback
 var shieldfsm: AnimationNodeStateMachinePlayback
