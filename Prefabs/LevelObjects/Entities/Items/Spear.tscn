@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnuysx83xafa3" path="res://Assets/Models/LevelObjects/Entities/Items/Spear/Spear.blend" id="4_2dy6b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ruhvi"]
-size = Vector3(0.305739, 8.62175, 0.608602)
+size = Vector3(0.5, 8.725, 0.5)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_moqfe"]
 properties/0/path = NodePath(".:position")
@@ -22,7 +22,7 @@ collision_mask = 3
 script = ExtResource("1_7uxx5")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_ruhvi")
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_ycl5b")]
@@ -36,6 +36,6 @@ script = ExtResource("3_o87ot")
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
 [node name="Model" parent="." instance=ExtResource("4_2dy6b")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
 
 [connection signal="timeout" from="Timer" to="." method="SwingFinished"]

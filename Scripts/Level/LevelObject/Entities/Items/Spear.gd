@@ -32,21 +32,27 @@ func Swing():
 	
 
 var in_throw = false
+var started_throw = false
+
+var throw_speed = 16
 
 
 func Throw():
-	move_direction = global_transform.basis.y
 	in_throw = true
 
 func _physics_process(delta):
 	if in_throw:
-		move_and_collide(8*move_direction*delta)
+		move_and_collide(-global_transform.basis.z*throw_speed*delta)
+		look_at(global_transform.origin-global_transform.basis.z)
+		if not started_throw:
+			started_throw = true
+			#look_at(global_transform.origin + global_transform.basis.z)
 	else:
 		super._physics_process(delta)
 
+
 func _process(delta):
 	pass
-
 
 func SwingFinished():
 	offset = default_offset

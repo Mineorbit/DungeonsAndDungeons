@@ -53,4 +53,3 @@ func _physics_process(delta):
 	if "parameters/swim_speed/blend_amount" in anim_tree:
 		anim_tree["parameters/swim_speed/blend_amount"] = speed*16*get_parent().move_direction.length()
 	anim_tree["parameters/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
-	
