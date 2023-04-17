@@ -34,11 +34,39 @@ var flavor_texts = [
 	"Ikea ist literal eine Mensa mit angetackertem Möbelhandel",
 	"Ganz ehrlich: Alligatoah ist die Volt Partei des Deutschrap",
 	"Das sieht aus wie eine industrielle Hobbithöhle",
-	"Zitat: So'n Schnitzel strahlt auch schon so ne Wärme aus",
+	"So'n Schnitzel strahlt auch schon so ne Wärme aus",
 	"Metakäse",
 	"Der schiefe Turm von Zewa",
 	"Die holländische Sprache ist wie Valorant: Sie kombiniert zwei Sachen und macht keins von beidem besser",
-	"Anfang April ist für mich auch Ende März"
+	"Anfang April ist für mich auch Ende März",
+	"Wahrlich, das Gelbe vom Senf!",
+	"Future Knick",
+	"Free XOR!",
+	"Kann Spuren von AI enthalten (*Hust* Schau mal in der Lobby)",
+	"Gesoffen und getanzen",
+	"Der Boy hat nur eins Joke gemacht",
+	"Flachzange >:(",
+	"Wolkig mit Aussicht auf Sonnenschein",
+	"oh merde, c'est une allemand",
+	"Kohlrouladen",
+	"Ba- Ba- Banküberfall!"
+	"Ey Kenning, lass ma einen saufen",
+	"Wir sind viel zu nüchtern",
+	"Giraffenkräfte kalibriert",
+	"Imp ist der ...",
+	"Aale, Randale ... Und jetzt alle",
+	"*Orgelgeräusche*",
+	"Das ist Sonnenbergstyle",
+	"0611",
+	"In my Karlshof Era",
+	"Das Drehding muss drehen",
+	"Tanzen und Springen, Singen und Klingen, Fa la la la, la la, Fa la la laa",
+	"Wow Dude, Pride Rock!",
+	"Map Men, Map Men, Map Map Map Men Men Men",
+	"Ludonarrative Dissonanzen",
+	"Das Problem in dem System, Ja, Ist das System, Ja",
+	"Und nun: Die Bürgschaft"
+	
 	
 	
 	
