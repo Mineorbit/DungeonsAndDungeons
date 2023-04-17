@@ -49,7 +49,7 @@ var flavor_texts = [
 	"Wolkig mit Aussicht auf Sonnenschein",
 	"oh merde, c'est une allemand",
 	"Kohlrouladen",
-	"Ba- Ba- Banküberfall!"
+	"Ba- Ba- Banküberfall!",
 	"Ey Kenning, lass ma einen saufen",
 	"Wir sind viel zu nüchtern",
 	"Giraffenkräfte kalibriert",

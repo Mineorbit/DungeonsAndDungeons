@@ -48,6 +48,8 @@ func throw():
 	if has_item(0):
 		Dettach(spear)
 		spear.global_transform.origin = global_transform.origin + global_transform.basis.x*0.5
+		spear.look_at(global_transform.origin + global_transform.basis.x)
+		spear.Use(1)
 
 func aim_at(target,delta):
 	var target_dir = target.global_transform.origin - global_transform.origin

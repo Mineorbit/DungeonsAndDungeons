@@ -55,6 +55,7 @@ func UpdateRelativePosition(_passive = false):
 		new_transform = new_transform.rotated_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
 		new_transform = new_transform.rotated_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
 		new_transform = new_transform.rotated_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
+		new_transform.scaled(Vector3(1,1,1))
 		global_transform = new_transform
 
 
@@ -81,5 +82,5 @@ func OnDettach():
 	var olditemOwner = itemOwner
 	itemOwner = null
 	in_use = false
-	rotation = Vector3.ZERO
+	#rotation = Vector3.ZERO
 	on_item_dettached.emit(olditemOwner)
