@@ -16,7 +16,7 @@ func _ready():
 func TryStrike(body):
 	print(body)
 	if body != self and body != lastItemOwner and body.has_method("Hit"):
-		body.Hit(15,self)
+		body.Hit(35,self)
 		# immediately prevent all collisions
 		# remove arrow if hit
 		#queue_free()
@@ -45,7 +45,7 @@ func Swing():
 var in_throw = false
 var started_throw = false
 
-var throw_speed = 16
+var throw_speed = 24
 
 
 func Throw():
