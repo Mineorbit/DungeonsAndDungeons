@@ -5,12 +5,23 @@ var default_offset
 var default_rot
 @onready var timer = $Timer
 
-
+@onready var hitbox:Area3D = $Hitbox
 
 func _ready():
 	super._ready()
+	hitbox.body_entered.connect(TryStrike)
 	default_offset = offset
 	default_rot = hold_rot
+
+func TryStrike(body):
+	print(body)
+	if body != self and body != lastItemOwner and body.has_method("Hit"):
+		body.Hit(15,self)
+		# immediately prevent all collisions
+		# remove arrow if hit
+		#queue_free()
+
+
 
 func OnAttach(new_owner):
 	super.OnAttach(new_owner)

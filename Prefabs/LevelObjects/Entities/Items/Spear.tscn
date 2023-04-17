@@ -1,7 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://k4wmacyn48wa"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Spear.gd" id="1_7uxx5"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_ycl5b"]
 [ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_o87ot"]
 [ext_resource type="PackedScene" uid="uid://dnuysx83xafa3" path="res://Assets/Models/LevelObjects/Entities/Items/Spear/Spear.blend" id="4_2dy6b"]
 
@@ -16,6 +15,9 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bo80w"]
+height = 5.0
+
 [node name="Spear" type="CharacterBody3D"]
 collision_layer = 6
 collision_mask = 3
@@ -24,8 +26,6 @@ script = ExtResource("1_7uxx5")
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_ruhvi")
-
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_ycl5b")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_moqfe")
@@ -37,5 +37,13 @@ script = ExtResource("3_o87ot")
 
 [node name="Model" parent="." instance=ExtResource("4_2dy6b")]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("CapsuleShape3D_bo80w")
 
 [connection signal="timeout" from="Timer" to="." method="SwingFinished"]

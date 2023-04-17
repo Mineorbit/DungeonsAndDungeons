@@ -2,6 +2,8 @@ extends Entity
 class_name ItemEntity
 
 var itemOwner
+var lastItemOwner
+
 var itemAttachmentPoint
 
 var isEquipped = false
@@ -69,6 +71,7 @@ func OnAttach(new_owner):
 	gravity = 0
 	isEquipped = true
 	itemOwner = new_owner
+	lastItemOwner = itemOwner
 	itemAttachmentPoint = itemOwner.model.get_node(itemOwner.model.attachmentPoints[attachment])
 	on_item_attached.emit(itemOwner)
 
