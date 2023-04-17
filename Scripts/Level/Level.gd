@@ -400,7 +400,6 @@ func remove_by_position(pos: Vector3):
 				remove_level_object(levelObject)
 				isRemoved = true
 				return isRemoved
-		print("Test: "+str(isRemoved)+" "+str(chunk))
 		isRemoved = chunk.remove_tiled_level_object(gridposition)
 	return isRemoved
 

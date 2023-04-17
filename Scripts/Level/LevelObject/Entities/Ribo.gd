@@ -38,7 +38,6 @@ func _physics_process(delta):
 	if try_throw:
 		aim_at(target,delta)
 		throw_timer += delta
-		print(throw_timer)
 	if try_throw and throw_timer > 2:
 		throw()
 		try_throw = false

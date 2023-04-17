@@ -7,7 +7,7 @@ class_name Enemy
 @onready var target = $Target
 @onready var strikeArea: Area3D = $StrikeArea
 
-@export var minimum_distance_to_target = 1
+@export_range(0.1,10,0.1) var minimum_distance_to_target: float = 1
 @export var visibilityDistance = 8
 
 

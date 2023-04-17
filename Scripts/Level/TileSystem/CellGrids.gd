@@ -116,7 +116,6 @@ func remove_tiled_level_object(pos):
 	var grid_pos = get_grid_position(pos)
 	var grid_index = get_grid_index(grid_pos)
 	var oldid = grid[grid_index]
-	print("Test2: "+str(pos)+" "+str(oldid))
 	if oldid == -1:
 		return false
 	var grid_mesh = gridmeshes[oldid]

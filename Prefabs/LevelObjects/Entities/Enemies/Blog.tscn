@@ -29,6 +29,7 @@ size = Vector3(1.01933, 1, 1)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_5eeht")
+minimum_distance_to_target = 1.5
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
