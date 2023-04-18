@@ -34,9 +34,11 @@ func _ready():
 
 
 func Use():
+	itemOwner.items_in_use = itemOwner.items_in_use + 1
 	in_use = true
 	
 func StopUse():
+	itemOwner.items_in_use = itemOwner.items_in_use - 1
 	in_use = false
 
 func _physics_process(delta):

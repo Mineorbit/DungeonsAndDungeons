@@ -15,6 +15,7 @@ var strikeTimer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	anim_tree["parameters/PlayerTop/strikestart/seek_request"] = 128
 	strikeTimer = Timer.new()
 	add_child(strikeTimer)
 	
@@ -29,7 +30,7 @@ func _ready():
 	get_parent().on_entity_jump.connect(player_jump)
 	aimfsm = anim_tree["parameters/PlayerTop/aimingstatemachine/playback"]
 	verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
-	shieldfsm = anim_tree["parameters/shieldstatemachine/playback"]
+	shieldfsm = anim_tree["parameters/PlayerTop/shieldstatemachine/playback"]
 	mouth = face.mesh.surface_get_material(0).duplicate(true)
 	eyes = face.mesh.surface_get_material(1).duplicate(true)
 	face.set_surface_override_material(0,mouth)
@@ -49,11 +50,13 @@ func player_aiming(is_aiming):
 
 func player_shield(is_aiming):
 	var v = 0
+	print("Updating "+str(is_aiming))
 	if is_aiming:
 		v = 1
 		update_shield_state_machine("Raise")
 	else:
 		update_shield_state_machine("Lower")
+	use_blend = v
 	#anim_tree["parameters/ShieldBlock/add_amount"] = v
 
 
@@ -72,13 +75,16 @@ func can_shoot(can_shootnow):
 		update_aim_state_machine("Aim")
 
 
+var use_blend = 0
+
+var blend_target = 0
+
 func stop_strike():
-	anim_tree["parameters/PlayerTop/strike/blend_amount"] = 0
+	blend_target = 0
 	
 
 func player_striking(v):
-	print(v)
-	anim_tree["parameters/PlayerTop/strike/blend_amount"] = 1
+	blend_target = 1
 	anim_tree["parameters/PlayerTop/strikestart/seek_request"] = 0
 	strikeTimer.start(Constants.SwordStrikeTime)
 
@@ -147,6 +153,8 @@ func update_vertical_state_machine_remote(state):
 var current_v = 0
 func _physics_process(delta):
 	super._physics_process(delta)
+	use_blend = 0.5*(use_blend + blend_target)
+	anim_tree["parameters/PlayerTop/Use/blend_amount"] = (get_parent().items_in_use > 0)
 	anim_tree["parameters/PlayerBot/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
 	anim_tree["parameters/PlayerTop/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
 	#anim_tree["parameters/strikespeed/blend_amount"] = speed*10*get_parent().move_direction.length()

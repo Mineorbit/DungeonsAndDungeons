@@ -90,6 +90,8 @@ signal on_entity_health_changed(health)
 
 var climbing = false
 
+var items_in_use = 0
+
 func MeleeStrike(damage):
 	meleehitarea.Strike(damage,self)
 
