@@ -11,6 +11,8 @@ func _ready():
 	super._ready()
 	default_offset = offset
 	default_rot = hold_rot
+	timer.timeout.connect(func():
+		StopUse())
 
 func OnAttach(new_owner):
 	super.OnAttach(new_owner)
