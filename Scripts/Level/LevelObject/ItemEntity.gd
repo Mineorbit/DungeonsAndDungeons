@@ -35,7 +35,8 @@ func _ready():
 
 func Use():
 	if not in_use:
-		itemOwner.items_in_use = itemOwner.items_in_use + 1
+		if itemOwner != null:
+			itemOwner.items_in_use = itemOwner.items_in_use + 1
 		in_use = true
 	
 func StopUse():

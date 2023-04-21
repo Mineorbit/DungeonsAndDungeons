@@ -9,13 +9,13 @@ var default_rot
 
 func _ready():
 	super._ready()
-	hitbox.body_entered.connect(TryStrike)
+	hitbox.body_entered.connect(TryDamage)
 	default_offset = offset
 	default_rot = hold_rot
 
-func TryStrike(body):
+func TryDamage(body):
 	print(body)
-	if body != self and body != lastItemOwner and body.has_method("Hit"):
+	if body != self and body != lastItemOwner and body.has_method("Hit") and in_throw:
 		body.Hit(35,self)
 		# immediately prevent all collisions
 		# remove arrow if hit
@@ -52,8 +52,14 @@ func Throw():
 	in_throw = true
 
 func _physics_process(delta):
-	if in_throw:
-		move_and_collide(-global_transform.basis.z*throw_speed*delta)
+	if itemOwner == null:
+		if in_throw:
+			var collision = move_and_collide(-global_transform.basis.z*throw_speed*delta)
+			if collision:
+				if not ( collision.get_collider() is Entity ):
+					print("Arrow was stopped")
+					in_throw = false
+		
 		look_at(global_transform.origin-global_transform.basis.z)
 		if not started_throw:
 			started_throw = true
