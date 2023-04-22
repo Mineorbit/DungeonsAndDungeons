@@ -22,16 +22,10 @@ height = 2.60032
 [node name="Spear" type="RigidBody3D"]
 collision_layer = 6
 collision_mask = 3
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_7uxx5")
 hold_rot = Vector3(0, 180, 0)
-health = null
-speed = null
-can_climb = null
-climb_velocity = null
-buoyancy = null
-jump_cool_down_time = null
-waterSpeed = null
-waterGravity = null
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)

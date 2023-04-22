@@ -57,29 +57,34 @@ func Throw(target_position):
 	in_throw = true
 	stuck_in_wall = false
 	itemOwner.Dettach(self)
-		#spear.global_transform.origin = global_transform.origin + 2*global_transform.basis.x + Vector3(0,0.75,0)
 	var aim_position = target_position
 	aim_position.y = self.global_transform.origin.y
-	self.look_at(aim_position)
+	#self.look_at(aim_position)
+	#apply_impulse(-global_transform.basis.z)
+	var impulse = (aim_position - global_transform.origin).normalized()
+	#collisionlayer = 0
+	#collisionmask = 0
+	apply_impulse(impulse*24)
 
 
 # this should be done cleaner
 func _physics_process(delta):
+	#if in_throw:
+	#	gravity_scale = 0
+	#else:
+	#	gravity_scale = 1
 	if itemOwner == null:
 		if in_throw:
-			var collision = move_and_collide(-global_transform.basis.z*throw_speed*delta)
+			var collision = get_colliding_bodies ()
+			print(collision)
 			if collision:
-				if not ( collision.get_collider() is Entity ):
+				if not ( collision[0] is Entity ):
 					print("Arrow was stopped")
 					in_throw = false
 					stuck_in_wall = true
 		
-			look_at(global_transform.origin-global_transform.basis.z)
 			if not started_throw:
 				started_throw = true
-		else:
-			if not stuck_in_wall:
-				super._physics_process(delta)
 			#look_at(global_transform.origin + global_transform.basis.z)
 	else:
 		super._physics_process(delta)

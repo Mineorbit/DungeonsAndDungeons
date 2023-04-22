@@ -30,7 +30,8 @@ func _ready():
 	collisionlayer = collision_layer
 	collisionmask = collision_mask
 
-
+func remove():
+	queue_free()
 
 func Use():
 	if not in_use:
@@ -73,6 +74,7 @@ func OnAttach(new_owner):
 	collision_mask = 0
 	sleeping  = true
 	isEquipped = true
+	freeze = true
 	itemOwner = new_owner
 	lastItemOwner = itemOwner
 	itemAttachmentPoint = itemOwner.model.get_node(itemOwner.model.attachmentPoints[attachment])
@@ -82,6 +84,7 @@ func OnDettach():
 	collision_layer = collisionlayer
 	collision_mask = collisionmask
 	sleeping  = false
+	freeze = false
 	isEquipped = true
 	var olditemOwner = itemOwner
 	itemOwner = null
