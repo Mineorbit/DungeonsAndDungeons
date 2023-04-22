@@ -27,6 +27,10 @@ func OnAttach(new_owner):
 	in_throw = false
 	super.OnAttach(new_owner)
 
+func OnDettach():
+	stuck_in_wall = false
+	super.OnDettach()
+
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 func Use(type = 0,target_pos = null):
 	super.Use()
@@ -39,8 +43,6 @@ func Use(type = 0,target_pos = null):
 func Swing():
 	in_throw = false
 	itemOwner.on_entity_melee_strike.emit(15)
-	hold_rot = Vector3(0,0,0)
-	offset = Vector3(0,0,0)
 	timer.start(Constants.SwordStrikeTime)
 	
 
@@ -49,10 +51,11 @@ var started_throw = false
 
 var throw_speed = 24
 
+var stuck_in_wall = false
 
 func Throw(target_position):
 	in_throw = true
-	
+	stuck_in_wall = false
 	itemOwner.Dettach(self)
 		#spear.global_transform.origin = global_transform.origin + 2*global_transform.basis.x + Vector3(0,0.75,0)
 	var aim_position = target_position
@@ -69,12 +72,14 @@ func _physics_process(delta):
 				if not ( collision.get_collider() is Entity ):
 					print("Arrow was stopped")
 					in_throw = false
+					stuck_in_wall = true
 		
 			look_at(global_transform.origin-global_transform.basis.z)
 			if not started_throw:
 				started_throw = true
 		else:
-			super._physics_process(delta)
+			if not stuck_in_wall:
+				super._physics_process(delta)
 			#look_at(global_transform.origin + global_transform.basis.z)
 	else:
 		super._physics_process(delta)
@@ -84,10 +89,8 @@ func _process(delta):
 	pass
 
 func SwingFinished():
-	offset = default_offset
-	hold_rot = default_rot
-	
+	pass
+
 
 func StopUse():
 	super.StopUse()
-	

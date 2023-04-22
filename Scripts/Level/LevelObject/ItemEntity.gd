@@ -1,4 +1,4 @@
-extends Entity
+extends RigidBody3D
 class_name ItemEntity
 
 var itemOwner
@@ -27,7 +27,6 @@ signal on_item_dettached(old_item_owner)
 
 
 func _ready():
-	super._ready()
 	collisionlayer = collision_layer
 	collisionmask = collision_mask
 
@@ -45,7 +44,6 @@ func StopUse():
 		in_use = false
 
 func _physics_process(delta):
-	super._physics_process(delta)
 	UpdateRelativePosition()
 
 func _process(_delta):
@@ -73,9 +71,7 @@ func UpdateRelativePosition(_passive = false):
 func OnAttach(new_owner):
 	collision_layer = 0
 	collision_mask = 0
-	_velocity = Vector3.ZERO
-	started = false
-	gravity = 0
+	sleeping  = true
 	isEquipped = true
 	itemOwner = new_owner
 	lastItemOwner = itemOwner
@@ -85,9 +81,7 @@ func OnAttach(new_owner):
 func OnDettach():
 	collision_layer = collisionlayer
 	collision_mask = collisionmask
-	_velocity = itemOwner._velocity
-	started = true
-	gravity = 25
+	sleeping  = false
 	isEquipped = true
 	var olditemOwner = itemOwner
 	itemOwner = null

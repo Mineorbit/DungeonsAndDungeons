@@ -44,7 +44,7 @@ func spawnEntity():
 	set_spawn_pos()
 	Constants.World.level.spawn_entity(currentSpawned)
 	currentSpawned.rotate_y(rot_target)
-	currentSpawned.on_entity_remove.connect(clear_after_remove)
+	currentSpawned.tree_exiting.connect(clear_after_remove)
 
 func on_remove():
 	despawnEntity()
