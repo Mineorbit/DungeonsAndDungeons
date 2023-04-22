@@ -45,12 +45,8 @@ func _physics_process(delta):
 
 func throw():
 	if has_item(0):
-		Dettach(spear)
-		#spear.global_transform.origin = global_transform.origin + 2*global_transform.basis.x + Vector3(0,0.75,0)
-		var aim_position = target_entity.global_transform.origin
-		aim_position.y = spear.global_transform.origin.y
-		spear.look_at(aim_position)
-		spear.Use(1)
+		# throw at position of target_entity
+		spear.Use(1,target_entity.global_transform.origin)
 
 func aim_at(target,delta):
 	var target_dir = target.global_transform.origin - global_transform.origin

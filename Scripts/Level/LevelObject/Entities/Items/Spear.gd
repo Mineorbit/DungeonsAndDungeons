@@ -24,18 +24,20 @@ func TryDamage(body):
 
 
 func OnAttach(new_owner):
+	in_throw = false
 	super.OnAttach(new_owner)
 
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
-func Use(type = 0):
+func Use(type = 0,target_pos = null):
 	super.Use()
 	if type == 0:
 		Swing()
 	else:
-		Throw()
+		Throw(target_pos)
 
 
 func Swing():
+	in_throw = false
 	itemOwner.on_entity_melee_strike.emit(15)
 	hold_rot = Vector3(0,0,0)
 	offset = Vector3(0,0,0)
@@ -48,9 +50,17 @@ var started_throw = false
 var throw_speed = 24
 
 
-func Throw():
+func Throw(target_position):
 	in_throw = true
+	
+	itemOwner.Dettach(self)
+		#spear.global_transform.origin = global_transform.origin + 2*global_transform.basis.x + Vector3(0,0.75,0)
+	var aim_position = target_position
+	aim_position.y = self.global_transform.origin.y
+	self.look_at(aim_position)
 
+
+# this should be done cleaner
 func _physics_process(delta):
 	if itemOwner == null:
 		if in_throw:
@@ -60,9 +70,11 @@ func _physics_process(delta):
 					print("Arrow was stopped")
 					in_throw = false
 		
-		look_at(global_transform.origin-global_transform.basis.z)
-		if not started_throw:
-			started_throw = true
+			look_at(global_transform.origin-global_transform.basis.z)
+			if not started_throw:
+				started_throw = true
+		else:
+			super._physics_process(delta)
 			#look_at(global_transform.origin + global_transform.basis.z)
 	else:
 		super._physics_process(delta)

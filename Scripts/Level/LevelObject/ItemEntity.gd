@@ -62,7 +62,9 @@ func UpdateRelativePosition(_passive = false):
 		new_transform = new_transform.rotated_local(Vector3(1, 0, 0), deg_to_rad(hold_rot.x))
 		new_transform = new_transform.rotated_local(Vector3(0, 1, 0), deg_to_rad(hold_rot.y))
 		new_transform = new_transform.rotated_local(Vector3(0, 0, 1), deg_to_rad(hold_rot.z))
-		new_transform.scaled(Vector3(1,1,1))
+		new_transform.basis.x = new_transform.basis.x.normalized()
+		new_transform.basis.y = new_transform.basis.y.normalized()
+		new_transform.basis.z = new_transform.basis.z.normalized()
 		global_transform = new_transform
 
 

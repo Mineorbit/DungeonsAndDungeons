@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnuysx83xafa3" path="res://Assets/Models/LevelObjects/Entities/Items/Spear/Spear.blend" id="4_2dy6b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ruhvi"]
-size = Vector3(0.5, 8.725, 0.5)
+size = Vector3(0.233133, 4.93283, 0.191792)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_moqfe"]
 properties/0/path = NodePath(".:position")
@@ -16,7 +16,8 @@ properties/1/spawn = true
 properties/1/sync = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bo80w"]
-height = 5.0
+radius = 0.169837
+height = 2.60032
 
 [node name="Spear" type="CharacterBody3D"]
 collision_layer = 6
@@ -37,7 +38,7 @@ script = ExtResource("3_o87ot")
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
 [node name="Model" parent="." instance=ExtResource("4_2dy6b")]
-transform = Transform3D(0.6, 0, 0, 0, -2.62268e-08, 0.6, 0, -0.6, -2.62268e-08, 0, 0, 0)
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, 0, 0, 0)
 
 [node name="Hitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
