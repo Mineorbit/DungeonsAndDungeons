@@ -33,6 +33,8 @@ Bootstrap="*res://Scenes/Bootstrap.tscn"
 MultiplayerConstants="*res://Prefabs/MultiplayerConstants.tscn"
 ApiAccess="*res://Prefabs/ApiAccess.tscn"
 BevelEdges="*res://Scripts/Util/BevelEdges.gd"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [display]
 
@@ -42,6 +44,10 @@ window/size/viewport_height=700
 [dotnet]
 
 project/assembly_name="DungeonsAndDungeons"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 
 [filesystem]
 
