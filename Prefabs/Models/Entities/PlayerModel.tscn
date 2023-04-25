@@ -81,6 +81,14 @@ nodes/vertical/node = SubResource("AnimationNodeBlend3_ayar2")
 nodes/vertical/position = Vector2(276.768, 115.076)
 node_connections = [&"output", 0, &"vertical", &"TimeScale", 0, &"Animation 2", &"speed", 0, &"Animation", &"speed", 1, &"TimeScale", &"vertical", 0, &"Animation 4", &"vertical", 1, &"speed", &"vertical", 2, &"Animation 3"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0h8p5"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3o6pb"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_8e1wm"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_etkup"]
+
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_klpr7"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ulf2"]
@@ -155,7 +163,7 @@ graph_offset = Vector2(96, 3)
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_gli1j"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a0vwq"]
-graph_offset = Vector2(-49.433, 73.2843)
+graph_offset = Vector2(-588.433, 7.2843)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_klpr7")
 nodes/Add2/position = Vector2(820, 340)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_dt6cg")
@@ -190,14 +198,6 @@ nodes/strikestart/position = Vector2(-80, 500)
 nodes/vertical/node = SubResource("AnimationNodeBlend3_gli1j")
 nodes/vertical/position = Vector2(-80, 60)
 node_connections = [&"output", 0, &"Use", &"Add2", 0, &"strikestart", &"Add2", 1, &"TimeScale 3", &"TimeScale", 0, &"Animation 2", &"TimeScale 2", 0, &"Animation 3", &"TimeScale 3", 0, &"shieldstatemachine", &"Use", 0, &"aim", &"Use", 1, &"Add2", &"aim", 0, &"vertical", &"aim", 1, &"aimingstatemachine", &"speed", 0, &"Animation", &"speed", 1, &"TimeScale", &"strikestart", 0, &"TimeScale 2", &"vertical", 0, &"Animation 5", &"vertical", 1, &"speed", &"vertical", 2, &"Animation 4"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0h8p5"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3o6pb"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_8e1wm"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_etkup"]
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_a8ymg"]
 
@@ -246,7 +246,7 @@ transitions = ["Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(-69, -31)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dcbpa"]
-graph_offset = Vector2(-943.406, -125.772)
+graph_offset = Vector2(-1027.41, -73.772)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_6olxp")
 nodes/Add2/position = Vector2(1280, 100)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_g6wpn")
@@ -263,10 +263,8 @@ nodes/Animation/position = Vector2(756, 16)
 "nodes/Animation 6/position" = Vector2(-3080, 0)
 "nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_u7nvj")
 "nodes/Animation 7/position" = Vector2(-3080, 200)
-nodes/PlayerBot/node = SubResource("AnimationNodeBlendTree_2m0ar")
-nodes/PlayerBot/position = Vector2(-1020, -40)
-nodes/PlayerTop/node = SubResource("AnimationNodeBlendTree_a0vwq")
-nodes/PlayerTop/position = Vector2(-880, 100)
+nodes/Bot/node = SubResource("AnimationNodeBlendTree_2m0ar")
+nodes/Bot/position = Vector2(-1020, -40)
 "nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_0h8p5")
 "nodes/TimeScale 2/position" = Vector2(-2800, -220)
 "nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_3o6pb")
@@ -275,6 +273,8 @@ nodes/PlayerTop/position = Vector2(-880, 100)
 "nodes/TimeScale 4/position" = Vector2(-2800, 180)
 "nodes/TimeScale 5/node" = SubResource("AnimationNodeTimeScale_etkup")
 "nodes/TimeScale 5/position" = Vector2(-2340, -260)
+nodes/Top/node = SubResource("AnimationNodeBlendTree_a0vwq")
+nodes/Top/position = Vector2(-880, 100)
 nodes/TopBot/node = SubResource("AnimationNodeAdd2_a8ymg")
 nodes/TopBot/position = Vector2(-465.037, -72.0767)
 nodes/land/node = SubResource("AnimationNodeOneShot_eoek4")
@@ -292,7 +292,7 @@ nodes/vertical/node = SubResource("AnimationNodeBlend2_a00wc")
 nodes/vertical/position = Vector2(-2300, 80)
 nodes/verticalstatemachine/node = SubResource("AnimationNodeStateMachine_doh4d")
 nodes/verticalstatemachine/position = Vector2(-3080, 320)
-node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Animation", &"Add2", 1, &"TopBot", &"TimeScale 2", 0, &"Animation 3", &"TimeScale 3", 0, &"Animation 2", &"TimeScale 4", 0, &"Animation 7", &"TimeScale 5", 0, &"Animation 4", &"TopBot", 0, &"PlayerBot", &"TopBot", 1, &"PlayerTop", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale 3", &"landidle", 0, &"swim", &"landidle", 1, &"land", &"speed", 0, &"Animation 6", &"speed", 1, &"TimeScale 4", &"swim", 0, &"vertical", &"swim", 1, &"swim_speed", &"swim_speed", 0, &"Animation 5", &"swim_speed", 1, &"TimeScale 5", &"vertical", 0, &"speed", &"vertical", 1, &"verticalstatemachine"]
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Animation", &"Add2", 1, &"TopBot", &"TimeScale 2", 0, &"Animation 3", &"TimeScale 3", 0, &"Animation 2", &"TimeScale 4", 0, &"Animation 7", &"TimeScale 5", 0, &"Animation 4", &"TopBot", 0, &"Bot", &"TopBot", 1, &"Top", &"land", 0, &"TimeScale 2", &"land", 1, &"TimeScale 3", &"landidle", 0, &"swim", &"landidle", 1, &"land", &"speed", 0, &"Animation 6", &"speed", 1, &"TimeScale 4", &"swim", 0, &"vertical", &"swim", 1, &"swim_speed", &"swim_speed", 0, &"Animation 5", &"swim_speed", 1, &"TimeScale 5", &"vertical", 0, &"speed", &"vertical", 1, &"verticalstatemachine"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_etfuy"]
 
@@ -333,8 +333,8 @@ attachmentPoints = [NodePath("HandL"), NodePath("HandR")]
 
 [node name="Skeleton3D" parent="root" index="0"]
 bones/0/rest = Transform3D(-6.91414e-06, 0.140677, 0.990056, 7.6741e-07, 0.990056, -0.140677, -1, -2.08616e-07, -6.91414e-06, 0.00629979, 0.465994, -2.75373e-10)
-bones/0/position = Vector3(0.00568309, 0.340299, 1.25204e-08)
-bones/0/rotation = Quaternion(-0.0386439, 0.706052, 0.0386434, 0.706048)
+bones/0/position = Vector3(0.00571668, 0.340893, 1.22077e-08)
+bones/0/rotation = Quaternion(-0.039338, 0.706014, 0.0393375, 0.706009)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/rest = Transform3D(1, 1.7171e-06, -2.9305e-06, -1.1694e-06, 0.984106, 0.177583, 3.18885e-06, -0.177583, 0.984106, -3.83024e-08, 0.185363, -0.00385938)
 bones/1/position = Vector3(-4.05897e-08, 0.185363, -0.00385937)
@@ -426,15 +426,15 @@ bones/23/rotation = Quaternion(-0.0218092, -0.234772, 0.00362493, 0.971799)
 bones/23/scale = Vector3(1, 1, 1)
 bones/24/rest = Transform3D(0.368834, 0.122427, 0.9214, 0.0209332, -0.992131, 0.123446, 0.929281, -0.0262426, -0.368487, 0.168477, -8.64653e-06, -0.000235289)
 bones/24/position = Vector3(0.168477, -8.64653e-06, -0.000235289)
-bones/24/rotation = Quaternion(0.664063, 0.505978, 0.475771, 0.276855)
+bones/24/rotation = Quaternion(0.665386, 0.503685, 0.478197, 0.273661)
 bones/24/scale = Vector3(1.00002, 1, 1)
 bones/25/rest = Transform3D(0.990702, -0.13605, 9.34657e-07, 0.13605, 0.990702, -2.38618e-06, -6.01327e-07, 2.49115e-06, 1, -1.69966e-08, 0.164137, -6.1933e-08)
 bones/25/position = Vector3(-1.69966e-08, 0.164137, -6.1933e-08)
-bones/25/rotation = Quaternion(-0.0346893, 0.101768, 0.634626, 0.765304)
+bones/25/rotation = Quaternion(-0.0369642, 0.103238, 0.628216, 0.770273)
 bones/25/scale = Vector3(1, 1, 1)
 bones/26/rest = Transform3D(-0.344139, 0.774042, 0.531438, -0.0465479, 0.55125, -0.83304, -0.937764, -0.311419, -0.153677, -0.0414817, 0.154147, 0.0230306)
 bones/26/position = Vector3(-0.00781621, 0.161313, 0.00313831)
-bones/26/rotation = Quaternion(0.362381, 0.596462, -0.559409, 0.447185)
+bones/26/rotation = Quaternion(0.360601, 0.598917, -0.556797, 0.448601)
 bones/26/scale = Vector3(1, 1, 1)
 bones/27/rest = Transform3D(-1, 1.96342e-07, 1.80359e-06, -9.8553e-08, 0.98678, -0.162065, -1.81157e-06, -0.162065, -0.98678, 6.0536e-09, 0.250972, 8.84756e-09)
 bones/27/position = Vector3(6.0536e-09, 0.250972, 8.84756e-09)
@@ -447,15 +447,15 @@ bones/28/scale = Vector3(1, 1, 1)
 bones/29/rotation = Quaternion(-9.58177e-08, -0.229241, 9.16328e-08, 0.97337)
 bones/30/rest = Transform3D(0.36886, -0.122427, -0.921388, -0.0209355, -0.992131, 0.123446, -0.929255, -0.0262443, -0.368518, -0.168466, -3.39317e-06, 0.000235811)
 bones/30/position = Vector3(-0.168466, -3.39317e-06, 0.000235811)
-bones/30/rotation = Quaternion(0.827236, -0.0669205, -0.557757, -0.0104956)
+bones/30/rotation = Quaternion(0.827176, -0.0642393, -0.558072, -0.014471)
 bones/30/scale = Vector3(1.00001, 1, 1)
 bones/31/rest = Transform3D(0.990702, 0.136049, -4.24844e-07, -0.136049, 0.990702, -5.02874e-06, -2.63261e-07, 5.03978e-06, 1, -9.42964e-09, 0.164137, 4.60423e-08)
 bones/31/position = Vector3(-9.42964e-09, 0.164137, 4.60423e-08)
-bones/31/rotation = Quaternion(0.040052, -0.0103219, -0.16562, 0.985322)
+bones/31/rotation = Quaternion(0.0368507, -0.00949685, -0.157861, 0.986728)
 bones/31/scale = Vector3(1, 1, 1)
 bones/32/rest = Transform3D(-0.344154, -0.774074, -0.531383, 0.0465575, 0.55119, -0.83308, 0.937758, -0.311448, -0.153655, 0.0412739, 0.153885, 0.0229307)
 bones/32/position = Vector3(0.0167946, 0.145147, 0.0134541)
-bones/32/rotation = Quaternion(0.362372, -0.596467, 0.559413, 0.447181)
+bones/32/rotation = Quaternion(0.360592, -0.598921, 0.556801, 0.448598)
 bones/32/scale = Vector3(1, 1, 1)
 bones/33/rest = Transform3D(-1, 9.58493e-07, -7.05385e-07, 1.06014e-06, 0.98678, -0.162065, 5.40722e-07, -0.162065, -0.98678, 6.51926e-09, 0.25097, -1.94414e-08)
 bones/33/position = Vector3(6.51926e-09, 0.25097, -1.94414e-08)
@@ -468,17 +468,17 @@ bones/35/scale = Vector3(1, 1, 1)
 script = ExtResource("1_wbk7d")
 
 [node name="Head" type="BoneAttachment3D" parent="root/Skeleton3D" index="6"]
-transform = Transform3D(-0.0126829, 0.0487623, 0.99873, 0.00636786, 0.998794, -0.0486845, -0.999899, 0.0057423, -0.0129782, -0.0149913, 1.15646, 0.000295903)
+transform = Transform3D(-0.0126954, 0.0467983, 0.998824, 0.00634293, 0.998888, -0.0467207, -0.999899, 0.00574233, -0.0129782, -0.0165624, 1.15701, 0.000295921)
 bone_name = "head.x"
 bone_idx = 5
 
 [node name="Physical Bone band_attach_r" type="PhysicalBone3D" parent="root/Skeleton3D" index="7"]
-transform = Transform3D(-0.981544, -0.0273113, -0.187952, -0.133722, 0.807629, 0.572775, 0.138617, 0.587921, -0.795443, -0.121468, 1.35341, 0.810033)
+transform = Transform3D(-0.984958, -0.0241084, -0.170581, -0.119988, 0.811919, 0.569708, 0.127277, 0.582127, -0.801555, -0.134578, 1.36008, 0.80673)
 collision_layer = 256
 collision_mask = 256
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0100122, -0.457121, 0.676456)
-body_offset = Transform3D(0.793185, -0.500002, 0.344699, 0.570382, 0.408992, -0.712317, 0.214585, 0.762486, 0.608205, -0.469677, 0.663099, -0.0650243)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0100894, -0.456453, 0.670837)
+body_offset = Transform3D(0.796566, -0.502667, 0.333007, 0.559492, 0.401096, -0.725359, 0.230629, 0.764926, 0.599263, -0.460874, 0.664034, -0.0551821)
 gravity_scale = 0.0
 angular_damp = 16.0
 bone_name = "band_attach.r"
@@ -491,12 +491,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bgdk6")
 
 [node name="Physical Bone band_top_r" type="PhysicalBone3D" parent="root/Skeleton3D" index="8"]
-transform = Transform3D(-0.939118, 0.081436, 0.395552, 0.285832, 0.844504, 0.508819, -0.277987, 0.579565, -0.806481, -0.144642, 1.31967, 0.910189)
+transform = Transform3D(-0.932038, 0.0851565, 0.412353, 0.296198, 0.84762, 0.498298, -0.291654, 0.575136, -0.805251, -0.159669, 1.32778, 0.90718)
 collision_layer = 256
 collision_mask = 256
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359841, -0.433289, 0.589661)
-body_offset = Transform3D(0.668444, -0.619533, 0.46868, 0.588177, 0.016448, -0.844521, 0.498148, 0.819526, 0.364548, -0.785332, 0.293457, -0.0391223)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.355153, -0.433667, 0.584529)
+body_offset = Transform3D(0.675608, -0.618516, 0.460067, 0.572221, 0.00906879, -0.856238, 0.507551, 0.820882, 0.349231, -0.777097, 0.301202, -0.0284044)
 gravity_scale = 0.0
 angular_damp = 16.0
 bone_name = "band_top.r"
@@ -509,12 +509,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_lnkvy")
 
 [node name="Physical Bone band_attach_l" type="PhysicalBone3D" parent="root/Skeleton3D" index="9"]
-transform = Transform3D(0.391422, -0.0284894, 0.918696, 0.607955, 0.759217, -0.234363, -0.691165, 0.652742, 0.311206, -0.166584, 1.39439, 0.773073)
+transform = Transform3D(0.40795, -0.0267225, 0.911643, 0.598069, 0.763967, -0.244092, -0.690093, 0.647247, 0.324238, -0.178746, 1.40169, 0.768877)
 collision_layer = 256
 collision_mask = 256
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479597, -0.510383, -0.306441)
-body_offset = Transform3D(0.86645, -0.0517989, 0.497791, 0.340866, -0.668464, -0.659708, 0.365519, 0.744156, -0.559256, -0.289441, -0.706812, 0.0331242)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.474832, -0.509562, -0.303204)
+body_offset = Transform3D(0.876097, -0.0447969, 0.481309, 0.333358, -0.66582, -0.666055, 0.348804, 0.74697, -0.566141, -0.292891, -0.699516, 0.0433486)
 gravity_scale = 0.0
 angular_damp = 16.0
 bone_name = "band_attach.l"
@@ -527,12 +527,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bdqym")
 
 [node name="Physical Bone band_top_l" type="PhysicalBone3D" parent="root/Skeleton3D" index="10"]
-transform = Transform3D(-0.187546, 0.049349, 1.02224, 0.556087, 0.879076, 0.06025, -0.858527, 0.554506, -0.192477, -0.26554, 1.38038, 0.778607)
+transform = Transform3D(-0.169681, 0.0539003, 1.02597, 0.552987, 0.882785, 0.0457506, -0.865018, 0.549572, -0.180316, -0.277895, 1.38849, 0.773829)
 collision_layer = 256
 collision_mask = 256
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.662279, -0.453298, 0.122883)
-body_offset = Transform3D(0.732919, -0.372488, 0.642683, 0.435769, -0.501897, -0.796213, 0.595323, 0.83189, -0.196592, -0.733219, -0.418268, 0.00698161)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.656667, -0.452666, 0.122079)
+body_offset = Transform3D(0.746998, -0.364874, 0.631901, 0.423259, -0.505772, -0.801416, 0.587954, 0.833851, -0.21368, -0.732837, -0.40905, 0.017452)
 gravity_scale = 0.0
 angular_damp = 16.0
 bone_name = "band_top.l"
@@ -553,24 +553,24 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 process_callback = 0
 parameters/Add2/add_amount = 1.0
-parameters/PlayerBot/TimeScale/scale = 1.5
-parameters/PlayerBot/speed/blend_amount = 0.0
-parameters/PlayerBot/vertical/blend_amount = 0
-parameters/PlayerTop/Add2/add_amount = 1.0
-parameters/PlayerTop/TimeScale/scale = 1.5
-"parameters/PlayerTop/TimeScale 2/scale" = 1.75
-"parameters/PlayerTop/TimeScale 3/scale" = 2.0
-parameters/PlayerTop/Use/blend_amount = 1.0
-parameters/PlayerTop/aim/blend_amount = 0
-parameters/PlayerTop/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_etfuy")
-parameters/PlayerTop/shieldstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_u8g5x")
-parameters/PlayerTop/speed/blend_amount = 0.0
-parameters/PlayerTop/strikestart/seek_request = -1.0
-parameters/PlayerTop/vertical/blend_amount = 0
+parameters/Bot/TimeScale/scale = 1.5
+parameters/Bot/speed/blend_amount = 0.0
+parameters/Bot/vertical/blend_amount = 0
 "parameters/TimeScale 2/scale" = 1.2
 "parameters/TimeScale 3/scale" = 1.2
 "parameters/TimeScale 4/scale" = 1.5
 "parameters/TimeScale 5/scale" = 1.5
+parameters/Top/Add2/add_amount = 1.0
+parameters/Top/TimeScale/scale = 1.5
+"parameters/Top/TimeScale 2/scale" = 1.75
+"parameters/Top/TimeScale 3/scale" = 2.0
+parameters/Top/Use/blend_amount = 1.0
+parameters/Top/aim/blend_amount = 0
+parameters/Top/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_etfuy")
+parameters/Top/shieldstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_u8g5x")
+parameters/Top/speed/blend_amount = 0.0
+parameters/Top/strikestart/seek_request = -1.0
+parameters/Top/vertical/blend_amount = 0
 parameters/TopBot/add_amount = 1.0
 parameters/land/active = false
 parameters/land/request = 0
@@ -603,14 +603,14 @@ max_polyphony = 4
 panning_strength = 2.0
 
 [node name="HandL" type="BoneAttachment3D" parent="." index="6"]
-transform = Transform3D(0.90151, 0.421967, 0.0960288, 0.193221, -0.591034, 0.783162, 0.387225, -0.687474, -0.614357, 0.0478923, 0.550068, -0.621518)
+transform = Transform3D(0.901128, 0.423129, 0.0944888, 0.194994, -0.590203, 0.783349, 0.387225, -0.687474, -0.614357, 0.0475133, 0.550745, -0.621518)
 bone_name = "hand.l"
 bone_idx = 17
 use_external_skeleton = true
 external_skeleton = NodePath("../root/Skeleton3D")
 
 [node name="HandR" type="BoneAttachment3D" parent="." index="7"]
-transform = Transform3D(-0.17346, 0.155054, 0.972558, 0.872185, -0.434452, 0.224822, 0.457389, 0.887249, -0.0598763, -0.0443923, 0.751772, 0.786482)
+transform = Transform3D(-0.175175, 0.155908, 0.972114, 0.871842, -0.434146, 0.226734, 0.457389, 0.887249, -0.0598762, -0.0451677, 0.752267, 0.786482)
 bone_name = "hand.r"
 bone_idx = 23
 use_external_skeleton = true

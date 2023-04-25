@@ -15,7 +15,7 @@ var strikeTimer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-	anim_tree["parameters/PlayerTop/strikestart/seek_request"] = 128
+	anim_tree["parameters/Top/strikestart/seek_request"] = 128
 	strikeTimer = Timer.new()
 	add_child(strikeTimer)
 	
@@ -28,9 +28,9 @@ func _ready():
 	get_parent().on_entity_shoot.connect(player_shot)
 	get_parent().on_entity_can_shoot.connect(can_shoot)
 	get_parent().on_entity_jump.connect(player_jump)
-	aimfsm = anim_tree["parameters/PlayerTop/aimingstatemachine/playback"]
+	aimfsm = anim_tree["parameters/Top/aimingstatemachine/playback"]
 	verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
-	shieldfsm = anim_tree["parameters/PlayerTop/shieldstatemachine/playback"]
+	shieldfsm = anim_tree["parameters/Top/shieldstatemachine/playback"]
 	mouth = face.mesh.surface_get_material(0).duplicate(true)
 	eyes = face.mesh.surface_get_material(1).duplicate(true)
 	face.set_surface_override_material(0,mouth)
@@ -44,7 +44,7 @@ func player_aiming(is_aiming):
 		update_aim_state_machine("Aim")
 	else:
 		update_aim_state_machine("Stop")
-	anim_tree["parameters/PlayerTop/aim/blend_amount"] = v
+	anim_tree["parameters/Top/aim/blend_amount"] = v
 
 
 
@@ -85,7 +85,7 @@ func stop_strike():
 
 func player_striking(v):
 	blend_target = 1
-	anim_tree["parameters/PlayerTop/strikestart/seek_request"] = 0
+	anim_tree["parameters/Top/strikestart/seek_request"] = 0
 	strikeTimer.start(Constants.SwordStrikeTime)
 
 
@@ -150,13 +150,10 @@ func update_vertical_state_machine_remote(state):
 	verticalfsm.travel(state)
 
 
-var current_v = 0
 func _physics_process(delta):
 	super._physics_process(delta)
 	use_blend = 0.5*(use_blend + blend_target)
-	anim_tree["parameters/PlayerTop/Use/blend_amount"] = (get_parent().items_in_use > 0)
-	anim_tree["parameters/PlayerBot/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
-	anim_tree["parameters/PlayerTop/speed/blend_amount"] = speed*8*get_parent().move_direction.length()
+	anim_tree["parameters/Top/Use/blend_amount"] = (get_parent().items_in_use > 0)
 	#anim_tree["parameters/strikespeed/blend_amount"] = speed*10*get_parent().move_direction.length()
 	# cound back down landblend
 	landblend = max(0,landblend-0.4*delta)
@@ -167,15 +164,5 @@ func _physics_process(delta):
 	if yspeed<0:
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
 		update_vertical_state_machine("Fall")
-	lastyspeed = yspeed
-	
-	var v = 0
-	if get_parent().is_on_floor():
-		v = 0
-	else:
-		v = sign(yspeed)
+
 	runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
-	var d = (v - current_v)
-	current_v = min(max(-1,current_v+8*delta*sign(d)),1)
-	anim_tree["parameters/PlayerBot/vertical/blend_amount"] = current_v
-	anim_tree["parameters/PlayerTop/vertical/blend_amount"] = current_v
