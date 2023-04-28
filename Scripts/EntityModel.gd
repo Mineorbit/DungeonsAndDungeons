@@ -21,6 +21,7 @@ var yspeed = 0
 var lastyspeed = 0
 var landblend = 0
 
+
 func _ready():
 	has_swim = "parameters/Top/swim/blend_amount" in anim_tree
 	if get_parent() is Entity:
@@ -74,3 +75,24 @@ func _physics_process(delta):
 	if ("parameters/Bot/vertical/blend_amount" in anim_tree):
 		anim_tree["parameters/Bot/vertical/blend_amount"] = current_v
 		anim_tree["parameters/Top/vertical/blend_amount"] = current_v
+
+
+var aimthrowtargetstate = ""
+
+func on_aiming_throw():
+	update_aim_throw_state_machine("Aim")
+
+func set_local_aim_throw(state):
+	pass
+
+
+func update_aim_throw_state_machine(state):
+	if aimthrowtargetstate != state:
+		set_local_aim_throw(state)
+		aimthrowtargetstate = state
+		rpc("update_aim_throw_state_machine_remote",state)
+
+
+@rpc
+func update_aim_throw_state_machine_remote(state):
+	set_local_aim_throw(state)

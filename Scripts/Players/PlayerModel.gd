@@ -47,6 +47,25 @@ func player_aiming(is_aiming):
 	anim_tree["parameters/Top/aim/blend_amount"] = v
 
 
+func update_aim_state_machine(state):
+	if aimtargetstate != state:
+		aimfsm.travel(state)
+		aimtargetstate = state
+		rpc("update_aim_state_machine_remote",state)
+
+func player_shot():
+	update_aim_state_machine("Release")
+
+# this will be used once there is a shooting cool down
+func can_shoot(can_shootnow):
+	if can_shootnow:
+		update_aim_state_machine("Aim")
+
+
+@rpc
+func update_aim_state_machine_remote(state):
+	aimfsm.travel(state)
+
 
 func player_shield(is_aiming):
 	var v = 0
@@ -65,14 +84,6 @@ func entity_hit():
 	print(str(Constants.id)+" HIT on "+str(self))
 	mouth.set_shader_parameter("character",1)
 	eyes.set_shader_parameter("character",1)
-
-func player_shot():
-	update_aim_state_machine("Release")
-
-# this will be used once there is a shooting cool down
-func can_shoot(can_shootnow):
-	if can_shootnow:
-		update_aim_state_machine("Aim")
 
 
 var use_blend = 0
@@ -114,11 +125,6 @@ var aimtargetstate = ""
 var verticaltargetstate = ""
 var shieldtargetstate = ""
 
-func update_aim_state_machine(state):
-	if aimtargetstate != state:
-		aimfsm.travel(state)
-		aimtargetstate = state
-		rpc("update_aim_state_machine_remote",state)
 
 
 
@@ -127,6 +133,9 @@ func update_shield_state_machine(state):
 		shieldfsm.travel(state)
 		shieldtargetstate = state
 		rpc("update_shield_state_machine_remote",state)
+
+
+
 
 
 func update_vertical_state_machine(state):
@@ -141,9 +150,6 @@ func update_vertical_state_machine(state):
 func update_shield_state_machine_remote(state):
 	shieldfsm.travel(state)
 
-@rpc
-func update_aim_state_machine_remote(state):
-	aimfsm.travel(state)
 
 @rpc
 func update_vertical_state_machine_remote(state):
