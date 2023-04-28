@@ -80,6 +80,10 @@ signal on_entity_can_shoot(can)
 
 signal on_entity_aiming(aiming)
 
+signal on_entity_throw_aiming
+
+signal on_entity_throw
+
 signal on_entity_using_shield(aiming)
 
 signal on_entity_jump

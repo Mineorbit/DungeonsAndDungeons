@@ -31,6 +31,7 @@ func _physics_process(delta):
 		follow_target = false
 		if not try_throw:
 			throw_timer = 0
+		on_entity_throw_aiming.emit()
 		try_throw = true
 	else:
 		follow_target = true
@@ -45,7 +46,6 @@ func _physics_process(delta):
 
 func throw():
 	if has_item(0):
-		# throw at position of target_entity
 		spear.Use(1,target_entity.global_transform.origin)
 
 func aim_at(target,delta):

@@ -26,6 +26,8 @@ func _ready():
 	has_swim = "parameters/Top/swim/blend_amount" in anim_tree
 	if get_parent() is Entity:
 		get_parent().on_entity_hit.connect(entity_hit)
+		get_parent().on_entity_throw_aiming.connect(on_throw_aiming)
+		get_parent().on_entity_throw.connect(on_throw)
 
 
 var rng = RandomNumberGenerator.new()
@@ -79,8 +81,11 @@ func _physics_process(delta):
 
 var aimthrowtargetstate = ""
 
-func on_aiming_throw():
+func on_throw_aiming():
 	update_aim_throw_state_machine("Aim")
+	
+func on_throw():
+	update_aim_throw_state_machine("Throw")
 
 func set_local_aim_throw(state):
 	pass
