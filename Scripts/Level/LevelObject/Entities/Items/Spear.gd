@@ -80,7 +80,7 @@ func _physics_process(delta):
 			var collision = get_colliding_bodies()
 			if collision:
 				if not ( collision[0] is Entity ):
-					print("Arrow was stopped")
+					print("Spear was stopped")
 					in_throw = false
 					stuck_in_wall = true
 		

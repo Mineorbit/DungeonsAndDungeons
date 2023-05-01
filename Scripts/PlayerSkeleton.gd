@@ -5,7 +5,6 @@ extends Skeleton3D
 func _ready():
 	
 	# cannot simultaneously start physical bone sim and animate physical bones
-	physical_bones_start_simulation(["band_top.r","band_top.l"])
 	animate_physical_bones = true
 	#physical_bones_start_simulation()
 
