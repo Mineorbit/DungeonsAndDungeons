@@ -69,7 +69,7 @@ func update_aim_state_machine_remote(state):
 
 func player_shield(is_aiming):
 	var v = 0
-	print("Updating "+str(is_aiming))
+	#print("Updating "+str(is_aiming))
 	if is_aiming:
 		v = 1
 		update_shield_state_machine("Raise")

@@ -108,7 +108,7 @@ func _physics_process(delta) -> void:
 	# Bring the axis to object space, WITHOUT position (so only the BASIS is used) since vectors shouldn't be translated
 	var bone_rotate_axis_obj: Vector3 = (bone_transf_obj.basis * bone_rotate_axis).normalized()
 	var bone_new_transf_obj: Transform3D = Transform3D(bone_transf_obj.basis.rotated(bone_rotate_axis_obj, bone_rotate_angle), bone_transf_obj.origin)
-
+	#bone_new_transf_obj = bone_new_transf_obj.rotated(Vector3(0,1,0),180)
 	skeleton.set_bone_global_pose_override(bone_id, bone_new_transf_obj, 0.5, true)
 
 	# Orient this object to the jigglebone
