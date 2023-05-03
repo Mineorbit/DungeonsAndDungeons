@@ -29,7 +29,7 @@ func _ready():
 	get_parent().on_entity_can_shoot.connect(can_shoot)
 	get_parent().on_entity_jump.connect(player_jump)
 	aimfsm = anim_tree["parameters/Top/aimingstatemachine/playback"]
-	verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
+	#verticalfsm = anim_tree["parameters/verticalstatemachine/playback"]
 	shieldfsm = anim_tree["parameters/Top/shieldstatemachine/playback"]
 	mouth = face.mesh.surface_get_material(0).duplicate(true)
 	eyes = face.mesh.surface_get_material(1).duplicate(true)
@@ -43,7 +43,8 @@ func player_aiming(is_aiming):
 		v = 1
 		update_aim_state_machine("Aim")
 	else:
-		update_aim_state_machine("Stop")
+		pass
+		update_aim_state_machine("End")
 	anim_tree["parameters/Top/aim/blend_amount"] = v
 
 
@@ -51,6 +52,7 @@ func update_aim_state_machine(state):
 	if aimtargetstate != state:
 		aimfsm.travel(state)
 		aimtargetstate = state
+		print(str(aimfsm)+" "+str(state)+" "+str(Constants.id))
 		rpc("update_aim_state_machine_remote",state)
 
 func player_shot():
@@ -64,6 +66,7 @@ func can_shoot(can_shootnow):
 
 @rpc
 func update_aim_state_machine_remote(state):
+	print(str(aimfsm)+" "+str(state)+" "+str(Constants.id))
 	aimfsm.travel(state)
 
 
@@ -110,8 +113,8 @@ func player_landed(blend):
 	update_vertical_state_machine("Fall")
 	mouth.set_shader_parameter("character",0)
 	eyes.set_shader_parameter("character",0)
-	anim_tree["parameters/landidle/blend_amount"] = landblend
-	anim_tree["parameters/land/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+	#anim_tree["parameters/landidle/blend_amount"] = landblend
+	#anim_tree["parameters/land/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 
 
@@ -141,7 +144,7 @@ func update_shield_state_machine(state):
 func update_vertical_state_machine(state):
 	#print(str(verticalfsm.get_current_node())+"->"+str(state))
 	if verticaltargetstate != state:
-		verticalfsm.travel(state)
+		#verticalfsm.travel(state)
 		#print("Result: "+str(verticalfsm.get_current_node()))
 		verticaltargetstate = state
 		rpc("update_vertical_state_machine_remote",state)
@@ -153,7 +156,8 @@ func update_shield_state_machine_remote(state):
 
 @rpc
 func update_vertical_state_machine_remote(state):
-	verticalfsm.travel(state)
+	pass
+	#verticalfsm.travel(state)
 
 
 func _physics_process(delta):
@@ -162,13 +166,13 @@ func _physics_process(delta):
 	anim_tree["parameters/Top/Use/blend_amount"] = (get_parent().items_in_use > 0)
 	#anim_tree["parameters/strikespeed/blend_amount"] = speed*10*get_parent().move_direction.length()
 	# cound back down landblend
-	landblend = max(0,landblend-0.4*delta)
-	anim_tree["parameters/landidle/blend_amount"] = landblend
+	#anim_tree["parameters/landidle/blend_amount"] = landblend
 	
 	
 	# travel darf nur einmal aufgerufen werden, transitions werden quasi gebuffered
 	if yspeed<0:
+		pass
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
-		update_vertical_state_machine("Fall")
+	#	update_vertical_state_machine("Fall")
 
 	runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
