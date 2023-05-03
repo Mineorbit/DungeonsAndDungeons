@@ -22,7 +22,7 @@ var throw_timer = 0
 func _physics_process(delta):
 	super._physics_process(delta)
 	time_since_seen += delta
-	if vision.is_colliding():
+	if vision.is_colliding() and target_entity == null:
 		target_entity = vision.get_collider(0)
 		time_since_seen = 0
 	if time_since_seen > 5:
@@ -42,6 +42,11 @@ func _physics_process(delta):
 	if try_throw and throw_timer > 2:
 		throw()
 		try_throw = false
+	if not has_item(0) and not spear.in_throw:
+		target_entity = spear
+		if (spear.global_transform.origin - global_transform.origin).length()  < 1:
+			Attach(spear)
+			target_entity = null
 
 
 func throw():

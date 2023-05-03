@@ -14,7 +14,6 @@ func _ready():
 	default_rot = hold_rot
 
 func TryDamage(body):
-	print(body)
 	if body != self and body != lastItemOwner and body.has_method("Hit") and in_throw:
 		body.Hit(35,self)
 		# immediately prevent all collisions
