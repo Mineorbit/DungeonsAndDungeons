@@ -1,11 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://n8jy6pe2mrtm"]
+[gd_scene load_steps=8 format=3 uid="uid://n8jy6pe2mrtm"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu/Main.gd" id="1_brb28"]
 [ext_resource type="Theme" uid="uid://bogksdbh4fu6o" path="res://Theme.tres" id="2_c8d5n"]
 [ext_resource type="StyleBox" uid="uid://cfy4i6yo0iwxe" path="res://Assets/UI/ButtonNormal.tres" id="3_hpt83"]
 [ext_resource type="StyleBox" uid="uid://ctfqa7np0x4g8" path="res://Assets/UI/ButtonStyle.tres" id="3_q4h68"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56n2o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nq5tj"]
+
 [sub_resource type="Theme" id="Theme_lwe2v"]
+Button/styles/disabled = SubResource("StyleBoxFlat_56n2o")
+Button/styles/focus = SubResource("StyleBoxFlat_nq5tj")
 Button/styles/hover = ExtResource("3_q4h68")
 Button/styles/normal = ExtResource("3_hpt83")
 Button/styles/pressed = ExtResource("3_q4h68")
