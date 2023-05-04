@@ -9,10 +9,10 @@ var player
 @export var offset = 0
 
 func prepare_camera_target(p):
-	print("Preparing Camera Target")
+	#print("Preparing Camera Target")
 	if player != p:
 		player = p
-		print("Preparing Camera Target2 "+str(player))
+		#print("Preparing Camera Target2 "+str(player))
 		player.on_entity_aiming.connect(change_aiming_state)
 
 func _enter_tree():

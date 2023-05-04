@@ -29,6 +29,7 @@ func player_connected(id):
 	var i = 0
 	while(MultiplayerConstants.local_id_to_id[i] != null):
 		i = i + 1
+	print("NEW PLAYER: "+str(id))
 	MultiplayerConstants.local_id_to_id[i] = id
 	MultiplayerConstants.rpc_id(id,"set_local_id",i)
 	

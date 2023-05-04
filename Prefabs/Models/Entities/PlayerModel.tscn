@@ -180,9 +180,9 @@ nodes/TopBot/position = Vector2(740, 240)
 nodes/output/position = Vector2(1540, 120)
 node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Animation", &"Add2", 1, &"TopBot", &"TopBot", 0, &"Bot", &"TopBot", 1, &"Top"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_wduhj"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_7nq0h"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_448mx"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_epfo3"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ycw4q"]
 properties/0/path = NodePath("RunTrail:emitting")
@@ -458,8 +458,8 @@ parameters/Top/TimeScale/scale = 1.5
 "parameters/Top/TimeScale 3/scale" = 2.0
 parameters/Top/Use/blend_amount = 0.0
 parameters/Top/aim/blend_amount = 1.0
-parameters/Top/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_wduhj")
-parameters/Top/shieldstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_448mx")
+parameters/Top/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_7nq0h")
+parameters/Top/shieldstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_epfo3")
 parameters/Top/speed/blend_amount = 0.0
 parameters/Top/strikestart/seek_request = -1.0
 parameters/Top/vertical/blend_amount = 0
@@ -487,14 +487,14 @@ max_polyphony = 4
 panning_strength = 2.0
 
 [node name="HandL" type="BoneAttachment3D" parent="." index="6"]
-transform = Transform3D(0.872468, 0.484331, 0.0649633, 0.421644, -0.813319, 0.400908, 0.247009, -0.322388, -0.913811, 0.12826, 0.535649, -0.499693)
+transform = Transform3D(0.872468, 0.484331, 0.0649628, 0.421644, -0.813318, 0.400909, 0.247008, -0.322389, -0.913811, 0.128259, 0.535649, -0.499693)
 bone_name = "hand.l"
 bone_idx = 17
 use_external_skeleton = true
 external_skeleton = NodePath("../root/Skeleton3D")
 
 [node name="HandR" type="BoneAttachment3D" parent="." index="7"]
-transform = Transform3D(-0.873409, 0.482898, 0.0629776, -0.417981, -0.809712, 0.411895, 0.249896, 0.33343, 0.909052, 0.107251, 0.511486, 0.534179)
+transform = Transform3D(-0.873408, 0.482899, 0.0629767, -0.417983, -0.809711, 0.411895, 0.249897, 0.33343, 0.909052, 0.107252, 0.511485, 0.534179)
 bone_name = "hand.r"
 bone_idx = 23
 use_external_skeleton = true

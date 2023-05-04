@@ -123,9 +123,9 @@ nodes/topbot/node = SubResource("AnimationNodeAdd2_hp0au")
 nodes/topbot/position = Vector2(1314.79, -60.0707)
 node_connections = [&"output", 0, &"topbot", &"topbot", 0, &"Bot", &"topbot", 1, &"Top"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_61mxe"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_rt74j"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_rj6r1"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_t75d7"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mvcwn"]
 properties/0/path = NodePath("AnimationTree:parameters/Bot/Throw/blend_amount")
@@ -150,10 +150,10 @@ attachmentPoints = [NodePath("HandL")]
 animation_multiplier = 4
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/rotation = Quaternion(0.00750257, 0, 0, 0.999972)
-bones/0/scale = Vector3(1.00183, 1.00183, 1.00183)
-bones/1/rotation = Quaternion(-0.0140828, 1.19197e-07, 1.6788e-09, 0.999901)
-bones/2/rotation = Quaternion(0.00774417, 4.19972e-15, -4.2403e-16, 0.99997)
+bones/0/rotation = Quaternion(0.050735, 3.19329e-26, -1.81721e-17, 0.998712)
+bones/0/scale = Vector3(1.01239, 1.01239, 1.01239)
+bones/1/rotation = Quaternion(-0.0953532, 1.18666e-07, -2.5305e-08, 0.995444)
+bones/2/rotation = Quaternion(0.0523704, 5.03524e-15, 2.01411e-08, 0.998628)
 bones/4/rotation = Quaternion(1.24928e-07, -1.27041e-07, -0.12892, 0.991655)
 bones/5/rotation = Quaternion(0.738415, 1.04507e-06, 1.32041e-06, 0.674347)
 bones/6/rotation = Quaternion(0.0704819, 1.18886e-07, 2.43663e-07, 0.997513)
@@ -165,7 +165,7 @@ bones/10/rotation = Quaternion(1.24928e-07, 1.27041e-07, 0.12892, 0.991655)
 bones/11/rotation = Quaternion(0.672335, -1.42202e-06, -1.11101e-06, 0.740247)
 bones/12/rotation = Quaternion(0.49755, -0.418074, 0.566781, 0.506377)
 bones/13/rotation = Quaternion(-0.0862049, 0.11131, -0.782746, 0.606208)
-bones/14/rotation = Quaternion(0.189891, 0.00468356, -0.0543851, 0.980286)
+bones/14/rotation = Quaternion(0.18583, 0.00912643, -0.119748, 0.975215)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/rotation = Quaternion(0.0831602, -0.020561, -0.10987, 0.990248)
 bones/15/scale = Vector3(1, 1, 1)
@@ -173,14 +173,14 @@ bones/16/rotation = Quaternion(-0.0582084, 0.0115097, 0.0538815, 0.996783)
 bones/17/rotation = Quaternion(-0.0701012, -9.67948e-08, 0.225217, 0.971784)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/rotation = Quaternion(-0.0862049, -0.11131, 0.782746, 0.606208)
-bones/19/rotation = Quaternion(0.189957, -0.0047231, 0.0544268, 0.980271)
+bones/19/rotation = Quaternion(0.186268, -0.00939394, 0.120031, 0.975094)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(0.0831602, 0.020561, 0.10987, 0.990248)
 bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(-0.0582084, -0.0115097, -0.0538815, 0.996783)
 bones/22/rotation = Quaternion(-0.0701013, -2.01257e-08, -0.225217, 0.971783)
 bones/22/scale = Vector3(1, 1, 1)
-bones/23/position = Vector3(0, -0.00557255, 0)
+bones/23/position = Vector3(0, -0.0376648, 0)
 bones/24/rotation = Quaternion(0.502229, 0.85377, 0.114981, 0.0749815)
 bones/24/scale = Vector3(1, 1, 1)
 bones/25/rotation = Quaternion(0.198461, 0.0263548, -0.470842, 0.859201)
@@ -202,16 +202,16 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Bot/Throw/blend_amount = 0.0
 parameters/Bot/speed/blend_amount = 0.0
-parameters/Bot/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_61mxe")
+parameters/Bot/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_rt74j")
 parameters/Top/Add2/add_amount = 1.0
 parameters/Top/Throw/blend_amount = 0.0
 parameters/Top/TimeSeek/seek_request = -1.0
 parameters/Top/speed/blend_amount = 0.0
-parameters/Top/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_rj6r1")
+parameters/Top/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_t75d7")
 parameters/topbot/add_amount = 1.0
 
 [node name="HandL" type="BoneAttachment3D" parent="." index="3"]
-transform = Transform3D(-0.458932, 0.880426, -0.133804, -0.890446, -0.455818, 0.0548504, -0.0126751, 0.144053, 0.991343, 1.65871, 0.180602, 0.101007)
+transform = Transform3D(-0.577762, 0.822912, -0.118091, -0.827565, -0.582998, -0.0137233, -0.0791587, 0.0886996, 1.00539, 1.59383, 0.0311794, 0.096416)
 bone_name = "hand.L"
 bone_idx = 16
 use_external_skeleton = true

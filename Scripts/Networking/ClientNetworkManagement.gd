@@ -34,9 +34,11 @@ func player_controls_activate(player):
 
 func disable_local_computations(entity):
 	entity.ready.connect(func():
+		pass
 		entity.set_physics_process(false)
 		entity.set_process(false)
 		if not entity.get("model") == null:
+			pass
 			entity.model.set_physics_process(false)
 			entity.model.set_process(false)
 		)
@@ -75,11 +77,13 @@ func player_created(player):
 	# need to cancel on ready
 	player.ready.connect(
 		func():
+			pass
 			player.set_physics_process(false)
 			player.set_process(false)
 	)
 	playermodel.ready.connect(
 		func():
+			pass
 			playermodel.set_physics_process(false)
 			playermodel.set_process(false)
 	)

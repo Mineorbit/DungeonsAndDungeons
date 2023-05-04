@@ -11,6 +11,9 @@ func _ready():
 	# only client should send back
 	Constants.World.game_won.connect(start_lobby)
 	ApiAccess.level_download_finished.connect(complete_start_round)
+	lobby = load("res://Prefabs/Lobby.tscn").instantiate()
+	add_child(lobby)
+	
 
 	# only if is on server change this in local mode
 	# start_lobby()
@@ -23,12 +26,11 @@ func start_lobby():
 	is_in_play = false
 	level_time = 0
 	level_locked = false
+	rpc("remove_level")
 	get_tree().paused = true
 	remove_chunk_streamers()
 	Constants.World.end()
-	rpc("remove_level")
 	# have to instantiate new for multiplayer to work, else server crashes on new lobby start
-	lobby = load("res://Prefabs/Lobby.tscn").instantiate()
 	add_child(lobby)
 	Constants.World.players.set_start_positions()
 	get_tree().paused = false
@@ -37,20 +39,27 @@ func start_lobby():
 @rpc
 func remove_level():
 	Constants.World.end()
+	#lobby = load("res://Prefabs/Lobby.tscn").instantiate()
+	#add_child(lobby)
+
+
 
 #this is called once the level was downloaded
 func complete_start_round(levelname):
 		
 	print(str(Constants.id)+" Starting Level "+str(levelname))
-	rpc("prepare_level")
+	#remove_child(lobby)
+	#lobby = null
 	# maybe here await all players answers that they have created the level
+	
+	remove_child(lobby)
+	#lobby = null
+	rpc("prepare_level")
 	get_tree().paused = true
 	# start world with level from downloads
 	await Constants.World.start(selected_level_name,true,true)
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
-	remove_child(lobby)
-	lobby = null
 	#Constants.World.players.spawn()
 	Constants.World.players.set_start_positions()
 	
@@ -62,7 +71,12 @@ func complete_start_round(levelname):
 
 @rpc
 func prepare_level():
+	remove_child(lobby)
+	print("Preparing level "+str(Constants.id))
 	await Constants.World.prepare_level()
+	print("Done preparing level "+str(Constants.id))
+	
+	#Constants.World.prepare_level()
 	Constants.World.level.level_object_added.connect(func(object):
 		object.contained_level_object.ready.connect(func():
 			print("Muting LevelObject "+str(object.contained_level_object))
@@ -82,10 +96,12 @@ var level_locked = false
 
 @rpc
 func start_round_client():
+	print("Opening Loading Screen")
 	LoadingScreen.open()
 
 @rpc
 func start_round_finish_client():
+	print("Close Loading Screen")
 	# here we should possibly await loading of the starting chunks until we open"
 	LoadingScreen.close()
 

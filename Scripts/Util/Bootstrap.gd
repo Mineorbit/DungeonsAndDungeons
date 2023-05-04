@@ -60,10 +60,10 @@ func _process(_delta):
 
 func start_server():
 	LoadingScreen.close()
-	current_scene = load("res://Scenes/play.tscn").instantiate()
-	add_child(current_scene)
+	current_scene = load("res://Scenes/play.tscn").instantiate()	
 	var server_management = load("res://Scenes/ServerNetworkManagement.tscn").instantiate()
 	current_scene.add_child(server_management)
+	add_child(current_scene)
 
 
 func start_play():
@@ -71,9 +71,10 @@ func start_play():
 			func():
 			remove_child(current_scene)
 			current_scene = load("res://Scenes/play.tscn").instantiate()
-			add_child(current_scene)
 			var client_management = load("res://Scenes/ClientNetworkManagement.tscn").instantiate()
 			current_scene.add_child(client_management)
+			
+			add_child(current_scene)
 			LoadingScreen.close()
 		)
 

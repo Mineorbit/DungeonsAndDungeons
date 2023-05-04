@@ -65,6 +65,7 @@ var initialize_list = false
 func set_interface_owner(id):
 	if owner_id == id:
 		return
+	print(str(Constants.id)+" received Owner ID")
 	owner_id = id
 	set_auth_on_objects(owner_id)
 	if owner_id == Constants.id:
@@ -148,7 +149,6 @@ func check_ready():
 
 
 func start_round():
-	print("Trying to start")
 	var can_start = check_ready()
 	if can_start:
 		get_parent().get_parent().rpc_id(1,"start_round",levellist.selected_level,levellist.selected_level_name)
@@ -156,10 +156,15 @@ func start_round():
 
 
 func refresh_level_list():
-	levellist.clear()
+	print(str(owner_id)+" "+str(Constants.id)+" requested Level List")
+	if Constants.id != owner_id:
+		pass
+		return
+	#levellist.clear()
 	ApiAccess.fetch_level_list()
 
 func load_level_list(list):
+	print("List: "+str(list))
 	levellist.clear()
 	levellist.enabled = true
 	levellist.set_level_list(list)
@@ -208,7 +213,7 @@ func _input(event):
 					event.position.x = rel_pos.x * interface.size.x
 					event.position.y = rel_pos.y * interface.size.y 
 				local_coord = false
-				print(str(is_foreign)+" "+str(event))
+				#print(str(is_foreign)+" "+str(event))
 			if local_player_inside or is_foreign:
 				interface.push_input(event, local_coord)
 

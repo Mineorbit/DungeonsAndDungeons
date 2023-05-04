@@ -68,7 +68,7 @@ func test(position,immediate):
 	
 
 func _physics_process(delta):
-	if target != null:
+	if target != null and target.is_inside_tree():
 		global_transform.origin = target.global_transform.origin
 	for i in range(-1,2):
 		for j in range(-1,2):
