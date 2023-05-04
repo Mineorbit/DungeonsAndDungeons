@@ -44,7 +44,8 @@ func _physics_process(delta):
 		try_throw = false
 	if not has_item(0) and not spear.in_throw:
 		target_entity = spear
-		if (spear.global_transform.origin - global_transform.origin).length()  < 1:
+		#print((spear.global_transform.origin - global_transform.origin).length())
+		if (spear.global_transform.origin - global_transform.origin).length()  < 1.75:
 			Attach(spear)
 			target_entity = null
 
