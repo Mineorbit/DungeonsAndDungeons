@@ -9,6 +9,7 @@ func StrikeAnimation(damage):
 
 func _physics_process(delta):
 	super._physics_process(delta)
+	anim_tree["parameters/speed/blend_amount"] = speed/delta*0.5
 
 @onready var strikeSound: AudioStreamPlayer3D = $StrikeSound
 

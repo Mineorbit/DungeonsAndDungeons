@@ -1,4 +1,4 @@
-extends EntityModel
+extends HumanoidModel
 
 
 @onready var playerSkeleton: Skeleton3D = $root/Skeleton3D

@@ -42,6 +42,9 @@ var current_swim_blend = 0
 var current_v = 0
 
 
+
+var aimthrowtargetstate = ""
+
 func _physics_process(delta):
 	var swim_blend = -2
 	if not (get_parent() is Entity):
@@ -50,8 +53,6 @@ func _physics_process(delta):
 		swim_blend = 1
 	if has_swim:
 		current_swim_blend = clampf(current_swim_blend + delta*swim_blend,0,1)
-		anim_tree["parameters/Top/swim/blend_amount"] = current_swim_blend
-		anim_tree["parameters/Bot/swim/blend_amount"] = current_swim_blend
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
 	yspeed = speed_pos.y - last_speed_pos.y
@@ -59,13 +60,6 @@ func _physics_process(delta):
 	speed_pos.y = 0
 	speed = (speed_pos - last_speed_pos).length()
 	lastpos = global_transform.origin
-	if "parameters/Top/swim_speed/blend_amount" in anim_tree:
-		anim_tree["parameters/Top/swim_speed/blend_amount"] = speed*16*get_parent()._velocity.length()
-		anim_tree["parameters/Bot/swim_speed/blend_amount"] = speed*16*get_parent()._velocity.length()
-	
-	anim_tree["parameters/Top/speed/blend_amount"] = animation_multiplier*speed*get_parent()._velocity.length()
-	anim_tree["parameters/Bot/speed/blend_amount"] = animation_multiplier*speed*get_parent()._velocity.length()
-	
 	
 	var v = 0
 	if get_parent().is_on_floor():
@@ -74,12 +68,7 @@ func _physics_process(delta):
 		v = sign(yspeed)
 	var d = (v - current_v)
 	current_v = min(max(-1,current_v+8*delta*sign(d)),1)
-	if ("parameters/Bot/vertical/blend_amount" in anim_tree):
-		anim_tree["parameters/Bot/vertical/blend_amount"] = current_v
-		anim_tree["parameters/Top/vertical/blend_amount"] = current_v
-
-
-var aimthrowtargetstate = ""
+	
 
 func on_throw_aiming():
 	update_aim_throw_state_machine("Aim")

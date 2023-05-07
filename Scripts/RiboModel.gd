@@ -1,4 +1,4 @@
-extends EntityModel
+extends HumanoidModel
 
 var top_aim_throw
 var bot_aim_throw
