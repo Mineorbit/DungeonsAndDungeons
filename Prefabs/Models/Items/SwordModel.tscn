@@ -1,10 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba8jd6whrhve0"]
+[gd_scene load_steps=7 format=3 uid="uid://ba8jd6whrhve0"]
 
 [ext_resource type="PackedScene" uid="uid://d0ha348vyrk5w" path="res://Assets/Models/LevelObjects/Entities/Items/Sword/Sword.blend" id="1_xmjk0"]
-[ext_resource type="PackedScene" uid="uid://1oltjr1rm2fx" path="res://Prefabs/Effects/StrikePlane.tscn" id="2_8lpov"]
 [ext_resource type="Script" path="res://Scripts/SwordModel.gd" id="2_58x77"]
+[ext_resource type="PackedScene" uid="uid://pqid1ks36lea" path="res://Assets/Models/StrikePlane.blend" id="2_a5of7"]
+
+[sub_resource type="Animation" id="Animation_dbm0q"]
+resource_name = "Flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:surface_0/material:shader_parameter/percentage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.0, 2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_npcox"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:surface_0/material:shader_parameter/percentage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4bko"]
+_data = {
+"Flash": SubResource("Animation_dbm0q"),
+"RESET": SubResource("Animation_npcox")
+}
 
 [node name="SwordModel" instance=ExtResource("1_xmjk0")]
 script = ExtResource("2_58x77")
 
-[node name="StrikePlane" parent="." index="2" instance=ExtResource("2_8lpov")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+root_node = NodePath("../StrikePlane/StrikePlane")
+libraries = {
+"": SubResource("AnimationLibrary_g4bko")
+}
+
+[node name="StrikePlane" parent="." index="3" instance=ExtResource("2_a5of7")]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0.15, 0)
+
+[node name="StrikePlane" parent="StrikePlane" index="0"]
+visible = false
+
+[editable path="StrikePlane"]
