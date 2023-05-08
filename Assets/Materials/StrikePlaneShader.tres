@@ -1,0 +1,59 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://odk8kwd5ge7g"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_81yik"]
+parameter_name = "percentage"
+
+[sub_resource type="Gradient" id="Gradient_0v0w6"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rc8ty"]
+gradient = SubResource("Gradient_0v0w6")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_j8i45"]
+texture = SubResource("GradientTexture2D_rc8ty")
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_okxfn"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_acswa"]
+input_name = "vertex"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform float percentage;
+
+
+
+void fragment() {
+// FloatParameter:3
+	float n_out3p0 = percentage;
+
+
+// Input:6
+	vec3 n_out6p0 = VERTEX;
+
+
+// VectorOp:5
+	vec2 n_out5p0 = vec2(n_out3p0) - vec2(n_out6p0.xy);
+
+
+// Output:0
+	ALPHA = n_out5p0.x;
+
+
+}
+"
+graph_offset = Vector2(-875.022, 28.9019)
+nodes/fragment/0/position = Vector2(580, 260)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatParameter_81yik")
+nodes/fragment/3/position = Vector2(-600, 240)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_j8i45")
+nodes/fragment/4/position = Vector2(-220, 20)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_okxfn")
+nodes/fragment/5/position = Vector2(240, 240)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_acswa")
+nodes/fragment/6/position = Vector2(-240, 420)
+nodes/fragment/connections = PackedInt32Array(5, 0, 0, 1, 6, 0, 5, 1, 3, 0, 5, 0)

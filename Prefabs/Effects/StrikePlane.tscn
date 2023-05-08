@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://1oltjr1rm2fx"]
+
+[ext_resource type="PackedScene" uid="uid://pqid1ks36lea" path="res://Assets/Models/StrikePlane.blend" id="1_ywohd"]
+
+[sub_resource type="Animation" id="Animation_1h27k"]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:surface_0/material:shader_parameter/percentage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.0, 1.133]
+}
+
+[sub_resource type="Animation" id="Animation_pqr7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:surface_0/material:shader_parameter/percentage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.133]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxieo"]
+_data = {
+"RESET": SubResource("Animation_pqr7u"),
+"flash": SubResource("Animation_1h27k")
+}
+
+[node name="StrikePlane" instance=ExtResource("1_ywohd")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StrikePlane" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_jxieo")
+}

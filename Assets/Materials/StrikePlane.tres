@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dgpel1makt5ke"]
+
+[ext_resource type="Shader" uid="uid://odk8kwd5ge7g" path="res://Assets/Materials/StrikePlaneShader.tres" id="1_hwxcg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_hwxcg")
+shader_parameter/percentage = 1.133

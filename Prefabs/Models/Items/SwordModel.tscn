@@ -1,24 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba8jd6whrhve0"]
+[gd_scene load_steps=4 format=3 uid="uid://ba8jd6whrhve0"]
 
 [ext_resource type="PackedScene" uid="uid://d0ha348vyrk5w" path="res://Assets/Models/LevelObjects/Entities/Items/Sword/Sword.blend" id="1_xmjk0"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_htxdl"]
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k32yo"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ff186"]
-material = SubResource("StandardMaterial3D_k32yo")
-orientation = 2
+[ext_resource type="PackedScene" uid="uid://1oltjr1rm2fx" path="res://Prefabs/Effects/StrikePlane.tscn" id="2_8lpov"]
+[ext_resource type="Script" path="res://Scripts/SwordModel.gd" id="2_58x77"]
 
 [node name="SwordModel" instance=ExtResource("1_xmjk0")]
+script = ExtResource("2_58x77")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="2"]
-amount = 4
-lifetime = 4.0
-visibility_aabb = AABB(-0.25, -0.25, -0.25, 0.5, 0.5, 0.5)
-trail_enabled = true
-process_material = SubResource("ParticleProcessMaterial_htxdl")
-draw_pass_1 = SubResource("PlaneMesh_ff186")
+[node name="StrikePlane" parent="." index="2" instance=ExtResource("2_8lpov")]
