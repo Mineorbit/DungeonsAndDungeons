@@ -322,7 +322,8 @@ func Hit(damage, hitting_entity,direction = null):
 	
 	offset_dir = offset_dir.normalized()
 	offset_dir.y = 0
-	
+	var t = 0.75
+	Effects.spawn("Hit",((1-t)*hitting_entity.global_transform.origin + t*global_transform.origin))
 	kickback((offset_dir + Vector3.UP)*log(damage)*0.5)
 	health = health - damage
 	if health < 0:
