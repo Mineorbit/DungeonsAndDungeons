@@ -24,6 +24,7 @@ var in_use = false
 
 signal on_item_attached(item_owner)
 signal on_item_dettached(old_item_owner)
+signal on_item_use
 
 
 func _ready():
@@ -38,6 +39,7 @@ func Use():
 		if itemOwner != null:
 			itemOwner.items_in_use = itemOwner.items_in_use + 1
 		in_use = true
+		self.on_item_use.emit()
 	
 func StopUse():
 	if in_use:
