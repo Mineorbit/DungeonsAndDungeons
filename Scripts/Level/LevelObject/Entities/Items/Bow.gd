@@ -27,6 +27,8 @@ func OnDettach():
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 
 
+func get_type():
+	return "Bow"
 
 func Use():
 	super.Use()

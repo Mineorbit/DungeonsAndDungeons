@@ -17,10 +17,11 @@ func try_strike():
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	strike_time += delta
-	if strike_time > 1:
-		try_strike()
-		strike_time = 0
-	time_since_seen += delta
-	if time_since_seen > 5:
-		target_entity = null
+	pass
+	#strike_time += delta
+	#if strike_time > 1:
+	#	try_strike()
+	#	strike_time = 0
+	#time_since_seen += delta
+	#if time_since_seen > 5:
+	#	target_entity = null

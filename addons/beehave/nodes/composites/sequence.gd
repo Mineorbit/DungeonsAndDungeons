@@ -18,6 +18,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 			continue
 		
 		if c != running_child:
+			#print(c)
 			c.before_run(actor, blackboard)
 
 		var response = c.tick(actor, blackboard)

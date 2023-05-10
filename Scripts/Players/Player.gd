@@ -126,11 +126,15 @@ func start():
 	Signals.playerHealthChanged.emit(id,health)
 
 
+func get_type():
+	return "Player"
+
 
 func _process(delta):
 	if playercontroller != null:
 		super._process(delta)
-		
+
+
 func _physics_process(delta):
 	health_ui = health
 	if playercontroller != null:

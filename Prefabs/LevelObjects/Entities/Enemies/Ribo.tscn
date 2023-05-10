@@ -1,16 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgkf1aq1kxjfp"]
+[gd_scene load_steps=16 format=3 uid="uid://cgkf1aq1kxjfp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Ribo.gd" id="1_idayt"]
 [ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
 [ext_resource type="PackedScene" uid="uid://evx2rdayce7g" path="res://Prefabs/Models/Entities/RiboModel.tscn" id="3_5ifii"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_5ojhm"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_cvljv"]
+[ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_soao6"]
+[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_ej64c"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="8_3b3jq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aa5fx"]
 radius = 0.374179
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
 size = Vector3(2, 1, 8)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_q63ex"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta4rm"]
 properties/0/path = NodePath(".:position")
@@ -25,16 +28,24 @@ properties/1/sync = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_f5r85"]
 size = Vector3(1.01933, 1, 1)
 
-[node name="Ribo" type="CharacterBody3D"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_3ld6k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gajk1"]
+size = Vector3(2, 1, 4)
+
+[node name="Ribo" type="CharacterBody3D" node_paths=PackedStringArray("navAgent")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_idayt")
+navAgent = NodePath("Navigation/NavAgent")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_aa5fx")
 
-[node name="Navigation" type="NavigationAgent3D" parent="."]
+[node name="Navigation" type="Node3D" parent="."]
+
+[node name="NavAgent" type="NavigationAgent3D" parent="Navigation"]
 path_desired_distance = 0.84
 path_max_distance = 12.9
 navigation_layers = 3
@@ -47,12 +58,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("BoxShape3D_do8j2")
 target_position = Vector3(0, 0, 4)
 collision_mask = 16
-
-[node name="Target" type="Node3D" parent="."]
-
-[node name="MeshInstance3d" type="MeshInstance3D" parent="Target"]
-visible = false
-mesh = SubResource("CylinderMesh_q63ex")
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_jjp5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
@@ -77,6 +82,37 @@ shape = SubResource("BoxShape3D_f5r85")
 [node name="Model" parent="." instance=ExtResource("3_5ifii")]
 transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, 0.425, 0)
 
-[node name="AI" type="Node" parent="."]
+[node name="AI" type="Node3D" parent="."]
 
-[connection signal="velocity_computed" from="Navigation" to="." method="on_navigation_velocity_computed"]
+[node name="BeehaveTree" type="Node" parent="AI" node_paths=PackedStringArray("blackboard")]
+script = ExtResource("4_5ojhm")
+actor_node_path = NodePath("../..")
+blackboard = NodePath("../Blackboard")
+
+[node name="Main" type="Node" parent="AI/BeehaveTree"]
+script = ExtResource("5_cvljv")
+
+[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main"]
+script = ExtResource("6_soao6")
+class_type = "Player"
+
+[node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
+script = ExtResource("7_ej64c")
+target = "seenPlayer"
+
+[node name="Blackboard" type="Node" parent="AI"]
+script = ExtResource("8_3b3jq")
+
+[node name="GoToTargetPosition" type="Node3D" parent="AI/Blackboard"]
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="AI/Blackboard/GoToTargetPosition"]
+visible = false
+mesh = SubResource("CylinderMesh_3ld6k")
+
+[node name="VisionCheck" type="ShapeCast3D" parent="AI/Blackboard"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_gajk1")
+target_position = Vector3(0, 0, 2)
+collision_mask = 16
+
+[connection signal="velocity_computed" from="Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]

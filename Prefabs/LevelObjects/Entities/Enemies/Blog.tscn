@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
 [ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_yeygo"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="4_vf5o5"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_g4clb"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_s0b01"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="6_51fru"]
 [ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_jaer6"]
 [ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_p5y7i"]
 
@@ -30,11 +30,24 @@ size = Vector3(1.01933, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
 size = Vector3(2, 1, 4)
 
-[node name="Blog" type="CharacterBody3D"]
+[node name="Blog" type="CharacterBody3D" node_paths=PackedStringArray("navAgent")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_5eeht")
+navAgent = NodePath("Navigation/NavAgent")
 minimum_distance_to_target = 1.5
+
+[node name="Navigation" type="Node3D" parent="."]
+
+[node name="NavObst" type="NavigationObstacle3D" parent="Navigation"]
+
+[node name="NavAgent" type="NavigationAgent3D" parent="Navigation"]
+path_desired_distance = 0.84
+path_max_distance = 12.9
+navigation_layers = 3
+avoidance_enabled = true
+max_speed = 5.0
+ignore_y = false
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
@@ -60,18 +73,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StrikeArea"]
 shape = SubResource("BoxShape3D_f5r85")
 
-[node name="Navigation" type="Node3D" parent="."]
-
-[node name="NavObst" type="NavigationObstacle3D" parent="Navigation"]
-
-[node name="NavAgent" type="NavigationAgent3D" parent="Navigation"]
-path_desired_distance = 0.84
-path_max_distance = 12.9
-navigation_layers = 3
-avoidance_enabled = true
-max_speed = 5.0
-ignore_y = false
-
 [node name="AI" type="Node3D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="AI" node_paths=PackedStringArray("blackboard")]
@@ -80,12 +81,9 @@ actor_node_path = NodePath("../..")
 blackboard = NodePath("../Blackboard")
 
 [node name="Main" type="Node" parent="AI/BeehaveTree"]
-script = ExtResource("6_51fru")
+script = ExtResource("5_g4clb")
 
-[node name="Patrol" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("6_51fru")
-
-[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
+[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("6_jaer6")
 class_type = "Player"
 

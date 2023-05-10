@@ -21,6 +21,8 @@ func TryDamage(body):
 		#queue_free()
 
 
+func get_type():
+	return "Spear"
 
 func OnAttach(new_owner):
 	in_throw = false

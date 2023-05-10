@@ -15,6 +15,10 @@ func _ready():
 	timer.timeout.connect(func():
 		StopUse())
 
+
+func get_type():
+	return "Sword"
+
 func OnAttach(new_owner):
 	super.OnAttach(new_owner)
 

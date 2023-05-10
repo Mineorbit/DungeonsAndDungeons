@@ -10,6 +10,10 @@ func OnAttach(new_owner):
 	super.OnAttach(new_owner)
 
 
+func get_type():
+	return "Shield"
+
+
 func OnDettach():
 	in_use = false
 	itemOwner.on_entity_using_shield.emit(false)

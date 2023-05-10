@@ -291,6 +291,9 @@ func look_into_direction(look_direction):
 	target_rot = Quaternion(Vector3(0,1,0), - look_direction.angle())
 	
 
+func get_type():
+	return "Entity"
+
 
 func kickback(direction) -> void:
 	input_blocked = true

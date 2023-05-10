@@ -3,8 +3,8 @@ class_name Enemy
 
 # Called when the node enters the scene tree for the first time.
 
-@onready var navAgent: NavigationAgent3D = $Navigation
-@onready var target = $Target
+@export var navAgent: NavigationAgent3D
+@onready var target = $AI/Blackboard/GoToTargetPosition
 @onready var strikeArea: Area3D = $StrikeArea
 
 @export_range(0.1,10,0.1) var minimum_distance_to_target: float = 1
@@ -15,9 +15,13 @@ class_name Enemy
 func _ready():
 	super._ready()
 	remove_child(target)
+	print(str(navAgent))
 	navAgent.ignore_y = false
 	get_parent().add_child(target)
 
+
+func get_type():
+	return "Enemy"
 
 
 func _physics_process(delta):
@@ -52,7 +56,7 @@ func distance_to_target():
 	return (target.global_transform.origin-global_transform.origin).length()
 
 func plan_route():
-	if (is_inside_tree() and target.is_inside_tree()):
+	if (target != null and target.is_inside_tree()):
 		if target_entity_in_front() and distance_to_target()<visibilityDistance:
 			navAgent.target_position = target.global_transform.origin
 

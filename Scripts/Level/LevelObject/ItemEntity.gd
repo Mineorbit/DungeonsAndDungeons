@@ -34,13 +34,19 @@ func _ready():
 func remove():
 	queue_free()
 
+
+func get_type():
+	return "ItemEntity"
+
+
 func Use():
 	if not in_use:
 		if itemOwner != null:
 			itemOwner.items_in_use = itemOwner.items_in_use + 1
 		in_use = true
 		self.on_item_use.emit()
-	
+
+
 func StopUse():
 	if in_use:
 		itemOwner.items_in_use = itemOwner.items_in_use - 1
