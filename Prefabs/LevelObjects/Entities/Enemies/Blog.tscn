@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://rv5fhuogmm7i"]
+[gd_scene load_steps=15 format=3 uid="uid://bwbdip5xme7q1"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_5eeht"]
 [ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
 [ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_yeygo"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="4_vf5o5"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_s0b01"]
-[ext_resource type="Script" path="res://Scripts/AI/CanSeePlayerCondition.gd" id="6_1noll"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="6_51fru"]
+[ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_jaer6"]
 [ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_p5y7i"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
@@ -85,11 +85,13 @@ script = ExtResource("6_51fru")
 [node name="Patrol" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("6_51fru")
 
-[node name="ConditionLeaf" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
-script = ExtResource("6_1noll")
+[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
+script = ExtResource("6_jaer6")
+class_type = "Player"
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("7_p5y7i")
+target = "seenPlayer"
 
 [node name="Blackboard" type="Node" parent="AI"]
 script = ExtResource("4_vf5o5")

@@ -1,15 +1,16 @@
 class_name MoveToTargetAction extends ActionLeaf
 
-var target: NodePath = "GoToTargetPosition"
+@export var target: String = "GoToTargetPosition"
 
 func _init(target: NodePath):
 	self.target = target
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	var target_node = blackboard.get_node(self.target)
+	var target_node = blackboard.get_value(target)
 	if target_node == null:
 		return FAILURE
 
+	# this needs to be navigation based instead
 	actor.look_at(target_node.global_position)
 	actor.move_and_slide(actor.global_transform.basis.z * 10, Vector3.UP)
 
