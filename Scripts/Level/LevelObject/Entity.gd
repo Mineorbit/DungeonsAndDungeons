@@ -72,7 +72,7 @@ signal on_entity_died
 
 signal on_entity_landed
 
-signal on_entity_melee_strike(damage)
+signal on_entity_melee_strike(damage,strike_time)
 
 signal on_entity_shoot
 
@@ -96,8 +96,8 @@ var climbing = false
 
 var items_in_use = 0
 
-func MeleeStrike(damage):
-	meleehitarea.Strike(damage,self)
+func MeleeStrike(damage,strike_time):
+	meleehitarea.Strike(damage,strike_time,self)
 
 func ent_can_shoot(v):
 	can_shoot = v

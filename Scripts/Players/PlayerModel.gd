@@ -97,7 +97,7 @@ func stop_strike():
 	blend_target = 0
 	
 
-func player_striking(v):
+func player_striking(v,time):
 	blend_target = 1
 	anim_tree["parameters/Top/strikestart/seek_request"] = 0
 	strikeTimer.start(Constants.SwordStrikeTime)

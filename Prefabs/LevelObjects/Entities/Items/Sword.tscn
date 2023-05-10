@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct8p1lumbrdmb"]
+[gd_scene load_steps=6 format=3 uid="uid://ct8p1lumbrdmb"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Sword.gd" id="1_p1n4q"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_aimnf"]
 [ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_me3ac"]
 [ext_resource type="PackedScene" uid="uid://ba8jd6whrhve0" path="res://Prefabs/Models/Items/SwordModel.tscn" id="4_rq6ba"]
 
@@ -26,8 +25,6 @@ hold_rot = Vector3(0, -45, -90)
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_ruhvi")
-
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_aimnf")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_moqfe")
