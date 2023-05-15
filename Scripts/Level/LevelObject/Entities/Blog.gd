@@ -7,7 +7,6 @@ var strike_time = 0
 
 func _ready():
 	super._ready()
-	follow_target = true
 
 
 func try_strike():

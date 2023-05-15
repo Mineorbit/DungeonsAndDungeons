@@ -180,9 +180,9 @@ nodes/TopBot/position = Vector2(740, 240)
 nodes/output/position = Vector2(1540, 120)
 node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"Animation", &"Add2", 1, &"TopBot", &"TopBot", 0, &"Bot", &"TopBot", 1, &"Top"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ghvi8"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_jmfr5"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_lbake"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_gvhrl"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ycw4q"]
 properties/0/path = NodePath("RunTrail:emitting")
@@ -458,8 +458,8 @@ parameters/Top/TimeScale/scale = 1.5
 "parameters/Top/TimeScale 3/scale" = 2.0
 parameters/Top/Use/blend_amount = 0.0
 parameters/Top/aim/blend_amount = 0.0
-parameters/Top/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_ghvi8")
-parameters/Top/shieldstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_lbake")
+parameters/Top/aimingstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_jmfr5")
+parameters/Top/shieldstatemachine/playback = SubResource("AnimationNodeStateMachinePlayback_gvhrl")
 parameters/Top/speed/blend_amount = 0.0
 parameters/Top/strikestart/seek_request = -1.0
 parameters/Top/vertical/blend_amount = 0

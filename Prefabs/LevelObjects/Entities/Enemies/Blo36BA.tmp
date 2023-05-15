@@ -94,15 +94,13 @@ target = "seenPlayer"
 [node name="Blackboard" type="Node" parent="AI"]
 script = ExtResource("4_vf5o5")
 
-[node name="Utils" type="Node3D" parent="AI"]
+[node name="GoToTargetPosition" type="Node3D" parent="AI/Blackboard"]
 
-[node name="GoToTargetPosition" type="Node3D" parent="AI/Utils"]
-
-[node name="MeshInstance3d" type="MeshInstance3D" parent="AI/Utils/GoToTargetPosition"]
+[node name="MeshInstance3d" type="MeshInstance3D" parent="AI/Blackboard/GoToTargetPosition"]
 visible = false
 mesh = SubResource("CylinderMesh_q63ex")
 
-[node name="VisionCheck" type="ShapeCast3D" parent="AI/Utils"]
+[node name="VisionCheck" type="ShapeCast3D" parent="AI/Blackboard"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_do8j2")
 target_position = Vector3(0, 0, 2)

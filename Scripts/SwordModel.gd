@@ -8,4 +8,5 @@ func _ready():
 	strikeplane.set_surface_override_material(0,mat)
 
 func _process(delta):
-	mat.set_shader_parameter("percentage",flash)
+	if mat != null:
+		mat.set_shader_parameter("percentage",flash)

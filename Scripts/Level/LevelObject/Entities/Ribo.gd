@@ -14,7 +14,8 @@ func _ready():
 	Constants.World.level.spawn_entity(spear)
 	Attach(spear)
 
-
+var target_entity
+var follow_target
 var try_throw = false
 
 var throw_timer = 0
