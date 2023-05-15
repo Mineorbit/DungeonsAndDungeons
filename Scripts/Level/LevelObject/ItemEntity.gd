@@ -49,7 +49,7 @@ func Use():
 
 func StopUse():
 	if in_use:
-		itemOwner.items_in_use = itemOwner.items_in_use - 1
+		itemOwner.items_in_use = max(0,itemOwner.items_in_use - 1) 
 		in_use = false
 
 func _physics_process(delta):
@@ -89,6 +89,8 @@ func OnAttach(new_owner):
 	on_item_attached.emit(itemOwner)
 
 func OnDettach():
+	if in_use:
+		itemOwner.items_in_use = max(0,itemOwner.items_in_use - 1) 
 	collision_layer = collisionlayer
 	collision_mask = collisionmask
 	sleeping  = false

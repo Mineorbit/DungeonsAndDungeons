@@ -84,7 +84,7 @@ func player_shield(is_aiming):
 
 func entity_hit():
 	super.entity_hit()
-	print(str(Constants.id)+" HIT on "+str(self))
+	#print(str(Constants.id)+" HIT on "+str(self))
 	mouth.set_shader_parameter("character",1)
 	eyes.set_shader_parameter("character",1)
 

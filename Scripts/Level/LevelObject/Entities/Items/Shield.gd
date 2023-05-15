@@ -15,7 +15,6 @@ func get_type():
 
 
 func OnDettach():
-	in_use = false
 	itemOwner.on_entity_using_shield.emit(false)
 	super.OnDettach()
 
