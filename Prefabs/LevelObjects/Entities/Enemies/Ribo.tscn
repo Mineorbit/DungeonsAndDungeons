@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgkf1aq1kxjfp"]
+[gd_scene load_steps=16 format=3 uid="uid://cgkf1aq1kxjfp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Ribo.gd" id="1_idayt"]
 [ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_soao6"]
 [ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_ej64c"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="8_3b3jq"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="9_q2myq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aa5fx"]
 radius = 0.374179
@@ -101,9 +100,6 @@ class_type = "Player"
 script = ExtResource("7_ej64c")
 target = "seenPlayer"
 
-[node name="SequenceStarComposite" type="Node" parent="AI/BeehaveTree"]
-script = ExtResource("9_q2myq")
-
 [node name="Blackboard" type="Node" parent="AI"]
 script = ExtResource("8_3b3jq")
 
@@ -120,5 +116,11 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("BoxShape3D_gajk1")
 target_position = Vector3(0, 0, 2)
 collision_mask = 16
+
+[node name="AimTargetPosition" type="Node3D" parent="AI/Utils"]
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="AI/Utils/AimTargetPosition"]
+visible = false
+mesh = SubResource("CylinderMesh_3ld6k")
 
 [connection signal="velocity_computed" from="Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]

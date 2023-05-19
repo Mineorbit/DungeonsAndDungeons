@@ -117,6 +117,7 @@ func StopUseRightAction():
 
 @rpc
 func Pickup():
+	print(str(name))
 	player.on_entity_pickup.emit()
 	
 func PickupAction():

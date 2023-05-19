@@ -20,10 +20,8 @@ func add(playerEntity,id, owner_id = 0):
 
 
 func set_current_player(number):
+	print("Setting Number: "+str(number))
 	Constants.currentPlayer = number
 	for i in range(4):
-		if get_parent().get_player(i) != null:
+		if playerControllers[i] != null:
 			playerControllers[i].set_active(i == number)
-	
-	if get_parent().get_player(number) != null:
-		print(playerControllers[number])

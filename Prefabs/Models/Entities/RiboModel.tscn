@@ -123,9 +123,9 @@ nodes/topbot/node = SubResource("AnimationNodeAdd2_hp0au")
 nodes/topbot/position = Vector2(1314.79, -60.0707)
 node_connections = [&"output", 0, &"topbot", &"topbot", 0, &"Bot", &"topbot", 1, &"Top"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_80oqe"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_aplau"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_yyd0c"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_wwosk"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mvcwn"]
 properties/0/path = NodePath("AnimationTree:parameters/Bot/Throw/blend_amount")
@@ -202,12 +202,12 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Bot/Throw/blend_amount = 0.0
 parameters/Bot/speed/blend_amount = 0.0
-parameters/Bot/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_80oqe")
+parameters/Bot/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_aplau")
 parameters/Top/Add2/add_amount = 1.0
 parameters/Top/Throw/blend_amount = 0.0
 parameters/Top/TimeSeek/seek_request = -1.0
 parameters/Top/speed/blend_amount = 0.0
-parameters/Top/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_yyd0c")
+parameters/Top/throwfsm/playback = SubResource("AnimationNodeStateMachinePlayback_wwosk")
 parameters/topbot/add_amount = 1.0
 
 [node name="HandL" type="BoneAttachment3D" parent="." index="3"]
