@@ -5,7 +5,6 @@ var spear
 
 @onready var vision: ShapeCast3D = $VisionCheck
 @onready var target_point = $AI/Utils/AimTargetPosition
-var time_since_seen = 0
 
 @export var aim_range = 4
 

@@ -1,13 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://cgkf1aq1kxjfp"]
+[gd_scene load_steps=20 format=3 uid="uid://cgkf1aq1kxjfp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Ribo.gd" id="1_idayt"]
+[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="2_2w6rk"]
 [ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_jjp5q"]
 [ext_resource type="PackedScene" uid="uid://evx2rdayce7g" path="res://Prefabs/Models/Entities/RiboModel.tscn" id="3_5ifii"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_5ojhm"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_cvljv"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="6_keb5u"]
 [ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_soao6"]
 [ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_ej64c"]
 [ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="8_3b3jq"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="10_ecn4i"]
+[ext_resource type="Script" path="res://Scripts/AI/HasItemCondition.gd" id="10_swg0k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aa5fx"]
 radius = 0.374179
@@ -59,6 +63,9 @@ shape = SubResource("BoxShape3D_do8j2")
 target_position = Vector3(0, 0, 4)
 collision_mask = 16
 
+[node name="ItemPickupArea" parent="." instance=ExtResource("2_2w6rk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_jjp5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 
@@ -90,15 +97,36 @@ actor_node_path = NodePath("../..")
 blackboard = NodePath("../Blackboard")
 
 [node name="Main" type="Node" parent="AI/BeehaveTree"]
-script = ExtResource("5_cvljv")
-
-[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("6_soao6")
-class_type = "Player"
+script = ExtResource("6_keb5u")
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("7_ej64c")
 target = "seenPlayer"
+
+[node name="Patrol" type="Node" parent="AI/BeehaveTree/Main"]
+script = ExtResource("5_cvljv")
+
+[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
+script = ExtResource("6_soao6")
+class_type = "Player"
+
+[node name="GoInRandomDirection" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
+script = ExtResource("10_ecn4i")
+
+[node name="Attack" type="Node" parent="AI/BeehaveTree/Main"]
+script = ExtResource("5_cvljv")
+
+[node name="HasItem" type="Node" parent="AI/BeehaveTree/Main/Attack"]
+script = ExtResource("10_swg0k")
+
+[node name="WhichWeapon" type="Node" parent="AI/BeehaveTree/Main/Attack"]
+script = ExtResource("6_keb5u")
+
+[node name="Spear" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon"]
+script = ExtResource("5_cvljv")
+
+[node name="SeekWeapon" type="Node" parent="AI/BeehaveTree/Main"]
+script = ExtResource("5_cvljv")
 
 [node name="Blackboard" type="Node" parent="AI"]
 script = ExtResource("8_3b3jq")
