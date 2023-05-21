@@ -8,33 +8,24 @@ func _ready():
 var collected = []
 
 func Pickup():
-	print("Picking Up")
 	var items_inside_range = get_items_in_area()
 	#change left hand
-	var left_avail = []
-	var right_avail = []
+	var avail = []
+	
+	for i in range(get_parent().item_slots):
+		avail.append([])
 	for item in items_inside_range:
-		if item.attachment == 1:
-			right_avail.append(item)
-		else:
-			left_avail.append(item)
+		avail[item.attachment].append(item)
 	var any_items = items_inside_range.size() > 0
-	change_left_hand(left_avail,any_items)
-	change_right_hand(right_avail,any_items)
+	for i in range(get_parent().item_slots):
+		change_slot(avail[i],any_items,i)
 
-func change_left_hand(avail,any_items):
-	if(get_parent().has_item(0) and (avail.size()>0 or not any_items)):
-		get_parent().Dettach(get_parent().item[0])
+func change_slot(avail,any_items,slot):
+	if(get_parent().has_item(slot) and (avail.size()>0 or not any_items)):
+		get_parent().Dettach(get_parent().item[slot])
 	if avail.size() > 0:
 		get_parent().Attach(avail[0])
 
-
-
-func change_right_hand(avail,any_items):
-	if(get_parent().has_item(1) and (avail.size()>0 or not any_items)):
-		get_parent().Dettach(get_parent().item[1])
-	if avail.size() > 0:
-		get_parent().Attach(avail[0])
 
 
 func get_items_in_area():
@@ -42,6 +33,6 @@ func get_items_in_area():
 	if is_colliding():
 		for i in range(get_collision_count()):
 			var collided_object = get_collider(i)
-			if collided_object is ItemEntity and not (collided_object in items_inside):
+			if collided_object is ItemEntity and not (collided_object in items_inside) and not(collided_object.isEquipped):
 				items_inside.append(collided_object)
 	return items_inside

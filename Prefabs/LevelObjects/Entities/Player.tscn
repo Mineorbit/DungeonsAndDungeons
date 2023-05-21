@@ -36,6 +36,7 @@ collision_priority = 2.0
 script = ExtResource("1_ju1or")
 can_climb = true
 climb_velocity = 3.0
+item_slots = 2
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)

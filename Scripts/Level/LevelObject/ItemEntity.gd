@@ -95,7 +95,7 @@ func OnDettach():
 	collision_mask = collisionmask
 	sleeping  = false
 	freeze = false
-	isEquipped = true
+	isEquipped = false
 	var olditemOwner = itemOwner
 	itemOwner = null
 	in_use = false

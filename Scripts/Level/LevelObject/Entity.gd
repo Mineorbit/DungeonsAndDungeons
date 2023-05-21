@@ -50,11 +50,12 @@ var last_floor = false
 var can_shoot = false
 
 
+@export var item_slots = 1
+
 var item = {}
 
 # The name of the Model of an entity should allways be named Model
 @onready var model = $Model
-
 
 
 
