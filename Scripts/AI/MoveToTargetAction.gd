@@ -1,7 +1,7 @@
 class_name MoveToTargetAction extends ActionLeaf
 
 @export var target: String = "GoToTargetPosition"
-
+@export var goal_distance = 2
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var target_node = blackboard.get_value(target)
 	if target_node == null:
@@ -14,7 +14,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	#actor.look_at(target_node.global_position)
 	#actor.move_and_slide(actor.global_transform.basis.z * 10, Vector3.UP)
 
-	if actor.global_transform.origin.distance_to(target_node.global_position) < 2:
+	if actor.global_transform.origin.distance_to(target_node.global_position) < goal_distance:
 		#print("Done")
 		return SUCCESS
 
