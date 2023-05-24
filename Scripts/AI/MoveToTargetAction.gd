@@ -15,7 +15,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	#actor.move_and_slide(actor.global_transform.basis.z * 10, Vector3.UP)
 
 	if actor.global_transform.origin.distance_to(target_node.global_position) < goal_distance:
-		#print("Done")
+		actor.go_to_target = false
 		return SUCCESS
-
+	
 	return RUNNING

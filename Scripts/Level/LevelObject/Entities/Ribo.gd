@@ -22,19 +22,21 @@ func _ready():
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	if aiming:
-		aim_at()
 
-func start_aiming():
-	aiming = true
-	on_entity_throw_aiming.emit()
 
-func throw():
+func Throw():
 	if has_item(0):
-		aiming = false
-		spear.Use(1,target_point.global_transform.origin)
+		if aiming:
+			aiming = false
+			print("Has thrown")
+			spear.Use(1,target_point.global_transform.origin)
 
-func aim_at():
-	var target_dir = target_point.global_transform.origin - global_transform.origin
-	target_dir = Vector2(target_dir.x,target_dir.z)
-	look_into_direction(target_dir)
+
+func Aim():
+	if not aiming:
+		aiming = true
+		on_entity_throw_aiming.emit()
+	if aiming:
+		var target_dir = target_point.global_transform.origin - global_transform.origin
+		target_dir = Vector2(target_dir.x,target_dir.z)
+		look_into_direction(target_dir)
