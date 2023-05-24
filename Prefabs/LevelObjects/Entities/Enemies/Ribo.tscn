@@ -16,12 +16,10 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="12_ipb10"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="13_ww0lv"]
 [ext_resource type="Script" path="res://Scripts/AI/AimAction.gd" id="14_dqetf"]
+[ext_resource type="Script" path="res://Scripts/AI/PickupItemAction.gd" id="16_5d23c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aa5fx"]
 radius = 0.374179
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
-size = Vector3(2, 1, 8)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta4rm"]
 properties/0/path = NodePath(".:position")
@@ -38,8 +36,8 @@ size = Vector3(1.01933, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3ld6k"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gajk1"]
-size = Vector3(2, 1, 4)
+[sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
+size = Vector3(2, 1, 8)
 
 [node name="Ribo" type="CharacterBody3D" node_paths=PackedStringArray("navAgent")]
 collision_layer = 2
@@ -61,14 +59,8 @@ avoidance_enabled = true
 max_speed = 5.0
 ignore_y = false
 
-[node name="VisionCheck" type="ShapeCast3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-shape = SubResource("BoxShape3D_do8j2")
-target_position = Vector3(0, 0, 4)
-collision_mask = 16
-
 [node name="ItemPickupArea" parent="." instance=ExtResource("2_2w6rk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70229, 0)
 
 [node name="MeleeHitArea" parent="." instance=ExtResource("2_jjp5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
@@ -123,6 +115,11 @@ script = ExtResource("5_cvljv")
 [node name="HasItem" type="Node" parent="AI/BeehaveTree/Main/Attack"]
 script = ExtResource("10_swg0k")
 any = true
+
+[node name="SeingPlayer" type="Node" parent="AI/BeehaveTree/Main/Attack"]
+script = ExtResource("6_soao6")
+class_types = PackedStringArray("Player")
+blackboard_name = "seenPlayer"
 
 [node name="WhichWeapon" type="Node" parent="AI/BeehaveTree/Main/Attack"]
 script = ExtResource("6_keb5u")
@@ -185,8 +182,7 @@ target = "seenWeapon"
 goal_distance = 1
 
 [node name="Pickup" type="Node" parent="AI/BeehaveTree/Main/SeekWeapon"]
-script = ExtResource("12_476b7")
-method = "Pickup"
+script = ExtResource("16_5d23c")
 
 [node name="Blackboard" type="Node" parent="AI"]
 script = ExtResource("8_3b3jq")
@@ -199,16 +195,16 @@ script = ExtResource("8_3b3jq")
 visible = false
 mesh = SubResource("CylinderMesh_3ld6k")
 
-[node name="VisionCheck" type="ShapeCast3D" parent="AI/Utils"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-shape = SubResource("BoxShape3D_gajk1")
-target_position = Vector3(0, 0, 2)
-collision_mask = 16
-
 [node name="AimTargetPosition" type="Node3D" parent="AI/Utils"]
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="AI/Utils/AimTargetPosition"]
 visible = false
 mesh = SubResource("CylinderMesh_3ld6k")
+
+[node name="VisionCheck" type="ShapeCast3D" parent="AI/Utils"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_do8j2")
+target_position = Vector3(0, 0, 4)
+collision_mask = 2
 
 [connection signal="velocity_computed" from="Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]

@@ -133,6 +133,8 @@ var num_of_climb_areas = 0
 var num_of_swim_areas = 0
 
 
+
+
 func has_item(attachment):
 	return attachment in item and item[attachment] != null
 

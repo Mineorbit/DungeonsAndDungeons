@@ -12,13 +12,22 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		return FAILURE
 
 	if vision.is_colliding():
-		target = vision.get_collider(0)
+		var i = 0
+		while i < 4:
+			var t = vision.get_collider(i)
+			print(t)
+			if t == null:
+				return FAILURE
+			if t.get_type() in class_types:
+				target = t
+				break
+			i = i + 1
 	#print(target.get_property_list()["class_name"])
 	if target == null:
 		return FAILURE
 	if blackboard_name.is_empty():
 		blackboard_name = "vis"
-	if actor.global_transform.origin.distance_to(target.global_position) < viewDistance and target.get_type() in class_types:
+	if actor.global_transform.origin.distance_to(target.global_position) < viewDistance:
 		#print("Found Player: "+str(target))
 		blackboard.set_value(blackboard_name,target)
 		return SUCCESS
