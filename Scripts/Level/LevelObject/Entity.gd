@@ -341,7 +341,6 @@ func Stun(duration, stunning_entity, direction):
 
 
 func Attach(item_to_attach):
-	print("Attaching "+str(item_to_attach))
 	if has_item(item_to_attach.attachment):
 		return
 	item[item_to_attach.attachment] = item_to_attach
