@@ -25,6 +25,7 @@ func _physics_process(delta):
 
 
 func Throw():
+	print("Throwing")
 	if has_item(0):
 		if aiming:
 			aiming = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ccbdrwvdupgc4"]
+[gd_scene load_steps=24 format=3 uid="uid://ccbdrwvdupgc4"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Ribo.gd" id="1_idayt"]
 [ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="2_2w6rk"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="10_ecn4i"]
 [ext_resource type="Script" path="res://Scripts/AI/HasItemCondition.gd" id="10_swg0k"]
 [ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="12_476b7"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="12_ipb10"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="13_ww0lv"]
 [ext_resource type="Script" path="res://Scripts/AI/AimAction.gd" id="14_dqetf"]
 
@@ -130,17 +131,20 @@ target = "seenPlayer"
 goal_distance = 16
 
 [node name="Throw" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear"]
-script = ExtResource("10_ecn4i")
+script = ExtResource("5_cvljv")
 
-[node name="WaitThrowTime" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw"]
+[node name="WaitDone" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw"]
+script = ExtResource("12_ipb10")
+
+[node name="WaitThrowTime" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw/WaitDone"]
 script = ExtResource("13_ww0lv")
-wait_time = 20.0
+wait_time = 2.0
 
-[node name="Aim" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw/WaitThrowTime"]
+[node name="Aim" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw/WaitDone/WaitThrowTime"]
 script = ExtResource("14_dqetf")
 aim_target_name = "seenPlayer"
 
-[node name="CallMethodAction" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw"]
+[node name="CallThrow" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear/Throw"]
 script = ExtResource("12_476b7")
 method = "Throw"
 
