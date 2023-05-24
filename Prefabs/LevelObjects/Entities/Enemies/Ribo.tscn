@@ -106,9 +106,13 @@ script = ExtResource("6_keb5u")
 [node name="Patrol" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("5_cvljv")
 
-[node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
+[node name="InverterDecorator" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
+script = ExtResource("12_ipb10")
+
+[node name="SeingPlayer" type="Node" parent="AI/BeehaveTree/Main/Patrol/InverterDecorator"]
 script = ExtResource("6_soao6")
-class_type = "Player"
+class_types = PackedStringArray("Player")
+blackboard_name = "seenPlayer"
 
 [node name="GoInRandomDirection" type="Node" parent="AI/BeehaveTree/Main/Patrol"]
 script = ExtResource("10_ecn4i")
@@ -118,12 +122,17 @@ script = ExtResource("5_cvljv")
 
 [node name="HasItem" type="Node" parent="AI/BeehaveTree/Main/Attack"]
 script = ExtResource("10_swg0k")
+any = true
 
 [node name="WhichWeapon" type="Node" parent="AI/BeehaveTree/Main/Attack"]
 script = ExtResource("6_keb5u")
 
 [node name="Spear" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon"]
 script = ExtResource("5_cvljv")
+
+[node name="HasSpear" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear"]
+script = ExtResource("10_swg0k")
+item_types = PackedStringArray("Spear")
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Spear"]
 script = ExtResource("7_ej64c")
@@ -151,8 +160,33 @@ method = "Throw"
 [node name="Sword" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon"]
 script = ExtResource("5_cvljv")
 
+[node name="HasSword" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Sword"]
+script = ExtResource("10_swg0k")
+item_types = PackedStringArray("Sword")
+
+[node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Sword"]
+script = ExtResource("7_ej64c")
+target = "seenPlayer"
+
+[node name="CallStrike" type="Node" parent="AI/BeehaveTree/Main/Attack/WhichWeapon/Sword"]
+script = ExtResource("12_476b7")
+
 [node name="SeekWeapon" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("5_cvljv")
+
+[node name="SeingItem" type="Node" parent="AI/BeehaveTree/Main/SeekWeapon"]
+script = ExtResource("6_soao6")
+class_types = PackedStringArray("Sword", "Spear")
+blackboard_name = "seenWeapon"
+
+[node name="GoToItem" type="Node" parent="AI/BeehaveTree/Main/SeekWeapon"]
+script = ExtResource("7_ej64c")
+target = "seenWeapon"
+goal_distance = 1
+
+[node name="Pickup" type="Node" parent="AI/BeehaveTree/Main/SeekWeapon"]
+script = ExtResource("12_476b7")
+method = "Pickup"
 
 [node name="Blackboard" type="Node" parent="AI"]
 script = ExtResource("8_3b3jq")

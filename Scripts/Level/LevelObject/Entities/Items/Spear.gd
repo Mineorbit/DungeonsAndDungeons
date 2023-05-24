@@ -72,10 +72,6 @@ func Throw(target_position):
 
 # this should be done cleaner
 func _physics_process(delta):
-	#if in_throw:
-	#	gravity_scale = 0
-	#else:
-	#	gravity_scale = 1
 	if itemOwner == null:
 		if in_throw:
 			var collision = get_colliding_bodies()

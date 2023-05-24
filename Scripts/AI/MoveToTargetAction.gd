@@ -4,6 +4,7 @@ class_name MoveToTargetAction extends ActionLeaf
 @export var goal_distance = 2
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var target_node = blackboard.get_value(target)
+	print(target_node)
 	if target_node == null:
 		actor.go_to_target = false
 		return FAILURE

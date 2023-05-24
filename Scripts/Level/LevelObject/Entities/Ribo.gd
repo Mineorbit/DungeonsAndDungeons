@@ -17,6 +17,7 @@ func _ready():
 	super._ready()
 	spear = load("res://Prefabs/LevelObjects/Entities/Items/Spear.tscn").instantiate()
 	Constants.World.level.spawn_entity(spear)
+	print("LOL "+str(item))
 	Attach(spear)
 
 

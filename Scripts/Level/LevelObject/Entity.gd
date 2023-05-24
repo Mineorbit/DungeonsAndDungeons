@@ -109,7 +109,7 @@ func _ready():
 	on_entity_can_shoot.connect(ent_can_shoot)
 	on_entity_melee_strike.connect(MeleeStrike)
 	_velocity = Vector3.ZERO
-	
+
 func start():
 	target_rot = global_transform.basis
 	health = max_health
@@ -342,12 +342,16 @@ func Stun(duration, stunning_entity, direction):
 
 func Attach(item_to_attach):
 	print("Attaching "+str(item_to_attach))
-	item[item_to_attach.attachment] = item
+	if has_item(item_to_attach.attachment):
+		return
+	item[item_to_attach.attachment] = item_to_attach
 	item_to_attach.OnAttach(self)
 
 
 func Dettach(item_to_dettach):
 	if item_to_dettach == null:
+		return
+	if not has_item(item_to_dettach.attachment):
 		return
 	item[item_to_dettach.attachment] = null
 	item_to_dettach.OnDettach()
