@@ -17,7 +17,7 @@ func _ready():
 	super._ready()
 	remove_child(target)
 	print(str(navAgent))
-	navAgent.ignore_y = false
+	#navAgent.ignore_y = false
 	get_parent().add_child(target)
 
 

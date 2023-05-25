@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cii0vc12m12om"]
 
-[ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://cyyl12pvlc3qn" path="res://Prefabs/Entities.tscn" id="2_fl8ir"]
+[ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1_gc4uh"]
+[ext_resource type="PackedScene" uid="uid://cyyl12pvlc3qn" path="res://Prefabs/Entities.tscn" id="2_afiv4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_i6616"]
 geometry_parsed_geometry_type = 1
@@ -9,9 +9,9 @@ agent_radius = 0.2
 
 [node name="Level" type="NavigationRegion3D"]
 navigation_mesh = SubResource("NavigationMesh_i6616")
-script = ExtResource("1")
+script = ExtResource("1_gc4uh")
 
-[node name="Entities" parent="." instance=ExtResource("2_fl8ir")]
+[node name="Entities" parent="." instance=ExtResource("2_afiv4")]
 
 [node name="EntitiesSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Prefabs/LevelObjects/Entities/Enemies/Blog.tscn", "res://Prefabs/LevelObjects/Entities/Items/Sword.tscn", "res://Prefabs/LevelObjects/Entities/Items/Bow.tscn", "res://Prefabs/LevelObjects/Entities/Items/BombGlove.tscn", "res://Prefabs/LevelObjects/Entities/Arrow.tscn", "res://Prefabs/LevelObjects/Entities/Bomb.tscn", "res://Prefabs/LevelObjects/Entities/PlattformEntity.tscn")

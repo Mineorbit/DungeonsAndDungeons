@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://doj2m1b66ehq1"]
 
-[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_sbkav"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_aa1la"]
-[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_yijaa"]
-[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_ylso8"]
+[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_ytg8n"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_p0olx"]
+[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_5lrgk"]
+[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_uup7l"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -37,7 +37,7 @@ height = 1.25
 collision_layer = 18
 collision_mask = 3
 collision_priority = 2.0
-script = ExtResource("1_sbkav")
+script = ExtResource("1_ytg8n")
 can_climb = true
 climb_velocity = 3.0
 item_slots = 2
@@ -52,16 +52,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
 [node name="CameraOffset" type="Node3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_aa1la")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_p0olx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)
 
-[node name="ItemPickupArea" parent="." instance=ExtResource("3_yijaa")]
+[node name="ItemPickupArea" parent="." instance=ExtResource("3_5lrgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bnrka")
 
-[node name="Model" parent="." instance=ExtResource("4_ylso8")]
+[node name="Model" parent="." instance=ExtResource("4_uup7l")]
 
 [node name="ClimbArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

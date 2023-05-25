@@ -7,6 +7,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	if target_node == null:
 		actor.go_to_target = false
 		return FAILURE
+	print("Going to Target")
 	actor.go_to_target = true
 	var target_pos = actor.get_node("AI/Utils/GoToTargetPosition")
 	target_pos.global_transform.origin = target_node.global_transform.origin

@@ -26,22 +26,29 @@ var neighbors = [Vector3(0,1,0),
 
 var building = false
 
-func rebuild_mesh():
-	var surfaceTool = SurfaceTool.new()
-	
+func clean_col():
 	for n in collisionshape.get_children():
 		collisionshape.remove_child(n)
 		n.queue_free()
+	
+
+func add_col(x,y,z):
+					var box_col = CollisionShape3D.new()
+					box_col.shape = BoxShape3D.new()
+					box_col.position = Vector3(x+0.5,y+0.5,z+0.5)
+					collisionshape.add_child(box_col)
+	
+
+func rebuild_mesh():
+	var surfaceTool = SurfaceTool.new()
+	call_thread_safe("clean_col")
 	surfaceTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for x in range(8):
 		for y in range(8):
 			for z in range(8):
 				var p = global_transform.origin + Vector3(x,y,z)
 				if get_parent().get_at(p) == levelObjectId:
-					var box_col = CollisionShape3D.new()
-					box_col.shape = BoxShape3D.new()
-					box_col.position = Vector3(x+0.5,y+0.5,z+0.5)
-					collisionshape.add_child(box_col)
+					call_thread_safe("add_col",x,y,z)
 					#top face
 					if get_parent().get_at(p+Vector3(0,1,0)) != levelObjectId:
 						surfaceTool.set_uv(Vector2(0,0))
@@ -192,7 +199,6 @@ func rebuild_mesh():
 	var mesh = surfaceTool.commit()
 	gridmesh.mesh = mesh
 	gridmesh.set_surface_override_material(0,surfacematerial)
-	
 	#collisionshape.shape = mesh.create_trimesh_shape()
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():

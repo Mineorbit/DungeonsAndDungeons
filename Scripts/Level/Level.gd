@@ -77,7 +77,7 @@ func build_navigation():
 	print("Building Nav Mesh")
 	# in base method
 	#await build_navigation_per_chunk()
-	bake_navigation_mesh()
+	call_thread_safe("bake_navigation_mesh",false)
 	
 	print("Finished Building Nav Mesh")
 	#for map in NavigationServer3D.get_maps():
@@ -99,7 +99,7 @@ var changes = true
 #this is a start routine for a level
 func start():
 	print("=== Starting Level ===")
-	await build_navigation()
+	build_navigation()
 	for chunk in chunks.values():
 		for object in chunk.levelObjects.get_children():
 			if object.has_method("attachSignals"):

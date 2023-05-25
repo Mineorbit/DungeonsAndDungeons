@@ -1,35 +1,35 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://bogksdbh4fu6o"]
 
-[ext_resource type="StyleBox" uid="uid://ctfqa7np0x4g8" path="res://Assets/UI/ButtonStyle.tres" id="1_4j10s"]
-[ext_resource type="StyleBox" uid="uid://dtwhob1t18ntx" path="res://Assets/UI/ButtonNormalAlt.tres" id="2_vbwpa"]
-[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="3_l2uo1"]
-[ext_resource type="Texture2D" uid="uid://3nxptyeg1e4m" path="res://Assets/UI/crosstoggle_off.png" id="4_6qn61"]
-[ext_resource type="StyleBox" uid="uid://cfy4i6yo0iwxe" path="res://Assets/UI/ButtonNormal.tres" id="5_brmvx"]
-[ext_resource type="FontFile" uid="uid://bunuu1xs4aqsi" path="res://Assets/Fonts/Barlow-Medium.ttf" id="6_wtjfe"]
+[ext_resource type="StyleBox" uid="uid://ctfqa7np0x4g8" path="res://Assets/UI/ButtonStyle.tres" id="1_qk1hq"]
+[ext_resource type="StyleBox" uid="uid://dtwhob1t18ntx" path="res://Assets/UI/ButtonNormalAlt.tres" id="2_lrict"]
+[ext_resource type="Texture2D" uid="uid://daiqux454er8x" path="res://icon.png" id="3_p5v5p"]
+[ext_resource type="Texture2D" uid="uid://3nxptyeg1e4m" path="res://Assets/UI/crosstoggle_off.png" id="4_lxlmm"]
+[ext_resource type="StyleBox" uid="uid://cfy4i6yo0iwxe" path="res://Assets/UI/ButtonNormal.tres" id="5_gr7yj"]
+[ext_resource type="FontFile" uid="uid://bunuu1xs4aqsi" path="res://Assets/Fonts/Barlow-Medium.ttf" id="6_b155y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrwr6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvq83"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vutlx"]
-texture = ExtResource("4_6qn61")
+texture = ExtResource("4_lxlmm")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_stbpb"]
 
 [resource]
 default_base_scale = 2.0
-default_font = ExtResource("6_wtjfe")
+default_font = ExtResource("6_b155y")
 Button/styles/focus = SubResource("StyleBoxFlat_wrwr6")
-Button/styles/hover = ExtResource("1_4j10s")
-Button/styles/normal = ExtResource("2_vbwpa")
+Button/styles/hover = ExtResource("1_qk1hq")
+Button/styles/normal = ExtResource("2_lrict")
 Button/styles/pressed = SubResource("StyleBoxFlat_wvq83")
-CheckBox/icons/checked = ExtResource("3_l2uo1")
-CheckBox/icons/checked_disabled = ExtResource("3_l2uo1")
-CheckBox/icons/unchecked = ExtResource("3_l2uo1")
+CheckBox/icons/checked = ExtResource("3_p5v5p")
+CheckBox/icons/checked_disabled = ExtResource("3_p5v5p")
+CheckBox/icons/unchecked = ExtResource("3_p5v5p")
 CheckBox/styles/disabled = SubResource("StyleBoxTexture_vutlx")
 CheckBox/styles/focus = null
 TabContainer/constants/outline_size = 0
 TabContainer/styles/panel = SubResource("StyleBoxEmpty_stbpb")
-TabContainer/styles/tab_disabled = ExtResource("5_brmvx")
-TabContainer/styles/tab_selected = ExtResource("5_brmvx")
-TabContainer/styles/tab_unselected = ExtResource("1_4j10s")
+TabContainer/styles/tab_disabled = ExtResource("5_gr7yj")
+TabContainer/styles/tab_selected = ExtResource("5_gr7yj")
+TabContainer/styles/tab_unselected = ExtResource("1_qk1hq")
