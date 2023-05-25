@@ -78,14 +78,7 @@ func start_play():
 			LoadingScreen.close()
 		)
 
-func start_edit(levelname = null, new_level = false):
-	
-		
-	LoadingScreen.open().timeout.connect(
-		func():
-			print("Starting Edit")
-			var t = Thread.new()
-			t.start(func():
+func prep_level(levelname,new_level):
 				remove_child(current_scene)
 				current_scene = load("res://Scenes/edit.tscn").instantiate()
 			# prepare edit
@@ -97,6 +90,17 @@ func start_edit(levelname = null, new_level = false):
 				else:
 					current_scene.prepare_edit(levelname)
 				LoadingScreen.close()
+
+func start_edit(levelname = null, new_level = false):
+	
+		
+	LoadingScreen.open().timeout.connect(
+		func():
+			print("Starting Edit")
+			prep_level(levelname,new_level)
+			var t = Thread.new()
+			t.start(func():
+				pass
 			)
 	)
 		#t.start(func():

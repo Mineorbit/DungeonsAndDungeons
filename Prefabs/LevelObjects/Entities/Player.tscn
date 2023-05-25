@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://doj2m1b66ehq1"]
 
-[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_ju1or"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_4q7mt"]
-[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_7kqva"]
-[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_ixgl3"]
+[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_sbkav"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_aa1la"]
+[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_yijaa"]
+[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_ylso8"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -13,15 +13,19 @@ height = 1.75
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/1/watch = false
 properties/2/path = NodePath(".:id")
 properties/2/spawn = true
 properties/2/sync = true
+properties/2/watch = false
 properties/3/path = NodePath(".:health_ui")
 properties/3/spawn = true
 properties/3/sync = true
+properties/3/watch = false
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0nwwf"]
 radius = 0.75
@@ -33,7 +37,7 @@ height = 1.25
 collision_layer = 18
 collision_mask = 3
 collision_priority = 2.0
-script = ExtResource("1_ju1or")
+script = ExtResource("1_sbkav")
 can_climb = true
 climb_velocity = 3.0
 item_slots = 2
@@ -48,16 +52,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
 [node name="CameraOffset" type="Node3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_4q7mt")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_aa1la")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)
 
-[node name="ItemPickupArea" parent="." instance=ExtResource("3_7kqva")]
+[node name="ItemPickupArea" parent="." instance=ExtResource("3_yijaa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bnrka")
 
-[node name="Model" parent="." instance=ExtResource("4_ixgl3")]
+[node name="Model" parent="." instance=ExtResource("4_ylso8")]
 
 [node name="ClimbArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

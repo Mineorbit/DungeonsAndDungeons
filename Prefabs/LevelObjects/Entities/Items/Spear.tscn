@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://k4wmacyn48wa"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Spear.gd" id="1_7uxx5"]
-[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="3_o87ot"]
-[ext_resource type="PackedScene" uid="uid://dnuysx83xafa3" path="res://Assets/Models/LevelObjects/Entities/Items/Spear/Spear.blend" id="4_2dy6b"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Spear.gd" id="1_5p42x"]
+[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="2_85oin"]
+[ext_resource type="PackedScene" uid="uid://dnuysx83xafa3" path="res://Assets/Models/LevelObjects/Entities/Items/Spear/Spear.blend" id="3_hiuyw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ruhvi"]
 size = Vector3(0.35, 5, 0.35)
@@ -11,9 +11,11 @@ size = Vector3(0.35, 5, 0.35)
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/1/watch = false
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bo80w"]
 radius = 0.169837
@@ -24,7 +26,7 @@ collision_layer = 6
 collision_mask = 3
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_7uxx5")
+script = ExtResource("1_5p42x")
 hold_rot = Vector3(0, 180, 0)
 
 [node name="Collision" type="CollisionShape3D" parent="."]
@@ -33,13 +35,13 @@ shape = SubResource("BoxShape3D_ruhvi")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_moqfe")
-script = ExtResource("3_o87ot")
+script = ExtResource("2_85oin")
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
-[node name="Model" parent="." instance=ExtResource("4_2dy6b")]
+[node name="Model" parent="." instance=ExtResource("3_hiuyw")]
 transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, 0, 0, 0)
 
 [node name="Hitbox" type="Area3D" parent="."]

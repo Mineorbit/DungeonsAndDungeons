@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://bwbdip5xme7q1"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_5eeht"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="3_5otfc"]
-[ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_yeygo"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="4_vf5o5"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_g4clb"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_s0b01"]
-[ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_jaer6"]
-[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_p5y7i"]
-[ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="8_jp6b1"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_54gog"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_fabnv"]
+[ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_5akxu"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_emh82"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_3lwdq"]
+[ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="6_7dxdh"]
+[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_0jhba"]
+[ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="8_odt3b"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_44r6j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 radius = 0.45
@@ -17,9 +17,11 @@ radius = 0.45
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/1/watch = false
 
 [sub_resource type="BoxMesh" id="BoxMesh_pywra"]
 
@@ -34,14 +36,14 @@ size = Vector3(2, 1, 4)
 [node name="Blog" type="CharacterBody3D" node_paths=PackedStringArray("navAgent")]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_5eeht")
+script = ExtResource("1_54gog")
 navAgent = NodePath("AI/Utils/Navigation/NavAgent")
 minimum_distance_to_target = 1.5
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("3_5otfc")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_fabnv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -51,7 +53,7 @@ replication_config = SubResource("SceneReplicationConfig_ta4rm")
 visible = false
 mesh = SubResource("BoxMesh_pywra")
 
-[node name="Model" parent="." instance=ExtResource("3_yeygo")]
+[node name="Model" parent="." instance=ExtResource("3_5akxu")]
 transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.5, 0)
 
 [node name="StrikeArea" type="Area3D" parent="."]
@@ -65,26 +67,26 @@ shape = SubResource("BoxShape3D_f5r85")
 [node name="AI" type="Node3D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="AI" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("5_s0b01")
+script = ExtResource("4_emh82")
 actor_node_path = NodePath("../..")
 blackboard = NodePath("../Blackboard")
 
 [node name="Main" type="Node" parent="AI/BeehaveTree"]
-script = ExtResource("5_g4clb")
+script = ExtResource("5_3lwdq")
 
 [node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("6_jaer6")
+script = ExtResource("6_7dxdh")
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("7_p5y7i")
+script = ExtResource("7_0jhba")
 target = "seenPlayer"
 
 [node name="Strike" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("8_jp6b1")
+script = ExtResource("8_odt3b")
 method = "try_strike"
 
 [node name="Blackboard" type="Node" parent="AI"]
-script = ExtResource("4_vf5o5")
+script = ExtResource("9_44r6j")
 
 [node name="Utils" type="Node3D" parent="AI"]
 
@@ -110,7 +112,6 @@ path_max_distance = 12.9
 navigation_layers = 3
 avoidance_enabled = true
 max_speed = 5.0
-ignore_y = false
 
 [connection signal="on_entity_melee_strike" from="." to="Model" method="StrikeAnimation"]
 [connection signal="velocity_computed" from="AI/Utils/Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]
