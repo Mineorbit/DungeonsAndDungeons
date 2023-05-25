@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3vhh2g7r2l4x"]
+
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="1_cskad"]
+[ext_resource type="Script" path="res://Scripts/AI/CanSeeEntityCondition.gd" id="2_lld35"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/leaves/blackboard_compare.gd" id="3_vdwe4"]
+
+[node name="KnowsWherePlayerIs" type="Node"]
+script = ExtResource("1_cskad")
+
+[node name="SeingPlayer" type="Node" parent="."]
+script = ExtResource("2_lld35")
+class_types = PackedStringArray("Player")
+blackboard_name = "seenPlayer"
+
+[node name="HasSeenPlayerInPast" type="Node" parent="."]
+script = ExtResource("3_vdwe4")
+left_operand = "get_value(\"seenPlayer\")"
+operator = 1
+right_operand = "null"

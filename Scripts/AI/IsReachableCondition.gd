@@ -1,10 +1,8 @@
-class_name IsReachableCondition extends ConditionLeaf
+class_name HasItemCondition extends ConditionLeaf
 
 @export var any: bool = false
 @export var item_types: PackedStringArray
 @export var slot = 0
-
-# this should be used in future to determine if other Entities are blocking this entity
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	if actor.has_item(slot):

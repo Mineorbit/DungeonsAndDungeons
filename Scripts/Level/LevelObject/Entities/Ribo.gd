@@ -25,13 +25,18 @@ func _physics_process(delta):
 	super._physics_process(delta)
 
 
+func Strike():
+	print("Striking")
+	if has_item(0):
+		item[0].Use()
+
 func Throw():
 	print("Throwing")
-	if has_item(0):
+	if has_item(0) and (item[0] is Spear):
 		if aiming:
 			aiming = false
 			print("Has thrown")
-			spear.Use(1,target_point.global_transform.origin)
+			item[0].Use(1,target_point.global_transform.origin)
 
 
 func Aim():

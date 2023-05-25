@@ -1,5 +1,5 @@
 extends ItemEntity
-
+class_name Spear
 
 var default_offset
 var default_rot

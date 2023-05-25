@@ -13,9 +13,8 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 
 	if vision.is_colliding():
 		var i = 0
-		while i < 4:
+		while i < min(3,vision.get_collision_count()):
 			var t = vision.get_collider(i)
-			print(t)
 			if t == null:
 				return FAILURE
 			if t.get_type() in class_types:

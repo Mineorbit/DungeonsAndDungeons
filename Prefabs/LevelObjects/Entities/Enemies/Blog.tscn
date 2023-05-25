@@ -35,20 +35,8 @@ size = Vector3(2, 1, 4)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_5eeht")
-navAgent = NodePath("Navigation/NavAgent")
+navAgent = NodePath("AI/Utils/Navigation/NavAgent")
 minimum_distance_to_target = 1.5
-
-[node name="Navigation" type="Node3D" parent="."]
-
-[node name="NavObst" type="NavigationObstacle3D" parent="Navigation"]
-
-[node name="NavAgent" type="NavigationAgent3D" parent="Navigation"]
-path_desired_distance = 0.84
-path_max_distance = 12.9
-navigation_layers = 3
-avoidance_enabled = true
-max_speed = 5.0
-ignore_y = false
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
@@ -86,7 +74,6 @@ script = ExtResource("5_g4clb")
 
 [node name="PlayerSeen" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("6_jaer6")
-class_type = "Player"
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
 script = ExtResource("7_p5y7i")
@@ -113,5 +100,17 @@ shape = SubResource("BoxShape3D_do8j2")
 target_position = Vector3(0, 0, 2)
 collision_mask = 16
 
+[node name="Navigation" type="Node3D" parent="AI/Utils"]
+
+[node name="NavObst" type="NavigationObstacle3D" parent="AI/Utils/Navigation"]
+
+[node name="NavAgent" type="NavigationAgent3D" parent="AI/Utils/Navigation"]
+path_desired_distance = 0.84
+path_max_distance = 12.9
+navigation_layers = 3
+avoidance_enabled = true
+max_speed = 5.0
+ignore_y = false
+
 [connection signal="on_entity_melee_strike" from="." to="Model" method="StrikeAnimation"]
-[connection signal="velocity_computed" from="Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]
+[connection signal="velocity_computed" from="AI/Utils/Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]

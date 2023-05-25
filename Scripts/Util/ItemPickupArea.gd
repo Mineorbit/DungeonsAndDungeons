@@ -11,7 +11,7 @@ func Pickup():
 	var items_inside_range = get_items_in_area()
 	#change left hand
 	var avail = []
-	
+	print(get_parent())
 	for i in range(get_parent().item_slots):
 		avail.append([])
 	for item in items_inside_range:
