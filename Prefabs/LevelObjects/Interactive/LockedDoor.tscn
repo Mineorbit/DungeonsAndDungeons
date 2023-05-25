@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://1pugwjjiurhy"]
+
+[ext_resource type="PackedScene" uid="uid://bjr0iam034ygi" path="res://Prefabs/Models/LevelObjects/Interactive/LockedDoorModel.tscn" id="1_0ckuw"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_wdj2l"]
+vertices = PackedVector3Array(-0.62, 0.5, -1.37, -0.62, 0.5, 1.36, 0.68, 0.5, 1.36, 0.68, 0.5, -1.37)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_size = 0.13
+agent_radius = 0.1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jpy8g"]
+size = Vector2(1.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
+size = Vector3(0.125, 3, 3)
+
+[node name="LockedDoor" type="Node3D"]
+
+[node name="Navigation" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_wdj2l")
+navigation_layers = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Navigation"]
+visible = false
+mesh = SubResource("PlaneMesh_jpy8g")
+
+[node name="Collision" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision"]
+shape = SubResource("BoxShape3D_vkx4j")
+
+[node name="LockedDoorModel" parent="." instance=ExtResource("1_0ckuw")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 1, 0)

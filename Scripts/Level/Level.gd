@@ -75,10 +75,8 @@ func build_navigation():
 			changedChunks = changedChunks + 1
 	
 	print("Building Nav Mesh")
-	# in base method
-	#await build_navigation_per_chunk()
-	call_thread_safe("bake_navigation_mesh",false)
-	
+	# last tested, this did not work with call_deferred or call_thread_safe when changing argument to true
+	bake_navigation_mesh(false)
 	print("Finished Building Nav Mesh")
 	#for map in NavigationServer3D.get_maps():
 	#	NavigationServer3D.map_set_edge_connection_margin(map,2)

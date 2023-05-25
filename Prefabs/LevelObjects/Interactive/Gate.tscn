@@ -1,22 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1iw5d7te4wr"]
+[gd_scene load_steps=6 format=3 uid="uid://c1iw5d7te4wr"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Gate.gd" id="1_vj3t7"]
-[ext_resource type="PackedScene" uid="uid://bw6qrxsk7er8f" path="res://Prefabs/Models/LevelObjects/Interactive/GateModel.tscn" id="2_cgsva"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Gate.gd" id="1_wokgf"]
+[ext_resource type="PackedScene" uid="uid://bw6qrxsk7er8f" path="res://Prefabs/Models/LevelObjects/Interactive/GateModel.tscn" id="2_4gsrd"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_pr2p7"]
+vertices = PackedVector3Array(-0.62, 0.5, -1.37, -0.62, 0.5, 1.36, 0.68, 0.5, 1.36, 0.68, 0.5, -1.37)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_size = 0.13
+agent_radius = 0.1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gjdth"]
+size = Vector2(1.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n57yx"]
+size = Vector3(0.125, 3, 3)
 
 [node name="Gate" type="Node3D"]
-script = ExtResource("1_vj3t7")
+script = ExtResource("1_wokgf")
+
+[node name="GateModel" parent="." instance=ExtResource("2_4gsrd")]
+transform = Transform3D(-3.27835e-08, 0, 0.25, 0, 0.95, 0, -0.75, 0, -1.09278e-08, 0, -0.45, 0)
 
 [node name="Navigation" type="NavigationRegion3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_pr2p7")
 navigation_layers = 3
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Navigation"]
+visible = false
+mesh = SubResource("PlaneMesh_gjdth")
+
 [node name="Collision" type="StaticBody3D" parent="."]
-transform = Transform3D(0.125, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collision"]
-shape = SubResource("BoxShape3D_vkx4j")
-
-[node name="GateModel" parent="." instance=ExtResource("2_cgsva")]
-transform = Transform3D(-3.27835e-08, 0, 0.25, 0, 0.65, 0, -0.75, 0, -1.09278e-08, 0, -0.465, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_n57yx")
