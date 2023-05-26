@@ -13,6 +13,8 @@ radius = 2.0
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_ufeps")
+offset = Vector3(0, 0.1, 0)
+hold_rot = Vector3(-90, 90, 0)
 
 [node name="Model" parent="." instance=ExtResource("1_2n33b")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.30395)
