@@ -30,17 +30,19 @@ func reset():
 
 
 func open():
-	add_child(nav)
-	if collision.get_parent() != null:
-		remove_child(collision)
-	is_open = true
+	if not is_open:
+		add_child(nav)
+		if collision.get_parent() != null:
+			remove_child(collision)
+		is_open = true
 	
 
 func close():
-	remove_child(nav)
-	if collision.get_parent() == null:
-		add_child(collision)
-	is_open = false
+	if is_open:
+		remove_child(nav)
+		if collision.get_parent() == null:
+			add_child(collision)
+		is_open = false
 	
 
 
