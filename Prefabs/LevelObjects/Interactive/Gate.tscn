@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1iw5d7te4wr"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Gate.gd" id="1_wokgf"]
-[ext_resource type="PackedScene" uid="uid://bw6qrxsk7er8f" path="res://Prefabs/Models/LevelObjects/Interactive/GateModel.tscn" id="2_4gsrd"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Gate.gd" id="1_mjeb5"]
+[ext_resource type="PackedScene" uid="uid://bw6qrxsk7er8f" path="res://Prefabs/Models/LevelObjects/Interactive/GateModel.tscn" id="2_qntvs"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_pr2p7"]
 vertices = PackedVector3Array(-0.62, 0.5, -1.37, -0.62, 0.5, 1.36, 0.68, 0.5, 1.36, 0.68, 0.5, -1.37)
@@ -16,9 +16,9 @@ size = Vector2(1.5, 3)
 size = Vector3(0.125, 3, 3)
 
 [node name="Gate" type="Node3D"]
-script = ExtResource("1_wokgf")
+script = ExtResource("1_mjeb5")
 
-[node name="GateModel" parent="." instance=ExtResource("2_4gsrd")]
+[node name="GateModel" parent="." instance=ExtResource("2_qntvs")]
 transform = Transform3D(-3.27835e-08, 0, 0.25, 0, 0.95, 0, -0.75, 0, -1.09278e-08, 0, -0.45, 0)
 
 [node name="Navigation" type="NavigationRegion3D" parent="."]

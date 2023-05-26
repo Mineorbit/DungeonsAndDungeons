@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpb7voe38jc3w"]
+
+[ext_resource type="PackedScene" uid="uid://y6yinqi2fc2v" path="res://Prefabs/Models/Entities/KeyModel.tscn" id="1_2n33b"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Key.gd" id="1_ufeps"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uatle"]
+size = Vector3(0.347289, 0.0979167, 0.904381)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6ovl5"]
+radius = 2.0
+
+[node name="Key" type="RigidBody3D"]
+collision_layer = 6
+collision_mask = 3
+script = ExtResource("1_ufeps")
+
+[node name="Model" parent="." instance=ExtResource("1_2n33b")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.30395)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.14659)
+shape = SubResource("BoxShape3D_uatle")
+
+[node name="KeyholeDetector" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KeyholeDetector"]
+shape = SubResource("SphereShape3D_6ovl5")

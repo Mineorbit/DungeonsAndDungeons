@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://w8uv7dv5n8w2"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_gh5dx"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_3ye7i"]
 
 [resource]
-script = ExtResource("1_gh5dx")
+script = ExtResource("1_3ye7i")
 name = "LockedDoor"
 tiled = false
 interactive = false
@@ -11,7 +11,7 @@ tileIndex = []
 levelObjectId = 24
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)
-construction_collision_offset = Vector3(0, 0, 0)
-construction_collision_scale = Vector3(1, 1, 1)
+construction_collision_offset = Vector3(0, 1, 0)
+construction_collision_scale = Vector3(1, 3, 3)
 display_offset = Vector3(0, 0, 0)
 display_scale = Vector3(1, 1, 1)

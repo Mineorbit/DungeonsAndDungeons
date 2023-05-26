@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://buia0gnakq6jr"]
 
-[ext_resource type="Script" path="res://Scripts/Util/level_objects.gd" id="1_yxm8o"]
-[ext_resource type="PackedScene" uid="uid://cbkg6f11hjbvu" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="2_yq0ew"]
+[ext_resource type="Script" path="res://Scripts/Util/level_objects.gd" id="1_xu6mv"]
+[ext_resource type="PackedScene" uid="uid://cbkg6f11hjbvu" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="2_3megv"]
 
 [node name="level_objects" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
-script = ExtResource("1_yxm8o")
+script = ExtResource("1_xu6mv")
 
-[node name="LevelObjectList" parent="." instance=ExtResource("2_yq0ew")]
+[node name="LevelObjectList" parent="." instance=ExtResource("2_3megv")]
 visible = false

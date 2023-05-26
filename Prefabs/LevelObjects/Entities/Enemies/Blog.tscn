@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://bwbdip5xme7q1"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_y0lbj"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_avaui"]
-[ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_q8ruu"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_aotei"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_77abt"]
-[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_e71tm"]
-[ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="8_lawqk"]
-[ext_resource type="PackedScene" uid="uid://d3vhh2g7r2l4x" path="res://Prefabs/AI/KnowsWherePlayerIs.tscn" id="8_y1h0u"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_86fse"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_na583"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_jgf4x"]
+[ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_20w6v"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_62k2v"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_xgde1"]
+[ext_resource type="PackedScene" uid="uid://d3vhh2g7r2l4x" path="res://Prefabs/AI/KnowsWherePlayerIs.tscn" id="6_pg8vw"]
+[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_2jdmu"]
+[ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="8_fnauo"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_cqkfg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 radius = 0.45
@@ -36,14 +36,14 @@ size = Vector3(2, 1, 4)
 [node name="Blog" type="CharacterBody3D" node_paths=PackedStringArray("navAgent")]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_y0lbj")
+script = ExtResource("1_na583")
 navAgent = NodePath("AI/Utils/Navigation/NavAgent")
 minimum_distance_to_target = 1.5
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_avaui")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_jgf4x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -53,7 +53,7 @@ replication_config = SubResource("SceneReplicationConfig_ta4rm")
 visible = false
 mesh = SubResource("BoxMesh_pywra")
 
-[node name="Model" parent="." instance=ExtResource("3_q8ruu")]
+[node name="Model" parent="." instance=ExtResource("3_20w6v")]
 transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.5, 0)
 
 [node name="StrikeArea" type="Area3D" parent="."]
@@ -67,25 +67,25 @@ shape = SubResource("BoxShape3D_f5r85")
 [node name="AI" type="Node3D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="AI" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("4_aotei")
+script = ExtResource("4_62k2v")
 actor_node_path = NodePath("../..")
 blackboard = NodePath("../Blackboard")
 
 [node name="Main" type="Node" parent="AI/BeehaveTree"]
-script = ExtResource("5_77abt")
+script = ExtResource("5_xgde1")
 
-[node name="KnowsWherePlayerIs" parent="AI/BeehaveTree/Main" instance=ExtResource("8_y1h0u")]
+[node name="KnowsWherePlayerIs" parent="AI/BeehaveTree/Main" instance=ExtResource("6_pg8vw")]
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("7_e71tm")
+script = ExtResource("7_2jdmu")
 target = "seenPlayer"
 
 [node name="Strike" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("8_lawqk")
+script = ExtResource("8_fnauo")
 method = "try_strike"
 
 [node name="Blackboard" type="Node" parent="AI"]
-script = ExtResource("9_86fse")
+script = ExtResource("9_cqkfg")
 
 [node name="Utils" type="Node3D" parent="AI"]
 

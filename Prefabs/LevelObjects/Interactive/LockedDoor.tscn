@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://1pugwjjiurhy"]
+[gd_scene load_steps=7 format=3 uid="uid://1pugwjjiurhy"]
 
-[ext_resource type="PackedScene" uid="uid://bjr0iam034ygi" path="res://Prefabs/Models/LevelObjects/Interactive/LockedDoorModel.tscn" id="1_0ckuw"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/LockedDoor.gd" id="1_l1ig6"]
+[ext_resource type="PackedScene" uid="uid://bjr0iam034ygi" path="res://Prefabs/Models/LevelObjects/Interactive/LockedDoorModel.tscn" id="1_y3f6w"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_wdj2l"]
 vertices = PackedVector3Array(-0.62, 0.5, -1.37, -0.62, 0.5, 1.36, 0.68, 0.5, 1.36, 0.68, 0.5, -1.37)
@@ -14,7 +15,11 @@ size = Vector2(1.5, 3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vkx4j"]
 size = Vector3(0.125, 3, 3)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4ggw"]
+size = Vector3(0.484438, 0.499345, 0.511603)
+
 [node name="LockedDoor" type="Node3D"]
+script = ExtResource("1_l1ig6")
 
 [node name="Navigation" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -31,5 +36,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collision"]
 shape = SubResource("BoxShape3D_vkx4j")
 
-[node name="LockedDoorModel" parent="." instance=ExtResource("1_0ckuw")]
+[node name="LockedDoorModel" parent="." instance=ExtResource("1_y3f6w")]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 1, 0)
+
+[node name="Lock" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 256
+collision_mask = 256
+
+[node name="Collision" type="CollisionShape3D" parent="Lock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03373, 0)
+shape = SubResource("BoxShape3D_s4ggw")
