@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0jvw4aah6ant"]
 
-[ext_resource type="Script" path="res://Editor/level_object_initialization.gd" id="1_440ii"]
-[ext_resource type="PackedScene" uid="uid://buia0gnakq6jr" path="res://Scenes/level_objects.tscn" id="2_lrvh8"]
+[ext_resource type="Script" path="res://Editor/level_object_initialization.gd" id="1_aj0yq"]
+[ext_resource type="PackedScene" uid="uid://buia0gnakq6jr" path="res://Scenes/level_objects.tscn" id="2_pqubm"]
 
 [node name="LevelObjectInitialization" type="Node3D"]
-script = ExtResource("1_440ii")
+script = ExtResource("1_aj0yq")
 
-[node name="level_objects" parent="." instance=ExtResource("2_lrvh8")]
+[node name="level_objects" parent="." instance=ExtResource("2_pqubm")]

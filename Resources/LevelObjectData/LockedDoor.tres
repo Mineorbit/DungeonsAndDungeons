@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://w8uv7dv5n8w2"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_3ye7i"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_l0siq"]
 
 [resource]
-script = ExtResource("1_3ye7i")
+script = ExtResource("1_l0siq")
 name = "LockedDoor"
 tiled = false
 interactive = false
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 24
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)

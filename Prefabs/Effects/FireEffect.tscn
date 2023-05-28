@@ -1,23 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://crainopm82lhd"]
+[gd_scene load_steps=18 format=3 uid="uid://crainopm82lhd"]
+
+[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_68crp"]
+[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_4sxid"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j022o"]
 emission_shape = 3
 emission_box_extents = Vector3(1, 0.4, 1)
 direction = Vector3(0, 1, 0)
 spread = 0.0
-flatness = 0.26
-gravity = Vector3(0, -2, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 1.5
-linear_accel_min = 3.69
-linear_accel_max = 6.0
-radial_accel_min = 2.0
-radial_accel_max = 4.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+linear_accel_min = 3.0
+linear_accel_max = 3.0
+radial_accel_min = 1.0
+radial_accel_max = 1.0
 tangential_accel_min = 1.0
 tangential_accel_max = 4.0
 turbulence_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5unh"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -25,17 +29,106 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_samkm"]
 material = SubResource("StandardMaterial3D_e5unh")
+size = Vector2(0.05, 0.075)
+
+[sub_resource type="Gradient" id="Gradient_8rsi8"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rccai"]
+gradient = SubResource("Gradient_8rsi8")
+
+[sub_resource type="Curve" id="Curve_verea"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 6), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c8s6u"]
+curve = SubResource("Curve_verea")
+
+[sub_resource type="Curve" id="Curve_mux55"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.38517, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cjdin"]
+curve = SubResource("Curve_mux55")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yxax8"]
+lifetime_randomness = 0.57
+direction = Vector3(0, 1, 0)
+spread = 2.0
+gravity = Vector3(0, -2, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+angular_velocity_min = 45.0
+angular_velocity_max = 45.0
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("CurveTexture_c8s6u")
+tangential_accel_min = 2.0
+tangential_accel_max = 2.0
+scale_curve = SubResource("CurveTexture_cjdin")
+color_ramp = SubResource("GradientTexture1D_rccai")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2nld"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("1_68crp")
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_fbr3a"]
+material = SubResource("StandardMaterial3D_d2nld")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q5lad"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_csxi0"]
+noise = SubResource("FastNoiseLite_q5lad")
+
+[sub_resource type="FogMaterial" id="FogMaterial_t72aw"]
+density = 1.5016
+albedo = Color(0.964706, 0.266667, 0, 1)
+height_falloff = 0.285261
+edge_fade = 0.0116629
+density_texture = SubResource("NoiseTexture3D_csxi0")
 
 [node name="FireEffect" type="Node3D"]
 
-[node name="Flame" type="GPUParticles3D" parent="."]
-amount = 24
+[node name="FlameCurtail" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+amount = 6
 lifetime = 0.5
 speed_scale = 0.7
 randomness = 0.35
 process_material = SubResource("ParticleProcessMaterial_j022o")
 draw_pass_1 = SubResource("QuadMesh_samkm")
 
-[node name="Sparks" type="GPUParticles3D" parent="."]
-
 [node name="Smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.492596, 0)
+amount = 6
+lifetime = 2.0
+explosiveness = 0.2
+randomness = 1.0
+fixed_fps = 20
+visibility_aabb = AABB(-1, -4, -1, 2, 8, 2)
+process_material = SubResource("ParticleProcessMaterial_yxax8")
+draw_pass_1 = SubResource("QuadMesh_fbr3a")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+size = Vector3(2, 3, 2)
+shape = 0
+material = SubResource("FogMaterial_t72aw")
+
+[node name="FireShape" parent="." instance=ExtResource("2_4sxid")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240777, 0)
+light_color = Color(1, 0.784314, 0.47451, 1)
+light_energy = 2.0
+shadow_enabled = true

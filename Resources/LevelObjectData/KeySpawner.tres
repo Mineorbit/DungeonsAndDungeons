@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://chasjpt8o2msa"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_e3qlm"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_xa6lq"]
 
 [resource]
-script = ExtResource("1_e3qlm")
+script = ExtResource("1_xa6lq")
 name = "KeySpawner"
 tiled = false
 interactive = false
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 25
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)
