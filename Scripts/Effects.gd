@@ -3,7 +3,7 @@ extends Node3D
 var effect = {}
 
 func _ready():
-	var hiteffect = load("res://Prefabs/Particles/HitEffect.tscn").instantiate()
+	var hiteffect = load("res://Prefabs/Effects/HitEffect.tscn").instantiate()
 	add_child(hiteffect)
 	effect["Hit"] = hiteffect
 
