@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://00nbdgjlbgoo"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Spawner.gd" id="1_uo7y8"]
-[ext_resource type="PackedScene" uid="uid://y6yinqi2fc2v" path="res://Prefabs/Models/Entities/KeyModel.tscn" id="2_48ygb"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Spawner.gd" id="1_ml3dq"]
+[ext_resource type="PackedScene" uid="uid://y6yinqi2fc2v" path="res://Prefabs/Models/Entities/KeyModel.tscn" id="2_ql3nk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dibhe"]
 
@@ -10,11 +10,11 @@ material = SubResource("StandardMaterial3D_dibhe")
 text = "Spawner"
 
 [node name="KeySpawner" type="Node3D"]
-script = ExtResource("1_uo7y8")
+script = ExtResource("1_ml3dq")
 spawnedEntity = "Items/Key"
 
 [node name="Text" type="MeshInstance3D" parent="."]
 mesh = SubResource("TextMesh_kbi3g")
 
-[node name="KeyModel" parent="Text" instance=ExtResource("2_48ygb")]
+[node name="KeyModel" parent="Text" instance=ExtResource("2_ql3nk")]
 transform = Transform3D(4.77671e-16, 1.09278e-08, 0.25, 0.25, -1.09278e-08, 3.30872e-23, 1.09278e-08, 0.25, -1.09278e-08, 0.0437831, 0.207794, 0)

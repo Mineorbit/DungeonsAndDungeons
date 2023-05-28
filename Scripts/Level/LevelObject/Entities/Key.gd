@@ -9,3 +9,5 @@ func Use():
 	if keyholeholder.has_overlapping_bodies():
 		var locked_object = keyholeholder.get_overlapping_bodies()[0].get_parent()
 		locked_object.open()
+		itemOwner.Dettach(self)
+		remove()
