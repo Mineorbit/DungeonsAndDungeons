@@ -1,35 +1,33 @@
-[gd_scene load_steps=18 format=3 uid="uid://crainopm82lhd"]
+[gd_scene load_steps=20 format=3 uid="uid://crainopm82lhd"]
 
-[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_68crp"]
-[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_4sxid"]
+[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_amf1j"]
+[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_2sv5u"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j022o"]
 emission_shape = 3
-emission_box_extents = Vector3(1, 0.4, 1)
+emission_box_extents = Vector3(0.4, 0.4, 0.4)
 direction = Vector3(0, 1, 0)
-spread = 0.0
+spread = 0.3
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 2.0
 initial_velocity_max = 3.0
-linear_accel_min = 3.0
-linear_accel_max = 3.0
-radial_accel_min = 1.0
-radial_accel_max = 1.0
-tangential_accel_min = 1.0
-tangential_accel_max = 4.0
-turbulence_enabled = true
+linear_accel_min = 2.0
+linear_accel_max = 2.0
+tangential_accel_min = 0.5
+tangential_accel_max = 0.5
+color = Color(0.960784, 0.533333, 0, 1)
+turbulence_noise_strength = 0.5
+turbulence_noise_speed = Vector3(0, 1, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5unh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66qgj"]
+transparency = 1
 shading_mode = 0
-albedo_color = Color(1, 1, 0, 1)
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+albedo_color = Color(0.960784, 0.533333, 0, 0.364706)
 
-[sub_resource type="QuadMesh" id="QuadMesh_samkm"]
-material = SubResource("StandardMaterial3D_e5unh")
-size = Vector2(0.05, 0.075)
+[sub_resource type="SphereMesh" id="SphereMesh_h3pyo"]
+material = SubResource("StandardMaterial3D_66qgj")
+radius = 0.05
+height = 0.1
 
 [sub_resource type="Gradient" id="Gradient_8rsi8"]
 
@@ -73,7 +71,7 @@ color_ramp = SubResource("GradientTexture1D_rccai")
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
-albedo_texture = ExtResource("1_68crp")
+albedo_texture = ExtResource("1_amf1j")
 disable_receive_shadows = true
 billboard_mode = 3
 particles_anim_h_frames = 1
@@ -96,16 +94,26 @@ height_falloff = 0.285261
 edge_fade = 0.0116629
 density_texture = SubResource("NoiseTexture3D_csxi0")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7jly"]
+shading_mode = 0
+albedo_color = Color(0.788235, 0.913725, 0, 1)
+grow = true
+grow_amount = 0.53
+
+[sub_resource type="QuadMesh" id="QuadMesh_olrky"]
+material = SubResource("StandardMaterial3D_h7jly")
+size = Vector2(0.05, 0.1)
+
 [node name="FireEffect" type="Node3D"]
 
 [node name="FlameCurtail" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 amount = 6
-lifetime = 0.5
+lifetime = 0.8
 speed_scale = 0.7
-randomness = 0.35
+randomness = 0.15
 process_material = SubResource("ParticleProcessMaterial_j022o")
-draw_pass_1 = SubResource("QuadMesh_samkm")
+draw_pass_1 = SubResource("SphereMesh_h3pyo")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.492596, 0)
@@ -124,11 +132,26 @@ size = Vector3(2, 3, 2)
 shape = 0
 material = SubResource("FogMaterial_t72aw")
 
-[node name="FireShape" parent="." instance=ExtResource("2_4sxid")]
+[node name="FireShape" parent="." instance=ExtResource("2_2sv5u")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240777, 0)
-light_color = Color(1, 0.784314, 0.47451, 1)
+light_color = Color(0.960784, 0.533333, 0, 1)
 light_energy = 2.0
 shadow_enabled = true
+
+[node name="FlameSparks" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+amount = 2
+lifetime = 1.25
+speed_scale = 0.7
+randomness = 0.15
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_j022o")
+draw_pass_1 = SubResource("QuadMesh_olrky")
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36778, 0)
+visible = false
+strength = 100.0

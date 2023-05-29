@@ -1,7 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cof5kbfc76mkf"]
 
-[ext_resource type="Shader" uid="uid://bhbvhhtpm1473" path="res://Shaders/Fire.tres" id="1_3atku"]
+[ext_resource type="Shader" uid="uid://bhbvhhtpm1473" path="res://Shaders/Fire.tres" id="1_fy7m3"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_3atku")
+shader = ExtResource("1_fy7m3")
+shader_parameter/ColorParameter = Color(0.960784, 0.533333, 0, 1)
