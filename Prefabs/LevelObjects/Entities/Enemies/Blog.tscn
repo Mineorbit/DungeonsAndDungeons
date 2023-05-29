@@ -1,14 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwbdip5xme7q1"]
+[gd_scene load_steps=18 format=3 uid="uid://bwbdip5xme7q1"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_na583"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_jgf4x"]
-[ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_20w6v"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_62k2v"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_xgde1"]
-[ext_resource type="PackedScene" uid="uid://d3vhh2g7r2l4x" path="res://Prefabs/AI/KnowsWherePlayerIs.tscn" id="6_pg8vw"]
-[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_2jdmu"]
-[ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="8_fnauo"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_cqkfg"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Blog.gd" id="1_4y8hl"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_45mun"]
+[ext_resource type="PackedScene" uid="uid://db3xijpudgayj" path="res://Prefabs/Models/Entities/BlogModel.tscn" id="3_iu5nx"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="4_xbrhu"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_bplin"]
+[ext_resource type="PackedScene" uid="uid://d3vhh2g7r2l4x" path="res://Prefabs/AI/KnowsWherePlayerIs.tscn" id="6_b8vbd"]
+[ext_resource type="Script" path="res://Scripts/AI/MoveToTargetAction.gd" id="7_j8i0q"]
+[ext_resource type="Script" path="res://Scripts/AI/CallMethodAction.gd" id="8_i1a6q"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_t7k08"]
+[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="10_7ai2o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xuwxo"]
 radius = 0.45
@@ -33,17 +34,19 @@ size = Vector3(1.01933, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_do8j2"]
 size = Vector3(2, 1, 4)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_8dc31"]
+
 [node name="Blog" type="CharacterBody3D" node_paths=PackedStringArray("navAgent")]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_na583")
+script = ExtResource("1_4y8hl")
 navAgent = NodePath("AI/Utils/Navigation/NavAgent")
 minimum_distance_to_target = 1.5
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xuwxo")
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_jgf4x")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_45mun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15686, 0, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -53,7 +56,7 @@ replication_config = SubResource("SceneReplicationConfig_ta4rm")
 visible = false
 mesh = SubResource("BoxMesh_pywra")
 
-[node name="Model" parent="." instance=ExtResource("3_20w6v")]
+[node name="Model" parent="." instance=ExtResource("3_iu5nx")]
 transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, -0.5, 0)
 
 [node name="StrikeArea" type="Area3D" parent="."]
@@ -67,25 +70,25 @@ shape = SubResource("BoxShape3D_f5r85")
 [node name="AI" type="Node3D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="AI" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("4_62k2v")
+script = ExtResource("4_xbrhu")
 actor_node_path = NodePath("../..")
 blackboard = NodePath("../Blackboard")
 
 [node name="Main" type="Node" parent="AI/BeehaveTree"]
-script = ExtResource("5_xgde1")
+script = ExtResource("5_bplin")
 
-[node name="KnowsWherePlayerIs" parent="AI/BeehaveTree/Main" instance=ExtResource("6_pg8vw")]
+[node name="KnowsWherePlayerIs" parent="AI/BeehaveTree/Main" instance=ExtResource("6_b8vbd")]
 
 [node name="GoToTarget" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("7_2jdmu")
+script = ExtResource("7_j8i0q")
 target = "seenPlayer"
 
 [node name="Strike" type="Node" parent="AI/BeehaveTree/Main"]
-script = ExtResource("8_fnauo")
+script = ExtResource("8_i1a6q")
 method = "try_strike"
 
 [node name="Blackboard" type="Node" parent="AI"]
-script = ExtResource("9_cqkfg")
+script = ExtResource("9_t7k08")
 
 [node name="Utils" type="Node3D" parent="AI"]
 
@@ -116,5 +119,13 @@ radius = 0.75
 max_speed = 5.0
 use_3d_avoidance = true
 
+[node name="Flammable" parent="." instance=ExtResource("10_7ai2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00263953, 0)
+
+[node name="CollisionShape3D" parent="Flammable" index="0"]
+shape = SubResource("SphereShape3D_8dc31")
+
 [connection signal="on_entity_melee_strike" from="." to="Model" method="StrikeAnimation"]
 [connection signal="velocity_computed" from="AI/Utils/Navigation/NavAgent" to="." method="on_navigation_velocity_computed"]
+
+[editable path="Flammable"]

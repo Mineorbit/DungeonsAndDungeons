@@ -1,15 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://ji1q7flh4l7"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Bomb.gd" id="1_inval"]
-[ext_resource type="PackedScene" uid="uid://i42s26hsik4p" path="res://Assets/Models/LevelObjects/Entities/Bomb/Bomb.glb" id="2_83gc7"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Bomb.gd" id="1_0x36p"]
+[ext_resource type="PackedScene" uid="uid://i42s26hsik4p" path="res://Assets/Models/LevelObjects/Entities/Bomb/Bomb.glb" id="2_xr20i"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wjp0c"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/1/watch = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ynyql"]
 
@@ -21,7 +23,7 @@ mass = 0.13
 center_of_mass_mode = 1
 max_contacts_reported = 4
 contact_monitor = true
-script = ExtResource("1_inval")
+script = ExtResource("1_0x36p")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wjp0c")
@@ -35,7 +37,7 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Model" parent="." instance=ExtResource("2_83gc7")]
+[node name="Model" parent="." instance=ExtResource("2_xr20i")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="BombArea" type="Area3D" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://d38lssasv21xl"]
 
-[ext_resource type="Script" path="res://Scripts/Effect.gd" id="1_0od0g"]
-[ext_resource type="Texture2D" uid="uid://ctpldi808fwkb" path="res://Assets/Textures/spike.png" id="2_r0t5n"]
+[ext_resource type="Script" path="res://Scripts/Effect.gd" id="1_jspn8"]
+[ext_resource type="Texture2D" uid="uid://ctpldi808fwkb" path="res://Assets/Textures/spike.png" id="2_qtyxr"]
 
 [sub_resource type="Curve" id="Curve_wmg3f"]
 min_value = -360.0
@@ -42,7 +42,7 @@ transparency = 1
 shading_mode = 0
 diffuse_mode = 3
 albedo_color = Color(0.823529, 0.827451, 0, 1)
-albedo_texture = ExtResource("2_r0t5n")
+albedo_texture = ExtResource("2_qtyxr")
 albedo_texture_force_srgb = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vf6lx"]
@@ -52,14 +52,14 @@ orientation = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qns0"]
 transparency = 1
 albedo_color = Color(1, 0.654902, 0.258824, 1)
-albedo_texture = ExtResource("2_r0t5n")
+albedo_texture = ExtResource("2_qtyxr")
 uv1_scale = Vector3(2, 2, 2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_nj8yc"]
 material = SubResource("StandardMaterial3D_7qns0")
 
 [node name="HitEffect" type="Node3D"]
-script = ExtResource("1_0od0g")
+script = ExtResource("1_jspn8")
 
 [node name="Spike" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

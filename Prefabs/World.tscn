@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7picxrwyqh4b"]
 
-[ext_resource type="Script" path="res://Scripts/World.gd" id="1_xxcxe"]
-[ext_resource type="PackedScene" uid="uid://b3lvyly783kk6" path="res://Prefabs/Players.tscn" id="2_34v13"]
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_phwu6"]
+[ext_resource type="PackedScene" uid="uid://b3lvyly783kk6" path="res://Prefabs/Players.tscn" id="2_ndui6"]
 
 [sub_resource type="Environment" id="Environment_3s232"]
 background_mode = 1
@@ -20,9 +20,9 @@ volumetric_fog_density = 0.0
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ic0qb"]
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_xxcxe")
+script = ExtResource("1_phwu6")
 
-[node name="Players" parent="." instance=ExtResource("2_34v13")]
+[node name="Players" parent="." instance=ExtResource("2_ndui6")]
 
 [node name="ChunkStreamers" type="Node3D" parent="."]
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgjb1aggkemn0"]
+[gd_scene load_steps=4 format=3 uid="uid://bgjb1aggkemn0"]
 
-[ext_resource type="PackedScene" uid="uid://crainopm82lhd" path="res://Prefabs/Effects/FireEffect.tscn" id="1_ufy3j"]
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/InteractiveLevelObject.gd" id="2_p5c80"]
-[ext_resource type="PackedScene" uid="uid://brumd858luqw5" path="res://Prefabs/Models/LevelObjects/FirePitModel.tscn" id="3_elcp4"]
+[ext_resource type="PackedScene" uid="uid://brumd858luqw5" path="res://Prefabs/Models/LevelObjects/FirePitModel.tscn" id="1_2s24q"]
+[ext_resource type="PackedScene" uid="uid://cmdlqk416pgd0" path="res://Prefabs/Elements/Fire.tscn" id="2_1uswx"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8pb75"]
 height = 0.65
@@ -10,11 +9,7 @@ radius = 0.55
 
 [node name="FirePit" type="Node3D"]
 
-[node name="FireEffect" parent="." instance=ExtResource("1_ufy3j")]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.0961211, 0)
-script = ExtResource("2_p5c80")
-
-[node name="FirePitModel" parent="." instance=ExtResource("3_elcp4")]
+[node name="FirePitModel" parent="." instance=ExtResource("1_2s24q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -22,3 +17,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("CylinderShape3D_8pb75")
+
+[node name="Fire" parent="." instance=ExtResource("2_1uswx")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)

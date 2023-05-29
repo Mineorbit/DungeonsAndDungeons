@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://wfj2i28vjum3"]
 
-[ext_resource type="Script" path="res://Scripts/Level/TileSystem/BoxGridMesh.gd" id="1_1l0r4"]
-[ext_resource type="Material" uid="uid://xeth77b5bjw7" path="res://Assets/Materials/Water.tres" id="2_u1f8c"]
+[ext_resource type="Script" path="res://Scripts/Level/TileSystem/BoxGridMesh.gd" id="1_s1hci"]
+[ext_resource type="Material" uid="uid://xeth77b5bjw7" path="res://Assets/Materials/Water.tres" id="2_gqlen"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_78uxd"]
-material = ExtResource("2_u1f8c")
+material = ExtResource("2_gqlen")
 
 [node name="TiledWater" type="MeshInstance3D"]
 skeleton = NodePath("../..")
-script = ExtResource("1_1l0r4")
-surfacematerial = ExtResource("2_u1f8c")
+script = ExtResource("1_s1hci")
+surfacematerial = ExtResource("2_gqlen")
 
 [node name="0" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_78uxd")

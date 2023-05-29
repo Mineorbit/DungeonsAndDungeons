@@ -1,14 +1,14 @@
 [gd_scene load_steps=51 format=3 uid="uid://bryply5pm5nlg"]
 
-[ext_resource type="PackedScene" uid="uid://c0hc88bv6i8f3" path="res://Assets/Models/LevelObjects/Entities/Player/Player.blend" id="1_jppap"]
-[ext_resource type="Script" path="res://Scripts/Players/PlayerModel.gd" id="2_ku6lb"]
-[ext_resource type="Script" path="res://Scripts/PlayerSkeleton.gd" id="3_riys5"]
-[ext_resource type="Script" path="res://addons/wigglebone/wiggle_bone.gd" id="4_khlc3"]
-[ext_resource type="Script" path="res://addons/wigglebone/wiggle_properties.gd" id="5_duoo7"]
-[ext_resource type="AudioStream" uid="uid://btxrdugeymdpx" path="res://Assets/Sounds/sfx/Hit.mp3" id="6_km60r"]
+[ext_resource type="PackedScene" uid="uid://c0hc88bv6i8f3" path="res://Assets/Models/LevelObjects/Entities/Player/Player.blend" id="1_ap4sd"]
+[ext_resource type="Script" path="res://Scripts/Players/PlayerModel.gd" id="2_0pbq1"]
+[ext_resource type="Script" path="res://Scripts/PlayerSkeleton.gd" id="3_ajyji"]
+[ext_resource type="Script" path="res://addons/wigglebone/wiggle_bone.gd" id="4_dmacx"]
+[ext_resource type="Script" path="res://addons/wigglebone/wiggle_properties.gd" id="5_dxkrp"]
+[ext_resource type="AudioStream" uid="uid://btxrdugeymdpx" path="res://Assets/Sounds/sfx/Hit.mp3" id="6_vymq5"]
 
 [sub_resource type="Resource" id="Resource_dnrra"]
-script = ExtResource("5_duoo7")
+script = ExtResource("5_dxkrp")
 mode = 0
 stiffness = 0.011
 damping = 0.06
@@ -18,7 +18,7 @@ max_degrees = 27.5
 max_distance = 0.1
 
 [sub_resource type="Resource" id="Resource_2xjce"]
-script = ExtResource("5_duoo7")
+script = ExtResource("5_dxkrp")
 mode = 0
 stiffness = 0.011
 damping = 0.06
@@ -236,8 +236,8 @@ properties/7/watch = false
 radius = 0.063
 height = 0.125
 
-[node name="PlayerModel" instance=ExtResource("1_jppap")]
-script = ExtResource("2_ku6lb")
+[node name="PlayerModel" instance=ExtResource("1_ap4sd")]
+script = ExtResource("2_0pbq1")
 attachmentPoints = [NodePath("HandL"), NodePath("HandR")]
 
 [node name="Skeleton3D" parent="root" index="0"]
@@ -377,13 +377,13 @@ bones/35/rest = Transform3D(1, 7.45058e-09, -4.92437e-08, -7.45058e-09, 1, -5.58
 bones/35/position = Vector3(-1.86265e-09, -4.23752e-08, 2.35159e-08)
 bones/35/rotation = Quaternion(2.79397e-08, -2.46218e-08, -3.72529e-09, 1)
 bones/35/scale = Vector3(1, 1, 1)
-script = ExtResource("3_riys5")
+script = ExtResource("3_ajyji")
 
 [node name="band_top_r" type="BoneAttachment3D" parent="root/Skeleton3D" index="6"]
 transform = Transform3D(-0.447879, -0.799145, -0.400962, -0.168809, -0.364809, 0.915651, -0.878014, 0.477786, 0.0284878, -0.302031, 1.3941, 0.0784905)
 bone_name = "band_top.r"
 bone_idx = 7
-script = ExtResource("4_khlc3")
+script = ExtResource("4_dmacx")
 properties = SubResource("Resource_dnrra")
 const_force_local = Vector3(0, 2, 0)
 
@@ -391,7 +391,7 @@ const_force_local = Vector3(0, 2, 0)
 transform = Transform3D(-0.4131, -0.816992, -0.402333, -0.0922478, -0.401978, 0.91099, -0.906002, 0.413444, 0.0906917, -0.395703, 1.35134, 0.134494)
 bone_name = "band_bot.r"
 bone_idx = 8
-script = ExtResource("4_khlc3")
+script = ExtResource("4_dmacx")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
@@ -399,7 +399,7 @@ const_force_local = Vector3(0, 2, 0)
 transform = Transform3D(0.444433, -0.799145, -0.404778, 0.176636, -0.364807, 0.914174, -0.878225, -0.477787, -0.0209742, -0.302031, 1.3941, -0.0699987)
 bone_name = "band_top.l"
 bone_idx = 10
-script = ExtResource("4_khlc3")
+script = ExtResource("4_dmacx")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
@@ -407,7 +407,7 @@ const_force_local = Vector3(0, 2, 0)
 transform = Transform3D(0.456562, -0.816992, -0.352241, -0.0129564, -0.401977, 0.915558, -0.889597, -0.413445, -0.194113, -0.395703, 1.35134, -0.126002)
 bone_name = "band_bot.l"
 bone_idx = 11
-script = ExtResource("4_khlc3")
+script = ExtResource("4_dmacx")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
@@ -415,7 +415,7 @@ const_force_local = Vector3(0, 2, 0)
 transform = Transform3D(0.733394, -0.41608, -0.537597, 0.493078, -0.218816, 0.842017, -0.467982, -0.882608, 0.0446813, -0.26503, 1.41356, 0.00849087)
 bone_name = "band_attach.l"
 bone_idx = 9
-script = ExtResource("4_khlc3")
+script = ExtResource("4_dmacx")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
@@ -423,7 +423,7 @@ const_force_local = Vector3(0, 2, 0)
 transform = Transform3D(-0.763088, -0.416079, -0.494545, -0.443853, -0.21882, 0.868972, -0.469777, 0.882608, -0.0176985, -0.26503, 1.41356, 9.71968e-07)
 bone_name = "band_attach.r"
 bone_idx = 6
-script = ExtResource("4_khlc3")
+script = ExtResource("4_dmacx")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
@@ -464,7 +464,7 @@ gravity = Vector3(0, 0.1, 0)
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06107, 0)
-stream = ExtResource("6_km60r")
+stream = ExtResource("6_vymq5")
 volume_db = -4.0
 max_db = 1.0
 max_distance = 16.0
