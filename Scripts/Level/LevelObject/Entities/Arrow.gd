@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 
+@export var material: LevelObjectData.LevelObjectMaterial = LevelObjectData.LevelObjectMaterial.Default
+
 @onready var hitbox:Area3D = $Hitbox
 # Called when the node enters the scene tree for the first time.
 func _ready():

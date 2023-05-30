@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c57iwonh6nffi"]
 
-[ext_resource type="Shader" path="res://Assets/Materials/Entities/Player/FacialShader.gdshader" id="1_s33hc"]
-[ext_resource type="Texture2D" uid="uid://dohbmcpjwbeuk" path="res://Assets/Textures/Player/eye.png" id="2_c14mm"]
-[ext_resource type="Texture2D" uid="uid://wt1t30juuxny" path="res://Assets/Textures/Player/eye_blink.png" id="3_kaukx"]
+[ext_resource type="Shader" path="res://Assets/Materials/Entities/Player/FacialShader.gdshader" id="1_bpw8h"]
+[ext_resource type="Texture2D" uid="uid://dohbmcpjwbeuk" path="res://Assets/Textures/Player/eye.png" id="2_2g6ei"]
+[ext_resource type="Texture2D" uid="uid://wt1t30juuxny" path="res://Assets/Textures/Player/eye_blink.png" id="3_d24gg"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_s33hc")
+shader = ExtResource("1_bpw8h")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/character = 0.0
 shader_parameter/point_size = null
@@ -18,5 +18,5 @@ shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = null
 shader_parameter/uv2_scale = null
 shader_parameter/uv2_offset = null
-shader_parameter/texture_albedo1 = ExtResource("2_c14mm")
-shader_parameter/texture_albedo2 = ExtResource("3_kaukx")
+shader_parameter/texture_albedo1 = ExtResource("2_2g6ei")
+shader_parameter/texture_albedo2 = ExtResource("3_d24gg")

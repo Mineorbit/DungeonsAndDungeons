@@ -50,6 +50,8 @@ var last_floor = false
 var can_shoot = false
 
 
+@export var material: LevelObjectData.LevelObjectMaterial = LevelObjectData.LevelObjectMaterial.Default
+
 @export var item_slots = 1
 
 var item = {}
@@ -319,7 +321,7 @@ func Kill():
 	on_entity_died.emit()
 
 
-func Hit(damage, hitting_entity,direction = null):
+func Hit(damage, hitting_entity,direction = null,stun = true):
 	on_entity_hit.emit()
 	print(str(hitting_entity)+" hit "+str(self)+" and did "+str(damage)+" Damage")
 	var offset_dir: Vector3 =global_transform.origin - hitting_entity.global_transform.origin
@@ -330,7 +332,8 @@ func Hit(damage, hitting_entity,direction = null):
 	offset_dir.y = 0
 	var t = 0.75
 	Effects.spawn("Hit",((1-t)*hitting_entity.global_transform.origin + t*global_transform.origin))
-	kickback((offset_dir + Vector3.UP)*log(damage)*0.5)
+	if stun:
+		kickback((offset_dir + Vector3.UP)*log(damage)*0.5)
 	health = health - damage
 	if health < 0:
 		Kill()

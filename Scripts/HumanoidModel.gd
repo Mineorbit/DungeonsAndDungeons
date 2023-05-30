@@ -1,6 +1,7 @@
 extends EntityModel
 class_name HumanoidModel
 
+@export var speed_blend_cap: float = 1
 
 var p
 
@@ -30,8 +31,9 @@ func _physics_process(delta):
 		anim_tree["parameters/Top/swim_speed/blend_amount"] = speed*16*get_parent()._velocity.length()
 		anim_tree["parameters/Bot/swim_speed/blend_amount"] = speed*16*get_parent()._velocity.length()
 	if p is Entity:
-		anim_tree["parameters/Top/speed/blend_amount"] = animation_multiplier*speed*get_parent()._velocity.length()
-		anim_tree["parameters/Bot/speed/blend_amount"] = animation_multiplier*speed*get_parent()._velocity.length()
+		var blend_speed = clampf(animation_multiplier*speed*get_parent()._velocity.length(),0,speed_blend_cap)
+		anim_tree["parameters/Top/speed/blend_amount"] = blend_speed
+		anim_tree["parameters/Bot/speed/blend_amount"] = blend_speed
 	if ("parameters/Bot/vertical/blend_amount" in anim_tree):
 		anim_tree["parameters/Bot/vertical/blend_amount"] = current_v
 		anim_tree["parameters/Top/vertical/blend_amount"] = current_v

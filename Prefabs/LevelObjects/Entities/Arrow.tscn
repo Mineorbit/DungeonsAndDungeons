@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cx7omi0atqfcp"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Arrow.gd" id="1_lmypg"]
-[ext_resource type="PackedScene" uid="uid://ba0346gtf005y" path="res://Assets/Models/LevelObjects/Entities/Arrow.glb" id="2_ojtkd"]
-[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="3_lm1ge"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Arrow.gd" id="1_hw4lf"]
+[ext_resource type="PackedScene" uid="uid://ba0346gtf005y" path="res://Assets/Models/LevelObjects/Entities/Arrow.glb" id="2_8n6s1"]
+[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="3_2umw0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wjp0c"]
 properties/0/path = NodePath(".:position")
@@ -21,14 +21,16 @@ height = 1.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_afna4"]
 height = 1.75
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ppdra"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ckyoc"]
+height = 1.54755
 
 [node name="Arrow" type="RigidBody3D"]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.5, 0)
 max_contacts_reported = 4
 contact_monitor = true
-script = ExtResource("1_lmypg")
+script = ExtResource("1_hw4lf")
+material = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wjp0c")
@@ -50,15 +52,15 @@ wait_time = 16.0
 one_shot = true
 autostart = true
 
-[node name="Model" parent="." instance=ExtResource("2_ojtkd")]
+[node name="Model" parent="." instance=ExtResource("2_8n6s1")]
 transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, 0.25, 0, -0.25, -1.09278e-08, 0, 0, 0)
 
-[node name="Flammable" parent="." instance=ExtResource("3_lm1ge")]
+[node name="Flammable" parent="." instance=ExtResource("3_2umw0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00680482, 0.0940255)
 
 [node name="CollisionShape3D" parent="Flammable" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.440281)
-shape = SubResource("SphereShape3D_ppdra")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.517173)
+shape = SubResource("CapsuleShape3D_ckyoc")
 
 [connection signal="timeout" from="Timer" to="." method="despawn"]
 

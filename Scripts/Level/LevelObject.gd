@@ -9,6 +9,8 @@ var contained_level_object
 var levelObjectData: LevelObjectData
 var uniqueLevelObjectId
 
+@export var material: LevelObjectData.LevelObjectMaterial = LevelObjectData.LevelObjectMaterial.Default
+
 @onready var construction_collision: StaticBody3D = $ConstructionCollision
 # Called when the node enters the scene tree for the first time.
 func _ready():

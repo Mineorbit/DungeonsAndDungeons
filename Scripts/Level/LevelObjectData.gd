@@ -5,6 +5,16 @@ class_name LevelObjectData
 # var a = 2
 # var b = "text"
 
+# this determines sound and reaction to certain elements
+enum LevelObjectMaterial {
+	Default,
+	Wood,
+	Stone,
+	Dirt,
+	Sand,
+	Metal
+}
+
 @export var name: String = "Default Level Object"
 @export var tiled: bool = false
 @export var interactive: bool = false
@@ -16,6 +26,8 @@ var gridScale: int = 2
 @export var offset: Vector3 = Vector3.ZERO
 @export var construction_collision_offset: Vector3 = Vector3.ZERO
 @export var construction_collision_scale: Vector3 = Vector3(1,1,1)
+
+@export var material: LevelObjectMaterial = LevelObjectMaterial.Default
 
 @export var display_offset: Vector3 = Vector3(0,0,0)
 @export var display_scale: Vector3 = Vector3(1,1,1)

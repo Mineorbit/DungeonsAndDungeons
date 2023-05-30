@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://ct8p1lumbrdmb"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Sword.gd" id="1_pvrbr"]
-[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="2_x6x6y"]
-[ext_resource type="PackedScene" uid="uid://ba8jd6whrhve0" path="res://Prefabs/Models/Items/SwordModel.tscn" id="3_emnl3"]
-[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="4_xmsd5"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Items/Sword.gd" id="1_81tqg"]
+[ext_resource type="Script" path="res://Scripts/Networking/ItemSynchronizer.gd" id="2_ns5bc"]
+[ext_resource type="PackedScene" uid="uid://ba8jd6whrhve0" path="res://Prefabs/Models/Items/SwordModel.tscn" id="3_8ju63"]
+[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="4_hf0nq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ruhvi"]
 size = Vector3(0.25, 2, 0.125)
@@ -25,7 +25,7 @@ height = 1.0
 [node name="Sword" type="RigidBody3D"]
 collision_layer = 6
 collision_mask = 3
-script = ExtResource("1_pvrbr")
+script = ExtResource("1_81tqg")
 offset = Vector3(0, 0.1, 0)
 hold_rot = Vector3(0, -45, -90)
 
@@ -35,9 +35,9 @@ shape = SubResource("BoxShape3D_ruhvi")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_moqfe")
-script = ExtResource("2_x6x6y")
+script = ExtResource("2_ns5bc")
 
-[node name="Model" parent="." instance=ExtResource("3_emnl3")]
+[node name="Model" parent="." instance=ExtResource("3_8ju63")]
 transform = Transform3D(2.7, 0, 0, 0, 2.7, 0, 0, 0, 2.7, 0, 0.235, 0)
 
 [node name="StrikePlane" parent="Model" index="3"]
@@ -50,7 +50,7 @@ transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.125, 0, 0.25, -5.46392e-
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 
-[node name="Flammable" parent="." instance=ExtResource("4_xmsd5")]
+[node name="Flammable" parent="." instance=ExtResource("4_hf0nq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24876, 0)
 
 [node name="CollisionShape3D" parent="Flammable" index="0"]

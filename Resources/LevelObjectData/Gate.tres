@@ -1,17 +1,18 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://bllhuil3gspco"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_hx28g"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_2rp0h"]
 
 [resource]
-script = ExtResource("1_hx28g")
+script = ExtResource("1_2rp0h")
 name = "Gate"
 tiled = false
 interactive = true
-tileIndex = PackedInt32Array()
+tileIndex = []
 levelObjectId = 4
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)
 construction_collision_offset = Vector3(0, 1, 0)
 construction_collision_scale = Vector3(1, 3, 3)
+material = 5
 display_offset = Vector3(0, 0, 0)
 display_scale = Vector3(0.5, 0.5, 0.5)

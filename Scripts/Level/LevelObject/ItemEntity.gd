@@ -1,6 +1,8 @@
 extends RigidBody3D
 class_name ItemEntity
 
+@export var material: LevelObjectData.LevelObjectMaterial = LevelObjectData.LevelObjectMaterial.Default
+
 var itemOwner
 var lastItemOwner
 
@@ -25,6 +27,8 @@ var in_use = false
 signal on_item_attached(item_owner)
 signal on_item_dettached(old_item_owner)
 signal on_item_use
+
+
 
 
 func _ready():

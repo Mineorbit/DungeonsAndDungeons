@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ji1q7flh4l7"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Bomb.gd" id="1_0x36p"]
-[ext_resource type="PackedScene" uid="uid://i42s26hsik4p" path="res://Assets/Models/LevelObjects/Entities/Bomb/Bomb.glb" id="2_xr20i"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObject/Entities/Bomb.gd" id="1_xknf2"]
+[ext_resource type="PackedScene" uid="uid://i42s26hsik4p" path="res://Assets/Models/LevelObjects/Entities/Bomb/Bomb.glb" id="2_j7xjf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wjp0c"]
 properties/0/path = NodePath(".:position")
@@ -23,7 +23,7 @@ mass = 0.13
 center_of_mass_mode = 1
 max_contacts_reported = 4
 contact_monitor = true
-script = ExtResource("1_0x36p")
+script = ExtResource("1_xknf2")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wjp0c")
@@ -37,7 +37,7 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Model" parent="." instance=ExtResource("2_xr20i")]
+[node name="Model" parent="." instance=ExtResource("2_j7xjf")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="BombArea" type="Area3D" parent="."]

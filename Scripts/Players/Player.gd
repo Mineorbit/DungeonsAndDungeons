@@ -16,15 +16,16 @@ var id: int = 0:
 var playercontroller
 
 
-func Hit(damage, hitting_entity,direction = null):
+func Hit(damage, hitting_entity,direction = null,stun = true):
 	var modifier = 1
 	if direction != null:
 		if has_item(1) and item[1] is Shield:
 			modifier = item[1].damage_modifier(direction)
 	if modifier != 0:
-		super.Hit(modifier*damage,hitting_entity,direction)
+		super.Hit(modifier*damage,hitting_entity,direction,stun)
 		Signals.playerHealthChanged.emit(id,health)
 	if modifier < 1:
+		# deflect stun
 		hitting_entity.Stun(1,self,-direction)
 
 
