@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://dmytyg7wfwpha"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_7mviu"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_hafo5"]
 
 [resource]
-script = ExtResource("1_7mviu")
+script = ExtResource("1_hafo5")
 name = "FirePit"
 tiled = false
 interactive = true
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 26
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)

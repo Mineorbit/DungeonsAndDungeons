@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://bllhuil3gspco"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_2rp0h"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_upt3j"]
 
 [resource]
-script = ExtResource("1_2rp0h")
+script = ExtResource("1_upt3j")
 name = "Gate"
 tiled = false
 interactive = true
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 4
 maximumNumber = -1
 offset = Vector3(0.5, 0.5, 0.5)

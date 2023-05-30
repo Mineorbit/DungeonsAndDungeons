@@ -46,3 +46,8 @@ func tick_damage():
 
 func extinguish():
 	queue_free()
+
+
+func on_water_entered(body):
+	print("Entered Water "+str(body))
+	extinguish()

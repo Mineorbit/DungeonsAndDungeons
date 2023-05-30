@@ -1,16 +1,81 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgom4k0xbayum"]
+[gd_scene load_steps=12 format=3 uid="uid://bgom4k0xbayum"]
 
-[ext_resource type="PackedScene" uid="uid://c6ejdp0xahvkj" path="res://Assets/Models/LevelObjects/Interactive/torch.blend" id="1_yctgr"]
+[ext_resource type="PackedScene" uid="uid://c6ejdp0xahvkj" path="res://Assets/Models/LevelObjects/Interactive/torch.blend" id="1_y3mr8"]
+[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="2_ilkpo"]
+
+[sub_resource type="Gradient" id="Gradient_l81ol"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rccai"]
+gradient = SubResource("Gradient_l81ol")
+
+[sub_resource type="Curve" id="Curve_l8a5l"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 6), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c8s6u"]
+curve = SubResource("Curve_l8a5l")
+
+[sub_resource type="Curve" id="Curve_y0wua"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.38517, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cjdin"]
+curve = SubResource("Curve_y0wua")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lsjmi"]
+lifetime_randomness = 0.57
+direction = Vector3(0, 1, 0)
+spread = 2.0
+gravity = Vector3(0, -2, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+angular_velocity_min = 45.0
+angular_velocity_max = 45.0
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("CurveTexture_c8s6u")
+tangential_accel_min = 2.0
+tangential_accel_max = 2.0
+scale_curve = SubResource("CurveTexture_cjdin")
+color_ramp = SubResource("GradientTexture1D_rccai")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2nld"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("2_ilkpo")
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_dlvmh"]
+material = SubResource("StandardMaterial3D_d2nld")
+size = Vector2(0.125, 0.125)
 
 [node name="Torch" type="Node3D"]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.5, 0)
-light_color = Color(0.882353, 0.956863, 0.447059, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255458, 0.417054, 0)
+light_color = Color(1, 0.862745, 0.4, 1)
 light_energy = 2.5
 light_indirect_energy = 2.0
 light_size = 1.0
 shadow_enabled = true
 
-[node name="torch" parent="." instance=ExtResource("1_yctgr")]
+[node name="torch" parent="." instance=ExtResource("1_y3mr8")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.125, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.241022, 0.393556, 0)
+amount = 2
+lifetime = 2.0
+explosiveness = 0.2
+randomness = 1.0
+fixed_fps = 20
+visibility_aabb = AABB(-1, -4, -1, 2, 8, 2)
+process_material = SubResource("ParticleProcessMaterial_lsjmi")
+draw_pass_1 = SubResource("QuadMesh_dlvmh")

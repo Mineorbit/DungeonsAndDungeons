@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3 uid="uid://u7i44ivmyy3k"]
+[gd_resource type="Resource" script_class="LevelObjectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_haq7p"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectData.gd" id="1_y4im6"]
 
 [resource]
-script = ExtResource("1_haq7p")
+script = ExtResource("1_y4im6")
 name = "Brick"
 tiled = true
 interactive = false
-tileIndex = []
+tileIndex = PackedInt32Array()
 levelObjectId = 23
 maximumNumber = -1
 offset = Vector3(0, 0, 0)
