@@ -15,4 +15,12 @@ func setup(level_object,prop_name):
 	property_value.text = str(level_object.get(prop_name))
 
 func text_changed():
-	editing_level_object.set(property_name,property_value.text)
+	print("Setting value "+str(property_value.text))
+	if property_value.text in ["false","true"]:
+		if property_value.text == "false":
+			print("SET "+str(editing_level_object))
+			editing_level_object.set(property_name,false)
+		else:
+			editing_level_object.set(property_name,true)
+	else:
+		editing_level_object.set(property_name,property_value.text)

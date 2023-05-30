@@ -13,8 +13,8 @@ func _ready():
 		if not(burningObject.material == LevelObjectData.LevelObjectMaterial.Wood):
 			timer.start()
 	else:
-		print(burningObject.get_parent())
-		if burningObject.get_parent() is LevelObject and not(burningObject.get_parent().material == LevelObjectData.LevelObjectMaterial.Wood):
+		if burningObject.get_parent() is LevelObject and burningObject.get_parent().levelObjectData != null  and not(burningObject.get_parent().levelObjectData.material == LevelObjectData.LevelObjectMaterial.Wood):
+			#print(burningObject.get_parent().material)
 			timer.start()
 
 func ignite(area:Node3D):
