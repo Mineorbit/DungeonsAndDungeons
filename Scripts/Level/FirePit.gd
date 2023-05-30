@@ -9,10 +9,10 @@ extends Node3D
 
 
 func set_fire():
+	$Flammable.remove_child($Flammable/Fire)
 	if var_burning:
 		$Flammable.add_child(fire)
 	else:
-		print("Removing Fire")
 		$Flammable.remove_child(fire)
 
 func _ready():
@@ -23,3 +23,14 @@ func start():
 
 func reset():
 	set_fire()
+
+
+func on_fire_started(node):
+	if Constants.currentMode > 1:
+		if get_parent() is InteractiveLevelObject:
+			get_parent().activate_connected()
+
+func on_fire_stopped(node):
+	if Constants.currentMode > 1:
+		if get_parent() is InteractiveLevelObject:
+			get_parent().deactivate_connected()

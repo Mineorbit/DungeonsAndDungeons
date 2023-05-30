@@ -32,4 +32,7 @@ shape = SubResource("SphereShape3D_3ctoe")
 
 [node name="Fire" parent="Flammable" instance=ExtResource("3_w4y4n")]
 
+[connection signal="child_entered_tree" from="Flammable" to="." method="on_fire_started"]
+[connection signal="child_exiting_tree" from="Flammable" to="." method="on_fire_stopped"]
+
 [editable path="Flammable"]
