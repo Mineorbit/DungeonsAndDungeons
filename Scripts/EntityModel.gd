@@ -53,6 +53,8 @@ func _physics_process(delta):
 		swim_blend = 1
 	if has_swim:
 		current_swim_blend = clampf(current_swim_blend + delta*swim_blend,0,1)
+		anim_tree["parameters/Top/swim/blend_amount"] = current_swim_blend
+		anim_tree["parameters/Bot/swim/blend_amount"] = current_swim_blend
 	var last_speed_pos = lastpos
 	var speed_pos = global_transform.origin
 	yspeed = speed_pos.y - last_speed_pos.y
