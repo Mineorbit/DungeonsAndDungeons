@@ -91,8 +91,18 @@ func compress_level(levelname,local = true):
 	
 # only for windows now
 func decompress_level(levelname,local = false):
-	var t = Thread.new()
+	start_thread(levelname,local)
+	#call_deferred_thread_group("finish_decompress",levelname)
+var t
+var started = false
+var finished = false
+var level_name = ""
+var done = false
+func start_thread(levelname,local):
+	t = Thread.new()
 	t.start(func():
+		finished = false
+		started = true
 		var subpath = "downloadLevels"
 		if local:
 			subpath = "localLevels"
@@ -100,14 +110,32 @@ func decompress_level(levelname,local = false):
 		var result = ProjectSettings.globalize_path("user://level/"+subpath)
 		print("Decompressing "+str(path)+" on "+str(OS.get_name()))
 		print("Unpacking to "+str(result))
-		delete_level(levelname)
+		#delete_level(levelname)
+		call_deferred("delete_level",levelname)
+		call_deferred("decompress",path,result)
+		print("Finished unpacking Level "+str(levelname))
+		#level_download_finished.emit(levelname)
+		level_name = levelname
+		finished = true
+	)
+
+
+func _process(delta):
+	if started and finished:
+		finish_decompress(level_name)
+		started = false
+		finished = false
+
+func finish_decompress(levelname):
+	level_download_finished.emit(levelname)
+
+func decompress(path,result):
 		if OS.get_name() == "Windows":
 			OS.execute("powershell.exe",["Expand-Archive",path,result,"-Force"])
 		else:
 			OS.execute("unzip",["-o",path,"-d",str(result)])
-		print("Finished unpacking Level "+str(levelname))
-		level_download_finished.emit(levelname)
-	)
+	
+
 
 
 func level_zip_file_path(levelname):
@@ -115,6 +143,8 @@ func level_zip_file_path(levelname):
 	return path
 
 func delete_level(levelname):
+	if DirAccess.open("user://level/downloadLevels/"+levelname) == null:
+		return
 	for file in DirAccess.open("user://level/downloadLevels/"+levelname).get_files():
 		DirAccess.remove_absolute("user://level/downloadLevels/"+levelname+"/"+str(file))
 	for file in DirAccess.open("user://level/downloadLevels/"+levelname+"/chunks").get_files():

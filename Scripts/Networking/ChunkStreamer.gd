@@ -8,10 +8,17 @@ func _ready():
 	target_player_network_id = str(name).to_int()
 	loadedChunks = []
 
+var func_data = []
 
 @rpc
 func stream_chunk(data,immediate):
-	add_from_function(data,false)
+	#data_add(data)
+	call_deferred_thread_group("data_add",data)
+	#call_deferred("add_from_function",data,false)
+
+func data_add(data):
+	func_data.append(data)
+	print("Data added "+str(data))
 
 var objects = []
 
@@ -29,7 +36,11 @@ func add_from_function(data,immediate):
 		var chunkgrid_thread = Thread.new()
 		chunkgrid_thread.start(
 			func():
-			chunk.generate_grid()
+			#chunk.generate_grid()
+			# this works but is slow
+			#chunk.call_deferred("generate_grid")
+			# this also works bit is also slow
+			chunk.call_deferred_thread_group("generate_grid")
 			)
 
 func _process(delta):
@@ -40,6 +51,10 @@ func _process(delta):
 			var object = o[1]
 			objects.remove_at(0)
 			Constants.World.level.add_from_string(base_position,object)
+		if func_data.size() > 0:
+			var data = func_data[0]
+			func_data.remove_at(0)
+			add_from_function(data,false)
 
 
 func load_chunk(location,immediate):
