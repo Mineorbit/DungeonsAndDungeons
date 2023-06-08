@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://crainopm82lhd"]
 
-[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_03gao"]
-[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_y7s4m"]
+[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_uqy18"]
+[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_3rguq"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j022o"]
 emission_shape = 3
@@ -71,7 +71,7 @@ color_ramp = SubResource("GradientTexture1D_rccai")
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
-albedo_texture = ExtResource("1_03gao")
+albedo_texture = ExtResource("1_uqy18")
 disable_receive_shadows = true
 billboard_mode = 3
 particles_anim_h_frames = 1
@@ -108,6 +108,7 @@ size = Vector2(0.05, 0.1)
 
 [node name="FlameCurtail" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 amount = 6
 lifetime = 0.8
 speed_scale = 0.7
@@ -117,6 +118,7 @@ draw_pass_1 = SubResource("SphereMesh_h3pyo")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.492596, 0)
+visible = false
 amount = 6
 lifetime = 2.0
 explosiveness = 0.2
@@ -132,7 +134,7 @@ size = Vector3(2, 3, 2)
 shape = 0
 material = SubResource("FogMaterial_t72aw")
 
-[node name="FireShape" parent="." instance=ExtResource("2_y7s4m")]
+[node name="FireShape" parent="." instance=ExtResource("2_3rguq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -143,6 +145,7 @@ shadow_enabled = true
 
 [node name="FlameSparks" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 amount = 2
 lifetime = 1.25
 speed_scale = 0.7
@@ -150,8 +153,3 @@ randomness = 0.15
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_j022o")
 draw_pass_1 = SubResource("QuadMesh_olrky")
-
-[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36778, 0)
-visible = false
-strength = 100.0

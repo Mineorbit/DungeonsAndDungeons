@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bct426sxrdfmd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ep8by"]
+radius = 0.063
+height = 0.125
+
+[node name="RunTrail" type="CPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.194178, 0, 0)
+emitting = false
+lifetime = 0.1
+mesh = SubResource("SphereMesh_ep8by")
+emission_shape = 1
+emission_sphere_radius = 0.13
+gravity = Vector3(0, 0.1, 0)

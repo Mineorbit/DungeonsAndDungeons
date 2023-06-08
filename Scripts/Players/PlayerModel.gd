@@ -175,4 +175,4 @@ func _physics_process(delta):
 	# and (verticalfsm.get_current_node() in ["Stop","Jump"]):
 	#	update_vertical_state_machine("Fall")
 
-	runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
+	#runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
