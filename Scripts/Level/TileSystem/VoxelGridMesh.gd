@@ -377,7 +377,9 @@ func generate():
 	if surface_count > 0:
 		for i in range(surface_count):
 			set_surface_override_material(i,par.surfacematerial)
+	
 	col.shape = arr_mesh.create_trimesh_shape()
+	
 	staticbody.collision_mask = par.collision
 	staticbody.collision_layer = par.collision
 

@@ -1,99 +1,99 @@
 [gd_scene load_steps=27 format=3 uid="uid://cbkg6f11hjbvu"]
 
-[ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_pl8ym"]
-[ext_resource type="PackedScene" uid="uid://dxy34lopfi1j1" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledFloor.tscn" id="2_o5tnn"]
-[ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="3_t861i"]
-[ext_resource type="PackedScene" uid="uid://dugp2bkorh4g" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="4_8fklb"]
-[ext_resource type="PackedScene" uid="uid://djyftwsvbthiy" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="5_cwkuh"]
-[ext_resource type="PackedScene" uid="uid://c1iw5d7te4wr" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="6_i8mpk"]
-[ext_resource type="PackedScene" uid="uid://ckfbma7csfka0" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_xk8bm"]
-[ext_resource type="PackedScene" uid="uid://dkt6ynrirtse5" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="8_jlfj6"]
-[ext_resource type="PackedScene" uid="uid://bqiutkpya2s8y" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_v4hkm"]
-[ext_resource type="PackedScene" uid="uid://dilmtjeo8nc3s" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="10_6dl75"]
-[ext_resource type="PackedScene" uid="uid://busvfduioflop" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="11_7n7x0"]
-[ext_resource type="PackedScene" uid="uid://bgom4k0xbayum" path="res://Prefabs/LevelObjects/Interactive/Torch.tscn" id="12_5ypew"]
-[ext_resource type="PackedScene" uid="uid://ku4vnqtrapbb" path="res://Prefabs/LevelObjects/Interactive/Spike.tscn" id="13_8j072"]
-[ext_resource type="PackedScene" uid="uid://cmmdkxfrlsyrm" path="res://Prefabs/LevelObjects/Interactive/AndGate.tscn" id="14_iq2wt"]
-[ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="15_7mlbc"]
-[ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="16_p3w0r"]
-[ext_resource type="PackedScene" uid="uid://x222g4oy75j2" path="res://Prefabs/LevelObjects/Interactive/Button.tscn" id="17_quprc"]
-[ext_resource type="PackedScene" uid="uid://wfj2i28vjum3" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledWater.tscn" id="18_kby8x"]
-[ext_resource type="PackedScene" uid="uid://d1nbqa7q8jcrs" path="res://Prefabs/LevelObjects/Interactive/MusicBox.tscn" id="19_cpdpi"]
-[ext_resource type="PackedScene" uid="uid://dmk8rcqgcohj8" path="res://Prefabs/LevelObjects/Spawners/ShieldSpawner.tscn" id="20_j8srf"]
-[ext_resource type="PackedScene" uid="uid://c6ibygdee2t42" path="res://RiboSpawner.tscn" id="21_joftt"]
-[ext_resource type="PackedScene" uid="uid://c1mjlp5rplnoo" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledBrick.tscn" id="22_n53g4"]
-[ext_resource type="PackedScene" uid="uid://1pugwjjiurhy" path="res://Prefabs/LevelObjects/Interactive/LockedDoor.tscn" id="23_npbwf"]
-[ext_resource type="PackedScene" uid="uid://00nbdgjlbgoo" path="res://Prefabs/LevelObjects/Spawners/KeySpawner.tscn" id="24_5h4hd"]
-[ext_resource type="PackedScene" uid="uid://bgjb1aggkemn0" path="res://Prefabs/LevelObjects/Interactive/FirePit.tscn" id="25_fwdyx"]
-[ext_resource type="PackedScene" uid="uid://btnj2pmt8rrg" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledSand.tscn" id="26_3my65"]
+[ext_resource type="Script" path="res://Scripts/Level/LevelObjectList.gd" id="1_pjyv8"]
+[ext_resource type="PackedScene" uid="uid://dxy34lopfi1j1" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledFloor.tscn" id="2_khr5e"]
+[ext_resource type="PackedScene" uid="uid://dk78w8hqpjd62" path="res://Prefabs/LevelObjects/PlayerGoal.tscn" id="3_xe1pu"]
+[ext_resource type="PackedScene" uid="uid://dugp2bkorh4g" path="res://Prefabs/LevelObjects/Interactive/Lever.tscn" id="4_lng8r"]
+[ext_resource type="PackedScene" uid="uid://djyftwsvbthiy" path="res://Prefabs/LevelObjects/MovingPlattform.tscn" id="5_cr548"]
+[ext_resource type="PackedScene" uid="uid://c1iw5d7te4wr" path="res://Prefabs/LevelObjects/Interactive/Gate.tscn" id="6_bs5gt"]
+[ext_resource type="PackedScene" uid="uid://ckfbma7csfka0" path="res://Prefabs/LevelObjects/Spawners/BlogSpawner.tscn" id="7_by378"]
+[ext_resource type="PackedScene" uid="uid://dkt6ynrirtse5" path="res://Prefabs/LevelObjects/Spawners/SwordSpawner.tscn" id="8_lj6kb"]
+[ext_resource type="PackedScene" uid="uid://bqiutkpya2s8y" path="res://Prefabs/LevelObjects/Spawners/BowSpawner.tscn" id="9_olpv3"]
+[ext_resource type="PackedScene" uid="uid://dilmtjeo8nc3s" path="res://Prefabs/LevelObjects/Spawners/BombGloveSpawner.tscn" id="10_i7d8x"]
+[ext_resource type="PackedScene" uid="uid://busvfduioflop" path="res://Prefabs/LevelObjects/PlayerSpawn.tscn" id="11_xkrlh"]
+[ext_resource type="PackedScene" uid="uid://bgom4k0xbayum" path="res://Prefabs/LevelObjects/Interactive/Torch.tscn" id="12_6ev07"]
+[ext_resource type="PackedScene" uid="uid://ku4vnqtrapbb" path="res://Prefabs/LevelObjects/Interactive/Spike.tscn" id="13_tme4y"]
+[ext_resource type="PackedScene" uid="uid://cmmdkxfrlsyrm" path="res://Prefabs/LevelObjects/Interactive/AndGate.tscn" id="14_rw46m"]
+[ext_resource type="PackedScene" uid="uid://b3bin5hmoaehm" path="res://Prefabs/LevelObjects/Ladder.tscn" id="15_ya85h"]
+[ext_resource type="PackedScene" uid="uid://cyu5utei4r4c5" path="res://Prefabs/LevelObjects/Interactive/Sign.tscn" id="16_5ikx1"]
+[ext_resource type="PackedScene" uid="uid://x222g4oy75j2" path="res://Prefabs/LevelObjects/Interactive/Button.tscn" id="17_bywmg"]
+[ext_resource type="PackedScene" uid="uid://wfj2i28vjum3" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledWater.tscn" id="18_gvlu8"]
+[ext_resource type="PackedScene" uid="uid://d1nbqa7q8jcrs" path="res://Prefabs/LevelObjects/Interactive/MusicBox.tscn" id="19_fdcg8"]
+[ext_resource type="PackedScene" uid="uid://dmk8rcqgcohj8" path="res://Prefabs/LevelObjects/Spawners/ShieldSpawner.tscn" id="20_n1fxh"]
+[ext_resource type="PackedScene" uid="uid://c6ibygdee2t42" path="res://RiboSpawner.tscn" id="21_olmk6"]
+[ext_resource type="PackedScene" uid="uid://c1mjlp5rplnoo" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledBrick.tscn" id="22_3e0gn"]
+[ext_resource type="PackedScene" uid="uid://1pugwjjiurhy" path="res://Prefabs/LevelObjects/Interactive/LockedDoor.tscn" id="23_n8ddd"]
+[ext_resource type="PackedScene" uid="uid://00nbdgjlbgoo" path="res://Prefabs/LevelObjects/Spawners/KeySpawner.tscn" id="24_l5vy6"]
+[ext_resource type="PackedScene" uid="uid://bgjb1aggkemn0" path="res://Prefabs/LevelObjects/Interactive/FirePit.tscn" id="25_n378v"]
+[ext_resource type="PackedScene" uid="uid://btnj2pmt8rrg" path="res://Prefabs/LevelObjects/TiledLevelObjects/TiledSand.tscn" id="26_trc7j"]
 
 [node name="LevelObjectList" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
-script = ExtResource("1_pl8ym")
+script = ExtResource("1_pjyv8")
 
-[node name="TiledFloor" parent="." instance=ExtResource("2_o5tnn")]
+[node name="TiledFloor" parent="." instance=ExtResource("2_khr5e")]
 
-[node name="PlayerGoal" parent="." instance=ExtResource("3_t861i")]
+[node name="PlayerGoal" parent="." instance=ExtResource("3_xe1pu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="Lever" parent="." instance=ExtResource("4_8fklb")]
+[node name="Lever" parent="." instance=ExtResource("4_lng8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 
-[node name="MovingPlattform" parent="." instance=ExtResource("5_cwkuh")]
+[node name="MovingPlattform" parent="." instance=ExtResource("5_cr548")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
 
-[node name="Gate" parent="." instance=ExtResource("6_i8mpk")]
+[node name="Gate" parent="." instance=ExtResource("6_bs5gt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
-[node name="BlogSpawner" parent="." instance=ExtResource("7_xk8bm")]
+[node name="BlogSpawner" parent="." instance=ExtResource("7_by378")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
 
-[node name="SwordSpawner" parent="." instance=ExtResource("8_jlfj6")]
+[node name="SwordSpawner" parent="." instance=ExtResource("8_lj6kb")]
 
-[node name="BowSpawner" parent="." instance=ExtResource("9_v4hkm")]
+[node name="BowSpawner" parent="." instance=ExtResource("9_olpv3")]
 
-[node name="BombGloveSpawner" parent="." instance=ExtResource("10_6dl75")]
+[node name="BombGloveSpawner" parent="." instance=ExtResource("10_i7d8x")]
 
-[node name="PlayerSpawnBlue" parent="." instance=ExtResource("11_7n7x0")]
+[node name="PlayerSpawnBlue" parent="." instance=ExtResource("11_xkrlh")]
 
-[node name="PlayerSpawnRed" parent="." instance=ExtResource("11_7n7x0")]
+[node name="PlayerSpawnRed" parent="." instance=ExtResource("11_xkrlh")]
 local_id = 1
 
-[node name="PlayerSpawnGreen" parent="." instance=ExtResource("11_7n7x0")]
+[node name="PlayerSpawnGreen" parent="." instance=ExtResource("11_xkrlh")]
 local_id = 2
 
-[node name="PlayerSpawnYellow" parent="." instance=ExtResource("11_7n7x0")]
+[node name="PlayerSpawnYellow" parent="." instance=ExtResource("11_xkrlh")]
 local_id = 3
 
-[node name="Torch" parent="." instance=ExtResource("12_5ypew")]
+[node name="Torch" parent="." instance=ExtResource("12_6ev07")]
 
-[node name="Spike" parent="." instance=ExtResource("13_8j072")]
+[node name="Spike" parent="." instance=ExtResource("13_tme4y")]
 
-[node name="AndGate" parent="." instance=ExtResource("14_iq2wt")]
+[node name="AndGate" parent="." instance=ExtResource("14_rw46m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.66763, 0, 0)
 
-[node name="Ladder" parent="." instance=ExtResource("15_7mlbc")]
+[node name="Ladder" parent="." instance=ExtResource("15_ya85h")]
 
-[node name="Sign" parent="." instance=ExtResource("16_p3w0r")]
+[node name="Sign" parent="." instance=ExtResource("16_5ikx1")]
 
-[node name="Button" parent="." instance=ExtResource("17_quprc")]
+[node name="Button" parent="." instance=ExtResource("17_bywmg")]
 
-[node name="TiledWater" parent="." instance=ExtResource("18_kby8x")]
+[node name="TiledWater" parent="." instance=ExtResource("18_gvlu8")]
 
-[node name="MusicBox" parent="." instance=ExtResource("19_cpdpi")]
+[node name="MusicBox" parent="." instance=ExtResource("19_fdcg8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
 
-[node name="ShieldSpawner" parent="." instance=ExtResource("20_j8srf")]
+[node name="ShieldSpawner" parent="." instance=ExtResource("20_n1fxh")]
 
-[node name="RiboSpawner" parent="." instance=ExtResource("21_joftt")]
+[node name="RiboSpawner" parent="." instance=ExtResource("21_olmk6")]
 
-[node name="TiledBrick" parent="." instance=ExtResource("22_n53g4")]
+[node name="TiledBrick" parent="." instance=ExtResource("22_3e0gn")]
 
-[node name="LockedDoor" parent="." instance=ExtResource("23_npbwf")]
+[node name="LockedDoor" parent="." instance=ExtResource("23_n8ddd")]
 
-[node name="KeySpawner" parent="." instance=ExtResource("24_5h4hd")]
+[node name="KeySpawner" parent="." instance=ExtResource("24_l5vy6")]
 
-[node name="FirePit" parent="." instance=ExtResource("25_fwdyx")]
+[node name="FirePit" parent="." instance=ExtResource("25_n378v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21743, 0, 0)
 
-[node name="TiledSand" parent="." instance=ExtResource("26_3my65")]
+[node name="TiledSand" parent="." instance=ExtResource("26_trc7j")]

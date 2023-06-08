@@ -1,15 +1,15 @@
 [gd_scene load_steps=55 format=3 uid="uid://bryply5pm5nlg"]
 
-[ext_resource type="PackedScene" uid="uid://c0hc88bv6i8f3" path="res://Assets/Models/LevelObjects/Entities/Player/Player.blend" id="1_6nbfr"]
-[ext_resource type="Script" path="res://Scripts/Players/PlayerModel.gd" id="2_4fnbr"]
-[ext_resource type="Script" path="res://Scripts/PlayerSkeleton.gd" id="3_ee23m"]
-[ext_resource type="Script" path="res://addons/wigglebone/wiggle_bone.gd" id="4_1bbx2"]
-[ext_resource type="Script" path="res://addons/wigglebone/wiggle_properties.gd" id="5_pww5x"]
-[ext_resource type="PackedScene" uid="uid://bct426sxrdfmd" path="res://Prefabs/Effects/RunTrail.tscn" id="6_g4kqx"]
-[ext_resource type="AudioStream" uid="uid://btxrdugeymdpx" path="res://Assets/Sounds/sfx/Hit.mp3" id="6_kvlp2"]
+[ext_resource type="PackedScene" uid="uid://c0hc88bv6i8f3" path="res://Assets/Models/LevelObjects/Entities/Player/Player.blend" id="1_n4qcw"]
+[ext_resource type="Script" path="res://Scripts/Players/PlayerModel.gd" id="2_2ov2k"]
+[ext_resource type="Script" path="res://Scripts/PlayerSkeleton.gd" id="3_ef60n"]
+[ext_resource type="Script" path="res://addons/wigglebone/wiggle_bone.gd" id="4_acjws"]
+[ext_resource type="Script" path="res://addons/wigglebone/wiggle_properties.gd" id="5_k7vyf"]
+[ext_resource type="PackedScene" uid="uid://bct426sxrdfmd" path="res://Prefabs/Effects/RunTrail.tscn" id="6_iwyff"]
+[ext_resource type="AudioStream" uid="uid://btxrdugeymdpx" path="res://Assets/Sounds/sfx/Hit.mp3" id="7_6846g"]
 
 [sub_resource type="Resource" id="Resource_dnrra"]
-script = ExtResource("5_pww5x")
+script = ExtResource("5_k7vyf")
 mode = 0
 stiffness = 0.011
 damping = 0.06
@@ -19,7 +19,7 @@ max_degrees = 27.5
 max_distance = 0.1
 
 [sub_resource type="Resource" id="Resource_2xjce"]
-script = ExtResource("5_pww5x")
+script = ExtResource("5_k7vyf")
 mode = 0
 stiffness = 0.011
 damping = 0.06
@@ -252,8 +252,8 @@ properties/7/spawn = true
 properties/7/sync = true
 properties/7/watch = false
 
-[node name="PlayerModel" instance=ExtResource("1_6nbfr")]
-script = ExtResource("2_4fnbr")
+[node name="PlayerModel" instance=ExtResource("1_n4qcw")]
+script = ExtResource("2_2ov2k")
 speed_blend_cap = 0.66
 attachmentPoints = [NodePath("HandL"), NodePath("HandR")]
 
@@ -394,53 +394,53 @@ bones/35/rest = Transform3D(1, 7.45058e-09, -4.92437e-08, -7.45058e-09, 1, -5.58
 bones/35/position = Vector3(-1.86265e-09, -4.23752e-08, 2.35159e-08)
 bones/35/rotation = Quaternion(2.79397e-08, -2.46218e-08, -3.72529e-09, 1)
 bones/35/scale = Vector3(1, 1, 1)
-script = ExtResource("3_ee23m")
+script = ExtResource("3_ef60n")
 
 [node name="band_top_r" type="BoneAttachment3D" parent="root/Skeleton3D" index="6"]
-transform = Transform3D(-0.414237, -0.690199, -0.593323, -0.024351, -0.643244, 0.765274, -0.909843, 0.331453, 0.249649, -0.29868, 1.37685, 0.0725008)
+transform = Transform3D(-0.448972, -0.801512, -0.394968, -0.165877, -0.359578, 0.918253, -0.878014, 0.477786, 0.0284877, -0.297845, 1.39515, 0.0784905)
 bone_name = "band_top.r"
 bone_idx = 7
-script = ExtResource("4_1bbx2")
+script = ExtResource("4_acjws")
 properties = SubResource("Resource_dnrra")
 const_force_local = Vector3(0, 2, 0)
 
 [node name="band_bot_r" type="BoneAttachment3D" parent="root/Skeleton3D" index="7"]
-transform = Transform3D(-0.376561, -0.635099, -0.674426, 0.085003, -0.74863, 0.657516, -0.922484, 0.190267, 0.335891, -0.379582, 1.30146, 0.111352)
+transform = Transform3D(-0.413694, -0.819602, -0.396369, -0.0895455, -0.396629, 0.913601, -0.906002, 0.413443, 0.0906916, -0.391794, 1.353, 0.134494)
 bone_name = "band_bot.r"
 bone_idx = 8
-script = ExtResource("4_1bbx2")
+script = ExtResource("4_acjws")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
 [node name="band_top_l" type="BoneAttachment3D" parent="root/Skeleton3D" index="8"]
-transform = Transform3D(0.409148, -0.690199, -0.596844, 0.0308977, -0.643243, 0.765038, -0.911945, -0.331455, -0.241856, -0.298681, 1.37685, -0.0640091)
+transform = Transform3D(0.445578, -0.801513, -0.398793, 0.173727, -0.359576, 0.916801, -0.878225, -0.477787, -0.0209743, -0.297845, 1.39515, -0.0699987)
 bone_name = "band_top.l"
 bone_idx = 10
-script = ExtResource("4_1bbx2")
+script = ExtResource("4_acjws")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
 [node name="band_bot_l" type="BoneAttachment3D" parent="root/Skeleton3D" index="9"]
-transform = Transform3D(0.451507, -0.6351, -0.626729, -0.159932, -0.748627, 0.64341, -0.877817, -0.19027, -0.439583, -0.379582, 1.30146, -0.102861)
+transform = Transform3D(0.456468, -0.819602, -0.346249, -0.0159407, -0.396628, 0.917841, -0.889597, -0.413445, -0.194113, -0.391795, 1.353, -0.126002)
 bone_name = "band_bot.l"
 bone_idx = 11
-script = ExtResource("4_1bbx2")
+script = ExtResource("4_acjws")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
 [node name="band_attach_l" type="BoneAttachment3D" parent="root/Skeleton3D" index="10"]
-transform = Transform3D(0.688708, -0.400749, -0.60422, 0.45132, -0.415265, 0.789852, -0.567443, -0.816673, -0.10513, -0.260718, 1.41437, 0.00849079)
+transform = Transform3D(0.736602, -0.417501, -0.532081, 0.488274, -0.216092, 0.845513, -0.467982, -0.882608, 0.0446813, -0.260717, 1.41437, 0.00849085)
 bone_name = "band_attach.l"
 bone_idx = 9
-script = ExtResource("4_1bbx2")
+script = ExtResource("4_acjws")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
 [node name="band_attach_r" type="BoneAttachment3D" parent="root/Skeleton3D" index="11"]
-transform = Transform3D(-0.722306, -0.400748, -0.563627, -0.405162, -0.415268, 0.814491, -0.560462, 0.816672, 0.137582, -0.260718, 1.41437, 8.94102e-07)
+transform = Transform3D(-0.765973, -0.4175, -0.488854, -0.438855, -0.216096, 0.872186, -0.469777, 0.882608, -0.0176985, -0.260717, 1.41437, 9.54561e-07)
 bone_name = "band_attach.r"
 bone_idx = 6
-script = ExtResource("4_1bbx2")
+script = ExtResource("4_acjws")
 properties = SubResource("Resource_2xjce")
 const_force_local = Vector3(0, 2, 0)
 
@@ -472,11 +472,11 @@ parameters/TopBot/add_amount = 1.0
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="3"]
 replication_config = SubResource("SceneReplicationConfig_ycw4q")
 
-[node name="RunTrail" parent="." index="4" instance=ExtResource("6_g4kqx")]
+[node name="RunTrail" parent="." index="4" instance=ExtResource("6_iwyff")]
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06107, 0)
-stream = ExtResource("6_kvlp2")
+stream = ExtResource("7_6846g")
 volume_db = -4.0
 max_db = 1.0
 max_distance = 16.0
@@ -484,14 +484,14 @@ max_polyphony = 4
 panning_strength = 2.0
 
 [node name="HandL" type="BoneAttachment3D" parent="." index="6"]
-transform = Transform3D(0.881636, 0.470234, 0.0399559, 0.294577, -0.614486, 0.731867, 0.368701, -0.633471, -0.680273, 0.119204, 0.616484, -0.622754)
+transform = Transform3D(0.881636, 0.470234, 0.0399569, 0.294576, -0.614486, 0.731867, 0.368702, -0.63347, -0.680273, 0.119204, 0.616484, -0.603225)
 bone_name = "hand.l"
 bone_idx = 17
 use_external_skeleton = true
 external_skeleton = NodePath("../root/Skeleton3D")
 
 [node name="HandR" type="BoneAttachment3D" parent="." index="7"]
-transform = Transform3D(-0.88184, 0.469872, 0.0397224, -0.293736, -0.613259, 0.733234, 0.368886, 0.634928, 0.678814, 0.0981002, 0.604625, 0.625294)
+transform = Transform3D(-0.88184, 0.469873, 0.0397216, -0.293737, -0.613259, 0.733233, 0.368886, 0.634927, 0.678815, 0.0981006, 0.604624, 0.644823)
 bone_name = "hand.r"
 bone_idx = 23
 use_external_skeleton = true

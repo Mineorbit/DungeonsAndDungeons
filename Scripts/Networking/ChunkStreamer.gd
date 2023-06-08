@@ -12,9 +12,10 @@ var func_data = []
 
 @rpc
 func stream_chunk(data,immediate):
-	data_add(data)
+	#data_add(data)
 	#call_deferred_thread_group("data_add",data)
 	#call_deferred("add_from_function",data,false)
+	add_from_function(data,false)
 
 func data_add(data):
 	func_data.append(data)

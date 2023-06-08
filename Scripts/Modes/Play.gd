@@ -57,6 +57,7 @@ func complete_start_round(levelname):
 	rpc("prepare_level")
 	get_tree().paused = true
 	# start world with level from downloads
+	# we load the entire level immediately
 	await Constants.World.start(selected_level_name,true,true)
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
@@ -149,7 +150,6 @@ func add_player(id):
 	return player
 
 func respawn_player(id):
-	print("Respawning Player "+str(id))
 	var player = await Constants.World.players.spawn_player(id)
 	player.on_entity_died.connect(func():
 		respawn_player(id))

@@ -266,7 +266,11 @@ func add_from_string(base_position,line):
 
 func generate_all_grids():
 	for c in chunks.values():
-		c.generate_grid()
+		var chunkgrid_thread = Thread.new()
+		chunkgrid_thread.start(
+			func():
+			c.call_deferred_thread_group("generate_grid")
+			)
 
 func _process(delta):
 	if toAdd.size() > 0:
