@@ -12,13 +12,12 @@ var func_data = []
 
 @rpc
 func stream_chunk(data,immediate):
-	#data_add(data)
-	call_deferred_thread_group("data_add",data)
+	data_add(data)
+	#call_deferred_thread_group("data_add",data)
 	#call_deferred("add_from_function",data,false)
 
 func data_add(data):
 	func_data.append(data)
-	print("Data added "+str(data))
 
 var objects = []
 
@@ -36,10 +35,6 @@ func add_from_function(data,immediate):
 		var chunkgrid_thread = Thread.new()
 		chunkgrid_thread.start(
 			func():
-			#chunk.generate_grid()
-			# this works but is slow
-			#chunk.call_deferred("generate_grid")
-			# this also works bit is also slow
 			chunk.call_deferred_thread_group("generate_grid")
 			)
 
