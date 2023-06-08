@@ -15,7 +15,7 @@ func stream_chunk(data,immediate):
 	#data_add(data)
 	#call_deferred_thread_group("data_add",data)
 	#call_deferred("add_from_function",data,false)
-	add_from_function(data,false)
+	add_from_function(data,true)
 
 func data_add(data):
 	func_data.append(data)
@@ -32,12 +32,6 @@ func add_from_function(data,immediate):
 	var chunk = Constants.World.level.get_chunk(base_position)
 	if immediate:
 		chunk.generate_grid()
-	else:
-		var chunkgrid_thread = Thread.new()
-		chunkgrid_thread.start(
-			func():
-			chunk.call_deferred_thread_group("generate_grid")
-			)
 
 func _process(delta):
 	if Constants.World.level != null:

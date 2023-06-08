@@ -351,7 +351,6 @@ var border = 1
 
 # this is the most important function for every gridmesh, this should be called when a chunk gridmesh should get updated
 func generate():
-	
 	var arr_mesh = ArrayMesh.new()
 	var surface_count = 0
 	for x in range(-border,grid_extend*grid_size*2 + border):

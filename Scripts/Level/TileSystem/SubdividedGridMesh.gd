@@ -19,9 +19,11 @@ var generating = false
 var subgrid = {}
 var generating_at = {}
 @onready var subgrids = $Subgrids
+var subgrid_list
 var previewmesh
 
 func _ready():
+	subgrid_list = subgrids.get_children()
 	previewmesh = get_node("0")
 	if get_parent().get("display") == null:
 		previewmesh.hide()
@@ -32,8 +34,8 @@ func _ready():
 
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():
-	#later on should only regenerate those, whose neighbor changed
-	for x in subgrids.get_children():
+	print("Working on subgrids "+str(subgrid_list))
+	for x in subgrid_list:
 		x.generate()
 
 func generate_for(set, force = false):

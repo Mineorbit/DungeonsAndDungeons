@@ -43,7 +43,11 @@ func update_navigation():
 
 func generate_grid():
 	for grid in cellGrids.get_children():
-		grid.generate()
+		print("Doing "+str(grid))
+		var t = Thread.new()
+		t.start(func():
+			grid.generate()
+		)
 
 
 func add_tiled_level_object(pos,levelObjectData, generate = false):

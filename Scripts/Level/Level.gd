@@ -265,11 +265,14 @@ func add_from_string(base_position,line):
 	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects,properties, false)
 
 func generate_all_grids():
+	print("Generating all Grids")
 	for c in chunks.values():
+		c.generate_grid()
 		var chunkgrid_thread = Thread.new()
 		chunkgrid_thread.start(
 			func():
-			c.call_deferred_thread_group("generate_grid")
+			pass
+			#c.call_deferred_thread_group("generate_grid")
 			)
 
 func _process(delta):
