@@ -40,14 +40,27 @@ func update_navigation():
 		change_in_chunk = false
 		get_parent().changedChunks = get_parent().changedChunks - 1
 
+signal gridGenerated(pos)
 
 func generate_grid():
+	var cells_todo = 0
 	for grid in cellGrids.get_children():
-		print("Doing "+str(grid))
+		cells_todo = cells_todo + 1
+	print("TODO: "+str(cells_todo))
+	for grid in cellGrids.get_children():
+		#print("Doing "+str(grid))
 		var t = Thread.new()
 		t.start(func():
 			grid.generate()
+			print("Done with grid")
+			cells_todo = cells_todo - 1
+			if cells_todo == 0:
+				call_deferred("chunkDone")
 		)
+
+func chunkDone():
+	print("Chunk Done")
+	gridGenerated.emit(position)
 
 
 func add_tiled_level_object(pos,levelObjectData, generate = false):

@@ -43,7 +43,6 @@ func generate_for(set, force = false):
 	var t = Thread.new()
 	t.start(func():
 		for x in set:
-			print(str(x)+" generating")
 			x.generate()
 		)
 		#t.start( func():

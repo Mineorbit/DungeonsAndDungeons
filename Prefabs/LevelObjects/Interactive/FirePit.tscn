@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bgjb1aggkemn0"]
 
-[ext_resource type="Script" path="res://Scripts/Level/FirePit.gd" id="1_gvdiw"]
-[ext_resource type="PackedScene" uid="uid://brumd858luqw5" path="res://Prefabs/Models/LevelObjects/FirePitModel.tscn" id="2_mb41m"]
-[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="3_qyw21"]
-[ext_resource type="PackedScene" uid="uid://cmdlqk416pgd0" path="res://Prefabs/Elements/Fire.tscn" id="4_u5rtu"]
+[ext_resource type="Script" path="res://Scripts/Level/FirePit.gd" id="1_jsqbv"]
+[ext_resource type="PackedScene" uid="uid://brumd858luqw5" path="res://Prefabs/Models/LevelObjects/FirePitModel.tscn" id="2_c8xiq"]
+[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="3_bmpcl"]
+[ext_resource type="PackedScene" uid="uid://cmdlqk416pgd0" path="res://Prefabs/Elements/Fire.tscn" id="4_n7b3g"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8pb75"]
 height = 0.65
@@ -12,9 +12,9 @@ radius = 0.55
 [sub_resource type="SphereShape3D" id="SphereShape3D_3ctoe"]
 
 [node name="FirePit" type="Node3D"]
-script = ExtResource("1_gvdiw")
+script = ExtResource("1_jsqbv")
 
-[node name="FirePitModel" parent="." instance=ExtResource("2_mb41m")]
+[node name="FirePitModel" parent="." instance=ExtResource("2_c8xiq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -23,14 +23,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("CylinderShape3D_8pb75")
 
-[node name="Flammable" parent="." instance=ExtResource("3_qyw21")]
+[node name="Flammable" parent="." instance=ExtResource("3_bmpcl")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="CollisionShape3D" parent="Flammable" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.264869, 0)
 shape = SubResource("SphereShape3D_3ctoe")
 
-[node name="Fire" parent="Flammable" instance=ExtResource("4_u5rtu")]
+[node name="Fire" parent="Flammable" instance=ExtResource("4_n7b3g")]
 
 [connection signal="child_entered_tree" from="Flammable" to="." method="on_fire_started"]
 [connection signal="child_exiting_tree" from="Flammable" to="." method="on_fire_stopped"]

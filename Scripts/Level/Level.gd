@@ -226,8 +226,8 @@ func load(level_name, immediate = false, download_level = false):
 				#close file access is automatically done
 			file_name = dir.get_next()
 		if immediate:
-			print("Loaded level")
-			Signals.level_loaded.emit()
+			print("Loaded Level Data")
+			generate_all_grids(true)
 	else:
 		print("An error occurred when trying to access the path.")
 
@@ -264,26 +264,36 @@ func add_from_string(base_position,line):
 	var pos = Vector3(i,j,k)
 	add(levelObjectData, base_position+pos,r,instance_id,connectedInteractiveObjects,properties, false)
 
-func generate_all_grids():
-	print("Generating all Grids")
+var todo = 0
+
+func generate_all_grids(load_signal = false):
+	# todo: determine chunk where spawns are, on grid generate signal do something
+	todo = 0
+	for c in chunks.values():
+		todo = todo + 1
+		if load_signal:
+			c.gridGenerated.connect(check_generating_done)
+	print(str(Constants.id)+" Generating all Grids")
 	for c in chunks.values():
 		c.generate_grid()
-		var chunkgrid_thread = Thread.new()
-		chunkgrid_thread.start(
-			func():
-			pass
-			#c.call_deferred_thread_group("generate_grid")
-			)
+
+func check_generating_done(chunkPos):
+	todo = max(0,todo - 1)
+	print("One Chunk Done")
+	if todo == 0:
+		print("Level loaded")
+		Signals.level_loaded.emit()
+
 
 func _process(delta):
 	if toAdd.size() > 0:
 		var result = toAdd[0]
 		toAdd.remove_at(0)
 		add_from_string(result[0],result[1])
-	if toAdd.size() == 0 and started_loading:
-		started_loading = false
-		print("Level loaded")
-		Signals.level_loaded.emit()
+	#if toAdd.size() == 0 and started_loading:
+	#	started_loading = false
+	#	print("Level loaded")
+	#	Signals.level_loaded.emit()
 	
 var chunks = {}
 

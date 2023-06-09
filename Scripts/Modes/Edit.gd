@@ -58,7 +58,7 @@ func prepare_edit(name):
 	#grid_thread.start(func():
 	#	Constants.World.level.generate_all_grids()
 	#	)
-	Constants.World.level.generate_all_grids()
+	#Constants.World.level.generate_all_grids()
 
 var current_player = 0
 

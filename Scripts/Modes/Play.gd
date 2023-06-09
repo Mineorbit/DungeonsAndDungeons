@@ -55,20 +55,29 @@ func complete_start_round(levelname):
 	remove_child(lobby)
 	#lobby = null
 	rpc("prepare_level")
-	get_tree().paused = true
+	#get_tree().paused = true
 	# start world with level from downloads
 	# we load the entire level immediately
-	await Constants.World.start(selected_level_name,true,true)
+	Signals.level_loaded.connect(func():
+		print("LEVEL IST READY")
+		finish_complete_start_round()
+		)
+	await Constants.World.start(selected_level_name,true,true,false)
+	
+
+func finish_complete_start_round():
+	
+	Constants.World.level.start()
 	for i in range(4):
 		add_chunk_streamer_for_player(i)
 	#Constants.World.players.spawn()
 	Constants.World.players.set_start_positions()
-	
-	get_tree().paused = false
+	#get_tree().paused = false
 	
 	rpc("start_round_finish_client")
 	level_time = 0
 	is_in_play = true
+
 
 @rpc
 func prepare_level():
