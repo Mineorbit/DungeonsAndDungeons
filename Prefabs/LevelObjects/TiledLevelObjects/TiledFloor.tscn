@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxy34lopfi1j1"]
 
-[ext_resource type="Script" path="res://Scripts/Level/TileSystem/SubdividedGridMesh.gd" id="1_xx6y3"]
-[ext_resource type="Material" uid="uid://r7jwhno6nawy" path="res://Assets/Materials/Floor.tres" id="2_8eumc"]
-[ext_resource type="PackedScene" uid="uid://col2b74dd5ayw" path="res://Prefabs/SubGrid.tscn" id="3_y3kbv"]
+[ext_resource type="Script" path="res://Scripts/Level/TileSystem/SubdividedGridMesh.gd" id="1_nujk5"]
+[ext_resource type="Material" uid="uid://r7jwhno6nawy" path="res://Assets/Materials/Floor.tres" id="2_qan70"]
+[ext_resource type="PackedScene" uid="uid://col2b74dd5ayw" path="res://Prefabs/SubGrid.tscn" id="3_5gywq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_78uxd"]
-material = ExtResource("2_8eumc")
+material = ExtResource("2_qan70")
 
 [node name="TiledFloor" type="MeshInstance3D"]
 skeleton = NodePath("../..")
-script = ExtResource("1_xx6y3")
-surfacematerial = ExtResource("2_8eumc")
+script = ExtResource("1_nujk5")
+surfacematerial = ExtResource("2_qan70")
 collision = 1
 
 [node name="0" type="MeshInstance3D" parent="."]
@@ -18,41 +18,41 @@ mesh = SubResource("BoxMesh_78uxd")
 
 [node name="Subgrids" type="Node3D" parent="."]
 
-[node name="000" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="000" parent="Subgrids" instance=ExtResource("3_5gywq")]
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="100" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="100" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="001" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="001" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="101" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="101" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="010" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="010" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="110" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="110" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 0)
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="011" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="011" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
 skeleton = NodePath("../..")
 grid_size = 16
 
-[node name="111" parent="Subgrids" instance=ExtResource("3_y3kbv")]
+[node name="111" parent="Subgrids" instance=ExtResource("3_5gywq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4)
 skeleton = NodePath("../..")
 grid_size = 16

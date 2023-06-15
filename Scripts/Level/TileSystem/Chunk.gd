@@ -46,7 +46,6 @@ func generate_grid():
 	var cells_todo = 0
 	for grid in cellGrids.get_children():
 		cells_todo = cells_todo + 1
-	print("TODO: "+str(cells_todo))
 	for grid in cellGrids.get_children():
 		#print("Doing "+str(grid))
 		var t = Thread.new()

@@ -227,6 +227,7 @@ func load(level_name, immediate = false, download_level = false):
 			file_name = dir.get_next()
 		if immediate:
 			print("Loaded Level Data")
+			Signals.level_loaded.emit()
 			generate_all_grids(true)
 	else:
 		print("An error occurred when trying to access the path.")

@@ -25,7 +25,6 @@ func OnAttach(new_owner):
 # eventuell bei boden kontakt oder so eigenen on_entity_melee_strike triggern
 func Use():
 	super.Use()
-	print("Using")
 	itemOwner.on_entity_melee_strike.emit(15,Constants.SwordStrikeTime)
 	hold_rot = Vector3(0,0,0)
 	offset = Vector3(0,0,0)

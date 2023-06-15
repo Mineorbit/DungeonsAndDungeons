@@ -7,11 +7,11 @@ var connections = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	constructionprefab = load("res://Prefabs/Connection.tscn")
-	constructconnection = constructionprefab.instantiate()
 	Signals.connection_added.connect(new_connections)
 	Signals.connection_removed.connect(remove_connections)
 	Signals.level_loaded.connect(reset_connections)
+	constructionprefab = load("res://Prefabs/Connection.tscn")
+	constructconnection = constructionprefab.instantiate()
 
 # build connection visualizations rom scratch
 func reset_connections():
@@ -37,10 +37,13 @@ func new_connections(b,list):
 
 
 func visualize_connection(x,a,b):
+		print("Visualizing")
 		if (not Constants.World.level.interactiveLevelObjects.has(a)) or (not Constants.World.level.interactiveLevelObjects.has(b)):
 			return
 		var obja = Constants.World.level.interactiveLevelObjects[a]
 		var objb = Constants.World.level.interactiveLevelObjects[b]
+		print(x.point_a)
+		print(x.point_b)
 		x.point_a.global_transform.origin = obja.global_transform.origin + Vector3(0.5,0.5,0.5)
 		x.point_b.global_transform.origin = objb.global_transform.origin + Vector3(0.5,0.5,0.5)
 		if not connections.has(a):
