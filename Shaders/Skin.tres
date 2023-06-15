@@ -1,0 +1,33 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://bvij3j37jegf5"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_yoaf3"]
+constant = Color(0.437878, 0.407993, 0.249973, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_lu087"]
+input_name = "color"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+
+void fragment() {
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(0.437878, 0.407993, 0.249973, 1.000000);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-260, 73)
+nodes/fragment/0/position = Vector2(600, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_yoaf3")
+nodes/fragment/2/position = Vector2(38, 196)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_lu087")
+nodes/fragment/3/position = Vector2(-120, 320)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

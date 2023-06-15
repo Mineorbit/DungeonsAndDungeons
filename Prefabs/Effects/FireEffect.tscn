@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://crainopm82lhd"]
 
-[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_wu4bg"]
-[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_xlaac"]
+[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="1_4wkjc"]
+[ext_resource type="PackedScene" uid="uid://cnsexbatw87ip" path="res://Assets/Models/FireShape.blend" id="2_hvkic"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j022o"]
 emission_shape = 3
@@ -71,7 +71,7 @@ color_ramp = SubResource("GradientTexture1D_rccai")
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
-albedo_texture = ExtResource("1_wu4bg")
+albedo_texture = ExtResource("1_4wkjc")
 disable_receive_shadows = true
 billboard_mode = 3
 particles_anim_h_frames = 1
@@ -134,7 +134,7 @@ size = Vector3(2, 3, 2)
 shape = 0
 material = SubResource("FogMaterial_t72aw")
 
-[node name="FireShape" parent="." instance=ExtResource("2_xlaac")]
+[node name="FireShape" parent="." instance=ExtResource("2_hvkic")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
