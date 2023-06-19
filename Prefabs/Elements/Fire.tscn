@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmdlqk416pgd0"]
 
-[ext_resource type="Script" path="res://Scripts/Level/Fire.gd" id="1_nabi2"]
-[ext_resource type="PackedScene" uid="uid://crainopm82lhd" path="res://Prefabs/Effects/FireEffect.tscn" id="2_0dppt"]
+[ext_resource type="Script" path="res://Scripts/Level/Fire.gd" id="1_e3px5"]
+[ext_resource type="PackedScene" uid="uid://crainopm82lhd" path="res://Prefabs/Effects/FireEffect.tscn" id="2_8ehiy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s0bn2"]
 
 [node name="Fire" type="Node3D" node_paths=PackedStringArray("timer")]
-script = ExtResource("1_nabi2")
+script = ExtResource("1_e3px5")
 timer = NodePath("Timer")
 
-[node name="FireEffect" parent="." instance=ExtResource("2_0dppt")]
+[node name="FireEffect" parent="." instance=ExtResource("2_8ehiy")]
 
 [node name="EffectArea" type="Area3D" parent="."]
 collision_layer = 0

@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://doj2m1b66ehq1"]
+[gd_scene load_steps=12 format=3 uid="uid://doj2m1b66ehq1"]
 
-[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_o82wh"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_ag45g"]
-[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_3yksf"]
-[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_1vlyy"]
-[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="5_jas4j"]
+[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_w2php"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_15603"]
+[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_3ulcb"]
+[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_obeur"]
+[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="5_0myqa"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -32,15 +32,19 @@ properties/3/watch = false
 radius = 0.75
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ntqoq"]
-height = 1.25
+radius = 0.125
+height = 0.25
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b4gi8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_52iv3"]
+size = Vector3(1, 2, 1.8)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 18
 collision_mask = 3
 collision_priority = 2.0
-script = ExtResource("1_o82wh")
+script = ExtResource("1_w2php")
 can_climb = true
 climb_velocity = 3.0
 item_slots = 2
@@ -55,16 +59,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
 [node name="CameraOffset" type="Node3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_ag45g")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_15603")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)
 
-[node name="ItemPickupArea" parent="." instance=ExtResource("3_3yksf")]
+[node name="ItemPickupArea" parent="." instance=ExtResource("3_3ulcb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bnrka")
 
-[node name="Model" parent="." instance=ExtResource("4_1vlyy")]
+[node name="Model" parent="." instance=ExtResource("4_obeur")]
 
 [node name="ClimbArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -74,12 +78,12 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClimbArea"]
 shape = SubResource("CapsuleShape3D_0nwwf")
 
-[node name="WaterArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="SwimArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32805, 0)
 collision_layer = 128
 collision_mask = 128
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SwimArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("CapsuleShape3D_ntqoq")
 
@@ -87,15 +91,19 @@ shape = SubResource("CapsuleShape3D_ntqoq")
 radius = 0.5
 use_3d_avoidance = true
 
-[node name="Flammable" parent="." instance=ExtResource("5_jas4j")]
+[node name="Flammable" parent="." instance=ExtResource("5_0myqa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.906796, 0)
 
 [node name="CollisionShape3D" parent="Flammable" index="0"]
 shape = SubResource("CapsuleShape3D_b4gi8")
 
+[node name="LedgeDetector" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.331636, 2.25219, 0)
+shape = SubResource("BoxShape3D_52iv3")
+
 [connection signal="body_entered" from="ClimbArea" to="." method="entered_climb_area"]
 [connection signal="body_exited" from="ClimbArea" to="." method="exited_climb_area"]
-[connection signal="body_entered" from="WaterArea" to="." method="entered_swim_area"]
-[connection signal="body_exited" from="WaterArea" to="." method="exited_swim_area"]
+[connection signal="body_entered" from="SwimArea" to="." method="entered_swim_area"]
+[connection signal="body_exited" from="SwimArea" to="." method="exited_swim_area"]
 
 [editable path="Flammable"]

@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c553jrb8a61t2"]
 
-[ext_resource type="Shader" path="res://Assets/Materials/Entities/Player/FacialShader.gdshader" id="1_btes4"]
-[ext_resource type="Texture2D" uid="uid://dsorrcjap3668" path="res://Assets/Textures/Player/mouth.png" id="2_yimbc"]
-[ext_resource type="Texture2D" uid="uid://d1lj60nxqkfus" path="res://Assets/Textures/Player/mouth_shock.png" id="3_4intt"]
+[ext_resource type="Shader" path="res://Assets/Materials/Entities/Player/FacialShader.gdshader" id="1_c20gd"]
+[ext_resource type="Texture2D" uid="uid://dsorrcjap3668" path="res://Assets/Textures/Player/mouth.png" id="2_fbj6i"]
+[ext_resource type="Texture2D" uid="uid://d1lj60nxqkfus" path="res://Assets/Textures/Player/mouth_shock.png" id="3_aaf75"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_btes4")
+shader = ExtResource("1_c20gd")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/character = 0.0
 shader_parameter/point_size = 0.0
@@ -18,5 +18,5 @@ shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = null
 shader_parameter/uv2_scale = null
 shader_parameter/uv2_offset = null
-shader_parameter/texture_albedo1 = ExtResource("2_yimbc")
-shader_parameter/texture_albedo2 = ExtResource("3_4intt")
+shader_parameter/texture_albedo1 = ExtResource("2_fbj6i")
+shader_parameter/texture_albedo2 = ExtResource("3_aaf75")

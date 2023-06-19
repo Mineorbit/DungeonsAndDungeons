@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2ea3rs0cq3rm"]
 
-[ext_resource type="Script" path="res://Scripts/UI/BuilderHUD.gd" id="1_ayb23"]
-[ext_resource type="PackedScene" uid="uid://cbkg6f11hjbvu" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="2_gry2d"]
-[ext_resource type="Script" path="res://Scripts/UI/EditPanel.gd" id="3_uwjqj"]
-[ext_resource type="AudioStream" uid="uid://bulvntx1u2u8m" path="res://Assets/Sounds/music/BuildTheme.mp3" id="4_28oq3"]
+[ext_resource type="Script" path="res://Scripts/UI/BuilderHUD.gd" id="1_y1eym"]
+[ext_resource type="PackedScene" uid="uid://cbkg6f11hjbvu" path="res://Prefabs/LevelObjects/LevelObjectList.tscn" id="2_cc63w"]
+[ext_resource type="Script" path="res://Scripts/UI/EditPanel.gd" id="3_i24nc"]
+[ext_resource type="AudioStream" uid="uid://bulvntx1u2u8m" path="res://Assets/Sounds/music/BuildTheme.mp3" id="4_myj5u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a6nvk"]
 
 [node name="BuilderHUD" type="Node2D"]
-script = ExtResource("1_ayb23")
+script = ExtResource("1_y1eym")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -76,7 +76,7 @@ size = 5.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/Control2/CenterContainer/MarginContainer/SubViewportContainer/SubViewport"]
 transform = Transform3D(-0.896439, -0.434133, 0.0890233, 0.402214, -0.712673, 0.574735, -0.186067, 0.551021, 0.813483, 0, 0, 0)
 
-[node name="LevelObjectList" parent="CanvasLayer/Control2/CenterContainer/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_gry2d")]
+[node name="LevelObjectList" parent="CanvasLayer/Control2/CenterContainer/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_cc63w")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, -0.875)
 display = true
 
@@ -93,7 +93,7 @@ anchor_right = 0.75
 anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_uwjqj")
+script = ExtResource("3_i24nc")
 
 [node name="Exit" type="Button" parent="CanvasLayer/EditPanel"]
 layout_mode = 1
@@ -116,7 +116,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="buildmusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_28oq3")
+stream = ExtResource("4_myj5u")
 volume_db = -10.0
 autoplay = true
 bus = &"music"

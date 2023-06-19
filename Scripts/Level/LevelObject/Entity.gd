@@ -209,6 +209,8 @@ func _process(_delta):
 
 var last_swim = false
 
+@export var waterExitSpeed: float = 7.5
+@onready var ledgeDetector: ShapeCast3D = $LedgeDetector
 
 func _physics_process(delta: float) -> void:
 	if not started:
@@ -238,6 +240,19 @@ func _physics_process(delta: float) -> void:
 	if not last_swim and in_swim_area:
 		_velocity *= 0.5
 	
+	# exit water
+	if not in_swim_area and last_swim:
+		if ledgeDetector != null:
+			if ledgeDetector.is_colliding():
+				print("Exiting Water")
+				_velocity.y = max(waterExitSpeed,_velocity.y*1.75)
+				print(_velocity.y)
+		
+	# smaller collider in water
+	if in_swim_area:
+		$CollisionShape.scale.y = 0.5
+	else:
+		$CollisionShape.scale.y = 1
 	if not is_on_floor():
 		var current_gravity = gravity
 		if in_swim_area:
@@ -327,7 +342,6 @@ func Hit(damage, hitting_entity,direction = null,stun = true):
 	var offset_dir: Vector3 =global_transform.origin - hitting_entity.global_transform.origin
 	if direction != null:
 		offset_dir = direction
-	
 	offset_dir = offset_dir.normalized()
 	offset_dir.y = 0
 	var t = 0.75
