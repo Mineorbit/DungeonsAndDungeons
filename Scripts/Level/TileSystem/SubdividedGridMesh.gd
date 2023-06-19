@@ -34,7 +34,6 @@ func _ready():
 
 # regenerate mesh at position where stuff changed / in worst case the location can be ignored
 func generate():
-	print("Working on subgrids "+str(subgrid_list))
 	for x in subgrid_list:
 		x.generate()
 
@@ -71,15 +70,12 @@ func _physics_process(delta):
 	while generate_tasks.size() > 0:
 			var pos = generate_tasks[0]
 			var x = get_subgrid(pos)
-			print(str(x)+" "+str(x.name))
 			if not generating_at[str(x.name)]:
 				generating_at[str(x.name)] = true
 				set.append(x)
 			generate_tasks.remove_at(0)
 			#start_generate(pos)
 	if set.size() > 0:
-		print(generating_at)
-		print(set)
 		generate_for(set)
 	for x in set:
 		generating_at[x.name] = false

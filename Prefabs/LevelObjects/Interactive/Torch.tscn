@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bgom4k0xbayum"]
 
-[ext_resource type="PackedScene" uid="uid://c6ejdp0xahvkj" path="res://Assets/Models/LevelObjects/Interactive/torch.blend" id="1_amc1r"]
-[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="2_1y0e1"]
+[ext_resource type="PackedScene" uid="uid://c6ejdp0xahvkj" path="res://Assets/Models/LevelObjects/Interactive/torch.blend" id="1_0m6wd"]
+[ext_resource type="Texture2D" uid="uid://dcp5q57bx7f11" path="res://Assets/Textures/smoke.png" id="2_3sodo"]
 
 [sub_resource type="Gradient" id="Gradient_l81ol"]
 
@@ -45,7 +45,7 @@ color_ramp = SubResource("GradientTexture1D_rccai")
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
-albedo_texture = ExtResource("2_1y0e1")
+albedo_texture = ExtResource("2_3sodo")
 disable_receive_shadows = true
 billboard_mode = 3
 particles_anim_h_frames = 1
@@ -66,7 +66,7 @@ light_indirect_energy = 2.0
 light_size = 1.0
 shadow_enabled = true
 
-[node name="torch" parent="." instance=ExtResource("1_amc1r")]
+[node name="torch" parent="." instance=ExtResource("1_0m6wd")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.125, 0)
 
 [node name="Smoke" type="GPUParticles3D" parent="."]

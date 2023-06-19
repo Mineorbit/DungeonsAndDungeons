@@ -415,7 +415,6 @@ func getValue(x, y, z):
 	var result: float = 1
 	var p: Vector3 = global_transform.origin+4.0/grid_size*(Vector3(x,y,z))
 	var has_box: bool = par2.get_at(p) == par.levelObjectId
-		#print("Test: "+str(has_box)+" "+str(get_parent().get_at(gridpos)))
 	if has_box:
 			#print(str(p)+" "+str(self))
 		result = 0

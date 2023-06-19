@@ -27,7 +27,6 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	if blackboard_name.is_empty():
 		blackboard_name = "vis"
 	if actor.global_transform.origin.distance_to(target.global_position) < viewDistance:
-		#print("Found Player: "+str(target))
 		blackboard.set_value(blackboard_name,target)
 		return SUCCESS
 	return FAILURE

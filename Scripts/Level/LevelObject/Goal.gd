@@ -15,7 +15,6 @@ var numberOfPlayersInside = 0
 var can_enter = true
 
 func reset():
-	print("Resetting Goal")
 	numberOfPlayersInside = 0
 	can_enter = true
 	if Constants.currentMode > 1:
@@ -43,7 +42,7 @@ func playerEntered(_player):
 	if not can_enter:
 		return
 	numberOfPlayersInside = numberOfPlayersInside + 1
-	print(str(numberOfPlayersInside)+"/"+str(number_of_players_needed()))
+	print(str(numberOfPlayersInside)+"/"+str(number_of_players_needed())+" Players reached the Goal")
 	if numberOfPlayersInside == number_of_players_needed():
 		can_enter = false
 		print("Game won!")

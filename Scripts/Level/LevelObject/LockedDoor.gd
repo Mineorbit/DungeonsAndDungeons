@@ -47,9 +47,9 @@ func close():
 
 
 func prepare_for_navmesh_build():
-	print("Disabled before baking Nav Mesh")
+	pass
 	#open()
-	
+
 func restore_after_navmesh_build():
-	print("Enabling before baking Nav Mesh")
+	pass
 	#close()

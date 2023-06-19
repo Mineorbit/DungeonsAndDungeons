@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://doj2m1b66ehq1"]
 
-[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_kob8t"]
-[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_fbvsw"]
-[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_ui44x"]
-[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_hjhyi"]
-[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="5_ld7qm"]
+[ext_resource type="Script" path="res://Scripts/Players/Player.gd" id="1_o82wh"]
+[ext_resource type="PackedScene" uid="uid://ccxmxyu2qvu6r" path="res://Prefabs/HitArea.tscn" id="2_ag45g"]
+[ext_resource type="PackedScene" uid="uid://cwhbpya0c0w61" path="res://Prefabs/ItemPickupArea.tscn" id="3_3yksf"]
+[ext_resource type="PackedScene" uid="uid://bryply5pm5nlg" path="res://Prefabs/Models/Entities/PlayerModel.tscn" id="4_1vlyy"]
+[ext_resource type="PackedScene" uid="uid://q67j2y025gyw" path="res://Prefabs/Elements/Flammable.tscn" id="5_jas4j"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.375
@@ -40,7 +40,7 @@ height = 1.25
 collision_layer = 18
 collision_mask = 3
 collision_priority = 2.0
-script = ExtResource("1_kob8t")
+script = ExtResource("1_o82wh")
 can_climb = true
 climb_velocity = 3.0
 item_slots = 2
@@ -55,16 +55,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1638, 0)
 [node name="CameraOffset" type="Node3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12686, 0, 0)
 
-[node name="MeleeHitArea" parent="." instance=ExtResource("2_fbvsw")]
+[node name="MeleeHitArea" parent="." instance=ExtResource("2_ag45g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2917, 1, 0)
 
-[node name="ItemPickupArea" parent="." instance=ExtResource("3_ui44x")]
+[node name="ItemPickupArea" parent="." instance=ExtResource("3_3yksf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bnrka")
 
-[node name="Model" parent="." instance=ExtResource("4_hjhyi")]
+[node name="Model" parent="." instance=ExtResource("4_1vlyy")]
 
 [node name="ClimbArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -87,7 +87,7 @@ shape = SubResource("CapsuleShape3D_ntqoq")
 radius = 0.5
 use_3d_avoidance = true
 
-[node name="Flammable" parent="." instance=ExtResource("5_ld7qm")]
+[node name="Flammable" parent="." instance=ExtResource("5_jas4j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.906796, 0)
 
 [node name="CollisionShape3D" parent="Flammable" index="0"]

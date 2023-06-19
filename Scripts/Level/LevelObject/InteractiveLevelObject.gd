@@ -37,8 +37,6 @@ func clearSignals():
 		
 func list_connections():
 	var connections = activationSignal.get_connections().duplicate()
-	for conn in connections:
-		print(conn)
 		
 func process(activation):
 	if activation:

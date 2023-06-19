@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://col2b74dd5ayw"]
 
-[ext_resource type="Script" path="res://Scripts/Level/TileSystem/VoxelGridMesh.gd" id="1_cji8b"]
+[ext_resource type="Script" path="res://Scripts/Level/TileSystem/VoxelGridMesh.gd" id="1_hy88b"]
 
 [node name="SubGrid" type="MeshInstance3D"]
-script = ExtResource("1_cji8b")
+script = ExtResource("1_hy88b")
 
 [node name="Collision" type="StaticBody3D" parent="."]
 

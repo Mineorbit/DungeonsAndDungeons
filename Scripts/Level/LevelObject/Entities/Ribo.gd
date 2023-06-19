@@ -17,7 +17,6 @@ func _ready():
 	super._ready()
 	spear = load("res://Prefabs/LevelObjects/Entities/Items/Spear.tscn").instantiate()
 	Constants.World.level.spawn_entity(spear)
-	print("LOL "+str(item))
 	Attach(spear)
 
 
@@ -26,16 +25,13 @@ func _physics_process(delta):
 
 
 func Strike():
-	print("Striking")
 	if has_item(0):
 		item[0].Use()
 
 func Throw():
-	print("Throwing")
 	if has_item(0) and (item[0] is Spear):
 		if aiming:
 			aiming = false
-			print("Has thrown")
 			item[0].Use(1,target_point.global_transform.origin)
 
 
