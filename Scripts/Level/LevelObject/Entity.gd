@@ -190,7 +190,6 @@ func can_jump():
 func jump():
 	is_jumping = can_jump()
 	if is_jumping and not in_swim_area:
-		print("Jumping")
 		on_entity_jump.emit()
 
 

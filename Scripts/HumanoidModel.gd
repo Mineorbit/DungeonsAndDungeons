@@ -21,7 +21,8 @@ func entity_hit():
 		hitSound.play()
 
 
-
+@onready var walkSound = $WalkSound
+var walking = false
 func _physics_process(delta):
 	super._physics_process(delta)
 	if has_swim:
@@ -34,6 +35,14 @@ func _physics_process(delta):
 		var blend_speed = clampf(animation_multiplier*speed*get_parent()._velocity.length(),0,speed_blend_cap)
 		anim_tree["parameters/Top/speed/blend_amount"] = blend_speed
 		anim_tree["parameters/Bot/speed/blend_amount"] = blend_speed
+		if blend_speed > 0.1 and get_parent().last_floor:
+			if(walking == false):
+				walking = true
+				walkSound.play()
+		else:
+			if(walking == true):
+				walking = false
+				walkSound.stop()
 	if ("parameters/Bot/vertical/blend_amount" in anim_tree):
 		anim_tree["parameters/Bot/vertical/blend_amount"] = current_v
 		anim_tree["parameters/Top/vertical/blend_amount"] = current_v

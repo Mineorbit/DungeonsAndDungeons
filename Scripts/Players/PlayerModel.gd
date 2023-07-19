@@ -105,8 +105,7 @@ func player_striking(v,time):
 
 func player_jump():
 	update_vertical_state_machine("Jump")
-	print("Jump Sound")
-	var random_num = rng.randf_range(0.75, 1.25)
+	var random_num = rng.randf_range(0.9, 1.25)
 	if jumpSound != null:
 		jumpSound.pitch_scale = random_num
 		jumpSound.play()
@@ -163,6 +162,8 @@ func update_shield_state_machine_remote(state):
 func update_vertical_state_machine_remote(state):
 	pass
 	#verticalfsm.travel(state)
+
+
 
 
 func _physics_process(delta):
