@@ -81,12 +81,21 @@ func player_shield(is_aiming):
 	use_blend = v
 	#anim_tree["parameters/ShieldBlock/add_amount"] = v
 
+@rpc
+func reset_face():
+	mouth.set_shader_parameter("character",0)
+	eyes.set_shader_parameter("character",0)
+
+@rpc
+func set_face():
+	mouth.set_shader_parameter("character",1)
+	eyes.set_shader_parameter("character",1)
 
 func entity_hit():
 	super.entity_hit()
 	#print(str(Constants.id)+" HIT on "+str(self))
-	mouth.set_shader_parameter("character",1)
-	eyes.set_shader_parameter("character",1)
+	set_face()
+	rpc("set_face")
 
 
 var use_blend = 0
@@ -115,12 +124,9 @@ var animate_local = true
 func player_landed(blend):
 	landblend = min(1,-blend/35)
 	update_vertical_state_machine("Fall")
-	mouth.set_shader_parameter("character",0)
-	eyes.set_shader_parameter("character",0)
-	#anim_tree["parameters/landidle/blend_amount"] = landblend
-	#anim_tree["parameters/land/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-
-
+	reset_face()
+	rpc("reset_face")
+	
 
 func left_hand():
 	return playerSkeleton.find_bone("hand.l")
