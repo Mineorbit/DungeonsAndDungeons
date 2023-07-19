@@ -105,6 +105,11 @@ func player_striking(v,time):
 
 func player_jump():
 	update_vertical_state_machine("Jump")
+	print("Jump Sound")
+	var random_num = rng.randf_range(0.75, 1.25)
+	if jumpSound != null:
+		jumpSound.pitch_scale = random_num
+		jumpSound.play()
 
 var animate_local = true
 
@@ -176,3 +181,4 @@ func _physics_process(delta):
 	#	update_vertical_state_machine("Fall")
 
 	#runTrail.emitting = get_parent().is_on_floor() and speed > 0.05
+

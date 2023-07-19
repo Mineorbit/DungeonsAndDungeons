@@ -2,6 +2,7 @@ extends Node3D
 class_name EntityModel
 
 @onready var hitSound = $HitSound
+@onready var jumpSound = $JumpSound
 
 @onready var anim_tree = $AnimationTree
 
@@ -36,6 +37,7 @@ func entity_hit():
 	if hitSound != null:
 		hitSound.pitch_scale = random_num
 		hitSound.play()
+
 
 var current_swim_blend = 0
 

@@ -156,4 +156,3 @@ func Dettach(item_to_dettach):
 	print("Dettaching "+str(self))
 	super.Dettach(item_to_dettach)
 	item[item_to_dettach.attachment] = null
-
